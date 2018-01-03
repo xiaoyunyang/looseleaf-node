@@ -282,3 +282,4 @@ function closePopup({ window, interval }) {
     resolve();
   });
 }
+

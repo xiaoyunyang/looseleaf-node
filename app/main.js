@@ -1,16 +1,23 @@
 import 'whatwg-fetch';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux'
-import { Router, browserHistory } from 'react-router';
-import configureStore from './store/configureStore';
-import getRoutes from './routes';
+import { AppContainer } from 'react-hot-loader';
+import App from './containers/App'
 
-const store = configureStore(window.INITIAL_STATE);
+const render = Component => {
+  ReactDOM.render(
+    <AppContainer>
+      <Component />
+    </AppContainer>,
+    document.getElementById('app'),
+  )
+}
 
-ReactDOM.render(
-  <Provider store={store}>
-    <Router history={browserHistory} routes={getRoutes(store)}/>
-  </Provider>,
-  document.getElementById('app')
-);
+render(App)
+
+// Webpack Hot Module Replacement API
+if (module.hot) {
+  module.hot.accept('./containers/App', () => {
+    render(App)
+  })
+}
