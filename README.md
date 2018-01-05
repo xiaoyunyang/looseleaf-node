@@ -53,7 +53,7 @@ Before running the app, you have to set up a few things:
 	* `pg_ctl -D /usr/local/var/postgres stop` 
 
 ### React Hot Reloader
-* For step-by-step on how to install, follow the instruction [here](https://github.com/glenjamin/webpack-hot-middleware). Note, for step 2 of the tutorial where you enable Hot Module Replacement in Webpack, use [this instruction](https://github.com/glenjamin/webpack-hot-middleware) for enabling webpack hot reloading using only webpack-dev-middleware (for existing server without webpack-dev-server).
+* For step-by-step on how to install, follow the instruction [here](https://github.com/gaearon/react-hot-loader). Note, for step 2 of the tutorial where you enable Hot Module Replacement in Webpack, use [this instruction](https://github.com/glenjamin/webpack-hot-middleware) for enabling webpack hot reloading using only webpack-dev-middleware (for existing server without webpack-dev-server).
 * Important: If you use Hot Module Reload, run server with `npm start` rather than `npm run dev` because according to the [Webpack hot middleware Doc](https://github.com/glenjamin/webpack-hot-middleware):
 
 	> This module expects to remain running while you make changes to your webpack bundle, if you use a process manager like nodemon then you will likely see very slow changes on the client side. If you want to reload the server component, either use a separate process, or find a way to reload your server routes without restarting the whole process.
