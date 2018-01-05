@@ -1,0 +1,39 @@
+{
+	"books": [
+		{
+			"id": "1",
+			"slug": "david-and-goliath",
+			"title": "David and Goliath",
+			"author": "Malcolm Gladwell",
+			"description": "In David and Goliath, Malcolm Gladwell challenges how we think about obstacles and disadvantages, offering a new interpretation of what it means to be discriminated against, suffer from a disability, lose a parent, attend a mediocre school, or endure any number of other apparent setbacks."
+		},
+		{
+			"id": "2",
+			"slug": "eat-pray-love",
+			"title": "Eat, Pray, Love",
+			"author": "Elizabeth Gilbert",
+			"description": "Elizabeth Gilbert’s Eat Pray Love touched the world and changed countless lives, inspiring and empowering millions of readers to search for their own best selves. Now, this beloved and iconic book returns in a beautiful 10th anniversary edition, complete with an updated introduction from the author, to launch a whole new generation of fans. "
+		},
+		{
+			"id": "3",
+			"slug": "the-future",
+			"title": "The Future",
+			"author": "Al Gore",
+			"description": "From his earliest days in public life, Al Gore has been warning us of the promise and peril of emergent truths—no matter how “inconvenient” they may seem to be. As absorbing as it is visionary, The Future is a map of the world to come, from a man who has looked ahead before and been proven all too right."
+		},
+		{
+			"id": "4",
+			"slug": "steve-jobs",
+			"title": "Steve Jobs",
+			"author": "Walter Isaacson",
+			"description": "Based on more than forty interviews with Steve Jobs conducted over two years—as well as interviews with more than 100 family members, friends, adversaries, competitors, and colleagues—Walter Isaacson has written a riveting story of the roller-coaster life and searingly intense personality of a creative entrepreneur whose passion for perfection and ferocious drive revolutionized six industries: personal computers, animated movies, music, phones, tablet computing, and digital publishing. Isaacson’s portrait touched millions of readers."
+		},
+		{
+			"id": "5",
+			"slug": "capital-in-the-twenty-first-century",
+			"title": "Capital in the Twenty-First Century",
+			"author": "Thomas Piketty",
+			"description": "In Capital in the Twenty-First Century, Thomas Piketty analyzes a unique collection of data from twenty countries, ranging as far back as the eighteenth century, to uncover key economic and social patterns. His findings will transform debate and set the agenda for the next generation of thought about wealth and inequality."
+		}
+	]
+}
