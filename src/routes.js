@@ -1,5 +1,6 @@
 import Home from './components/Home'
 import Book from './components/Book/'
+import Signin from './components/User/Signin'
 import BookAll from './components/Book/All'
 import BookSingle from './components/Book/Single'
 import About from './components/About'
@@ -47,6 +48,10 @@ const routes = [
 		component: RedirectWithStatus,
 		status: 301,
 		to: '/book'
+	},
+	{
+		path: '/signin',
+		component: Signin,
 	},
 	{
 		path: '*',

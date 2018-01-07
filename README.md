@@ -1,4 +1,10 @@
-## LooseLeaf - Node.js App
+# LooseLeaf - Node.js App
+
+##### TODOs
+- [x] Router
+- [ ] Open Authentication
+- [ ] Routing 
+- [ ] Database setup
 
 ### Getting Started 
 
@@ -74,6 +80,33 @@ Before running the app, you have to set up a few things:
 5. Stop the postgres database when you are done:
 	* `pg_ctl -D /usr/local/var/postgres stop`
 
+### Redux
+
+> [`redux`](https://redux.js.org/) is a manager of global variables for React components.
+
+**Middleware**
+
+* [`redux-thunk`](https://github.com/gaearon/redux-thunk) - allows you to write action creators that return a function instead of an action. `redux-thunk` allows you to delay the dispatch of an action or to dispatch only if a certain condition is met. A thunk is a function that wraps an expression to delay its evaluation.
+* [`redux-promise`](https://github.com/acdlite/redux-promise) - receives a promise, dispatch the resolved value of the promise, but will not dismatch anything if the promise rejects.
+* [`redux-logger`](https://github.com/evgenyrodionov/redux-logger) - logging tool that lets you replay problems as if they happened in your own browser.
+* [`react-redux`](https://github.com/reactjs/react-redux) - We need to use `connect` from `react-redux` to connect a React component to a Redux store.
+
+
+
+### OAuth
+
+Why Open Authentication? Per [scotch.io](https://scotch.io/tutorials/the-easiest-way-to-add-authentication-to-any-app), there are a few key reasons for this, including:
+> 
+* A shifting identity landscape where we are now logging in with social providers like Google, Facebook, Twitter, and others
+* A desire for tighter security through features like multi-factor authentication, password-less login, and single sign-on
+* A new approach for application architecture that makes it more difficult to implement authentication
+
+1. Install redux dependencies
+	* See section above
+2. Install other dependencies
+	* [`moment`](https://github.com/moment/moment), which is a lightweight JavaScript date library for parsing, validating, manipulating, and formatting dates.
+	* [`react-cookie`](https://github.com/reactivestack/cookies/tree/master/packages/react-cookie), which lets you load and save cookies with React.
+
 
 ### PostgresQL
 
@@ -111,9 +144,10 @@ If you want to use a PostgresQL GUI, install and launch [Postico](https://eggera
 5. [Read this](https://github.com/ReactTraining/react-router/pull/4934) for more on how to fix the deprecation warnings.
 	> Failed Context Types: Calling PropTypes validators directly is not supported by the `prop-types` package
 
-**React**
+**Authentication**
 
-* [Migration log](https://reactjs.org/blog/2017/04/07/react-v15.5.0.html#migrating-from-react.proptypes)
+* Why [open authentication](https://scotch.io/tutorials/the-easiest-way-to-add-authentication-to-any-app)?
+
 
 **Database**
 
