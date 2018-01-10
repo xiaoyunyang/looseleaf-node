@@ -10,7 +10,9 @@ const Header = () => (
 				<li><Link to='/book'>Book</Link></li>
 				<li><Link to='/about'>About</Link></li>
 				<li><Link to='/movie'>Movie/Redirect</Link></li>
-				<li><Link to='/signin'>Sign in</Link></li>
+				<li><Link to='/signup'>Signup</Link></li>
+				<li><Link to='/login'>Login</Link></li>
+				<li><Link to='/user'>User</Link></li>
 				<li><Link to='/foop'>404</Link></li>
 			</ul>
 		</nav>

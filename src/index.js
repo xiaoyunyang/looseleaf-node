@@ -13,6 +13,7 @@ const render = Component => {
   )
 }
 
+//Wrapping App inside of AppContainer, which is a react-hot-loader component
 render(App)
 
 // Webpack Hot Module Replacement API

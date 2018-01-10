@@ -1,10 +1,13 @@
 # LooseLeaf - Node.js App
 
 ##### TODOs
-- [x] Router
+- [x] Create Web Tech Stack [HowTo doc](https://github.com/xiaoyunyang/xiaoyunyang.github.io/blob/master/assets/md/WebTech.md)
+- [x] Add React Router
+- [ ] Routing in Guest Mode and User Mode
+- [ ] Hook up Redux to Frontend app
+- [ ] Database Hookup
+- [ ] Local Authentication
 - [ ] Open Authentication
-- [ ] Routing 
-- [ ] Database setup
 
 ### Getting Started 
 
@@ -91,21 +94,40 @@ Before running the app, you have to set up a few things:
 * [`redux-logger`](https://github.com/evgenyrodionov/redux-logger) - logging tool that lets you replay problems as if they happened in your own browser.
 * [`react-redux`](https://github.com/reactjs/react-redux) - We need to use `connect` from `react-redux` to connect a React component to a Redux store.
 
+### Authentication
+
+See [the tutorial](https://github.com/xiaoyunyang/xiaoyunyang.github.io/blob/master/assets/md/SetupAuth.md) for how to set up `passport` and `postgresql` with your react-node app.
+
+We also need to create a controller for creating the `User` object after the user enters all the required information:
+
+```
+$ mkdir controllers
+$ touch controllers/user.js
+```
+
+The `user` controller will include logic for creating a new user and authenticating a returning user. The `user` controller relies on the `User` model for creating a new `User`. The `user` controller requires the following dependencies:
+
+* [`async`](https://caolan.github.io/async/) - We will be using `async.waterfall` a lot, which:
+
+	> Runs the tasks array of functions in series, each passing their results to the next in the array. However, if any of the tasks pass an error to their own callback, the next function is not executed, and the main callback is immediately called with the error.
+* [`nodemailer`](https://nodemailer.com/about/) - a module for Node.js applications to allow easy as cake email sending.
+* [`jsonwebtoken`](https://github.com/auth0/node-jsonwebtoken)
+* [`moment`](https://github.com/moment/moment) - is a lightweight Javascript date library for parsing, validating, manipulating, and formatting dates.
+* [`request`](https://www.npmjs.com/package/request) - Request is designed to be the simplest way possible to make http calls. It supports HTTPS and follows redirects by default.
+* [`querystring`](https://nodejs.org/api/querystring.html) - Node's utilities for parsing and formatting URL query strings.
 
 
-### OAuth
+**Oauth**
 
-Why Open Authentication? Per [scotch.io](https://scotch.io/tutorials/the-easiest-way-to-add-authentication-to-any-app), there are a few key reasons for this, including:
-> 
-* A shifting identity landscape where we are now logging in with social providers like Google, Facebook, Twitter, and others
-* A desire for tighter security through features like multi-factor authentication, password-less login, and single sign-on
-* A new approach for application architecture that makes it more difficult to implement authentication
-
-1. Install redux dependencies
-	* See section above
-2. Install other dependencies
+1. Install dependencies
 	* [`moment`](https://github.com/moment/moment), which is a lightweight JavaScript date library for parsing, validating, manipulating, and formatting dates.
 	* [`react-cookie`](https://github.com/reactivestack/cookies/tree/master/packages/react-cookie), which lets you load and save cookies with React.
+
+
+### DevTools
+* [`morgan`](https://www.npmjs.com/package/morgan) - quest logger middleware for node.js
+
+
 
 
 ### PostgresQL
@@ -133,6 +155,7 @@ If you want to use a PostgresQL GUI, install and launch [Postico](https://eggera
 ### Resources
 **React Router**
 
+* [react-router-config](https://www.npmjs.com/package/react-router-config)
 * [Starter project tutorial](https://www.mokuji.me/article/universal-app-react-router)
 * [Egghead Tutorial](https://egghead.io/lessons/react-create-basic-routes-with-the-react-router-v4-browserrouter)
 * [route-config example](https://reacttraining.com/react-router/web/example/route-config)
@@ -152,6 +175,8 @@ If you want to use a PostgresQL GUI, install and launch [Postico](https://eggera
 **Database**
 
 * [codeMentor](https://www.codementor.io/devops/tutorial/getting-started-postgresql-server-mac-osx) - Getting Started Tutorial for postgresql
+* [node passport and postgres setup](http://mherman.org/blog/2016/09/25/node-passport-and-postgres/)
+* [postgres with passport](http://uitblog.com/postgres-with-passport/)
 
 **DevOp**
 

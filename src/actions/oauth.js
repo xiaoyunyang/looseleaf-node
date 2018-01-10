@@ -4,6 +4,12 @@ import moment from 'moment';
 import cookie from 'react-cookie';
 import { withRouter } from 'react-router-dom';
 
+/*
+ * facebookLogin function
+ * caller: Signin.js
+ *
+ */
+
 // Sign in with Facebook
 export function facebookLogin() {
   const facebook = {
@@ -152,6 +158,7 @@ function oauth1(config, dispatch) {
 }
 
 function openPopup({ url, config, dispatch }) {
+console.log("openPopup")
   return new Promise((resolve, reject) => {
     const width = config.width || 500;
     const height = config.height || 500;
@@ -190,6 +197,7 @@ function getRequestToken({ window, config, dispatch }) {
 }
 
 function pollPopup({ window, config, requestToken, dispatch }) {
+console.log("pollPopup")
   return new Promise((resolve, reject) => {
     const redirectUri = url.parse(config.redirectUri);
     const redirectUriPath = redirectUri.host + redirectUri.pathname;
@@ -234,6 +242,9 @@ function pollPopup({ window, config, requestToken, dispatch }) {
 }
 
 function exchangeCodeForToken({ oauthData, config, window, interval, dispatch }) {
+console.log("exchangeCodeForToken")
+console.log("oauthData: ")
+console.log(oauthData)
   return new Promise((resolve, reject) => {
     const data = Object.assign({}, oauthData, config);
 
@@ -243,11 +254,20 @@ function exchangeCodeForToken({ oauthData, config, window, interval, dispatch })
       credentials: 'same-origin', // By default, fetch won't send any cookies to the server
       body: JSON.stringify(data)
     }).then((response) => {
+console.log("response")
+console.log(response)
       if (response.ok) {
+console.log("response is ok")
+console.log(response)
+
         return response.json().then((json) => {
           resolve({ token: json.token, user: json.user, window: window, interval: interval, dispatch: dispatch });
         });
       } else {
+
+console.log("response is NOT ok")
+console.log(response)
+
         return response.json().then((json) => {
           dispatch({
             type: 'OAUTH_FAILURE',
