@@ -3,11 +3,11 @@
 ##### TODOs
 - [x] Create Web Tech Stack [HowTo doc](https://github.com/xiaoyunyang/xiaoyunyang.github.io/blob/master/assets/md/WebTech.md)
 - [x] Add React Router
-- [ ] Routing in Guest Mode and User Mode
+- [X] Routing in Guest Mode and User Mode - See [Solution](https://github.com/ReactTraining/react-router/issues/4962)
+- [X] Select Database - See [SetupAuth](https://github.com/xiaoyunyang/xiaoyunyang.github.io/blob/master/assets/md/SetupAuth.md)
+- [ ] Authentication - See [SetupAuth](https://github.com/xiaoyunyang/xiaoyunyang.github.io/blob/master/assets/md/SetupAuth.md)
 - [ ] Hook up Redux to Frontend app
-- [ ] Database Hookup
-- [ ] Local Authentication
-- [ ] Open Authentication
+
 
 ### Getting Started 
 
@@ -38,6 +38,10 @@ Take the following steps to create a baseline app:
 2. Follow [this tutorial](https://www.mokuji.me/article/universal-app-react-router) to set up the rest of the [`create-react-app`](https://github.com/facebookincubator/create-react-app) project to use [`react-router`](https://github.com/ReactTraining/react-router). We are going to use Version 4.x of the React Router, which is a complete rewrite of Versions 3.x and prior.
 
 	**Warning**:  Implementing the Build, Run & Develop section in the second tutorial could cause `react-hot-loader` to not work so this section wasn't implemented in the baseline app, which is available for download [on Github](https://github.com/xiaoyunyang/looseleaf-node/tree/baseline).
+	
+3. Set up Babel.
+	* [What is Babel?](https://kleopetrov.me/2016/03/18/everything-about-babel/)
+	* [How to set up Babel](http://www.react.express/babel) 	
 
 ### Running the App
 
@@ -45,18 +49,34 @@ Before running the app, you have to set up a few things:
 
 1. From the project directory, run the commands: `npm install`. This installs all the dependencies in your `package.json`. Everytime you make changes to `package.json`, `npm install` needs to be run so that the dependencies defined in the file would get downloaded by npm. The dependencies gets downloaded into a folder called node_modules.
 2. Set up your database for the app:
-	* Install Postgres:  `brew install postgres`
+
+	**Postgres**
+	
+	* Install Postgres:  `$ brew install postgres`
 	* Start postgres database:
-	 	`pg_ctl -D /usr/local/var/postgres start`
-	* Create database: `createdb looseleaf`
+	 	`$ pg_ctl -D /usr/local/var/postgres start`
+	* Create database: `> createdb looseleaf`
 	* Run database:
 
 		```
-		psql looseleaf
-		looseleaf=# \du
+		> psql looseleaf
+		> looseleaf=# \du
 		```
 	* Link database to your app: In the `.env` file in the root directory of the app, edit the DB_NAME line to say `DB_NAME='looseleaf'` and change `DB_USER` to the name as appeared when you run the `looseleaf=# \du` command above.
 	* If you don't start the database before you run `npm start`, then you will get a "Knex: Error Pool 2 - Error: connect ECONNREFUSED" error.
+
+	**MongoDB**
+	
+	* Install MongoDB:  `$ brew install mongodb`
+	* Create the data directory: `$ sudo mkdir -p /data/db`
+	* Set permissions for the data directory: 
+	
+		```
+		$ sudo chown -R `whoami` /data/db`	
+		```
+	* Run MongoDB server: `$ mongod`
+	 
+	
 3. `npm run build` or `yarn build` - Build the project. If you don't have hot reloading enabled, you have to run this after making changes to your source code to allow the changes to take effect next time you start the server. This is undesirable and there are a few workarounds, in particular, nodemon and react-hot-reloader, which will be discussed in more detail below.
 4. Run the app:
 
@@ -68,11 +88,16 @@ Before running the app, you have to set up a few things:
 	To run just the client app, do
 		
 		```
-		# yarn start
+		$ yarn start
 		
 		```
 		In this mode, you can use `react-hot-loader` to make changes to react components in runtime.
 		
+		If you want to run on other ports, like 9000, 8000, 8080, just specify the port you want:
+		
+		```
+		$ PORT=9000 npm start
+		```
 	* To run the server to serve static content:
 		
 		```
@@ -80,8 +105,16 @@ Before running the app, you have to set up a few things:
 		$ serve -s build
 		```
 		In this mode, you can't use `react-hot-loader` because the client app is rendered on the server side.
-5. Stop the postgres database when you are done:
-	* `pg_ctl -D /usr/local/var/postgres stop`
+5. Stop the database server when you are done:
+	* Stop the postgres database 
+	 
+	 ```
+	 $ pg_ctl -D /usr/local/var/postgres stop
+	 
+	 ```
+	
+	* Or if you use mongo: `control`+`C`  
+	 
 
 ### Redux
 
@@ -123,7 +156,6 @@ The `user` controller will include logic for creating a new user and authenticat
 	* [`moment`](https://github.com/moment/moment), which is a lightweight JavaScript date library for parsing, validating, manipulating, and formatting dates.
 	* [`react-cookie`](https://github.com/reactivestack/cookies/tree/master/packages/react-cookie), which lets you load and save cookies with React.
 
-
 ### DevTools
 * [`morgan`](https://www.npmjs.com/package/morgan) - quest logger middleware for node.js
 
@@ -139,8 +171,8 @@ Using Homebrew:  `brew install postgres`
 	* `pg_ctl -D /usr/local/var/postgres start && brew services start postgresql` - This makes Postgres start every time your computer starts up. Execute the following command
 	* `brew services start postgresql` - To have launchd start postgresql now and restart at login
 * Manual
-	* Start Postgres: `pg_ctl -D /usr/local/var/postgres start`
-	* Stop Postgres: `pg_ctl -D /usr/local/var/postgres stop`
+	* Start Postgres: `$ pg_ctl -D /usr/local/var/postgres start`
+	* Stop Postgres: `$ pg_ctl -D /usr/local/var/postgres stop`
 
 ##### Database Management
 * `createdb looseleaf` - creates a database called looseleaf
@@ -151,6 +183,43 @@ Using Homebrew:  `brew install postgres`
 	* `looseleaf=# \q` - quit
 If you want to use a PostgresQL GUI, install and launch [Postico](https://eggerapps.at/postico/). Look up the User name using `looseleaf=# \du`.
 
+### MongoDB
+Install Homebrew package manager. Then follow the steps below to install and setup MongoDB.
+
+```
+# Update Homebrew's package database
+$ brew update
+
+# Install MongoDB
+$ brew install mongodb
+
+# Create the data directory
+$ sudo mkdir -p /data/db
+
+# Set permissions for the data directory
+$ sudo chown -R `whoami` /data/db
+
+# Run MongoDB Server
+$ mongod
+```
+Accessing Data can be done via the mongo shell:
+
+```
+# start the mongo shell
+$ mongo
+
+# see which data you are using currently
+> db 
+
+# see all available databases
+> show dbs 
+```
+For more on mongo shell read MongoDB's [official documentation](https://docs.mongodb.com/manual/mongo/)
+
+**Use MongoDB in your app**
+
+* Install [`mongoose`](http://mongoosejs.com/index.html)
+* [Connect mongoose to mongodb](http://mongoosejs.com/docs/connections.html)
 
 ### Resources
 **React Router**
@@ -170,14 +239,18 @@ If you want to use a PostgresQL GUI, install and launch [Postico](https://eggera
 **Authentication**
 
 * Why [open authentication](https://scotch.io/tutorials/the-easiest-way-to-add-authentication-to-any-app)?
+* [`passport-mongo-local`](https://github.com/saintedlama/passport-local-mongoose)
+* [Connect mongoose to mongodb](http://mongoosejs.com/docs/connections.html)
 
 
 **Database**
 
 * [codeMentor](https://www.codementor.io/devops/tutorial/getting-started-postgresql-server-mac-osx) - Getting Started Tutorial for postgresql
 * [node passport and postgres setup](http://mherman.org/blog/2016/09/25/node-passport-and-postgres/)
+* [mode passport and mongo setup](http://mherman.org/blog/2013/11/11/user-authentication-with-passport-dot-js/#setup) 
 * [postgres with passport](http://uitblog.com/postgres-with-passport/)
-
+* [TutorialsPoint MongoDB Tutorial](https://www.tutorialspoint.com/mongodb/mongodb_overview.htm)
+* [MongoDB official documentation](https://docs.mongodb.com/manual/mongo/)
 **DevOp**
 
 * [Webpack vs. Gulp vs. Browserify](https://www.youtube.com/watch?v=xsSnOQynTHs) 
