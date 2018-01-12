@@ -33,7 +33,7 @@ class Home extends React.Component {
   render() {
     return (
       <div className="App">
-        <h1 className="App-title">Welcome to React!!</h1>
+        <h1 className="App-title">Welcome to React!</h1>
         <p className="App-intro">{this.state.response}</p>
       </div>
     );
