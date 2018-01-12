@@ -1,12 +1,14 @@
 import React from 'react'
+
+/* TODO: this code is used for debugging. delete after app working
 import {
+
 	 BrowserRouter,
 	 Route,
 	 Link,
 	 Redirect,
 	 withRouter
 } from 'react-router-dom'
-
 
 const fakeAuth = {
 	isAuthenticated: false,
@@ -31,6 +33,11 @@ const AuthButton = withRouter(({ history }) => (
     <p>You are not logged in.</p>
   )
 ))
+
+
+*/
+
+
 
 /*
 class Login extends React.Component {

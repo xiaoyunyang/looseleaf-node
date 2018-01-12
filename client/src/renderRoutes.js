@@ -18,11 +18,7 @@ const renderRoutes = (routes, authed, authPath, extraProps = {}, switchProps = {
         strict={route.strict}
         render={(props) => {
 
-console.log("allowed to view "+ route.path +" ? "+ (!route.restricted || authed || route.path === authPath))
-console.log("Is current component restricted? "+ route.restricted)
-console.log("path="+route.path)
-
-const redirPath = authPath ? authPath : '/login'
+          const redirPath = authPath ? authPath : '/login'
 
           if( !route.restricted || authed || route.path === authPath) {
             return <route.component {...props} {...extraProps} route={route}/>

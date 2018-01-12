@@ -1,12 +1,4 @@
 import React from 'react'
-import {
-	 BrowserRouter,
-	 Route,
-	 Link,
-	 Redirect,
-	 withRouter
-} from 'react-router-dom'
-
 
 const User = () => (
 	<div>

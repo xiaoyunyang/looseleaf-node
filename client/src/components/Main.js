@@ -4,14 +4,14 @@ import { Switch } from 'react-router-dom'
 import renderRoutes from '../renderRoutes'
 import routes from '../routes'
 
-const authed = true
+const authed = false
 const authPath = '/login'
 
 /*  TODO:
 	  fakeAuth is a hack to simulate auth to support testing...
     Take this out later when backend is implemented for realAuth ...
 		See App2 for how this is used.
-*/
+
 const fakeAuth = {
 	isAuthenticated: false,
 	authenticate(cb) {
@@ -23,6 +23,7 @@ const fakeAuth = {
 		setTimeout(cb, 100)
 	}
 }
+*/
 
 
 const Main = () => (
