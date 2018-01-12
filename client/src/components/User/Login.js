@@ -71,7 +71,6 @@ class Login extends React.Component {
 */
 class Login extends React.Component {
 	render() {
-		console.log(this.props)
 		const { from } = this.props.location.state || { from: {pathname: '/' } }
 		return (
 			<div>
@@ -79,7 +78,6 @@ class Login extends React.Component {
 				<button onClick={this.login}>Log in </button>
 			</div>
 		)
-
 	}
 }
 
