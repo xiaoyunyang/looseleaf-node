@@ -9,10 +9,6 @@ const RedirectWithStatus = ({route}) => (
 	}}/>
 )
 
-export default RedirectWithStatus
-
-
-
 
 /*
 
@@ -35,7 +31,7 @@ const RedirectWithStatus = ({route}) => (
 		return <Redirect to='/login' from={route.from} authed={route.authed}/>
 	}}/>
 )
+*/
+
 
 export default RedirectWithStatus
-
-*/

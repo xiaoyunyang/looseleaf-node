@@ -7,6 +7,14 @@ import routes from '../routes'
 const authed = false
 const authPath = '/login'
 
+const Main = () => (
+	<main>
+		<Switch>
+			{renderRoutes(routes, authed, authPath)}
+		</Switch>
+	</main>
+)
+
 /*  TODO:
 	  fakeAuth is a hack to simulate auth to support testing...
     Take this out later when backend is implemented for realAuth ...
@@ -24,14 +32,5 @@ const fakeAuth = {
 	}
 }
 */
-
-
-const Main = () => (
-	<main>
-		<Switch>
-			{renderRoutes(routes, authed, authPath)}
-		</Switch>
-	</main>
-)
 
 export default Main
