@@ -1,7 +1,7 @@
 # LooseLeaf - Node.js App
 
 ##### TODOs
-- [x] Create Web Tech Stack [HowTo doc](https://github.com/xiaoyunyang/xiaoyunyang.github.io/blob/master/assets/md/WebTech.md)
+- [x] Create Web Tech Stack [HowTo doc](https://github.com/xiaoyunyang/xiaoyunyang.github.io/blob/master/assets/md/tech-behind-modern-webapps.md)
 - [x] Add React Router
 - [X] Routing in Guest Mode and User Mode - See [Solution](https://github.com/ReactTraining/react-router/issues/4962)
 - [X] Select Database - See [SetupAuth](https://github.com/xiaoyunyang/xiaoyunyang.github.io/blob/master/assets/md/SetupAuth.md)
@@ -13,7 +13,7 @@
 
 We are going to use the following stack:
 
-- **Platform:** node
+- **Platform:** node - provides the runtime environment
 - **Framework**: express
 - **CSS Framework**: materialize
 - **CSS Preprocessor**: SASS
@@ -39,10 +39,7 @@ Take the following steps to create a baseline app:
 
 	**Warning**:  Implementing the Build, Run & Develop section in the second tutorial could cause `react-hot-loader` to not work so this section wasn't implemented in the baseline app, which is available for download [on Github](https://github.com/xiaoyunyang/looseleaf-node/tree/baseline).
 	
-3. Set up Babel.
-	* [What is Babel?](https://kleopetrov.me/2016/03/18/everything-about-babel/)
-	* [How to set up Babel](http://www.react.express/babel) 
-
+3. [React Express Tutorial](http://www.react.express/webpack) provides a comprehensive overview of `create-react-app`.
 4. Set up debugging with Webpack
 
 5. Integrate `create-react-app` with a Node+Express API server server. 
@@ -50,6 +47,7 @@ Take the following steps to create a baseline app:
 	* [FreeCodeCamp Tutorial](https://medium.freecodecamp.org/how-to-make-create-react-app-work-with-a-node-backend-api-7c5c48acb1b0)
 	* [Esau Silva's Tutorial](https://esausilva.com/2017/11/14/how-to-use-create-react-app-with-a-node-express-backend-api/)
 	* [Dave Ceddia's Tutorial](https://daveceddia.com/create-react-app-express-backend/)	
+
 
 ## Quick Tutorial
 
@@ -100,6 +98,9 @@ Before running the app, you have to set up a few things:
 	 
 	
 3. `npm run build` or `yarn build` - Build the project. If you don't have hot reloading enabled, you have to run this after making changes to your source code to allow the changes to take effect next time you start the server. This is undesirable and there are a few workarounds, in particular, nodemon and react-hot-reloader, which will be discussed in more detail below.
+
+	>The `bundle.js` file will be served from memory by the development server. For production builds, you'll want to use `npm run build` to build an optimized bundle.js, which will be saved to the filesystem.
+	
 4. Run the app:
 
 	* To run the server in development mode, do the following, which starts the server to automomatically listen on port 3000: [http://localhost:3000/](http://localhost:3000/).
@@ -178,11 +179,8 @@ The `user` controller will include logic for creating a new user and authenticat
 	* [`moment`](https://github.com/moment/moment), which is a lightweight JavaScript date library for parsing, validating, manipulating, and formatting dates.
 	* [`react-cookie`](https://github.com/reactivestack/cookies/tree/master/packages/react-cookie), which lets you load and save cookies with React.
 
-### DevTools
-* [`morgan`](https://www.npmjs.com/package/morgan) - quest logger middleware for node.js
 
-
-
+## Database
 
 ### PostgresQL
 
@@ -243,7 +241,30 @@ For more on mongo shell read MongoDB's [official documentation](https://docs.mon
 * Install [`mongoose`](http://mongoosejs.com/index.html)
 * [Connect mongoose to mongodb](http://mongoosejs.com/docs/connections.html)
 
-### Resources
+## DevTools
+* [`morgan`](https://www.npmjs.com/package/morgan) - quest logger middleware for node.js
+* [`webpack`]()
+* [`babel`]()
+
+
+## Resources
+
+**React**
+
+* [React.Express Tutorial](http://www.react.express) - Learn about React, Redux, ES6, Babel, Webpack
+* [My Notes on React](https://github.com/xiaoyunyang/xiaoyunyang.github.io/blob/master/assets/md/react-notes.md)
+* [My Notes on D3 React Integration](https://github.com/xiaoyunyang/xiaoyunyang.github.io/blob/master/assets/md/d3-react-integration.md)
+
+
+**JavaScript, ES6, and Babel**
+
+* [My Notes on ES6 and Babel](https://github.com/xiaoyunyang/xiaoyunyang.github.io/blob/master/assets/md/es6-and-babel.md)
+
+
+**Express**
+
+* [Manning Express In Action](https://hackerstribe.com/wp-content/uploads/2016/04/Node.js-Express-in-Action.pdf)
+
 **React Router**
 
 * [react-router-config](https://www.npmjs.com/package/react-router-config)
@@ -278,4 +299,11 @@ For more on mongo shell read MongoDB's [official documentation](https://docs.mon
 * [Webpack vs. Gulp vs. Browserify](https://www.youtube.com/watch?v=xsSnOQynTHs) 
 
  >Use Webpack because it allows for hot module replacement. Webpack is a prerequisite for [`react-hot-reloader`](https://github.com/gaearon/react-hot-loader), which lets you update your react components during runtime without restarting the server via a `npm run build`.
+
 * [React Hot Reloader Talk](https://www.youtube.com/watch?v=xsSnOQynTHs)
+* Babel.
+	* [What is Babel?](https://kleopetrov.me/2016/03/18/everything-about-babel/)
+
+		>Babel is a highly configurable compiler that lets you use experimental JavaScript features and extensions, compiling down into older JavaScript versions that can be supported on a wider range of platforms. Of course, if a native platform doesn't support an ES2015 feature like Promise(), Babel won't fully be able to help -- but it can in many cases "polyfill" missing APIs to provide this functionality.
+	* [How to set up Babel](http://www.react.express/babel) 
+
