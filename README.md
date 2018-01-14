@@ -13,22 +13,22 @@
 
 We are going to use the following stack:
 
-- **Platform:** node - provides the runtime environment
-- **Framework**: express
+- **Platform:** [node](https://nodejs.org/docs/latest/api/https.html)
+- **Framework**: [express](https://expressjs.com/en/4x/api.html)
 - **CSS Framework**: materialize
 - **CSS Preprocessor**: SASS
 - **JavaScript Framework**: React with React Router v4
 - **Build Tool**: webpack
 - **Unit Testing**: mocha
-- **Database**: postgresql
+- **Database**: mongodb
 - **Authentication**: facebook,email,google,github,twitter
 - **Deployment**: digitalOcean
 
-DevOp
+Tools
 
 - [`create-react-app`](https://github.com/facebookincubator/create-react-app)
 - [`react-hot-loader`](https://github.com/gaearon/react-hot-loader)
- 
+- [`NVM`](https://github.com/creationix/nvm)
 
 Take the following steps to create a baseline app:
 

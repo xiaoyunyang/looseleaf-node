@@ -1,18 +1,16 @@
-const express = require('express');
-
-
-
+const express = require('express')
+const logger = require('morgan')
+const getInfoFromURL = require('./modules/getInfoFromURL')
 
 // Set up ======================================================================
 // get all the tools we need
 const app = express()
-
 app.set("port", process.env.PORT || 3001);
-
+app.use(logger("short"))
 
 // Express only serves static assets in production
 if (process.env.NODE_ENV === "production") {
-  app.use(express.static("client/build"));
+  app.use(express.static("client/build"))
 }
 
 /*
@@ -22,10 +20,17 @@ if (process.env.NODE_ENV === "production") {
 app.get('/api/hello', (req, res) => {
   res.send({ express: 'If you are seeing this, your frontend react app is hooked up to your backend Express app. CONGRATULATIONS!' });
 });
+app.get('/api/goodbye', (req, res) => {
+  res.send({ express: 'Goodbye!!' });
+});
 
+
+const path = "https://medium.com/@xiaoyunyang"
+console.log(getInfoFromURL(path)("username"))
+//console.log(getInfoFromURL(path)("pathname"))
 
 // launch ======================================================================
-// Run server
+// Starts the Express server on port 3001 and logs that it has started
 app.listen(app.get("port"), () => {
-  console.log(`Find the server at: http://localhost:${app.get("port")}/`); // eslint-disable-line no-console
-});
+  console.log(`Express server started at: http://localhost:${app.get("port")}/`); // eslint-disable-line no-console
+})

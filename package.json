@@ -3,14 +3,15 @@
   "version": "1.0.0",
   "scripts": {
     "start": "concurrently \"npm run server\" \"npm run client\"",
-    "server": "node server.js",
-    "client": "node start-client.js",
+    "server": "node ./server/server.js",
+    "client": "node ./server/start-client.js",
     "dev": "echo \"This command has been deprecated. Use 'npm start'\" && exit 1",
     "lint": "eslint ."
   },
   "dependencies": {
     "express": "^4.16.2",
-    "fs": "0.0.1-security"
+    "fs": "0.0.1-security",
+    "morgan": "^1.9.0"
   },
   "devDependencies": {
     "concurrently": "3.1.0",
