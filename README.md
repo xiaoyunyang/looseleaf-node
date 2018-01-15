@@ -63,11 +63,18 @@ Take the following steps to create a baseline app:
 * A `create-react-app` with server example
 
 
+
 ## Running the App
 
 Before running the app, you have to set up a few things:
 
-1. From the project directory, run the commands: `npm install`. This installs all the dependencies in your `package.json`. Everytime you make changes to `package.json`, `npm install` needs to be run so that the dependencies defined in the file would get downloaded by npm. The dependencies gets downloaded into a folder called node_modules.
+1. From the project directory, run the command: 
+	
+	```
+	$ npm install && cd client && npm install && cd ..
+	``` 
+	
+	This installs all the dependencies in your `package.json` from for both the server and the client. Everytime you make changes to `package.json`, `npm install` needs to be run so that the dependencies defined in the file would get downloaded by npm. The dependencies gets downloaded into a folder called node_modules.
 2. Set up your database for the app:
 
 	**Postgres**

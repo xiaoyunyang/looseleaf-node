@@ -1,6 +1,7 @@
 const express = require('express')
 const logger = require('morgan')
 const getInfoFromURL = require('./modules/getInfoFromURL')
+const path = require("path")
 
 // Set up ======================================================================
 // get all the tools we need
@@ -25,8 +26,17 @@ app.get('/api/goodbye', (req, res) => {
 });
 
 
-const path = "https://medium.com/@xiaoyunyang"
-console.log(getInfoFromURL(path)("username"))
+// The below code allows client app to run from the the server (localhost:3001)
+app.use(express.static(path.join(__dirname, '../client/build')));
+
+app.get('/', function (req, res) {
+  res.sendFile(path.join(__dirname, '../client/', 'index.html'));
+});
+
+/*
+TEST CODE BELOW
+ */
+console.log(getInfoFromURL("https://medium.com/@xiaoyunyang")("username"))
 //console.log(getInfoFromURL(path)("pathname"))
 
 // launch ======================================================================
