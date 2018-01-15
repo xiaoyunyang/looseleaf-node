@@ -76,6 +76,7 @@ Before running the app, you have to set up a few things:
 	
 	```
 	$ npm install && cd client && npm install && cd ..
+	$ mkdir server/build
 	``` 
 	
 	This installs all the dependencies in your `package.json` from for both the server and the client. Everytime you make changes to `package.json`, `npm install` needs to be run so that the dependencies defined in the file would get downloaded by npm. The dependencies gets downloaded into a folder called node_modules.
@@ -108,23 +109,26 @@ Before running the app, you have to set up a few things:
 	* Run MongoDB server: `$ mongod`
 	 
 	
-3. `npm run build` or `yarn build` - Build the project. If you don't have hot reloading enabled, you have to run this after making changes to your source code to allow the changes to take effect next time you start the server. This is undesirable and there are a few workarounds, in particular, nodemon and react-hot-reloader, which will be discussed in more detail below.
-
-	>The `bundle.js` file will be served from memory by the development server. For production builds, you'll want to use `npm run build` to build an optimized bundle.js, which will be saved to the filesystem.
+3. `npm run build` or `yarn build` - Build the project. For production builds, you'll want to use `npm run build` to build an optimized bundle and transpiled down to ES5, which will be saved to the filesystem.. If you don't have hot reloading enabled, you have to run this after making changes to your source code to allow the changes to take effect next time you start the client server. This is undesirable and there are a few workarounds, in particular, nodemon and react-hot-reloader, which will be discussed in more detail below.
 	
 4. Run the app:
 
-	* To run the server in development mode, do the following, which starts the server to automomatically listen on port 3000: [http://localhost:3000/](http://localhost:3000/).
+	* To run the server and client in development mode, do the following, which starts the server to automomatically listen on port 3001 ([http://localhost:3001/](http://localhost:3001/)) and the client to automomatically listen on port 3000.
 
 		```
-		$ npm start
+		$ npm start-dev
 		``` 
 	To run just the client app, do
 		
 		```
-		$ yarn start
+		$ npm start-client
 		
 		```
+		Alternatively,
+		```
+		$ cd client && npm start
+		```
+		
 		In this mode, you can use `react-hot-loader` to make changes to react components in runtime.
 		
 		If you want to run on other ports, like 9000, 8000, 8080, just specify the port you want:
