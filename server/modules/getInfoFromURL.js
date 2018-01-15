@@ -36,10 +36,8 @@ const getPathnameFromURL = pathname => {
   }
   return name
 }
-/**
- * Unit Testing code
- * delete or comment out for production
- */
+
+// TODO: TEST CODE BELOW. Remote for production
 let path = "https://medium.com/@xiaoyunyang"
 console.log(getInfoFromURL(path)("username"))
 
