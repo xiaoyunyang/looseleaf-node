@@ -1,12 +1,15 @@
 # LooseLeaf - Node.js App
 
 ##### TODOs
-- [x] Create Web Tech Stack [HowTo doc](https://github.com/xiaoyunyang/xiaoyunyang.github.io/blob/master/assets/md/tech-behind-modern-webapps.md)
-- [x] Add React Router
-- [X] Routing in Guest Mode and User Mode - See [Solution](https://github.com/ReactTraining/react-router/issues/4962)
-- [X] Select Database - See [SetupAuth](https://github.com/xiaoyunyang/xiaoyunyang.github.io/blob/master/assets/md/SetupAuth.md)
+- [x] Select Web Tech Stack [HowTo doc](https://github.com/xiaoyunyang/xiaoyunyang.github.io/blob/master/assets/md/tech-behind-modern-webapps.md)
+- [x] Add React Router V4
+- [x] Routing in Guest Mode and User Mode - See [Solution](https://github.com/ReactTraining/react-router/issues/4962)
+- [x] Set up REST API in server and isomorphic fetch in client 
+- [ ] Connect database to server 
+- [ ] Set up Redux for Frontend app
+- [ ] Connect React Router V4 router to Server Router - See [This Tutorial](https://crypt.codemancers.com/posts/2017-06-03-reactjs-server-side-rendering-with-router-v4-and-redux/)
+- [ ] Connect Server to Database
 - [ ] Authentication - See [SetupAuth](https://github.com/xiaoyunyang/xiaoyunyang.github.io/blob/master/assets/md/SetupAuth.md)
-- [ ] Hook up Redux to Frontend app
 
 
 ## Getting Started 
@@ -47,6 +50,7 @@ Take the following steps to create a baseline app:
 	* [FreeCodeCamp Tutorial](https://medium.freecodecamp.org/how-to-make-create-react-app-work-with-a-node-backend-api-7c5c48acb1b0)
 	* [Esau Silva's Tutorial](https://esausilva.com/2017/11/14/how-to-use-create-react-app-with-a-node-express-backend-api/)
 	* [Dave Ceddia's Tutorial](https://daveceddia.com/create-react-app-express-backend/)	
+	* [Codemander's Tutorial](https://crypt.codemancers.com/posts/2017-06-03-reactjs-server-side-rendering-with-router-v4-and-redux/)
 
 
 ## Quick Tutorial
@@ -99,7 +103,7 @@ Before running the app, you have to set up a few things:
 	* Set permissions for the data directory: 
 	
 		```
-		$ sudo chown -R `whoami` /data/db`	
+		$ sudo chown -R `whoami` /data/db	
 		```
 	* Run MongoDB server: `$ mongod`
 	 
@@ -157,6 +161,11 @@ Before running the app, you have to set up a few things:
 * [`redux-logger`](https://github.com/evgenyrodionov/redux-logger) - logging tool that lets you replay problems as if they happened in your own browser.
 * [`react-redux`](https://github.com/reactjs/react-redux) - We need to use `connect` from `react-redux` to connect a React component to a Redux store.
 
+### Express
+
+* [`morgan`](https://www.npmjs.com/package/morgan-2) - log every request to the console
+* [`body-parser`](https://github.com/expressjs/body-parser) -  get information from html forms
+
 ### Authentication
 
 See [the tutorial](https://github.com/xiaoyunyang/xiaoyunyang.github.io/blob/master/assets/md/SetupAuth.md) for how to set up `passport` and `postgresql` with your react-node app.
@@ -185,6 +194,8 @@ The `user` controller will include logic for creating a new user and authenticat
 1. Install dependencies
 	* [`moment`](https://github.com/moment/moment), which is a lightweight JavaScript date library for parsing, validating, manipulating, and formatting dates.
 	* [`react-cookie`](https://github.com/reactivestack/cookies/tree/master/packages/react-cookie), which lets you load and save cookies with React.
+
+
 
 
 ## Database
@@ -285,6 +296,7 @@ For more on mongo shell read MongoDB's [official documentation](https://docs.mon
 * [unofficial migration guide](https://codeburst.io/react-router-v4-unofficial-migration-guide-5a370b8905a).
 5. [Read this](https://github.com/ReactTraining/react-router/pull/4934) for more on how to fix the deprecation warnings.
 	> Failed Context Types: Calling PropTypes validators directly is not supported by the `prop-types` package
+* [Integrate React Router v4 with Server Router](https://crypt.codemancers.com/posts/2017-06-03-reactjs-server-side-rendering-with-router-v4-and-redux/)
 
 **Authentication**
 
@@ -301,7 +313,9 @@ For more on mongo shell read MongoDB's [official documentation](https://docs.mon
 * [postgres with passport](http://uitblog.com/postgres-with-passport/)
 * [TutorialsPoint MongoDB Tutorial](https://www.tutorialspoint.com/mongodb/mongodb_overview.htm)
 * [MongoDB official documentation](https://docs.mongodb.com/manual/mongo/)
-**DevOp**
+
+
+**DevTools**
 
 * [Webpack vs. Gulp vs. Browserify](https://www.youtube.com/watch?v=xsSnOQynTHs) 
 
@@ -314,3 +328,4 @@ For more on mongo shell read MongoDB's [official documentation](https://docs.mon
 		>Babel is a highly configurable compiler that lets you use experimental JavaScript features and extensions, compiling down into older JavaScript versions that can be supported on a wider range of platforms. Of course, if a native platform doesn't support an ES2015 feature like Promise(), Babel won't fully be able to help -- but it can in many cases "polyfill" missing APIs to provide this functionality.
 	* [How to set up Babel](http://www.react.express/babel) 
 
+* [How to set up ES6 in Node](https://www.lookami.com/using-es6-es2015-in-a-node-js-express/)
