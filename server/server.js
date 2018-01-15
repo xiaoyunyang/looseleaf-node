@@ -12,8 +12,16 @@ app.use(logger("short"))
 
 // Express only serves static assets in production
 if (process.env.NODE_ENV === "production") {
-  app.use(express.static("client/build"))
+  let path = path.join(__dirname, '../../client/build')
+  app.use(express.static(path))
 }
+
+// The below code allows client app to run from the the server (localhost:3001)
+app.use(express.static(path.join(__dirname, '../../client/build')))
+
+app.get('/', function (req, res) {
+  res.sendFile(path.join(__dirname, '../../client/', 'index.html'))
+})
 
 /*
  This is getting sent to localhost:3001/api/hello. In your terminal try:
@@ -34,12 +42,7 @@ app.get('/auth/facebook/callback', (res, resp) => {
 
 //TODO: Add logic here for server to log routes managed by client code
 
-// The below code allows client app to run from the the server (localhost:3001)
-app.use(express.static(path.join(__dirname, '../client/build')))
 
-app.get('/', function (req, res) {
-  res.sendFile(path.join(__dirname, '../client/', 'index.html'))
-})
 
 // TODO: TEST CODE BELOW. Remote for production
 console.log(getInfoFromURL("https://medium.com/@xiaoyunyang")("username"))
