@@ -63,7 +63,8 @@ Take the following steps to create a baseline app:
 [create-react-app](https://github.com/facebookincubator/create-react-app)
 >Create React App is agnostic of the backend, and just produces static HTML/JS/CSS bundles.
 
-[food-lookup-demo](https://github.com/fullstackreact/food-lookup-demo)
+[food-lookup-demo](https://github.com/fullstackreact/food-lookup-demo) 
+
 * A `create-react-app` with server example
 
 
@@ -113,18 +114,19 @@ Before running the app, you have to set up a few things:
 	
 4. Run the app:
 
-	* To run the server and client in development mode, do the following, which starts the server to automomatically listen on port 3001 ([http://localhost:3001/](http://localhost:3001/)) and the client to automomatically listen on port 3000.
+	* To run the server and client in development mode, do the following, which starts the server to automomatically listen on port 3001 ([http://localhost:3001/](http://localhost:3001/)) and the client to automomatically listen on port 3000 ([http://localhost:3000/](http://localhost:3000/)).
 
 		```
 		$ npm start-dev
 		``` 
-	To run just the client app, do
 		
+	* To run just the client app, do 
+	
 		```
 		$ npm start-client
+		```		
+	Alternatively,
 		
-		```
-		Alternatively,
 		```
 		$ cd client && npm start
 		```
@@ -142,6 +144,7 @@ Before running the app, you have to set up a few things:
 		$ yarn global add serve
 		$ serve -s build
 		```
+		
 		In this mode, you can't use `react-hot-loader` because the client app is rendered on the server side.
 5. Stop the database server when you are done:
 	* Stop the postgres database 
@@ -199,8 +202,42 @@ The `user` controller will include logic for creating a new user and authenticat
 	* [`moment`](https://github.com/moment/moment), which is a lightweight JavaScript date library for parsing, validating, manipulating, and formatting dates.
 	* [`react-cookie`](https://github.com/reactivestack/cookies/tree/master/packages/react-cookie), which lets you load and save cookies with React.
 
+## CSS
+We are using `materialize-css`, which depends on `jquery`. Add the following to the client project:
 
+```
+$ cd client
+$ npm install --save materialize-css
+$ npm install --save jquery
+$ touch src/assets/index.css
+```
+The `index.css` is where the custom styles for you app go. This will override the `materialize-css` style if you add the following imports to your `index.js` (or whatever the main entry point of your client app is):
 
+```javascript
+// src/index.js
+
+import 'materialize-css'
+import 'materialize-css/dist/css/materialize.min.css';
+import './assets/index.css';
+```
+To use materialize components in your react components, import `jquery` and add the script in `componentDidMount`:
+
+```javascript
+// src/components/Header.js
+import React from 'react'
+import { Link } from 'react-router-dom'
+import $ from 'jquery'
+
+class Header extends React.Component {
+  componentDidMount() {
+    $(".dropdown-button").dropdown()
+  }
+  render() {
+  	// TODO: nav and dropdown menu
+  }
+
+```
+What about CSS javascripts? Read the [full stack react tutorial](https://www.fullstackreact.com/p/using-webpack-with-create-react-app/) for more on that.
 
 ## Database
 

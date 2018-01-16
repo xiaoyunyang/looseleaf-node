@@ -1,8 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
-import './index.css';
 import App from './App';
+import 'materialize-css'
+import 'materialize-css/dist/css/materialize.min.css';
+import './assets/index.css';
 
 const render = Component => {
   ReactDOM.render(
