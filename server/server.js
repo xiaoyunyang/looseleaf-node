@@ -11,30 +11,37 @@ require('dotenv').config()
 // Set up ======================================================================
 // get all the tools we need
 const app = express()
-app.set("port", process.env.PORT || 3001);
+app.set("port", process.env.PORT || 3001)
 app.use(logger("short"))
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: false }))
 
 // Integration with Frontend ===================================================
 // Express only serves static assets in production
+
 if (process.env.NODE_ENV === "production") {
-  let path = path.join(path.resolve("./"), 'client/build')
-  app.use(express.static(path))
+  console.log("Running in production mode")
+
+  // The below code allows client app to run from the the server (localhost:3001)
+  app.use(express.static(path.join(path.resolve("."), '/client/build')))
+  app.get('/', function (req, res) {
+    res.sendFile(path.join(path.resolve("."), '/client/', 'index.html'))
+  })
+} else if(process.env.NODE_ENV == "development") {
+  console.log("Running in development mode")
+
+  /*
+  TODO: Integrate server with client when env is development
+  Add logic here for server to log routes managed by client code. See
+  https://crypt.codemancers.com/posts/2017-06-03-reactjs-server-side-rendering-with-router-v4-and-redux/
+  The below code is temporary, copied from the the case when env is production.
+  */
+  app.use(express.static(path.join(path.resolve("."), '/client/build')))
+  app.get('/', function (req, res) {
+    res.sendFile(path.join(path.resolve("."), '/client/', 'index.html'))
+  })
 }
-
-// The below code allows client app to run from the the server (localhost:3001)
-app.use(express.static(path.join(path.resolve("."), '/client/build')))
-
-app.get('/', function (req, res) {
-  res.sendFile(path.join(path.resolve("."), '/client/', 'index.html'))
-})
-
-/*
-TODO: Add logic here for server to log routes managed by client code. See
-https://crypt.codemancers.com/posts/2017-06-03-reactjs-server-side-rendering-with-router-v4-and-redux/
-*/
-
 
 
 // API =========================================================================
@@ -61,11 +68,9 @@ app.get('/auth/facebook/callback', (res, resp) => {
 })
 
 
-
-
 // Test code ===================================================================
 // TODO: TEST CODE BELOW. Remote for production
-console.log(getInfoFromURL("https://medium.com/@xiaoyunyang")("username"))
+//console.log(getInfoFromURL("https://medium.com/@xiaoyunyang")("username"))
 //console.log(getInfoFromURL(path)("pathname"))
 
 app.set("views", path.resolve(__dirname, "views"));
@@ -74,14 +79,14 @@ app.set("view engine", "ejs");
 let entries = [];
 app.locals.entries = entries;
 
-app.get("/test", function(request, response) {
+app.get("/guestbook", function(request, response) {
   response.render("index");
 });
-app.get("/test/new-entry", function(request, response) {
+app.get("/guestbook/new-entry", function(request, response) {
   response.render("new-entry");
 });
 
-app.post("/test/new-entry", function(request, response) {
+app.post("/guestbook/new-entry", function(request, response) {
   if (!request.body.title || !request.body.body) {
     response.status(400).send("Entries must have a title and a body.");
     return;
@@ -92,14 +97,22 @@ app.post("/test/new-entry", function(request, response) {
     published: new Date()
   });
   console.log(entries)
-  response.redirect("/test");
+  response.redirect("/guestbook");
 });
 
+// Serve static file
+//Try: http://localhost:3001/cat.png
+//Try:  http://localhost:3001/resume.png
+const staticPath = path.join(__dirname, "static");
+app.use(express.static(staticPath));
 
 //Renders a 404 page because you’re requesting an unknown source
-app.use(function(request, response) {
-  response.status(404).render("404");
+app.use(function(req, res) {
+  res.status(404)
+  res.send("File not found!")
 });
+
+
 
 // launch ======================================================================
 // Starts the Express server on port 3001 and logs that it has started

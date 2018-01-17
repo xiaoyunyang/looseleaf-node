@@ -38,8 +38,8 @@ const getPathnameFromURL = pathname => {
 }
 
 // TODO: TEST CODE BELOW. Remote for production
-let path = "https://medium.com/@xiaoyunyang"
-console.log(getInfoFromURL(path)("username"))
+//let path = "https://medium.com/@xiaoyunyang"
+//console.log(getInfoFromURL(path)("username"))
 
 /*
 We have to use module.export because our server doesn't get transpiled into ES6.

@@ -27,6 +27,7 @@ class Header extends React.Component {
                 </a>
                 <ul id="user-dropdown" className="dropdown-content">
                   <li><a href="/user">Profile</a></li>
+                  <li><a href="/user">Stats</a></li>
                   <li className="divider"></li>
                   <li><a href="/logout">Log out</a></li>
                 </ul>

@@ -46,27 +46,23 @@ Take the following steps to create a baseline app:
 4. Set up debugging with Webpack
 
 5. Integrate `create-react-app` with a Node+Express API server server. 
-	* [FullStackReact's Tutorial](https://www.fullstackreact.com/articles/using-create-react-app-with-a-server/#enter-create-react-app) and [Sample Project](https://github.com/fullstackreact/food-lookup-demo)
+	* [FullStackReact's Tutorial](https://www.fullstackreact.com/articles/using-create-react-app-with-a-server/#enter-create-react-app) and [Sample Project](https://github.com/fullstackreact/food-lookup-demo) - A `create-react-app` with server example
 	* [FreeCodeCamp Tutorial](https://medium.freecodecamp.org/how-to-make-create-react-app-work-with-a-node-backend-api-7c5c48acb1b0)
 	* [Esau Silva's Tutorial](https://esausilva.com/2017/11/14/how-to-use-create-react-app-with-a-node-express-backend-api/)
-	* [Dave Ceddia's Tutorial](https://daveceddia.com/create-react-app-express-backend/)	
-	* [Codemander's Tutorial](https://crypt.codemancers.com/posts/2017-06-03-reactjs-server-side-rendering-with-router-v4-and-redux/)
+	* [Codemander's Tutorial](https://crypt.codemancers.com/posts/2017-06-03-reactjs-server-side-rendering-with-router-v4-and-redux/) - Integrate react-router-v4 with server router
+	* [Dave Ceddia's Tutorial](https://daveceddia.com/create-react-app-express-backend/) - `create-react-app` with express backend
 
+## Tutorial
 
-## Quick Tutorial
+* [React Express](http://www.react.express/environment)
+	>Facebook provides a command-line utility called `create-react-app` which automatically sets up a new React project with a sensible default project structure and feature set. This is the best way to get started as a beginner.
 
-[React Express](http://www.react.express/environment)
->Facebook provides a command-line utility called `create-react-app` which automatically sets up a new React project with a sensible default project structure and feature set. This is the best way to get started as a beginner.
+	>You'll likely outgrow this option pretty quickly as you get a better grasp of React and want to customize your stack. Fortunately, create-react-app offers an `eject` option to export your app, so you're not locked in.
 
->You'll likely outgrow this option pretty quickly as you get a better grasp of React and want to customize your stack. Fortunately, create-react-app offers an `eject` option to export your app, so you're not locked in.
-
-[create-react-app](https://github.com/facebookincubator/create-react-app)
+* [create-react-app](https://github.com/facebookincubator/create-react-app)
 >Create React App is agnostic of the backend, and just produces static HTML/JS/CSS bundles.
 
-[food-lookup-demo](https://github.com/fullstackreact/food-lookup-demo) 
-
-* A `create-react-app` with server example
-
+* [my babel tutorial](https://github.com/xiaoyunyang/xiaoyunyang.github.io/blob/master/assets/md/es6-and-babel.md)
 
 
 ## Running the App
@@ -125,7 +121,8 @@ Before running the app, you have to set up a few things:
 		```
 		$ npm start-client
 		```		
-	Alternatively,
+	
+		Alternatively,
 		
 		```
 		$ cd client && npm start
@@ -151,7 +148,6 @@ Before running the app, you have to set up a few things:
 	 
 	 ```
 	 $ pg_ctl -D /usr/local/var/postgres stop
-	 
 	 ```
 	
 	* Or if you use mongo: `control`+`C`  
@@ -233,7 +229,7 @@ class Header extends React.Component {
     $(".dropdown-button").dropdown()
   }
   render() {
-  	// TODO: nav and dropdown menu
+    // TODO: nav and dropdown menu
   }
 
 ```
