@@ -5,6 +5,7 @@ import logger from 'morgan'
 import getInfoFromURL from './modules/getInfoFromURL'
 import path from 'path'
 import bodyParser from 'body-parser'
+import fs from 'fs'
 
 require('dotenv').config()
 
@@ -79,14 +80,14 @@ app.set("view engine", "ejs");
 let entries = [];
 app.locals.entries = entries;
 
-app.get("/guestbook", function(request, response) {
+app.get("/guestbook", (request, response) => {
   response.render("index");
 });
-app.get("/guestbook/new-entry", function(request, response) {
+app.get("/guestbook/new-entry", (request, response) => {
   response.render("new-entry");
 });
 
-app.post("/guestbook/new-entry", function(request, response) {
+app.post("/guestbook/new-entry", (request, response) => {
   if (!request.body.title || !request.body.body) {
     response.status(400).send("Entries must have a title and a body.");
     return;
@@ -103,14 +104,36 @@ app.post("/guestbook/new-entry", function(request, response) {
 // Serve static file
 //Try: http://localhost:3001/cat.png
 //Try:  http://localhost:3001/resume.png
-const staticPath = path.join(__dirname, "static");
-app.use(express.static(staticPath));
 
+
+app.use('/static', (req, res, next) => {
+  const filePath = path.join(__dirname, "static", req.url);
+
+  res.sendFile(filePath, (err) => {
+    if(err) {
+      next(new Error("Error sending file!"));
+    }
+  })
+})
+
+
+// Error Handler ===============================================================
 //Renders a 404 page because you’re requesting an unknown source
-app.use(function(req, res) {
-  res.status(404)
-  res.send("File not found!")
-});
+
+// middleware that logs the error
+app.use((err, req, res, next) => {
+  console.error(err)
+  next(err)
+})
+
+// middleware that logs all errors
+app.use((err, req, res, next) => {
+  res.status(500);
+  res.send("Internal server error.");
+})
+
+
+
 
 
 
