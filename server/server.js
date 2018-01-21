@@ -20,15 +20,17 @@ app.use(bodyParser.urlencoded({ extended: false }))
 
 // Integration with Frontend ===================================================
 // Express only serves static assets in production
-
+const clientAppPath = path.join(path.resolve("."), '/client/build')
 if (process.env.NODE_ENV === "production") {
   console.log("Running in production mode")
-
   // The below code allows client app to run from the the server (localhost:3001)
-  app.use(express.static(path.join(path.resolve("."), '/client/build')))
+  app.use('/', express.static(clientAppPath))
+
+
+/*  app.use(express.static(path.join(path.resolve("."), '/client/build')))
   app.get('/', function (req, res) {
-    res.sendFile(path.join(path.resolve("."), '/client/', 'index.html'))
-  })
+    res.sendFile(path.join(path.resolve("."), '/client/build', 'index.html'))
+  })*/
 } else if(process.env.NODE_ENV == "development") {
   console.log("Running in development mode")
 
@@ -38,10 +40,8 @@ if (process.env.NODE_ENV === "production") {
   https://crypt.codemancers.com/posts/2017-06-03-reactjs-server-side-rendering-with-router-v4-and-redux/
   The below code is temporary, copied from the the case when env is production.
   */
-  app.use(express.static(path.join(path.resolve("."), '/client/build')))
-  app.get('/', function (req, res) {
-    res.sendFile(path.join(path.resolve("."), '/client/', 'index.html'))
-  })
+
+  app.use('/', express.static(clientAppPath))
 }
 
 
@@ -50,16 +50,8 @@ if (process.env.NODE_ENV === "production") {
  This is getting sent to localhost:3001/api/hello. In your terminal try:
  $ curl localhost:3001/api/hello
  */
-app.get('/api/hello', (req, res) => {
-  res.send({ express: 'If you are seeing this, your frontend react app is hooked up to your backend Express app. CONGRATULATIONS!' });
-})
-app.get("/api/hello/@:who", function(req, res) {
-  res.end("Hello, " + req.params.who + ".");
-  // Fun fact: this has some security issues, which we’ll get to!
-});
-app.get('/api/goodbye', (req, res) => {
-  res.send({ express: 'Goodbye!' });
-})
+const apiVersion1 = require("./api1.js");
+app.use("/api", apiVersion1)
 
 // Auth ========================================================================
 //TODO: Add Auth stuff here
@@ -121,6 +113,11 @@ app.post("/guestbook/new-entry", (req, res) => {
 
 app.use('/static', (req, res, next) => {
   const filePath = path.join(__dirname, "static", req.url)
+  console.log(req.url)
+
+  if(req.url == '/resume.pdf') {
+    res.status(403).send(req.url + " is Forbidden resource")
+  }
 
   res.sendFile(filePath, (err) => {
     if(err) {
@@ -128,7 +125,6 @@ app.use('/static', (req, res, next) => {
     }
   })
 })
-
 
 // Error Handler ===============================================================
 
@@ -138,18 +134,24 @@ app.use((err, req, res, next) => {
   next(err)
 })
 
+// middleware that responds to the 404 error
+// The 404 error is associated with a GET request failure
+app.use((req, res) => {
+  res.status(404).render("404");
+  //alternative:
+  //res.status(404).json({ error: "Resource not found!" });
+})
+
+app.use((req, res) => {
+  res.status(403).send("Forbidden resource")
+})
+
+
 // middleware that responds to the 500 error
 // The 500 error is associated with a requesting a file that does not exist
 app.use((err, req, res, next) => {
-  res.status(500).send("Internal server error.")
+  res.status(500).send("Internal server error: "+ err)
 })
-
-// middleware that responds to the 404 error
-// The 404 error is associated with a GET request failure
-app.use((req, resp) => {
-  resp.status(404).send("Page not found!")
-})
-
 
 // launch ======================================================================
 // Starts the Express server on port 3001 and logs that it has started
