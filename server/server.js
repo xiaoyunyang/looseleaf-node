@@ -77,48 +77,60 @@ app.get('/auth/facebook/callback', (res, resp) => {
 app.set("views", path.resolve(__dirname, "views"));
 app.set("view engine", "ejs");
 
-let entries = [];
+let entries = []
+let ctr = 0
 app.locals.entries = entries;
 
-app.get("/guestbook", (request, response) => {
-  response.render("index");
+app.get("/guestbook", (req, res) => {
+  res.render("index")
 });
-app.get("/guestbook/new-entry", (request, response) => {
-  response.render("new-entry");
+app.get("/guestbook/new-entry", (req, res) => {
+  res.render("new-entry")
 });
 
-app.post("/guestbook/new-entry", (request, response) => {
-  if (!request.body.title || !request.body.body) {
-    response.status(400).send("Entries must have a title and a body.");
+// regex for catching numbers only
+app.get(/^\/guestbook\/(\d+)$/, (req, res) => {
+  let id = parseInt(req.params[0], 10);
+  let entry = entries[id]
+  app.locals.entry = entry;
+  res.render("entry")
+})
+
+app.post("/guestbook/new-entry", (req, res) => {
+  if (!req.body.title || !req.body.body) {
+    res.status(400).send("Entries must have a title and a body.")
     return;
   }
   entries.push({
-    title: request.body.title,
-    content: request.body.body,
+    id: ctr,
+    title: req.body.title,
+    content: req.body.body,
     published: new Date()
   });
+  ctr = ctr + 1
   console.log(entries)
-  response.redirect("/guestbook");
-});
+  res.redirect("/guestbook")
+})
+
+
 
 // Serve static file
-//Try: http://localhost:3001/cat.png
-//Try:  http://localhost:3001/resume.png
+//Try: http://localhost:3001/static/cat.png
+//Try:  http://localhost:3001/static/resume.png
 
 
 app.use('/static', (req, res, next) => {
-  const filePath = path.join(__dirname, "static", req.url);
+  const filePath = path.join(__dirname, "static", req.url)
 
   res.sendFile(filePath, (err) => {
     if(err) {
-      next(new Error("Error sending file!"));
+      next(new Error("Error sending file!"))
     }
   })
 })
 
 
 // Error Handler ===============================================================
-//Renders a 404 page because you’re requesting an unknown source
 
 // middleware that logs the error
 app.use((err, req, res, next) => {
@@ -126,15 +138,17 @@ app.use((err, req, res, next) => {
   next(err)
 })
 
-// middleware that logs all errors
+// middleware that responds to the 500 error
+// The 500 error is associated with a requesting a file that does not exist
 app.use((err, req, res, next) => {
-  res.status(500);
-  res.send("Internal server error.");
+  res.status(500).send("Internal server error.")
 })
 
-
-
-
+// middleware that responds to the 404 error
+// The 404 error is associated with a GET request failure
+app.use((req, resp) => {
+  resp.status(404).send("Page not found!")
+})
 
 
 // launch ======================================================================

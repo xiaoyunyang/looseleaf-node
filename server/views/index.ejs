@@ -6,7 +6,9 @@
         <div class="text-muted pull-right">
           <%= entry.published %>
         </div>
-        <%= entry.title %>
+        <a href="/guestbook/<%= entry.id %>"/>
+          <%= entry.title %>
+        </a>
       </div>
       <div class="panel-body">
         <%= entry.content %>
