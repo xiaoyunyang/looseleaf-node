@@ -5,7 +5,12 @@ import logger from 'morgan'
 import getInfoFromURL from './modules/getInfoFromURL'
 import path from 'path'
 import bodyParser from 'body-parser'
-import fs from 'fs'
+//import fs from 'fs'
+import cookieParser from 'cookie-parser'
+import mongoose from 'mongoose'
+import session from 'express-session'
+import flash from 'connect-flash'
+import passport from 'passport'
 
 require('dotenv').config()
 
@@ -44,6 +49,9 @@ if (process.env.NODE_ENV === "production") {
   app.use('/', express.static(clientAppPath))
 }
 
+const setUpPassport = require ('./config/passport.js')
+mongoose.connect("mongodb://localhost:27017/test")
+setUpPassport()
 
 // API =========================================================================
 /*
@@ -60,8 +68,26 @@ app.get('/auth/facebook/callback', (res, resp) => {
   resp.end("Facebook Callback page with status code"+ resp.statusCode)
 })
 
+// Auth ========================================================================
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(session({
+  secret: "TKRv0IJs=HYqrvagQ#&!F!%V]Ww/4KiVs$s,<<MX",
+  resave: true,
+  saveUninitialized: true
+}));
+app.use(flash());
 
-// Test code ===================================================================
+app.use(passport.initialize());
+app.use(passport.session());
+
+
+
+const routes = require("./routes")
+app.use('/auth', routes);
+
+
+// Guestbook ===================================================================
 // TODO: TEST CODE BELOW. Remote for production
 //console.log(getInfoFromURL("https://medium.com/@xiaoyunyang")("username"))
 //console.log(getInfoFromURL(path)("pathname"))

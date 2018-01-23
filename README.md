@@ -300,6 +300,8 @@ For more on mongo shell read MongoDB's [official documentation](https://docs.mon
 * [`morgan`](https://www.npmjs.com/package/morgan) - quest logger middleware for node.js
 * [`webpack`]()
 * [`babel`]()
+* [`immer`](https://github.com/mweststrate/immer) - a tiny package that allows you to work with immutable state in a more convenient way. It is based on the copy-on-write mechanism.
+* [`mobx`](https://github.com/mobxjs) - Simple, scalable state management
 
 
 ## Resources
