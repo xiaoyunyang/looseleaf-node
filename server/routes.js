@@ -45,7 +45,7 @@ router.post("/signup", (req, res, next) => {
     newUser.save(next)
   })
 }, passport.authenticate("login", {
-  successRedirect: "/",
+  successRedirect: "/auth",
   failureRedirect: "/auth/signup",
   failureFlash: true
 }))

@@ -41,7 +41,7 @@ userSchema.methods.name = function() {
 }
 
 // Checking the user’s password against hashedPassword
-userSchema.methods.checkPassword = (guess, done) => {
+userSchema.methods.checkPassword = function(guess, done) {
   bcrypt.compare(guess, this.password, (err, isMatch) => {
     done(err, isMatch);
   })
