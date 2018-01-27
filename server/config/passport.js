@@ -3,11 +3,14 @@ import { Strategy as LocalStrategy } from 'passport-local'
 import User from '../models/User'
 
 module.exports = function() {
-
+  // serializeUser should turn a user object into an ID.
+  // You call done with no error and the user’s ID.
   passport.serializeUser(function(user, done) {
     done(null, user._id);
   })
 
+  // deserializeUser should turn the ID into a user object.
+  // Once you’ve finished, you call done with any errors and the user object.
   passport.deserializeUser(function(id, done) {
     User.findById(id, function(err, user) {
       done(err, user);

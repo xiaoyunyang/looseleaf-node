@@ -71,6 +71,7 @@ app.get('/auth/facebook/callback', (res, resp) => {
 // Auth ========================================================================
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+// TODO: "secret" needs to be secret and a bunch of random characters
 app.use(session({
   secret: "TKRv0IJs=HYqrvagQ#&!F!%V]Ww/4KiVs$s,<<MX",
   resave: true,
@@ -80,8 +81,6 @@ app.use(flash());
 
 app.use(passport.initialize());
 app.use(passport.session());
-
-
 
 const routes = require("./routes")
 app.use('/auth', routes);

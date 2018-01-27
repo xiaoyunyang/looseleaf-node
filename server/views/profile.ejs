@@ -1,6 +1,6 @@
 <% include _header %>
 <% if ((currentUser) && (currentUser.id === user.id)) { %>
-  <a href="/edit" class="pull-right">Edit your profile</a>
+  <a href="/auth/edit" class="pull-right">Edit your profile</a>
   <% } %>
   <h1><%= user.name() %></h1>
   <h2>Joined on <%= user.createdAt %></h2>

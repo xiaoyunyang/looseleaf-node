@@ -48,6 +48,6 @@ userSchema.methods.checkPassword = function(guess, done) {
 }
 
 // Creating and exporting the user model =======================================
-var User = mongoose.model('User', userSchema);
+const User = mongoose.model('User', userSchema);
 
 module.exports = User;

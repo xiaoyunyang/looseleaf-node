@@ -9,12 +9,12 @@
 <div class="navbar navbar-default navbar-static-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
-      <a class="navbar-brand" href="/">Learn About Me</a>
+      <a class="navbar-brand" href="/auth">Learn About Me</a>
     </div>
     <ul class="nav navbar-nav navbar-right">
       <% if (currentUser) { %>
         <li>
-          <a href="/edit">
+          <a href="/auth/edit">
             Hello, <%= currentUser.name() %>
           </a>
         </li>
