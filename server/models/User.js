@@ -2,11 +2,18 @@ import mongoose from 'mongoose'
 import bcrypt from 'bcrypt-nodejs'
 
 const userSchema = mongoose.Schema({
-  username: { type: String, required: true, unique: true },
-  password: { type: String, required: true },
   createdAt: { type: Date, default: Date.now },
+  username: { type: String, required: true, unique: true },
   displayName: String,
-  bio: String
+  website: String,
+  location: String,
+  picture: String,
+  bio: String,
+  local: {
+    email: { type: String, unique: true},
+    password: { type: String, required: true },
+    passwordResetToken: String,
+  }
 })
 
 const SALT_FACTOR = 10
@@ -19,21 +26,19 @@ const noop = function() {}
 // See: https://github.com/Automattic/mongoose/issues/3333
 userSchema.pre("save", function(done) {
   const user = this; // Saves a reference to the user
-  if(!user.isModified("password")) {
+  if(!user.isModified("local.password")) {
 
     return done()
   }
   bcrypt.genSalt(SALT_FACTOR, (err, salt) => {
     if(err) { return done(err) }
-    bcrypt.hash(user.password, salt, noop, (err, hashedPassword) => {
+    bcrypt.hash(user.local.password, salt, noop, (err, hashedPassword) => {
       if(err) { return done(err) }
-      user.password = hashedPassword
+      user.local.password = hashedPassword
       done()
     })
   })
 })
-
-
 
 // Model methods ===============================================================
 userSchema.methods.name = function() {
@@ -42,7 +47,7 @@ userSchema.methods.name = function() {
 
 // Checking the user’s password against hashedPassword
 userSchema.methods.checkPassword = function(guess, done) {
-  bcrypt.compare(guess, this.password, (err, isMatch) => {
+  bcrypt.compare(guess, this.local.password, (err, isMatch) => {
     done(err, isMatch);
   })
 }

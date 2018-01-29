@@ -4,7 +4,8 @@
   <% } %>
   <h1><%= user.name() %></h1>
   <h2>Joined on <%= user.createdAt %></h2>
+  <p>Email:  <%= user.local.email %></p>
   <% if (user.bio) { %>
-    <p><%= user.bio %></p>
+    <p>Bio:  <%= user.bio %></p>
   <% } %>
 <% include _footer %>

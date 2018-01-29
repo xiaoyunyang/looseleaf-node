@@ -1,5 +1,7 @@
 "use strict";
 
+// Set up ======================================================================
+// get all the tools we need
 import express from  'express'
 import logger from 'morgan'
 import getInfoFromURL from './modules/getInfoFromURL'
@@ -14,85 +16,60 @@ import passport from 'passport'
 
 require('dotenv').config()
 
-// Set up ======================================================================
-// get all the tools we need
-const app = express()
-app.set("port", process.env.PORT || 3001)
-app.use(logger("short"))
+const configPassport = require ('./config/passport.js')
 
+// Configuration ===============================================================
+const app = express()
+app.set("port", process.env.PORT || 8080)
+app.use(logger("short"))
+app.use(cookieParser());
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 
-// Integration with Frontend ===================================================
-// Express only serves static assets in production
-const clientAppPath = path.join(path.resolve("."), '/client/build')
-if (process.env.NODE_ENV === "production") {
-  console.log("Running in production mode")
-  // The below code allows client app to run from the the server (localhost:3001)
-  app.use('/', express.static(clientAppPath))
+// connect to our database
+mongoose.connect(process.env.MONGODB)
+
+// set up ejs for templating
+app.set("view engine", "ejs")
+app.set("views", path.resolve(__dirname, "views"))
+
+// required for passport
+// TODO: "secret" needs to be secret and a bunch of random characters
+app.use(session({
+  secret: "TKRv0IJs=HYqrvagQ#&!F!%V]Ww/4KiVs$s,<<MX",
+  resave: true,
+  saveUninitialized: true
+}))
+app.use(passport.initialize())
+app.use(passport.session())
+app.use(flash()) // use connect-flash for flash messages stored in session
+
+// Auth ========================================================================
+app.use(bodyParser.urlencoded({ extended: false }));
+
+const authRoutes = require("./routes/auth")
+app.use('/auth', authRoutes);
+configPassport()
 
 
-/*  app.use(express.static(path.join(path.resolve("."), '/client/build')))
-  app.get('/', function (req, res) {
-    res.sendFile(path.join(path.resolve("."), '/client/build', 'index.html'))
-  })*/
-} else if(process.env.NODE_ENV == "development") {
-  console.log("Running in development mode")
+app.get('/auth/facebook/callback', (res, resp) => {
+  resp.statusCode = 404;
+  resp.end("Facebook Callback page with status code"+ resp.statusCode)
+})
 
-  /*
-  TODO: Integrate server with client when env is development
-  Add logic here for server to log routes managed by client code. See
-  https://crypt.codemancers.com/posts/2017-06-03-reactjs-server-side-rendering-with-router-v4-and-redux/
-  The below code is temporary, copied from the the case when env is production.
-  */
-
-  app.use('/', express.static(clientAppPath))
-}
-
-const setUpPassport = require ('./config/passport.js')
-mongoose.connect("mongodb://localhost:27017/test")
-setUpPassport()
 
 // API =========================================================================
 /*
  This is getting sent to localhost:3001/api/hello. In your terminal try:
  $ curl localhost:3001/api/hello
  */
-const apiVersion1 = require("./api1.js");
+const apiVersion1 = require("./routes/api1.js");
 app.use("/api", apiVersion1)
-
-// Auth ========================================================================
-//TODO: Add Auth stuff here
-app.get('/auth/facebook/callback', (res, resp) => {
-  resp.statusCode = 404;
-  resp.end("Facebook Callback page with status code"+ resp.statusCode)
-})
-
-// Auth ========================================================================
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
-// TODO: "secret" needs to be secret and a bunch of random characters
-app.use(session({
-  secret: "TKRv0IJs=HYqrvagQ#&!F!%V]Ww/4KiVs$s,<<MX",
-  resave: true,
-  saveUninitialized: true
-}));
-app.use(flash());
-
-app.use(passport.initialize());
-app.use(passport.session());
-
-const routes = require("./routes")
-app.use('/auth', routes);
-
 
 // Guestbook ===================================================================
 // TODO: TEST CODE BELOW. Remote for production
 //console.log(getInfoFromURL("https://medium.com/@xiaoyunyang")("username"))
 //console.log(getInfoFromURL(path)("pathname"))
-
-app.set("views", path.resolve(__dirname, "views"));
-app.set("view engine", "ejs");
 
 let entries = []
 let ctr = 0
@@ -130,17 +107,16 @@ app.post("/guestbook/new-entry", (req, res) => {
 })
 
 
-
+// Serve Static ================================================================
 // Serve static file
 //Try: http://localhost:3001/static/cat.png
 //Try:  http://localhost:3001/static/resume.png
-
 
 app.use('/static', (req, res, next) => {
   const filePath = path.join(__dirname, "static", req.url)
   console.log(req.url)
 
-  if(req.url == '/resume.pdf') {
+  if(req.url === '/resume.pdf') {
     res.status(403).send(req.url + " is Forbidden resource")
   }
 
@@ -150,6 +126,31 @@ app.use('/static', (req, res, next) => {
     }
   })
 })
+// Integration with Frontend ===================================================
+// Express only serves static assets in production
+const clientAppPath = path.join(path.resolve("."), '/client/build')
+if (process.env.NODE_ENV === "production") {
+  console.log("Running in production mode")
+  // The below code allows client app to run from the the server (localhost:3001)
+  app.use('/', express.static(clientAppPath))
+
+
+/*  app.use(express.static(path.join(path.resolve("."), '/client/build')))
+  app.get('/', function (req, res) {
+    res.sendFile(path.join(path.resolve("."), '/client/build', 'index.html'))
+  })*/
+} else if(process.env.NODE_ENV === "development") {
+  console.log("Running in development mode")
+
+  /*
+  TODO: Integrate server with client when env is development
+  Add logic here for server to log routes managed by client code. See
+  https://crypt.codemancers.com/posts/2017-06-03-reactjs-server-side-rendering-with-router-v4-and-redux/
+  The below code is temporary, copied from the the case when env is production.
+  */
+
+  app.use('/', express.static(clientAppPath))
+}
 
 // Error Handler ===============================================================
 

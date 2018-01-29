@@ -1,3 +1,7 @@
+// routes/api1.js
+// caller: server.js
+// All the routes for version 1 of our api
+
 import express from  'express'
 
 const api = express.Router()

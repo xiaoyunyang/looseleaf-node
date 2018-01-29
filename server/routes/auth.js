@@ -1,7 +1,10 @@
+// routes/routes.js
+// caller: server.js
+// All the routes for authentication
+
 import express from 'express'
 import passport from 'passport'
-var User = require('./models/User')
-
+const User = require('../models/User')
 const router = express.Router()
 
 // Passing data to views
@@ -12,7 +15,7 @@ router.use((req, res, next) => {
   res.locals.infos = req.flash("info");
   next();
 })
-
+// List User(s) ================================================================
 // returns all the users, newest one first
 router.get("/", (req, res, next) => {
   User.find()
@@ -31,16 +34,6 @@ router.get("/users/:username", (req, res, next) => {
   })
 })
 
-
-function ensureAuthenticated(req, res, next) {
-  if (req.isAuthenticated()) {
-    next()
-  } else {
-    req.flash("info", "You must be logged in to see this page.")
-    res.redirect("/auth/login")
-  }
-}
-
 // Signup ======================================================================
 // Saves user to the database
 router.get("/signup", (req, res) => {
@@ -49,39 +42,53 @@ router.get("/signup", (req, res) => {
 
 router.post("/signup", (req, res, next) => {
   // body-parser adds the username and password to req.body
-  const username = req.body.username
+  const email = req.body.email
   const password = req.body.password
 
+
+
   // Calls findOne to return just one user. You want a match on usernames here
-  User.findOne({ username: username }, (err, user) => {
-    if (err) { return next(err) }
+  User.findOne({ 'local.email' :  email }, (err, user) => {
+    if (err) {
+      return next(err)
+    }
+    // If user already exists ...
     if (user) {
       req.flash("error", "User already exists")
       return res.redirect("/auth/signup")
     }
-    const newUser = new User({
-      username: username,
-      password: password
-    })
-    // Saves the new user to the database and continues to the next request handler
-    newUser.save(next)
+    // Else if user does not exist, Let's create new user
+    const newUser = new User()
+    newUser.local.email  = email
+    newUser.local.password = password
+    let username = email.split("@")[0]
+    let regex = new RegExp('^'+username+'.*$', "i")
+
+    User.count({ 'username': regex},
+      function(err, c) {
+        if(err) {
+          return next(err)
+        }
+        let append = (c === 0) ? "" : '-' + c
+        newUser.username = username + append
+        newUser.save(next)
+      })
   })
-}, passport.authenticate("login", {
+
+}, passport.authenticate("login-local", {
   successRedirect: "/auth",
   failureRedirect: "/auth/signup",
   failureFlash: true
 }))
 
 // Login ======================================================================
-//
-
 router.get("/login", (req, res) => {
   res.render("login");
 })
 
-router.post("/login", passport.authenticate("login", {
+router.post("/login", passport.authenticate("login-local", {
   successRedirect: "/auth",
-   failureRedirect: "/auth/login",
+  failureRedirect: "/auth/login",
   failureFlash: true
 }))
 
@@ -99,7 +106,7 @@ router.use((req, res, next) => {
   next();
 })
 
-// edit ======================================================================
+// edit ========================================================================
 // Passport populates req.user for you
 router.get("/edit", ensureAuthenticated, (req, res) => {
   res.render("edit")
@@ -114,9 +121,20 @@ router.post("/edit", ensureAuthenticated, (req, res, next) => {
       return
     }
     req.flash("info", "Profile updated!")
-    res.redirect("/auth/edit")
+    res.redirect("/auth/users/"+req.user.username)
   })
 })
+
+// Middleware ==================================================================
+// route middleware to make sure a user is authenticated
+function ensureAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) {
+    next()
+  } else {
+    req.flash("info", "You must be logged in to see this page.")
+    res.redirect("/auth/login")
+  }
+}
 
 
 module.exports = router;
