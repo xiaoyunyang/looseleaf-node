@@ -1,3 +1,7 @@
+// auth/User.js
+// callers: auth/routes.js and auth/passport.js
+// User model instantiates a mongoose schema
+
 import mongoose from 'mongoose'
 import bcrypt from 'bcrypt-nodejs'
 

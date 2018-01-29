@@ -1,10 +1,12 @@
+// auth/passport.js
+// caller: server.js
+
 import passport from 'passport'
 import { Strategy as LocalStrategy } from 'passport-local'
 import { Strategy as FacebookStrategy } from 'passport-facebook'
-import User from '../models/User'
-const configAuth = require('./auth')
+import User from './User'
+const configAuth = require('./secrets')
 
-// caller: server.js
 module.exports = function() {
   // =========================================================================
   // passport session setup ==================================================

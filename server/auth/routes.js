@@ -4,7 +4,7 @@
 
 import express from 'express'
 import passport from 'passport'
-const User = require('../models/User')
+const User = require('./User')
 const router = express.Router()
 
 // Passing data to views

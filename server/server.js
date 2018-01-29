@@ -16,7 +16,6 @@ import passport from 'passport'
 
 require('dotenv').config()
 
-const configPassport = require ('./config/passport.js')
 
 // Configuration ===============================================================
 const app = express()
@@ -47,7 +46,9 @@ app.use(flash()) // use connect-flash for flash messages stored in session
 // Auth ========================================================================
 app.use(bodyParser.urlencoded({ extended: false }));
 
-const authRoutes = require("./routes/auth")
+const authRoutes = require("./auth/routes")
+const configPassport = require ('./auth/passport.js')
+
 app.use('/auth', authRoutes);
 configPassport()
 
@@ -63,7 +64,7 @@ app.get('/auth/facebook/callback', (res, resp) => {
  This is getting sent to localhost:3001/api/hello. In your terminal try:
  $ curl localhost:3001/api/hello
  */
-const apiVersion1 = require("./routes/api1.js");
+const apiVersion1 = require("./api/api1");
 app.use("/api", apiVersion1)
 
 // Guestbook ===================================================================
