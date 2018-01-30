@@ -17,7 +17,12 @@ const userSchema = mongoose.Schema({
     email: { type: String, unique: true},
     password: { type: String, required: true },
     passwordResetToken: String,
-  }
+  },
+  facebook: {
+    id: String,
+    token: String,
+    email: String
+    },
 })
 
 const SALT_FACTOR = 10

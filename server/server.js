@@ -53,12 +53,6 @@ app.use('/auth', authRoutes);
 configPassport()
 
 
-app.get('/auth/facebook/callback', (res, resp) => {
-  resp.statusCode = 404;
-  resp.end("Facebook Callback page with status code"+ resp.statusCode)
-})
-
-
 // API =========================================================================
 /*
  This is getting sent to localhost:3001/api/hello. In your terminal try:

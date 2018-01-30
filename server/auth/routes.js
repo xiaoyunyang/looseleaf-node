@@ -34,6 +34,20 @@ router.get("/users/:username", (req, res, next) => {
   })
 })
 
+// Facebook=====================================================================
+router.get("/facebook", passport.authenticate("facebook", {
+  scope : ['public_profile', 'email']
+}))
+
+
+// handle the callback after facebook has authenticated the user
+router.get('/facebook/callback',
+  passport.authenticate('facebook', {
+    successRedirect : '/auth/',
+    failureRedirect : '/auth/login'
+}))
+
+
 // Signup ======================================================================
 // Saves user to the database
 router.get("/signup", (req, res) => {
@@ -44,8 +58,6 @@ router.post("/signup", (req, res, next) => {
   // body-parser adds the username and password to req.body
   const email = req.body.email
   const password = req.body.password
-
-
 
   // Calls findOne to return just one user. You want a match on usernames here
   User.findOne({ 'local.email' :  email }, (err, user) => {
