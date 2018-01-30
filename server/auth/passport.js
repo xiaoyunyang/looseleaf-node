@@ -45,7 +45,7 @@ module.exports = function() {
       process.nextTick(function() {
         // find a user whose email is the same as the forms email
         // we are checking to see if the user trying to login already exists
-        User.findOne({ 'local.email': email }, function(err, user) {
+        User.findOne({ 'email': email }, function(err, user) {
           if (err) {
             return done(err);
           }
@@ -76,7 +76,6 @@ module.exports = function() {
       // asynchronous
       // User.findOne wont fire unless data is sent back
       process.nextTick(function() {
-console.log(profile)
         // find the user in the database based on their facebook id
         User.findOne({ 'facebook.id' : profile.id }, function(err, user) {
           // if there is an error, stop everything and return that
@@ -94,9 +93,8 @@ console.log(profile)
             newUser.facebook.id    = profile.id; // set the users facebook id
             newUser.facebook.token = token; // we will save the token that facebook provides to the user
             newUser.username  = profile.name.givenName + '' + profile.name.familyName; // look at the passport user profile to see how names are returned
-            newUser.facebook.email = profile.emails[0].value; // facebook can return multiple emails so we'll take the first
+            newUser.email = profile.emails[0].value; // facebook can return multiple emails so we'll take the first
             newUser.local.password = 'password123' // just a default
-console.log('MOOOOOO:   We are about to save our user')
             // save our user to the database
             newUser.save(done)
           }

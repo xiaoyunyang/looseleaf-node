@@ -71,7 +71,7 @@ router.post("/signup", (req, res, next) => {
     }
     // Else if user does not exist, Let's create new user
     const newUser = new User()
-    newUser.local.email  = email
+    newUser.email  = email
     newUser.local.password = password
     let username = email.split("@")[0]
     let regex = new RegExp('^'+username+'.*$', "i")

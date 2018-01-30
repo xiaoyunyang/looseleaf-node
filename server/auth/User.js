@@ -8,21 +8,20 @@ import bcrypt from 'bcrypt-nodejs'
 const userSchema = mongoose.Schema({
   createdAt: { type: Date, default: Date.now },
   username: { type: String, required: true, unique: true },
+  email: { type: String, unique: true},
   displayName: String,
   website: String,
   location: String,
   picture: String,
   bio: String,
   local: {
-    email: { type: String, unique: true},
     password: { type: String, required: true },
     passwordResetToken: String,
   },
   facebook: {
     id: String,
-    token: String,
-    email: String
-    },
+    token: String
+  },
 })
 
 const SALT_FACTOR = 10
