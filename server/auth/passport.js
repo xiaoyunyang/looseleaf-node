@@ -5,6 +5,7 @@ import passport from 'passport'
 import { Strategy as LocalStrategy } from 'passport-local'
 import { Strategy as FacebookStrategy } from 'passport-facebook'
 import User from './User'
+import crypto from 'crypto'
 const configAuth = require('./secrets')
 
 module.exports = function() {
@@ -87,14 +88,16 @@ module.exports = function() {
             return done(null, user); // user found, return that user
           } else {
             // if there is no user found with that facebook id, create them
-            var newUser = new User();
-
+            let newUser = new User();
             // set all of the facebook information in our user model
             newUser.facebook.id    = profile.id; // set the users facebook id
             newUser.facebook.token = token; // we will save the token that facebook provides to the user
-            newUser.username  = profile.name.givenName + '' + profile.name.familyName; // look at the passport user profile to see how names are returned
+            newUser.username  = (profile.name.givenName + '' + profile.name.familyName).toLowerCase() // look at the passport user profile to see how names are returned
             newUser.email = profile.emails[0].value; // facebook can return multiple emails so we'll take the first
-            newUser.local.password = 'password123' // just a default
+            newUser.local.password = crypto.randomBytes(20).toString('hex')
+            newUser.gender = profile.gender
+            newUser.location = profile._json.location.name
+            newUser.picture = 'https://graph.facebook.com/' + profile.id + '/picture?type=large'
             // save our user to the database
             newUser.save(done)
           }

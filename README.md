@@ -7,8 +7,9 @@
 - [x] Set up REST API in server and isomorphic fetch in client 
 - [X] Connect database to server
 - [ ] Authentication - See [SetupAuth](https://github.com/xiaoyunyang/web-dev-cheatsheets/blob/master/auth-setup.md)
-	- [ ] Scotch.io's [local auth Tutorial](https://scotch.io/tutorials/easy-node-authentication-setup-and-local)
-	- [ ] Scotch.io's [oAuth Tutorial](https://scotch.io/tutorials/easy-node-authentication-facebook)
+	- [X] Scotch.io's [local auth Tutorial](https://scotch.io/tutorials/easy-node-authentication-setup-and-local)
+	- [X] Scotch.io's [oAuth Tutorial](https://scotch.io/tutorials/easy-node-authentication-facebook)
+	- [ ] DJAM's [programming blog](https://www.djamware.com/post/59a6257180aca768e4d2b132/node-express-passport-facebook-twitter-google-github-login) to create auth via Twitter, Google, and Github.
 - [ ] Integrate Backend With Frontend
 	* [X] FullStackReact's [Tutorial](https://www.fullstackreact.com/articles/using-create-react-app-with-a-server/#enter-create-react-app) and [Sample Project](https://github.com/fullstackreact/food-lookup-demo) - A `create-react-app` with server example
 	* [ ] FreeCodeCamp's [Tutorial](https://medium.freecodecamp.org/how-to-make-create-react-app-work-with-a-node-backend-api-7c5c48acb1b0)
@@ -68,19 +69,18 @@ Take the following steps to create a baseline app:
 looseleaf-node
 ├───package.json
 ├───.babelrc
-├───.env
+├───.env <== *
 ├───server
 │   ├───server.js  <== **
 │   ├───start-client.js	 
 │   ├───build
-│   └───config
-|   |	 └───auth.js
-|   |	 └───passport.js	
-│   └───models
+│   ├───auth
+|   |	 └───routes.js
+|   |	 └───passport.js
+|   |	 └───secrets.js <== *
 |   |	 └───User.js
-│   └───routes
+│   └───api
 |   	 └───api1.js
-|		 └───auth.js	
 ├───client
 │   ├───package.json
 │   ├───config
@@ -92,7 +92,7 @@ looseleaf-node
 |   │   |   └───Header.js
 |   │   |   └───Home.js
 |   │   |   └───Main.js
-│   |   └───App.js
+│   |   ├───App.js
 │   |   └───index.js <== **
 │   |   └───routes.js
 	
@@ -101,6 +101,7 @@ looseleaf-node
 **Notes**
 
 * Lots of extraneous folders and files were omitted from the file structure map above because they are auto-generated when you first set up your project or after when you build the project
+* The files marked with `*` is omitted from the github repo because they contain authentication ids, secrets, etc that are application-specific
 * The files marked with `**` is the starting point for navigating the server code and client code.
 
 

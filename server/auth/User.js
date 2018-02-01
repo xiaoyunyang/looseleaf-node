@@ -12,6 +12,7 @@ const userSchema = mongoose.Schema({
   displayName: String,
   website: String,
   location: String,
+  gender: String,
   picture: String,
   bio: String,
   local: {
