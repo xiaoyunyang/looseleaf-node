@@ -7,14 +7,15 @@ import bcrypt from 'bcrypt-nodejs'
 
 const userSchema = mongoose.Schema({
   createdAt: { type: Date, default: Date.now },
-  username: { type: String, required: true, unique: true },
   email: { type: String, unique: true},
+  username: { type: String, required: true, unique: true },
   displayName: String,
+  picture: String,
+  bio: String,
   website: String,
   location: String,
   gender: String,
-  picture: String,
-  bio: String,
+  hireable: String,
   local: {
     password: { type: String, required: true },
     passwordResetToken: String,
@@ -23,6 +24,10 @@ const userSchema = mongoose.Schema({
     id: String,
     token: String
   },
+  github: {
+    id: String,
+    token: String
+  }
 })
 
 const SALT_FACTOR = 10

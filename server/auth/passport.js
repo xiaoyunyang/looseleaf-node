@@ -4,6 +4,7 @@
 import passport from 'passport'
 import { Strategy as LocalStrategy } from 'passport-local'
 import { Strategy as FacebookStrategy } from 'passport-facebook'
+import { Strategy as GithubStrategy } from 'passport-github'
 import User from './User'
 import crypto from 'crypto'
 const configAuth = require('./secrets')
@@ -31,16 +32,13 @@ module.exports = function() {
 
   // =========================================================================
   // Local Signup  ============================================================
-  // we are using named strategies since we have one for login and one for signup
-  // by default, if there was no name, it would just be called 'local'
   // =========================================================================
   passport.use("login-local", new LocalStrategy({
       // by default, local strategy uses username and password, we will override with email
       usernameField : 'email',
       passwordField : 'password',
       passReqToCallback : true // allows us to pass back the entire request to the callback
-    },
-    function(req, email, password, done) {
+    }, function(req, email, password, done) {
       // asynchronous
       // User.findOne wont fire unless data is sent back
       process.nextTick(function() {
@@ -65,15 +63,24 @@ module.exports = function() {
       })
     }
   ))
+
+  /* TODO: Fix callback hell / multiple instances of the same boilerplate code
+     created to prevent username collision for logging in with different social auth
+  */
+  /* TODO: If same user has same email from facebook and github, should that person
+     be able to create two separate accounts?
+  */
+
+  // ===========================================================================
+  // Facebook Signup  ==========================================================
+  // ===========================================================================
   passport.use(new FacebookStrategy({
       // pull in our app id and secret from our auth.js file
       clientID        : configAuth.facebookAuth.clientID,
       clientSecret    : configAuth.facebookAuth.clientSecret,
       callbackURL     : configAuth.facebookAuth.callbackURL,
       profileFields   : configAuth.facebookAuth.profileFields
-    },
-    // facebook will send back the token and profile
-    function(token, refreshToken, profile, done) {
+    }, function(token, refreshToken, profile, done) { // facebook will send back the token and profile
       // asynchronous
       // User.findOne wont fire unless data is sent back
       process.nextTick(function() {
@@ -91,18 +98,81 @@ module.exports = function() {
             let newUser = new User();
             // set all of the facebook information in our user model
             newUser.facebook.id    = profile.id; // set the users facebook id
-            newUser.facebook.token = token; // we will save the token that facebook provides to the user
-            newUser.username  = (profile.name.givenName + '' + profile.name.familyName).toLowerCase() // look at the passport user profile to see how names are returned
-            newUser.email = profile.emails[0].value; // facebook can return multiple emails so we'll take the first
-            newUser.local.password = crypto.randomBytes(20).toString('hex')
-            newUser.gender = profile.gender
-            newUser.location = profile._json.location.name
-            newUser.picture = 'https://graph.facebook.com/' + profile.id + '/picture?type=large'
-            // save our user to the database
-            newUser.save(done)
+            newUser.facebook.token = token // we will save the token that facebook provides to the user
+
+            let username  = (profile.name.givenName + '' + profile.name.familyName).toLowerCase()
+            let regex = new RegExp('^'+username+'.*$', "i")
+
+            User.count({ 'username': regex},
+              function(err, c) {
+                if(err) {
+                  return next(err)
+                }
+                let append = (c === 0) ? "" : '-' + c
+                newUser.username = username + append
+
+                newUser.displayName = (profile.name.givenName + ' ' + profile.name.familyName)
+                newUser.email = profile.emails[0].value; // facebook can return multiple emails so we'll take the first
+                newUser.local.password = crypto.randomBytes(20).toString('hex')
+                newUser.gender = profile.gender
+                newUser.location = profile._json.location.name
+                newUser.picture = 'https://graph.facebook.com/' + profile.id + '/picture?type=large'
+                // save our user to the database
+                newUser.save(done)
+            })
           }
         })
       })
     }
   ))
+
+  passport.use(new GithubStrategy({
+    clientID          : configAuth.githubAuth.clientID,
+    clientSecret      : configAuth.githubAuth.clientSecret,
+    callbackURL       : configAuth.githubAuth.callbackURL,
+    scope             : configAuth.githubAuth.scope
+  }, function(token, refreshToken, profile, done) {
+    process.nextTick(function() {
+      User.findOne({ 'github.id' : profile.id }, function(err, user) {
+        // if there is an error, stop everything and return that
+        // ie an error connecting to the database
+        if (err) return done(err);
+
+        // if the user is found, then log them in
+        if (user) {
+          return done(null, user); // user found, return that user
+        } else {
+          // if there is no user found with that facebook id, create them
+          let newUser = new User();
+          // set all of the facebook information in our user model
+          newUser.github.id    = profile._json.id // set the users facebook id
+          newUser.github.token = token
+
+          let username  = profile._json.login
+          let regex = new RegExp('^'+username+'.*$', "i")
+
+          User.count({ 'username': regex},
+            function(err, c) {
+              if(err) {
+                return next(err)
+              }
+              let append = (c === 0) ? "" : '-' + c
+              newUser.username = username + append
+              newUser.email = profile.emails[0].value
+              newUser.location = profile._json.Location
+              newUser.hireable = profile._json.hireable
+              newUser.displayName = profile._json.name
+              newUser.website  = profile._json.blog
+              newUser.bio  = profile._json.bio
+              newUser.local.password = crypto.randomBytes(20).toString('hex')
+              newUser.picture = profile._json.avatar_url
+              // save our user to the database
+              newUser.save(done)
+          })
+        }
+      })
+    })
+  }
+))
+
 }

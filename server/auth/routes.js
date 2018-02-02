@@ -4,8 +4,11 @@
 
 import express from 'express'
 import passport from 'passport'
-const User = require('./User')
+import User from './User'
+
 const router = express.Router()
+
+// TODO: Sanitize all inputs
 
 // Passing data to views
 // Passport populates req.user for you
@@ -27,7 +30,7 @@ router.get("/", (req, res, next) => {
 })
 
 router.get("/users/:username", (req, res, next) => {
-  User.findOne({ username: req.params.username }, function(err, user) {
+  User.findOne({ username: req.params.username }, (err, user) => {
     if (err) { return next(err); }
     if (!user) { return next(404); }
     res.render("profile", { user: user });
@@ -35,14 +38,23 @@ router.get("/users/:username", (req, res, next) => {
 })
 
 // Facebook=====================================================================
-router.get("/facebook", passport.authenticate("facebook", {
-  scope : ['public_profile', 'email']
-}))
+router.get("/facebook", passport.authenticate("facebook"))
 
 
 // handle the callback after facebook has authenticated the user
 router.get('/facebook/callback',
   passport.authenticate('facebook', {
+    successRedirect : '/auth/',
+    failureRedirect : '/auth/login'
+}))
+
+// Github =====================================================================
+router.get("/github", passport.authenticate("github"))
+
+
+// handle the callback after facebook has authenticated the user
+router.get('/github/callback',
+  passport.authenticate('github', {
     successRedirect : '/auth/',
     failureRedirect : '/auth/login'
 }))
@@ -60,7 +72,7 @@ router.post("/signup", (req, res, next) => {
   const password = req.body.password
 
   // Calls findOne to return just one user. You want a match on usernames here
-  User.findOne({ 'local.email' :  email }, (err, user) => {
+  User.findOne({ 'email' :  email }, (err, user) => {
     if (err) {
       return next(err)
     }
@@ -126,6 +138,7 @@ router.get("/edit", ensureAuthenticated, (req, res) => {
 
 router.post("/edit", ensureAuthenticated, (req, res, next) => {
   req.user.displayName = req.body.displayname
+  req.user.location = req.body.location
   req.user.bio = req.body.bio
   req.user.save((err) => {
     if (err) {
