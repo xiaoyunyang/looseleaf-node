@@ -147,6 +147,19 @@ if (process.env.NODE_ENV === "production") {
   app.use('/', express.static(clientAppPath))
 }
 
+// Send to SuperTest for test ==================================================
+app.get("/test/plain", function(req, res) {
+  res.send(req.headers["user-agent"]);
+});
+app.get("/test/html", function(req, res) {
+  var userAgent = req.headers["user-agent"] || "none";
+  if (req.accepts("html")) {
+    res.render("test", { userAgent: userAgent });
+  } else {
+    res.type("text");
+    res.send(userAgent);
+  }
+});
 // Error Handler ===============================================================
 
 // middleware that logs the error
@@ -179,3 +192,5 @@ app.use((err, req, res, next) => {
 app.listen(app.get("port"), () => {
   console.log(`Express server started at: http://localhost:${app.get("port")}/`); // eslint-disable-line no-console
 })
+
+module.exports = app
