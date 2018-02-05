@@ -109,8 +109,6 @@ app.post("/guestbook/new-entry", (req, res) => {
 
 app.use('/static', (req, res, next) => {
   const filePath = path.join(__dirname, "static", req.url)
-  console.log(req.url)
-
   if(req.url === '/resume.pdf') {
     res.status(403).send(req.url + " is Forbidden resource")
   }
@@ -148,10 +146,7 @@ if (process.env.NODE_ENV === "production") {
 }
 
 // Send to SuperTest for test ==================================================
-app.get("/test/plain", function(req, res) {
-  res.send(req.headers["user-agent"]);
-});
-app.get("/test/html", function(req, res) {
+app.get("/test/", function(req, res) {
   var userAgent = req.headers["user-agent"] || "none";
   if (req.accepts("html")) {
     res.render("test", { userAgent: userAgent });

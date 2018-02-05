@@ -9,7 +9,7 @@
 - [ ] Authentication - See [SetupAuth](https://github.com/xiaoyunyang/web-dev-cheatsheets/blob/master/auth-setup.md)
 	- [X] Scotch.io's [local auth Tutorial](https://scotch.io/tutorials/easy-node-authentication-setup-and-local)
 	- [X] Scotch.io's [oAuth Tutorial](https://scotch.io/tutorials/easy-node-authentication-facebook)
-	- [ ] DJAM's [programming blog](https://www.djamware.com/post/59a6257180aca768e4d2b132/node-express-passport-facebook-twitter-google-github-login) to create auth via Twitter, Google, and Github.
+	- [X] DJAM's [programming blog](https://www.djamware.com/post/59a6257180aca768e4d2b132/node-express-passport-facebook-twitter-google-github-login) to create auth via Twitter, Google, and Github.
 	- [ ] Sanitize input using [`express-validator`](https://www.npmjs.com/package/express-validator)
 	- [ ] Move all secret auth stuff to `.env`. See [this tutorial](http://www.clementinejs.com/tutorials/tutorial-passport.html)
 - [ ] Integrate Backend With Frontend
@@ -20,6 +20,8 @@
 	* [ ] Dave Ceddia's [Tutorial](https://daveceddia.com/create-react-app-express-backend/) - `create-react-app` with express backend
 	- [ ] Connect React Router V4 router to Server Router - See [This Tutorial](https://crypt.codemancers.com/posts/2017-06-03-reactjs-server-side-rendering-with-router-v4-and-redux/)
 	- [ ] Haphazardly thrown together [React Router 4 + Express + Passport Auth Example](https://github.com/netpoetica/react-router-passport-express-demo-app)
+- [ ] Build Server to serve API
+	* [X] Add Automated Testing to backend: `mocha`, `chai`, `SuperTest` and `cheerio`.
 - [ ] Set up Redux for Frontend app
 
 ## Getting Started 
@@ -32,7 +34,8 @@ We are going to use the following stack:
 - **CSS Preprocessor**: SASS
 - **JavaScript Framework**: React with React Router v4
 - **Build Tool**: webpack
-- **Unit Testing**: mocha
+- **Unit Testing**: `mocha`, `chai`
+- **Integration Testing**: `SuperTest` and `cheerio`.
 - **Database**: mongodb
 - **Authentication**: facebook, email, google, github, twitter
 - **Deployment**: digitalOcean
@@ -43,9 +46,16 @@ Tools
 - [`react-hot-loader`](https://github.com/gaearon/react-hot-loader)
 - [`NVM`](https://github.com/creationix/nvm)
 
-Middleware
-- [mongoose](http://mongoosejs.com/index.html) - object modeling for our MongoDB database
-- [passport]() - help us authenticating with different methods
+Authentication Middleware
+
+- [`mongoose`](http://mongoosejs.com/index.html) - object modeling for our MongoDB database
+- [`passport`](http://www.passportjs.org/docs/authorize/) - help us authenticating with different methods
+
+Automated Testing
+
+- [`mocha`](https://mochajs.org/) sets up the unit test, while [`chai`](http://chaijs.com/) helps you accomplish a unit test using asserts.
+- [`SuperTest`](https://github.com/visionmedia/supertest) spools up your Express server and sends requests to it.Once the requests come back, you can make assertions about the response.
+- [`cheerio`](https://cheeriojs.github.io/cheerio/) is jQuery for Node. It'll help your server code parse HTML.
 
 Take the following steps to create a baseline app:
 
@@ -83,6 +93,7 @@ looseleaf-node
 |   |	 └───User.js
 │   └───api
 |   	 └───api1.js
+├───test
 ├───client
 │   ├───package.json
 │   ├───config

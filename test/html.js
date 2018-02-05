@@ -6,8 +6,8 @@ describe("html response", function() {
   var request;
   beforeEach(function() {
     request = supertest(app) // SuperTest builds up the request.
-      .get("/test/html")  // You visit the "/test" URL.
-      .set("User-Agent", "my cool browser")
+      .get("/test/")  // You visit the "/test" URL.
+      .set("User-Agent", "a cool browser")
       .set("Accept", "text/html") // Sets a header describing what content type we want back from the server
   })
   it("returns an HTML response", function(done) {
