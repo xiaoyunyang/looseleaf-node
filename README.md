@@ -55,7 +55,7 @@ Automated Testing
 
 - [`mocha`](https://mochajs.org/) sets up the unit test, while [`chai`](http://chaijs.com/) helps you accomplish a unit test using asserts.
 - [`SuperTest`](https://github.com/visionmedia/supertest) spools up your Express server and sends requests to it.Once the requests come back, you can make assertions about the response.
-- [`cheerio`](https://cheeriojs.github.io/cheerio/) is jQuery for Node. It'll help your server code parse HTML.
+- [`cheerio`](https://cheerio.js.org/) is jQuery for Node. It'll help your server code parse HTML.
 
 Take the following steps to create a baseline app:
 
@@ -334,6 +334,8 @@ What about CSS javascripts? Read the [full stack react tutorial](https://www.ful
 
 ## Resources
 
+* Mongoose
+	* [Cheatsheet](https://www.techcress.com/mongoose-js-query-cheatsheet/)
 * React
 	* [My Notes on React](https://github.com/xiaoyunyang/web-dev-cheatsheets/blob/master/react-notes.md)
 	* [My Notes on D3 React Integration](https://github.com/xiaoyunyang/web-dev-cheatsheets/blob/master/d3-react-integration.md)

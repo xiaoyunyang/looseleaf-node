@@ -14,5 +14,9 @@
   <textarea name="bio" class="form-control" placeholder="Tell us about yourself!"><%= currentUser.bio || "" %></textarea>
   <input type="submit" value="Update" class="btn btn-primary btn-block">
 </form>
+<br>
+<form action="/auth/delete/<%= currentUser.username %>" method="post">
+  <input type="submit" value="Delete" class="btn btn-danger btn-block">
+</form>
 
 <% include _footer %>

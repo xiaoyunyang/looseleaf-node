@@ -1,4 +1,4 @@
-var capitalize = require("../temp/capitalize")
+var capitalize = require("../server/modules/capitalize")
 var chai = require("chai")
 var expect = chai.expect;
 

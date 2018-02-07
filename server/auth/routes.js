@@ -60,6 +60,31 @@ router.get('/github/callback',
 }))
 
 
+// Delete ======================================================================
+// Delete user from the database
+
+
+router.post("/delete/:username",
+          ensureAuthenticated,
+          (req, res, next) => {
+
+  User.findOneAndRemove({ 'username' :  req.params.username }, (err, user) => {
+    if (err) {
+      req.flash("error", "No user found")
+      return next(err)
+    }
+    // If user successfully deleted
+    if(user) {
+      req.flash("info", "User deleted!")
+    } else {
+      req.flash("error", "No user found")
+    }
+    return res.redirect("/auth/")
+
+  })
+})
+
+
 // Signup ======================================================================
 // Saves user to the database
 router.get("/signup", (req, res) => {
