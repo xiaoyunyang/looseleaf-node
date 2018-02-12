@@ -17,10 +17,12 @@ coverage
 # API keys
 .env
 secrets.js
+localhost-ssl
 
 # Dependency directory
 node_modules
 bower_components
+
 
 # Builds
 build

@@ -10,7 +10,11 @@
 	- [X] Scotch.io's [local auth Tutorial](https://scotch.io/tutorials/easy-node-authentication-setup-and-local)
 	- [X] Scotch.io's [oAuth Tutorial](https://scotch.io/tutorials/easy-node-authentication-facebook)
 	- [X] DJAM's [programming blog](https://www.djamware.com/post/59a6257180aca768e4d2b132/node-express-passport-facebook-twitter-google-github-login) to create auth via Twitter, Google, and Github.
-	- [ ] Sanitize input using [`express-validator`](https://www.npmjs.com/package/express-validator)
+- Security
+	- [X] Sanitize input using [`validator`](https://github.com/chriso/validator.js) to protect against Cross Site Scripting (XSS)
+	- [X] Add [`helmet`](https://github.com/helmetjs/helmet) to server.
+	- [X] Add [https](https://certsimple.com/blog/localhost-ssl-fix) to localhost server.
+	- [X] Add [`csurf`](https://github.com/expressjs/csurf) to forms to protect against cross site request forgery (CSRF).
 	- [ ] Move all secret auth stuff to `.env`. See [this tutorial](http://www.clementinejs.com/tutorials/tutorial-passport.html)
 - [ ] Integrate Backend With Frontend
 	* [X] FullStackReact's [Tutorial](https://www.fullstackreact.com/articles/using-create-react-app-with-a-server/#enter-create-react-app) and [Sample Project](https://github.com/fullstackreact/food-lookup-demo) - A `create-react-app` with server example

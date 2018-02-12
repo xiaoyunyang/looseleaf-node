@@ -1,7 +1,6 @@
 <% include _header %>
 <h1>Edit your profile</h1>
 <form action="/auth/edit" method="post">
-  <input name="_csrf" value="<%= csrfToken %>" type="hidden">
   <img src=<%= currentUser.picture %> height="120" width="120"/>
   <h4>Display Name:</h4>
   <input name="displayname" type="text" class="form-control" placeholder="Display name" value="<%= currentUser.displayName || "" %>"/>
@@ -17,7 +16,6 @@
 </form>
 <br>
 <form action="/auth/delete/<%= currentUser.username %>" method="post">
-  <input name="_csrf" value="<%= csrfToken %>" type="hidden">
   <input type="submit" value="Delete" class="btn btn-danger btn-block">
 </form>
 

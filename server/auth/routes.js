@@ -4,10 +4,11 @@
 
 import express from 'express';
 import passport from 'passport';
+import csrf from 'csurf';
 import User from './User';
 
 const router = express.Router();
-
+router.use(csrf());
 // Middleware ==================================================================
 // route middleware to make sure a user is authenticated
 /**
@@ -94,8 +95,9 @@ router.post(
       // If user successfully deleted
       if (user) {
         req.flash('info', 'User deleted!');
+      } else {
+        req.flash('error', 'No user found');
       }
-      req.flash('error', 'No user found');
       return res.redirect('/auth/');
     });
   },
@@ -105,7 +107,9 @@ router.post(
 // Signup ======================================================================
 // Saves user to the database
 router.get('/signup', (req, res) => {
-  res.render('signup');
+  res.render('signup', {
+    csrfToken: req.csrfToken(),
+  });
 });
 
 router.post('/signup', (req, res, next) => {
@@ -129,16 +133,15 @@ router.post('/signup', (req, res, next) => {
     newUser.email = email;
     newUser.local.password = password;
     const username = email.split('@')[0];
-    const regex = new RegExp(`^${username}.*$i`);
+    const regex = new RegExp('^'+username+'.*$', "i");
 
-    return User.count({ username: regex }, (err2, c) => {
+    User.count({ 'username': regex }, (err2, c) => {
       if (err2) {
         return next(err2);
       }
       const append = (c === 0) ? '' : `-${c}`;
       newUser.username = username + append;
       newUser.save(next);
-      return next();
     });
   });
 }, passport.authenticate('login-local', {
@@ -149,7 +152,9 @@ router.post('/signup', (req, res, next) => {
 
 // Login ======================================================================
 router.get('/login', (req, res) => {
-  res.render('login');
+  res.render('login', {
+    csrfToken: req.csrfToken(),
+  });
 });
 
 router.post('/login', passport.authenticate('login-local', {
@@ -175,7 +180,12 @@ router.use((req, res, next) => {
 // edit ========================================================================
 // Passport populates req.user for you
 router.get('/edit', ensureAuthenticated, (req, res) => {
-  res.render('edit');
+  res.render('edit', {
+    csrfToken: req.csrfToken(),
+  });
+});
+router.get('/edit-csrf', ensureAuthenticated, (req, res) => {
+  res.render('edit-csrf');
 });
 
 router.post('/edit', ensureAuthenticated, (req, res, next) => {

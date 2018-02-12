@@ -1,15 +1,21 @@
 // Set up ======================================================================
 // get all the tools we need
 import express from 'express';
+import https from 'https';
+import http from 'http';
 import logger from 'morgan';
 import path from 'path';
 import bodyParser from 'body-parser';
-// import fs from 'fs'
+import fs from 'fs';
 import cookieParser from 'cookie-parser';
 import mongoose from 'mongoose';
 import session from 'express-session';
 import flash from 'connect-flash';
 import passport from 'passport';
+// import enforceSSL from 'express-enforces-ssl';
+import helmet from 'helmet';
+import ms from 'ms';
+import validator from 'validator';
 
 require('dotenv').config();
 
@@ -21,6 +27,22 @@ app.use(logger('short'));
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+// app.enable('trust proxy');
+// app.use(enforceSSL());
+
+app.use(helmet.hsts({
+  maxAge: ms('1 year'),
+  includeSubdomains: true,
+}));
+
+// mitigate cross site scripting
+// Implement X-XSS-Protection, which configures
+// HTTP header with X-XSS-Protection: "1; mode=block"
+// This header is supported by IE and webkit browsers like Chrome and Safari.
+// It is not supported in Firefox.
+app.use(helmet.xssFilter());
+
+// mitigate cross site request forgery
 
 // connect to our database
 mongoose.connect(process.env.MONGODB);
@@ -156,6 +178,16 @@ app.get('/test/', (req, res) => {
     res.send(userAgent);
   }
 });
+
+// The following url causes cross site scripting. Chrome will prevent this scripts
+// but firefox will not
+// http://localhost:3001/test/search?q=<script>alert("you are hacked")</script>
+// validator.escape makes <script>alert("you are hacked") into:
+// &lt;script&gt;alert(&quot;you are hacked&quot;)&lt;&#x2F;script&gt;
+app.get('/test/search', (req, res) => {
+  const userAgent = validator.escape(req.query.q) || '';
+  res.render('test', { userAgent });
+});
 // Error Handler ===============================================================
 
 // middleware that logs the error
@@ -183,10 +215,33 @@ app.use((err, req, res) => {
   res.status(500).send(`Internal server error ${err}`);
 });
 
+app.use((err, req, res, next) => {
+  if (err.code !== 'EBADCSRFTOKEN') {
+    next(err);
+    return;
+  }
+  res.status(403);
+  res.send('CSRF error.');
+});
+
 // launch ======================================================================
 // Starts the Express server on port 3001 and logs that it has started
-app.listen(app.get('port'), () => {
+const httpsOptions = {
+  key: fs.readFileSync('localhost-ssl/key.pem'),
+  cert: fs.readFileSync('localhost-ssl/cert.pem'),
+};
+
+http.createServer(app).listen(app.get('port'), () => {
   console.log(`Express server started at: http://localhost:${app.get('port')}/`); // eslint-disable-line no-console
 });
 
+https.createServer(httpsOptions, app).listen(8080, () => {
+  console.log('Express server started at: https://localhost:8080/'); // eslint-disable-line no-console
+});
+
+/*
+https.createServer(httpsOptions, app).listen(app.get('port'), () => {
+  console.log(`Express server started at: https://localhost:${app.get('port')}/`); // eslint-disable-line no-console
+});
+*/
 module.exports = app;

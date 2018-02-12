@@ -101,10 +101,10 @@ module.exports = () => {
         newUser.facebook.id = profile.id; // set the users facebook id
         newUser.facebook.token = token; // we will save the token that facebook provides to the user
 
-        const username = (`${profile.name.givenName} ${profile.name.familyName}`).toLowerCase();
-        const regex = new RegExp(`^${username}.*$i`);
+        const username = (`${profile.name.givenName}${profile.name.familyName}`).toLowerCase();
+        const regex = new RegExp('^'+username+'.*$', "i");
 
-        return User.count({ username: regex }, (err2, c) => {
+        User.count({ 'username': regex}, (err2, c) => {
           if (err2) {
             return done(err2);
           }
@@ -119,7 +119,6 @@ module.exports = () => {
           newUser.picture = `https://graph.facebook.com/${profile.id}/picture?type=large`;
           // save our user to the database
           newUser.save(done);
-          return done(null, newUser);
         });
       });
     });
@@ -148,12 +147,13 @@ module.exports = () => {
         newUser.github.token = token;
 
         const username = profile._json.login;
-        const regex = new RegExp(`^${username}.*$i`);
+        const regex = new RegExp('^'+username+'.*$', "i");
 
-        return User.count({ username: regex }, (err2, c) => {
+        User.count({ 'username': regex}, (err2, c) => {
           if (err2) {
             return done(err2);
           }
+
           const append = (c === 0) ? '' : `-${c}`;
           newUser.username = username + append;
           newUser.email = profile.emails[0].value;
@@ -166,7 +166,6 @@ module.exports = () => {
           newUser.picture = profile._json.avatar_url;
           // save our user to the database
           newUser.save(done);
-          return done(null, newUser);
         });
       });
     });

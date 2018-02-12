@@ -12,7 +12,7 @@
 <body>
   <h2>Your User Agent is:</h2>
   <h1 class="user-agent">
-    <%= userAgent %>
+    <%- userAgent %> <!--This code causes cross site scripting . Use <%= userAgent %> instead -->
   </h1>
 </body>
 </html>
