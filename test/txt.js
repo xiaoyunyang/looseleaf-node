@@ -1,5 +1,5 @@
 var app = require("../server/server")
-var supertest = require("supertest");
+var supertest = require("supertest")
 
 describe("plain text response", function() {
   var request;

@@ -2,30 +2,31 @@
 // caller: server.js
 // All the routes for version 1 of our api
 
-import express from  'express'
+import express from 'express';
 
-const api = express.Router()
+const api = express.Router();
 
 api.get('/hello', (req, res) => {
   res.send({ express: 'If you are seeing this, your frontend react app is hooked up to your backend Express app. CONGRATULATIONS!' });
-})
-api.get("/hello/@:who", function(req, res) {
-  res.end("Hello, " + req.params.who + ".");
+});
+
+api.get('/hello/@:who', (req, res) => {
+  res.end(`Hello, ${req.params.who}.`);
   // Fun fact: this has some security issues, which we’ll get to!
 });
 api.get('/goodbye', (req, res) => {
   res.send({ express: 'Goodbye!' });
-})
-api.get("/random/:min/:max", (req, res) => {
-  let min = parseInt(req.params.min)
-  let max = parseInt(req.params.max)
-  if (isNaN(min) || isNaN(max)) {
+});
+api.get('/random/:min/:max', (req, res) => {
+  const min = parseInt(req.params.min, 10);
+  const max = parseInt(req.params.max, 10);
+  if (Number.isNaN(min) || Number.isNaN(max)) {
     res.status(400);
-    res.json({ error: "Bad request." });
-    return
+    res.json({ error: 'Bad request.' });
+    return;
   }
-  let result = Math.round((Math.random() * (max - min)) + min);
-  res.json({ result: result });
-})
+  const result = Math.round((Math.random() * (max - min)) + min);
+  res.json({ result });
+});
 
-module.exports = api
+module.exports = api;
