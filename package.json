@@ -8,6 +8,8 @@
     "build-server": "babel server/server.js -o server/build/main.bundle.js",
     "build-client": "cd  client && npm run build && cd ..",
     "start-server": "nodemon server/server.js --watch server --watch client/src --watch .env --exec babel-node",
+    "start-server-prod": "forever start --minUptime 1000 --spinSleepTime 1000 -c babel-node server/server.js",
+    "stop-server-prod": "forever stopall",
     "start-client": "node server/start-client.js",
     "dev": "echo \"This command has been deprecated. Use 'npm start'\" && exit 1",
     "lint-server": "eslint server",
@@ -21,15 +23,16 @@
     "connect-flash": "^0.1.1",
     "cookie-parser": "^1.4.3",
     "csurf": "^1.9.0",
-    "dotenv": "^4.0.0",
+    "dotenv": "^5.0.0",
     "ejs": "^2.5.7",
     "express": "^4.16.2",
     "express-enforces-ssl": "^1.1.0",
     "express-session": "^1.15.6",
+    "forever": "^0.15.3",
     "fs": "0.0.1-security",
     "helmet": "^3.11.0",
     "materialize": "^1.0.0",
-    "mongoose": "^5.0.1",
+    "mongoose": "^5.0.4",
     "morgan": "^1.9.0",
     "ms": "^2.1.1",
     "passport": "^0.4.0",
@@ -38,7 +41,7 @@
     "passport-google-oauth": "^1.0.0",
     "passport-local": "^1.0.0",
     "validator": "^9.4.0",
-    "webpack": "^3.10.0"
+    "webpack": "^3.11.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
@@ -49,7 +52,7 @@
     "babel-preset-env": "^1.6.1",
     "babel-preset-stage-2": "^6.24.1",
     "chai": "^4.1.2",
-    "concurrently": "3.1.0",
+    "concurrently": "^3.5.1",
     "eslint": "^4.17.0",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-config-google": "^0.9.1",
@@ -59,9 +62,9 @@
     "eslint-plugin-react": "^7.6.1",
     "eslint-plugin-react-native": "^3.2.1",
     "mocha": "^5.0.0",
-    "nodemon": "^1.14.11",
+    "nodemon": "^1.14.12",
     "supertest": "^3.0.0",
-    "webpack-dev-middleware": "^2.0.4",
+    "webpack-dev-middleware": "^2.0.5",
     "webpack-hot-middleware": "^2.21.0"
   }
 }

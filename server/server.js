@@ -30,6 +30,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // app.enable('trust proxy');
 // app.use(enforceSSL());
 
+app.disable('x-powered-by');
+
 app.use(helmet.hsts({
   maxAge: ms('1 year'),
   includeSubdomains: true,
@@ -41,7 +43,8 @@ app.use(helmet.hsts({
 // This header is supported by IE and webkit browsers like Chrome and Safari.
 // It is not supported in Firefox.
 app.use(helmet.xssFilter());
-
+app.use(helmet.frameguard('sameorigin'));
+app.use(helmet.noSniff()); // Don’t let browsers infer the file type
 // mitigate cross site request forgery
 
 // connect to our database

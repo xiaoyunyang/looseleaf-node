@@ -73,6 +73,43 @@ module.exports = () => {
   */
 
   // ===========================================================================
+  // Helpers needed for open auth
+  // ===========================================================================
+  /*
+  const createUserName = (username) => {
+    const regex = new RegExp(`^${username}.*$`, 'i');
+    return User.count({ 'username': regex}, (err, c) => {
+      if (err) {
+        return '';
+      }
+      const append = (c === 0) ? '' : `-${c}`;
+      return username + append;
+    });
+  }
+
+  const newSocialUser =(
+    count,
+    email,
+    username,
+    displayName,
+    picture,
+    bio,
+    website,
+    location,
+    gender, hireable) => {
+      const newUser = new User();
+      newUser.email = email;
+      newUser.username = username;
+      newUser.displayName = displayName;
+      newUser.local.password = crypto.randomBytes(20).toString('hex');
+      newUser.gender = gender;
+      newUser.location = location;
+      newUser.picture = picture;
+
+      return newUser;
+    };
+*/
+  // ===========================================================================
   // Facebook Signup  ==========================================================
   // ===========================================================================
   passport.use(new FacebookStrategy({
@@ -102,7 +139,7 @@ module.exports = () => {
         newUser.facebook.token = token; // we will save the token that facebook provides to the user
 
         const username = (`${profile.name.givenName}${profile.name.familyName}`).toLowerCase();
-        const regex = new RegExp('^'+username+'.*$', "i");
+        const regex = new RegExp(`^${username}.*$`, 'i');
 
         User.count({ 'username': regex}, (err2, c) => {
           if (err2) {
@@ -147,7 +184,7 @@ module.exports = () => {
         newUser.github.token = token;
 
         const username = profile._json.login;
-        const regex = new RegExp('^'+username+'.*$', "i");
+        const regex = new RegExp(`^${username}.*$`, 'i');
 
         User.count({ 'username': regex}, (err2, c) => {
           if (err2) {

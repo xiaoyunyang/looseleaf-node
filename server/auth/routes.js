@@ -133,7 +133,15 @@ router.post('/signup', (req, res, next) => {
     newUser.email = email;
     newUser.local.password = password;
     const username = email.split('@')[0];
-    const regex = new RegExp('^'+username+'.*$', "i");
+    const regex = new RegExp(`^${username}.*$`, 'i');
+
+    // TODO: don't user User.count. If you logged in with facebook, with username
+    // xiaoyunyang, then logged in with github, which created another user with
+    // same username, but called xiaoyunyang-1, then deleted the facebook account,
+    // then created the facebook account again, you won't be able to create an
+    // account due to duplicate key (xiaoyunyang-1).
+    // What we want to do is to find the largest number following the username
+    // and append that to the end of the new username (xiaoyunyang-2)
 
     User.count({ 'username': regex }, (err2, c) => {
       if (err2) {

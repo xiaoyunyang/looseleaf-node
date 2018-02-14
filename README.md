@@ -6,7 +6,7 @@
 - [x] Routing in Guest Mode and User Mode - See [Solution](https://github.com/ReactTraining/react-router/issues/4962)
 - [x] Set up REST API in server and isomorphic fetch in client 
 - [X] Connect database to server
-- [ ] Authentication - See [SetupAuth](https://github.com/xiaoyunyang/web-dev-cheatsheets/blob/master/auth-setup.md)
+- Authentication - See [SetupAuth](https://github.com/xiaoyunyang/web-dev-cheatsheets/blob/master/auth-setup.md)
 	- [X] Scotch.io's [local auth Tutorial](https://scotch.io/tutorials/easy-node-authentication-setup-and-local)
 	- [X] Scotch.io's [oAuth Tutorial](https://scotch.io/tutorials/easy-node-authentication-facebook)
 	- [X] DJAM's [programming blog](https://www.djamware.com/post/59a6257180aca768e4d2b132/node-express-passport-facebook-twitter-google-github-login) to create auth via Twitter, Google, and Github.
@@ -16,7 +16,7 @@
 	- [X] Add [https](https://certsimple.com/blog/localhost-ssl-fix) to localhost server.
 	- [X] Add [`csurf`](https://github.com/expressjs/csurf) to forms to protect against cross site request forgery (CSRF).
 	- [ ] Move all secret auth stuff to `.env`. See [this tutorial](http://www.clementinejs.com/tutorials/tutorial-passport.html)
-- [ ] Integrate Backend With Frontend
+- Integrate Backend With Frontend
 	* [X] FullStackReact's [Tutorial](https://www.fullstackreact.com/articles/using-create-react-app-with-a-server/#enter-create-react-app) and [Sample Project](https://github.com/fullstackreact/food-lookup-demo) - A `create-react-app` with server example
 	* [ ] FreeCodeCamp's [Tutorial](https://medium.freecodecamp.org/how-to-make-create-react-app-work-with-a-node-backend-api-7c5c48acb1b0)
 	* [ ] Esau Silva's [Tutorial](https://esausilva.com/2017/11/14/how-to-use-create-react-app-with-a-node-express-backend-api/)
