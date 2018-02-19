@@ -26,6 +26,7 @@ bower_components
 
 # Builds
 build
+browser.js
 
 # Editors
 .idea

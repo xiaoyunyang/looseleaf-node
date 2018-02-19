@@ -1,15 +1,16 @@
 # LooseLeaf - Node.js App
 
 ##### TODOs
-- [x] Select Web Tech Stack [HowTo doc](https://github.com/xiaoyunyang/xiaoyunyang.github.io/blob/master/assets/md/tech-behind-modern-webapps.md)
+- [x] Select Web Tech Stack [HowTo doc](https://github.com/xiaoyunyang/xiaoyunyang.github.io/blob/master/assets/md/fundamental/tech-behind-modern-webapps.md)
 - [x] Add React Router V4
 - [x] Routing in Guest Mode and User Mode - See [Solution](https://github.com/ReactTraining/react-router/issues/4962)
 - [x] Set up REST API in server and isomorphic fetch in client 
 - [X] Connect database to server
-- Authentication - See [SetupAuth](https://github.com/xiaoyunyang/web-dev-cheatsheets/blob/master/auth-setup.md)
+- Authentication - See [SetupAuth](https://github.com/xiaoyunyang/web-dev-cheatsheets/blob/master/guides/auth-setup.md)
 	- [X] Scotch.io's [local auth Tutorial](https://scotch.io/tutorials/easy-node-authentication-setup-and-local)
 	- [X] Scotch.io's [oAuth Tutorial](https://scotch.io/tutorials/easy-node-authentication-facebook)
 	- [X] DJAM's [programming blog](https://www.djamware.com/post/59a6257180aca768e4d2b132/node-express-passport-facebook-twitter-google-github-login) to create auth via Twitter, Google, and Github.
+	- [ ] Add [`nodemailer`](https://nodemailer.com/about/) and `mailgun` to allow app to send emails to users. See [this article](https://medium.com/hexient-labs/nodemailer-mailgun-4d9f18f955a9)
 - Security
 	- [X] Sanitize input using [`validator`](https://github.com/chriso/validator.js) to protect against Cross Site Scripting (XSS)
 	- [X] Add [`helmet`](https://github.com/helmetjs/helmet) to server.
@@ -18,6 +19,7 @@
 	- [ ] Move all secret auth stuff to `.env`. See [this tutorial](http://www.clementinejs.com/tutorials/tutorial-passport.html)
 - Integrate Backend With Frontend
 	* [X] FullStackReact's [Tutorial](https://www.fullstackreact.com/articles/using-create-react-app-with-a-server/#enter-create-react-app) and [Sample Project](https://github.com/fullstackreact/food-lookup-demo) - A `create-react-app` with server example
+	* [X] Isomorphic Webapp Book [Chapter 2 Sample Code](https://github.com/isomorphic-dev-js/chapter2-a-sample-isomorphic-app.git)
 	* [ ] FreeCodeCamp's [Tutorial](https://medium.freecodecamp.org/how-to-make-create-react-app-work-with-a-node-backend-api-7c5c48acb1b0)
 	* [ ] Esau Silva's [Tutorial](https://esausilva.com/2017/11/14/how-to-use-create-react-app-with-a-node-express-backend-api/)
 	* [ ] Codemander's [Tutorial](https://crypt.codemancers.com/posts/2017-06-03-reactjs-server-side-rendering-with-router-v4-and-redux/) - Integrate react-router-v4 with server router
@@ -44,13 +46,13 @@ We are going to use the following stack:
 - **Authentication**: facebook, email, google, github, twitter
 - **Deployment**: digitalOcean
 
-Tools
+### Tools
 
 - [`create-react-app`](https://github.com/facebookincubator/create-react-app)
 - [`react-hot-loader`](https://github.com/gaearon/react-hot-loader)
 - [`NVM`](https://github.com/creationix/nvm)
 
-Authentication Middleware
+Authentication and Database Middleware
 
 - [`mongoose`](http://mongoosejs.com/index.html) - object modeling for our MongoDB database
 - [`passport`](http://www.passportjs.org/docs/authorize/) - help us authenticating with different methods
@@ -61,6 +63,7 @@ Automated Testing
 - [`SuperTest`](https://github.com/visionmedia/supertest) spools up your Express server and sends requests to it.Once the requests come back, you can make assertions about the response.
 - [`cheerio`](https://cheerio.js.org/) is jQuery for Node. It'll help your server code parse HTML.
 
+### Baseline App
 Take the following steps to create a baseline app:
 
 1. Follow [this tutorial](http://joshbroton.com/add-react-hot-reloading-create-react-app/) to set up a [`create-react-app`](https://github.com/facebookincubator/create-react-app) with [`react-hot-loader`](https://github.com/gaearon/react-hot-loader)
@@ -69,12 +72,34 @@ Take the following steps to create a baseline app:
 2. Follow [this tutorial](https://www.mokuji.me/article/universal-app-react-router) to set up the rest of the [`create-react-app`](https://github.com/facebookincubator/create-react-app) project to use [`react-router`](https://github.com/ReactTraining/react-router). We are going to use Version 4.x of the React Router, which is a complete rewrite of Versions 3.x and prior.
 
 	**Warning**:  Implementing the Build, Run & Develop section in the second tutorial could cause `react-hot-loader` to not work so this section wasn't implemented in the baseline app, which is available for download [on Github](https://github.com/xiaoyunyang/looseleaf-node/tree/baseline).
+
+4. FullStackReact's [Tutorial](https://www.fullstackreact.com/articles/using-create-react-app-with-a-server/#enter-create-react-app) and [Sample Project](https://github.com/fullstackreact/food-lookup-demo) - A `create-react-app` with server example
+	- Pro: Builds a client app to run concurrently with a server app.
+	- Con: This helps you build a single page application. If you want to build a isomorphic webapp, proceed with the next step.
+
+5. Isomorphic Webapp Book [Chapter 2 Sample Code](https://github.com/isomorphic-dev-js/chapter2-a-sample-isomorphic-app.git)
+	- Gotcha: if you are trying to integrate this example into your existing `create-react-app`, make sure to add the following babel config to the root of your create-react-app directory:
 	
-3. [React Express Tutorial](http://www.react.express/webpack) provides a comprehensive overview of `create-react-app`.
-4. Set up debugging with Webpack
+	```
+	// .babelrc
+	{
+	  "presets": [
+	    ["env", {"modules": false}],
+	    "stage-1",
+	    "react",
+	    "es2015",
+	    "stage-2"
+	  ],
+	  "plugins": [
+	    "transform-runtime"
+	  ]
+	}
+	```
+	If you don't do this, you'll have [this issue](https://github.com/facebook/create-react-app/issues/2377).
 
-5. Integrate `create-react-app` with a Node+Express API server server.
+**Learning**
 
+* [React Express Tutorial](http://www.react.express/webpack) provides a comprehensive overview of `create-react-app`.
 
 
 ## Docs
@@ -85,15 +110,16 @@ Take the following steps to create a baseline app:
 looseleaf-node
 ├───package.json
 ├───.babelrc
-├───.env <== *
+├───.env <== #C
 ├───server
-│   ├───server.js  <== **
+│   ├───server.js  <== #B
 │   ├───start-client.js	 
+│   ├───run.js <== #A
 │   ├───build
 │   ├───auth
 |   |	 └───routes.js
 |   |	 └───passport.js
-|   |	 └───secrets.js <== *
+|   |	 └───secrets.js <== #C
 |   |	 └───User.js
 │   └───api
 |   	 └───api1.js
@@ -103,14 +129,15 @@ looseleaf-node
 │   ├───config
 │   ├───public
 |   |   └───favicon.ico
-|   |   └───index.html  <== **
+|   |   └───index.html  <== #B
 │   ├───src
 │   |   └───components
 |   │   |   └───Header.js
 |   │   |   └───Home.js
 |   │   |   └───Main.js
 │   |   ├───App.js
-│   |   └───index.js <== **
+│   |   └───index.js <== #B
+│   |   └───main.js <== #A
 │   |   └───routes.js
 	
 ```
@@ -118,10 +145,9 @@ looseleaf-node
 **Notes**
 
 * Lots of extraneous folders and files were omitted from the file structure map above because they are auto-generated when you first set up your project or after when you build the project
-* The files marked with `*` is omitted from the github repo because they contain authentication ids, secrets, etc that are application-specific
-* The files marked with `**` is the starting point for navigating the server code and client code.
-
-
+* **#A**: These files are the entry point for navigating the isomorphic webapp.
+* **#B**: These files are the entry point for navigating the server code and client code.
+* **#C**: These files are omitted from the github repo because they contain authentication ids, secrets, etc that are application-specific
 
 ## Tutorial
 
@@ -132,9 +158,8 @@ looseleaf-node
 
 * [create-react-app](https://github.com/facebookincubator/create-react-app)
 >Create React App is agnostic of the backend, and just produces static HTML/JS/CSS bundles.
-
-* [my babel tutorial](https://github.com/xiaoyunyang/web-dev-cheatsheets/blob/master/es6-and-babel.md)
-
+* [my babel tutorial](https://github.com/xiaoyunyang/web-dev-cheatsheets/blob/master/guides/es6-and-babel.md)
+* [my isomorphic webapp tutorial](https://github.com/xiaoyunyang/web-dev-cheatsheets/blob/master/fundamental/isomorphic-webapp.md)
 
 ## Running the App
 
@@ -178,29 +203,43 @@ Before running the app, you have to set up a few things:
 	
 4. For developing an integrated client and server app:
 
-	* To run the server and client in development mode, do the following, which starts the server to automomatically listen on port 3001 ([http://localhost:3001/](http://localhost:3001/)) and the client to automomatically listen on port 3000 ([http://localhost:3000/](http://localhost:3000/)).
+	* To run the isomorphic webapp, do this:
+	  
+	  ```
+	  $ npm start
+	  ```
+	  
+	* To run both the server and client in separately, do the following, which starts the server to automomatically listen on port 3001 ([http://localhost:3001/](http://localhost:3001/)) and the client to automomatically listen on port 3000 ([http://localhost:3000/](http://localhost:3000/)).
 
 		```
-		$ npm start
+		$ npm start-dev
 		``` 
-	* To run both the client and server app, do 
-	
-		```
-		$ npm start
-		```		
-	
-		Alternatively,
+		If the single page application doesn't render correctly on the server, you need to do this:
 		
 		```
-		$ cd client && npm start
+		# npm build-client
 		```
-
+		
+		The `npm start-dev` script is equivalent to running `npm run start-server` and `npm run start-client` concurrently. We learn how to do that from FullStackReact's [Tutorial](https://www.fullstackreact.com/articles/using-create-react-app-with-a-server/#enter-create-react-app) and [Sample Project](https://github.com/fullstackreact/food-lookup-demo).
+		
 	* To run just the server app, do 
 	
 		```
 		$ npm run start-server
 		```		
+		
+	* To run both the client and server app, do
 	
+		```
+		$ npm start-dev
+		```
+		
+	* To run the client app, do
+		
+		```
+		$ npm run start-client
+		```
+		
 		Alternatively,
 		
 		```
@@ -234,6 +273,7 @@ Before running the app, you have to set up a few things:
 		```
 		
 		In this mode, you can't use `react-hot-loader` because the client app is rendered on the server side.
+
 5. Stop the database server when you are done:
 	* Stop the postgres database 
 	 
@@ -262,7 +302,7 @@ Before running the app, you have to set up a few things:
 
 ### Authentication
 
-See [the tutorial](https://github.com/xiaoyunyang/web-dev-cheatsheets/blob/master/auth-setup.md) for how to set up `passport` and `postgresql` with your react-node app.
+See [the tutorial](https://github.com/xiaoyunyang/web-dev-cheatsheets/blob/master/guides/auth-setup.md) for how to set up `passport` and `postgresql` with your react-node app.
 
 We also need to create a controller for creating the `User` object after the user enters all the required information:
 

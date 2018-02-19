@@ -6,6 +6,9 @@ import 'materialize-css'
 import 'materialize-css/dist/css/materialize.min.css';
 import './assets/index.css';
 
+/*
+ * Main entry point for the client app
+ */
 const render = Component => {
   ReactDOM.render(
     <AppContainer>

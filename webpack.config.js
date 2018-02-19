@@ -1,0 +1,23 @@
+module.exports = {
+  entry: './client/src/main.jsx',
+  output: {
+    path: __dirname + '/client/public',
+    filename: 'browser.js',
+  },
+  module: {
+    rules: [
+      {
+        test: /\.(jsx|es6)$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader',
+      },
+      {
+        test: /\.css$/,
+        loaders: ['style-loader', 'css-loader'],
+      },
+    ],
+  },
+  resolve: {
+    extensions: ['.js', '.jsx', '.css', '.es6'],
+  },
+};

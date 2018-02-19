@@ -1,0 +1,11 @@
+.ui.items>.item>.image, .ui.items>.item>.image>img {
+  max-height: 100px;
+}
+
+.featured.ui.segment {
+  margin-bottom: 10px;
+}
+
+.footer.ui.vertical.segment {
+  padding-left: 5px;
+}

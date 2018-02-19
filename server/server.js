@@ -16,9 +16,9 @@ import passport from 'passport';
 import helmet from 'helmet';
 import ms from 'ms';
 import validator from 'validator';
+import renderViewMiddleware from '../client/iso-middleware/renderView';
 
 require('dotenv').config();
-
 
 // Configuration ===============================================================
 const app = express();
@@ -191,6 +191,16 @@ app.get('/test/search', (req, res) => {
   const userAgent = validator.escape(req.query.q) || '';
   res.render('test', { userAgent });
 });
+
+
+// Isomorphic Webapp ===========================================================
+
+// handle the isomorphic page render
+app.get('/iso', renderViewMiddleware);
+// setup static files, server browser.js (webpacked file) from root
+app.use(express.static(__dirname));
+
+
 // Error Handler ===============================================================
 
 // middleware that logs the error
