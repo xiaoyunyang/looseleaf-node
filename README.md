@@ -18,17 +18,20 @@
 	- [X] Add [`csurf`](https://github.com/expressjs/csurf) to forms to protect against cross site request forgery (CSRF).
 	- [ ] Move all secret auth stuff to `.env`. See [this tutorial](http://www.clementinejs.com/tutorials/tutorial-passport.html)
 - Integrate Backend With Frontend
-	* [X] FullStackReact's [Tutorial](https://www.fullstackreact.com/articles/using-create-react-app-with-a-server/#enter-create-react-app) and [Sample Project](https://github.com/fullstackreact/food-lookup-demo) - A `create-react-app` with server example
-	* [X] Isomorphic Webapp Book [Chapter 2 Sample Code](https://github.com/isomorphic-dev-js/chapter2-a-sample-isomorphic-app.git)
-	* [ ] FreeCodeCamp's [Tutorial](https://medium.freecodecamp.org/how-to-make-create-react-app-work-with-a-node-backend-api-7c5c48acb1b0)
-	* [ ] Esau Silva's [Tutorial](https://esausilva.com/2017/11/14/how-to-use-create-react-app-with-a-node-express-backend-api/)
-	* [ ] Codemander's [Tutorial](https://crypt.codemancers.com/posts/2017-06-03-reactjs-server-side-rendering-with-router-v4-and-redux/) - Integrate react-router-v4 with server router
-	* [ ] Dave Ceddia's [Tutorial](https://daveceddia.com/create-react-app-express-backend/) - `create-react-app` with express backend
-	- [ ] Connect React Router V4 router to Server Router - See [This Tutorial](https://crypt.codemancers.com/posts/2017-06-03-reactjs-server-side-rendering-with-router-v4-and-redux/)
+	- [X] FullStackReact's [Tutorial](https://www.fullstackreact.com/articles/using-create-react-app-with-a-server/#enter-create-react-app) and [Sample Project](https://github.com/fullstackreact/food-lookup-demo) - A `create-react-app` with server example
+	- [X] Isomorphic Webapp Book [Chapter 2 Sample Code](https://github.com/isomorphic-dev-js/chapter2-a-sample-isomorphic-app.git)
+	- [ ] FreeCodeCamp's [Tutorial](https://medium.freecodecamp.org/how-to-make-create-react-app-work-with-a-node-backend-api-7c5c48acb1b0)
+	- [ ] Esau Silva's [Tutorial](https://esausilva.com/2017/11/14/how-to-use-create-react-app-with-a-node-express-backend-api/)
+	- [ ] Codemander's [Tutorial](https://crypt.codemancers.com/posts/2017-06-03-reactjs-server-side-rendering-with-router-v4-and-redux/) - Integrate react-router-v4 with server router
+	- [ ] Dave Ceddia's [Tutorial](https://daveceddia.com/create-react-app-express-backend/) - `create-react-app` with express backend
 	- [ ] Haphazardly thrown together [React Router 4 + Express + Passport Auth Example](https://github.com/netpoetica/react-router-passport-express-demo-app)
+	- [ ] Patrick Cason's Tutorial for [React Router V4 Helmet Redux and Thunk](https://medium.com/@cereallarceny/server-side-rendering-with-create-react-app-fiber-react-router-v4-helmet-redux-and-thunk-275cb25ca972) 
+	- [ ] Justin Jung's [React Server Sider Rendering and Hot Reloading](https://medium.com/@justinjung04/react-server-side-rendering-and-hot-reloading-ffb87ca81a89)
+	- [ ] Evheniy Bystrov's [React App From Scratch](https://medium.com/@evheniybystrov/react-app-from-scratch-d694300d1631)
+* [Universal Create React App Step by Step](https://medium.com/leanjs/universal-create-react-app-step-by-step-b80ba68d125d)
 - [ ] Build Server to serve API
-	* [X] Add Automated Testing to backend: `mocha`, `chai`, `SuperTest` and `cheerio`.
-- [ ] Set up Redux for Frontend app
+	- [X] Add Automated Testing to backend: `mocha`, `chai`, `SuperTest` and `cheerio`.
+- [X] Set up Redux for Frontend app
 
 ## Getting Started 
 
@@ -73,31 +76,12 @@ Take the following steps to create a baseline app:
 
 	**Warning**:  Implementing the Build, Run & Develop section in the second tutorial could cause `react-hot-loader` to not work so this section wasn't implemented in the baseline app, which is available for download [on Github](https://github.com/xiaoyunyang/looseleaf-node/tree/baseline).
 
-4. FullStackReact's [Tutorial](https://www.fullstackreact.com/articles/using-create-react-app-with-a-server/#enter-create-react-app) and [Sample Project](https://github.com/fullstackreact/food-lookup-demo) - A `create-react-app` with server example
+3. FullStackReact's [Tutorial](https://www.fullstackreact.com/articles/using-create-react-app-with-a-server/#enter-create-react-app) and [Sample Project](https://github.com/fullstackreact/food-lookup-demo) - A `create-react-app` with server example
 	- Pro: Builds a client app to run concurrently with a server app.
 	- Con: This helps you build a single page application. If you want to build a isomorphic webapp, proceed with the next step.
 
-5. Isomorphic Webapp Book [Chapter 2 Sample Code](https://github.com/isomorphic-dev-js/chapter2-a-sample-isomorphic-app.git)
-	- Gotcha: if you are trying to integrate this example into your existing `create-react-app`, make sure to add the following babel config to the root of your create-react-app directory:
-	
-	```
-	// .babelrc
-	{
-	  "presets": [
-	    ["env", {"modules": false}],
-	    "stage-1",
-	    "react",
-	    "es2015",
-	    "stage-2"
-	  ],
-	  "plugins": [
-	    "transform-runtime"
-	  ]
-	}
-	```
-	If you don't do this, you'll have [this issue](https://github.com/facebook/create-react-app/issues/2377).
-
-**Learning**
+4. Isomorphic Webapp Book [Chapter 2 Sample Code](https://github.com/isomorphic-dev-js/chapter2-a-sample-isomorphic-app.git)
+	**Learning**
 
 * [React Express Tutorial](http://www.react.express/webpack) provides a comprehensive overview of `create-react-app`.
 
@@ -112,17 +96,14 @@ looseleaf-node
 ├───.babelrc
 ├───.env <== #C
 ├───server
-│   ├───server.js  <== #B
+│   ├───server.js <== #B
 │   ├───start-client.js	 
 │   ├───run.js <== #A
 │   ├───build
-│   ├───auth
-|   |	 └───routes.js
-|   |	 └───passport.js
-|   |	 └───secrets.js <== #C
-|   |	 └───User.js
+│   ├───data <== #A
+│   ├───assets <== #A
 │   └───api
-|   	 └───api1.js
+|   	 └───api1.js <== #A and #B
 ├───test
 ├───client
 │   ├───package.json
@@ -132,13 +113,16 @@ looseleaf-node
 |   |   └───index.html  <== #B
 │   ├───src
 │   |   └───components
+|   │   |   └───Recipe <== #A
 |   │   |   └───Header.js
 |   │   |   └───Home.js
 |   │   |   └───Main.js
+│   |   └───redux <== #A
 │   |   ├───App.js
 │   |   └───index.js <== #B
 │   |   └───main.js <== #A
 │   |   └───routes.js
+│   |   └───style.css <== #A
 	
 ```
 
@@ -201,14 +185,24 @@ Before running the app, you have to set up a few things:
 	 
 3. If you are developing on the client side only, `$ cd client` then `$ npm run build` or `$ yarn build` - Build the project. For production builds, you'll want to use `npm run build` to build an optimized bundle and transpiled down to ES5, which will be saved to the filesystem. If you don't have hot reloading enabled, you have to run this after making changes to your source code to allow the changes to take effect next time you start the client server. This is undesirable and there are a few workarounds, in particular, nodemon and react-hot-reloader, which will be discussed in more detail below.
 	
-4. For developing an integrated client and server app:
-
-	* To run the isomorphic webapp, do this:
+4. For developing an integrated client and server app, we want to  run the isomorphic webapp with the following command line:
 	  
 	  ```
 	  $ npm start
 	  ```
 	  
+	  This will give us access to:	  
+	  - [http://localhost:3001/](http://localhost:3001/) 
+	  - [http://localhost:3001/](http://localhost:3001/iso)
+	  - [http://localhost:3001/api/hello](http://localhost:3001/api/hello)
+	  If you are not seeing changes made to the client app, do the following, before running the start script again:
+	  
+	  ```
+	  $ npm build-client
+	  ```
+	  
+5. For developing an server and client separately
+
 	* To run both the server and client in separately, do the following, which starts the server to automomatically listen on port 3001 ([http://localhost:3001/](http://localhost:3001/)) and the client to automomatically listen on port 3000 ([http://localhost:3000/](http://localhost:3000/)).
 
 		```
@@ -245,20 +239,11 @@ Before running the app, you have to set up a few things:
 		```
 		$ cd client && npm start
 		```
-	
-	* To run just the client app, do 
-	
-		```
-		$ npm run start-client
-		```		
-	
-		Alternatively,
-		
-		```
-		$ cd client && npm start
-		```
 		
 		In this mode, you can use `react-hot-loader` to make changes to react components in runtime.
+		
+		Just go to [http://localhost:3001/api/hello](http://localhost:3000) to see change being made.
+
 		
 		If you want to run on other ports, like 9000, 8000, 8080, just specify the port you want:
 		

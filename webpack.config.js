@@ -1,5 +1,10 @@
+process.env.NODE_ENV = 'development';
+
 module.exports = {
-  entry: './client/src/main.jsx',
+  entry: [
+    'babel-polyfill',
+    './client/src/main.jsx',
+  ],
   output: {
     path: __dirname + '/client/public',
     filename: 'browser.js',
