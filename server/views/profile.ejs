@@ -1,0 +1,20 @@
+<% include _header %>
+<% if ((currentUser) && (currentUser.id === user.id)) { %>
+  <a href="/auth/edit" class="pull-right">Edit your profile</a>
+  <% } %>
+  <h1><%= user.name() %></h1>
+  <h2>Joined on <%= user.createdAt %></h2>
+  <% if (user.picture) { %>
+    <img src=<%= user.picture %> height="120" width="120"/>
+  <% } %>
+  <p>Email:  <%= user.email %></p>
+  <% if (user.bio) { %>
+    <p>Bio:  <%= user.bio %></p>
+  <% } %>
+  <% if (user.gender) { %>
+    <p>Gender:  <%= user.gender %></p>
+  <% } %>
+  <% if (user.location) { %>
+    <p>Location:  <%= user.location %></p>
+  <% } %>
+<% include _footer %>

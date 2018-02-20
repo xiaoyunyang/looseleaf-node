@@ -1,0 +1,21 @@
+{
+  "id": 1,
+  "title": "Hard Boiled Egg",
+"cookTime": "25m",
+  "difficulty": "Easy",
+  "servings": 4,
+  "thumbnail": "egg.jpg",
+  "labels": ["breakfast", "snack", "basics"],
+  "steps": [
+    "Place eggs in pan",
+    "Add cold water until eggs are covered by 1 inch of water",
+    "Heat on high until the water boils",
+    "Remove from burner and cover pan",
+    "Let stand for about 12 minutes",
+    "Drain immediately and cool under cold running water"
+  ],
+  "ingredients": [
+    "4 Large Eggs",
+    "Water"
+  ]
+}

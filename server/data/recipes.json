@@ -1,0 +1,52 @@
+[
+  {
+    "id": 1,
+    "title": "Hard Boiled Egg",
+    "cookTime": "25m",
+    "difficulty": "Easy",
+    "servings": 4,
+    "thumbnail": "egg.jpg",
+    "featured": true,
+    "labels": ["breakfast", "snack", "basics"]
+  },
+  {
+    "id": 2,
+    "title": "Bread",
+    "cookTime": "50m",
+    "difficulty": "Medium",
+    "servings": 32,
+    "thumbnail": "bread.jpg",
+    "featured": false,
+    "labels": ["baking", "basics"]
+  },
+  {
+    "id": 3,
+    "title": "Vanilla Layer Cake",
+    "cookTime": "2h",
+    "difficulty": "Hard",
+    "servings": 12,
+    "thumbnail": "cake.jpg",
+    "featured": false,
+    "labels": ["dessert", "cake"]
+  },
+  {
+    "id": 4,
+    "title": "Quinoa and Kale Salad",
+    "cookTime": "30m",
+    "difficulty": "Easy",
+    "servings": 8,
+    "thumbnail": "kale.jpg",
+    "featured": false,
+    "labels": ["salad", "healthy", "vegan", "gluten free"]
+  },
+  {
+    "id": 5,
+    "title": "Baked Pasta",
+    "cookTime": "35m",
+    "difficulty": "Easy",
+    "servings": 4,
+    "thumbnail": "pasta.jpg",
+    "featured": false,
+    "labels": ["lunch", "dinner", "comfort", "vegetarian"]
+  }
+]

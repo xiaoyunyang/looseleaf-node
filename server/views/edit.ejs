@@ -1,0 +1,24 @@
+<% include _header %>
+<h1>Edit your profile</h1>
+<form action="/auth/edit" method="post">
+  <input name="_csrf" value="<%= csrfToken %>" type="hidden">
+  <img src=<%= currentUser.picture %> height="120" width="120"/>
+  <h4>Display Name:</h4>
+  <input name="displayname" type="text" class="form-control" placeholder="Display name" value="<%= currentUser.displayName || "" %>"/>
+  <h4>Your Email:</h4>
+  <p><%= currentUser.email || "" %></p>
+  <h4>Your Location:</h4>
+  <input name="location" class="form-control" placeholder="Location" value="<%= currentUser.location || "" %>"/>
+  <h4>Your Personal Webite:</h4>
+  <input name="website" class="form-control" placeholder="Website" value="<%= currentUser.website|| "" %>"/>
+  <h4>Bio</h4>
+  <textarea name="bio" class="form-control" placeholder="Tell us about yourself!"><%= currentUser.bio || "" %></textarea>
+  <input type="submit" value="Update" class="btn btn-primary btn-block">
+</form>
+<br>
+<form action="/auth/delete/<%= currentUser.username %>" method="post">
+  <input name="_csrf" value="<%= csrfToken %>" type="hidden">
+  <input type="submit" value="Delete" class="btn btn-danger btn-block">
+</form>
+
+<% include _footer %>

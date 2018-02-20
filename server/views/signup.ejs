@@ -1,0 +1,11 @@
+<% include _header %>
+<h1>Sign up</h1>
+<form action="/auth/signup" method="post">
+  <input name="_csrf" value="<%= csrfToken %>" type="hidden">
+  <input name="email" type="text" class="form-control"
+     placeholder="Email" required autofocus>
+  <input name="password" type="password" class="form-control"
+     placeholder="Password" required>
+  <input type="submit" value="Sign up" class="btn btn-primary btn-block">
+</form>
+<% include _footer %>
