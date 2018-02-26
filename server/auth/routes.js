@@ -5,6 +5,7 @@
 import express from 'express';
 import passport from 'passport';
 import csrf from 'csurf';
+import gravatarUrl from 'gravatar-url';
 import User from './User';
 
 const router = express.Router();
@@ -132,6 +133,8 @@ router.post('/signup', (req, res, next) => {
     const newUser = new User();
     newUser.email = email;
     newUser.local.password = password;
+    // TODO: newUser.picture = Gravatar
+    newUser.picture = gravatarUrl(email, { size: 120, default: 'mm' });
     const username = email.split('@')[0];
     const regex = new RegExp(`^${username}.*$`, 'i');
 

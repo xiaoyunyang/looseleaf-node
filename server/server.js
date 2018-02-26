@@ -12,13 +12,15 @@ import mongoose from 'mongoose';
 import session from 'express-session';
 import flash from 'connect-flash';
 import passport from 'passport';
-import colors from 'colors';
+
+// import colors from 'colors';
 
 // import enforceSSL from 'express-enforces-ssl';
 import helmet from 'helmet';
 import ms from 'ms';
 import validator from 'validator';
 import renderViewMiddleware from '../client/iso-middleware/renderView';
+
 require('dotenv').config();
 
 // Configuration ===============================================================
@@ -246,7 +248,7 @@ const httpsOptions = {
 };
 
 http.createServer(app).listen(app.get('port'), () => {
-  console.log(colors.green('hello'));
+  // console.log(colors.green('hello'));
   console.log(`Express server started at: http://localhost:${app.get('port')}/`); // eslint-disable-line no-console
 });
 

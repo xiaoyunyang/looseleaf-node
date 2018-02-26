@@ -46,7 +46,6 @@ api.get('/recipes', (req, res) => {
   // Read and open the recipes json file
   const filePath = path.join(__dirname, '../data/recipes.json');
   fs.readFile(filePath, 'utf8', (err, data) => {
-
     // Error handling - return an error
     if (err) {
       res.status(500).end();
@@ -60,11 +59,10 @@ api.get('/featured', (req, res) => {
   // Read and open the featured recipe json file
   const filePath = path.join(__dirname, '../data/featured.json');
   fs.readFile(filePath, 'utf8', (err, data) => {
-
     // Error handling - return an error
     if (err) {
       res.status(500).end();
-      return console.error(err);
+      console.error(err);
     }
     const recipe = JSON.parse(data);
     res.status(200).send({ recipe });
