@@ -149,11 +149,12 @@ app.use('/static', (req, res, next) => {
 */
 // Integration with Frontend ===================================================
 // Express only serves static assets in production
-const clientAppPath = path.join(path.resolve('.'), '/client/build');
+
 if (process.env.NODE_ENV === 'production') {
+  const clientAppPathProd = path.join(path.resolve('.'), '/client/build');
   // console.log('Running in production mode');
   // The below code allows client app to run from the the server (localhost:3001)
-  app.use('/', express.static(clientAppPath));
+  app.use('/', express.static(clientAppPathProd));
 
 
 /*  app.use(express.static(path.join(path.resolve("."), '/client/build')))
@@ -162,6 +163,7 @@ if (process.env.NODE_ENV === 'production') {
   })
 */
 } else if (process.env.NODE_ENV === 'development') {
+  const clientAppPathDev = path.join(path.resolve('.'), '/client/public');
   // console.log('Running in development mode')
 
   /*
@@ -171,7 +173,7 @@ if (process.env.NODE_ENV === 'production') {
   The below code is temporary, copied from the the case when env is production.
   */
 
-  app.use('/', express.static(clientAppPath));
+  app.use('/', express.static(clientAppPathDev));
 }
 
 // Send to SuperTest for test ==================================================

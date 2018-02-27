@@ -2,7 +2,7 @@ process.env.NODE_ENV = 'development';
 
 module.exports = {
   entry: [
-    'babel-polyfill',
+    // 'babel-polyfill',
     './client/src/main.jsx',
   ],
   output: {

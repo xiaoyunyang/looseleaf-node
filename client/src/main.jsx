@@ -12,7 +12,17 @@ const store = initRedux(initialState);
 
 console.log('Data to hydrate with', initialState);
 
-ReactDOM.render(
-  <Provider store={store}><App /></Provider>,
-  document.getElementById('root')
-);
+/*
+ * Main entry point for the client app
+ */
+const render = Component => {
+  ReactDOM.render(
+    <Provider store={store}>
+      <Component />
+    </Provider>,
+    document.getElementById('root')
+  );
+};
+
+//Wrapping App inside of Provider
+render(App);

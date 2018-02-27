@@ -193,7 +193,7 @@ Before running the app, you have to set up a few things:
 	  
 	  This will give us access to:	  
 	  - [http://localhost:3001/](http://localhost:3001/) 
-	  - [http://localhost:3001/](http://localhost:3001/iso)
+	  - [http://localhost:3001/iso](http://localhost:3001/iso)
 	  - [http://localhost:3001/api/hello](http://localhost:3001/api/hello)
 	  If you are not seeing changes made to the client app, do the following, before running the start script again:
 	  
