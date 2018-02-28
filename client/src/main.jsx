@@ -7,8 +7,8 @@ import initRedux from './redux/init-redux.es6';
 
 console.log("Browser packed file loaded");
 
-const initialState = window.__INITIAL_STATE;
-const store = initRedux(initialState);
+const initialState = window.__INITIAL_STATE;  // Grab the server serialized state off of the window object.
+const store = initRedux(initialState);  // Instead of starting Redux with an empty initial state on the server, you pass the server data into the Redux setup.
 
 console.log('Data to hydrate with', initialState);
 

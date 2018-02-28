@@ -1,5 +1,9 @@
 import React from 'react';
 
+/*
+ * HTML
+ * caller: renderView.jsx (server side render)
+ */
 export default class HTML extends React.Component {
   render() {
     return (

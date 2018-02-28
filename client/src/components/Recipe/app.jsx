@@ -5,6 +5,10 @@ import Recipes from './recipes';
 import Featured from './featured';
 import * as actionCreators from '../../redux/action-creators';
 
+/*
+ * App
+ * caller: renderView.jsx (server side render) and main.jsx (client side render) 
+ */
 class App extends React.Component {
 
   componentDidMount() {
@@ -31,6 +35,7 @@ class App extends React.Component {
   }
 }
 
+// This function lets you convert the app state to properties on your component.
 function mapStateToProps(state) {
   let { recipes, featuredRecipe } = state.recipes;
   return {
@@ -39,8 +44,13 @@ function mapStateToProps(state) {
   }
 }
 
+// This function lets you make actions simpler to call from the component.
+// Normally you have to call dispatch(action) each time you want to call an action.
+// This allows the view to call the action without knowing about dispatch.
 function mapDispatchToProps(dispatch) {
   return { actions: bindActionCreators(actionCreators, dispatch) }
 }
 
+// Instead of exporting the App component, you export the connect component,
+// which takes in the two helper functions and the App component as parameters.
 export default connect(mapStateToProps, mapDispatchToProps)(App)

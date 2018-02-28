@@ -6,7 +6,7 @@ module.exports = {
     './client/src/main.jsx',
   ],
   output: {
-    path: __dirname + '/client/public',
+    path: __dirname + '/client/build',
     filename: 'browser.js',
   },
   module: {

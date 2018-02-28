@@ -149,13 +149,13 @@ app.use('/static', (req, res, next) => {
 */
 // Integration with Frontend ===================================================
 // Express only serves static assets in production
-
+const clientAppPathProd = path.join(path.resolve('.'), '/client/build');
+const clientAppPathDev = path.join(path.resolve('.'), '/client/build');
 if (process.env.NODE_ENV === 'production') {
-  const clientAppPathProd = path.join(path.resolve('.'), '/client/build');
+
   // console.log('Running in production mode');
   // The below code allows client app to run from the the server (localhost:3001)
   app.use('/', express.static(clientAppPathProd));
-
 
 /*  app.use(express.static(path.join(path.resolve("."), '/client/build')))
   app.get('/', function (req, res) {
@@ -163,9 +163,7 @@ if (process.env.NODE_ENV === 'production') {
   })
 */
 } else if (process.env.NODE_ENV === 'development') {
-  const clientAppPathDev = path.join(path.resolve('.'), '/client/public');
   // console.log('Running in development mode')
-
   /*
   TODO: Integrate server with client when env is development
   Add logic here for server to log routes managed by client code. See

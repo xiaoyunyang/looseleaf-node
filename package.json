@@ -6,7 +6,7 @@
     "start-dev": "concurrently \"npm run start-server\" \"npm run start-client\"",
     "build:browser": "node_modules/.bin/webpack",
     "prestart": "npm run build:browser",
-    "start": "nodemon server/run-dev.js --watch server",
+    "start": "nodemon server/run-dev.js --watch server --watch client/src",
     "build": "npm run build-client && npm run build-server",
     "build-server": "babel server/server.js -o server/build/main.bundle.js",
     "build-client": "cd  client && npm run build && cd ..",
