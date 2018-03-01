@@ -14,10 +14,38 @@ So far, I talked about 3 groups of people who will be using LooseLeaf (1) wannab
 
 Who are the mentors? They are people who likes to write about what they know and teach and guide others through their blogs, publications (books, articles), or social media. They are characterized by their in depth knowledge in a specific knowledge area and their willingness to share what they know with others. They do that altruistic reasons or to gain influence and followers. These people look for an audience and potential customers who will buy their books or donate to keep their blogs going. LooseLeaf gives them that audience - the wannabes. In turn they give the wannabes guidance and support (in addition to the mutual support that wannabes of the same aspiration give to each other).
 
-## FAQ
+## The Wannabes
+
+**Who are they?**
+
+* People who want to get better at `X`.
+* People who want to pursue `X` as a serious hobby, which could potentially generate another stream of income.
+
+**What are `X`?**
+
+* Artist / Designer  	
+ 	- Skill Areas:  `Cartooning`, `Illustration`, `Infographics` 
+ 	- Deliverbles: image file, vector, web page
+ 	 
+ * Web Developer
+ 	- Skill Areas: `Wordpress`, `React`, `JavaScript`, `Single Page Application`
+ 	- Deliverables: code snippets
+  
+ * Mobile Developer
+ 	- Skill Areas: `Game Developer`, `iOs`, `Android` 	 
+ * Writer
+ 	- Skill Areas: `Blogging`, video editing, `Proof Reading`, `Copy Writing`
+
+ * Data Scientist
+ 	- Skill Areas: `Data Visualization`, 
+
+* Teacher
+	- Skill Areas: `Worksheet`, `Classroom Activities`,  
+
+
 **More experienced wannabes will dominate all the jobs, if the best submissions are the ones selected by the client or you (looseleaf). How will you level the playing field for novice programmers?**
 
-All wannabes can submit work to any job post. Once they submit, they get credit for it. If their work was picked to be the best by the creator of the job post, they get extra credit. Both the credit and the extra credit get logged to your profile. Extra credit is bonus but not necessary. Think of it like class in college. There’ll be someone who’s better than you on an exam but if you earned > 90, you get an A. More people getting As in the class doesn’t take away your A. Your “level” as a wannabe is based on cardinal, not ordinal metrics.
+All wannabes can submit work to any project post. Once they submit, they get credit for it. If their work was picked to be the best by the creator of the job post, they get extra credit. Both the credit and the extra credit get logged to your profile. Extra credit is bonus but not necessary. Think of it like class in college. There’ll be someone who’s better than you on an exam but if you earned > 90, you get an A. More people getting As in the class doesn’t take away your A. Your “level” as a wannabe is based on cardinal, not ordinal metrics.
 
 **for the people trying to earn credibility as a professionals is this strictly for technology jobs or does it cross over into other fields such as agriculture, construction, services, etc..?**
 
@@ -31,11 +59,55 @@ You gave me an idea with using LooseLeaf to support nonprofits. I also haven’t
 
 One option for my end game would be to get acquired by LinkedIn. LooseLeaf’s customers include recruiters and companies looking for talent. There is some overlap with LooseLeaf. I can picture acquisition by Facebook being another end game since LooseLeaf is more social networking and community building than other edtech companies, which offer content and seek to be a cheaper alternative of college.
 
+## The Patrons
+
+**Who are they?**
+
+* Elementary school teacher who wants a mobile app to show their kids math concepts
+* High school teacher who wants a web app to demonstrate projectile motion or polar coordinates
+* Nonprofits looking for people to visualize their FOIA data
+* Authors looking for someone to design book cover for self publishing their book
+* Government employee looking for someone to help build a website for intranet
+* Startup founder looking for someone to make a explainer video for their startup
+* Author looking for someone to build a landing page for their book
+
+## Projects
+
+* Cartoon for blog
+* Photograph for blog
+* Mobile app for classroom
+* Mobile app for event (funk parade, math fest)
+* Banner for facebook event
+* Banner for meetup group
+* Brochure for event (school event, office party)
+* Designs for indie game
+* Book cover design for self published book
+* Website for book
+* Explainer video for startup
+* Website for intranet
+* Logo Design for startup
+
+## The Mentors
+
+**Who are the mentors?**
+
+They are the evangelists. They usually maintain blogs. They like to educate others in what they know, gain a repuatation, and sell books, newsletters, or get users for their open source projects or startups.
+
+
+**How's LooseLeaf useful for the mentors?**
+
+* [Hire a cartoonist to make their blogs less boring](https://mtlynch.io/how-to-hire-a-cartoonist/)
+* Access to people to influence
+
+
+
 ## TODOs
 
 * Funding
-	- [] NSF SeedFund - [application](https://seedfund.nsf.gov/apply/) and [PDF Version](https://seedfund.nsf.gov/assets/files/applicants/combined-topics-09-15-2017.pdf)
-* [] TechCrunch - Create Profile
-* [] ProductHunt - Anyway to get featured up there?
-* [] Angellist - Create Profile
-
+	- [ ] NSF SeedFund - [application](https://seedfund.nsf.gov/apply/) and [PDF Version](https://seedfund.nsf.gov/assets/files/applicants/combined-topics-09-15-2017.pdf)
+* Branding
+	* [ ] TechCrunch - Create Profile
+	* [ ] ProductHunt - Anyway to get featured up there?
+	* [ ] Angellist - Create Profile
+* Community Building
+	* [ ] Hackerspace 

@@ -9,41 +9,41 @@ class BookSingle extends Component {
   constructor(props) {
     super(props);
     let book = {};
-    let slug = this.props.match.params.slug;
+    const slug = this.props.match.params.slug;
 
-		// Set 'book' if it’s on server-side
+    // Set 'book' if it’s on server-side
     if (this.props.staticContext) {
-      book = this.props.staticContext.books.find(book => book.slug === slug)
-		}
+      book = this.props.staticContext.books.find(book => book.slug === slug);
+    }
 
-		this.state = { book: book, slug: slug }
-	}
+    this.state = { book, slug };
+  }
 
-	componentDidMount () {
-		let slug = this.state.slug
-		fetch('/books.json')
-		.then(res => res.json())
-		.then((json) => {
-			let book = json.books.find(book => book.slug === slug)
-			this.setState({book: book})
-		})
-	}
+  componentDidMount() {
+    const slug = this.state.slug;
+    fetch('/books.json')
+      .then(res => res.json())
+      .then((json) => {
+        const book = json.books.find(book => book.slug === slug);
+        this.setState({ book });
+      });
+  }
 
-	render() {
-		let book = this.state.book
-		return (
-			<div>
-				<h3>{book.title}</h3>
-				<h5 style={{textAlign: 'right'}}><em>{book.author}</em></h5>
-				<p>{book.description}</p>
-				<p style={{ color:'#aaa' }}>
-					<small>The text above was copied and pasted from Amazon.com.</small>
-				</p>
-				<br/>
-				<p><Link to='/book'>Back to all books</Link></p>
-			</div>
-		);
-	}
+  render() {
+    const book = this.state.book;
+    return (
+      <div>
+        <h3>{book.title}</h3>
+        <h5 style={{ textAlign: 'right' }}><em>{book.author}</em></h5>
+        <p>{book.description}</p>
+        <p style={{ color: '#aaa' }}>
+          <small>The text above was copied and pasted from Amazon.com.</small>
+        </p>
+        <br />
+        <p><Link to="/book">Back to all books</Link></p>
+      </div>
+    );
+  }
 }
 
-export default BookSingle
+export default BookSingle;

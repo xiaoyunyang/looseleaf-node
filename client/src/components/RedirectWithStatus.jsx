@@ -1,13 +1,13 @@
-import React from 'react'
-import { Route, Redirect } from 'react-router-dom'
+import React from 'react';
+import { Route, Redirect } from 'react-router-dom';
 
-const RedirectWithStatus = ({route}) => (
-	<Route render={({ staticContext }) => {
-		if (staticContext)
-			staticContext.status = route.status
-		return <Redirect to={route.to}/>
-	}}/>
-)
+const RedirectWithStatus = ({ route }) => (
+  <Route render={({ staticContext }) => {
+		if (staticContext) { staticContext.status = route.status; }
+		return <Redirect to={route.to} />;
+	}}
+  />
+);
 
 
 /*
@@ -34,4 +34,4 @@ const RedirectWithStatus = ({route}) => (
 */
 
 
-export default RedirectWithStatus
+export default RedirectWithStatus;

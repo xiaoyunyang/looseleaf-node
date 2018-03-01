@@ -7,9 +7,9 @@ export function submitContactForm(name, email, message) {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        name: name,
-        email: email,
-        message: message
+        name,
+        email,
+        message
       })
     }).then((response) => {
       if (response.ok) {
@@ -19,14 +19,13 @@ export function submitContactForm(name, email, message) {
             messages: [json]
           });
         });
-      } else {
-        return response.json().then((json) => {
-          dispatch({
-            type: 'CONTACT_FORM_FAILURE',
-            messages: Array.isArray(json) ? json : [json]
-          });
-        });
       }
+      return response.json().then((json) => {
+        dispatch({
+          type: 'CONTACT_FORM_FAILURE',
+          messages: Array.isArray(json) ? json : [json]
+        });
+      });
     });
   };
 }

@@ -110,14 +110,14 @@ export function link(provider) {
       return {
         type: 'LINK_FAILURE',
         messages: [{ msg: 'Invalid OAuth Provider' }]
-      }
+      };
   }
 }
 
 // Unlink account
 export function unlink(provider) {
   return (dispatch) => {
-    return fetch('/unlink/' + provider).then((response) => {
+    return fetch(`/unlink/${provider}`).then((response) => {
       if (response.ok) {
         return response.json().then((json) => {
           dispatch({
@@ -125,16 +125,15 @@ export function unlink(provider) {
             messages: [json]
           });
         });
-      } else {
-        return response.json().then((json) => {
-          dispatch({
-            type: 'UNLINK_FAILURE',
-            messages: [json]
-          });
-        });
       }
+      return response.json().then((json) => {
+        dispatch({
+          type: 'UNLINK_FAILURE',
+          messages: [json]
+        });
+      });
     });
-  }
+  };
 }
 
 function oauth2(config, dispatch) {
@@ -146,25 +145,25 @@ function oauth2(config, dispatch) {
       display: 'popup',
       response_type: 'code'
     };
-    const url = config.authorizationUrl + '?' + qs.stringify(params);
-    resolve({ url: url, config: config, dispatch: dispatch });
+    const url = `${config.authorizationUrl}?${qs.stringify(params)}`;
+    resolve({ url, config, dispatch });
   });
 }
 
 function oauth1(config, dispatch) {
   return new Promise((resolve, reject) => {
-    resolve({ url: 'about:blank', config: config, dispatch: dispatch });
+    resolve({ url: 'about:blank', config, dispatch });
   });
 }
 
 function openPopup({ url, config, dispatch }) {
-console.log("openPopup")
+  console.log('openPopup');
   return new Promise((resolve, reject) => {
     const width = config.width || 500;
     const height = config.height || 500;
     const options = {
-      width: width,
-      height: height,
+      width,
+      height,
       top: window.screenY + ((window.outerHeight - height) / 2.5),
       left: window.screenX + ((window.outerWidth - width) / 2)
     };
@@ -174,7 +173,7 @@ console.log("openPopup")
       popup.document.body.innerHTML = 'Loading...';
     }
 
-    resolve({ window: popup, config: config, dispatch: dispatch });
+    resolve({ window: popup, config, dispatch });
   });
 }
 
@@ -189,21 +188,25 @@ function getRequestToken({ window, config, dispatch }) {
     }).then((response) => {
       if (response.ok) {
         return response.json().then((json) => {
-          resolve({ window: window, config: config, requestToken: json, dispatch: dispatch });
+          resolve({
+            window, config, requestToken: json, dispatch
+          });
         });
       }
     });
   });
 }
 
-function pollPopup({ window, config, requestToken, dispatch }) {
-console.log("pollPopup")
+function pollPopup({
+  window, config, requestToken, dispatch
+}) {
+  console.log('pollPopup');
   return new Promise((resolve, reject) => {
     const redirectUri = url.parse(config.redirectUri);
     const redirectUriPath = redirectUri.host + redirectUri.pathname;
 
     if (requestToken) {
-      window.location = config.authorizationUrl + '?' + qs.stringify(requestToken);
+      window.location = `${config.authorizationUrl}?${qs.stringify(requestToken)}`;
     }
 
     const polling = setInterval(() => {
@@ -224,7 +227,9 @@ console.log("pollPopup")
                 messages: [{ msg: params.error }]
               });
             } else {
-              resolve({ oauthData: params, config: config, window: window, interval: polling, dispatch: dispatch });
+              resolve({
+                oauthData: params, config, window, interval: polling, dispatch
+              });
             }
           } else {
             dispatch({
@@ -241,10 +246,12 @@ console.log("pollPopup")
   });
 }
 
-function exchangeCodeForToken({ oauthData, config, window, interval, dispatch }) {
-console.log("exchangeCodeForToken")
-console.log("oauthData: ")
-console.log(oauthData)
+function exchangeCodeForToken({
+  oauthData, config, window, interval, dispatch
+}) {
+  console.log('exchangeCodeForToken');
+  console.log('oauthData: ');
+  console.log(oauthData);
   return new Promise((resolve, reject) => {
     const data = Object.assign({}, oauthData, config);
 
@@ -254,44 +261,46 @@ console.log(oauthData)
       credentials: 'same-origin', // By default, fetch won't send any cookies to the server
       body: JSON.stringify(data)
     }).then((response) => {
-console.log("response")
-console.log(response)
+      console.log('response');
+      console.log(response);
       if (response.ok) {
-console.log("response is ok")
-console.log(response)
+        console.log('response is ok');
+        console.log(response);
 
         return response.json().then((json) => {
-          resolve({ token: json.token, user: json.user, window: window, interval: interval, dispatch: dispatch });
-        });
-      } else {
-
-console.log("response is NOT ok")
-console.log(response)
-
-        return response.json().then((json) => {
-          dispatch({
-            type: 'OAUTH_FAILURE',
-            messages: Array.isArray(json) ? json : [json]
+          resolve({
+            token: json.token, user: json.user, window, interval, dispatch
           });
-          closePopup({ window: window, interval: interval });
         });
       }
+
+      console.log('response is NOT ok');
+      console.log(response);
+
+      return response.json().then((json) => {
+        dispatch({
+          type: 'OAUTH_FAILURE',
+          messages: Array.isArray(json) ? json : [json]
+        });
+        closePopup({ window, interval });
+      });
     });
   });
 }
 
-function signIn({ token, user, window, interval, dispatch }) {
+function signIn({
+  token, user, window, interval, dispatch
+}) {
   return new Promise((resolve, reject) => {
     dispatch({
       type: 'OAUTH_SUCCESS',
-      token: token,
-      user: user
+      token,
+      user
     });
     cookie.save('token', token, { expires: moment().add(1, 'hour').toDate() });
-//    browserHistory.push('/');
-    resolve({ window: window, interval: interval });
+    //    browserHistory.push('/');
+    resolve({ window, interval });
   });
-
 }
 
 

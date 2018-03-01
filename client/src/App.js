@@ -1,8 +1,8 @@
-import React from 'react'
-import {BrowserRouter} from 'react-router-dom'
-import {Provider} from 'react-redux'
-import Header from './components/Header'
-import Main from './components/Main'
+import React from 'react';
+import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import Header from './components/Header';
+import Main from './components/Main';
 import configureStore from './store/configureStore';
 
 const store = configureStore(window.INITIAL_STATE);
@@ -15,11 +15,11 @@ const App = () => (
   <Provider store={store}>
     <BrowserRouter>
       <div>
-        <Header/>
-        <Main/>
+        <Header />
+        <Main />
       </div>
     </BrowserRouter>
   </Provider>
-)
+);
 
-export default App
+export default App;

@@ -5,17 +5,21 @@ import App from './components/Recipe/app';
 import initRedux from './redux/init-redux.es6';
 // require('./style.css');
 
-console.log("Browser packed file loaded");
+console.log('Browser packed file loaded');
 
-const initialState = window.__INITIAL_STATE;  // Grab the server serialized state off of the window object.
-const store = initRedux(initialState);  // Instead of starting Redux with an empty initial state on the server, you pass the server data into the Redux setup.
+// Grab the server serialized state off of the window object.
+const initialState = window.__INITIAL_STATE;
+
+// Instead of starting Redux with an empty initial state on the server,
+// you pass the server data into the Redux setup.
+const store = initRedux(initialState);
 
 console.log('Data to hydrate with', initialState);
 
 /*
  * Main entry point for the client app
  */
-const render = Component => {
+const render = (Component) => {
   ReactDOM.render(
     <Provider store={store}>
       <Component />
@@ -24,5 +28,5 @@ const render = Component => {
   );
 };
 
-//Wrapping App inside of Provider
+// Wrapping App inside of Provider
 render(App);

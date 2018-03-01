@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 /* TODO: this code is used for debugging. delete after app working
 import {
@@ -38,7 +38,6 @@ const AuthButton = withRouter(({ history }) => (
 */
 
 
-
 /*
 class Login extends React.Component {
 	state = {
@@ -70,15 +69,15 @@ class Login extends React.Component {
 }
 */
 class Login extends React.Component {
-	render() {
-		const { from } = this.props.location.state || { from: {pathname: '/' } }
-		return (
-			<div>
-				<p>You must log in to view this page at {from.pathname} </p>
-				<button onClick={this.login}>Log in </button>
-			</div>
-		)
-	}
+  render() {
+    const { from } = this.props.location.state || { from: { pathname: '/' } };
+    return (
+      <div>
+        <p>You must log in to view this page at {from.pathname} </p>
+        <button onClick={this.login}>Log in </button>
+      </div>
+    );
+  }
 }
 
-export default Login
+export default Login;

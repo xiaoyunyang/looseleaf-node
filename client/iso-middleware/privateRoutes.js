@@ -1,15 +1,15 @@
 import { polyfill } from 'es6-promise';
 import fetch from 'isomorphic-fetch';
-import Home from './components/Home';
-import Book from './components/Book/';
-import Signup from './components/User/Signup';
-import Login from './components/User/Login';
-import User from './components/User/User';
-import BookAll from './components/Book/All';
-import BookSingle from './components/Book/Single';
-import About from './components/About';
-import RedirectWithStatus from './components/RedirectWithStatus';
-import NotFound from './components/NotFound';
+import Home from '../src/components/Home';
+import Book from '../src/components/Book/';
+import Signup from '../src/components/User/Signup';
+import Login from '../src/components/User/Login';
+import User from '../src/components/User/User';
+import BookAll from '../src/components/Book/All';
+import BookSingle from '../src/components/Book/Single';
+import About from '../src/components/About';
+import RedirectWithStatus from '../src/components/RedirectWithStatus';
+import NotFound from '../src/components/NotFound';
 
 
 polyfill();
@@ -94,4 +94,4 @@ const routes = [
   }
 ];
 
-export default routes;
+export default privateRoutes;

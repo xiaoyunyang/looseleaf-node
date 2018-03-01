@@ -10,14 +10,18 @@ export default class HTML extends React.Component {
       <html>
         <head>
           <title>Chapter 2 - Recipes</title>
-          <link rel="stylesheet"
-                href="https://cdn.jsdelivr.net/semantic-ui/2.2.2/semantic.min.css" />
+          <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/semantic-ui/2.2.2/semantic.min.css"
+          />
         </head>
         <body>
-          <div id="root"
-               dangerouslySetInnerHTML={{__html: this.props.html}}/>
-          <script dangerouslySetInnerHTML={{__html: this.props.data}}/>
-          <script src="/browser.js"/>
+          <div
+            id="root"
+            dangerouslySetInnerHTML={{ __html: this.props.html }}
+          />
+          <script dangerouslySetInnerHTML={{ __html: this.props.data }} />
+          <script src="/browser.js" />
         </body>
       </html>
     );

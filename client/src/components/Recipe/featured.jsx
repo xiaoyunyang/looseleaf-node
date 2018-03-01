@@ -5,36 +5,34 @@ const Featured = (props) => {
     const list = [];
 
     ingredients.forEach((ingredient, index) => {
-      list.push(
-        <li className="item"
-            key={`${ingredient}-${index}`}>
-          {ingredient}
-        </li>
-      );
+      list.push(<li
+        className="item"
+        key={`${ingredient}-${index}`}
+      >
+        {ingredient}
+                </li>);
     });
 
     return list;
-  }
+  };
 
   const buildSteps = (steps) => {
     const list = [];
 
     steps.forEach((step, index) => {
-      list.push(
-        <li className="item"
-            key={`${step}-${index}`}>
-          {step}
-        </li>
-      );
+      list.push(<li
+        className="item"
+        key={`${step}-${index}`}>
+        {step}
+        </li>);
     });
-
     return list;
-  }
+  };
 
   return (
     <div className="featured ui container segment six wide column">
       <div className="ui large image">
-        <img src={`http://localhost:3001/api/assets/${props.thumbnail}`} />
+        <img alt='thumbnail' src={`http://localhost:3001/api/assets/${props.thumbnail}`} />
       </div>
       <h3>{props.title}</h3>
       <div className="meta">Cook Time: {props.cookTime}</div>
@@ -51,6 +49,6 @@ const Featured = (props) => {
       </div>
     </div>
   );
-}
+};
 
 export default Featured;
