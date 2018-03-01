@@ -17,6 +17,7 @@ module.exports = {
       }],
       "comma-dangle": ["error", "never"],
       "no-underscore-dangle": "off",
+      "react/jsx-filename-extension": 0, // No, JSX belongs to .js files
       "jsx-a11y/no-static-element-interactions": "off",
       "react/no-did-mount-set-state": "off"
     },

@@ -28,7 +28,11 @@
 	- [ ] Patrick Cason's Tutorial for [React Router V4 Helmet Redux and Thunk](https://medium.com/@cereallarceny/server-side-rendering-with-create-react-app-fiber-react-router-v4-helmet-redux-and-thunk-275cb25ca972) 
 	- [ ] Justin Jung's [React Server Sider Rendering and Hot Reloading](https://medium.com/@justinjung04/react-server-side-rendering-and-hot-reloading-ffb87ca81a89)
 	- [ ] Evheniy Bystrov's [React App From Scratch](https://medium.com/@evheniybystrov/react-app-from-scratch-d694300d1631)
-* [Universal Create React App Step by Step](https://medium.com/leanjs/universal-create-react-app-step-by-step-b80ba68d125d)
+* Universal App (Isomorphic Webapp)
+	- [ ] [Universal Create React App Step by Step](https://medium.com/leanjs/universal-create-react-app-step-by-step-b80ba68d125d)
+	- [ ] React Router V4 [Server Side Rendering](https://reacttraining.com/react-router/web/guides/server-rendering)
+	- [ ] React Router V4 and react-router-config [tutorial by Emile Cantin](https://blog.emilecantin.com/web/react/javascript/2017/05/16/ssr-react-router-4-webpack-code-split.html)
+	- [ ] universal-react-router4 [repo](https://github.com/technology-ebay-de/universal-react-router4) with sample project
 - [ ] Build Server to serve API
 	- [X] Add Automated Testing to backend: `mocha`, `chai`, `SuperTest` and `cheerio`.
 - [X] Set up Redux for Frontend app
