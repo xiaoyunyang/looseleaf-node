@@ -9,11 +9,10 @@ const HTML = (props) => {
           rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css"
         />
-        <link rel="stylesheet" href="/assets/style.css" />
       </head>
       <body>
         <div
-          id="root-app"
+          id="root"
           dangerouslySetInnerHTML={{ __html: props.html }}
         />
         <script dangerouslySetInnerHTML={{

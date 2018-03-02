@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import initRedux from '../src/redux/init-redux.es6';
 import * as actions from '../src/redux/action-creators.es6';
 import HTML from '../src/components/Recipe/html';
-import App from '../src/components/Recipe/app';
+import RecipeApp from '../src/components/Recipe/app';
 
 
 /**
@@ -33,7 +33,7 @@ export default function renderView(req, res, next) {
     // Render the components by rendering app.jsx and injecting the data you fetched in the previous step.
     html = ReactDOM.renderToString(
       <Provider store={store}>
-        <App />
+        <RecipeApp />
       </Provider>
     );
 

@@ -2,9 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
-import App from './components/Recipe/app';
+import RecipeApp from './components/Recipe/app';
 import initRedux from './redux/init-redux.es6';
-import { App as RouterApp } from '../shared/App'
+import App from '../shared/App'
 // require('./style.css');
 
 console.log('Browser packed file loaded');
@@ -38,9 +38,9 @@ const renderRouter = (Component, store) => {
   ReactDOM.render(
     <BrowserRouter>
       <Component />
-    </BrowserRouter>, document.getElementById('root-app'));
+    </BrowserRouter>, document.getElementById('root'));
 };
 
 // Wrapping App inside of Provider
-render(App, store);
-renderRouter(RouterApp, store);
+// render(RecipeApp, store);
+renderRouter(App, store);

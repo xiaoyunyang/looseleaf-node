@@ -204,7 +204,7 @@ app.get('/iso', renderViewMiddleware);
 // setup static files, server browser.js (webpacked file) from root
 app.use(express.static(__dirname));
 
-app.get('/iso-route/*', renderRouteMiddleware);
+app.get('/iso-route*', renderRouteMiddleware);
 
 // Error Handler ===============================================================
 

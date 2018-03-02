@@ -9,7 +9,7 @@ import * as actionCreators from '../../redux/action-creators';
  * App
  * caller: renderView.jsx (server side render) and main.jsx (client side render)
  */
-class App extends React.Component {
+class RecipeApp extends React.Component {
   componentDidMount() {
     this.props.actions.getHomePageData();
   }
@@ -52,4 +52,4 @@ function mapDispatchToProps(dispatch) {
 
 // Instead of exporting the App component, you export the connect component,
 // which takes in the two helper functions and the App component as parameters.
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(RecipeApp);
