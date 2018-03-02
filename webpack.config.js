@@ -1,6 +1,7 @@
 process.env.NODE_ENV = 'development';
 
 module.exports = {
+  devtool: 'source-map',
   entry: [
     // 'babel-polyfill',
     './client/src/main.jsx',
@@ -12,7 +13,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(jsx|es6)$/,
+        test: /\.(jsx|js|es6)$/,
         exclude: /node_modules/,
         loader: 'babel-loader',
       },

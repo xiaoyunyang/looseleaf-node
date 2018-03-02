@@ -13,7 +13,7 @@ const HTML = (props) => {
       </head>
       <body>
         <div
-          id="react-content"
+          id="root-app"
           dangerouslySetInnerHTML={{ __html: props.html }}
         />
         <script dangerouslySetInnerHTML={{
