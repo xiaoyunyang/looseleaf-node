@@ -33,26 +33,4 @@ export default function renderRoute(req, res, next) {
     );
     return res.send(`<!DOCTYPE html>${html}`);
   });
-/*
-  const match = routes.reduce((acc, route) =>
-    matchPath(req.url, route, { exact: true }) || acc, null);
-
-  if (!match) {
-    res.status(404).send('not found');
-    return;
-  }
-
-  const context = {
-    splitPoints: []
-  };
-  const app = renderToString(
-    <StaticRouter location={req.url} context={context}>
-      {renderRoutes(routes)}
-    </StaticRouter>
-  );
-  const html = renderToString(
-    <HTML html={app}/>
-  );
-  res.send(`<!DOCTYPE html>${html}`);
-*/
 }

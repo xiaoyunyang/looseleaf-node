@@ -17,7 +17,7 @@ const initialState = window.__INITIAL_STATE;
 
 // Instead of starting Redux with an empty initial state on the server,
 // you pass the server data into the Redux setup.
-const store = initRedux(initialState);
+// const store = initRedux(initialState);
 // const storeRoute = initRedux(initialStateRoute);
 
 console.log('Data to hydrate with', initialState);
