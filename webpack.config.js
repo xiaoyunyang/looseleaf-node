@@ -6,13 +6,13 @@ module.exports = {
     './client/src/main.jsx',
   ],
   output: {
-    path: __dirname + '/client/public',
+    path: __dirname + '/client/build',
     filename: 'browser.js',
   },
   module: {
     rules: [
       {
-        test: /\.(jsx|es6)$/,
+        test: /\.(jsx|js|es6)$/,
         exclude: /node_modules/,
         loader: 'babel-loader',
       },

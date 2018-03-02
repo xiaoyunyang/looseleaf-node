@@ -6,6 +6,7 @@ import logger from 'morgan';
 
 import path from 'path';
 import renderViewMiddleware from '../client/iso-middleware/renderView';
+import renderRouterMiddleware from '../client/iso-middleware/renderRoute';
 
 require('dotenv').config();
 
@@ -35,6 +36,7 @@ if (process.env.NODE_ENV === 'production') {
 // Isomorphic Webapp ===========================================================
 // handle the isomorphic page render
 app.get('/iso', renderViewMiddleware);
+app.get('/iso-route*', renderRouterMiddleware);
 // setup static files, server browser.js (webpacked file) from root
 app.use(express.static(__dirname));
 

@@ -10,7 +10,7 @@ export default class HTML extends React.Component {
                 href="https://cdn.jsdelivr.net/semantic-ui/2.2.2/semantic.min.css" />
         </head>
         <body>
-          <div id="react-content"
+          <div id="root"
                dangerouslySetInnerHTML={{__html: this.props.html}}/>
           <script dangerouslySetInnerHTML={{__html: this.props.data}}/>
           <script src="/browser.js"/>
