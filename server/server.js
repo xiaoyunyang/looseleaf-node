@@ -38,7 +38,7 @@ app.disable('x-powered-by');
 
 app.use(helmet.hsts({
   maxAge: ms('1 year'),
-  includeSubdomains: true,
+  includeSubdomains: true
 }));
 
 // mitigate cross site scripting
@@ -63,7 +63,7 @@ app.set('views', path.resolve(__dirname, 'views'));
 app.use(session({
   secret: 'TKRv0IJs=HYqrvagQ#&!F!%V]Ww/4KiVs$s,<<MX',
   resave: true,
-  saveUninitialized: true,
+  saveUninitialized: true
 }));
 app.use(passport.initialize());
 app.use(passport.session());
@@ -121,7 +121,7 @@ app.post('/guestbook/new-entry', (req, res) => {
     id: ctr,
     title: req.body.title,
     content: req.body.body,
-    published: new Date(),
+    published: new Date()
   });
   ctr += 1;
 
@@ -153,7 +153,6 @@ app.use('/static', (req, res, next) => {
 const clientAppPathProd = path.join(path.resolve('.'), '/client/build');
 const clientAppPathDev = path.join(path.resolve('.'), '/client/build');
 if (process.env.NODE_ENV === 'production') {
-
   // console.log('Running in production mode');
   // The below code allows client app to run from the the server (localhost:3001)
   app.use('/', express.static(clientAppPathProd));
@@ -246,7 +245,7 @@ app.use((err, req, res, next) => {
 // Starts the Express server on port 3001 and logs that it has started
 const httpsOptions = {
   key: fs.readFileSync('localhost-ssl/key.pem'),
-  cert: fs.readFileSync('localhost-ssl/cert.pem'),
+  cert: fs.readFileSync('localhost-ssl/cert.pem')
 };
 
 http.createServer(app).listen(app.get('port'), () => {

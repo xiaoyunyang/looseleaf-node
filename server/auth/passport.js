@@ -40,7 +40,7 @@ module.exports = () => {
     // by default, local strategy uses username and password, we will override with email
     usernameField: 'email',
     passwordField: 'password',
-    passReqToCallback: true, // allows us to pass back the entire request to the callback
+    passReqToCallback: true // allows us to pass back the entire request to the callback
   }, (req, email, password, done) => {
     // asynchronous
     // User.findOne wont fire unless data is sent back
@@ -117,7 +117,7 @@ module.exports = () => {
     clientID: configAuth.facebookAuth.clientID,
     clientSecret: configAuth.facebookAuth.clientSecret,
     callbackURL: configAuth.facebookAuth.callbackURL,
-    profileFields: configAuth.facebookAuth.profileFields,
+    profileFields: configAuth.facebookAuth.profileFields
   }, (token, refreshToken, profile, done) => { // facebook will send back the token and profile
     // asynchronous
     // User.findOne wont fire unless data is sent back
@@ -141,7 +141,7 @@ module.exports = () => {
         const username = (`${profile.name.givenName}${profile.name.familyName}`).toLowerCase();
         const regex = new RegExp(`^${username}.*$`, 'i');
 
-        User.count({ 'username': regex}, (err2, c) => {
+        User.count({ username: regex }, (err2, c) => {
           if (err2) {
             return done(err2);
           }
@@ -165,7 +165,7 @@ module.exports = () => {
     clientID: configAuth.githubAuth.clientID,
     clientSecret: configAuth.githubAuth.clientSecret,
     callbackURL: configAuth.githubAuth.callbackURL,
-    scope: configAuth.githubAuth.scope,
+    scope: configAuth.githubAuth.scope
   }, (token, refreshToken, profile, done) => {
     process.nextTick(() => {
       User.findOne({ 'github.id': profile.id }, (err, user) => {
@@ -186,7 +186,7 @@ module.exports = () => {
         const username = profile._json.login;
         const regex = new RegExp(`^${username}.*$`, 'i');
 
-        User.count({ 'username': regex}, (err2, c) => {
+        User.count({ username: regex }, (err2, c) => {
           if (err2) {
             return done(err2);
           }

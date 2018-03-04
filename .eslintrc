@@ -14,9 +14,11 @@
       "requireParamDescription": true,
       "requireReturnDescription": true
     }],
+    "comma-dangle": ["error", "never"],
     "prefer-destructuring": ["error", {"object": false, "array": false}],
     "global-require": 0, // Used by React Native.
     "func-names": ["error", "never"],
+    "function-paren-newline": ["error", "consistent"],
     "new-cap": [2, {"capIsNew": false, "newIsCap": true}], // For immutable Record() etc.
     "no-class-assign": 0, // Class assign is used for higher order components.
     "no-nested-ternary": 0, // It's nice for JSX.
@@ -32,9 +34,9 @@
     "arrow-parens": 0, // Not really.
     "require-jsdoc": ["error", {
         "require": {
-            "FunctionDeclaration": true,
-            "MethodDefinition": true,
-            "ClassDeclaration": true
+            "FunctionDeclaration": false,
+            "MethodDefinition": false,
+            "ClassDeclaration": false
         }
     }]
   }

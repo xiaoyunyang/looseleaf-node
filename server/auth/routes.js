@@ -65,7 +65,7 @@ router.get(
   '/facebook/callback',
   passport.authenticate('facebook', {
     successRedirect: '/auth/',
-    failureRedirect: '/auth/login',
+    failureRedirect: '/auth/login'
   }),
 );
 
@@ -77,7 +77,7 @@ router.get(
   '/github/callback',
   passport.authenticate('github', {
     successRedirect: '/auth/',
-    failureRedirect: '/auth/login',
+    failureRedirect: '/auth/login'
   }),
 );
 
@@ -109,7 +109,7 @@ router.post(
 // Saves user to the database
 router.get('/signup', (req, res) => {
   res.render('signup', {
-    csrfToken: req.csrfToken(),
+    csrfToken: req.csrfToken()
   });
 });
 
@@ -146,7 +146,7 @@ router.post('/signup', (req, res, next) => {
     // What we want to do is to find the largest number following the username
     // and append that to the end of the new username (xiaoyunyang-2)
 
-    User.count({ 'username': regex }, (err2, c) => {
+    User.count({ username: regex }, (err2, c) => {
       if (err2) {
         return next(err2);
       }
@@ -158,20 +158,20 @@ router.post('/signup', (req, res, next) => {
 }, passport.authenticate('login-local', {
   successRedirect: '/auth',
   failureRedirect: '/auth/signup',
-  failureFlash: true,
+  failureFlash: true
 }));
 
 // Login ======================================================================
 router.get('/login', (req, res) => {
   res.render('login', {
-    csrfToken: req.csrfToken(),
+    csrfToken: req.csrfToken()
   });
 });
 
 router.post('/login', passport.authenticate('login-local', {
   successRedirect: '/auth',
   failureRedirect: '/auth/login',
-  failureFlash: true,
+  failureFlash: true
 }));
 
 // Logout ======================================================================
@@ -192,7 +192,7 @@ router.use((req, res, next) => {
 // Passport populates req.user for you
 router.get('/edit', ensureAuthenticated, (req, res) => {
   res.render('edit', {
-    csrfToken: req.csrfToken(),
+    csrfToken: req.csrfToken()
   });
 });
 router.get('/edit-csrf', ensureAuthenticated, (req, res) => {

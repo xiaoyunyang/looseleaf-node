@@ -45,7 +45,7 @@ We are going to use the following stack:
 - **Framework**: [express](https://expressjs.com/en/4x/api.html)
 - **CSS Framework**: [materialize](http://materializecss.com/getting-started.html)
 - **CSS Preprocessor**: SASS
-- **JavaScript Framework**: React with React Router v4
+- **JavaScript Framework**: React with [`react-router`](https://github.com/ReactTraining/react-router) v4 and [`react-router-config`](https://github.com/ReactTraining/react-router/tree/master/packages/react-router-config)
 - **Build Tool**: webpack
 - **Unit Testing**: `mocha`, `chai`
 - **Integration Testing**: `SuperTest` and `cheerio`.

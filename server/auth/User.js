@@ -18,16 +18,16 @@ const userSchema = mongoose.Schema({
   hireable: String,
   local: {
     password: { type: String, required: true },
-    passwordResetToken: String,
+    passwordResetToken: String
   },
   facebook: {
     id: String,
-    token: String,
+    token: String
   },
   github: {
     id: String,
-    token: String,
-  },
+    token: String
+  }
 });
 
 const SALT_FACTOR = 10;

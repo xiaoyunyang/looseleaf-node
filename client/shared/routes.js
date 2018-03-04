@@ -5,12 +5,16 @@ import NotFound from './components/NotFound';
 const root = '/iso-route'
 const routes = [
   {
-    path: root+'/',
+    path: root,
     exact: true,
     component: Home
   },
   {
     path: root+'/about',
+    component: About
+  },
+  {
+    path: root+'/recipes',
     component: About
   },
   {
