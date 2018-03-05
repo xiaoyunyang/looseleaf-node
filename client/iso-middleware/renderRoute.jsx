@@ -2,9 +2,9 @@ import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom';
 import { matchRoutes } from 'react-router-config';
-import routes from '../shared/routes';
-import HTML from '../shared/components/HTML';
-import App from '../shared/App';
+import routes from '../src/shared/routes';
+import HTML from '../src/shared/components/HTML';
+import App from '../src/shared/App';
 
 export default function renderRoute(req, res, next) {
   const branch = matchRoutes(routes, req.url)

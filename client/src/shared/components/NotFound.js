@@ -1,5 +1,4 @@
 import React from 'react';
-import Header from './Header'
 
 const style = {
     padding: '16px'

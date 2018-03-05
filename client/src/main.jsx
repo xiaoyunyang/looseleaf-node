@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import RecipeApp from './components/Recipe/app';
 import initRedux from './redux/init-redux.es6';
-import App from '../shared/App'
+import App from './shared/App'
 // require('./style.css');
 
 console.log('Browser packed file loaded');
@@ -23,7 +23,7 @@ const store = initRedux(initialState);
 console.log('Data to hydrate with', initialState);
 
 /*
- * Main entry point for the client app
+ * Main entry point for the client side isomorphic app
  */
 const render = (Component, store) => {
   ReactDOM.render(
