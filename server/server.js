@@ -12,8 +12,8 @@ import mongoose from 'mongoose';
 import session from 'express-session';
 import flash from 'connect-flash';
 import passport from 'passport';
-
-// import colors from 'colors';
+import cors from 'cors';
+import chalk from 'chalk';
 
 // import enforceSSL from 'express-enforces-ssl';
 import helmet from 'helmet';
@@ -33,7 +33,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 // app.enable('trust proxy');
 // app.use(enforceSSL());
-
 app.disable('x-powered-by');
 
 app.use(helmet.hsts({
@@ -54,10 +53,45 @@ app.use(helmet.noSniff()); // Don’t let browsers infer the file type
 // connect to our database
 mongoose.connect(process.env.MONGODB);
 
-// set up ejs for templating
+// set up ejs for templating - for prototyping server only
 app.set('view engine', 'ejs');
 app.set('views', path.resolve(__dirname, 'views'));
 
+
+// setup static files, server main.bundle.js (webpacked file) from root
+// Express must only serves static assets in production
+const clientAppPathProd = path.join(__dirname, '../', 'client/build');
+const clientAppPathDev = path.join(__dirname, '../', 'client/build');
+
+if (process.env.NODE_ENV === 'production') {
+  console.log(chalk.blue('Running in production mode'));
+  // The below code allows client app to run from the the server (localhost:3001)
+  app.use('/', express.static(clientAppPathProd));
+} else if (process.env.NODE_ENV === 'development') {
+  console.log(chalk.blue('Running in development mode'));
+  app.use('/', express.static(clientAppPathDev));
+  app.use(cors()); // TODO: this allows anyone to access my api. can't use for production
+}
+
+
+// API =========================================================================
+/*
+ This is getting sent to localhost:3001/api/hello. In your terminal try:
+ $ curl localhost:3001/api/hello
+ */
+const apiVersion1 = require('./api/api1');
+
+app.use('/api', apiVersion1);
+
+// Isomorphic Webapp ===========================================================
+
+// handle the isomorphic page render
+app.get('/iso', renderViewMiddleware);
+
+// app.use(express.static(__dirname));
+app.get('/iso-route*', renderRouteMiddleware);
+
+// Auth ========================================================================
 // required for passport
 // TODO: "secret" needs to be secret and a bunch of random characters
 app.use(session({
@@ -69,7 +103,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash()); // use connect-flash for flash messages stored in session
 
-// Auth ========================================================================
+
 app.use(bodyParser.urlencoded({ extended: false }));
 
 const authRoutes = require('./auth/routes');
@@ -77,16 +111,6 @@ const configPassport = require('./auth/passport.js');
 
 app.use('/auth', authRoutes);
 configPassport();
-
-
-// API =========================================================================
-/*
- This is getting sent to localhost:3001/api/hello. In your terminal try:
- $ curl localhost:3001/api/hello
- */
-const apiVersion1 = require('./api/api1');
-
-app.use('/api', apiVersion1);
 
 // Guestbook ===================================================================
 // TODO: TEST CODE BELOW. Remote for production
@@ -148,33 +172,6 @@ app.use('/static', (req, res, next) => {
 });
 
 */
-// Integration with Frontend ===================================================
-// setup static files, server main.bundle.js (webpacked file) from root
-// Express must only serves static assets in production
-const clientAppPathProd = path.join(__dirname, '../', 'client/build');
-const clientAppPathDev = path.join(__dirname, '../', 'client/build');
-
-if (process.env.NODE_ENV === 'production') {
-  // console.log('Running in production mode');
-  // The below code allows client app to run from the the server (localhost:3001)
-  app.use('/', express.static(clientAppPathProd));
-
-/*  app.use(express.static(path.join(path.resolve("."), '/client/build')))
-  app.get('/', function (req, res) {
-    res.sendFile(path.join(path.resolve("."), '/client/build', 'index.html'))
-  })
-*/
-} else if (process.env.NODE_ENV === 'development') {
-  // console.log('Running in development mode')
-  /*
-  TODO: Integrate server with client when env is development
-  Add logic here for server to log routes managed by client code. See
-  https://crypt.codemancers.com/posts/2017-06-03-reactjs-server-side-rendering-with-router-v4-and-redux/
-  The below code is temporary, copied from the the case when env is production.
-  */
-
-  app.use('/', express.static(clientAppPathDev));
-}
 
 // Send to SuperTest for test ==================================================
 app.get('/test/', (req, res) => {
@@ -197,14 +194,6 @@ app.get('/test/search', (req, res) => {
   res.render('test', { userAgent });
 });
 
-
-// Isomorphic Webapp ===========================================================
-
-// handle the isomorphic page render
-app.get('/iso', renderViewMiddleware);
-
-// app.use(express.static(__dirname));
-app.get('/iso-route*', renderRouteMiddleware);
 
 // Error Handler ===============================================================
 
@@ -250,7 +239,6 @@ const httpsOptions = {
 };
 
 http.createServer(app).listen(app.get('port'), () => {
-  // console.log(colors.green('hello'));
   console.log(`Express server started at: http://localhost:${app.get('port')}/`); // eslint-disable-line no-console
 });
 
