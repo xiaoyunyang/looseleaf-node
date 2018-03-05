@@ -149,9 +149,11 @@ app.use('/static', (req, res, next) => {
 
 */
 // Integration with Frontend ===================================================
-// Express only serves static assets in production
-const clientAppPathProd = path.join(path.resolve('.'), '/client/build');
-const clientAppPathDev = path.join(path.resolve('.'), '/client/build');
+// setup static files, server main.bundle.js (webpacked file) from root
+// Express must only serves static assets in production
+const clientAppPathProd = path.join(__dirname, '../', 'client/build');
+const clientAppPathDev = path.join(__dirname, '../', 'client/build');
+
 if (process.env.NODE_ENV === 'production') {
   // console.log('Running in production mode');
   // The below code allows client app to run from the the server (localhost:3001)
@@ -200,9 +202,8 @@ app.get('/test/search', (req, res) => {
 
 // handle the isomorphic page render
 app.get('/iso', renderViewMiddleware);
-// setup static files, server browser.js (webpacked file) from root
-app.use(express.static(__dirname));
 
+// app.use(express.static(__dirname));
 app.get('/iso-route*', renderRouteMiddleware);
 
 // Error Handler ===============================================================

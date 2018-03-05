@@ -21,7 +21,7 @@ export default class HTML extends React.Component {
             dangerouslySetInnerHTML={{ __html: this.props.html }}
           />
           <script dangerouslySetInnerHTML={{ __html: this.props.data }} />
-          <script src="/browser.js" />
+          <script src="/recipe.bundle.js" />
         </body>
       </html>
     );

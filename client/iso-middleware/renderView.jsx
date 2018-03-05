@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom/server';
 import { Provider } from 'react-redux';
 import initRedux from '../src/redux/init-redux.es6';
 import * as actions from '../src/redux/action-creators.es6';
-import HTML from '../src/components/Recipe/html';
-import App from '../src/components/Recipe/app';
+import HTML from '../src/shared/Recipe/html';
+import App from '../src/shared/Recipe/app';
 
 
 /**
