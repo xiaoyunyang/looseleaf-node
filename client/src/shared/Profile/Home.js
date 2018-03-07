@@ -1,11 +1,12 @@
 import React from 'react';
 import fetch from 'isomorphic-fetch';
 
+// This is a ES6 class - see https://toddmotto.com/react-create-class-versus-component/
 class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      resHello: 'Loading...',
+      resHello: 'Loading...'
     };
   }
   componentDidMount() {
@@ -14,7 +15,8 @@ class Home extends React.Component {
       .then(res => this.setState({ resHello: res.express }))
       .catch(err => console.log(err));
   }
-  async callApi(endpoint) {
+  callApi = async function (endpoint) {
+    // console.log(this)
     const response = await fetch(endpoint);
     const body = await response.json();
 

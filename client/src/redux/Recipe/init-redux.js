@@ -4,7 +4,7 @@ import {
   applyMiddleware,
   compose } from 'redux';
 import thunkMiddleware from 'redux-thunk';
-import recipes from './recipe-reducer.es6';
+import recipes from './recipe-reducer';
 
 /**
  * Since both the browser and the server will be initializing Redux, you will

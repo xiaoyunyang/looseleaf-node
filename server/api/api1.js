@@ -7,6 +7,8 @@ import arrayWrap from 'arraywrap';
 import fs from 'fs';
 import path from 'path';
 
+import dataPreloading from '../../client/iso-middleware/dataPreloading'
+
 const api = express.Router();
 
 api.get('/hello', (req, res) => {
@@ -41,6 +43,8 @@ api.get('/random/:min/:max', (req, res) => {
   const result = Math.round((Math.random() * (max - min)) + min);
   res.json({ result });
 });
+
+api.get('/hello-recipe', dataPreloading);
 
 api.get('/recipes', (req, res) => {
   // Read and open the recipes json file

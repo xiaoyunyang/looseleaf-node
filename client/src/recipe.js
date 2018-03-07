@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import App from './shared/Recipe/app';
-import initRedux from './redux/init-redux.es6';
+import App from './shared/Recipe/App';
+import initRedux from './redux/Recipe/init-redux';
 // require('./style.css');
 
 console.log('Browser packed file loaded');

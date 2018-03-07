@@ -5,9 +5,10 @@ const Featured = (props) => {
     const list = [];
 
     ingredients.forEach((ingredient, index) => {
+      const key = `${ingredient}-${index}`;
       list.push(<li
         className="item"
-        key={`${ingredient}-${index}`}
+        key={key}
       >
         {ingredient}
                 </li>);
@@ -20,9 +21,10 @@ const Featured = (props) => {
     const list = [];
 
     steps.forEach((step, index) => {
+      const key = `${step}-${index}`
       list.push(<li
         className="item"
-        key={`${step}-${index}`}>
+        key={key}>
         {step}
         </li>);
     });

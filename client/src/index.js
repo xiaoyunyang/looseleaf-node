@@ -1,14 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
-import AppOld from './App';
-import AppUser from './AppUser'
 import 'materialize-css';
 import 'materialize-css/dist/css/materialize.min.css';
-import 'materialize-css/dist/js/materialize.min.js';
+import 'materialize-css/dist/js/materialize.min';
+import AppOld from './App';
+import AppUser from './AppUser';
+import AppRecipe from './AppRecipe';
 import './assets/index.css';
 
-const App = AppUser;
+const App = AppOld;//AppUser;//AppRecipe;
 
 /*
  * Main entry point for the create-react-app

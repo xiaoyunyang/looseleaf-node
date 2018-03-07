@@ -22,7 +22,7 @@ const HTML = (props) => {
           `
         }}
         />
-      <script type="application/javascript" src="/main.bundle.js" />
+        <script type="application/javascript" src="/main.bundle.js" />
       </body>
     </html>
   );

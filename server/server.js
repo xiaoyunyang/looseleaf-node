@@ -86,10 +86,10 @@ app.use('/api', apiVersion1);
 // Isomorphic Webapp ===========================================================
 
 // handle the isomorphic page render
-app.get('/iso', renderViewMiddleware);
+app.get('/recipe', renderViewMiddleware);
 
 // app.use(express.static(__dirname));
-app.get('/iso-route*', renderRouteMiddleware);
+app.get('/profile*', renderRouteMiddleware);
 
 // Auth ========================================================================
 // required for passport

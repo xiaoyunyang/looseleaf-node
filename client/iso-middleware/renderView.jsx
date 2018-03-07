@@ -1,20 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom/server';
 import { Provider } from 'react-redux';
-import initRedux from '../src/redux/init-redux.es6';
-import * as actions from '../src/redux/action-creators.es6';
-import HTML from '../src/shared/Recipe/html';
-import App from '../src/shared/Recipe/app';
-
+import initRedux from '../src/redux/Recipe/init-redux';
+import * as actions from '../src/redux/Recipe/action-creators';
+import HTML from '../src/shared/Recipe/HTML';
+import App from '../src/shared/Recipe/App';
 
 /**
  * Express middleware receives the request
  * object, the response object and a next callback for passing control to the
  * next middleware in the chain.
- * @param  {[type]}   req  [description]
- * @param  {[type]}   res  [description]
- * @param  {Function} next [description]
- * @return {[type]}        [description]
  */
 export default function renderView(req, res, next) {
 

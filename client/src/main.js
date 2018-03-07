@@ -2,8 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
-import initRedux from './redux/init-redux.es6';
-import App from './shared/App'
+import initRedux from './redux/Recipe/init-redux';
+import App from './shared/Profile/App';
 // require('./style.css');
 
 console.log('Browser packed file loaded');
@@ -28,7 +28,8 @@ const renderRouter = (Component, store) => {
   ReactDOM.hydrate(
     <BrowserRouter>
       <Component />
-    </BrowserRouter>, document.getElementById('root'));
+    </BrowserRouter>, document.getElementById('root')
+  );
 };
 
 // Wrapping App inside of Provider

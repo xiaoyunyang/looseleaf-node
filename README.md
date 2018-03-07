@@ -95,6 +95,10 @@ Take the following steps to create a baseline app:
 **File Structure**
 
 ```
+$ tree -l 3 --ignore 'node_modules'
+```
+
+```
 looseleaf-node
 ├───package.json
 ├───.babelrc
@@ -116,25 +120,34 @@ looseleaf-node
 |   |   └───favicon.ico
 |   |   └───index.html  <== #B
 │   ├───src
-│   |   └───components
-|   │   |   └───Recipe <== #A
-|   │   |   └───Header.js
-|   │   |   └───Home.js
-|   │   |   └───Main.js
-│   |   └───redux <== #A
-│   |   ├───App.js
+│   |   └───shared
+|   |   ├── shared
+|   |   |   ├───Profile
+|   |   |   |   ├── App.js <== #A
+|   |   |   |   ├── HTML.js <== #A
+|   |   |   |   ├── Header.js
+|   |   |   |   ├── Home.js
+|   |   |   |   ├── Main.js
+|   |   |   |   ├── NotFound.js
+|   |   |   |   └── routes.js <== #A
+|   |   |   └───Recipe
+|   |   |       ├── App.js
+|   |   |       ├── HTML.js
+|   |   |       └── ...
+│   |   ├───AppUser.js <== #B
 │   |   └───index.js <== #B
 │   |   └───main.js <== #A
-│   |   └───routes.js
-│   |   └───style.css <== #A
+|   ├───iso-middleware
+|   |   ├── renderRoute.jsx <==
+|   |   └── renderView.jsx
 	
 ```
 
 **Notes**
 
 * Lots of extraneous folders and files were omitted from the file structure map above because they are auto-generated when you first set up your project or after when you build the project
-* **#A**: These files are the entry point for navigating the isomorphic webapp.
-* **#B**: These files are the entry point for navigating the server code and client code.
+* **#A**: These files are the entry points for the isomorphic webapp.
+* **#B**: These files are associated with the create-react-app, which includes HMR and react-hot-loader for better development work flow. `index.js` and `index.html` are the entry points. `index.js` renders component that attaches to the root componnent identified in the `index.html` file.
 * **#C**: These files are omitted from the github repo because they contain authentication ids, secrets, etc that are application-specific
 
 ## Tutorial

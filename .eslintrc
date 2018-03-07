@@ -8,11 +8,8 @@
     "mocha": true
   },
   "rules": {
-    "valid-jsdoc": ["error", {
-      "requireReturn": true,
-      "requireReturnType": true,
-      "requireParamDescription": true,
-      "requireReturnDescription": true
+    "arrow-body-style": [0, "as-needed", {
+      requireReturnForObjectLiteral: false,
     }],
     "comma-dangle": ["error", "never"],
     "prefer-destructuring": ["error", {"object": false, "array": false}],
@@ -38,6 +35,12 @@
             "MethodDefinition": false,
             "ClassDeclaration": false
         }
-    }]
+    }],
+    "valid-jsdoc": ["error", {
+      "requireReturn": true,
+      "requireReturnType": true,
+      "requireParamDescription": true,
+      "requireReturnDescription": true
+    }],
   }
 }

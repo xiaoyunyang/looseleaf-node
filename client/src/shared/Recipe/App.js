@@ -1,15 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import Recipes from './recipes';
-import Featured from './featured';
-import * as actionCreators from './action-creators';
+import Recipes from './Recipes';
+import Featured from './Featured';
+import * as actionCreators from '../../redux/Recipe/action-creators';
 
 /*
  * App
- * caller: renderView.jsx (server side render) and main.jsx (client side render)
+ * caller: renderView.js (server side render) and recipe.js (client side render)
  */
-class RecipeApp extends React.Component {
+class App extends React.Component {
   componentDidMount() {
     this.props.actions.getHomePageData();
   }
@@ -19,7 +19,7 @@ class RecipeApp extends React.Component {
       <div>
         <div className="ui fixed inverted menu">
           <div className="ui contianer">
-            <a href="/" className="header item">Recipes Example App</a>
+            <a href="/" className="header item">My Recipes Example App</a>
           </div>
         </div>
         <div className="ui padded grid">
@@ -52,4 +52,4 @@ function mapDispatchToProps(dispatch) {
 
 // Instead of exporting the App component, you export the connect component,
 // which takes in the two helper functions and the App component as parameters.
-export default connect(mapStateToProps, mapDispatchToProps)(RecipeApp);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
