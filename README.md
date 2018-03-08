@@ -1,41 +1,63 @@
 # LooseLeaf - Node.js App
 
-##### TODOs
+## TODOs
+### App Setup 
+**Technology selection and experimentation**
+
 - [x] Select Web Tech Stack [HowTo doc](https://github.com/xiaoyunyang/xiaoyunyang.github.io/blob/master/assets/md/fundamental/tech-behind-modern-webapps.md)
-- [x] Add React Router V4
-- [x] Routing in Guest Mode and User Mode - See [Solution](https://github.com/ReactTraining/react-router/issues/4962)
-- [x] Set up REST API in server and isomorphic fetch in client 
-- [X] Connect database to server
-- Authentication - See [SetupAuth](https://github.com/xiaoyunyang/web-dev-cheatsheets/blob/master/guides/auth-setup.md)
+- [x] Add React Router V4. Hack react-router-config to handle routing in Guest Mode and User Mode - See [Solution](https://github.com/ReactTraining/react-router/issues/4962)
+- [x] Connect Mongo database to server using mongoose
+
+**Set up Universal App (Isomorphic Webapp) **
+
+- [X] Set up a single page isomorphic Webapp using [Iso Book Chapter 2 Sample Code](https://github.com/isomorphic-dev-js/chapter2-a-sample-isomorphic-app.git) as a starting point.
+- [X] Set up an isomorphic router app using [Iso Book Chapter 4 Sample Code](https://github.com/isomorphic-dev-js/complete-isomorphic-example) and a few other tutorials and universal/isomorphic app repos to get everything set up with React Router 4, react-router-config, Webpack 4 and code splitting. Created a repo [isomorphic-router-demo](https://github.com/xiaoyunyang/isomorphic-router-demo) to help others who need to get started with an isomorphic router app with this stack.
+- [ ] Read/archive the rest of these learning resources:
+	- FreeCodeCamp's [Tutorial](https://medium.freecodecamp.org/how-to-make-create-react-app-work-with-a-node-backend-api-7c5c48acb1b0)
+	- Esau Silva's [Tutorial](https://esausilva.com/2017/11/14/how-to-use-create-react-app-with-a-node-express-backend-api/)
+	- Codemancer's [Tutorial](https://crypt.codemancers.com/posts/2017-06-03-reactjs-server-side-rendering-with-router-v4-and-redux/) - Integrate react-router-v4 with server router
+	- Dave Ceddia's [Tutorial](https://daveceddia.com/create-react-app-express-backend/) - `create-react-app` with express backend
+	- Haphazardly thrown together [React Router 4 + Express + Passport Auth Example](https://github.com/netpoetica/react-router-passport-express-demo-app)
+	- Patrick Cason's Tutorial for [React Router V4 Helmet Redux and Thunk](https://medium.com/@cereallarceny/server-side-rendering-with-create-react-app-fiber-react-router-v4-helmet-redux-and-thunk-275cb25ca972) 
+	- Justin Jung's [React Server Sider Rendering and Hot Reloading](https://medium.com/@justinjung04/react-server-side-rendering-and-hot-reloading-ffb87ca81a89)
+	- Evheniy Bystrov's [React App From Scratch](https://medium.com/@evheniybystrov/react-app-from-scratch-d694300d1631)
+	- Universal Create React App [Step by Step](https://medium.com/leanjs/universal-create-react-app-step-by-step-b80ba68d125d)
+	- Official Doc for React Router V4 [Server Side Rendering](https://reacttraining.com/react-router/web/guides/server-rendering)
+	- React Router V4 and react-router-config [tutorial by Emile Cantin](https://blog.emilecantin.com/web/react/javascript/2017/05/16/ssr-react-router-4-webpack-code-split.html)
+	- [technology-ebay-de/universal-react-router4](https://github.com/technology-ebay-de/universal-react-router4/tree/master/src/shared)
+	- [zacfukuda/universal-app-react-router](https://github.com/zacfukuda/universal-app-react-router)
+
+**Dev Workflow and environment Set up**
+
+- Set up create-react-app for development of client application:
+	- [X] Integrate create-react-app with Server API. Got create-react-app and server to run on separate localhost ports concurrently for improving separation of concerns between server code and client code. I used FullStackReact's [Tutorial](https://www.fullstackreact.com/articles/using-create-react-app-with-a-server/#enter-create-react-app) and [Sample Project](https://github.com/fullstackreact/food-lookup-demo), which is a `create-react-app` with server example.
+	- [X] Set up create-react-app with webpack 4, code splitting, webpack hot module reload, webpack-dev-middleware, and react-hot-loader. Created open source starter project [isomorphic-router-demo](https://github.com/xiaoyunyang/isomorphic-router-demo)
+- [x] Add eslint to both client and server.
+- [X] Set up automated Testing for server: `mocha`, `chai`, `SuperTest` and `cheerio`.
+
+**UserProfileApp**
+
+- [**Server**] Authentication and User Login - See [SetupAuth](https://github.com/xiaoyunyang/web-dev-cheatsheets/blob/master/guides/auth-setup.md)
 	- [X] Scotch.io's [local auth Tutorial](https://scotch.io/tutorials/easy-node-authentication-setup-and-local)
 	- [X] Scotch.io's [oAuth Tutorial](https://scotch.io/tutorials/easy-node-authentication-facebook)
 	- [X] DJAM's [programming blog](https://www.djamware.com/post/59a6257180aca768e4d2b132/node-express-passport-facebook-twitter-google-github-login) to create auth via Twitter, Google, and Github.
 	- [ ] Add [`nodemailer`](https://nodemailer.com/about/) and `mailgun` to allow app to send emails to users. See [this article](https://medium.com/hexient-labs/nodemailer-mailgun-4d9f18f955a9)
-- Security
-	- [X] Sanitize input using [`validator`](https://github.com/chriso/validator.js) to protect against Cross Site Scripting (XSS)
-	- [X] Add [`helmet`](https://github.com/helmetjs/helmet) to server.
+	- [ ] Refactor passport auth code and new user creation code to eliminate duplicate code. Fix the callback hell with mongoose database access.
+	- [ ] Remove capability to for user to delete their profile. They can only deactivate it. Deleting user from database messes up the logic for creating a unique user name. 
+-  [**Server**] Security
+	- [X] Sanitize input on the server side (ejs form) using [`validator`](https://github.com/chriso/validator.js)
+	- [X] Add [`helmet`](https://github.com/helmetjs/helmet) to server to mitigate cross site scripting (XSS).
 	- [X] Add [https](https://certsimple.com/blog/localhost-ssl-fix) to localhost server.
-	- [X] Add [`csurf`](https://github.com/expressjs/csurf) to forms to protect against cross site request forgery (CSRF).
-	- [ ] Move all secret auth stuff to `.env`. See [this tutorial](http://www.clementinejs.com/tutorials/tutorial-passport.html)
-- Integrate Backend With Frontend
-	- [X] FullStackReact's [Tutorial](https://www.fullstackreact.com/articles/using-create-react-app-with-a-server/#enter-create-react-app) and [Sample Project](https://github.com/fullstackreact/food-lookup-demo) - A `create-react-app` with server example
-	- [X] Isomorphic Webapp Book [Chapter 2 Sample Code](https://github.com/isomorphic-dev-js/chapter2-a-sample-isomorphic-app.git)
-	- [ ] FreeCodeCamp's [Tutorial](https://medium.freecodecamp.org/how-to-make-create-react-app-work-with-a-node-backend-api-7c5c48acb1b0)
-	- [ ] Esau Silva's [Tutorial](https://esausilva.com/2017/11/14/how-to-use-create-react-app-with-a-node-express-backend-api/)
-	- [ ] Codemancer's [Tutorial](https://crypt.codemancers.com/posts/2017-06-03-reactjs-server-side-rendering-with-router-v4-and-redux/) - Integrate react-router-v4 with server router
-	- [ ] Dave Ceddia's [Tutorial](https://daveceddia.com/create-react-app-express-backend/) - `create-react-app` with express backend
-	- [ ] Haphazardly thrown together [React Router 4 + Express + Passport Auth Example](https://github.com/netpoetica/react-router-passport-express-demo-app)
-	- [ ] Patrick Cason's Tutorial for [React Router V4 Helmet Redux and Thunk](https://medium.com/@cereallarceny/server-side-rendering-with-create-react-app-fiber-react-router-v4-helmet-redux-and-thunk-275cb25ca972) 
-	- [ ] Justin Jung's [React Server Sider Rendering and Hot Reloading](https://medium.com/@justinjung04/react-server-side-rendering-and-hot-reloading-ffb87ca81a89)
-	- [ ] Evheniy Bystrov's [React App From Scratch](https://medium.com/@evheniybystrov/react-app-from-scratch-d694300d1631)
-* Universal App (Isomorphic Webapp)
-	- [ ] [Universal Create React App Step by Step](https://medium.com/leanjs/universal-create-react-app-step-by-step-b80ba68d125d)
-	- [ ] React Router V4 [Server Side Rendering](https://reacttraining.com/react-router/web/guides/server-rendering)
-	- [ ] React Router V4 and react-router-config [tutorial by Emile Cantin](https://blog.emilecantin.com/web/react/javascript/2017/05/16/ssr-react-router-4-webpack-code-split.html)
-	- [ ] universal-react-router4 [repo](https://github.com/technology-ebay-de/universal-react-router4) with sample project
-- [ ] Build Server to serve API
-	- [X] Add Automated Testing to backend: `mocha`, `chai`, `SuperTest` and `cheerio`.
-- [X] Set up Redux for Frontend app
+	- [X] Add [`csurf`](https://github.com/expressjs/csurf) to server side forms (ejs) to protect against cross site request forgery (CSRF).
+	- [ ] Move all secret auth stuff to `.env`, which is excluded from github as define din gitignore. See [this tutorial](http://www.clementinejs.com/tutorials/tutorial-passport.html)
+	- [ ] Add XSS protection to client side forms. Use validator?
+	- [ ] Add [`csurf`](https://github.com/expressjs/csurf) to client side forms to protect against CSRF.
+	- [ ] Set up auto-redirect to the HTTPS app
+- [**Universal**] UserProfileApp server and client integration
+	- [ ] Create UserProfile UI in materializeCSS and React using dummy data (use create-react-app to take advantage of HMR and react hot loader).
+	- [ ] Set up redux store, actions, and reducers for UserProfileApp
+	- [ ] Create Server API for user profile in server to send profile data for initial load an isomorphic fetch in client app after initial load.
+	- [ ] Create unit test for server api.
 
 ## Getting Started 
 
@@ -138,8 +160,8 @@ looseleaf-node
 │   |   └───index.js <== #B
 │   |   └───main.js <== #A
 |   ├───iso-middleware
-|   |   ├── renderRoute.jsx <==
-|   |   └── renderView.jsx
+|   |   ├── renderRoute.jsx <== #D
+|   |   └── renderView.jsx <== #D
 	
 ```
 
@@ -149,6 +171,7 @@ looseleaf-node
 * **#A**: These files are the entry points for the isomorphic webapp.
 * **#B**: These files are associated with the create-react-app, which includes HMR and react-hot-loader for better development work flow. `index.js` and `index.html` are the entry points. `index.js` renders component that attaches to the root componnent identified in the `index.html` file.
 * **#C**: These files are omitted from the github repo because they contain authentication ids, secrets, etc that are application-specific
+* **#D**: These files are used by the server to render html pages using React code shared with the client.
 
 ## Tutorial
 
