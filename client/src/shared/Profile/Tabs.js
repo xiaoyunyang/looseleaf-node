@@ -25,20 +25,20 @@ const Three = () => (
 );
 const routes = [
   {
-    path: `${root}/about/one`,
+    path: `${root}/one`,
     exact: true,
     component: One
   },
   {
-    path: `${root}/about/two`,
+    path: `${root}/two`,
     component: Two
   },
   {
-    path: `${root}/about/three`,
+    path: `${root}/three`,
     component: Three
   },
   {
-    path: `${root}/about/three`,
+    path: `${root}/*`,
     restricted: false,
     component: NotFound
   }
@@ -46,17 +46,30 @@ const routes = [
 
 
 class Tabs extends React.Component  {
-  componentDidMount() {
-    $('ul.tabs').tabs('select_tab', 'three');
+  constructor() {
+    super();
+    this.state = {
+      pages: ['one', 'two', 'three']
+    };
   }
   render() {
+    const selected = window.location.href.split(/\//).pop();
     return (
       <div className="row">
         <div className="col s12">
           <ul className="tabs">
-            <li className="tab col s3"><Link to={`${root}/about/one`}>One</Link></li>
-            <li className="tab col s3"><Link to={`${root}/about/two`}>Two</Link></li>
-            <li className="tab col s3"><Link to={`${root}/about/three`}>Three</Link></li>
+          {
+            this.state.pages.map((d, i) => {
+              return (
+                <li key={i} className="tab col l3 m2 s3">
+                  <Link onClick={this.handleClick}
+                        className={d===selected ? "active" : ""}
+                        to={`${root}/${d}`}>
+                    {d}
+                  </Link>
+                </li>);
+            })
+          }
           </ul>
         </div>
         <Switch>

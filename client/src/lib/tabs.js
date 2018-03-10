@@ -163,9 +163,13 @@ import Materialize from 'materialize-css/dist/js/materialize';
           return;
         }
 
+/*** Overriding Default =========================================================
+We always want tabs to be an external link
+***/
+
         // Act as regular link if target attribute is specified.
         //if (!!$(this).attr("target")) {
-          return;
+          //return;
         //}
 
         clicked = true;
@@ -191,6 +195,7 @@ import Materialize from 'materialize-css/dist/js/materialize';
         }
         // Change url to current tab
         // window.location.hash = $active.attr('href');
+
 
         // Swap content
         if (options.swipeable) {
@@ -223,8 +228,11 @@ import Materialize from 'materialize-css/dist/js/materialize';
         // Update indicator
         animateIndicator(prev_index);
 
+/*** Overriding Default =========================================================
+Comment the following line out because We always want tabs to be an external link
+***/
         // Prevent the anchor's default click action
-        e.preventDefault();
+        // e.preventDefault();
       });
     });
 
