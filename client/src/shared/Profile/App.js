@@ -1,10 +1,10 @@
 import React from 'react';
-import Header from './Header';
+import TopNav from './TopNav';
 import Main from './Main';
 
 const App = () => (
   <div>
-    <Header />
+    <TopNav />
     <Main />
   </div>
 );

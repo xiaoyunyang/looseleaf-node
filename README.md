@@ -8,7 +8,7 @@
 - [x] Add React Router V4. Hack react-router-config to handle routing in Guest Mode and User Mode - See [Solution](https://github.com/ReactTraining/react-router/issues/4962)
 - [x] Connect Mongo database to server using mongoose
 
-**Set up Universal App (Isomorphic Webapp) **
+**Set up Universal App (Isomorphic Webapp)**
 
 - [X] Set up a single page isomorphic Webapp using [Iso Book Chapter 2 Sample Code](https://github.com/isomorphic-dev-js/chapter2-a-sample-isomorphic-app.git) as a starting point.
 - [X] Set up an isomorphic router app using [Iso Book Chapter 4 Sample Code](https://github.com/isomorphic-dev-js/complete-isomorphic-example) and a few other tutorials and universal/isomorphic app repos to get everything set up with React Router 4, react-router-config, Webpack 4 and code splitting. Created a repo [isomorphic-router-demo](https://github.com/xiaoyunyang/isomorphic-router-demo) to help others who need to get started with an isomorphic router app with this stack.
@@ -39,8 +39,8 @@
 
 - [**Server**] Authentication and User Login - See [SetupAuth](https://github.com/xiaoyunyang/web-dev-cheatsheets/blob/master/guides/auth-setup.md)
 	- [X] Scotch.io's [local auth Tutorial](https://scotch.io/tutorials/easy-node-authentication-setup-and-local)
-	- [X] Scotch.io's [oAuth Tutorial](https://scotch.io/tutorials/easy-node-authentication-facebook)
-	- [X] DJAM's [programming blog](https://www.djamware.com/post/59a6257180aca768e4d2b132/node-express-passport-facebook-twitter-google-github-login) to create auth via Twitter, Google, and Github.
+	- [X] Scotch.io's [oAuth Tutorial](https://scotch.io/tutorials/easy-node-authentication-facebook) and DJAM's [programming blog](https://www.djamware.com/post/59a6257180aca768e4d2b132/node-express-passport-facebook-twitter-google-github-login) to sign up / login via Facebook and Github.
+	- [ ] Sign up / Login with LinkedIn
 	- [ ] Add [`nodemailer`](https://nodemailer.com/about/) and `mailgun` to allow app to send emails to users. See [this article](https://medium.com/hexient-labs/nodemailer-mailgun-4d9f18f955a9)
 	- [ ] Refactor passport auth code and new user creation code to eliminate duplicate code. Fix the callback hell with mongoose database access.
 	- [ ] Remove capability to for user to delete their profile. They can only deactivate it. Deleting user from database messes up the logic for creating a unique user name. 

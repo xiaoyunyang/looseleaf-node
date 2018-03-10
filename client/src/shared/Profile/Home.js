@@ -16,7 +16,6 @@ class Home extends React.Component {
       .catch(err => console.log(err));
   }
   callApi = async function (endpoint) {
-    // console.log(this)
     const response = await fetch(endpoint);
     const body = await response.json();
 

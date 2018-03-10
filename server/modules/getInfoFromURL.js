@@ -34,8 +34,8 @@ const getInfoFromURL = path => {
 
 
   return (param) => {
-    if (param == 'username') return getUsernameFromURL(pathname);
-    else if (param == 'pathname') return getPathnameFromURL(pathname);
+    if (param === 'username') return getUsernameFromURL(pathname);
+    else if (param === 'pathname') return getPathnameFromURL(pathname);
     return 'error';
   };
 };

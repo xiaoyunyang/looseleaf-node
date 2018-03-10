@@ -14,10 +14,6 @@ const routes = [
     component: About
   },
   {
-    path: `${root}/recipes`,
-    component: About
-  },
-  {
     path: `${root}*`,
     restricted: false,
     component: NotFound
