@@ -4,6 +4,7 @@ import { AppContainer } from 'react-hot-loader';
 import 'materialize-css';
 import 'materialize-css/dist/css/materialize.min.css';
 import 'materialize-css/dist/js/materialize.min';
+import './lib/tabs' // <- overriding the materialize tabs js
 import AppOld from './App';
 import AppUser from './AppUser';
 import AppRecipe from './AppRecipe';

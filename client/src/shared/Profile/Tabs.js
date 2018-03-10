@@ -47,16 +47,16 @@ const routes = [
 
 class Tabs extends React.Component  {
   componentDidMount() {
-    $('ul.tabs').tabs();
+    $('ul.tabs').tabs('select_tab', 'three');
   }
   render() {
     return (
       <div className="row">
         <div className="col s12">
           <ul className="tabs">
-            <li className="tab col s3"><Link target='_self' to={`${root}/about/one`}>One</Link></li>
-            <li className="tab col s3"><Link target='_self' to={`${root}/about/two`}>Two</Link></li>
-            <li className="tab col s3"><Link target='_self' to={`${root}/about/three`}>Three</Link></li>
+            <li className="tab col s3"><Link to={`${root}/about/one`}>One</Link></li>
+            <li className="tab col s3"><Link to={`${root}/about/two`}>Two</Link></li>
+            <li className="tab col s3"><Link to={`${root}/about/three`}>Three</Link></li>
           </ul>
         </div>
         <Switch>
