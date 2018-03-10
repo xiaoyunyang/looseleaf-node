@@ -25,7 +25,7 @@ const Three = () => (
 );
 const routes = [
   {
-    path: `${root}/one`,
+    path: `${root}/`,
     exact: true,
     component: One
   },
@@ -49,22 +49,32 @@ class Tabs extends React.Component  {
   constructor() {
     super();
     this.state = {
-      pages: ['one', 'two', 'three']
+      pages: {
+        'one': {'route':  ''},
+        'two': {'route':  'two'},
+        'three': {'route':  'three'}
+      }
     };
   }
+  componentDidMount() {
+    console.log("pooooopp")
+    $('ul.tabs').tabs();
+  }
   render() {
-    const selected = window.location.href.split(/\//).pop();
+    const selected = window.location.href.split(/\/about\//).pop();
+    console.log('selected', selected)
+
     return (
       <div className="row">
         <div className="col s12">
           <ul className="tabs">
           {
-            this.state.pages.map((d, i) => {
+            Object.keys(this.state.pages).map((d, i) => {
               return (
                 <li key={i} className="tab col l3 m2 s3">
                   <Link onClick={this.handleClick}
-                        className={d===selected ? "active" : ""}
-                        to={`${root}/${d}`}>
+                        className={this.state.pages[d].route===selected ? "active" : ""}
+                        to={`${root}/${this.state.pages[d].route}`}>
                     {d}
                   </Link>
                 </li>);
