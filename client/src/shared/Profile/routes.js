@@ -2,8 +2,7 @@ import Home from './Home';
 import NotFound from './NotFound';
 import About from './About';
 import Tab from './About/Tab';
-import RedirectWithStatus from './RedirectWithStatus'
-
+import RedirectWithStatus from '../components/RedirectWithStatus';
 
 const root = '/profile';
 const routes = [
