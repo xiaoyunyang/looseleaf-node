@@ -163,6 +163,8 @@ import Materialize from 'materialize-css/dist/js/materialize';
           return;
         }
 
+        console.log('pooooop')
+
 /*** Overriding Default =========================================================
 We always want tabs to be an external link
 ***/

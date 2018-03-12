@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { polyfill } from 'es6-promise';
 import { Switch } from 'react-router-dom';
 import { renderRoutes } from 'react-router-config';
+import $ from 'jquery';
 import NotFound from '../NotFound';
 import Home from '../Home';
 
@@ -63,10 +64,13 @@ class Tab extends Component {
     }
 
   }
-
+  componentDidMount() {
+    $('ul.tabs').tabs();
+  }
 
   render() {
     const selected = this.props.match.params.slug;
+
     return (
       <div className="row">
         <div className="col s12">

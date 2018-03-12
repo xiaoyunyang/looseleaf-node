@@ -5,7 +5,7 @@ import { BrowserRouter } from 'react-router-dom';
 import initRedux from './redux/Recipe/init-redux';
 import App from './shared/Profile/App';
 import 'materialize-css/dist/js/materialize.min';
-import './lib/tabs'
+import './lib/tabs';
 
 console.log('Browser packed file loaded');
 
