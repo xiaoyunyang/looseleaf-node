@@ -8,7 +8,7 @@ module.exports = {
     recipe: './client/src/recipe.js'
   },
   output: {
-    path: path.resolve(__dirname, 'client/build'),
+    path: path.resolve(__dirname, 'client/src/assets'),
     filename: '[name].bundle.js'
   },
   module: {
@@ -23,7 +23,7 @@ module.exports = {
         loaders: ['style-loader', 'css-loader']
       },
       {
-        test: /\.(png|woff|woff2|eot|ttf|svg)$/,
+        test: /\.(woff|woff2|eot|ttf|svg)$/,
         loader: 'url-loader?limit=100000'
       }
     ]

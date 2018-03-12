@@ -15,10 +15,10 @@ class Tab extends Component {
   }
   render() {
     const selected = this.props.match.params.slug || 'one';
-
-    if(window) {
+    if (typeof window !== 'undefined') {
       $(`#tab-${selected}`).trigger('click');
     }
+
     return (
       <div className="container">
         <div className="row">

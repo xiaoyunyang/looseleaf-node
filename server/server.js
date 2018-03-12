@@ -60,8 +60,8 @@ app.set('views', path.resolve(__dirname, 'views'));
 
 // setup static files, server main.bundle.js (webpacked file) from root
 // Express must only serves static assets in production
-const clientAppPathProd = path.join(__dirname, '../', 'client/build');
-const clientAppPathDev = path.join(__dirname, '../', 'client/build');
+const clientAppPathProd = path.join(__dirname, '../', 'client/src/assets');
+const clientAppPathDev = path.join(__dirname, '../', 'client/src/assets');
 
 if (process.env.NODE_ENV === 'production') {
   console.log(chalk.blue('Running in production mode'));

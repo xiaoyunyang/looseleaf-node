@@ -8,6 +8,11 @@ export default () => (
   <div className="navbar-fixed">
     <nav className="grey lighten-4">
       <div className="nav-wrapper-white nav-text-links">
+        <div className="brand-logo">
+          <Link className="navbar-brand" to={root}>
+            <img src="http://looseleafapp.com/assets/images/logo/logo.png" alt="LooseLeaf" />
+          </Link>
+        </div>
         <ul id="nav-mobile" className="right">
           <li><Link to={root}>Home</Link></li>
           <li><Link to={`${root}/user/${username}`}>Profile</Link></li>

@@ -23,10 +23,13 @@ localhost-ssl
 node_modules
 bower_components
 package-lock.json
+.map
 
 # Builds
 build
 browser.js
+*.map
+*.bundle.js
 
 # Editors
 .idea
