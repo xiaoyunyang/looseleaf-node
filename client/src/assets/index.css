@@ -201,7 +201,23 @@ h6 {
 .navbar-brand img {
   vertical-align:top;
 }
-
+#profile-tabs .tab a {
+  background-color: transparent;
+  color: #26a69a;
+}
+#profile-tabs .indicator {
+    background-color: #26a69a;
+}
+.hero-profile {
+  padding: 30px;
+}
+.hero-profile img {
+  width: 200px;
+  height: 200px;
+}
+.hero-profile .hero-info {
+  padding-top: 5px;
+}
 #signup-btn {
   background-color: #26a69a;
   color: white;

@@ -2,10 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
+import 'materialize-css';
+import 'materialize-css/dist/css/materialize.min.css';
+import 'materialize-css/dist/js/materialize.min';
 import initRedux from './redux/Recipe/init-redux';
 import App from './shared/Profile/App';
-import 'materialize-css/dist/js/materialize.min';
 import './lib/tabs';
+import './assets/index.css';
 
 console.log('Browser packed file loaded');
 

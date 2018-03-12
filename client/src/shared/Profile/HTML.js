@@ -11,11 +11,11 @@ const HTML = (props) => {
     <html lang="en">
       <head>
         <title>LooseLeaf</title>
-        <link
-          rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css"
-        />
-        <link rel="stylesheet" href="/index.css"/>
+          <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css"
+          />
+          <link rel="stylesheet" href="/index.css"/>
     </head>
       <body>
         <div
