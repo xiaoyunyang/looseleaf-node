@@ -3,48 +3,14 @@ import { Link } from 'react-router-dom';
 import { Switch } from 'react-router-dom';
 import { renderRoutes } from 'react-router-config';
 import $ from 'jquery';
-// import '../../lib/tabs';
-import NotFound from './NotFound';
-import Home from './Home';
-
 const root = '/profile/about';
 
 
-const One = () => (
-  <div id="one" className="col s12">
-    One
-  </div>
-);
-const Two = () => (
-  <div id="two" className="col s12">
-    Two
-  </div>
-);
 const Three = () => (
   <div id="three" className="col s12">
     Three
   </div>
 );
-const routes = [
-  {
-    path: `${root}/`,
-    exact: true,
-    component: Home
-  },
-  {
-    path: `${root}/two`,
-    component: Two
-  },
-  {
-    path: `${root}/three`,
-    component: Three
-  },
-  {
-    path: `${root}/*`,
-    restricted: false,
-    component: NotFound
-  }
-];
 
 
 class Tabs extends React.Component  {
@@ -62,7 +28,8 @@ class Tabs extends React.Component  {
     $('ul.tabs').tabs();
   }
   render() {
-    const selected = window.location.href.split(/\/about\//).pop();
+    const selected = 'one';
+    //const selected = window.location.href.split(/\/about\//).pop();
     console.log('selected', selected)
 
     return (
@@ -75,7 +42,7 @@ class Tabs extends React.Component  {
                 <li key={i} className="tab col l3 m2 s3">
                   <Link onClick={this.handleClick}
                         className={this.state.pages[d].route===selected ? "active" : ""}
-                        to={`${this.props.root}/${this.state.pages[d].route}`}>
+                        to={`${root}/${this.state.pages[d].route}`}>
                     {d}
                   </Link>
                 </li>);
@@ -83,13 +50,11 @@ class Tabs extends React.Component  {
           }
           </ul>
         </div>
-        <Switch>
-          {renderRoutes(routes)}
-        </Switch>
+        <Three />
       </div>
     );
   }
 }
 
 
-export default Tabs;
+export default Three;

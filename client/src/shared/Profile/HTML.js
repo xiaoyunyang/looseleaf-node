@@ -1,5 +1,11 @@
 import React from 'react';
 
+// TODO
+// index.css comes from the client/build folder, for server side rendering
+// For CRA, index.css comes from the client/asset folder.
+// They should be equal.
+// Make sure to minify the index.css for production
+
 const HTML = (props) => {
   return (
     <html lang="en">
@@ -9,7 +15,8 @@ const HTML = (props) => {
           rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css"
         />
-      </head>
+        <link rel="stylesheet" href="/index.css"/>
+    </head>
       <body>
         <div
           id="root"
