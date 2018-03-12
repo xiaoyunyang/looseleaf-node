@@ -11,10 +11,13 @@ polyfill();
 class Tab extends Component {
   componentDidMount() {
     $('ul.tabs').tabs();
+    console.log('componentDidMount')
   }
   render() {
     const selected = this.props.match.params.slug;
 
+    $(`#tab-${selected}`).trigger('click');
+    console.log('selected', selected)
     return (
       <div className="row">
         <div className="col s12">
@@ -24,7 +27,8 @@ class Tab extends Component {
             tabs.map((tab, i) => {
               return (
                 <li key={i} className="tab col l3 m2 s3">
-                  <Link to={`${root}/${tab}`}
+                  <Link id={`tab-${tab}`}
+                        to={`${root}/${tab}`}
                         className={tab === selected ? "active" : ""}>
                     {tab}
                   </Link>
