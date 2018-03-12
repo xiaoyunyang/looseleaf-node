@@ -1,11 +1,12 @@
 import React from 'react';
 
+const list = ['One','Two','Three','Four', 'Five', 'Six'];
 export default () => (
     <div id='one' className="col s12">
-        <h2>One</h2>
+        <h2>Achievements</h2>
         <ul className="collection">
           {
-            ['One','Two','Three','Four'].map((d, i) => {
+            list.map((d, i) => {
               return(
                 <li key={i} className="collection-item avatar">
                   <img src="https://cs3design.com/wp-content/uploads/2017/04/checkmark.png" alt="" className="circle" />

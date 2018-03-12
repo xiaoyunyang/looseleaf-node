@@ -3,9 +3,16 @@ import Two from './Two';
 import Three from './Three';
 import NotFound from '../NotFound';
 
-const root = '/profile/about';
+const username = 'xiaoyun-yang';
+const root = `/profile/user/${username}`;
+
 const tabs = ['one', 'two', 'three'];
 const routes = [
+  {
+    path: `${root}`,
+    exact: true,
+    component: One
+  },
   {
     path: `${root}/one`,
     exact: true,

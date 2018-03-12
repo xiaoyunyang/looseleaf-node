@@ -189,7 +189,6 @@ h6 {
 }
 /**** Signup / Login END ****/
 
-
 /**** Navbar BEGIN ****/
 .navbar-brand {
   padding: 0.70em;
@@ -201,23 +200,6 @@ h6 {
 .navbar-brand img {
   vertical-align:top;
 }
-#profile-tabs .tab a {
-  background-color: transparent;
-  color: #26a69a;
-}
-#profile-tabs .indicator {
-    background-color: #26a69a;
-}
-.hero-profile {
-  padding: 30px;
-}
-.hero-profile img {
-  width: 200px;
-  height: 200px;
-}
-.hero-profile .hero-info {
-  padding-top: 5px;
-}
 #signup-btn {
   background-color: #26a69a;
   color: white;
@@ -228,6 +210,15 @@ h6 {
 .nav-text-links a {
   color: #616161;
   font-weight: bolder;
+}
+.nav-text-links button {
+  color: #616161;
+  font-weight: bolder;
+  background-color: transparent;
+  border: none;
+}
+.nav-text-links i {
+  margin-top: 3px;
 }
 .nav-text-links li:not(.active) a:hover {
   background-color:  rgba(0, 0, 0, 0);
@@ -300,6 +291,27 @@ img.mod-round, picture.mod-round {
 }
 
 /**** Navbar END ****/
+
+/**** profile Page Stuff BEGIN ****/
+#profile-tabs .tab a {
+  background-color: transparent;
+  color: #26a69a;
+}
+#profile-tabs .indicator {
+    background-color: #26a69a;
+}
+.hero-profile {
+  padding: 30px;
+}
+.hero-profile img {
+  width: 200px;
+  height: 200px;
+}
+.hero-profile .hero-info {
+  padding-top: 5px;
+}
+
+/**** profile Page Stuff END ****/
 
 /** Markdown BEGIN **/
 #text-work img {

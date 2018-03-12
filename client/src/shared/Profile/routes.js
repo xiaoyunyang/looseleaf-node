@@ -1,10 +1,11 @@
 import Home from './Home';
 import NotFound from './NotFound';
-import About from './About';
-import Tab from './About/Tab';
-import RedirectWithStatus from '../components/RedirectWithStatus';
+import User from './User';
+import Tab from './User/Tab';
 
 const root = '/profile';
+const username = 'xiaoyun-yang';
+
 const routes = [
   {
     path: root,
@@ -12,18 +13,16 @@ const routes = [
     component: Home
   },
   {
-    path: `${root}/about`,
-		component: About,
+    path: `${root}/user/${username}`,
+		component: User,
 		routes: [
 			{
-				path: `${root}/about`,
+				path: `${root}/user/${username}`,
 				exact: true,
-				component: RedirectWithStatus,
-        status: 301,
-        to: `${root}/about/one`
+				component: Tab
 			},
 			{
-        path: `${root}/about/:slug`,
+        path: `${root}/user/${username}/:slug`,
 				component: Tab
 			}
 		]

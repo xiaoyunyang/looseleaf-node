@@ -5,6 +5,7 @@ import { Switch } from 'react-router-dom';
 import { renderRoutes } from 'react-router-config';
 import $ from 'jquery';
 import { routes, root, tabs } from './routes';
+import About from './About';
 
 polyfill();
 
@@ -13,27 +14,16 @@ class Tab extends Component {
     $('ul.tabs').tabs();
   }
   render() {
-    const selected = this.props.match.params.slug;
+    const selected = this.props.match.params.slug || 'one';
+
     if(window) {
       $(`#tab-${selected}`).trigger('click');
     }
-
     return (
       <div className="container">
         <div className="row">
           <div className="col s12">
-            <div className="hero-profile">
-              <div className="row">
-                <div className="col l4 m3 12">
-                  <img src="https://res.cloudinary.com/closebrace/image/upload/w_400/v1491315007/usericon_id76rb.png" alt="" className="circle" />
-                </div>
-                <div className="col l5 m3 12 hero-info">
-                  <h3>Xiaoyun Yang</h3>
-                  <p>Bio</p>
-                  <p>Website</p>
-                </div>
-              </div>
-            </div>
+            <About />
             <ul id="profile-tabs" className="tabs">
             {
               tabs.map((tab, i) => {

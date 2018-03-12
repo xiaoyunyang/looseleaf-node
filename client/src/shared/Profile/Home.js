@@ -28,7 +28,7 @@ class Home extends React.Component {
     console.log('rendering: Home');
     return (
       <div className="container">
-        <h1>Home page</h1>
+        <h1>Help Wanted</h1>
         <h6>
           {`Message from the server: ${this.state.resHello}`}
         </h6>
