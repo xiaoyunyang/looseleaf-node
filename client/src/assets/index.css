@@ -190,6 +190,9 @@ h6 {
 /**** Signup / Login END ****/
 
 /**** Navbar BEGIN ****/
+.navbar-fixed {
+  z-index: 9999;
+}
 .navbar-brand {
   padding: 0.70em;
   width: 200px;
@@ -242,14 +245,8 @@ h6 {
 .footer-text-links  a:hover {
   color: #1de9b6 !important;
 }
-.side-nav {
-  width: 300px;
-}
-.side-nav li:not(.active):hover {
-  background: transparent;
-}
 .side-nav a:hover {
-  color: #616161;
+  color: #383435;
   font-weight: bolder;
 }
 .navbar-img {
@@ -438,8 +435,8 @@ footer.section-brown {
 
 /* Customize Parallex Header */
 .header {
-    color: #388e3c;
-    font-weight: 300;
+  color: #388e3c;
+  font-weight: 300;
 }
 .parallax-container {
   height: 400px;
