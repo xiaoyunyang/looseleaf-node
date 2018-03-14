@@ -2,11 +2,11 @@ import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom';
 import { matchRoutes } from 'react-router-config';
-import routes from '../src/shared/Profile/routes';
-import HTML from '../src/shared/Profile/HTML';
-import App from '../src/shared/Profile/App';
+import routes from '../src/shared/User/routes';
+import HTML from '../src/shared/User/HTML';
+import App from '../src/shared/User/App';
 
-export default function renderRoute(req, res, next) {
+export default function renderUserApp(req, res, next) {
   const branch = matchRoutes(routes, req.url)
   const promises = [];
 

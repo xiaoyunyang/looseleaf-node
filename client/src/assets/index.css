@@ -223,13 +223,27 @@ h6 {
 .nav-text-links i {
   margin-top: 3px;
 }
-.nav-text-links li:not(.active) a:hover {
-  background-color:  rgba(0, 0, 0, 0);
-}
-.nav-text-links a:hover {
-  color: #383435;
-}
 
+.nav-text-links ul:not(.side-nav) li a:hover {
+  color: #383435;
+  background-color: transparent;
+}
+#dropdown-block a {
+  background-color: transparent;
+  color: #616161;
+}
+#dropdown-block a:hover {
+  background-color: transparent;
+  color: #383435;
+  font-weight: bolder;
+}
+.nav-text-links ul li.active {
+  background-color: transparent;
+  border-bottom: 3px solid #383435;
+}
+.nav-text-links ul li.active a:hover {
+  border-bottom: none;
+}
 .mdi-navigation-menu {
   margin-top: 0px !important;
   padding-left: 10px;
@@ -290,12 +304,15 @@ img.mod-round, picture.mod-round {
 /**** Navbar END ****/
 
 /**** profile Page Stuff BEGIN ****/
+#profile-tabs {
+  border-bottom: 1px solid rgba(0,0,0,.05);
+}
 #profile-tabs .tab a {
   background-color: transparent;
   color: #26a69a;
 }
 #profile-tabs .indicator {
-    background-color: #26a69a;
+  background-color: #26a69a;
 }
 .hero-profile {
   padding: 30px;

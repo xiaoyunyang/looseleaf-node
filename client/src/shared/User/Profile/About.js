@@ -8,7 +8,8 @@ export default () => (
       </div>
       <div className="col l8 m6 s12 hero-info">
         <h3>Xiaoyun Yang</h3>
-        <p>Bio</p>
+        <p>Web Developer | Member since April 2018</p>
+        <p>Hi I'm Xiaoyun</p>
         <p>Website</p>
       </div>
     </div>

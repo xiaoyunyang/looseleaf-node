@@ -6,7 +6,7 @@ import 'materialize-css';
 import 'materialize-css/dist/css/materialize.min.css';
 import 'materialize-css/dist/js/materialize.min';
 import initRedux from './redux/Recipe/init-redux';
-import App from './shared/Profile/App';
+import App from './shared/User/App';
 import './lib/tabs';
 import './assets/index.css';
 

@@ -1,5 +1,14 @@
 # Functional requirements
 
+## Functionality
+1. Register and log in to access profile page
+2. On your profile page, see your accomplishments, assignmenst you need to work on, and feeds
+3. Go to assignments page, browse assignments based on due dates, and sign up to work on assignments
+4. On the page for each assignment where there's the due date, a list of other people who also signed up to work on it, and their submissions
+5. For each submittal for each assignment, a list of comments and reactions from other users. The comment from the one who posted the assignment is the special comment that appear at the top.
+
+The list of accomplishments include a list of all your submittals and stats on your submittals, such as number of reactions and list of comments and such.
+
 ## Components
 
 
