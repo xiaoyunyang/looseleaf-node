@@ -21,12 +21,13 @@ const Featured = (props) => {
     const list = [];
 
     steps.forEach((step, index) => {
-      const key = `${step}-${index}`
+      const key = `${step}-${index}`;
       list.push(<li
         className="item"
-        key={key}>
+        key={key}
+      >
         {step}
-        </li>);
+      </li>);
     });
     return list;
   };
@@ -34,7 +35,7 @@ const Featured = (props) => {
   return (
     <div className="featured ui container segment six wide column">
       <div className="ui large image">
-        <img alt='thumbnail' src={`http://localhost:3001/api/assets/${props.thumbnail}`} />
+        <img alt="thumbnail" src={`http://localhost:3001/api/assets/${props.thumbnail}`} />
       </div>
       <h3>{props.title}</h3>
       <div className="meta">Cook Time: {props.cookTime}</div>

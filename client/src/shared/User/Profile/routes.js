@@ -1,7 +1,7 @@
 import One from './One';
 import Two from './Two';
 import Three from './Three';
-import NotFound from '../NotFound';
+import NotFound from '../../components/NotFound';
 
 const username = 'xiaoyun-yang';
 const root = `/profile/user/${username}`;
@@ -33,4 +33,4 @@ const routes = [
   }
 ];
 
-export {root, routes, tabs};
+export { root, routes, tabs };

@@ -20,6 +20,7 @@ import helmet from 'helmet';
 import ms from 'ms';
 import validator from 'validator';
 import renderViewMiddleware from '../client/iso-middleware/renderView';
+import renderGuestAppMiddleware from '../client/iso-middleware/renderGuestApp';
 import renderUserAppMiddleware from '../client/iso-middleware/renderUserApp';
 
 require('dotenv').config();
@@ -90,6 +91,7 @@ app.get('/recipe', renderViewMiddleware);
 
 // app.use(express.static(__dirname));
 app.get('/profile*', renderUserAppMiddleware);
+app.get('/public*', renderGuestAppMiddleware);
 
 // Auth ========================================================================
 // required for passport

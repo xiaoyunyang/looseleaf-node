@@ -6,7 +6,7 @@ const style = {
 
 export default () => (
   <div>
-    <div className="ui main text container">
+    <div className="container">
       <div style={style}>
         <h1>Sorry!</h1>
         <p>Something went horribly wrong…</p>

@@ -4,9 +4,7 @@ import { matchRoutes } from 'react-router-config';
 import $ from 'jquery';
 import routes from './routes';
 
-const root = 'profile';
-const username = 'xiaoyun-yang';
-const branch = matchRoutes(routes, '/profile/xiaoyun-yang');
+const root = 'public';
 
 class MobileSideNav extends React.Component {
   componentDidMount() {
@@ -21,37 +19,22 @@ class MobileSideNav extends React.Component {
         <a href="#" data-activates="mobile-menu" className="button-collapse"><i className="material-icons">menu</i></a>
         <ul className="side-nav" id="mobile-menu">
           <li><Link to={`/${root}`} className="active">Home</Link></li>
-          <li><Link to={`/${root}/user/${username}`}>Profile</Link></li>
+          <li><Link to={`/${root}/how-it-works`}>How It Works</Link></li>
+          <li><a href="">Login</a></li>
         </ul>
       </div>
     );
   }
 }
 
-const UserDropdown = () => (
-  <li id="dropdown-block">
-    <a className="navbar-img dropdown-button" data-activates="user-dropdown">
-      <img alt="loosleaf" className="mod-round" src="http://looseleafapp.com/assets/data/profile/photo/looseleaf.png" />
-      <div className="arrow-down" />
-    </a>
-    <ul id="user-dropdown" className="dropdown-content">
-      <li><Link to={`/${root}/user/${username}`}>Profile</Link></li>
-      <li><a href="/user">Stats</a></li>
-      <li className="divider" />
-      <li><a href={`/${root}/user/${username}/settings`}>Settings</a></li>
-      <li><a href="/logout">Log out</a></li>
-    </ul>
-  </li>
-);
-
 export default class TopNav extends React.Component {
   render() {
-    // TODO: active nav from server and client disagree. server 
+    // TODO: active nav from server and client disagree. server
     // rendered page does not know what the route is. Why?
     let selected = '';
     if (typeof document !== 'undefined') {
-        selected = document.location.pathname.split('/').pop();
-        $(`#nav-${selected}`).trigger('click');
+      selected = document.location.pathname.split('/').pop();
+      $(`#nav-${selected}`).trigger('click');
     }
     return (
       <div className="navbar-fixed">
@@ -66,12 +49,11 @@ export default class TopNav extends React.Component {
               <li className={selected === root ? 'active' : ''}>
                 <Link id={`nav-${root}`} to={`/${root}`}>Home</Link>
               </li>
-              <li className={selected === username ? 'active' : ''}>
-                <Link id={`nav-${username}`} to={`/${root}/user/${username}`}>Profile</Link>
+              <li className={selected === 'how-it-works' ? 'active' : ''}>
+                <Link id="nav-how-it-works" to={`/${root}/how-it-works`}>How It Works</Link>
               </li>
-              <li><Link to={`/${root}/foo`}>Foo</Link></li>
-              <li><button><i className="material-icons">notifications_none</i></button></li>
-              <UserDropdown />
+              <li><a href="">Login</a></li>
+              <li><a href="">Join</a></li>
             </ul>
             <MobileSideNav />
           </div>

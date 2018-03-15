@@ -1,13 +1,13 @@
 import React from 'react';
 
-const list = ['One','Two','Three','Four', 'Five', 'Six'];
+const list = ['One', 'Two', 'Three', 'Four', 'Five', 'Six'];
 export default () => (
-    <div id='one' className="col s12">
-        <h2>Achievements</h2>
-        <ul className="collection">
-          {
+  <div id="one" className="col s12">
+    <h2>Achievements</h2>
+    <ul className="collection">
+      {
             list.map((d, i) => {
-              return(
+              return (
                 <li key={i} className="collection-item avatar">
                   <img src="https://cs3design.com/wp-content/uploads/2017/04/checkmark.png" alt="" className="circle" />
                   <span className="title">{d}</span>
@@ -18,6 +18,6 @@ export default () => (
               );
             })
           }
-        </ul>
-    </div>
+    </ul>
+  </div>
 );

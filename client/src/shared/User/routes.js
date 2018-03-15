@@ -1,5 +1,5 @@
 import Home from './Home';
-import NotFound from './NotFound';
+import NotFound from '../components/NotFound';
 import Profile from './Profile';
 import Tab from './Profile/Tab';
 
@@ -14,22 +14,21 @@ const routes = [
   },
   {
     path: `/${root}/user/${username}`,
-		component: Profile,
-		routes: [
-			{
-				path: `/${root}/user/${username}`,
-				exact: true,
-				component: Tab
-			},
-			{
+    component: Profile,
+    routes: [
+      {
+        path: `/${root}/user/${username}`,
+        exact: true,
+        component: Tab
+      },
+      {
         path: `/${root}/user/${username}/:slug`,
-				component: Tab
-			}
-		]
-	},
+        component: Tab
+      }
+    ]
+  },
   {
     path: `/${root}*`,
-    restricted: false,
     component: NotFound
   }
 ];

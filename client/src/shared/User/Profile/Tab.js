@@ -25,13 +25,15 @@ class Tab extends Component {
           <div className="col s12">
             <About />
             <ul id="profile-tabs" className="tabs">
-            {
+              {
               tabs.map((tab, i) => {
                 return (
                   <li key={i} className="tab col l3 m2 s3">
-                    <Link id={`tab-${tab}`}
-                          to={`${root}/${tab}`}
-                          className={tab === selected ? "active" : ""}>
+                    <Link
+                      id={`tab-${tab}`}
+                      to={`${root}/${tab}`}
+                      className={tab === selected ? 'active' : ''}
+                    >
                       {tab}
                     </Link>
                   </li>);

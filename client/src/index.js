@@ -7,10 +7,11 @@ import 'materialize-css/dist/js/materialize.min';
 import './lib/tabs' // <- overriding the materialize tabs js
 import AppOld from './App';
 import AppUser from './AppUser';
+import AppGuest from './AppGuest';
 import AppRecipe from './AppRecipe';
 import './assets/index.css';
 
-const App = AppUser;//AppUser;//AppRecipe;
+const App = AppGuest;//AppUser;//AppRecipe;
 
 /*
  * Main entry point for the create-react-app
