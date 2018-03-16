@@ -45,14 +45,18 @@ const UserDropdown = () => (
 );
 
 export default class TopNav extends React.Component {
+  constructor(props) {
+    super();
+  }
   render() {
-    // TODO: active nav from server and client disagree. server 
+    // TODO: active nav from server and client disagree. server
     // rendered page does not know what the route is. Why?
     let selected = '';
     if (typeof document !== 'undefined') {
         selected = document.location.pathname.split('/').pop();
         $(`#nav-${selected}`).trigger('click');
     }
+    console.log('location', this.props.location);
     return (
       <div className="navbar-fixed">
         <nav className="grey lighten-4">

@@ -3,6 +3,7 @@ import HowItWorks from './HowItWorks';
 import NotFound from '../components/NotFound';
 
 const root = 'public';
+function noop() {}
 
 const routes = [
   {
@@ -14,6 +15,11 @@ const routes = [
     path: `/${root}/how-it-works`,
     exact: true,
     component: HowItWorks
+  },
+  {
+    path: `/${root}/login`,
+    exact: true,
+    component: noop
   },
   {
     path: `/${root}*`,

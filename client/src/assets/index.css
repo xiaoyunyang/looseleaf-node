@@ -128,40 +128,39 @@ h6 {
 }
 
 .social-logins a {
-    width: 100%;
-    margin: 0 auto 10px;
+  width: 100%;
+  margin: 0 auto 10px;
 }
 
 .btn-facebook a {
   background-color: #3b5998;
 }
+.btn-twitter a {
+  background-color: #00aced;
+}
+.btn-google a {
+  background-color: #dd4b39;
+}
+.btn-github a {
+  background-color: #444444;
+}
 .btn-facebook a:hover {
   background-color: #3b5998;
   opacity: 0.85;
-}
-.btn-twitter a {
-  background-color: #00aced;
 }
 .btn-twitter a:hover {
   background-color: #00aced;
   opacity: 0.85;
 }
-.btn-google a {
-  background-color: #dd4b39;
-}
 .btn-google a:hover {
   background-color: #dd4b39;
   opacity: 0.85;
 }
-.btn-facebook i {
-  margin-left: -5px;
-  margin-right: 16px;
+.btn-github a:hover {
+  background-color: #444444;
+  opacity: 0.85;
 }
-.btn-google i {
-  margin-left: -20px;
-  margin-right: 9px;
-}
-.btn-twitter i {
+.social-logins i {
   margin-left: -20px;
   margin-right: 9px;
 }
@@ -170,14 +169,14 @@ h6 {
   border-top: 1px solid #e0e0e0;
   color: #9e9e9e;
   text-align: center;
-  margin-top: 20px;
+  margin: 2rem 0rem;
 }
 
 .or-divider > span {
-    position: relative;
-    top: -10px;
-    background: white;
-    padding: 0px 400px;
+  position: relative;
+  top: -10px;
+  background: #fafafa;
+  padding: 0px 10px;
 }
 .or-divider img {
     max-width: 380px !important;
