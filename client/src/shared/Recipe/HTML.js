@@ -12,7 +12,7 @@ export default class HTML extends React.Component {
           <title>Chapter 2 - Recipes</title>
           <link
             rel="stylesheet"
-            href="https://cdn.jsdelivr.net/semantic-ui/2.2.2/semantic.min.css"
+            href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css"
           />
         </head>
         <body>

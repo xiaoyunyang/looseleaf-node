@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import Recipes from './Recipes';
 import Featured from './Featured';
 import * as actionCreators from '../../redux/Recipe/action-creators';
-
+import Footer from '../components/Footer';
 /*
  * App
  * caller: renderView.js (server side render) and recipe.js (client side render)
@@ -17,18 +17,22 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <div className="ui fixed inverted menu">
-          <div className="ui contianer">
-            <a href="/" className="header item">My Recipes Example App</a>
-          </div>
+        <div className="navbar-fixed">
+          <nav className="grey lighten-4">
+            <div className="nav-wrapper-white nav-text-links">
+              <div className="brand-logo">
+                <a href="/">Recipes App</a>
+              </div>
+            </div>
+          </nav>
         </div>
-        <div className="ui padded grid">
+        <div className="container">
           <Recipes {...this.props} />
           <Featured {...this.props.featuredRecipe} />
         </div>
-        <div className="ui inverted vertical footer segment">
-            Footer
-        </div>
+
+        <Footer />
+
       </div>
     );
   }

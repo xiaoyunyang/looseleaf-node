@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import App from './shared/Recipe/App';
 import initRedux from './redux/Recipe/init-redux';
-// require('./style.css');
+import './lib/tabs';
+import './assets/index.css';
 
 console.log('Browser packed file loaded');
 

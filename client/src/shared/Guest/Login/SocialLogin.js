@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+const authPath = 'http://localhost:3001/auth'
+
 class SocialLogin extends React.Component {
   constructor() {
     super();
@@ -13,7 +15,7 @@ class SocialLogin extends React.Component {
     // capitalize first letter of oath. Example: facebook => Facebook
     const oauthName = oauth[0].toUpperCase() + oauth.substr(1);
     return <div key={key} className={`btn-${oauth}`}>
-      <a className="waves-effect waves-light btn modal-trigger" href={`/login/${oauth}`}>
+      <a className="waves-effect waves-light btn modal-trigger" href={`${authPath}/${oauth}`}>
         <i className={`fa fa-${oauth} fa-lg`}></i>
         {`${this.props.action} with ${oauthName}`}
       </a>
