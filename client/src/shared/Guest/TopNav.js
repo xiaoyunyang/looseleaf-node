@@ -59,7 +59,7 @@ class LocalLogin extends React.Component {
   renderForgotPass() {
     if(this.props.action === 'Continue') {
       return (
-        <div className="row container">
+        <div className="container">
           <div className="col s12 m12 l12">
             <a className="offset-l6" href="">Forgot password</a>
           </div>
@@ -116,57 +116,69 @@ const LoginModal = () => (
 )
 
 export default class TopNav extends React.Component {
-  openModal(id) {
-    console.log('want to open modal '+id)
-  }
+
   componentDidMount() {
     $('.modal').modal({
       dismissible: true, // Modal can be dismissed by clicking outside of the modal
       opacity: .5, // Opacity of modal background
-      in_duration: 100, // Transition in duration
-      out_duration: 150, // Transition out duration
-      starting_top: '4%', // Starting top style attribute
-      ending_top: '10%', // Ending top style attribute
-      //ready: function() { alert('Ready'); }, // Callback for Modal open
-      //complete: function() { alert('Closed'); } // Callback for Modal close
+      inDuration: 300, // Transition in duration
+      outDuration: 200, // Transition out duration
+      startingTop: '4%', // Starting top style attribute
+      endingTop: '120px', // Ending top style attribute
     });
   }
   closeModal(modalId) {
-    console.log('close modal with modalId = '+modalId)
-
     $(modalId).modal('close');
   }
-  render() {
-    // TODO: active nav from server and client disagree. server
-    // rendered page does not know what the route is. Why?
-    let selected = '';
-    if (typeof document !== 'undefined') {
-      selected = document.location.pathname.split('/').pop();
-      $(`#nav-${selected}`).trigger('click');
-    }
-
+  renderTabs(selected) {
     return (
-      <div className="navbar-fixed">
-        <nav className="grey lighten-4">
+      <ul id="nav-tabs" className="tabs grey lighten-4">
+        <li className="tab">
+          <Link
+            id={`tab-one`}
+            to={`/${root}/community/one`}
+            className={selected === 'one'? 'active' : ''}
+            >
+            One
+          </Link>
+        </li>
+        <li className="tab">
+          <Link
+            id={`tab-two`}
+            to={`/${root}/community/two`}
+            className={selected === 'two'? 'active' : ''}
+            >
+            Two
+          </Link>
+        </li>
+        <li className="tab">
+          <Link
+            id={`tab-three`}
+            to={`/${root}/community/three`}
+            className={selected === 'three'? 'active' : ''}
+            >
+            Three
+          </Link>
+        </li>
+      </ul>
+    );
+  }
+  render() {
+    let selected = '';
+    if (typeof window !== 'undefined') {
+      selected = document.location.pathname.split('/').pop();
+      $(`#tab-${selected}`).trigger('click');
+    }
+    return (
+      <div id="navbar-extended" className="navbar-fixed">
+        <nav className="navbar-fixed nav-extended grey lighten-4">
           <div className="nav-wrapper-white nav-text-links">
             <div className="brand-logo">
               <Link className="navbar-brand" to={`/${root}`}>
                 <img src="http://looseleafapp.com/assets/images/logo/logo.png" alt="LooseLeaf" />
               </Link>
             </div>
-            <ul className="right hide-on-med-and-down">
-              <li className={selected === root ? 'active' : ''}>
-                <Link id={`nav-${root}`} to={`/${root}`}>Home</Link>
-              </li>
-              <li className={selected === 'how-it-works' ? 'active' : ''}>
-                <Link id="nav-how-it-works" to={`/${root}/how-it-works`}>How It Works</Link>
-              </li>
-              <li>
-                <a className="text-green modal-trigger" href="#login-modal"
-                        onClick={this.closeModal.bind(this, '#signup-modal')}>
-                  Log in
-                </a>
-              </li>
+            <ul className="right">
               <li>
                 <a id="signup-btn" href="#signup-modal"
                         onClick={this.closeModal.bind(this, '#login-modal')}
@@ -175,8 +187,24 @@ export default class TopNav extends React.Component {
                 </a>
               </li>
             </ul>
-            <MobileSideNav />
+            <ul className="right hide-on-small-only">
+              <li>
+                <a className="text-green modal-trigger" href="#login-modal"
+                        onClick={this.closeModal.bind(this, '#signup-modal')}>
+                  Log in
+                </a>
+              </li>
+            </ul>
+            <ul className="right hide-on-med-and-down">
+              <li>
+                <Link to={`/${root}`}>Home</Link>
+              </li>
+              <li>
+                <Link to={`/${root}/how-it-works`}>How It Works</Link>
+              </li>
+            </ul>
           </div>
+          {this.renderTabs(selected)}
         </nav>
         <LoginModal />
         <SignupModal />

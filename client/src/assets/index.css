@@ -50,10 +50,7 @@ main a:hover {
 html{
   font-size:100%;
 }
-@media(min-device-width : 375px){
-/*  h3{font-size: 175%}
-  h5{font-size: 110%}*/
-}
+
 @media only screen
     and (max-device-width: 640px),
     only screen and (max-device-width: 667px),
@@ -65,7 +62,23 @@ html{
     margin-left: 0px;
     padding-left: 0px;
   }
+  nav .brand-logo {
+    left: 25%;
+  }
+
 }
+
+@media only screen and (max-width : 992px) {
+    header, main, footer {
+        padding-left: 0;
+    }
+    .main-content {
+        padding-left: 0;
+    }
+}
+
+
+
 
 p {
   font-size:100%;
@@ -110,7 +123,7 @@ h6 {
 
 .modal {
   max-height: 100%;
-  top: 15px !important;
+  overflow-y: scroll;
 }
 
 /**** Signup / Login BEGIN ****/
@@ -192,6 +205,10 @@ h6 {
 .navbar-fixed {
   z-index: 9999;
 }
+#navbar-extended {
+  height: 112px;
+}
+
 .navbar-brand {
   padding: 0.70em;
   width: 200px;
@@ -298,6 +315,13 @@ img.mod-round, picture.mod-round {
   border-top: 6px solid #929ead;
   margin-left: 38px;
   margin-top: -34px;
+}
+#nav-tabs .tab a {
+  background-color: transparent;
+  color: #26a69a;
+}
+#nav-tabs .indicator {
+  background-color: #26a69a;
 }
 
 /**** Navbar END ****/
@@ -487,14 +511,8 @@ header, main, footer.dashboard-footer {
 footer.page-footer {
     margin-top: 0px;
 }
-@media only screen and (max-width : 992px) {
-    header, main, footer {
-        padding-left: 0;
-    }
-    .main-content {
-        padding-left: 0;
-    }
-}
+
+
 #user-info {
   text-align: center;
 }

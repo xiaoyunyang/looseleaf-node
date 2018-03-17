@@ -5,7 +5,9 @@ import Main from './Main';
 const App = () => (
   <div>
     <TopNav />
-    <Main />
+    <div className="container">
+      <Main />
+    </div>
   </div>
 );
 

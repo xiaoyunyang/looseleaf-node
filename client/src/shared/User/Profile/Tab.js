@@ -32,7 +32,7 @@ class Tab extends Component {
                     <Link
                       id={`tab-${tab}`}
                       to={`${root}/${tab}`}
-                      className={tab === selected ? 'active' : ''}
+                      className={selected === tab ? 'active' : ''}
                     >
                       {tab}
                     </Link>
