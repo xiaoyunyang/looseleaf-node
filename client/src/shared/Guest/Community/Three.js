@@ -4,7 +4,7 @@ import TopNav from '../TopNav';
 export default ( {route} ) => (
   <div>
     <TopNav route={route} />
-    <div className="container">
+    <div className="container main">
       <div id="three" className="col s12">
         <h2>Three</h2>
       </div>

@@ -1,6 +1,16 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 
+const style = {
+  padding: '30px',
+  width: '85%'
+};
+
+const h1Style = {
+  fontSize: '2em',
+  fontWeight: '400'
+}
+
 const Status = ({ code, children }) => (
 	<Route render={({ staticContext }) => {
 		if (staticContext)
@@ -11,12 +21,10 @@ const Status = ({ code, children }) => (
 
 const NotFound = () => (
   <Status code={404}>
-    <div>
-      {
-        console.log('rendering NotFound')
-      }
-      <h1>Sorry!</h1>
-      <p>Something went horribly wrong…</p>
+    <div style={style} className='container hero-info center'>
+      <h1 style={h1Style}>Page Not Found</h1>
+      <p>Sorry, but the page you were trying to view does not exist.</p>
+        <a className="waves-effect waves-light btn modal-trigger modal-close" href="http://looseleafapp.com">Go to home page</a>
     </div>
   </Status>
 );

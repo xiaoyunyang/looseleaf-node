@@ -4,11 +4,19 @@
 img {
     width: 100%;
 }
-html, body {
+html {
   height: 100%;
+}
+body {
+  min-height: 100%;
+  position: relative;
 }
 p {
   font-size: 18px;
+  color: #555;
+}
+h1, h2, h3, h4, h5, h6, p, span {
+ color: #555;
 }
 a {
 	color: #26a69a;
@@ -318,6 +326,7 @@ img.mod-round, picture.mod-round {
 #nav-tabs .tab a {
   background-color: transparent;
   color: #26a69a;
+  font-weight: bolder;
 }
 #nav-tabs .indicator {
   background-color: #26a69a;
@@ -419,16 +428,16 @@ img[alt="medium center"] {
   background-color: #f5f5f5;
 }
 .section-green {
-    background-color: #00897b;
+  background-color: #00897b;
 }
 .section-brown {
     background-color: #383435;
 }
-footer.section-green {
-    background-color: #00897b;
+footer.section-green p {
+  color: #eeeeee;
 }
 footer.section-brown {
-    background-color: #383435;
+  background-color: #383435;
 }
 .text-green {
   color: #00897b;
@@ -508,9 +517,18 @@ header, main, footer.dashboard-footer {
   padding-left: 50px
 }
 footer.page-footer {
-    margin-top: 0px;
+  position: absolute;
+  bottom: 0;
 }
-
+/* Note: main wraps the content above the footer. This code is needed so footer
+   always appear at the bottom of the page and doesn't cover up content */
+.main {
+  min-height:80vh;
+  overflow: hidden;
+  display: block;
+  position: relative;
+  padding-bottom: 327px; /* height of your footer */
+}
 
 #user-info {
   text-align: center;

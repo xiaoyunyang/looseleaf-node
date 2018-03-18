@@ -5,7 +5,7 @@ const list = ['One', 'Two', 'Three', 'Four', 'Five', 'Six'];
 export default ( {route} ) => (
   <div>
     <TopNav route={route} />
-    <div className="container">
+    <div className="container main">
       <div id="one" className="col s12">
         <h2>One</h2>
         <ul className="collection">

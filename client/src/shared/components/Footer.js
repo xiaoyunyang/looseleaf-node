@@ -17,7 +17,7 @@ class Footer extends React.Component {
                 </a>
               </div>
               <div className="col l12 s12">
-                <p className="light footer-text-links">
+                <p className="light">
                 {
                   'Let LooseLeaf help you connect with opportunities to gain relevant work experience.'
                 }
