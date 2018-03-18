@@ -1,12 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { matchRoutes } from 'react-router-config';
 import $ from 'jquery';
-import routes from './routes';
 
 const root = 'profile';
 const username = 'xiaoyun-yang';
-const branch = matchRoutes(routes, '/profile/xiaoyun-yang');
 
 class MobileSideNav extends React.Component {
   componentDidMount() {
@@ -45,18 +42,19 @@ const UserDropdown = () => (
 );
 
 export default class TopNav extends React.Component {
-  constructor(props) {
-    super();
-  }
   render() {
-    // TODO: active nav from server and client disagree. server
-    // rendered page does not know what the route is. Why?
     let selected = '';
+    if(typeof this.props.route.path === 'string') {
+      selected = this.props.route.path.split('/').pop();
+    }
+    // TODO: Still need the code below?
+/*
     if (typeof document !== 'undefined') {
         selected = document.location.pathname.split('/').pop();
+        console.log('client rendered...selected=', selected)
         $(`#nav-${selected}`).trigger('click');
     }
-    console.log('location', this.props.location);
+*/
     return (
       <div className="navbar-fixed">
         <nav className="grey lighten-4">

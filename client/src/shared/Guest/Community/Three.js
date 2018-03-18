@@ -1,8 +1,13 @@
 import React from 'react';
+import TopNav from '../TopNav';
 
-const list = ['One', 'Two', 'Three', 'Four', 'Five', 'Six'];
-export default () => (
-  <div id="three" className="col s12">
-    <h2>Three</h2>
+export default ( {route} ) => (
+  <div>
+    <TopNav route={route} />
+    <div className="container">
+      <div id="three" className="col s12">
+        <h2>Three</h2>
+      </div>
+    </div>
   </div>
 );

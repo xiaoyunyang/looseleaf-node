@@ -42,7 +42,7 @@ class Footer extends React.Component {
               </div>
             </div>
             <div className="col l6 m12 s12">
-              <div className="col s4 offset-s1">
+              <div className="col s6 m4">
                 <h5 className="white-text"><strong>Work as</strong></h5>
                 <h6>
                   <ul className="light footer-text-links">
@@ -52,8 +52,8 @@ class Footer extends React.Component {
                   </ul>
                 </h6>
               </div>
-              <div className="col l6 m12 s12 offset-s2">
-                <h5 className="white-text"><strong>{'Work for'}</strong></h5>
+              <div className="col l6 m5 s6 offset-l2 offset-m2">
+                <h5 className="white-text"><strong>{'Help out'}</strong></h5>
                 <h6>
                   <ul className="light footer-text-links">
                     <li><a href="#!">Teachers</a></li>

@@ -1,11 +1,15 @@
 import React from 'react';
+import TopNav from '../TopNav';
 
 const list = ['One', 'Two', 'Three', 'Four', 'Five', 'Six'];
-export default () => (
-  <div id="one" className="col s12">
-    <h2>One</h2>
-    <ul className="collection">
-      {
+export default ( {route} ) => (
+  <div>
+    <TopNav route={route} />
+    <div className="container">
+      <div id="one" className="col s12">
+        <h2>One</h2>
+        <ul className="collection">
+          {
             list.map((d, i) => {
               return (
                 <li key={i} className="collection-item avatar">
@@ -18,6 +22,9 @@ export default () => (
               );
             })
           }
-    </ul>
+        </ul>
+      </div>
+    </div>
   </div>
+
 );

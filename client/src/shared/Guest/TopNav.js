@@ -15,6 +15,7 @@ export default class TopNav extends React.Component {
       startingTop: '4%', // Starting top style attribute
       endingTop: '120px', // Ending top style attribute
     });
+    $('ul.tabs').tabs();
   }
   closeModal(modalId) {
     $(modalId).modal('close');
@@ -22,29 +23,29 @@ export default class TopNav extends React.Component {
   renderTabs(selected) {
     return (
       <ul id="nav-tabs" className="tabs grey lighten-4">
-        <li className="tab">
+        <li className='tab'>
           <Link
             id={`tab-one`}
-            to={`/${root}/community/one`}
             className={selected === 'one'? 'active' : ''}
+            to={`/${root}/community/one`}
             >
             One
           </Link>
         </li>
-        <li className="tab">
+        <li className='tab'>
           <Link
             id={`tab-two`}
-            to={`/${root}/community/two`}
             className={selected === 'two'? 'active' : ''}
+            to={`/${root}/community/two`}
             >
             Two
           </Link>
         </li>
-        <li className="tab">
+        <li className='tab'>
           <Link
             id={`tab-three`}
-            to={`/${root}/community/three`}
             className={selected === 'three'? 'active' : ''}
+            to={`/${root}/community/three`}
             >
             Three
           </Link>
@@ -54,9 +55,8 @@ export default class TopNav extends React.Component {
   }
   render() {
     let selected = '';
-    if (typeof window !== 'undefined') {
-      selected = document.location.pathname.split('/').pop();
-      $(`#tab-${selected}`).trigger('click');
+    if(typeof this.props.route.path === 'string') {
+      selected = this.props.route.path.split('/').pop();
     }
     return (
       <div id="navbar-extended" className="navbar-fixed">
@@ -87,11 +87,16 @@ export default class TopNav extends React.Component {
               </li>
             </ul>
             <ul className="right hide-on-med-and-down">
-              <li>
-                <Link to={`/${root}`}>Home</Link>
+              <li className={selected === root ? 'active' : ''}>
+                <Link
+                  to={`/${root}`}>
+                  Home
+                </Link>
               </li>
-              <li>
-                <Link to={`/${root}/how-it-works`}>How It Works</Link>
+              <li className={selected === 'how-it-works'? 'active' : ''}>
+                <Link
+                  to={`/${root}/how-it-works`}>
+                  How It Works</Link>
               </li>
             </ul>
           </div>

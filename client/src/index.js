@@ -11,7 +11,7 @@ import AppGuest from './AppGuest';
 import AppRecipe from './AppRecipe';
 import './assets/index.css';
 
-const App = AppGuest;//AppUser;//AppRecipe;
+const App = AppUser;//AppUser;//AppRecipe;
 
 /*
  * Main entry point for the create-react-app

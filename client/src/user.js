@@ -10,6 +10,7 @@ import App from './shared/User/App';
 import './lib/tabs';
 import './assets/index.css';
 
+
 console.log('Browser packed file loaded');
 
 // Grab the server serialized state off of the window object.

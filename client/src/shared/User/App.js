@@ -1,12 +1,12 @@
 import React from 'react';
-import TopNav from './TopNav';
-import Main from './Main';
+import { renderRoutes } from 'react-router-config';
+import routes from './routes';
 
 const App = () => (
   <div>
-    <TopNav />
-    <Main />
+    {renderRoutes(routes)}
   </div>
+
 );
 
 export default App;

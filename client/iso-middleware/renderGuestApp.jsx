@@ -8,12 +8,12 @@ import App from '../src/shared/Guest/App';
 
 export default function renderUserApp(req, res, next) {
   const branch = matchRoutes(routes, req.url)
-  const promises = [];
 
-  branch.forEach( ({route, match}) => {
-    if (route.loadData)
-  	 promises.push(route.loadData(match))
-	});
+  const promises = branch.map(({ route, match }) => {
+    return route.loadData
+      ? route.loadData(match)
+      : Promise.resolve(null)
+   })
 
   Promise.all(promises).then(data => {
     // data will be an array[] of datas returned by each promises.

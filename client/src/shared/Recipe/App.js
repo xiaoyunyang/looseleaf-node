@@ -27,12 +27,11 @@ class App extends React.Component {
           </nav>
         </div>
         <div className="container">
-          <Recipes {...this.props} />
           <Featured {...this.props.featuredRecipe} />
+          <h4>{'More like this'}</h4>
+          <Recipes {...this.props} />
         </div>
-
         <Footer />
-
       </div>
     );
   }

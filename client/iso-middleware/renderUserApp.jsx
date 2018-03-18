@@ -7,14 +7,13 @@ import HTML from '../src/shared/User/HTML';
 import App from '../src/shared/User/App';
 
 export default function renderUserApp(req, res, next) {
+
   const branch = matchRoutes(routes, req.url)
-  const promises = [];
-
-  branch.forEach( ({route, match}) => {
-    if (route.loadData)
-  	 promises.push(route.loadData(match))
-	});
-
+  const promises = branch.map(({ route, match }) => {
+    return route.loadData
+      ? route.loadData(match)
+      : Promise.resolve(null)
+   })
   Promise.all(promises).then(data => {
     // data will be an array[] of datas returned by each promises.
   	// console.log(data)
@@ -28,6 +27,11 @@ export default function renderUserApp(req, res, next) {
 				<App />
 			</StaticRouter>
 		);
+
+    if(context.url) {
+			res.writeHead(301, {Location: context.url})
+			res.end()
+		}
     const html = renderToString(
       <HTML html={app}/>
     );

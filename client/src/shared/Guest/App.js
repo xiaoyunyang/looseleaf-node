@@ -1,15 +1,12 @@
 import React from 'react';
-import TopNav from './TopNav';
-import Main from './Main';
-import Footer from '../components/Footer';
+import { renderRoutes } from 'react-router-config';
+import routes from './routes';
+
 const App = () => (
   <div>
-    <TopNav />
-    <div className="container">
-      <Main />
-    </div>
-    <Footer />
+    {renderRoutes(routes)}
   </div>
+
 );
 
 export default App;

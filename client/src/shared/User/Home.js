@@ -1,5 +1,6 @@
 import React from 'react';
 import fetch from 'isomorphic-fetch';
+import TopNav from './TopNav';
 
 // This is a ES6 class - see https://toddmotto.com/react-create-class-versus-component/
 class Home extends React.Component {
@@ -27,11 +28,14 @@ class Home extends React.Component {
   render() {
     console.log('rendering: Home');
     return (
-      <div className="container">
-        <h1>Help Wanted</h1>
-        <h6>
-          {`Message from the server: ${this.state.resHello}`}
-        </h6>
+      <div>
+        <TopNav route={this.props.route}/>
+        <div className="container">
+          <h1>Help Wanted</h1>
+          <h6>
+            {`Message from the server: ${this.state.resHello}`}
+          </h6>
+        </div>
       </div>
     );
   }
