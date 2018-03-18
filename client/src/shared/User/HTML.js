@@ -10,7 +10,8 @@ const HTML = (props) => {
   return (
     <html lang="en">
       <head>
-        <title>LooseLeaf</title>
+        <title>LooseLeaf | Dashboard</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link
           rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css"

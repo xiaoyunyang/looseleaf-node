@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 
-const style = {
+const containerStyle = {
   padding: '30px',
   width: '85%'
 };
@@ -21,7 +21,7 @@ const Status = ({ code, children }) => (
 
 const NotFound = () => (
   <Status code={404}>
-    <div style={style} className='container hero-info center'>
+    <div style={containerStyle} className='container hero-info center'>
       <h1 style={h1Style}>Page Not Found</h1>
       <p>Sorry, but the page you were trying to view does not exist.</p>
         <a className="waves-effect waves-light btn modal-trigger modal-close" href="http://looseleafapp.com">Go to home page</a>
