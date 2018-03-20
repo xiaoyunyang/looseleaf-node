@@ -2,7 +2,11 @@ import React from 'react';
 import { Route } from 'react-router-dom';
 
 const containerStyle = {
-  padding: '30px',
+  minHeight: '50vh',
+  overflow: 'hidden',
+  display: 'block',
+  position: 'relative',
+  paddingBottom: '23%',
   width: '85%'
 };
 
@@ -21,10 +25,10 @@ const Status = ({ code, children }) => (
 
 const NotFound = () => (
   <Status code={404}>
-    <div style={containerStyle} className='container hero-info center'>
+    <div className='main container hero-info center'>
       <h1 style={h1Style}>Page Not Found</h1>
       <p>Sorry, but the page you were trying to view does not exist.</p>
-        <a className="waves-effect waves-light btn modal-trigger modal-close" href="http://looseleafapp.com">Go to home page</a>
+        <a className="waves-effect waves-light btn" href="http://looseleafapp.com">Go to home page</a>
     </div>
   </Status>
 );

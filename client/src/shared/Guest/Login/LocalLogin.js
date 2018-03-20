@@ -3,6 +3,10 @@ import PropTypes from 'prop-types';
 const loginPath = 'http://localhost:3001/auth/login';
 const signupPath = 'http://localhost:3001/auth/signup';
 
+/* TODO: The propTypes checking is not the best. Check out this article for
+   best practice for writing react components:
+   https://engineering.musefind.com/our-best-practices-for-writing-react-components-dec3eb5c3fc8
+*/
 class LocalLogin extends React.Component {
   constructor() {
     super();
@@ -33,7 +37,7 @@ class LocalLogin extends React.Component {
     return (
       <div className="col s12 m10 offset-m1 l8 offset-l2 center">
         <div className="row">
-          <form action={this.getFormAction(this.props.action)} 
+          <form action={this.getFormAction(this.props.action)}
                 method="post"
                 className="col s12">
             <div className="input-field col s12 m6 l6">
