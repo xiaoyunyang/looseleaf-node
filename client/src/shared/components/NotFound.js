@@ -25,7 +25,7 @@ const Status = ({ code, children }) => (
 
 const NotFound = () => (
   <Status code={404}>
-    <div className='main container hero-info center'>
+    <div style={containerStyle} className='main container hero-info center'>
       <h1 style={h1Style}>Page Not Found</h1>
       <p>Sorry, but the page you were trying to view does not exist.</p>
         <a className="waves-effect waves-light btn" href="http://looseleafapp.com">Go to home page</a>

@@ -27,27 +27,24 @@ export default class TopNav extends React.Component {
           <Link
             id={`tab-one`}
             className={selected === 'one'? 'active' : ''}
-            to={`/${root}/community/one`}
-            >
-            One
+            to={`/${root}/community/one`}>
+            Developers
           </Link>
         </li>
         <li className='tab'>
           <Link
             id={`tab-two`}
             className={selected === 'two'? 'active' : ''}
-            to={`/${root}/community/two`}
-            >
-            Two
+            to={`/${root}/community/two`}>
+            Designers
           </Link>
         </li>
         <li className='tab'>
           <Link
             id={`tab-three`}
             className={selected === 'three'? 'active' : ''}
-            to={`/${root}/community/three`}
-            >
-            Three
+            to={`/${root}/community/three`}>
+            Writers
           </Link>
         </li>
       </ul>
@@ -79,9 +76,9 @@ export default class TopNav extends React.Component {
             </ul>
             <ul className="right hide-on-small-only">
               <li>
-                <a className="text-green modal-trigger"
-                   href="#login-modal"
-                   onClick={this.closeModal.bind(this, '#signup-modal')}>
+                <a href="#login-modal"
+                   onClick={this.closeModal.bind(this, '#signup-modal')}
+                   className="modal-trigger">
                   Log in
                 </a>
               </li>

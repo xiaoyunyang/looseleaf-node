@@ -17,16 +17,6 @@ p {
 h1, h2, h3, h4, h5, h6, p, span {
  color: #555;
 }
-
-h2 {
-    font-weight: 300;
-}
-h3 {
-    font-weight: 300;
-}
-h4 {
-    font-weight: 300;
-}
 h5 {
     font-weight: 300;
     line-height: 1.40em;
