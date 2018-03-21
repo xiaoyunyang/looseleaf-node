@@ -13,7 +13,6 @@ export default ( {route} ) => (
         <h5>Work opportunities create learning opportunities.</h5>
         <h3>Future of Work is peer-to-peer, distributed, and modular.</h3>
       </div>
-
     </div>
   </div>
 );
