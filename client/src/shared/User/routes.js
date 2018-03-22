@@ -29,17 +29,13 @@ const routes = [
         component: Home
       },
       {
-        path: `/${root}/foo`,
-        exact: true,
-        component: NotFound
-      },
-      {
+        path: `/${root}/user/${username}`,
         component: Profile,
         routes: tabsRoutes
       },
       {
         path: `/${root}*`,
-        component: NotFound     // TODO: NotFound not rendering because of the nested route above
+        component: NotFound
       }
     ]
   }
