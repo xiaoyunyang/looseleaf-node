@@ -10,7 +10,7 @@ class Home extends React.Component {
       resHello: 'Loading...'
     };
   }
-  componentDidMount() {
+  componentWillMount() {
     // Get hello message
     this.callApi('http://localhost:3001/api/hello')
       .then(res => this.setState({ resHello: res.express }))

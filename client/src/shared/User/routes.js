@@ -20,7 +20,8 @@ const tabsRoutes = [
 ];
 
 const routes = [
-  { component: Root,
+  {
+    component: Root,
     routes: [
       {
         path: `/${root}`,

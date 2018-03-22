@@ -6,7 +6,6 @@ const App = () => (
   <div>
     {renderRoutes(routes)}
   </div>
-
 );
 
 export default App;

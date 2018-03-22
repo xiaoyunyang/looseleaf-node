@@ -6,6 +6,10 @@ import { LoginModal, SignupModal } from './Login/Modal';
 const root = 'public';
 
 export default class TopNav extends React.Component {
+  constructor(props) {
+    super(props);
+    this.closeModal = this.closeModal.bind(this);
+  }
   componentDidMount() {
     $('.modal').modal({
       dismissible: true, // Modal can be dismissed by clicking outside of the modal
@@ -86,7 +90,7 @@ export default class TopNav extends React.Component {
                 <li>
                   <a id="signup-btn-tab"
                      href="#signup-modal"
-                     onClick={this.closeModal.bind(this, '#login-modal')}
+                     onClick={this.closeModal('#login-modal')}
                      className="btn modal-trigger signup-btn">
                     Join
                   </a>
@@ -143,7 +147,7 @@ export default class TopNav extends React.Component {
             <li>
               <a id="signup-btn-main"
                  href="#signup-modal"
-                 onClick={this.closeModal.bind(this, '#login-modal')}
+                 onClick={this.closeModal('#login-modal')}
                  className="btn modal-trigger signup-btn">
                 Join
               </a>
@@ -152,7 +156,7 @@ export default class TopNav extends React.Component {
           <ul className="right hide-on-small-only">
             <li>
               <a href="#login-modal"
-                 onClick={this.closeModal.bind(this, '#signup-modal')}
+                 onClick={this.closeModal('#signup-modal')}
                  className="modal-trigger">
                 Log in
               </a>
@@ -174,8 +178,17 @@ export default class TopNav extends React.Component {
         </div>
         <div className="nav-header center">
           <h4>Build Skills by Helping A Good Cause</h4>
-          <div className="tagline">{'Gain relevant work experience as a developer, designer, and writer'}</div>
+
+        <div className="tagline">
+          {'Gain relevant work experience as a developer, designer, and writer'}
         </div>
+        <a href="#signup-modal"
+           onClick={this.closeModal('#login-modal')}
+           className="btn modal-trigger signup-btn">
+          Join LooseLeaf
+        </a>
+
+      </div>
       </nav>
       </div>
       <nav className="filter-navbar" style={styleHeight}>
