@@ -4,9 +4,9 @@ const path = require('path');
 module.exports = {
   devtool: 'source-map',
   entry: {
-    guest: './client/src/guest.js',
-    user: './client/src/user.js',
-    recipe: './client/src/recipe.js'
+    guest: path.resolve(__dirname, 'client/src/guest.js'),
+    user: path.resolve(__dirname, 'client/src/user.js'),
+    recipe: path.resolve(__dirname, 'client/src/recipe.js')
   },
   output: {
     path: path.resolve(__dirname, 'client/src/assets'),

@@ -26,7 +26,7 @@ class App extends React.Component {
             </div>
           </nav>
         </div>
-        <div className="container">
+        <div className="container main">
           <Featured {...this.props.featuredRecipe} />
           <h4>{'More like this'}</h4>
           <Recipes {...this.props} />
