@@ -4,7 +4,7 @@
 ### App Setup 
 **Technology selection and experimentation**
 
-- [x] Select Web Tech Stack [HowTo doc](https://github.com/xiaoyunyang/xiaoyunyang.github.io/blob/master/assets/md/fundamental/tech-behind-modern-webapps.md)
+- [x] Select Web Tech Stack [HowTo doc](https://github.com/xiaoyunyang/web-dev-cheatsheets/blob/master/fundamental/tech-behind-modern-webapps.md)
 - [x] Add React Router V4. Hack react-router-config to handle routing in Guest Mode and User Mode - See [Solution](https://github.com/ReactTraining/react-router/issues/4962)
 - [x] Connect Mongo database to server using mongoose
 
@@ -56,6 +56,11 @@
 - [**Universal**] UserProfileApp server and client integration
 	- [ ] Create UserProfile UI in materializeCSS and React using dummy data (use create-react-app to take advantage of HMR and react hot loader).
 	- [ ] Set up redux store, actions, and reducers for UserProfileApp
+		- timdorr's [data preloading example project](https://github.com/reactjs/redux/tree/master/examples/universal)
+		- Jason Watmore's [example project](http://jasonwatmore.com/post/2017/09/16/react-redux-user-registration-and-login-tutorial-example#user-actions-js) which guides you to set up react redux user registration and login
+		- Scotch.io [Tutorial](https://scotch.io/courses/using-react-router-4/authentication-with-redirect)
+		- [LoginFlow](https://github.com/mxstbr/login-flow) Sample/Starter project
+		- Medium [React Router 4 Container for Rendering Two Versions of the app](https://medium.com/@lonesword_/authentication-with-react-router-4-x-5b377e5e05d1)
 	- [ ] Create Server API for user profile in server to send profile data for initial load an isomorphic fetch in client app after initial load.
 	- [ ] Create unit test for server api.
 

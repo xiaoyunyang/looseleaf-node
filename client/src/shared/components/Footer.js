@@ -9,6 +9,7 @@ class Footer extends React.Component {
     $('.tooltipped').tooltip({delay: 50});
   }
   render() {
+    // TODO: wrap social icons in circles
     return (
       <footer className="page-footer section-green">
         <div className="container">
@@ -54,7 +55,7 @@ class Footer extends React.Component {
                 <h6>
                   <ul className="light footer-text-links">
                     <li><a href="#!">Designer</a></li>
-                    <li><a href="#!">Artist</a></li>
+                    <li><a href="#!">Illustrator</a></li>
                     <li><a href="#!">Developer</a></li>
                     <li><a href="#!">Writer</a></li>
                   </ul>

@@ -74,7 +74,6 @@ if (process.env.NODE_ENV === 'production') {
   app.use(cors()); // TODO: this allows anyone to access my api. can't use for production
 }
 
-
 // API =========================================================================
 /*
  This is getting sent to localhost:3001/api/hello. In your terminal try:
@@ -241,11 +240,11 @@ const httpsOptions = {
 };
 
 http.createServer(app).listen(app.get('port'), () => {
-  console.log(`Express server started at: http://localhost:${app.get('port')}/`); // eslint-disable-line no-console
+  console.info(`Express server started at: http://localhost:${app.get('port')}/`); // eslint-disable-line no-console
 });
 
 https.createServer(httpsOptions, app).listen(8080, () => {
-  console.log('Express server started at: https://localhost:8080/'); // eslint-disable-line no-console
+  console.info('Express server started at: https://localhost:8080/'); // eslint-disable-line no-console
 });
 
 /*

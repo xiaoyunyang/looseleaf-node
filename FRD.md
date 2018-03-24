@@ -9,6 +9,31 @@
 
 The list of accomplishments include a list of all your submittals and stats on your submittals, such as number of reactions and list of comments and such.
 
+
+## Authentication
+
+### Redux States:
+
+* `IS_LOGGED_IN`
+* `LOGIN_SUCCESS`
+* `LOGIN_FAILURE`
+* `SIGNUP_SUCCESS`
+* `SIGNUP_FAILURE`
+
+Root = `/`
+
+* If `IS_LOGGED_IN`, then you have access to the following routes:
+
+	1. `/[username]`
+	2. `/[username]/[area]/[project-name]`
+	3. `/[username]/completed`
+	4. `/[username]/completed/[area]`
+	4. `/[username]/ongoing`
+	5. `/[username]/ongoing/[area]`
+	6. `/[username]/opportunities`
+	7. `/[username]/opportunities/[area]`
+	8. `/[username]/opportunities` 
+
 ## Components
 
 
