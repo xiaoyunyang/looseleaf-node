@@ -42,8 +42,7 @@ export default function renderUserApp(req, res, next) {
 			res.end()
 		}
     const html = renderToString(
-      <HTML userData={`window.__PRELOADED_STATE__ =
-        ${JSON.stringify(dataToSerialize)}`}
+      <HTML userData={dataToSerialize}
         html={app}/>
     );
     return res.send(`<!DOCTYPE html>${html}`);

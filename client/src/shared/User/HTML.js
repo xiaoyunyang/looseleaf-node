@@ -10,7 +10,7 @@ const HTML = (props) => {
   return (
     <html lang="en">
       <head>
-        <title>LooseLeaf | Dashboard</title>
+        <title>{`${props.userData.displayName} - LooseLeaf `}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link
           rel="stylesheet"
@@ -24,12 +24,12 @@ const HTML = (props) => {
           dangerouslySetInnerHTML={{ __html: props.html }}
         />
         <script dangerouslySetInnerHTML={{
-          __html: `
-            window.__SERIALIZED_STATE__ =
-              JSON.stringify(${props.userData})
-          `
-        }}
+            __html: `window.__PRELOADED_STATE__ =
+              ${JSON.stringify(props.userData)}`
+          }}
         />
+
+
       <script type="application/javascript" src="/user.bundle.js" />
       </body>
     </html>
