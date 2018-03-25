@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/server';
 import { Provider } from 'react-redux';
-import initRedux from '../src/redux/Recipe/init-redux';
-import * as actions from '../src/redux/Recipe/action-creators';
+import initRedux from '../src/shared/redux/Recipe/init-redux';
+import * as actions from '../src/shared/redux/Recipe/action-creators';
 import HTML from '../src/shared/Recipe/HTML';
 import App from '../src/shared/Recipe/App';
 
@@ -34,7 +34,7 @@ export default function renderView(req, res, next) {
 
     // Render the full HTML page by rendering html.jsx with the previously rendered components and the serialized data.
     const renderedHTML = ReactDOM.renderToString(
-      <HTML data={`window.__INITIAL_STATE =
+      <HTML data={`window.__PRELOADED_STATE__ =
         ${JSON.stringify(dataToSerialize)}`}
             html={html} />
     )

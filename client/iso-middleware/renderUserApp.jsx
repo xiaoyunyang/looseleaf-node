@@ -3,18 +3,17 @@ import { renderToString } from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom';
 import { matchRoutes } from 'react-router-config';
 import { Provider } from 'react-redux';
-import configureStore from '../src/redux/User/configureStore';
+import configureStore from '../src/shared/redux/User/configureStore';
 import routes from '../src/shared/User/routes';
 import HTML from '../src/shared/User/HTML';
 import App from '../src/shared/User/App';
 
 export default function renderUserApp(req, res, next) {
-
-  const preloadedState = req.user;
-  console.log('preloadedState type: ', (typeof preloadedState));
-
-  const dataToSerialize = JSON.stringify(preloadedState);
+//  console.log('preloadedState type: ', (typeof preloadedState));
   const store = configureStore(req.user);
+  const dataToSerialize = store.getState();
+
+  console.log('dataToSerialize', dataToSerialize);
 
   const branch = matchRoutes(routes, req.url)
   const promises = branch.map(({ route, match }) => {
@@ -43,7 +42,7 @@ export default function renderUserApp(req, res, next) {
 			res.end()
 		}
     const html = renderToString(
-      <HTML userData={`window.__INITIAL_STATE =
+      <HTML userData={`window.__PRELOADED_STATE__ =
         ${JSON.stringify(dataToSerialize)}`}
         html={app}/>
     );

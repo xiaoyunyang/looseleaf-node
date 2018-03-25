@@ -1,5 +1,5 @@
-import initRedux from '../src/redux/Recipe/init-redux';
-import * as actions from '../src/redux/Recipe/action-creators';
+import initRedux from '../src/shared/redux/Recipe/init-redux';
+import * as actions from '../src/shared/redux/Recipe/action-creators';
 
 export default function dataPreloading(req, res, next) {
 

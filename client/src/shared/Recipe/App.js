@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Recipes from './Recipes';
 import Featured from './Featured';
-import * as actionCreators from '../../redux/Recipe/action-creators';
+import * as actionCreators from '../redux/Recipe/action-creators';
 import Footer from '../components/Footer';
 /*
  * App

@@ -14,7 +14,7 @@ const initState = {
   gender: "female",
   location: "Washington, District of Columbia",
   picture: "https://graph.facebook.com/10213296357138004/picture?type=large","__v":0
-}
+};
 
 export default function user(state = initState, action) {
   switch (action.type) {

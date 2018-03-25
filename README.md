@@ -56,6 +56,7 @@
 - [**Universal**] UserProfileApp server and client integration
 	- [ ] Create UserProfile UI in materializeCSS and React using dummy data (use create-react-app to take advantage of HMR and react hot loader).
 	- [ ] Set up redux store, actions, and reducers for UserProfileApp
+		- initialize redux store with server data [explanation](http://stackoverflow.com/a/33791942/458193)
 		- timdorr's [data preloading example project](https://github.com/reactjs/redux/tree/master/examples/universal)
 		- Jason Watmore's [example project](http://jasonwatmore.com/post/2017/09/16/react-redux-user-registration-and-login-tutorial-example#user-actions-js) which guides you to set up react redux user registration and login
 		- Scotch.io [Tutorial](https://scotch.io/courses/using-react-router-4/authentication-with-redirect)

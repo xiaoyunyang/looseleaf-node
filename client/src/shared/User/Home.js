@@ -10,7 +10,7 @@ class Home extends React.Component {
       resHello: 'Loading...'
     };
   }
-  componentWillMount() {
+  componentDidlMount() {
     // Get hello message
     this.callApi('http://localhost:3001/api/hello')
       .then(res => this.setState({ resHello: res.express }))
@@ -35,7 +35,7 @@ class Home extends React.Component {
         <TopNav route={this.props.route}/>
         <div className="container">
           <h1>{`Welcome `}</h1>
-          <p>{userData}</p>
+          <p>userData:</p>
           <a className="btn" href="">Start a project</a>
           <h6>
             {`Message from the server: ${this.state.resHello}`}
