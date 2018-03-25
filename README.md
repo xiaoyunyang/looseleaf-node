@@ -62,6 +62,7 @@
 		- Scotch.io [Tutorial](https://scotch.io/courses/using-react-router-4/authentication-with-redirect)
 		- [LoginFlow](https://github.com/mxstbr/login-flow) Sample/Starter project
 		- Medium [React Router 4 Container for Rendering Two Versions of the app](https://medium.com/@lonesword_/authentication-with-react-router-4-x-5b377e5e05d1)
+		- Tutorial from [codementor](https://www.codementor.io/kiok46/redux-store-actions-reducers-and-logger-get-started-b35h1pvpc)
 	- [ ] Create Server API for user profile in server to send profile data for initial load an isomorphic fetch in client app after initial load.
 	- [ ] Create unit test for server api.
 

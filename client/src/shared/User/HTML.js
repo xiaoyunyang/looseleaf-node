@@ -30,7 +30,7 @@ const HTML = (props) => {
           `
         }}
         />
-        <script type="application/javascript" src="/user.bundle.js" />
+      <script type="application/javascript" src="/user.bundle.js" />
       </body>
     </html>
   );

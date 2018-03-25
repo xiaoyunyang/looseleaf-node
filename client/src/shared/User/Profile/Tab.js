@@ -6,6 +6,7 @@ import { renderRoutes } from 'react-router-config';
 import $ from 'jquery';
 import { routes, root, tabs } from './routes';
 import About from './About';
+import TopNav from '../TopNav';
 
 polyfill();
 
@@ -18,34 +19,37 @@ class Tab extends Component {
     if (typeof window !== 'undefined') {
       $(`#tab-${selected}`).trigger('click');
     }
-
     return (
-      <div className="container">
-        <div className="row">
-          <div className="col s12">
-            <About />
-            <ul id="profile-tabs" className="tabs">
-              {
-              tabs.map((tab, i) => {
-                return (
-                  <li key={i} className="tab col l3 m2 s3">
-                    <Link
-                      id={`tab-${tab}`}
-                      to={`${root}/${tab}`}
-                      className={selected === tab ? 'active' : ''}
-                    >
-                      {tab}
-                    </Link>
-                  </li>);
-              })
-            }
-            </ul>
+      <div>
+        <TopNav route={this.props.route} user={this.props.user}/>
+        <div className="container">
+          <div className="row">
+            <div className="col s12">
+              <About user={this.props.user}/>
+              <ul id="profile-tabs" className="tabs">
+                {
+                tabs.map((tab, i) => {
+                  return (
+                    <li key={i} className="tab col l3 m2 s3">
+                      <Link
+                        id={`tab-${tab}`}
+                        to={`${root}/${tab}`}
+                        className={selected === tab ? 'active' : ''}
+                      >
+                        {tab}
+                      </Link>
+                    </li>);
+                })
+              }
+              </ul>
+            </div>
+            <Switch>
+              {renderRoutes(routes)}
+            </Switch>
           </div>
-          <Switch>
-            {renderRoutes(routes)}
-          </Switch>
         </div>
       </div>
+
     );
   }
 }

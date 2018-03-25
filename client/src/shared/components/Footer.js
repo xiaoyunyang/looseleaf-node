@@ -17,7 +17,7 @@ class Footer extends React.Component {
             <div className="col l5 m12 s12">
               <div className="col l6 m4 s6">
                 <a href="/">
-                  <img src="http://looseleafapp.com/assets/images/logo/beta.png"/>
+                  <img alt='looseleaf' src="http://looseleafapp.com/assets/images/logo/beta.png"/>
                 </a>
               </div>
               <div className="col l12 s12 light footer-text-links">
@@ -35,10 +35,10 @@ class Footer extends React.Component {
                   </div>
                   <div className='col l6 m6 s6 offset-l1'>
                     <div style={socialIconsStyle} className="social-icons">
-                      <a target="_blank" href="https://www.facebook.com/mylooseleaf">
+                      <a target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/mylooseleaf">
                         <i className="fa fa-facebook fa-lg"></i>
                       </a>
-                      <a target="_blank" href="https://twitter.com/mylooseleaf">
+                      <a target="_blank" rel="noopener noreferrer" href="https://twitter.com/mylooseleaf">
                         <i className="fa fa-twitter fa-lg"></i>
                       </a>
                       <a className="tooltipped" data-position="top" data-delay="50" data-tooltip="Email us" href="mailto:info@looseleaf.us">

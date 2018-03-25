@@ -26,16 +26,11 @@ class Home extends React.Component {
   }
 
   render() {
-    let userData = '';
-    if(typeof window !== 'undefined') {
-      userData = window.__INITIAL_STATE;
-    }
     return (
       <div>
-        <TopNav route={this.props.route}/>
+        <TopNav route={this.props.route} user={this.props.user}/>
         <div className="container">
-          <h1>{`Welcome `}</h1>
-          <p>userData:</p>
+          <h1>{`Welcome ${this.props.user.username} `}</h1>
           <a className="btn" href="">Start a project</a>
           <h6>
             {`Message from the server: ${this.state.resHello}`}

@@ -21,8 +21,8 @@ class Header extends React.Component {
               <li><Link to="/user">User</Link></li>
               <li><Link to="/foop">404</Link></li>
               <li>
-                <a href="#" className="navbar-img dropdown-button" data-activates="user-dropdown">
-                  <img className="mod-round" src="http://looseleafapp.com/assets/data/profile/photo/looseleaf.png" />
+                <a className="navbar-img dropdown-button" data-activates="user-dropdown">
+                  <img alt="looseleaf" className="mod-round" src="http://looseleafapp.com/assets/data/profile/photo/looseleaf.png" />
                   <div className="arrow-down" />
                 </a>
                 <ul id="user-dropdown" className="dropdown-content">

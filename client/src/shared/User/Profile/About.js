@@ -1,16 +1,22 @@
 import React from 'react';
 
-export default () => (
+export default ({ user }) => (
   <div className="hero-profile">
     <div className="row center">
       <div className="col l4 m6 s12">
-        <img src="https://res.cloudinary.com/closebrace/image/upload/w_400/v1491315007/usericon_id76rb.png" alt="" className="circle" />
+        <img src={user.picture} alt="" className="circle" />
       </div>
       <div className="col l8 m6 s12 hero-info">
-        <h3>Xiaoyun Yang</h3>
-        <p>Web Developer | Member since April 2018</p>
-        <p>Hi I'm Xiaoyun</p>
-        <p>Website</p>
+        <h3>{user.displayName}</h3>
+        <p>Web Developer | {`Member since ${user.createdAt}`}</p>
+        {
+          user.bio ? <p>{`Bio ${user.bio}`}</p> : <a>add bio</a>
+        }
+        <p>{`email: ${user.email}`}</p>
+        <p>{`location: ${user.location}`}</p>
+        {
+          user.website ? <p>{`Website ${user.website}`}</p> : <a>add website</a>
+        }
       </div>
     </div>
   </div>

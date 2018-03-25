@@ -1,22 +1,23 @@
 import {
   createStore,
-  applyMiddleware } from 'redux';
-import logger from 'redux-logger'
-
+  applyMiddleware,
+  compose } from 'redux';
 import thunkMiddleware from 'redux-thunk';
+import loggerMiddleware from 'redux-logger';
 import reducers from './reducers';
 
 //TODO: remove logger for only production mode
 
 const configureStore = (preloadedState) => {
-  const middleware = [thunkMiddleware, logger];
-
+  const middleware = [thunkMiddleware, loggerMiddleware];
+  const enhancer = compose(
+    applyMiddleware(...middleware)
+  );
   const store = createStore(
     reducers,
     {user: preloadedState},
-    applyMiddleware(...middleware)
+    enhancer
   );
-
   return store;
 }
 

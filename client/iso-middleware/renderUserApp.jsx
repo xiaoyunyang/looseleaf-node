@@ -4,18 +4,18 @@ import { StaticRouter } from 'react-router-dom';
 import { matchRoutes } from 'react-router-config';
 import { Provider } from 'react-redux';
 import configureStore from '../src/shared/redux/User/configureStore';
-import routes from '../src/shared/User/routes';
+import getRoutes from '../src/shared/User/routes';
 import HTML from '../src/shared/User/HTML';
 import App from '../src/shared/User/App';
 
 export default function renderUserApp(req, res, next) {
 //  console.log('preloadedState type: ', (typeof preloadedState));
   const store = configureStore(req.user);
-  const dataToSerialize = store.getState();
+  const dataToSerialize = req.user;
 
-  console.log('dataToSerialize', dataToSerialize);
+  // console.log('dataToSerialize', dataToSerialize);
 
-  const branch = matchRoutes(routes, req.url)
+  const branch = matchRoutes(getRoutes(req.user.username), req.url)
   const promises = branch.map(({ route, match }) => {
     return route.loadData
       ? route.loadData(match)

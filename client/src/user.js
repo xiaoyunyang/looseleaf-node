@@ -26,9 +26,6 @@ const store = configureStore(initialState);
 // const storeRoute = initRedux(initialStateRoute);
 
 console.log('Data to hydrate with', initialState);
-
-console.log('store.getState() =', store.getState())
-
 /*
  * Main entry point for the client side isomorphic app
  */

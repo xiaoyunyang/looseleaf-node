@@ -4,8 +4,7 @@ import $ from 'jquery';
 import store from './store';
 
 const root = store.root;
-const username = store.username;
-
+// const username = store.username;
 
 class MobileSideNav extends React.Component {
   componentDidMount() {
@@ -25,20 +24,19 @@ class MobileSideNav extends React.Component {
     });
   }
   render() {
-      console.log(username)
     return (
       <div>
-        <a href="#" data-activates="mobile-menu" className="button-collapse"><i className="material-icons">menu</i></a>
+        <a data-activates="mobile-menu" className="button-collapse"><i className="material-icons">menu</i></a>
         <ul className="side-nav" id="mobile-menu">
           <li><Link to={`${root}`} className="active">Home</Link></li>
-          <li><Link to={`/${root}${username}`}>Profile</Link></li>
+          <li><Link to={`/${root}${this.props.username}`}>Profile</Link></li>
         </ul>
       </div>
     );
   }
 }
 
-const UserDropdown = () => (
+const UserDropdown = ({username}) => (
   <li id="dropdown-block">
     <a className="navbar-img dropdown-button" data-activates="user-dropdown">
       <img alt="loosleaf" className="mod-round" src="http://looseleafapp.com/assets/data/profile/photo/looseleaf.png" />
@@ -56,7 +54,10 @@ const UserDropdown = () => (
 
 export default class TopNav extends React.Component {
   render() {
+    const username = this.props.user.username;
+
     let selected = '';
+
     if(typeof this.props.route.path === 'string') {
       selected = this.props.route.path.split('/').pop();
     }
@@ -86,9 +87,9 @@ export default class TopNav extends React.Component {
               </li>
               <li><Link to={`/${root}foo`}>Foo</Link></li>
               <li><button><i className="material-icons">notifications_none</i></button></li>
-              <UserDropdown />
+              <UserDropdown username={username} />
             </ul>
-            <MobileSideNav />
+            <MobileSideNav username={username} />
           </div>
         </nav>
       </div>
