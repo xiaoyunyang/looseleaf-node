@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Recipes from './Recipes';
 import Featured from './Featured';
-import * as actionCreators from '../redux/Recipe/action-creators';
+import * as actionCreators from '../redux/Recipe/actions/recipes';
+// import * as actionCreators from '../redux/Recipe/actions/projects';
 import Footer from '../components/Footer';
 /*
  * App
@@ -40,9 +41,12 @@ class App extends React.Component {
 // This function lets you convert the app state to properties on your component.
 function mapStateToProps(state) {
   const { recipes, featuredRecipe } = state.recipes;
+  const { newProjects, completedProjects } = state.projects;
   return {
     recipes,
-    featuredRecipe
+    featuredRecipe,
+    newProjects,
+    completedProjects,
   };
 }
 

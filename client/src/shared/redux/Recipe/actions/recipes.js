@@ -6,14 +6,17 @@ import fetch from 'isomorphic-fetch';
 export const GET_RECIPES = 'GET_RECIPES';
 export const GET_FEATURED_RECIPE = 'GET_FEATURED_RECIPE';
 
+
 // The fetch recipes handles all of the logic for
 // making a request to the server for the recipes data.
 export function fetchRecipes() {
+    console.log("in fetchRecipes!!!!!!!!!!!!!!!")
   return dispatch => {
     return fetch('http://localhost:3001/api/recipes', { // Implement the fetch API for making a GET request to the appropriate endpoint.
       method: 'GET'
     }).then((response) => {
       return response.json().then((data) => { // On a successful response, get the JSON from the response.
+        console.log("data.newProjects", data.recipes)
         return dispatch({  // Dispatch the action.
           type: GET_RECIPES,  // Type is the only required property of every action.
           data: data.recipes  // Attach the JSON data to the action payload on a property called data.
@@ -41,7 +44,6 @@ export function fetchFeaturedRecipe() {
     });
   }
 }
-
 // This action creator composes the other two action creators making it easier
 // for the view and server to request the related data.
 export function getHomePageData() {

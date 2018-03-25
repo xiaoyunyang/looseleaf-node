@@ -1,4 +1,6 @@
-import { GET_RECIPES, GET_FEATURED_RECIPE } from './action-creators';
+import {
+  GET_RECIPES,
+  GET_FEATURED_RECIPE } from '../actions/recipes';
 // Include the constants from the action creators.
 
 export default function recipes(state = {}, action) {
@@ -13,7 +15,6 @@ export default function recipes(state = {}, action) {
         ...state,
         featuredRecipe: action.data,
       };
-
     default:
       return state;  // If the reducer is triggered but no case matches, return the current store state. No changes are required so you don’t need to create a new object.
   }

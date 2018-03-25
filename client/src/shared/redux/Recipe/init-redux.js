@@ -4,11 +4,13 @@ import {
   applyMiddleware,
   compose } from 'redux';
 import thunkMiddleware from 'redux-thunk';
-import recipes from './recipe-reducer';
+import recipes from './reducers/recipes';
+import projects from './reducers/projects';
 
 export default function (initialStore={}) {
   const reducer = combineReducers({
-    recipes
+    recipes,
+    projects
   });
   const middleware = [thunkMiddleware]
   return compose(

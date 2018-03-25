@@ -26,15 +26,13 @@ Root = `/`
 
 	1. `/[username]`
 		- contains hero About and tabs to latest, ongoing, and stats. Links routes #2, #4, and 
-	2. `/[username]/latest`
+	2. `/[username]/projects`
 		- contain links to Route #3 below. 
-	3. `/[username]/latest/[area]`
+	3. `/[username]/projects/[area]`
 		- contains a filtered down list of stuff the user has done 
 		- contain links to Route #3 below. 
 	3. `/[username]/[area]/[project-name]`
 	4. `/[username]/latest`
-		
-	5. 
 	6. `/[username]/ongoing`
 	7. `/[username]/ongoing/[area]`
 	8. `/[username]/community`

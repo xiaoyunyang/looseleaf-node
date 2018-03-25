@@ -6,9 +6,6 @@ import { hot } from 'react-hot-loader';
 import configureStore from './shared/redux/User/configureStore';
 
 const store = configureStore();
-
-console.log('store.getState() =', store.getState())
-
 const AppUser = () => (
   <Provider store={store}>
     <BrowserRouter>

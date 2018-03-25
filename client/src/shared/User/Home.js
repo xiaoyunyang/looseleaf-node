@@ -10,7 +10,10 @@ class Home extends React.Component {
       resHello: 'Loading...'
     };
   }
-  componentDidlMount() {
+  componentDidMount() {
+    // console.log("componentDidMount in Home ... ")
+    // this.props.actions.getHomePageData();
+    console.log(this.props.actions)
     // Get hello message
     this.callApi('http://localhost:3001/api/hello')
       .then(res => this.setState({ resHello: res.express }))
@@ -26,6 +29,7 @@ class Home extends React.Component {
   }
 
   render() {
+    console.log("Home is rendering...")
     return (
       <div>
         <TopNav route={this.props.route} user={this.props.user}/>

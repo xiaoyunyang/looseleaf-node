@@ -1,8 +1,3 @@
-import {
-  GET_RECIPES,
-  GET_FEATURED_RECIPE } from '../action-creators';
-// Include the constants from the action creators.
-
 const initState = {
   createdAt: "2018-03-12T04:10:43.893Z",
   local: {"password":"$2a$10$9sSuh.axRYv.ZWITeXQw0eLi8JQCtIZmLAHQUvIoXTf3/R1vHMqWW"},
@@ -18,17 +13,6 @@ const initState = {
 
 export default function user(state = initState, action) {
   switch (action.type) {
-    case GET_RECIPES:
-      return {
-        ...state, // Use the spread operator to clone the state object. This maintains the immutable store.
-        recipes: action.data,  // Use the data from the action to override the current state so that the new app state is the old app state with the modified data
-      };
-    case GET_FEATURED_RECIPE:
-      return {
-        ...state,
-        featuredRecipe: action.data,
-      };
-
     default:
       return state;  // If the reducer is triggered but no case matches, return the current store state. No changes are required so you don’t need to create a new object.
   }

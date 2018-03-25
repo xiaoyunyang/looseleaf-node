@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/server';
 import { Provider } from 'react-redux';
 import initRedux from '../src/shared/redux/Recipe/init-redux';
-import * as actions from '../src/shared/redux/Recipe/action-creators';
+import * as actions from '../src/shared/redux/Recipe/actions/recipes';
 import HTML from '../src/shared/Recipe/HTML';
 import App from '../src/shared/Recipe/App';
 

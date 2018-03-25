@@ -72,6 +72,32 @@ api.get('/featured', (req, res) => {
     res.status(200).send({ recipe });
   });
 });
+api.get('/projects/new', (req, res) => {
+  // Read and open the recipes json file
+  const filePath = path.join(__dirname, '../data/recipes.json');
+  fs.readFile(filePath, 'utf8', (err, data) => {
+    // Error handling - return an error
+    if (err) {
+      res.status(500).end();
+      return console.error(err);
+    }
+    const newProjects = JSON.parse(data);
+    res.status(200).send({ newProjects });
+  });
+});
+api.get('/projects/completed', (req, res) => {
+  // Read and open the featured recipe json file
+  const filePath = path.join(__dirname, '../data/featured.json');
+  fs.readFile(filePath, 'utf8', (err, data) => {
+    // Error handling - return an error
+    if (err) {
+      res.status(500).end();
+      console.error(err);
+    }
+    const completedProjects = JSON.parse(data);
+    res.status(200).send({ completedProjects });
+  });
+});
 
 api.use('/assets', (req, res, next) => {
   const filePath = path.join(__dirname, '../assets', req.url);
