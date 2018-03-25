@@ -183,7 +183,7 @@ router.post('/auth/login', passport.authenticate('login-local', {
 // Passport populates req.user for you
 router.get('/auth/logout', (req, res) => {
   req.logout();
-  res.redirect('/auth');
+  res.redirect('/');
 });
 
 router.use((req, res, next) => {

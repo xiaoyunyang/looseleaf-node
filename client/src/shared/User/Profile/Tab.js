@@ -4,7 +4,7 @@ import { polyfill } from 'es6-promise';
 import { Switch } from 'react-router-dom';
 import { renderRoutes } from 'react-router-config';
 import $ from 'jquery';
-import { routes, root, tabs } from './routes';
+import { getRoot, getRoutes, tabs } from './routes';
 import About from './About';
 import TopNav from '../TopNav';
 
@@ -19,6 +19,7 @@ class Tab extends Component {
     if (typeof window !== 'undefined') {
       $(`#tab-${selected}`).trigger('click');
     }
+    const root = getRoot(this.props.user.username)
     return (
       <div>
         <TopNav route={this.props.route} user={this.props.user}/>
@@ -44,7 +45,7 @@ class Tab extends Component {
               </ul>
             </div>
             <Switch>
-              {renderRoutes(routes)}
+              {renderRoutes(getRoutes(this.props.user.username).routes)}
             </Switch>
           </div>
         </div>

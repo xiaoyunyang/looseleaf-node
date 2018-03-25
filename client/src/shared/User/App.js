@@ -8,6 +8,7 @@ import * as actionCreators from '../redux/User/action-creators';
 
 class AppContainer extends React.Component {
   render() {
+    console.log('AppContainer', getRoutes(this.props.state.user))
     return (
       <App {...this.props} />
     );

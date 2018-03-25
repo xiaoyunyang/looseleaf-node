@@ -47,7 +47,7 @@ const UserDropdown = ({username}) => (
       <li><a href="/user">Stats</a></li>
       <li className="divider" />
       <li><a href={`/${root}${username}/settings`}>Settings</a></li>
-      <li><a href="/logout">Log out</a></li>
+      <li><a href="/auth/logout">Log out</a></li>
     </ul>
   </li>
 );

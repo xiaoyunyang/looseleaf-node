@@ -13,7 +13,9 @@ export default ({ user }) => (
           user.bio ? <p>{`Bio ${user.bio}`}</p> : <a>add bio</a>
         }
         <p>{`email: ${user.email}`}</p>
-        <p>{`location: ${user.location}`}</p>
+        {
+          user.location ? <p>{`location: ${user.location}`}</p> : <a>add Location</a>
+        }
         {
           user.website ? <p>{`Website ${user.website}`}</p> : <a>add website</a>
         }

@@ -14,8 +14,9 @@ class SocialLogin extends React.Component {
   renderLoginBtn(oauth, action, key) {
     // capitalize first letter of oath. Example: facebook => Facebook
     const oauthName = oauth[0].toUpperCase() + oauth.substr(1);
+
     return <div key={key} className={`btn-${oauth}`}>
-      <a className="waves-effect waves-light btn modal-trigger" href={`${authPath}/${oauth}`}>
+      <a className="waves-effect waves-light btn" href={`${authPath}/${oauth}`}>
         <i className={`fa fa-${oauth} fa-lg`}></i>
         {`${this.props.action} with ${oauthName}`}
       </a>
