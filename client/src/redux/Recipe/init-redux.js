@@ -6,12 +6,6 @@ import {
 import thunkMiddleware from 'redux-thunk';
 import recipes from './recipe-reducer';
 
-/**
- * Since both the browser and the server will be initializing Redux, you will
- * abstract the code into a module called init-redux.
- * @param  {Object} [initialStore={}] initialStore has a value that was passed in from main.jsx. (it defaults to an empty object when none is passed in).
- * @return {[type]}                   [description]
- */
 export default function (initialStore={}) {
   const reducer = combineReducers({
     recipes

@@ -89,8 +89,8 @@ app.use('/api', apiVersion1);
 app.get('/recipe', renderViewMiddleware);
 
 // app.use(express.static(__dirname));
-app.get('/profile*', renderUserAppMiddleware);
-app.get('/public*', renderGuestAppMiddleware);
+// app.get('/user*', renderUserAppMiddleware);
+// app.get('/public*', renderGuestAppMiddleware);
 
 // Auth ========================================================================
 // required for passport
@@ -110,7 +110,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 const authRoutes = require('./auth/routes');
 const configPassport = require('./auth/passport.js');
 
-app.use('/auth', authRoutes);
+app.use('/', authRoutes);
 configPassport();
 
 // Guestbook ===================================================================

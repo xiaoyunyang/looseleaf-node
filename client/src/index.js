@@ -11,11 +11,11 @@ import AppGuest from './AppGuest';
 import AppRecipe from './AppRecipe';
 import './assets/index.css';
 
-const App = AppUser;//AppUser;//AppRecipe;
-
 /*
  * Main entry point for the create-react-app
  */
+const isLoggedin = true;
+const App = isLoggedin ? AppUser : AppGuest;
 const render = (Component) => {
   ReactDOM.render(
     <AppContainer>

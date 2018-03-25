@@ -2,11 +2,11 @@ import One from './One';
 import Two from './Two';
 import Three from './Three';
 import NotFound from '../../components/NotFound';
+import store from '../store';
 
-const username = 'xiaoyun-yang';
-const root = `/profile/user/${username}`;
+const root = `/${store.root}${store.username}`;
 
-const tabs = ['one', 'two', 'three'];
+const tabs = ['projects', 'requests', 'community'];
 const routes = [
   {
     path: `${root}`,
@@ -14,16 +14,16 @@ const routes = [
     component: One
   },
   {
-    path: `${root}/one`,
+    path: `${root}/${tabs[0]}`,
     exact: true,
     component: One
   },
   {
-    path: `${root}/two`,
+    path: `${root}/${tabs[1]}`,
     component: Two
   },
   {
-    path: `${root}/three`,
+    path: `${root}/${tabs[2]}`,
     component: Three
   },
   {

@@ -1,9 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import $ from 'jquery';
+import store from './store';
 
-const root = 'profile';
-const username = 'xiaoyun-yang';
+const root = store.root;
+const username = store.username;
+
 
 class MobileSideNav extends React.Component {
   componentDidMount() {
@@ -11,14 +13,25 @@ class MobileSideNav extends React.Component {
       edge: 'left',
       closeOnClick: true
     });
+
+    $('.dropdown-button').dropdown({
+      inDuration: 300,
+      outDuration: 225,
+      constrainWidth: false, // Does not change width of dropdown to that of the activator
+      gutter: 0, // Spacing from edge
+      belowOrigin: false, // Displays dropdown below the button
+      alignment: 'left', // Displays dropdown with edge aligned to the left of button
+      stopPropagation: false // Stops event propagation
+    });
   }
   render() {
+      console.log(username)
     return (
       <div>
         <a href="#" data-activates="mobile-menu" className="button-collapse"><i className="material-icons">menu</i></a>
         <ul className="side-nav" id="mobile-menu">
-          <li><Link to={`/${root}`} className="active">Home</Link></li>
-          <li><Link to={`/${root}/user/${username}`}>Profile</Link></li>
+          <li><Link to={`${root}`} className="active">Home</Link></li>
+          <li><Link to={`/${root}${username}`}>Profile</Link></li>
         </ul>
       </div>
     );
@@ -32,10 +45,10 @@ const UserDropdown = () => (
       <div className="arrow-down" />
     </a>
     <ul id="user-dropdown" className="dropdown-content">
-      <li><Link to={`/${root}/user/${username}`}>Profile</Link></li>
+      <li><Link to={`/${root}${username}`}>Profile</Link></li>
       <li><a href="/user">Stats</a></li>
       <li className="divider" />
-      <li><a href={`/${root}/user/${username}/settings`}>Settings</a></li>
+      <li><a href={`/${root}${username}/settings`}>Settings</a></li>
       <li><a href="/logout">Log out</a></li>
     </ul>
   </li>
@@ -69,9 +82,9 @@ export default class TopNav extends React.Component {
                 <Link id={`nav-${root}`} to={`/${root}`}>Home</Link>
               </li>
               <li className={selected === username ? 'active' : ''}>
-                <Link id={`nav-${username}`} to={`/${root}/user/${username}`}>Profile</Link>
+                <Link id={`nav-${username}`} to={`/${root}${username}`}>Profile</Link>
               </li>
-              <li><Link to={`/${root}/foo`}>Foo</Link></li>
+              <li><Link to={`/${root}foo`}>Foo</Link></li>
               <li><button><i className="material-icons">notifications_none</i></button></li>
               <UserDropdown />
             </ul>

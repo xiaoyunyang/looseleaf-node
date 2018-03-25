@@ -25,14 +25,32 @@ Root = `/`
 * If `IS_LOGGED_IN`, then you have access to the following routes:
 
 	1. `/[username]`
-	2. `/[username]/[area]/[project-name]`
-	3. `/[username]/completed`
-	4. `/[username]/completed/[area]`
-	4. `/[username]/ongoing`
-	5. `/[username]/ongoing/[area]`
-	6. `/[username]/opportunities`
-	7. `/[username]/opportunities/[area]`
-	8. `/[username]/opportunities` 
+		- contains hero About and tabs to latest, ongoing, and stats. Links routes #2, #4, and 
+	2. `/[username]/latest`
+		- contain links to Route #3 below. 
+	3. `/[username]/latest/[area]`
+		- contains a filtered down list of stuff the user has done 
+		- contain links to Route #3 below. 
+	3. `/[username]/[area]/[project-name]`
+	4. `/[username]/latest`
+		
+	5. 
+	6. `/[username]/ongoing`
+	7. `/[username]/ongoing/[area]`
+	8. `/[username]/community`
+	9. `/[username]/opportunities/[area]`
+	10. `/[username]/opportunities`
+	11. `/[username]/settings` 
+		 - route to `/[username]/settings/about`
+	12. `/[username]/settings/about`
+	13. `/[username]/settings/account`
+	14. `/[username]/settings/notifications`
+
+* If `NOT_LOGGED_IN`'
+
+1. Root `/`
+	- Users explore LooseLeaf homepage site to get a get a sense of what sort of stuff they can be working on. 
+ 
 
 ## Components
 

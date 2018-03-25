@@ -8,6 +8,10 @@ import csrf from 'csurf';
 import gravatarUrl from 'gravatar-url';
 import User from './User';
 
+import renderGuestAppMiddleware from '../../client/iso-middleware/renderGuestApp';
+import renderUserAppMiddleware from '../../client/iso-middleware/renderUserApp';
+
+
 const router = express.Router();
 router.use(csrf());
 // Middleware ==================================================================
@@ -38,9 +42,10 @@ router.use((req, res, next) => {
   res.locals.infos = req.flash('info');
   next();
 });
+
 // List User(s) ================================================================
 // returns all the users, newest one first
-router.get('/', (req, res, next) => {
+router.get('/auth/users', (req, res, next) => {
   User.find()
     .sort({ createdAt: 'descending' })
     .exec((err, users) => {
@@ -49,7 +54,7 @@ router.get('/', (req, res, next) => {
     });
 });
 
-router.get('/users/:username', (req, res, next) => {
+router.get('/auth/users/:username', (req, res, next) => {
   User.findOne({ username: req.params.username }, (err, user) => {
     if (err) { return next(err); }
     if (!user) { return next(404); }
@@ -58,25 +63,25 @@ router.get('/users/:username', (req, res, next) => {
 });
 
 // Facebook=====================================================================
-router.get('/facebook', passport.authenticate('facebook'));
+router.get('/auth/facebook', passport.authenticate('facebook'));
 
 // handle the callback after facebook has authenticated the user
 router.get(
-  '/facebook/callback',
+  '/auth/facebook/callback',
   passport.authenticate('facebook', {
-    successRedirect: '/auth/',
+    successRedirect: '/',
     failureRedirect: '/auth/login'
   }),
 );
 
 // Github =====================================================================
-router.get('/github', passport.authenticate('github'));
+router.get('/auth/github', passport.authenticate('github'));
 
 // handle the callback after facebook has authenticated the user
 router.get(
-  '/github/callback',
+  '/auth/github/callback',
   passport.authenticate('github', {
-    successRedirect: '/auth/',
+    successRedirect: '/',
     failureRedirect: '/auth/login'
   }),
 );
@@ -85,7 +90,7 @@ router.get(
 // Delete ======================================================================
 // Delete user from the database
 router.post(
-  '/delete/:username',
+  '/auth/delete/:username',
   ensureAuthenticated,
   (req, res, next) => {
     User.findOneAndRemove({ username: req.params.username }, (err, user) => {
@@ -107,13 +112,13 @@ router.post(
 
 // Signup ======================================================================
 // Saves user to the database
-router.get('/signup', (req, res) => {
+router.get('/auth/signup', (req, res) => {
   res.render('signup', {
     csrfToken: req.csrfToken()
   });
 });
 
-router.post('/signup', (req, res, next) => {
+router.post('/auth/signup', (req, res, next) => {
   // body-parser adds the username and password to req.body
   const email = req.body.email;
   const password = req.body.password;
@@ -162,13 +167,13 @@ router.post('/signup', (req, res, next) => {
 }));
 
 // Login ======================================================================
-router.get('/login', (req, res) => {
+router.get('/auth/login', (req, res) => {
   res.render('login', {
     csrfToken: req.csrfToken()
   });
 });
 
-router.post('/login', passport.authenticate('login-local', {
+router.post('/auth/login', passport.authenticate('login-local', {
   successRedirect: '/auth',
   failureRedirect: '/auth/login',
   failureFlash: true
@@ -176,7 +181,7 @@ router.post('/login', passport.authenticate('login-local', {
 
 // Logout ======================================================================
 // Passport populates req.user for you
-router.get('/logout', (req, res) => {
+router.get('/auth/logout', (req, res) => {
   req.logout();
   res.redirect('/auth');
 });
@@ -190,16 +195,16 @@ router.use((req, res, next) => {
 
 // edit ========================================================================
 // Passport populates req.user for you
-router.get('/edit', ensureAuthenticated, (req, res) => {
+router.get('/auth/edit', ensureAuthenticated, (req, res) => {
   res.render('edit', {
     csrfToken: req.csrfToken()
   });
 });
-router.get('/edit-csrf', ensureAuthenticated, (req, res) => {
+router.get('/auth/edit-csrf', ensureAuthenticated, (req, res) => {
   res.render('edit-csrf');
 });
 
-router.post('/edit', ensureAuthenticated, (req, res, next) => {
+router.post('/auth/edit', ensureAuthenticated, (req, res, next) => {
   req.user.displayName = req.body.displayname;
   req.user.location = req.body.location;
   req.user.bio = req.body.bio;
@@ -212,5 +217,26 @@ router.post('/edit', ensureAuthenticated, (req, res, next) => {
     res.redirect(`/auth/users/${req.user.username}`);
   });
 });
+
+// Render Apps ================================================================
+router.get('/*', (req, res, next) => {
+  if (req.isAuthenticated()) {
+    renderUserAppMiddleware(req, res, next);
+  }
+  renderGuestAppMiddleware(req, res, next);
+});
+
+/*
+router.get('/user*', (req, res) => {
+  renderUserAppMiddleware(req)
+});*/
+/*
+router.get('/*', (req, res) => {
+  if (req.isAuthenticated()) {
+    renderUserAppMiddleware(req)
+  }
+  renderGuestAppMiddleware(req)
+});
+*/
 
 module.exports = router;

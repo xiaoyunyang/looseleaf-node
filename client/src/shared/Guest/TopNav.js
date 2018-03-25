@@ -2,12 +2,13 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import $ from 'jquery';
 import { LoginModal, SignupModal } from './Login/Modal';
+import store from './store';
 
-const root = 'public';
+const root = store.root;
 
 export default class TopNav extends React.Component {
   componentDidMount() {
-    
+
     $('.modal').modal({
       dismissible: true, // Modal can be dismissed by clicking outside of the modal
       opacity: 0.5, // Opacity of modal background
@@ -105,7 +106,7 @@ export default class TopNav extends React.Component {
               </li>
               <li className={selected === 'how-it-works'? 'active' : ''}>
                 <Link
-                  to={`/${root}/how-it-works`}>
+                  to={`/${root}how-it-works`}>
                   How It Works</Link>
               </li>
             </ul>
@@ -137,7 +138,7 @@ export default class TopNav extends React.Component {
                     <Link
                       id={`tab-one`}
                       className={selected === 'one'? 'active' : ''}
-                      to={`/${root}/community/one`}>
+                      to={`/${root}community/one`}>
                       Developers
                     </Link>
                   </li>
@@ -145,7 +146,7 @@ export default class TopNav extends React.Component {
                     <Link
                       id={`tab-two`}
                       className={selected === 'two'? 'active' : ''}
-                      to={`/${root}/community/two`}>
+                      to={`/${root}community/two`}>
                       Designers
                     </Link>
                   </li>
@@ -153,7 +154,7 @@ export default class TopNav extends React.Component {
                     <Link
                       id={`tab-three`}
                       className={selected === 'three'? 'active' : ''}
-                      to={`/${root}/community/three`}>
+                      to={`/${root}community/three`}>
                       Writers
                     </Link>
                   </li>

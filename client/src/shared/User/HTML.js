@@ -26,7 +26,7 @@ const HTML = (props) => {
         <script dangerouslySetInnerHTML={{
           __html: `
             window.__SERIALIZED_STATE__ =
-              JSON.stringify(${props.serverState})
+              JSON.stringify(${props.userData})
           `
         }}
         />

@@ -5,12 +5,15 @@ import NotFound from '../components/NotFound';
 import One from './Community/One';
 import Two from './Community/Two';
 import Three from './Community/Three';
+import store from './store';
 
-const root = 'public';
+const root = store.root;
+
 function noop() {}
 
 const routes = [
-  { component: Root,
+  {
+    component: Root,
     routes: [
       {
         path: `/${root}`,
@@ -18,27 +21,27 @@ const routes = [
         component: Home
       },
       {
-        path: `/${root}/how-it-works`,
+        path: `/${root}how-it-works`,
         exact: true,
         component: HowItWorks
       },
       {
-        path: `/${root}/login`,
+        path: `/${root}login`,
         exact: true,
         component: noop
       },
       {
-        path: `/${root}/community/one`,
+        path: `/${root}community/one`,
         exact: true,
         component: One
       },
       {
-        path: `/${root}/community/two`,
+        path: `/${root}community/two`,
         exact: true,
         component: Two
       },
       {
-        path: `/${root}/community/three`,
+        path: `/${root}community/three`,
         exact: true,
         component: Three
       },
