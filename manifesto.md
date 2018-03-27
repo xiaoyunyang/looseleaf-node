@@ -1,5 +1,17 @@
 ## LooseLeaf Manifesto
 
+## Version 1.1
+
+I just don’t think getting a STEM degree online (like what [101 Edu](https://www.crunchbase.com/organization/101#section-overview) is doing) is the right way to disrupt the higher education industry. Sure it’s more affordable than college, but it’s based on the same flawed premise as college education today. The educational needs have fundamentally changed since the advent of computers. Back in the day when we didn’t have sophisticated and comprehensive information collection and retrieval systems (computer, internet), there was a need for people who can be a repository of knowledge. Now we don’t need those educated maven in the work place. We need people who can do something creative with the information they have. Our education needs of today should not include getting sprayed by a firehouse of information and facts and try to retain as much as possible. What we need is hands on experience, projects to work on, the teamwork, and the equipment and coaching from TAs you need to build cool things. We need on the job training. And if you don’t get the job because you don’t have the degree, then acquire work experience on your own. Work on side projects, volunteer for non-profits, start a company. Why wait for someone to give us permission to start learning and building experiences? Just do it!
+
+For an employer, you want someone who has grit. At LooseLeaf, we keep track of everyone’s progress and measure their “grittiness level”. Grit means you complete what you’ve started. Practice is more important than pure talent in mastering a skill. It’s easier to have grit when you have a support system, when there’s social accountability, and when what you are doing matters (purpose). 
+
+*Idea:* Internship is when you shadow someone and they let you help them out on some stuff right? Can we do that online? People are already sharing everything they do online anyway (tweets). You can shadow someone by being their followers and ask them questions right?
+
+*Idea:* Can I partner up with Manning?
+
+
+## Version 1.0
 The ultimate vision is for LooseLeaf to supersede a college education or internship for gaining the skills and credibility needed to find employment. What LooseLeaf needs for early adopters are those who see the value and have the motivation to earn their credibility as an app developer, freelance writer, or graphic designer through working on projects for people pro bono. Of course they will not be the paying customers. 
 
 The paying customers would be the ones commissioning the work (maybe pay a flat fee to LooseLeaf to gain the ability to post these jobs and get others to work on them for free). There's more value for those paying customers using LooseLeaf because they pay a flat fee for the ability to get multiple "wannabe" programmers/writers/designer to work on their projects and get to choose the best one at the end to reward "extra credits" to.  Everyone who submits something before the deadline gets credits for having completed the work. Every little effort counts and LooseLeaf let's you advertise all your efforts on your LooseLeaf profile page, which I'm envisioning as something resembling Github, but itemizes the type of work you complete by chunking them into skill sets and knowledge areas. 
@@ -99,6 +111,13 @@ They are the evangelists. They usually maintain blogs. They like to educate othe
 * [Hire a cartoonist to make their blogs less boring](https://mtlynch.io/how-to-hire-a-cartoonist/)
 * Access to people to influence
 
+
+## Motivation
+
+According to [this article](https://latest.13d.com/why-higher-education-in-america-is-ripe-for-disruption-b5f2e49cea98)
+> “The cost of college attendance is rising while the financial benefits of a degree are falling.”
+
+> The cost of undergraduate education in the U.S. is 12x higher than it was 35 years ago, far outpacing inflation. As a point of comparison: while the cost of medical care rose 600%, and the cost of housing and food went up 300%, the indexed price of college tuition and fees surged by more than 1,122% since 1978. Despite the burden this places on families, enrollment has also skyrocketed.
 
 
 ## TODOs

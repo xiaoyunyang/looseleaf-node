@@ -1,21 +1,29 @@
 import React from 'react';
+import $ from 'jquery';
 import TopNav from '../TopNav';
-import { randomUserPic } from '../../../lib/helpers';
+import { randomUserPic, randomUser } from '../../../lib/helpers';
 
 const list = ['One', 'Two', 'Three', 'Four', 'Five', 'Six'];
 
 class Task extends React.Component {
   constructor(props) {
     super(props);
+    const rand = Math.random();
+    const numProj = Math.ceil(rand * 10);
+    const rand2 = Math.random();
+    const numMonths = Math.ceil(rand2 * 14);
+    const rand3 = Math.random();
+    const numBest = Math.floor(rand3 * numProj);
     this.state = {
       option: 0,
-      userPic: ''
+      numProj: numProj,
+      numMonths: numMonths,
+      numBest: numBest,
+      user: {}
     }
   }
   componentWillMount() {
-    this.setState({
-      userPic: randomUserPic()
-    })
+    randomUser(u => this.setState({user: u}))
   }
   getIconName(option) {
     const options = ['star_border', 'grade']
@@ -30,10 +38,10 @@ class Task extends React.Component {
   render() {
     return (
       <li className="collection-item avatar">
-        <img src={this.state.userPic} alt="" className="circle" />
-        <span className="title">{this.props.title}</span>
-        <p>First Line</p>
-        <p>Second Line</p>
+        <img src={this.state.user.picture} alt="" className="circle" />
+        <span className="title">{`${this.state.user.firstname} ${this.state.user.lastname}`}</span>
+        <p>{`Completed ${this.state.numProj} projects in the past ${this.state.numMonths} months`}</p>
+        <p>{`Won best project ${this.state.numBest} times`}</p>
         <a href="#!" className="secondary-content" onClick={this.toggleStar.bind(this, this.state.option)}>
           <i className="material-icons">{this.getIconName(this.state.option)}</i>
         </a>
@@ -47,7 +55,7 @@ export default ( {route} ) => (
     <TopNav route={route} />
     <div className="container main">
       <div id="one" className="col s12">
-        <h4>Developers</h4>
+        <h4>Aspiring Developers</h4>
         <ul className="collection">
           {
             list.map((d, i) => {

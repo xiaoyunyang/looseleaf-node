@@ -6,7 +6,7 @@ export default ( {route} ) => (
     <TopNav route={route} />
     <div className="container main">
       <div id="two" className="col s12">
-        <h2>Designers</h2>
+        <h2>Aspiring Designers</h2>
       </div>
     </div>
   </div>

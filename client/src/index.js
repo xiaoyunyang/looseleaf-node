@@ -14,9 +14,9 @@ import './assets/index.css';
 /*
  * Main entry point for the create-react-app
  */
-const isLoggedin = true;
-// const App = isLoggedin ? AppUser : AppGuest;
-const App = AppRecipe;
+const isLoggedin = false;
+const App = isLoggedin ? AppUser : AppGuest;
+// const App = AppRecipe;
 const render = (Component) => {
   ReactDOM.render(
     <AppContainer>
