@@ -2,13 +2,49 @@
 
 ## Version 1.1
 
-I just don’t think getting a STEM degree online (like what [101 Edu](https://www.crunchbase.com/organization/101#section-overview) is doing) is the right way to disrupt the higher education industry. Sure it’s more affordable than college, but it’s based on the same flawed premise as college education today. The educational needs have fundamentally changed since the advent of computers. Back in the day when we didn’t have sophisticated and comprehensive information collection and retrieval systems (computer, internet), there was a need for people who can be a repository of knowledge. Now we don’t need those educated maven in the work place. We need people who can do something creative with the information they have. Our education needs of today should not include getting sprayed by a firehouse of information and facts and try to retain as much as possible. What we need is hands on experience, projects to work on, the teamwork, and the equipment and coaching from TAs you need to build cool things. We need on the job training. And if you don’t get the job because you don’t have the degree, then acquire work experience on your own. Work on side projects, volunteer for non-profits, start a company. Why wait for someone to give us permission to start learning and building experiences? Just do it!
+Getting a STEM degree online (like what [101 Edu](https://www.crunchbase.com/organization/101#section-overview) is doing) is the right way to disrupt the higher education industry. Sure it’s more affordable than college, but it’s based on the same flawed premise as college education today. The educational needs have fundamentally changed since the advent of computers. Back in the day when we didn’t have sophisticated and comprehensive information collection and retrieval systems (computer, internet), there was a need for people who can be a repository of knowledge. Now we don’t need those educated maven in the work place. We need people who can do something creative with the information they have. Our education needs of today should not include getting sprayed by a firehouse of information and facts and try to retain as much as possible. What we need is hands on experience, projects to work on, the teamwork, and the equipment and coaching from TAs you need to build cool things. We need on the job training. And if you don’t get the job because you don’t have the degree, then acquire work experience on your own. Work on side projects, volunteer for non-profits, start a company. Why wait for someone to give us permission to start learning and building experiences? Just do it!
 
 For an employer, you want someone who has grit. At LooseLeaf, we keep track of everyone’s progress and measure their “grittiness level”. Grit means you complete what you’ve started. Practice is more important than pure talent in mastering a skill. It’s easier to have grit when you have a support system, when there’s social accountability, and when what you are doing matters (purpose). 
 
 *Idea:* Internship is when you shadow someone and they let you help them out on some stuff right? Can we do that online? People are already sharing everything they do online anyway (tweets). You can shadow someone by being their followers and ask them questions right?
 
 *Idea:* Can I partner up with Manning?
+
+
+### Why You Should Become A LooseLeaf User
+
+* **LooseLeaf Users are special:**  Users of LooseLeaf show that they have initiative, they're smart, and can pick things up on their own. They can work through problems and teach themselves. Companies need smart people who are flexible, versatile, and are successful with minimal supervision. 
+
+### Disrupting the Higher Education Industry
+
+LooseLeaf disrupts higher education industry. Why it needs to be disrupted and why it’s the right time to disrupt:
+
+* US Higher Ed has a product that does not work, ridiculous costs, and an antiquated business model.
+* Stanford, MIT, and other prestigious universities started offering courses online for free, legitimizing online learning.
+* Trends:
+	* Unemployment and underemployment of college grads, riddled with debt.
+	* Plus, businesses are no longer willing to invest in training recent graduates: management training programs are disappearing. Clients of law firms often refuse to pay for first-year lawyers, arguing that they add no value. Unpaid internships for recent graduates have multiplied in place of  paid training programs, indicating that businesses find recent graduates unprepared for productive work. 
+* Recruiting Industry Trends: TODO
+
+We need to be moving away from consumption-based learning model to be disruptive.
+
+Many edTech companies provide platforms that still offer consumption based learning. They are moving consumption out of the classroom, onto your laptop and iPad. But that’s still consumption. They are not fundamentally changing the way we learn. 
+
+LooeseLeaf's learning model is different. We are focusing on creation. When students are offered a chance to create, they are motivated. How do we get them to create? A few ways:
+
+1. Create shared experience:  There’s a lot of fear associated with trying something new. But this is a shared experience. if you are not doing it alone, it’s easier to start trying something new.
+2. Pair those skills with real world problem. For example, have aspiring web designers build websites for non-profits.
+3. Bootstrapping is encouraged. Unlike college where assignments are set up to have you to do things the more difficult way to demonstrate a fundamental concept, LooseLeaf users are encouraged to share their work, leverage other people's work, and overcoming obstacles to build something they are proud of and appreciated for.
+
+
+There's value in a college education, but the benefit is largely negated by the financial burden and opportunity cost of attending college.
+
+Pursuing an academic path gives you some in-depth understanding. The university is a great place to learn, but it’s not required any longer.Studying at a university usually offers a better-structured and smoother learning experience than trying to learn everything yourself. However, not many people attend college to learn purely for the sake of learning or have an enjoyable four years of their lives. Most attend college to kickstart their careers for a better opportunity in life. In a economy that rewards people who can accomplish things, we need to focus on developing mission accomplishment skills, which includes:
+
+* Problem solving.  This includes being resourceful (Knowing how and where to look for resources that can help you solve the problem at hand) as well as having the confidence to take on the challenge and the grit to continue working on discovering the solution when you hit a wall. 
+* Experience.  This comes with deliberate practice. People practice because they have a passion for the work. Having a passion for the work means every time you make progress, you get a hit of dopamine. To develop a passion, you need to get to a point where you can start making progress. For web development, this means set up the project and all the dependencies so you can start making the actual website you want to make. For game developers, this means knowing how loops, if statements, and arrays work so you can program tetris.
+* 
+
 
 
 ## Version 1.0

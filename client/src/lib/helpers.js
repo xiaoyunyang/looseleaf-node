@@ -23,7 +23,7 @@ const randomUser = (setState) => {
     lastname: 'world',
     picture: 'https://images.cdn.stuff.tv/sites/stuff.tv/files/avatar.png'
   };
-  const updatedUser = (data) => {
+  const setUserInfo = (data) => {
     user.firstname = capitalize(data.results[0].name.first);
     user.lastname = capitalize(data.results[0].name.last);
     user.picture = data.results[0].picture.thumbnail;
@@ -33,8 +33,7 @@ const randomUser = (setState) => {
     url: 'https://randomuser.me/api/?nat=us',
     dataType: 'json',
     success: function(data) {
-      console.log('data loaded', data)
-      updatedUser(data)
+      setUserInfo(data)
     }
   });
 }
