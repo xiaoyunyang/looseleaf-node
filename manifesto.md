@@ -43,8 +43,6 @@ Pursuing an academic path gives you some in-depth understanding. The university 
 
 * Problem solving.  This includes being resourceful (Knowing how and where to look for resources that can help you solve the problem at hand) as well as having the confidence to take on the challenge and the grit to continue working on discovering the solution when you hit a wall. 
 * Experience.  This comes with deliberate practice. People practice because they have a passion for the work. Having a passion for the work means every time you make progress, you get a hit of dopamine. To develop a passion, you need to get to a point where you can start making progress. For web development, this means set up the project and all the dependencies so you can start making the actual website you want to make. For game developers, this means knowing how loops, if statements, and arrays work so you can program tetris.
-* 
-
 
 
 ## Version 1.0
