@@ -123,10 +123,10 @@ export default class TopNav extends React.Component {
     };
     const noMarginBottom = {
       marginBottom: 0
-    }
+    };
     const styleHeight = {
       height: '48px'
-    }
+    };
     return (
       <nav className="filter-navbar" style={styleHeight}>
         <div className="categories-wrapper">

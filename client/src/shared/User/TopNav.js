@@ -7,32 +7,47 @@ const root = store.root;
 // const username = store.username;
 
 class MobileSideNav extends React.Component {
-  componentDidMount() {
-    $('.button-collapse').sideNav({
-      edge: 'left',
-      closeOnClick: true
-    });
-
-    $('.dropdown-button').dropdown({
-      inDuration: 300,
-      outDuration: 225,
-      constrainWidth: false, // Does not change width of dropdown to that of the activator
-      gutter: 0, // Spacing from edge
-      belowOrigin: false, // Displays dropdown below the button
-      alignment: 'left', // Displays dropdown with edge aligned to the left of button
-      stopPropagation: false // Stops event propagation
-    });
-  }
-  render() {
+  render1() {
     return (
-      <div>
-        <a data-activates="mobile-menu" className="button-collapse"><i className="material-icons">menu</i></a>
-        <ul className="side-nav" id="mobile-menu">
-          <li><Link to={`${root}`} className="active">Home</Link></li>
-          <li><Link to={`/${root}${this.props.username}`}>Profile</Link></li>
-        </ul>
-      </div>
+      <ul id="mobile-menu" className="side-nav">
+        <li><Link to={`${root}`} className="active">Home</Link></li>
+        <li><Link to={`/${root}${this.props.username}`}>Profile</Link></li>
+      </ul>
     );
+  }
+  render2() {
+    return (
+      <ul id="mobile-menu" className="side-nav">
+        <li>
+          <div className="user-view">
+            <div className="background">
+              <img src="http://xiaoyunyang.github.io/serverless-webapp/assets/images/table3.png"/>
+            </div>
+            <img alt='username' className="circle" src="http://xiaoyunyang.github.io/assets/data/profile/photo/xyang.png"/>
+             <div className="row">
+               <div className="col l2 m2 s2">
+                 <a href="https://github.com/xiaoyunyang"><i className="fa fa-github fa-lg"></i></a>
+               </div>
+               <div className="col l2 m2 s2">
+                 <a href="https://www.linkedin.com/in/xiaoyun-yang"><i className="fa fa-linkedin fa-lg"></i></a>
+               </div>
+               <div className="col l2 m2 s2">
+                 <a href="https://medium.com/@xiaoyunyang"><i className="fa fa-medium fa-lg"></i></a>
+               </div>
+               <div className="col l2 m2 s2">
+                 <a href="mailto:xiaoyun@looseleafapp.com"><i className="fa fa-envelope fa-lg"></i></a>
+               </div>
+              </div>
+          </div>
+        </li>
+        <li><Link to={`${root}`} className="active">Home</Link></li>
+        <li><Link to={`/${root}${this.props.username}`}>Profile</Link></li>
+      </ul>
+    );
+  }
+
+  render() {
+    return this.render2();
   }
 }
 
@@ -53,6 +68,21 @@ const UserDropdown = ({username}) => (
 );
 
 export default class TopNav extends React.Component {
+  componentDidMount() {
+    $('.button-collapse').sideNav({
+      edge: 'left',
+      closeOnClick: true
+    });
+    $('.dropdown-button').dropdown({
+      inDuration: 300,
+      outDuration: 225,
+      constrainWidth: false, // Does not change width of dropdown to that of the activator
+      gutter: 0, // Spacing from edge
+      belowOrigin: false, // Displays dropdown below the button
+      alignment: 'left', // Displays dropdown with edge aligned to the left of button
+      stopPropagation: false // Stops event propagation
+    });
+  }
   render() {
     const username = this.props.user.username;
 
@@ -70,29 +100,37 @@ export default class TopNav extends React.Component {
     }
 */
     return (
-      <div className="navbar-fixed">
-        <nav className="grey lighten-4">
-          <div className="nav-wrapper-white nav-text-links">
-            <div className="brand-logo">
-              <Link className="navbar-brand" to={`/${root}`}>
-                <img src="http://looseleafapp.com/assets/images/logo/logo.png" alt="LooseLeaf" />
-              </Link>
+      <div>
+        <div className="navbar-fixed">
+          <nav className="grey lighten-4">
+            <div className="nav-wrapper-white nav-text-links">
+              <div className="brand-logo hide-on-med-and-down">
+                <Link className="navbar-brand" to={`/${root}`}>
+                  <img src="http://looseleafapp.com/assets/images/logo/logo.png" alt="LooseLeaf" />
+                </Link>
+              </div>
+              <ul className="right hide-on-med-and-down">
+                <li className={selected === root ? 'active' : ''}>
+                  <Link id={`nav-${root}`} to={`/${root}`}>Home</Link>
+                </li>
+                <li className={selected === username ? 'active' : ''}>
+                  <Link id={`nav-${username}`} to={`/${root}${username}`}>Profile</Link>
+                </li>
+                <li><Link to={`/${root}foo`}>Foo</Link></li>
+                <li><button><i className="material-icons">notifications_none</i></button></li>
+                <UserDropdown username={username} />
+              </ul>
+              <ul className="left">
+                <li>
+                  <a data-activates="mobile-menu" className="button-collapse"><i className="material-icons">menu</i></a>
+                </li>
+              </ul>
             </div>
-            <ul className="right hide-on-med-and-down">
-              <li className={selected === root ? 'active' : ''}>
-                <Link id={`nav-${root}`} to={`/${root}`}>Home</Link>
-              </li>
-              <li className={selected === username ? 'active' : ''}>
-                <Link id={`nav-${username}`} to={`/${root}${username}`}>Profile</Link>
-              </li>
-              <li><Link to={`/${root}foo`}>Foo</Link></li>
-              <li><button><i className="material-icons">notifications_none</i></button></li>
-              <UserDropdown username={username} />
-            </ul>
-            <MobileSideNav username={username} />
-          </div>
-        </nav>
+          </nav>
+        </div>
+        <MobileSideNav username={username} />
       </div>
+
     );
   }
 }
