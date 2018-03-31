@@ -2,7 +2,7 @@ import React from 'react';
 
 const list = ['One', 'Two', 'Three', 'Four', 'Five', 'Six'];
 export default () => (
-  <div id="one" className="col s12">
+  <div id="one" className="col l12 m12 s12">
     <h2>Achievements</h2>
     <ul className="collection">
       {

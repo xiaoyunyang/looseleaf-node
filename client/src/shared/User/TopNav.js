@@ -7,15 +7,7 @@ const root = store.root;
 // const username = store.username;
 
 class MobileSideNav extends React.Component {
-  render1() {
-    return (
-      <ul id="mobile-menu" className="side-nav">
-        <li><Link to={`${root}`} className="active">Home</Link></li>
-        <li><Link to={`/${root}${this.props.username}`}>Profile</Link></li>
-      </ul>
-    );
-  }
-  render2() {
+  render() {
     return (
       <ul id="mobile-menu" className="side-nav">
         <li>
@@ -44,10 +36,6 @@ class MobileSideNav extends React.Component {
         <li><Link to={`/${root}${this.props.username}`}>Profile</Link></li>
       </ul>
     );
-  }
-
-  render() {
-    return this.render2();
   }
 }
 

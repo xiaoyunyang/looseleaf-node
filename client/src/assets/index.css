@@ -72,6 +72,7 @@ html{
     only screen and (max-device-width: 667px),
     only screen and (max-width: 480px)
 {
+  h2{font-size: 250%}
   h3{font-size: 175%}
   h5{font-size: 110%}
   .footer-copyright {
@@ -566,35 +567,58 @@ nav .categories-wrapper {
   top: 0px;
 }
 .pinned {
-  position: fixed !important;
+  /*position: fixed !important;*/
   z-index: 9999;
 }
 nav .categories-wrapper .categories-container {
-    overflow: initial;
+  overflow: initial;
 }
 nav .categories-wrapper .categories-container {
-    background-color: inherit;
-    white-space: nowrap;
-    overflow: auto;
+  background-color: inherit;
+  white-space: nowrap;
+  overflow: auto;
 }
 nav .categories-wrapper .categories-container.pinned {
-    width: 100%;
-    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2);
+  width: 100%;
+  box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2);
 }
 nav .categories-wrapper .categories {
-    height: 48px;
-    line-height: 48px;
-    overflow-x: auto;
-    overflow-y: hidden;
+  height: 48px;
+  line-height: 48px;
+  overflow-x: auto;
+  overflow-y: hidden;
 }
 #signup-btn-tab {
   visibility: hidden;
 }
 #profile-tabs {
-  max-width: inherit;
+  width: 100%;
 }
-.tabs.pinned {
+@media only screen and (min-width : 992px) {
+  #profile-tabs .tabs {
+    width: 70%;
+    margin-left: auto;
+    left: auto;
+    right: auto;
+  }
+}
+
+.tabs-container.pinned {
+  background-color: #f5f5f5;
   margin-top: 56px;
-  border-bottom: 1px solid rgba(0,0,0,.05);
-  margin-left: -10px;
+  width: 100%;
+  box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2);
+}
+.tabs-container.pinned .tab {
+  background-color: #f5f5f5;
+}
+.tabs-container.pinned .tabs {
+  background-color: #f5f5f5;
+}
+@media only screen and (max-width: 992px) {
+.tabs {
+    display: -ms-flexbox;
+    display: flex;
+    width: 90%;
+  }
 }
