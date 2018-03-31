@@ -16,11 +16,11 @@ class Tab extends Component {
     this.initializeSticky();
   }
   initializeSticky() {
-    let categories = $('.tabs-container');
-  console.log('poooop',categories.offset().top)
-    if (categories.length) {
-      categories.pushpin({
-        top: categories.offset().top
+    let tabs = $('.tabs-container');
+    if (tabs.length) {
+      console.log("tabs offset", tabs.offset().top)
+      tabs.pushpin({
+        top: tabs.offset().top - 48
       });
     }
   }
@@ -29,7 +29,7 @@ class Tab extends Component {
       top: 0
     };
     return (
-      <div id="profile-tabs" className="tabs-container pin-top" >
+      <div id="profile-tabs" className="tabs-container pin-top" style={style}>
         <ul className="tabs">
           {
           tabs.map((tab, i) => {
