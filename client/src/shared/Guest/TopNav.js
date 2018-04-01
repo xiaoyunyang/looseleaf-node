@@ -1,12 +1,15 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import $ from 'jquery';
 import { LoginModal, SignupModal } from './Login/Modal';
-import store from './store';
-
-const root = store.root;
+import { root, getNav, communities } from './routes';
+import { getPageName } from '../../lib/helpers';
 
 export default class TopNav extends React.Component {
+  static defalutProps = {
+    extended: false
+  }
   componentDidMount() {
 
     $('.modal').modal({
@@ -78,42 +81,55 @@ export default class TopNav extends React.Component {
       </div>
     );
   }
-  renderPrimaryNav(selected) {
+  renderPrimaryNavExtended(selected) {
     return (
       <div id="looseleaf-section-header">
         <nav className="nav-extended grey lighten-4">
           <div className="nav-background">
             <div className="pattern active"></div>
           </div>
-          <div className="nav-wrapper-white nav-text-links">
-            <div className="brand-logo">
-              <Link className="navbar-brand" to={`/${root}`}>
-                <img src="http://looseleafapp.com/assets/images/logo/logo.png" alt="LooseLeaf" />
-              </Link>
-            </div>
-            <ul className="right">
-              <li>{this.renderJoinBtn('Join', 'signup-btn-main')}</li>
-            </ul>
-            <div className="right hide-on-small-only">
-              { this.renderLoginBtn() }
-            </div>
-            <ul className="right hide-on-med-and-down">
-              <li className={selected === root ? 'active' : ''}>
-                <Link
-                  to={`/${root}`}>
-                  Home
-                </Link>
-              </li>
-              <li className={selected === 'how-it-works'? 'active' : ''}>
-                <Link
-                  to={`/${root}how-it-works`}>
-                  How It Works</Link>
-              </li>
-            </ul>
-          </div>
+          {this.renderPrimaryNavInner(selected)}
           { this.renderNavHeader() }
-
         </nav>
+      </div>
+    );
+  }
+  renderPrimaryNav(selected) {
+    return (
+      <div className="navbar-fixed">
+        <nav className="grey lighten-4">
+          {this.renderPrimaryNavInner(selected)}
+        </nav>
+      </div>
+    );
+  }
+  renderPrimaryNavInner(selected) {
+    return (
+      <div className="nav-wrapper-white nav-text-links">
+        <div className="brand-logo">
+          <Link className="navbar-brand" to={getNav().home}>
+            <img src="http://looseleafapp.com/assets/images/logo/logo.png" alt="LooseLeaf" />
+          </Link>
+        </div>
+        <ul className="right">
+          <li>{this.renderJoinBtn('Join', 'signup-btn-main')}</li>
+        </ul>
+        <div className="right hide-on-small-only">
+          { this.renderLoginBtn() }
+        </div>
+        <ul className="right hide-on-med-and-down">
+          <li className={selected === root ? 'active' : ''}>
+            <Link
+              to={getNav().home}>
+              Home
+            </Link>
+          </li>
+          <li className={selected === 'how-it-works'? 'active' : ''}>
+            <Link
+              to={getNav().HowItWorks}>
+              How It Works</Link>
+          </li>
+        </ul>
       </div>
     );
   }
@@ -137,24 +153,24 @@ export default class TopNav extends React.Component {
                   <li className='tab'>
                     <Link
                       id={`tab-one`}
-                      className={selected === 'one'? 'active' : ''}
-                      to={`/${root}community/one`}>
+                      className={selected === communities.one ? 'active' : ''}
+                      to={getNav().one}>
                       Developers
                     </Link>
                   </li>
                   <li className='tab'>
                     <Link
                       id={`tab-two`}
-                      className={selected === 'two'? 'active' : ''}
-                      to={`/${root}community/two`}>
+                      className={selected === communities.two ? 'active' : ''}
+                      to={getNav().two}>
                       Designers
                     </Link>
                   </li>
                   <li className='tab'>
                     <Link
                       id={`tab-three`}
-                      className={selected === 'three'? 'active' : ''}
-                      to={`/${root}community/three`}>
+                      className={selected === communities.three ? 'active' : ''}
+                      to={getNav().three}>
                       Writers
                     </Link>
                   </li>
@@ -174,17 +190,29 @@ export default class TopNav extends React.Component {
     );
   }
   render() {
-    let selected = '';
-    if(typeof this.props.route.path === 'string') {
-      selected = this.props.route.path.split('/').pop();
-    }
+    let selected = (typeof this.props.route.path === 'string')
+                    ? getPageName(this.props.route.path) : '';
+
     return (
       <div>
-        { this.renderPrimaryNav(selected) }
-        { this.renderTabs(selected) }
+        { this.props.extended ?
+            this.renderPrimaryNavExtended(selected) :
+            this.renderPrimaryNav(selected)
+        }
+        {
+          this.props.extended ?
+            this.renderTabs(selected) : null
+        }
         <LoginModal />
         <SignupModal />
       </div>
     );
   }
+}
+
+TopNav.propTypes = {
+  extended: PropTypes.bool
+}
+TopNav.defaultProps = {
+  extended: false
 }

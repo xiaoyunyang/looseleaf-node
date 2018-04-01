@@ -11,7 +11,6 @@ import About from './components/About';
 import RedirectWithStatus from './components/RedirectWithStatus';
 import NotFound from './components/NotFound';
 
-
 polyfill();
 
 // Custom function to load the data on the server-side

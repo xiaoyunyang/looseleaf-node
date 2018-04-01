@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import $ from 'jquery';
 import { getNav, root } from './routes';
+import { getPageName } from '../../lib/helpers';
 
 // const username = store.username;
 
@@ -10,9 +11,9 @@ const MobileSideNav = ( {username} ) => (
     <li>
       <div className="user-view">
         <div className="background">
-          <img src="http://xiaoyunyang.github.io/serverless-webapp/assets/images/table3.png"/>
+          <img alt="looseleaf" src="http://xiaoyunyang.github.io/serverless-webapp/assets/images/table3.png"/>
         </div>
-        <img alt='username' className="circle" src="http://xiaoyunyang.github.io/assets/data/profile/photo/xyang.png"/>
+        <img alt={`looseleaf user ${username}`}  className="circle" src="http://xiaoyunyang.github.io/assets/data/profile/photo/xyang.png"/>
          <div className="row">
            <div className="col l2 m2 s2">
              <a href="https://github.com/xiaoyunyang"><i className="fa fa-github fa-lg"></i></a>
@@ -37,7 +38,7 @@ const MobileSideNav = ( {username} ) => (
 const UserDropdown = ( {username, userPic} ) => (
   <li id="dropdown-block">
     <a className="navbar-img dropdown-button" data-activates="user-dropdown">
-      <img alt="loosleaf" className="mod-round" src={userPic} />
+      <img alt={`looseleaf user ${username}`} className="mod-round" src={userPic} />
       <div className="arrow-down" />
     </a>
     <ul id="user-dropdown" className="dropdown-content">
@@ -87,11 +88,9 @@ export default class TopNav extends React.Component {
   render() {
     const username = this.props.user.username;
     const userPic = this.props.user.picture;
-    let selected = '';
-
-    if(typeof this.props.route.path === 'string') {
-      selected = this.props.route.path.split('/').pop();
-    }
+    let selected = (typeof this.props.route.path === 'string')
+                    ? getPageName(this.props.route.path) : '';
+    
     // TODO: Still need the code below?
 /*
     if (typeof document !== 'undefined') {

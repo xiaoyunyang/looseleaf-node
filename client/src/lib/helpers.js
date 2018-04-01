@@ -3,7 +3,7 @@ import $ from 'jquery';
 // Get random users. See:  https://randomuser.me/
 // https://randomuser.me/documentation#format
 
-const randomUserPic = () => {
+export const randomUserPic = () => {
   // Math.random gives you a number between 0 and 1
   const rand = Math.random();
   const randInt = Math.floor(rand * 100); // random Integer between 0 and 100
@@ -11,13 +11,13 @@ const randomUserPic = () => {
   return `https://randomuser.me/api/portraits/thumb/${gender}/${randInt}.jpg`;
 }
 
-const capitalize = (word) => {
+export const capitalize = (word) => {
   const rest = word.slice(1);
   const firstLtr = word.charAt(0);
   return firstLtr.toUpperCase() + rest.toLowerCase();
 }
 
-const randomUser = (setState) => {
+export const randomUser = (setState) => {
   let user = {
     firstname: 'hello',
     lastname: 'world',
@@ -38,4 +38,6 @@ const randomUser = (setState) => {
   });
 }
 
-export { randomUserPic, randomUser };
+export const getPageName = (url) => {
+  return url.split('/').pop();
+}

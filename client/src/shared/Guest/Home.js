@@ -3,7 +3,7 @@ import TopNav from './TopNav';
 
 export default ( {route} ) => (
   <div>
-    <TopNav route={route} />
+    <TopNav route={route} extended={true}/>
     <div className="container main">
       <div>
         <h1>Home</h1>

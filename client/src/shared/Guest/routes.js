@@ -5,52 +5,68 @@ import NotFound from '../components/NotFound';
 import One from './Community/One';
 import Two from './Community/Two';
 import Three from './Community/Three';
-import store from './store';
 
-const root = store.root;
+const root = '';
 
 function noop() {}
 
+const communities = {
+  one: 'developers',
+  two: 'designers',
+  three: 'writers'
+}
+
+const getNav = () => {
+  return {
+    home: `/${root}`,
+    HowItWorks: `/${root}how-it-works`,
+    login: `/${root}login`,
+    one: `/${root}community/${communities.one}`,
+    two: `/${root}community/${communities.two}`,
+    three: `/${root}community/${communities.three}`,
+    wildcard: `/${root}*`,
+  }
+}
 const routes = [
   {
     component: Root,
     routes: [
       {
-        path: `/${root}`,
+        path: getNav().home,
         exact: true,
         component: Home
       },
       {
-        path: `/${root}how-it-works`,
+        path: getNav().HowItWorks,
         exact: true,
         component: HowItWorks
       },
       {
-        path: `/${root}login`,
+        path: getNav().login,
         exact: true,
         component: noop
       },
       {
-        path: `/${root}community/one`,
+        path: getNav().one,
         exact: true,
         component: One
       },
       {
-        path: `/${root}community/two`,
+        path: getNav().two,
         exact: true,
         component: Two
       },
       {
-        path: `/${root}community/three`,
+        path: getNav().three,
         exact: true,
         component: Three
       },
       {
-        path: `/${root}*`,
+        path: getNav().wildcard,
         component: NotFound
       }
     ]
   }
 ];
 
-export default routes;
+export { routes, getNav, communities, root };

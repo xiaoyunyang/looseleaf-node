@@ -2,14 +2,13 @@ import One from './One';
 import Two from './Two';
 import Three from './Three';
 import NotFound from '../../components/NotFound';
-import store from '../store';
-
+import { root } from '../routes'
 // const root = `/${store.root}${store.username}`;
 
 const tabs = ['projects', 'requests', 'community'];
 
 const getRoot = (username) => {
-  return `/${store.root}@${username}`;
+  return `/${root}@${username}`;
 }
 
 const getRoutes = (username) => {

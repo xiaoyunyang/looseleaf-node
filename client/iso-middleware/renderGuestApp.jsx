@@ -2,7 +2,7 @@ import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom';
 import { matchRoutes } from 'react-router-config';
-import routes from '../src/shared/Guest/routes';
+import { routes } from '../src/shared/Guest/routes';
 import HTML from '../src/shared/Guest/HTML';
 import App from '../src/shared/Guest/App';
 
