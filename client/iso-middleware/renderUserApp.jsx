@@ -4,7 +4,7 @@ import { StaticRouter } from 'react-router-dom';
 import { matchRoutes } from 'react-router-config';
 import { Provider } from 'react-redux';
 import configureStore from '../src/shared/redux/User/configureStore';
-import getRoutes from '../src/shared/User/routes';
+import { getRoutes } from '../src/shared/User/routes';
 import HTML from '../src/shared/User/HTML';
 import App from '../src/shared/User/App';
 

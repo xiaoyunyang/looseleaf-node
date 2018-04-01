@@ -16,9 +16,8 @@ class Tab extends Component {
     this.initializeSticky();
   }
   initializeSticky() {
-    let tabs = $('.tabs-container');
+    const tabs = $('.tabs-container');
     if (tabs.length) {
-      console.log("tabs offset", tabs.offset().top)
       tabs.pushpin({
         top: tabs.offset().top - 48
       });

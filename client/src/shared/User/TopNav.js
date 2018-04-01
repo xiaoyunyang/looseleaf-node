@@ -1,55 +1,50 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import $ from 'jquery';
-import store from './store';
+import { getNav, root } from './routes';
 
-const root = store.root;
 // const username = store.username;
 
-class MobileSideNav extends React.Component {
-  render() {
-    return (
-      <ul id="mobile-menu" className="side-nav">
-        <li>
-          <div className="user-view">
-            <div className="background">
-              <img src="http://xiaoyunyang.github.io/serverless-webapp/assets/images/table3.png"/>
-            </div>
-            <img alt='username' className="circle" src="http://xiaoyunyang.github.io/assets/data/profile/photo/xyang.png"/>
-             <div className="row">
-               <div className="col l2 m2 s2">
-                 <a href="https://github.com/xiaoyunyang"><i className="fa fa-github fa-lg"></i></a>
-               </div>
-               <div className="col l2 m2 s2">
-                 <a href="https://www.linkedin.com/in/xiaoyun-yang"><i className="fa fa-linkedin fa-lg"></i></a>
-               </div>
-               <div className="col l2 m2 s2">
-                 <a href="https://medium.com/@xiaoyunyang"><i className="fa fa-medium fa-lg"></i></a>
-               </div>
-               <div className="col l2 m2 s2">
-                 <a href="mailto:xiaoyun@looseleafapp.com"><i className="fa fa-envelope fa-lg"></i></a>
-               </div>
-              </div>
+const MobileSideNav = ( {username} ) => (
+  <ul id="mobile-menu" className="side-nav">
+    <li>
+      <div className="user-view">
+        <div className="background">
+          <img src="http://xiaoyunyang.github.io/serverless-webapp/assets/images/table3.png"/>
+        </div>
+        <img alt='username' className="circle" src="http://xiaoyunyang.github.io/assets/data/profile/photo/xyang.png"/>
+         <div className="row">
+           <div className="col l2 m2 s2">
+             <a href="https://github.com/xiaoyunyang"><i className="fa fa-github fa-lg"></i></a>
+           </div>
+           <div className="col l2 m2 s2">
+             <a href="https://www.linkedin.com/in/xiaoyun-yang"><i className="fa fa-linkedin fa-lg"></i></a>
+           </div>
+           <div className="col l2 m2 s2">
+             <a href="https://medium.com/@xiaoyunyang"><i className="fa fa-medium fa-lg"></i></a>
+           </div>
+           <div className="col l2 m2 s2">
+             <a href="mailto:xiaoyun@looseleafapp.com"><i className="fa fa-envelope fa-lg"></i></a>
+           </div>
           </div>
-        </li>
-        <li><Link to={`${root}`} className="active">Home</Link></li>
-        <li><Link to={`/${root}${this.props.username}`}>Profile</Link></li>
-      </ul>
-    );
-  }
-}
+      </div>
+    </li>
+    <li><Link to={getNav(username).home} className="active">Home</Link></li>
+    <li><Link to={getNav(username).profile}>Profile</Link></li>
+  </ul>
+);
 
-const UserDropdown = ({username}) => (
+const UserDropdown = ( {username, userPic} ) => (
   <li id="dropdown-block">
     <a className="navbar-img dropdown-button" data-activates="user-dropdown">
-      <img alt="loosleaf" className="mod-round" src="http://looseleafapp.com/assets/data/profile/photo/looseleaf.png" />
+      <img alt="loosleaf" className="mod-round" src={userPic} />
       <div className="arrow-down" />
     </a>
     <ul id="user-dropdown" className="dropdown-content">
-      <li><Link to={`/${root}${username}`}>Profile</Link></li>
+      <li><Link to={getNav(username).profile}>Profile</Link></li>
       <li><a href="/user">Stats</a></li>
       <li className="divider" />
-      <li><a href={`/${root}${username}/settings`}>Settings</a></li>
+      <li><Link to={getNav(username).settings}>Settings</Link></li>
       <li><a href="/auth/logout">Log out</a></li>
     </ul>
   </li>
@@ -70,10 +65,28 @@ export default class TopNav extends React.Component {
       alignment: 'left', // Displays dropdown with edge aligned to the left of button
       stopPropagation: false // Stops event propagation
     });
+    if(typeof window !== undefined) {
+      $(window).scroll(function(){
+        this.toggleNavbarBoxShadow()
+      }.bind(this))
+    }
+  }
+  // TODO: I don't know if there's a more elegant way to do this in css
+  // This function is essentially doing the same thing as the one in the topNav
+  // component of the Guest App. Can we create a template for it somehow?
+  toggleNavbarBoxShadow() {
+    const boxShadow = "0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2)";
+    const topNav = $("#user-navbar-fixed .navbar-fixed nav");
+    const tabs = $('.tabs-container');
+    if(tabs.hasClass('pinned')) {
+      topNav.css('box-shadow', 'none');
+    } else if(tabs.hasClass('pin-top')) {
+      topNav.css('box-shadow', boxShadow);
+    }
   }
   render() {
     const username = this.props.user.username;
-
+    const userPic = this.props.user.picture;
     let selected = '';
 
     if(typeof this.props.route.path === 'string') {
@@ -88,25 +101,25 @@ export default class TopNav extends React.Component {
     }
 */
     return (
-      <div>
+      <div id="user-navbar-fixed">
         <div className="navbar-fixed">
           <nav className="grey lighten-4">
             <div className="nav-wrapper-white nav-text-links">
               <div className="brand-logo hide-on-med-and-down">
-                <Link className="navbar-brand" to={`/${root}`}>
+                <Link className="navbar-brand" to={getNav(username).home}>
                   <img src="http://looseleafapp.com/assets/images/logo/logo.png" alt="LooseLeaf" />
                 </Link>
               </div>
-              <ul className="right hide-on-med-and-down">
+              <ul className="right hide-on-small-only">
                 <li className={selected === root ? 'active' : ''}>
-                  <Link id={`nav-${root}`} to={`/${root}`}>Home</Link>
+                  <Link id={`nav-${root}`} to={getNav(username).home}>Home</Link>
                 </li>
                 <li className={selected === username ? 'active' : ''}>
-                  <Link id={`nav-${username}`} to={`/${root}${username}`}>Profile</Link>
+                  <Link id={`nav-${username}`} to={getNav(username).profile}>Profile</Link>
                 </li>
-                <li><Link to={`/${root}foo`}>Foo</Link></li>
+                <li><Link to={`${getNav(username).home}foo`}>Foo</Link></li>
                 <li><button><i className="material-icons">notifications_none</i></button></li>
-                <UserDropdown username={username} />
+                <UserDropdown username={username} userPic={userPic}/>
               </ul>
               <ul className="left">
                 <li>

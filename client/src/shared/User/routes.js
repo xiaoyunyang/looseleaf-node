@@ -1,20 +1,31 @@
 import Root from './Root';
 import Home from './Home';
 import Tab from './Profile/Tab';
-import store from './store';
+import Settings from './Profile/Settings';
 import NotFound from '../components/NotFound';
 
-const root = store.root;
+
+const root = '';
+
+const getNav = (username) => {
+  return {
+    home: `/${root}`,
+    profile: `/${root}@${username}`,
+    settings: `/${root}@${username}/settings`,
+    tabs: `/${root}@${username}/:slug`,
+    wildcard: `/${root}*`,
+  }
+}
 
 const getTabsRoutes = (username) => {
   const tabsRoutes = [
     {
-      path: `/${root}${username}`,
+      path: getNav(username).profile,
       exact: true,
       component: Tab
     },
     {
-      path: `/${root}${username}/:slug`,
+      path: getNav(username).tabs,
       component: Tab
     },
   ];
@@ -30,17 +41,22 @@ const getRoutes = (user) => {
       component: Root,
       routes: [
         {
-          path: `/${root}`,
+          path: getNav(username).home,
           exact: true,
           component: Home
         },
         {
-          path: `/${root}${username}`,
+          path: getNav(username).settings,
+          exact: true,
+          component: Settings
+        },
+        {
+          path: getNav(username).profile,
           component: Tab,
           routes: getTabsRoutes(username)
         },
         {
-          path: `/${root}*`,
+          path: getNav(username).wildcard,
           component: NotFound
         }
       ]
@@ -49,5 +65,7 @@ const getRoutes = (user) => {
   return routes;
 }
 
-
-export default getRoutes;
+// Caller:
+// getRoutes is used by App.js
+// getNav is used by TopNav.js
+export { getRoutes, getNav, root };

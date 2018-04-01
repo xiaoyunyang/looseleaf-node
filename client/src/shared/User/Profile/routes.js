@@ -9,13 +9,11 @@ import store from '../store';
 const tabs = ['projects', 'requests', 'community'];
 
 const getRoot = (username) => {
-  return `/${store.root}${username}`;
+  return `/${store.root}@${username}`;
 }
 
 const getRoutes = (username) => {
   const root = getRoot(username);
-console.log('root', root)
-
   const routes = [
     {
       path: `${root}`,
