@@ -18,7 +18,7 @@ export default class TopNav extends React.Component {
       inDuration: 300, // Transition in duration
       outDuration: 200, // Transition out duration
       startingTop: '4%', // Starting top style attribute
-      endingTop: '120px' // Ending top style attribute
+      endingTop: '80px' // Ending top style attribute
     });
 
     $('ul.tabs').tabs();

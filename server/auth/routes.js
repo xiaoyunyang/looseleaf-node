@@ -7,13 +7,17 @@ import passport from 'passport';
 import csrf from 'csurf';
 import gravatarUrl from 'gravatar-url';
 import User from './User';
+import chalk from 'chalk';
 
 import renderGuestAppMiddleware from '../../client/iso-middleware/renderGuestApp';
 import renderUserAppMiddleware from '../../client/iso-middleware/renderUserApp';
 
 
 const router = express.Router();
-router.use(csrf());
+// TODO: csrf commented out so client app can post. Need to figure out use
+// csrf with the client app
+// router.use(csrf());
+
 // Middleware ==================================================================
 // route middleware to make sure a user is authenticated
 /**
@@ -104,7 +108,7 @@ router.post(
       } else {
         req.flash('error', 'No user found');
       }
-      return res.redirect('/auth/');
+      return res.redirect('/auth/users');
     });
   },
 );
@@ -119,6 +123,9 @@ router.get('/auth/signup', (req, res) => {
 });
 
 router.post('/auth/signup', (req, res, next) => {
+
+  console.log(chalk.red('post request for signup!'));
+
   // body-parser adds the username and password to req.body
   const email = req.body.email;
   const password = req.body.password;
@@ -161,7 +168,7 @@ router.post('/auth/signup', (req, res, next) => {
     });
   });
 }, passport.authenticate('login-local', {
-  successRedirect: '/auth',
+  successRedirect: '/',
   failureRedirect: '/auth/signup',
   failureFlash: true
 }));
@@ -174,7 +181,7 @@ router.get('/auth/login', (req, res) => {
 });
 
 router.post('/auth/login', passport.authenticate('login-local', {
-  successRedirect: '/auth',
+  successRedirect: '/',
   failureRedirect: '/auth/login',
   failureFlash: true
 }));
@@ -218,7 +225,10 @@ router.post('/auth/edit', ensureAuthenticated, (req, res, next) => {
   });
 });
 
+
 // Render Apps ================================================================
+// Important: this has to remain at the bottom of the page because it's a wildcard
+// catch-all case
 router.get('/*', (req, res, next) => {
   if (req.isAuthenticated()) {
     renderUserAppMiddleware(req, res, next);

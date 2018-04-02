@@ -9,8 +9,12 @@
 - [ ] List all users from GuestApp and UserApp
 - [X] Server sends GuestApp if not logged in, and sends UserApp if logged in.
 - [ ] List all projects, which is hosted from JSON files stored on server
+- [ ] Use settings page to see and modify user information
+
 
 ## Heroku App 5/1 Checklist
+- [ ] Add fields to User object to include areas (e.g., developers, designers, writers)
+- [ ] Look into repl.it for hosting developer projects (alternative: codepen)
 - [ ] GuestApp Tab pages need to display project completed under each category by aspiring creators for that categories.
 - [ ] The categories should be: App developer, designer, and writers
 - [ ] Aspiring creators can create projects postings and work on the projects that they've created/

@@ -8,7 +8,7 @@ export default ( {route} ) => (
     <TopNav route={route} extended={true}/>
     <div className="container main">
       <div id={communities.two} className="col s12">
-        <h2>Aspiring Designers</h2>
+        <h3>Aspiring Designers</h3>
         <UserListing number={5} />
       </div>
     </div>

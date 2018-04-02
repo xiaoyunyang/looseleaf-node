@@ -26,7 +26,11 @@ export default class UserCard extends React.Component {
     return (
       <li className="collection-item avatar">
         <img src={this.state.user.picture} alt="" className="circle" />
-        <span className="title">{`${this.state.user.firstname} ${this.state.user.lastname}`}</span>
+        <span className="title">
+          <a href="/">
+            {`${this.state.user.firstname} ${this.state.user.lastname}`}
+          </a>
+        </span>
         <p>{`Completed ${this.props.user.stats.numProj} projects in the past ${this.props.user.stats.numMonths} months`}</p>
         <p>{`Won best project ${this.props.user.stats.numBest} times`}</p>
         <a href="#!" className="secondary-content" onClick={this.toggleStar.bind(this, this.state.option)}>

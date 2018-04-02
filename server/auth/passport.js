@@ -9,6 +9,7 @@ import { Strategy as LocalStrategy } from 'passport-local';
 import { Strategy as FacebookStrategy } from 'passport-facebook';
 import { Strategy as GithubStrategy } from 'passport-github';
 import User from './User';
+import chalk from 'chalk';
 
 const configAuth = require('./secrets');
 
@@ -42,6 +43,9 @@ module.exports = () => {
     passwordField: 'password',
     passReqToCallback: true // allows us to pass back the entire request to the callback
   }, (req, email, password, done) => {
+console.log(chalk.red('post request for login'));
+console.log('login-local req.headers', req.headers);
+console.log('login-local req.body', req.body);
     // asynchronous
     // User.findOne wont fire unless data is sent back
     process.nextTick(() => {
