@@ -13,6 +13,8 @@ export default function renderUserApp(req, res, next) {
   const store = configureStore(req.user);
   const dataToSerialize = req.user;
 
+console.log("DataToSerialize ......... "+ req.user)
+
   // console.log('dataToSerialize', dataToSerialize);
 
   const branch = matchRoutes(getRoutes(req.user.username), req.url)

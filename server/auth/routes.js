@@ -20,13 +20,6 @@ const router = express.Router();
 
 // Middleware ==================================================================
 // route middleware to make sure a user is authenticated
-/**
- * [ensureAuthenticated description]
- * @param  {[type]}   req  [description]
- * @param  {[type]}   res  [description]
- * @param  {Function} next [description]
- * @return {[type]}        [description]
- */
 function ensureAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
     next();
@@ -66,7 +59,80 @@ router.get('/auth/users/:username', (req, res, next) => {
   });
 });
 
-// Facebook=====================================================================
+// Local Signup ================================================================
+// Saves user to the database
+router.get('/auth/signup', (req, res) => {
+  res.render('signup', {
+    csrfToken: req.csrfToken()
+  });
+});
+
+router.post('/auth/signup', (req, res, next) => {
+
+  console.log(chalk.red('post request for signup!'));
+
+  // body-parser adds the username and password to req.body
+  const email = req.body.email;
+  const password = req.body.password;
+
+  // Calls findOne to return just one user. You want a match on usernames here
+  User.findOne({ email }, (err, user) => {
+    if (err) {
+      return next(err);
+    }
+    // If user already exists ...
+    if (user) {
+      req.flash('error', 'User already exists');
+      return res.redirect('/auth/signup');
+    }
+
+    // Else if user does not exist, Let's create new user
+    const newUser = new User();
+    newUser.email = email;
+    newUser.local.password = password;
+    // TODO: newUser.picture = Gravatar
+    newUser.picture = gravatarUrl(email, { size: 120, default: 'mm' });
+    const username = email.split('@')[0];
+    newUser.displayName = username;
+    const regex = new RegExp(`^${username}.*$`, 'i');
+
+    // TODO: don't user User.count. If you logged in with facebook, with username
+    // xiaoyunyang, then logged in with github, which created another user with
+    // same username, but called xiaoyunyang-1, then deleted the facebook account,
+    // then created the facebook account again, you won't be able to create an
+    // account due to duplicate key (xiaoyunyang-1).
+    // What we want to do is to find the largest number following the username
+    // and append that to the end of the new username (xiaoyunyang-2)
+
+    User.count({ username: regex }, (err2, c) => {
+      if (err2) {
+        return next(err2);
+      }
+      const append = (c === 0) ? '' : `-${c}`;
+      newUser.username = username + append;
+      newUser.save(next);
+    });
+  });
+}, passport.authenticate('login-local', {
+  successRedirect: '/',
+  failureRedirect: '/auth/signup',
+  failureFlash: true
+}));
+
+// Local Login ==================================================================
+router.get('/auth/login', (req, res) => {
+  res.render('login', {
+    csrfToken: req.csrfToken()
+  });
+});
+
+router.post('/auth/login', passport.authenticate('login-local', {
+  successRedirect: '/',
+  failureRedirect: '/auth/login',
+  failureFlash: true
+}));
+
+// Facebook ====================================================================
 router.get('/auth/facebook', passport.authenticate('facebook'));
 
 // handle the callback after facebook has authenticated the user
@@ -113,79 +179,6 @@ router.post(
   },
 );
 
-
-// Signup ======================================================================
-// Saves user to the database
-router.get('/auth/signup', (req, res) => {
-  res.render('signup', {
-    csrfToken: req.csrfToken()
-  });
-});
-
-router.post('/auth/signup', (req, res, next) => {
-
-  console.log(chalk.red('post request for signup!'));
-
-  // body-parser adds the username and password to req.body
-  const email = req.body.email;
-  const password = req.body.password;
-
-  // Calls findOne to return just one user. You want a match on usernames here
-  User.findOne({ email }, (err, user) => {
-    if (err) {
-      return next(err);
-    }
-    // If user already exists ...
-    if (user) {
-      req.flash('error', 'User already exists');
-      return res.redirect('/auth/signup');
-    }
-
-    // Else if user does not exist, Let's create new user
-    const newUser = new User();
-    newUser.email = email;
-    newUser.local.password = password;
-    // TODO: newUser.picture = Gravatar
-    newUser.picture = gravatarUrl(email, { size: 120, default: 'mm' });
-    const username = email.split('@')[0];
-    const regex = new RegExp(`^${username}.*$`, 'i');
-
-    // TODO: don't user User.count. If you logged in with facebook, with username
-    // xiaoyunyang, then logged in with github, which created another user with
-    // same username, but called xiaoyunyang-1, then deleted the facebook account,
-    // then created the facebook account again, you won't be able to create an
-    // account due to duplicate key (xiaoyunyang-1).
-    // What we want to do is to find the largest number following the username
-    // and append that to the end of the new username (xiaoyunyang-2)
-
-    User.count({ username: regex }, (err2, c) => {
-      if (err2) {
-        return next(err2);
-      }
-      const append = (c === 0) ? '' : `-${c}`;
-      newUser.username = username + append;
-      newUser.save(next);
-    });
-  });
-}, passport.authenticate('login-local', {
-  successRedirect: '/',
-  failureRedirect: '/auth/signup',
-  failureFlash: true
-}));
-
-// Login ======================================================================
-router.get('/auth/login', (req, res) => {
-  res.render('login', {
-    csrfToken: req.csrfToken()
-  });
-});
-
-router.post('/auth/login', passport.authenticate('login-local', {
-  successRedirect: '/',
-  failureRedirect: '/auth/login',
-  failureFlash: true
-}));
-
 // Logout ======================================================================
 // Passport populates req.user for you
 router.get('/auth/logout', (req, res) => {
@@ -230,6 +223,7 @@ router.post('/auth/edit', ensureAuthenticated, (req, res, next) => {
 // Important: this has to remain at the bottom of the page because it's a wildcard
 // catch-all case
 router.get('/*', (req, res, next) => {
+console.log(chalk.green(`req is authenticated? ${req.isAuthenticated()}`))
   if (req.isAuthenticated()) {
     renderUserAppMiddleware(req, res, next);
   }
