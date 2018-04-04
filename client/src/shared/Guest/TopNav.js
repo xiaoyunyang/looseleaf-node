@@ -126,7 +126,7 @@ export default class TopNav extends React.Component {
           </li>
           <li className={selected === 'how-it-works'? 'active' : ''}>
             <Link
-              to={getNav().HowItWorks}>
+              to={getNav().howItWorks}>
               How It Works</Link>
           </li>
         </ul>

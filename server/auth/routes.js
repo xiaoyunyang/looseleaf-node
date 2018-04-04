@@ -12,7 +12,6 @@ import chalk from 'chalk';
 import renderGuestAppMiddleware from '../../client/iso-middleware/renderGuestApp';
 import renderUserAppMiddleware from '../../client/iso-middleware/renderUserApp';
 
-
 const router = express.Router();
 // TODO: csrf commented out so client app can post. Need to figure out use
 // csrf with the client app
@@ -63,14 +62,11 @@ router.get('/auth/users/:username', (req, res, next) => {
 // Saves user to the database
 router.get('/auth/signup', (req, res) => {
   res.render('signup', {
-    csrfToken: req.csrfToken()
+    // csrfToken: req.csrfToken()
   });
 });
 
 router.post('/auth/signup', (req, res, next) => {
-
-  console.log(chalk.red('post request for signup!'));
-
   // body-parser adds the username and password to req.body
   const email = req.body.email;
   const password = req.body.password;
@@ -82,10 +78,14 @@ router.post('/auth/signup', (req, res, next) => {
     }
     // If user already exists ...
     if (user) {
+      console.log(chalk.red('error: user already exists'));
       req.flash('error', 'User already exists');
-      return res.redirect('/auth/signup');
+      res.statusMessage = 'error';
+      return res.send('User already exists')
+      //return res.redirect('/login');
+      // return res.status(404).json("Not Found");
+      // return res.redirect('/signup'); // res.redirect('/how-it-works');
     }
-
     // Else if user does not exist, Let's create new user
     const newUser = new User();
     newUser.email = email;
@@ -115,22 +115,40 @@ router.post('/auth/signup', (req, res, next) => {
   });
 }, passport.authenticate('login-local', {
   successRedirect: '/',
-  failureRedirect: '/auth/signup',
+  failureRedirect: '/login',
   failureFlash: true
 }));
 
 // Local Login ==================================================================
 router.get('/auth/login', (req, res) => {
   res.render('login', {
-    csrfToken: req.csrfToken()
+    // csrfToken: req.csrfToken()
   });
 });
 
+/*
 router.post('/auth/login', passport.authenticate('login-local', {
   successRedirect: '/',
-  failureRedirect: '/auth/login',
+  failureRedirect: '/login',
   failureFlash: true
 }));
+*/
+router.post('/auth/login', (req, res, next) => {
+  passport.authenticate('login-local', (err, user, info) => {
+    console.log('heyyyy!')
+    if (err) { return next(err); }
+    if (!user) {
+      res.statusMessage = 'error';
+      return res.send(info.message);
+    }
+    req.logIn(user, (err) => {
+      if (err) {
+        return next(err);
+      }
+      return res.redirect('/');
+    });
+  })(req, res, next);
+});
 
 // Facebook ====================================================================
 router.get('/auth/facebook', passport.authenticate('facebook'));
@@ -166,15 +184,21 @@ router.post(
     User.findOneAndRemove({ username: req.params.username }, (err, user) => {
       if (err) {
         req.flash('error', 'No user found');
-        return next(err);
+        res.statusMessage = 'error';
+        return res.send('No user found');
+        //return next(err);
       }
       // If user successfully deleted
       if (user) {
         req.flash('info', 'User deleted!');
-      } else {
-        req.flash('error', 'No user found');
+        res.statusMessage = 'info';
+        return res.send('User deleted!');
       }
-      return res.redirect('/auth/users');
+      req.flash('error', 'No user found');
+      res.statusMessage = 'error';
+      return res.send('No user found');
+
+      // return res.redirect('/auth/users');
     });
   },
 );
@@ -214,6 +238,8 @@ router.post('/auth/edit', ensureAuthenticated, (req, res, next) => {
       return;
     }
     req.flash('info', 'Profile updated!');
+    res.statusMessage = 'info';
+    res.send('Profile updated!');
     res.redirect(`/auth/users/${req.user.username}`);
   });
 });

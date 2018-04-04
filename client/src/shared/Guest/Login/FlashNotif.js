@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 class FlashNotif extends React.Component {
   static defaultProps = {
-    text: 'Error. something wrong with your login'
+    msg: 'Error. something wrong with your login'
   }
   renderNotif(state, text) {
     switch(state) {
@@ -13,22 +13,22 @@ class FlashNotif extends React.Component {
         return null;
     }
   }
-  renderError(text) {
+  renderError(msg) {
     return (
-      <p style={{color: '#e57373'}}>{text}</p>
+      <p style={{color: '#e57373'}}>{msg}</p>
     );
   }
   render() {
     return (
       <div className="col l12 m12 s12 center-align">
-        { this.renderNotif(this.props.state, this.props.text) }
+        { this.renderNotif(this.props.state, this.props.msg) }
       </div>
     );
   }
 }
 FlashNotif.propTypes = {
   state: PropTypes.string.isRequired,
-  text: PropTypes.string
+  msg: PropTypes.string
 }
 
 export default FlashNotif;

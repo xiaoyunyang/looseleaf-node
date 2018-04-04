@@ -16,6 +16,10 @@ class LocalLogin extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      flash: {
+        state: 'ok',
+        msg: '',
+      },
       formFields: {
         email: '',
         password: ''
@@ -39,11 +43,22 @@ class LocalLogin extends React.Component {
     console.log('submit btn pressed. action = ', this.getFormAction(this.props.action))
 
     axios.post(this.getFormAction(this.props.action), formFields)
-      .then(function(response){
+      .then(res => {
         console.log('login via axios is a success')
-        console.log(response);
+        console.log(res);
 
-        window.location = "/";
+        // TODO:
+        // redirect to /signup if action is signup and user already exists
+        // redirect to / if the server responds with 200 ok...
+
+        if(res.statusText === 'error') {
+          //window.location = "/signup";
+          this.setState({
+            flash: {state: res.statusText, msg: res.data}
+          })
+        } else if(res.statusText === 'OK') {
+          window.location = "/";
+        }
 
         //Perform action based on response, such as flashing error notif
       })
@@ -71,10 +86,11 @@ class LocalLogin extends React.Component {
     return signupPath;
   }
   render() {
+    console.log(this.state.flash)
     return (
       <div className="col s12 m10 offset-m1 l8 offset-l2 center">
         <div className="row">
-          <FlashNotif state="ok"/>
+          <FlashNotif state={this.state.flash.state} msg={this.state.flash.msg}/>
           <form className="col s12" onSubmit={this.handleInput.bind(this)}>
             <div className="input-field col s12 m6 l6">
               <input type="email" name='email' className="validate" onChange={this.handleInput.bind(this)} />
