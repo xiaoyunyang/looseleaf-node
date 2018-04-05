@@ -5,6 +5,7 @@
 
 import passport from 'passport';
 import crypto from 'crypto';
+import validator from 'validator';
 import { Strategy as LocalStrategy } from 'passport-local';
 import { Strategy as FacebookStrategy } from 'passport-facebook';
 import { Strategy as GithubStrategy } from 'passport-github';
@@ -46,6 +47,12 @@ module.exports = () => {
 console.log(chalk.red('post request for login'));
 console.log('login-local req.headers', req.headers);
 console.log('login-local req.body', req.body);
+
+    // First, perform some validation of the inputs
+    if (!validator.isEmail(email)) {
+      return done(null, false, { message: 'Please provide a valid email' });
+    }
+
     // asynchronous
     // User.findOne wont fire unless data is sent back
     process.nextTick(() => {

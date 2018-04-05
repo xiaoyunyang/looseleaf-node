@@ -4,6 +4,7 @@
 
 import express from 'express';
 import passport from 'passport';
+import validator from 'validator';
 import csrf from 'csurf';
 import gravatarUrl from 'gravatar-url';
 import User from './User';
@@ -87,8 +88,22 @@ router.post('/auth/signup', (req, res, next) => {
       // return res.redirect('/signup'); // res.redirect('/how-it-works');
     }
     // Else if user does not exist, Let's create new user
+
+    // but first, we need to validate input:
+    if (!validator.isEmail(email)) {
+      res.statusMessage = 'error';
+      return res.send('Please provide a valid email');
+    }
+    if (validator.isEmpty(password)) {
+      res.statusMessage = 'error';
+      return res.send('Please provide a password');
+    }
+
     const newUser = new User();
     newUser.email = email;
+
+    // Error checking for email to make sure it is an email...
+
     newUser.local.password = password;
     // TODO: newUser.picture = Gravatar
     newUser.picture = gravatarUrl(email, { size: 120, default: 'mm' });
@@ -135,7 +150,6 @@ router.post('/auth/login', passport.authenticate('login-local', {
 */
 router.post('/auth/login', (req, res, next) => {
   passport.authenticate('login-local', (err, user, info) => {
-    console.log('heyyyy!')
     if (err) { return next(err); }
     if (!user) {
       res.statusMessage = 'error';

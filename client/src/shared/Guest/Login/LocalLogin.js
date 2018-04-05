@@ -26,6 +26,8 @@ class LocalLogin extends React.Component {
       }
     }
   }
+  //TODO: detect invalid email addresses or email address with invalid characters
+  //such as angle brackets
   handleInput(e) {
     let formFields = { ...this.state.formFields };
     formFields[e.target.name] = e.target.value;
@@ -39,6 +41,7 @@ class LocalLogin extends React.Component {
       this.handleSubmit(this.state.formFields);
     }
   }
+  // TODO: prevent axios from posting if client side validation has an error
   handleSubmit(formFields) {
     console.log('submit btn pressed. action = ', this.getFormAction(this.props.action))
 
@@ -86,7 +89,6 @@ class LocalLogin extends React.Component {
     return signupPath;
   }
   render() {
-    console.log(this.state.flash)
     return (
       <div className="col s12 m10 offset-m1 l8 offset-l2 center">
         <div className="row">
