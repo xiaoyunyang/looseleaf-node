@@ -1,6 +1,43 @@
 # LooseLeaf - Node.js App
 
 ## TODOs
+
+
+### Heroku App 4/10 Checklist
+
+- [X] Create User Account via Facebook
+- [X] Create User Account via Github
+- [X] Create User Account via Email and Local Strategy
+- [ ] Enable csrf for the form used to submit user email and password
+- [ ] List all users from GuestApp and UserApp
+- [X] Server sends GuestApp if not logged in, and sends UserApp if logged in.
+- [ ] Complete HowItWorks page. Serve content for the page from a markdown file.
+- [ ] List some dummy data for the projects, which is hosted from JSON files stored on server
+- [ ] Use settings page to see and modify user information
+- [ ] Use settings page to delete user information
+
+### Heroku App 5/1 Checklist
+- [ ] When user first signs up, redirect the user to the `ProfileBuilder` app that asks a series of questions to help the user set up his/her profile.
+- [ ] Add fields to User object to include areas (e.g., developers, designers, writers)
+- [ ] Look into [repl.it](https://repl.it/repls), [codepen](https://codepen.io/stefanjudis/full/gkHwJ), and [Glitch](https://glitch.com/) for hosting developer projects.
+- [ ] `GuestApp` Tab pages need to display project completed under each category by aspiring creators for that categories.
+- [ ] The categories should be: App developer, designer, and writers
+- [ ] Aspiring creators can create projects postings and work on the projects that they've created
+- [ ] Project creation involves specifying the deliverable and the due date. Once a project is created, anyone can work on it.
+- [ ] Deliverables may include Medium (for writing and comics), Codepen, Glitch, repl.it, and Github (repo or gist).
+- [ ] All projects that has been created and completed should be displayed on a page from both the GuestApp and UserApp.
+- [ ] All projects that has been completed should be displayed on the profile pages of users who have completed it.
+- [ ] All projects that have been created by a user should be displayed on the profile page of that user.
+- [ ] Every created project should have a page.
+- [ ] There should be a discussion section for each project and a list of users who have elected to work on the project.
+- [ ] If a user selected "work on it" for a project, there should be a way to undo it.
+- [ ] There's a "Work on it" button for every created project.
+- [ ] When the project is first being created, the creator of the project will be asked whether he or she will be working on the project also before submitting the project request for everyone to see.
+- [ ] From the UserApp profile page, there should be a tab that displays all the projects this user is currently working.
+- [ ] From the UserApp profile page, there should be a tab that displays all the projects this user has completed.
+- [ ] Completing a project means submitting a link to the project from the project page.
+- [ ] When the clock runs out on a project, the creator of the project will be prompted to select the best submittal and give review or feedback to any of the submittals thus far.
+
 ### App Setup 
 **Technology selection and experimentation**
 
@@ -34,8 +71,8 @@
 	- [X] Set up create-react-app with webpack 4, code splitting, webpack hot module reload, webpack-dev-middleware, and react-hot-loader. Created open source starter project [isomorphic-router-demo](https://github.com/xiaoyunyang/isomorphic-router-demo)
 - [x] Add eslint to both client and server.
 - [X] Set up automated Testing for server: `mocha`, `chai`, `SuperTest` and `cheerio`.
-
-**UserProfileApp**
+ 
+**UserApp**
 
 - [**Server**] Authentication and User Login - See [SetupAuth](https://github.com/xiaoyunyang/web-dev-cheatsheets/blob/master/guides/auth-setup.md)
 	- [X] Scotch.io's [local auth Tutorial](https://scotch.io/tutorials/easy-node-authentication-setup-and-local)
@@ -44,15 +81,22 @@
 	- [ ] Add [`nodemailer`](https://nodemailer.com/about/) and `mailgun` to allow app to send emails to users. See [this article](https://medium.com/hexient-labs/nodemailer-mailgun-4d9f18f955a9)
 	- [ ] Refactor passport auth code and new user creation code to eliminate duplicate code. Fix the callback hell with mongoose database access.
 	- [ ] Remove capability to for user to delete their profile. They can only deactivate it. Deleting user from database messes up the logic for creating a unique user name. 
--  [**Server**] Security
+
+-  [**Security**]
 	- [X] Sanitize input on the server side (ejs form) using [`validator`](https://github.com/chriso/validator.js)
 	- [X] Add [`helmet`](https://github.com/helmetjs/helmet) to server to mitigate cross site scripting (XSS).
 	- [X] Add [https](https://certsimple.com/blog/localhost-ssl-fix) to localhost server.
 	- [X] Add [`csurf`](https://github.com/expressjs/csurf) to server side forms (ejs) to protect against cross site request forgery (CSRF).
+	- [ ] In the login via email strategy, rather than displaying the message indicating email has a problem or password has a problem ,simply display "Incorrect email or password". This is better from a security standpoint.
 	- [ ] Move all secret auth stuff to `.env`, which is excluded from github as define din gitignore. See [this tutorial](http://www.clementinejs.com/tutorials/tutorial-passport.html)
 	- [ ] Add XSS protection to client side forms. Use validator?
 	- [ ] Add [`csurf`](https://github.com/expressjs/csurf) to client side forms to protect against CSRF.
+	- [ ] Incorporate client-side detection and mitigation of invalid input for user login/signup forms
 	- [ ] Set up auto-redirect to the HTTPS app
+
+- [**Content**]
+	- [ ] Create React component that imports text from markdown to be rendered on different pages. Gotcha: Enable [`cors`](https://github.com/expressjs/cors) before serving static content from localhost:3001 (server) for localhost:3000 (create-react-app) consumption. This is for development only. Alternatively, you can implement a [workaround](http://community.powerbi.com/t5/Developer/Error-No-Access-Control-Allow-Origin-header-is-present-on-the/m-p/351506) to add an extension to Chrome that disables CORS protection. 
+
 - [**Universal**] UserProfileApp server and client integration
 	- [ ] Create UserProfile UI in materializeCSS and React using dummy data (use create-react-app to take advantage of HMR and react hot loader).
 	- [ ] Set up redux store, actions, and reducers for UserProfileApp
@@ -64,7 +108,24 @@
 		- Medium [React Router 4 Container for Rendering Two Versions of the app](https://medium.com/@lonesword_/authentication-with-react-router-4-x-5b377e5e05d1)
 		- Tutorial from [codementor](https://www.codementor.io/kiok46/redux-store-actions-reducers-and-logger-get-started-b35h1pvpc)
 	- [ ] Create Server API for user profile in server to send profile data for initial load an isomorphic fetch in client app after initial load.
+	- [ ] Create lib on for client side to support isomorphic fetch:
+		- Read [Google Developer's doc](https://developers.google.com/web/ilt/pwa/working-with-the-fetch-api) to learn all about `fetch`
 	- [ ] Create unit test for server api.
+
+	
+* [**Deployment**] Prep
+	* [ ] Clean up run scripts in `package.json`. Turn on `forever`.
+	* [ ] ServiceWorkers
+	* [ ] Progressive Webapp
+		* Addy Osmani's [Blog Article](https://addyosmani.com/blog/getting-started-with-progressive-web-apps/) 
+		* Article on [Progressive Web App With React](https://medium.com/@addyosmani/progressive-web-apps-with-react-js-part-i-introduction-50679aef2b12)
+	* [ ] Try out webpages in both the desktop and mobile version.
+	* [ ] Use Google's [Lighthouse Dev Tool](https://developers.google.com/web/tools/lighthouse/#devtools) to audit webspages' performance
+	* [ ] Use Google’s [PageSpeed Tools](https://developers.google.com/speed/pagespeed/insights/?url=https%3A%2F%2Fgoogle.com&tab=mobile) to audit each webpages' SEO score
+	* [ ] Use Chrome’s dev tools to inspect the HTML and HTTP response header
+	* [ ] Use [Facebook’s Sharing Debugger Dev Tool](https://developers.facebook.com/tools/debug/sharing/?q=https%3A%2F%2Fmedium.com) to audit webpages against social sharing
+	* [ ] Use the desktop version of the site with javascript disabled
+
 
 ## Getting Started 
 

@@ -34,6 +34,7 @@
     "isomorphic-fetch": "^2.2.1",
     "jest": "20.0.4",
     "jquery": "^3.2.1",
+    "marked": "^0.3.19",
     "materialize-css": "^0.100.2",
     "object-assign": "4.1.1",
     "postcss-flexbugs-fixes": "^3.2.0",

@@ -73,7 +73,7 @@ export default class TopNav extends React.Component {
   renderNavHeader() {
     return (
       <div className="nav-header center">
-        <h4>Build Skills by Helping A Good Cause</h4>
+        <h4>{'Build Skills by Helping Nonprofits'}</h4>
         <div className="tagline">
           {'Gain relevant work experience as a developer, designer, and writer'}
         </div>

@@ -6,7 +6,7 @@ export default ( {route} ) => (
     <TopNav route={route} extended={true}/>
     <div className="container main">
       <div>
-        <h1>Home</h1>
+        <h1>Mission</h1>
         <p>Welcome!</p>
         <h3>Access to work opportunities does not need to be blocked by unaffordable college education.</h3>
         <h5>Work opportunities create learning opportunities.</h5>

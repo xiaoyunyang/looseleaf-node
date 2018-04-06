@@ -19,6 +19,8 @@ class Home extends React.Component {
       .then(res => this.setState({ resHello: res.express }))
       .catch(err => console.log(err));
   }
+  // TODO: put callApi in a lib and import it. There's duplicate code in
+  // the User/Home.js component.
   callApi = async function (endpoint) {
     const response = await fetch(endpoint);
     const body = await response.json();
