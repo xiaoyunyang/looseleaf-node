@@ -1,5 +1,4 @@
 import React from 'react';
-import fetch from 'isomorphic-fetch';
 import $ from 'jquery';
 import marked from 'marked';
 

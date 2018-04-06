@@ -47,13 +47,11 @@ class LocalLogin extends React.Component {
 
     axios.post(this.getFormAction(this.props.action), formFields)
       .then(res => {
-        console.log('login via axios is a success')
-        console.log(res);
-
-        // TODO:
+        // console.log('login via axios is a success')
+        // console.log(res);
+        //
         // redirect to /signup if action is signup and user already exists
         // redirect to / if the server responds with 200 ok...
-
         if(res.statusText === 'error') {
           //window.location = "/signup";
           this.setState({
@@ -71,16 +69,17 @@ class LocalLogin extends React.Component {
       });
   }
   renderForgotPass() {
+    const style = {
+      marginTop: -16
+    }
     if (this.props.action === 'Continue') {
       return (
-        <div className="container">
-          <div className="col s12 m12 l12">
-            <a className="offset-l6" href="/forgot">Forgot password</a>
+          <div style={style} className="col l8 offset-l5 m10 offset-m4 s12">
+            <a className="" href="/forgot">Forgot password</a>
           </div>
-        </div>
       );
     }
-    return <div />;
+    return null;
   }
   getFormAction(action) {
     if(action === 'Continue') {
@@ -107,12 +106,10 @@ class LocalLogin extends React.Component {
             </div>
           </form>
         </div>
-
         <a className="btn"
           onClick={this.handleSubmit.bind(this, this.state.formFields)}>
           {`${this.props.action} with Email`}
         </a>
-
       </div>
     );
   }

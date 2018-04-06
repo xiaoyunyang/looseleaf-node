@@ -63,8 +63,9 @@ console.log('login-local req.body', req.body);
           return done(err);
         }
         if (!user) {
-          console.log(chalk.red('No user has that email'));
-          return done(null, false, { message: 'No user has that email!' });
+          // No user has that email...we want to display a generic
+          // error message for security sake
+          return done(null, false, { message: 'missing credentials' });
         }
         return user.checkPassword(password, (err2, isMatch) => {
           if (err2) { return done(err); }
@@ -73,7 +74,9 @@ console.log('login-local req.body', req.body);
             return done(null, user); // success
           }
           console.log(chalk.red('Invalid password.'));
-          return done(null, false, { message: 'Invalid password.' });
+          // Invalid password...we want to display a generic
+          // error message for security sake
+          return done(null, false, { message: 'missing credentials' });
         });
       });
     });
