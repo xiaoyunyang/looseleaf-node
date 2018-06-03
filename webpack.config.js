@@ -5,6 +5,7 @@ module.exports = {
   devtool: 'source-map',
   entry: {
     guest: path.resolve(__dirname, 'client/src/guest.js'),
+    community: path.resolve(__dirname, 'client/src/community.js'),
     user: path.resolve(__dirname, 'client/src/user.js'),
     recipe: path.resolve(__dirname, 'client/src/recipe.js')
   },

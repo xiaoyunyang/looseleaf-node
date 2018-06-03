@@ -69,7 +69,6 @@ if (process.env.NODE_ENV === 'production') {
   // The below code allows client app to run from the the server (localhost:3001)
   app.use('/', express.static(clientAppPathProd));
 } else if (process.env.NODE_ENV === 'development') {
-
   console.log(chalk.blue('Running in development mode'));
   // TODO: cors allows anyone to access my api. can't use for production
   // This is not a fix for production or when application has to be shown

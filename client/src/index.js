@@ -5,18 +5,27 @@ import 'materialize-css';
 import 'materialize-css/dist/css/materialize.min.css';
 import 'materialize-css/dist/js/materialize.min';
 import './lib/tabs' // <- overriding the materialize tabs js
-import AppOld from './App';
-import AppUser from './AppUser';
-import AppGuest from './AppGuest';
-import AppRecipe from './AppRecipe';
+import AppOld from './clientApps/App';
+import AppUser from './clientApps/AppUser';
+import AppGuest from './clientApps/AppGuest';
+import AppCommunity from './clientApps/AppCommunity';
+import AppLanding from './clientApps/AppLanding';
+import AppRecipe from './clientApps/AppRecipe';
 import './assets/index.css';
 
 /*
  * Main entry point for the create-react-app
  */
-const isLoggedin = false;
-const App = isLoggedin ? AppUser : AppGuest;
-// const App = AppRecipe;
+const Apps = {
+  'user': AppUser,
+  'guest': AppGuest,
+  'community': AppCommunity,
+  'landing': AppLanding,
+  'recipe': AppRecipe
+}
+
+const App = Apps.landing;
+
 const render = (Component) => {
   ReactDOM.render(
     <AppContainer>

@@ -1,6 +1,6 @@
 # LooseLeaf - Node.js App
 
-## Getting Started 
+## Getting Started
 
 We are going to use the following stack:
 
@@ -38,7 +38,7 @@ Take the following steps to create a baseline app:
 
 1. Follow [this tutorial](http://joshbroton.com/add-react-hot-reloading-create-react-app/) to set up a [`create-react-app`](https://github.com/facebookincubator/create-react-app) with [`react-hot-loader`](https://github.com/gaearon/react-hot-loader)
 	> React Hot Loader allows you to tweak React components in real time.
- 
+
 2. Follow [this tutorial](https://www.mokuji.me/article/universal-app-react-router) to set up the rest of the [`create-react-app`](https://github.com/facebookincubator/create-react-app) project to use [`react-router`](https://github.com/ReactTraining/react-router). We are going to use Version 4.x of the React Router, which is a complete rewrite of Versions 3.x and prior.
 
 	**Warning**:  Implementing the Build, Run & Develop section in the second tutorial could cause `react-hot-loader` to not work so this section wasn't implemented in the baseline app, which is available for download [on Github](https://github.com/xiaoyunyang/looseleaf-node/tree/baseline).
@@ -84,7 +84,6 @@ looseleaf-node
 |   |   └───index.html  <== #B
 │   ├───src
 │   |   └───shared
-|   |   ├── shared
 |   |   |   ├───Profile
 |   |   |   |   ├── App.js <== #A
 |   |   |   |   ├── HTML.js <== #A
@@ -103,7 +102,7 @@ looseleaf-node
 |   ├───iso-middleware
 |   |   ├── renderRoute.jsx <== #D
 |   |   └── renderView.jsx <== #D
-	
+
 ```
 
 **Notes**
@@ -130,29 +129,29 @@ looseleaf-node
 
 Before running the app, you have to set up a few things:
 
-1. From the project directory, run the command: 
-	
+1. From the project directory, run the command:
+
 	```
 	$ npm install && cd client && npm install && cd ..
 	$ mkdir server/build
-	``` 
-	
+	```
+
 	This installs all the dependencies in your `package.json` from for both the server and the client. Everytime you make changes to `package.json`, `npm install` needs to be run so that the dependencies defined in the file would get downloaded by npm. The dependencies gets downloaded into a folder called node_modules.
 2. Set up your database for the app:
 
 	**MongoDB**
-	
+
 	* Install MongoDB:  `$ brew install mongodb`
 	* Create the data directory: `$ sudo mkdir -p /data/db`
-	* Set permissions for the data directory: 
-	
+	* Set permissions for the data directory:
+
 		```
-		$ sudo chown -R `whoami` /data/db	
+		$ sudo chown -R `whoami` /data/db
 		```
 	* Run MongoDB server: `$ mongod`
 	* Run MongoDB shell in a separate terminal: `$ mongo`
 	* Some useful commands to run in the mongo shell
-	
+
 		```
 		> use test $ switch to db test
 		> show collections $ list all collections inside current db
@@ -163,92 +162,92 @@ Before running the app, you have to set up a few things:
 		> db.users.dropIndexes()
 		```
  Check out [Azat Marda's Cheatsheet](https://github.com/azat-co/cheatsheets/tree/master/mongodb-mongoose), [Quick Reference](https://docs.mongodb.com/manual/reference/mongo-shell/), and [Little Mongo Handbook](http://openmymind.net/mongodb.pdf) for more useful commands.
-	 
+
 3. If you are developing on the client side only, `$ cd client` then `$ npm run build` or `$ yarn build` - Build the project. For production builds, you'll want to use `npm run build` to build an optimized bundle and transpiled down to ES5, which will be saved to the filesystem. If you don't have hot reloading enabled, you have to run this after making changes to your source code to allow the changes to take effect next time you start the client server. This is undesirable and there are a few workarounds, in particular, nodemon and react-hot-reloader, which will be discussed in more detail below.
-	
+
 4. For developing an integrated client and server app, we want to  run the isomorphic webapp with the following command line:
-	  
+
 	  ```
 	  $ npm start
 	  ```
-	  
+
 	  This will give us access to:	  
-	  - [http://localhost:3001/](http://localhost:3001/) 
+	  - [http://localhost:3001/](http://localhost:3001/)
 	  - [http://localhost:3001/iso](http://localhost:3001/iso)
 	  - [http://localhost:3001/api/hello](http://localhost:3001/api/hello)
 	  If you are not seeing changes made to the client app, do the following, before running the start script again:
-	  
+
 	  ```
 	  $ npm build-client
 	  ```
-	  
+
 5. For developing an server and client separately
 
 	* To run both the server and client in separately, do the following, which starts the server to automomatically listen on port 3001 ([http://localhost:3001/](http://localhost:3001/)) and the client to automomatically listen on port 3000 ([http://localhost:3000/](http://localhost:3000/)).
 
 		```
 		$ npm start-dev
-		``` 
+		```
 		If the single page application doesn't render correctly on the server, you need to do this:
-		
+
 		```
 		# npm build-client
 		```
-		
+
 		The `npm start-dev` script is equivalent to running `npm run start-server` and `npm run start-client` concurrently. We learn how to do that from FullStackReact's [Tutorial](https://www.fullstackreact.com/articles/using-create-react-app-with-a-server/#enter-create-react-app) and [Sample Project](https://github.com/fullstackreact/food-lookup-demo).
-		
-	* To run just the server app, do 
-	
+
+	* To run just the server app, do
+
 		```
 		$ npm run start-server
 		```		
-		
+
 	* To run both the client and server app, do
-	
+
 		```
 		$ npm start-dev
 		```
-		
+
 	* To run the client app, do
-		
+
 		```
 		$ npm run start-client
 		```
-		
+
 		Alternatively,
-		
+
 		```
 		$ cd client && npm start
 		```
-		
+
 		In this mode, you can use `react-hot-loader` to make changes to react components in runtime.
-		
+
 		Just go to [http://localhost:3001/api/hello](http://localhost:3000) to see change being made.
 
-		
+
 		If you want to run on other ports, like 9000, 8000, 8080, just specify the port you want:
-		
+
 		```
 		$ PORT=9000 npm start
 		```
 	* To run the server to serve static content:
-		
+
 		```
 		$ yarn global add serve
 		$ serve -s build
 		```
-		
+
 		In this mode, you can't use `react-hot-loader` because the client app is rendered on the server side.
 
 5. Stop the database server when you are done:
-	* Stop the postgres database 
-	 
+	* Stop the postgres database
+
 	 ```
 	 $ pg_ctl -D /usr/local/var/postgres stop
 	 ```
-	
+
 	* Or if you use mongo: `control`+`C`  
-	 
+
 
 ## Redux
 
@@ -353,5 +352,5 @@ What about CSS javascripts? Read the [full stack react tutorial](https://www.ful
 * Express: [Manning Express In Action](https://hackerstribe.com/wp-content/uploads/2016/04/Node.js-Express-in-Action.pdf)
 * Authentication and Database: [My Notes on Database and Passport setup](https://github.com/xiaoyunyang/web-dev-cheatsheets/blob/master/auth-setup.md)
 * DevTools
-	* [Webpack vs. Gulp vs. Browserify](https://www.youtube.com/watch?v=xsSnOQynTHs) 
+	* [Webpack vs. Gulp vs. Browserify](https://www.youtube.com/watch?v=xsSnOQynTHs)
  	>Use Webpack because it allows for hot module replacement. Webpack is a prerequisite for [`react-hot-reloader`](https://github.com/gaearon/react-hot-loader), which lets you update your react components during runtime without restarting the server via a `npm run build`.

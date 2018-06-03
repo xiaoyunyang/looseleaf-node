@@ -100,6 +100,9 @@ html{
     position: relative;
     padding-bottom: 327px; /* height of your footer */
   }
+  .main-wide {
+    padding-bottom: 327px; /* height of your footer */
+  }
 }
 
 @media only screen and (max-width : 992px) {
@@ -433,7 +436,7 @@ img[alt="medium center"] {
   background-color: #00897b;
 }
 .section-brown {
-    background-color: #383435;
+  background-color: #383435;
 }
 footer.section-green p {
   color: #eeeeee;
@@ -444,9 +447,10 @@ footer.section-brown {
 .text-green {
   color: #00897b;
 }
-.text-brown{
+.text-brown {
   color: #383435;
 }
+
 .text-white {
   color: #e6e7e8;
 }

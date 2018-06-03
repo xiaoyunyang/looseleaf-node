@@ -12,6 +12,7 @@ import chalk from 'chalk';
 
 import renderGuestAppMiddleware from '../../client/iso-middleware/renderGuestApp';
 import renderUserAppMiddleware from '../../client/iso-middleware/renderUserApp';
+import renderCommunityAppMiddleware from '../../client/iso-middleware/renderCommunityApp';
 
 const router = express.Router();
 // TODO: csrf commented out so client app can post. Need to figure out use
@@ -262,6 +263,10 @@ router.post('/auth/edit', ensureAuthenticated, (req, res, next) => {
 // Render Apps ================================================================
 // Important: this has to remain at the bottom of the page because it's a wildcard
 // catch-all case
+router.get('/webdev*', (req, res, next) => {
+  renderCommunityAppMiddleware(req, res, next);
+});
+
 router.get('/*', (req, res, next) => {
 console.log(chalk.green(`req is authenticated? ${req.isAuthenticated()}`))
   if (req.isAuthenticated()) {

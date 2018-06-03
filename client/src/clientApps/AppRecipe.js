@@ -1,8 +1,8 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import App from './shared/Recipe/App';
+import App from '../shared/Recipe/App';
 import { hot } from 'react-hot-loader';
-import initRedux from './shared/redux/Recipe/init-redux';
+import initRedux from '../shared/redux/Recipe/init-redux';
 import fetch from 'isomorphic-fetch';
 
 

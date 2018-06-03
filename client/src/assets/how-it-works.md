@@ -53,6 +53,11 @@ The major challenges of self-study for a career change include the lack of insig
 
 Another challenge of self-study is the ability to stay motivated and focused to effectively and efficiently filter through and utilize the massive collection of free learning resources online. LooseLeaf’s second innovation is the integration of social networking features to create a peer mentorship system, in which newcomers can (1) observe what someone else at their experience level would do to complete a project (e.g., creating a landing page for a non-profit or designing a logo for a startup founder) and (2) provide encouragement and feedback to each other during the project completion process. The peer mentorship system groups newcomers of similar skill levels, aspirations, and interest areas, and shared projects to create social networks. When newcomers browse open projects in areas of their interest, they can add the projects they would like to complete to their todo-list and watch-list. They can document their efforts in how they are completing these projects, which sends notifications to other newcomers in their network.
 
+#### Why LooseLeaf
+
+1. Access to work opportunities does not need to be blocked by unaffordable college education.
+2. Work opportunities create learning opportunities.
+3. The future of Work is peer-to-peer, distributed, and modular.
 
 #### TL;DR
 
