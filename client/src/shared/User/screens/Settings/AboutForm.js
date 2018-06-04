@@ -1,4 +1,5 @@
 import React from 'react';
+import InputTags from './InputTags';
 
 export default class AboutForm extends React.Component {
   constructor(props) {
@@ -8,7 +9,9 @@ export default class AboutForm extends React.Component {
       location: this.props.location,
       website: this.props.website,
       interests: this.props.interests,
-      communities: this.props.communities
+      communities: this.props.communities,
+      tags: ['Advertising', 'AI', 'Animation', 'Art', 'AWS', 'Blogging', 'Branding', 'C++', 'D3.js', 'Data Science', 'Data Visualization', 'Design', 'Digital Marketing', 'Education', 'Entrepreneurship', 'Games', 'Go', 'JavaScript', 'Machine Learning', 'Node', 'Photography', 'Python', 'React', 'Ruby', 'Ruby on Rails', 'Social Media', 'SPA', 'UI', 'User Experience', 'UX Design', 'Writing'],
+      selectedTags: []
     }
   }
   handleChange(id, e) {
@@ -97,6 +100,14 @@ export default class AboutForm extends React.Component {
                 :
                 this.renderTextInput('website', '', 'Website')
               }
+              <InputTags
+                id='select-areas'
+                label='Add Interests'
+                hint='+Interest'
+                tags={this.state.tags}
+                selectedTags={this.state.selectedTags}
+                setState={ds => this.setState({selectedTags: ds})}
+            />
             </div>
             <div className="col s12 m12 l12 center">
               <button className="btn" type="submit" name="action">Save Changes
