@@ -43,8 +43,9 @@ const UserDropdown = ( {username, userPic} ) => (
     </a>
     <ul id="user-dropdown" className="dropdown-content">
       <li><Link to={getNav(username).portfolio}>Portfolio</Link></li>
-      <li><a href="/user">Stats</a></li>
+      <li><a href="/r">New Project</a></li>
       <li className="divider" />
+      <li><a href="/">WebDev</a></li>
       <li><Link to={getNav(username).settings}>Settings</Link></li>
       <li><a href="/auth/logout">Log out</a></li>
     </ul>

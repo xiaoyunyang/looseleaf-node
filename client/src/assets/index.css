@@ -350,7 +350,6 @@ img.mod-round, picture.mod-round {
   margin-top: 5px;
 }
 .feed .feed-user p {
-/*  line-height: 0em;*/
   font-weight: 300;
   color: #555;
   margin-left: -15px !important;
@@ -378,14 +377,29 @@ img.mod-round, picture.mod-round {
   background-color: #26a69a;
 }
 .hero-profile {
-  padding: 30px;
+  margin-top: 30px;
 }
-.hero-profile img {
-  width: 200px;
-  height: 200px;
+.portfolio-user-info {
+  padding-bottom: 10px;
 }
-.hero-profile .hero-info {
-  padding-top: 5px;
+.hero-info p {
+  font-weight: 300;
+  color: #555;  
+}
+.hero-info .portfolio-user-info p {
+  margin-top: -1px;
+}
+.portfolio-user-info a {
+  margin-top: -1px;
+}
+.portfolio-user-info .chip a {
+  display: inline-block;
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(0,0,0,0.6);
+}
+.hero-profile .hero-info .row {
+  margin-bottom: 0px;
 }
 
 /**** profile Page Stuff END ****/

@@ -6,7 +6,7 @@ const initState = {
   username: "xiaoyunyang",
   displayName: "Xiaoyun Yang",
   email: "shaoween232@yahoo.com",
-  website: 'hello.me',
+  bio: "I love the idea of services exchanged without money. The world needs more of this! For too long a lack of finances has kept people from doing the work that they love and are actually most competent at. Here's to Simbi and a great concept well executed.",
   interests: [],
   gender: "female",
   location: "Washington, District of Columbia",

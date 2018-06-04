@@ -2,7 +2,6 @@ import React from 'react';
 import fetch from 'isomorphic-fetch';
 import TopNav from '../TopNav';
 
-
 const Stat = ({num, phrase}) => (
   <div className="row">
     <div className="col s2 m2 l2">
