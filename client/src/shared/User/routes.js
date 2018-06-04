@@ -1,7 +1,7 @@
 import Root from './Root';
 import Home from './screens/Home';
 import Settings from './screens/Settings/Main';
-import Tab from './screens/Portfolio/Tab';
+import Portfolio from './screens/Portfolio/Main';
 import NotFound from '../components/NotFound';
 
 const root = '';
@@ -21,11 +21,11 @@ const getTabsRoutes = (username) => {
     {
       path: getNav(username).portfolio,
       exact: true,
-      component: Tab
+      component: Portfolio
     },
     {
       path: getNav(username).tabs,
-      component: Tab
+      component: Portfolio
     },
   ];
   return tabsRoutes;
@@ -51,7 +51,7 @@ const getRoutes = (user) => {
         },
         {
           path: getNav(username).portfolio,
-          component: Tab,
+          component: Portfolio,
           routes: getTabsRoutes(username)
         },
         {

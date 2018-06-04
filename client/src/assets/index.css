@@ -112,12 +112,7 @@ html{
     .main-content {
         padding-left: 0;
     }
-
 }
-
-
-
-
 
 .btn {
   border-radius: 4px;
@@ -338,6 +333,38 @@ img.mod-round, picture.mod-round {
 }
 
 /**** Navbar END ****/
+
+/**** User Home Page Stuff BEGIN ****/
+#user-home {
+  margin-top: 30px;
+}
+#user-card p {
+  line-height: 0.5em;
+  font-weight: 300;
+  color: #555;
+}
+#user-card .row {
+  margin-bottom: 0px;
+}
+#user-card .or-divider {
+  margin-top: 5px;
+}
+.feed .feed-user p {
+/*  line-height: 0em;*/
+  font-weight: 300;
+  color: #555;
+  margin-left: -15px !important;
+}
+.feed a {
+  color: #555 !important;
+}
+.feed a:hover {
+  color: #26a69a !important;
+}
+.feed .card-action a {
+  font-size: 13px;
+}
+/**** User Home Page Stuff END ****/
 
 /**** profile Page Stuff BEGIN ****/
 #profile-tabs {

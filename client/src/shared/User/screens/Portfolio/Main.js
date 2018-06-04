@@ -10,7 +10,7 @@ import TopNav from '../../TopNav';
 
 polyfill();
 
-class Tab extends Component {
+export default class Main extends Component {
   componentDidMount() {
     $('ul.tabs').tabs();
     this.initializeSticky();
@@ -79,5 +79,3 @@ class Tab extends Component {
     );
   }
 }
-
-export default Tab;
