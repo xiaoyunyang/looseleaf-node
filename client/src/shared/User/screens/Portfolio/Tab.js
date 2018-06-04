@@ -6,7 +6,7 @@ import { renderRoutes } from 'react-router-config';
 import $ from 'jquery';
 import { getRoot, getRoutes, tabs } from './routes';
 import About from './About';
-import TopNav from '../TopNav';
+import TopNav from '../../TopNav';
 
 polyfill();
 

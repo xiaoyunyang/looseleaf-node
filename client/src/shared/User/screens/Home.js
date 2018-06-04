@@ -1,6 +1,6 @@
 import React from 'react';
 import fetch from 'isomorphic-fetch';
-import TopNav from './TopNav';
+import TopNav from '../TopNav';
 
 // This is a ES6 class - see https://toddmotto.com/react-create-class-versus-component/
 class Home extends React.Component {

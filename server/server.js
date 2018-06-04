@@ -20,8 +20,8 @@ import helmet from 'helmet';
 import ms from 'ms';
 import validator from 'validator';
 import renderViewMiddleware from '../client/iso-middleware/renderView';
-import renderGuestAppMiddleware from '../client/iso-middleware/renderGuestApp';
-import renderUserAppMiddleware from '../client/iso-middleware/renderUserApp';
+//import renderGuestAppMiddleware from '../client/iso-middleware/renderGuestApp';
+//import renderUserAppMiddleware from '../client/iso-middleware/renderUserApp';
 
 require('dotenv').config();
 

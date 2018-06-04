@@ -6,14 +6,14 @@ import { getPageName } from '../../lib/helpers';
 
 // const username = store.username;
 
-const MobileSideNav = ( {username} ) => (
+const MobileSideNav = ( {username, userPic} ) => (
   <ul id="mobile-menu" className="side-nav">
     <li>
       <div className="user-view">
         <div className="background">
           <img alt="looseleaf" src="http://xiaoyunyang.github.io/serverless-webapp/assets/images/table3.png"/>
         </div>
-        <img alt={`looseleaf user ${username}`}  className="circle" src="http://xiaoyunyang.github.io/assets/data/profile/photo/xyang.png"/>
+        <img alt={`looseleaf user ${username}`}  className="circle" src={userPic}/>
          <div className="row">
            <div className="col l2 m2 s2">
              <a href="https://github.com/xiaoyunyang"><i className="fa fa-github fa-lg"></i></a>
@@ -31,7 +31,7 @@ const MobileSideNav = ( {username} ) => (
       </div>
     </li>
     <li><Link to={getNav(username).home} className="active">Home</Link></li>
-    <li><Link to={getNav(username).profile}>Profile</Link></li>
+    <li><Link to={getNav(username).portfolio}>Portfolio</Link></li>
   </ul>
 );
 
@@ -42,7 +42,7 @@ const UserDropdown = ( {username, userPic} ) => (
       <div className="arrow-down" />
     </a>
     <ul id="user-dropdown" className="dropdown-content">
-      <li><Link to={getNav(username).profile}>Profile</Link></li>
+      <li><Link to={getNav(username).portfolio}>Portfolio</Link></li>
       <li><a href="/user">Stats</a></li>
       <li className="divider" />
       <li><Link to={getNav(username).settings}>Settings</Link></li>
@@ -90,7 +90,7 @@ export default class TopNav extends React.Component {
     const userPic = this.props.user.picture;
     let selected = (typeof this.props.route.path === 'string')
                     ? getPageName(this.props.route.path) : '';
-    
+
     // TODO: Still need the code below?
 /*
     if (typeof document !== 'undefined') {
@@ -114,7 +114,7 @@ export default class TopNav extends React.Component {
                   <Link id={`nav-${root}`} to={getNav(username).home}>Home</Link>
                 </li>
                 <li className={selected === username ? 'active' : ''}>
-                  <Link id={`nav-${username}`} to={getNav(username).profile}>Profile</Link>
+                  <Link id={`nav-${username}`} to={getNav(username).portfolio}>Portfolio</Link>
                 </li>
                 <li><Link to={`${getNav(username).home}foo`}>Foo</Link></li>
                 <li><button><i className="material-icons">notifications_none</i></button></li>
@@ -128,7 +128,7 @@ export default class TopNav extends React.Component {
             </div>
           </nav>
         </div>
-        <MobileSideNav username={username} />
+        <MobileSideNav username={username} userPic={userPic} />
       </div>
 
     );

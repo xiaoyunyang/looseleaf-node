@@ -36,7 +36,7 @@ export default ( {route} ) => (
           <div className="col s4 m4 l4">
             <img src={getImgPath('share.png')}/>
           </div>
-          <h5 className="text-white">Share</h5>
+          <h5 className="text-white">Create Project</h5>
           <p className="text-white">Curate bookmarks to online learning content with other knowledge seekers.</p>
         </div>
         <div className="col s12 m4 l4">

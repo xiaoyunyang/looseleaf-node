@@ -10,6 +10,7 @@ import gravatarUrl from 'gravatar-url';
 import User from './User';
 import chalk from 'chalk';
 
+import renderLandingAppMiddleware from '../../client/iso-middleware/renderLandingApp';
 import renderGuestAppMiddleware from '../../client/iso-middleware/renderGuestApp';
 import renderUserAppMiddleware from '../../client/iso-middleware/renderUserApp';
 import renderCommunityAppMiddleware from '../../client/iso-middleware/renderCommunityApp';
@@ -272,7 +273,7 @@ console.log(chalk.green(`req is authenticated? ${req.isAuthenticated()}`))
   if (req.isAuthenticated()) {
     renderUserAppMiddleware(req, res, next);
   }
-  renderGuestAppMiddleware(req, res, next);
+  renderLandingAppMiddleware(req, res, next);
 });
 
 /*

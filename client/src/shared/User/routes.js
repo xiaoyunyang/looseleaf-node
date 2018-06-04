@@ -1,16 +1,15 @@
 import Root from './Root';
-import Home from './Home';
-import Tab from './Profile/Tab';
-import Settings from './Profile/Settings';
+import Home from './screens/Home';
+import Settings from './screens/Settings/Main';
+import Tab from './screens/Portfolio/Tab';
 import NotFound from '../components/NotFound';
-
 
 const root = '';
 
 const getNav = (username) => {
   return {
     home: `/${root}`,
-    profile: `/${root}@${username}`,
+    portfolio: `/${root}@${username}`,
     settings: `/${root}@${username}/settings`,
     tabs: `/${root}@${username}/:slug`,
     wildcard: `/${root}*`,
@@ -20,7 +19,7 @@ const getNav = (username) => {
 const getTabsRoutes = (username) => {
   const tabsRoutes = [
     {
-      path: getNav(username).profile,
+      path: getNav(username).portfolio,
       exact: true,
       component: Tab
     },
@@ -51,7 +50,7 @@ const getRoutes = (user) => {
           component: Settings
         },
         {
-          path: getNav(username).profile,
+          path: getNav(username).portfolio,
           component: Tab,
           routes: getTabsRoutes(username)
         },
