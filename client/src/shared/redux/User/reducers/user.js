@@ -7,6 +7,7 @@ const initState = {
   displayName: "Xiaoyun Yang",
   email: "shaoween232@yahoo.com",
   website: 'hello.me',
+  interests: [],
   gender: "female",
   location: "Washington, District of Columbia",
   picture: "https://graph.facebook.com/10213296357138004/picture?type=large","__v":0

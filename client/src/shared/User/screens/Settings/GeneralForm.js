@@ -75,7 +75,7 @@ export default class GeneralForm extends React.Component {
       <div className="card-panel white">
         <h4>General</h4>
         <div className="row">
-        <div className="col s10 m4 l4 offset-s1">
+        <div className="col s5 m3 l3 offset-s3">
           {this.renderImgInput(this.props.picture)}
         </div>
           <form className="col s12 m8 l8">

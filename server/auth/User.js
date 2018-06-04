@@ -16,6 +16,7 @@ const userSchema = mongoose.Schema({
   location: String,
   gender: String,
   hireable: String,
+  interests: Array,
   local: {
     password: { type: String, required: true },
     passwordResetToken: String

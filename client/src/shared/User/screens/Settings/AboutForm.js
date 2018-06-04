@@ -8,10 +8,9 @@ export default class AboutForm extends React.Component {
       bio: this.props.bio,
       location: this.props.location,
       website: this.props.website,
-      interests: this.props.interests,
       communities: this.props.communities,
       tags: ['Advertising', 'AI', 'Animation', 'Art', 'AWS', 'Blogging', 'Branding', 'C++', 'D3.js', 'Data Science', 'Data Visualization', 'Design', 'Digital Marketing', 'Education', 'Entrepreneurship', 'Games', 'Go', 'JavaScript', 'Machine Learning', 'Node', 'Photography', 'Python', 'React', 'Ruby', 'Ruby on Rails', 'Social Media', 'SPA', 'UI', 'User Experience', 'UX Design', 'Writing'],
-      selectedTags: []
+      selectedTags: this.props.interests,
     }
   }
   handleChange(id, e) {
