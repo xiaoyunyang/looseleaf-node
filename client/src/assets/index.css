@@ -363,6 +363,16 @@ img.mod-round, picture.mod-round {
 .feed .card-action a {
   font-size: 13px;
 }
+.feed-user img {
+  width: 30px;
+  margin-right: 5px;
+}
+#user-home .card-panel {
+  position: fixed;
+  width: 250px;
+  margin-left: -30px;
+}
+
 /**** User Home Page Stuff END ****/
 
 /**** profile Page Stuff BEGIN ****/
@@ -384,7 +394,7 @@ img.mod-round, picture.mod-round {
 }
 .hero-info p {
   font-weight: 300;
-  color: #555;  
+  color: #555;
 }
 .hero-info .portfolio-user-info p {
   margin-top: -1px;

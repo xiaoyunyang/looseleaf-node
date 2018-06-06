@@ -84,10 +84,10 @@ class Home extends React.Component {
       <div className="card feed">
         <div class="card-content">
           <div className="row feed-user">
-            <div className="col s1 m1 l1">
+            <div className="col">
               <img className="circle" src={this.props.user.picture} alt=""/>
             </div>
-            <div className="col s8 m8 l8">
+            <div className="col">
               <p>{this.props.user.displayName}</p>
             </div>
           </div>
@@ -107,7 +107,7 @@ class Home extends React.Component {
       <div className="card feed">
         <div class="card-content">
           <div className="row feed-user">
-            <div className="col s1 m1 l1">
+            <div className="col">
               <img className="circle" src={this.props.user.picture} alt=""/>
             </div>
             <div className="col s8 m8 l8">

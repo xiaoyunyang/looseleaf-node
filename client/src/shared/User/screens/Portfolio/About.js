@@ -34,7 +34,7 @@ const Communities= ({icon, cs}) => (
 const cs = [
   {name: 'Web Developer', url: ''},
   {name: 'Mobile Developer', url: ''},
-  {name: 'Graphic Desiger', url: ''},
+  {name: 'Graphic Designer', url: ''},
   {name: 'Entrepreneur', url: ''},
 ]
 
