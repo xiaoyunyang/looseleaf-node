@@ -397,21 +397,22 @@ img.mod-round, picture.mod-round {
     width: 80%;
   }
 }
-/* Medium Screens */
+/* Medium Screen and Small Screen */
 @media only screen and (max-width: 992px) {
   .hero-profile-center {
     text-align: center;
   }
   .hero-profile img {
     display: block;
-    width: 30%;
+    width: 20%;
     margin: auto;
   }
 }
-
 @media only screen and (max-width: 600px) {
-  .user-display-name {
-    text-align: center;
+  .hero-profile img {
+    display: block;
+    width: 35%;
+    margin: auto;
   }
 }
 .portfolio-user-info {

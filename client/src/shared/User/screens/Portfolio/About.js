@@ -42,7 +42,7 @@ const cs = [
 export default ({ user }) => (
   <div className="hero-profile">
     <div className="row">
-      <div className="col s5 m12 l3 offset-s3">
+      <div className="col s12 m12 l3">
         <img src={user.picture} alt="" className="circle" />
       </div>
       <div className="col s12 m12 l9 hero-info">

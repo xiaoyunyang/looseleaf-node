@@ -6,7 +6,7 @@ import NotFound from '../../../../components/NotFound';
 import { root } from '../../routes'
 // const root = `/${store.root}${store.username}`;
 
-const tabs = ['completed', 'todo-list', 'watch-list', 'contributions'];
+const tabs = ['completed', 'todo', 'watch', 'contributions'];
 
 const getRoot = (username) => {
   return `/${root}@${username}`;
