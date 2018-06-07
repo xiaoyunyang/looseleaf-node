@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import $ from 'jquery';
-import { getNav, root } from './routes';
+import { getNav, root } from '../User/routes';
 import { getPageName } from '../../lib/helpers';
 
 // const username = store.username;
@@ -52,6 +52,7 @@ const UserDropdown = ( {username, userPic} ) => (
   </li>
 );
 
+// Callers:  User/Home.js and User/Porfolio/Main.js and User/Settings/Main.js
 export default class TopNav extends React.Component {
   componentDidMount() {
     $('.button-collapse').sideNav({

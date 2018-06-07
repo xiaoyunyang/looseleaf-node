@@ -59,7 +59,7 @@ class Home extends React.Component {
 
   renderUserCard() {
     return (
-      <div className="card-panel hide-on-small-only" id="user-card">
+      <div className="card-panel" id="user-card">
         <div className="row">
           <div className="col s4 m4 l4">
             <img className="circle" src={this.props.user.picture} alt=""/>

@@ -7,6 +7,7 @@ import 'materialize-css/dist/js/materialize.min';
 import './lib/tabs' // <- overriding the materialize tabs js
 // import AppOld from './craApps/App';
 import AppUser from './craApps/AppUser';
+import AppProject from './craApps/AppProject';
 import AppGuest from './craApps/AppGuest';
 import AppCommunity from './craApps/AppCommunity';
 import AppLanding from './craApps/AppLanding';
@@ -18,6 +19,7 @@ import './assets/index.css';
  */
 const Apps = {
   'user': AppUser,
+  'project': AppProject,
   'guest': AppGuest,
   'community': AppCommunity,
   'landing': AppLanding,

@@ -4,16 +4,16 @@ import { StaticRouter } from 'react-router-dom';
 import { matchRoutes } from 'react-router-config';
 import { Provider } from 'react-redux';
 import configureStore from '../src/shared/redux/User/configureStore';
-import { getRoutes } from '../src/shared/User/routes';
-import HTML from '../src/shared/User/HTML';
-import App from '../src/shared/User/App';
+import { getRoutes } from '../src/shared/Project/routes';
+import HTML from '../src/shared/Project/HTML';
+import App from '../src/shared/Project/App';
 
-export default function renderUserApp(req, res, next) {
+export default function renderProjectApp(req, res, next) {
 //  console.log('preloadedState type: ', (typeof preloadedState));
   const store = configureStore(req.user);
   const dataToSerialize = req.user;
 
-// console.log("DataToSerialize ......... "+ req.user)
+console.log("I'm in renderProjectApp!!! ")
 
   // console.log('dataToSerialize', dataToSerialize);
 

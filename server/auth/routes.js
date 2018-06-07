@@ -14,6 +14,7 @@ import renderLandingAppMiddleware from '../../client/iso-middleware/renderLandin
 import renderGuestAppMiddleware from '../../client/iso-middleware/renderGuestApp';
 import renderUserAppMiddleware from '../../client/iso-middleware/renderUserApp';
 import renderCommunityAppMiddleware from '../../client/iso-middleware/renderCommunityApp';
+import renderProjectAppMiddleware from '../../client/iso-middleware/renderProjectApp';
 
 const router = express.Router();
 // TODO: csrf commented out so client app can post. Need to figure out use
@@ -266,6 +267,11 @@ router.post('/auth/edit', ensureAuthenticated, (req, res, next) => {
 // catch-all case
 router.get('/webdev*', (req, res, next) => {
   renderCommunityAppMiddleware(req, res, next);
+});
+router.get('/project*', (req, res, next) => {
+  if (req.isAuthenticated()) {
+    renderProjectAppMiddleware(req, res, next);
+  }
 });
 
 router.get('/*', (req, res, next) => {

@@ -338,6 +338,7 @@ img.mod-round, picture.mod-round {
 #user-home {
   margin-top: 30px;
 }
+
 #user-card p {
   line-height: 0.5em;
   font-weight: 300;
@@ -389,12 +390,50 @@ img.mod-round, picture.mod-round {
 .hero-profile {
   margin-top: 30px;
 }
+
+/* Big Screens */
+@media only screen and (min-width: 993px) {
+  .hero-profile {
+    width: 80%;
+  }
+}
+/* Medium Screens */
+@media only screen and (max-width: 992px) {
+  .hero-profile-center {
+    text-align: center;
+  }
+  .hero-profile img {
+    display: block;
+    width: 30%;
+    margin: auto;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .user-display-name {
+    text-align: center;
+  }
+}
 .portfolio-user-info {
   padding-bottom: 10px;
+}
+.hero-profile-center p {
+  padding-top: 0px !important;
+  -webkit-margin-before: 0em;
+  -webkit-margin-after: 0em;
+  color: rgba(0,0,0,0.6)!important;
+}
+.hero-profile-center h4 {
+  padding-top: 0px !important;
+  -webkit-margin-after: 0em;
+}
+.hero-profile-center {
+  -webkit-margin-after: 1.5em;
 }
 .hero-info p {
   font-weight: 300;
   color: #555;
+  padding-top: 5px;
 }
 .hero-info .portfolio-user-info p {
   margin-top: -1px;

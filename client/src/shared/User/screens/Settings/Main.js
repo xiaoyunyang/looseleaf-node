@@ -1,5 +1,5 @@
 import React from 'react';
-import TopNav from '../../TopNav';
+import TopNav from '../../../components/TopNavUser';
 import GeneralForm from './GeneralForm';
 import AboutForm from './AboutForm';
 
