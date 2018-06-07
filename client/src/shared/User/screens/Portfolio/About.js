@@ -3,6 +3,46 @@ import * as moment from 'moment';
 import { Link } from 'react-router-dom';
 import { getNav } from '../../routes';
 
+const iconEnums = {
+  bio: 'create',
+  create: 'bio',
+  location: 'location_on',
+  location_on: 'location',
+  email: 'email',
+  website: 'public',
+  public: 'website',
+  communities: 'group',
+  group: 'communities'
+}
+
+const TextOrLink = ({iconName, content}) => (
+  <div>
+{      console.log('pooop', iconName)}
+    {
+
+      iconEnums[iconName] === 'email' ?
+        <a href={`mailto: ${content}`}>{content}</a>
+        :
+        null
+    }
+    {
+      iconEnums[iconName] === 'website' ?
+        <a href={`${content}`} target="_blank">
+          {content} <i className="fa fa-external-link"></i>
+        </a>
+        :
+        null
+    }
+    {
+      (iconEnums[iconName] === 'bio' || iconEnums[iconName] === 'location') ?
+        <p>{content}</p>
+        :
+        null
+    }
+  </div>
+)
+
+
 const UserInfo = ({icon, info, orElse, to}) => (
   <div className="row portfolio-user-info">
     <div className="col s1 m1 l1">
@@ -10,7 +50,7 @@ const UserInfo = ({icon, info, orElse, to}) => (
     </div>
     <div className="col s11 m11 l11">
       { info ?
-        <p>{info}</p>
+        <TextOrLink iconName={icon} content={info} />
         :
         <Link to={to}>{orElse}</Link>
       }
@@ -56,22 +96,22 @@ export default ({ user }) => (
             </p>
         </div>
         <Communities icon={'group'} cs={cs} />
-        <UserInfo icon={'location_on'}
+        <UserInfo icon={iconEnums.location}
           info={user.location}
           orElse={'add location'}
           to={getNav(user.username).settings}
           />
-        <UserInfo icon={'create'}
+        <UserInfo icon={iconEnums.bio}
           info={user.bio}
           orElse={'add bio'}
           to={getNav(user.username).settings}
           />
-        <UserInfo icon={'email'}
+        <UserInfo icon={iconEnums.email}
           info={user.email}
           orElse={'add email'}
           to={getNav(user.username).settings}
         />
-        <UserInfo icon={'public'}
+      <UserInfo icon={iconEnums.website}
           info={user.website}
           orElse={'add website'}
           to={getNav(user.username).settings}
