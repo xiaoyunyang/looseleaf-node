@@ -26,7 +26,7 @@ const Apps = {
   'recipe': AppRecipe
 }
 
-const App = Apps.user;
+const App = Apps.project;
 
 const render = (Component) => {
   ReactDOM.render(

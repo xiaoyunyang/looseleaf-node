@@ -13,7 +13,7 @@ export default function renderUserApp(req, res, next) {
   const store = configureStore(req.user);
   const dataToSerialize = req.user;
 
-console.log('...........in middleware. req.url', req.url)
+console.log('...........in user middleware. req.url', req.url)
 
   const branch = matchRoutes(getRoutes(req.user.username), req.url)
   const promises = branch.map(({ route, match }) => {

@@ -80,7 +80,7 @@ export default class AboutForm extends React.Component {
   render() {
     return (
       <div className="card-panel white">
-        <h4>About Me</h4>
+        <h4>About The Project</h4>
         <div className="row">
           <form className="col s12">
             { this.state.bio ?
