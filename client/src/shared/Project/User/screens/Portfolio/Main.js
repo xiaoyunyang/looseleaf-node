@@ -9,6 +9,7 @@ import About from './About';
 import TopNav from '../../../components/TopNavUser';
 
 polyfill();
+
 export default class Main extends Component {
   componentDidMount() {
     $('ul.tabs').tabs();
@@ -48,18 +49,11 @@ export default class Main extends Component {
     );
   }
   render() {
-    // TODO: The code below is an ugly hac but it worksk. I don't know why
-    // this.props.match.slug no longer provides the tab name
-    // It worked before ... not sure why it doesn't work now
-    const selected = this.props.location.pathname.split('/').pop() || 'completed';
-    if (typeof window !== 'undefined' &&
-        (selected === tabs[0] || selected === tabs[1] || selected === tabs[2] || selected === tabs[3])
-      ) {
+    const selected = this.props.match.params.slug || 'one';
+    if (typeof window !== 'undefined') {
       $(`#tab-${selected}`).trigger('click');
     }
-
     const root = getRoot(this.props.user.username);
-    
     return (
       <div>
         <TopNav route={this.props.route} user={this.props.user}/>
@@ -81,6 +75,7 @@ export default class Main extends Component {
           </div>
         </div>
       </div>
+
     );
   }
 }

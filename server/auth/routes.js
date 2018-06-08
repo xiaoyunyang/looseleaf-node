@@ -268,15 +268,26 @@ router.post('/auth/edit', ensureAuthenticated, (req, res, next) => {
 router.get('/webdev*', (req, res, next) => {
   renderCommunityAppMiddleware(req, res, next);
 });
-router.get('/project*', (req, res, next) => {
-  if (req.isAuthenticated()) {
-    renderProjectAppMiddleware(req, res, next);
-  }
-});
+
+// router.get('/project*', (req, res, next) => {
+//   console.log(chalk.red('/project requested.'))
+//   if (req.isAuthenticated()) {
+//     console.log(chalk.red('/is authenticated'))
+//     renderProjectAppMiddleware(req, res, next);
+//   }
+//   renderLandingAppMiddleware(req, res, next);
+// });
 
 router.get('/*', (req, res, next) => {
 console.log(chalk.green(`req is authenticated? ${req.isAuthenticated()}`))
+console.log(chalk.red(`req.url = ? ${req.url}`))
   if (req.isAuthenticated()) {
+
+    // if (req.url === '/project') {
+    //   renderProjectAppMiddleware(req, res, next);
+    // } else {
+    //   renderUserAppMiddleware(req, res, next);
+    // }
     renderUserAppMiddleware(req, res, next);
   }
   renderLandingAppMiddleware(req, res, next);

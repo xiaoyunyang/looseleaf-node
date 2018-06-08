@@ -59,7 +59,7 @@ class Home extends React.Component {
 
   renderUserCard() {
     return (
-      <div className="card-panel hide-on-small-only" id="user-card">
+      <div className="card-panel" id="user-card">
         <div className="row">
           <div className="col s4 m4 l4">
             <img className="circle" src={this.props.user.picture} alt=""/>
@@ -82,7 +82,7 @@ class Home extends React.Component {
   renderNewPost() {
     return (
       <div className="card feed">
-        <div className="card-content">
+        <div class="card-content">
           <div className="row feed-user">
             <div className="col">
               <img className="circle" src={this.props.user.picture} alt=""/>
@@ -102,10 +102,10 @@ class Home extends React.Component {
       </div>
     )
   }
-  renderFeed(msg, id) {
+  renderFeed(msg) {
     return (
-      <div key={id} className="card feed">
-        <div className="card-content">
+      <div className="card feed">
+        <div class="card-content">
           <div className="row feed-user">
             <div className="col">
               <img className="circle" src={this.props.user.picture} alt=""/>
@@ -140,22 +140,23 @@ class Home extends React.Component {
         <TopNav route={this.props.route} user={this.props.user}/>
         <div className="container" id="user-home">
           <div className="row">
-            <div className="col s12 m4 l3">
+            <div className="col s12 m5 l4">
               {
                 this.renderUserCard()
               }
             </div>
-            <div className="col s12 m8 l9 user-feed">
+            <div className="col s12 m7 l8">
               {
                 this.renderNewPost()
               }
               {
-                this.renderFeed(this.state.resHello, -1)
+                this.renderFeed(this.state.resHello)
               }
               {
-                updates.map((d,i) => {
-                  return this.renderFeed(d, i)
+                updates.map(d => {
+                  return this.renderFeed(d)
                 })
+
               }
             </div>
           </div>

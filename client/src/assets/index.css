@@ -371,7 +371,17 @@ img.mod-round, picture.mod-round {
 #user-home .card-panel {
   position: fixed;
   width: 250px;
-  margin-left: -30px;
+}
+/* Big Screen */
+@media only screen and (min-width: 993px) {
+  #user-home .card-panel {
+    margin-left: -5em;
+  }
+}
+@media only screen and (min-width: 601px) and (max-width: 993px) {
+  #user-home .user-feed {
+    padding-left: 8%;
+  }
 }
 
 /**** User Home Page Stuff END ****/

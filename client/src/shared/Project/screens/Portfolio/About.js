@@ -2,15 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { getNav } from '../../routes';
 
-const getMonthYear = (dateString) => {
-  // dateStr looks like 'Fri Apr 06 2018'
-  let dateArr = new Date(dateString).toDateString().split(' ')
-  let month = dateArr[1]
-  let year = dateArr[3]
-  return `${month} ${year}`
-}
-
-
 const iconEnums = {
   bio: 'create',
   create: 'bio',
@@ -25,6 +16,7 @@ const iconEnums = {
 
 const TextOrLink = ({iconName, content}) => (
   <div>
+{      console.log('pooop', iconName)}
     {
 
       iconEnums[iconName] === 'email' ?
@@ -97,9 +89,6 @@ export default ({ user }) => (
           <h4>{user.displayName}</h4>
             <p>
               {`@${user.username}`}
-            </p>
-            <p>
-              {`Member since ${getMonthYear(user.createdAt)}`}
             </p>
         </div>
         <Communities icon={'group'} cs={cs} />

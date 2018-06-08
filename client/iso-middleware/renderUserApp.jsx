@@ -9,13 +9,11 @@ import HTML from '../src/shared/User/HTML';
 import App from '../src/shared/User/App';
 
 export default function renderUserApp(req, res, next) {
-//  console.log('preloadedState type: ', (typeof preloadedState));
+
   const store = configureStore(req.user);
   const dataToSerialize = req.user;
 
-// console.log("DataToSerialize ......... "+ req.user)
-
-  // console.log('dataToSerialize', dataToSerialize);
+console.log('...........in middleware. req.url', req.url)
 
   const branch = matchRoutes(getRoutes(req.user.username), req.url)
   const promises = branch.map(({ route, match }) => {
@@ -23,7 +21,6 @@ export default function renderUserApp(req, res, next) {
       ? route.loadData(match)
       : Promise.resolve(null)
   });
-
   Promise.all(promises).then(data => {
     // data will be an array[] of datas returned by each promises.
   	// console.log(data)
