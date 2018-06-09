@@ -6,7 +6,7 @@ export default class extends React.Component {
   render() {
     return (
       <div className='section-white'>
-        <TopNav route={this.props.route} user={this.props.user}/>
+        <TopNav route={this.props.route} user={this.props.user} useExternLinks={true}/>
         <div className="container">
           <h4>New Project</h4>
           <ProjectForm

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import $ from 'jquery';
 import { getNav, root } from '../User/routes';
@@ -53,7 +54,10 @@ const UserDropdown = ( {username, userPic} ) => (
 );
 
 // Callers:  User/Home.js and User/Porfolio/Main.js and User/Settings/Main.js
-export default class TopNav extends React.Component {
+export default class TopNavUser extends React.Component {
+  static defaultProps = {
+    useExternLinks: false
+  }
   componentDidMount() {
     $('.button-collapse').sideNav({
       edge: 'left',
@@ -113,12 +117,29 @@ export default class TopNav extends React.Component {
               </div>
               <ul className="right hide-on-small-only">
                 <li className={selected === root ? 'active' : ''}>
-                  <Link id={`nav-${root}`} to={getNav(username).home}>Home</Link>
+                  {
+                    this.props.useExternLinks ?
+                      <a href={getNav(username).home}>Home</a>
+                      :
+                      <Link id={`nav-${root}`} to={getNav(username).home}>Home</Link>
+                  }
                 </li>
                 <li className={selected === username ? 'active' : ''}>
-                  <Link id={`nav-${username}`} to={getNav(username).portfolio}>Portfolio</Link>
+                  {
+                    this.props.useExternLinks ?
+                    <a href={getNav(username).portfolio}>Portfolio</a>
+                    :
+                    <Link id={`nav-${username}`} to={getNav(username).portfolio}>Portfolio</Link>
+                  }
                 </li>
-                <li><Link to={`${getNav(username).home}foo`}>Foo</Link></li>
+                <li>
+                  {
+                    this.props.useExternLinks ?
+                    <a href={`${getNav(username).home}foo`}>Foo</a>
+                    :
+                    <Link to={`${getNav(username).home}foo`}>Foo</Link>
+                  }
+                </li>
                 <li><button><i className="material-icons">notifications_none</i></button></li>
                 <UserDropdown username={username} userPic={userPic}/>
               </ul>
@@ -135,4 +156,7 @@ export default class TopNav extends React.Component {
 
     );
   }
+}
+TopNavUser.proTypes = {
+  useExternLinks: PropTypes.bool
 }
