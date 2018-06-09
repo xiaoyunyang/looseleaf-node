@@ -7,7 +7,7 @@ export default class MdText extends React.Component {
     super(props);
     this.state = {
       mdData: this.loadData(this.props.filepath) // path to the md file
-    }
+    };
   }
   loadData(filepath) {
     $.ajax({

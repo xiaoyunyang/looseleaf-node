@@ -14,7 +14,7 @@ body {
 p {
   line-height:1.2em;
 }
-h1, h2, h3, h4, h5, h6, p, span {
+h1, h2, h3, h4, h5, h6, p {
  color: #555;
 }
 h5 {
@@ -385,6 +385,16 @@ img.mod-round, picture.mod-round {
 }
 
 /**** User Home Page Stuff END ****/
+
+/**** form Page BEGIN ****/
+#project-form {
+  padding-bottom: 30px;
+}
+#project-form .container {
+  margin-top: 30px;
+}
+
+/**** form Page END ****/
 
 /**** profile Page Stuff BEGIN ****/
 #profile-tabs {

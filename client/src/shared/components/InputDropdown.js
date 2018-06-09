@@ -23,7 +23,7 @@ export default class InputTags extends React.Component {
 
   render() {
     return (
-      <div className='input-field col l6 m6 s6'>
+      <div style={{paddingTop: '12px'}} className='input-field col l6 m6 s6'>
         <select id={this.props.id} defaultValue='None'>
           <option disabled>{this.props.label}</option>
           {

@@ -5,7 +5,7 @@ import ProjectForm from './ProjectForm';
 export default class extends React.Component {
   render() {
     return (
-      <div className='section-white'>
+      <div className='section-white' id='project-form'>
         <TopNav route={this.props.route} user={this.props.user} useExternLinks={true}/>
         <div className="container">
           <h4>New Project</h4>
@@ -17,7 +17,6 @@ export default class extends React.Component {
             communities={this.props.user.communities}
             />
         </div>
-
       </div>
     );
   }

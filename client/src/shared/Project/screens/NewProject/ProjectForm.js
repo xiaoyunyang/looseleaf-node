@@ -1,11 +1,21 @@
 import React from 'react';
+import $ from 'jquery';
 import InputTags from '../../../components/InputTags';
 import InputDropdown from '../../../components/InputDropdown';
+import DatePicker from '../../../components/DatePicker';
 
 const projects = [
   'Web Development',
   'Mobile Development',
   'Data Science'
+]
+const platforms = [
+  'Google Doc',
+  'Dropbox',
+  'Github',
+  'Codepen',
+  'Repl.it',
+  'Other'
 ]
 
 export default class AboutForm extends React.Component {
@@ -18,6 +28,9 @@ export default class AboutForm extends React.Component {
       communities: this.props.communities,
       tags: ['Advertising', 'AI', 'Animation', 'Art', 'AWS', 'Blogging', 'Branding', 'C++', 'D3.js', 'Data Science', 'Data Visualization', 'Design', 'Digital Marketing', 'Education', 'Entrepreneurship', 'Games', 'Go', 'JavaScript', 'Machine Learning', 'Node', 'Photography', 'Python', 'React', 'Ruby', 'Ruby on Rails', 'Social Media', 'SPA', 'UI', 'User Experience', 'UX Design', 'Writing'],
       selectedTags: this.props.interests,
+      people: ['Andrew Fenner', 'Peter Preston', 'Xiaoyun Yang'],
+      selectedPeople: [],
+      dueDate: '',
     }
   }
   handleChange(id, e) {
@@ -63,74 +76,101 @@ export default class AboutForm extends React.Component {
       </div>
     )
   }
-
   render() {
     return (
       <form className="col s12">
-      <div className="card-panel white">
-        <h5>About The Project</h5>
-        <div className="row">
-          <div className="col s12">
+        <div className="card-panel white">
+          <h5>About The Project</h5>
+          <div className="row">
+            <div className="col s12">
+              {
+                this.renderTextInput('location', '', 'Title')
+              }
+              {
+                this.renderTextAreaInput('bio', '', 'Description')
+              }
+              {
+                <InputDropdown
+                  id='select-project'
+                  label='Project Type'
+                  choices={projects}
+                  setState={d => this.setState({selectedProject: d})}
+                />
+              }
+              {
+                <InputTags
+                  id='select-areas'
+                  label='Interest Areas'
+                  hint='+Interest'
+                  tags={this.state.tags}
+                  selectedTags={this.state.selectedTags}
+                  setState={ds => this.setState({selectedTags: ds})}
+                />
+              }
+            </div>
+          </div>
+        </div>
+        <div className="card-panel white">
+          <h5>About You And Your Mission</h5>
+          <p>{'Introduce yourself. Give people a reason to get really excited about working on this project with you.'}</p>
+          <div className="row">
+            <div className="col s12">
+              {
+                this.renderTextAreaInput('bio', '', 'About Me')
+              }
+              {
+                this.renderTextAreaInput('bio', '', 'My Mission')
+              }
+            </div>
+          </div>
+        </div>
+        <div className="card-panel white">
+          <h5>Due Date</h5>
+        </div>
+        <div className="card-panel white">
+          <h5>Invite Project Collaborators</h5>
+          <p>{"Invite People to work on the project."}</p>
             {
-              this.renderTextInput('location', '', 'Title')
-            }
-            {
-              this.renderTextAreaInput('bio', '', 'Description')
-            }
-            {
-              <InputDropdown
-                id='select-project'
-                label='Project Type'
-                choices={projects}
-                setState={d => this.setState({selectedProject: d})}
-              />
-          }
-          {
               <InputTags
-                id='select-areas'
-                label='Interest Areas'
-                hint='+Interest'
-                tags={this.state.tags}
-                selectedTags={this.state.selectedTags}
-                setState={ds => this.setState({selectedTags: ds})}
+                id='select-people'
+                label='collaborators'
+                hint='+collaborator'
+                tags={this.state.people}
+                selectedTags={this.state.selectedPeople}
+                setState={ds => this.setState({selectedPeople: ds})}
               />
             }
-
+        </div>
+        <div className="card-panel white">
+          <h5>Logistics</h5>
+          <p>{"Submission Instruction."}</p>
+          <div className="row">
+            <div className="col s12">
+              {
+                <InputDropdown
+                  id='select-platform'
+                  label='Platform Type'
+                  choices={platforms}
+                  setState={d => this.setState({selectedProject: d})}
+                />
+              }
+              {
+                this.renderTextAreaInput('bio', '', 'Optional Submission Instruction')
+              }
+            </div>
+          </div>
+          <p>{"Set a due date. You can always change the deadline."}</p>
+          <div className="row">
+            <div className="col s12 m10 l8">
+              <DatePicker setState={d => this.setState({dueDate: d})}/>
+            </div>
           </div>
         </div>
-      </div>
-      <div className="card-panel white">
-        <h5>About You And Your Mission</h5>
-        <p>{'Introduce yourself. Give people a reason to get really excited about working on this project with you.'}</p>
-
-        <div className="row">
-          <div className="col s12">
-            {
-              this.renderTextAreaInput('bio', '', 'About Me')
-            }
-            {
-              this.renderTextAreaInput('bio', '', 'My Mission')
-            }
-          </div>
+        <div className="row center">
+          <button className="btn" type="submit" name="action">
+            Create Project
+          </button>
         </div>
-
-      </div>
-      <div className="card-panel white">
-        <h5>Deadline</h5>
-        <p>{"Set deadline. You can always change the deadline."}</p>
-        <div className="or-divider"/>
-        <h5>Invite People</h5>
-        <p>
-          {
-            "Invite People to work on the project."
-          }
-        </p>
-      </div>
-      <div className="col s12 m12 l12 center">
-        <button className="btn" type="submit" name="action">
-          Create Project
-        </button>
-      </div>
       </form>
     )
   }
