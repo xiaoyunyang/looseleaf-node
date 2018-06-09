@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import App from '../shared/Recipe/App';
 import initRedux from '../shared/redux/Recipe/init-redux';
 import '../lib/tabs';
+import '../lib/chips';
 import '../assets/index.css';
 
 console.log('Browser packed file loaded');

@@ -4,15 +4,15 @@ import $ from 'jquery';
 export default class InputTags extends React.Component {
 
   componentDidMount() {
-    let tags = this.props.selectedTags.map(function(d) {
+    let tags = this.props.selectedTags.map(d => {
       return {tag: d};
     });
-    let options = this.props.tags.map(function(d) {
-      var tmp = {};
+    let options = this.props.tags.map(d => {
+      let tmp = {};
       tmp[d] = null;
       return tmp;
     }).reduce(function(acc, x) {
-      for (var key in x) acc[key] = x[key];
+      for (let key in x) acc[key] = x[key];
       return acc;
     }, {});
 
@@ -35,7 +35,6 @@ export default class InputTags extends React.Component {
     $('#'+this.props.id).on('chip.delete', function(e, chip){
       this.handleDeleteTag(chip.tag);
     }.bind(this));
-
   }
 
   handleAddTag(tag) {

@@ -8,6 +8,7 @@ import 'materialize-css/dist/js/materialize.min';
 import configureStore from '../shared/redux/User/configureStore';
 import App from '../shared/Project/App';
 import '../lib/tabs';
+import '../lib/chips';
 import '../assets/index.css';
 
 // Grab the server serialized state off of the window object.

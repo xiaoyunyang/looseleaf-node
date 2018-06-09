@@ -23,13 +23,13 @@ export default class InputTags extends React.Component {
 
   render() {
     return (
-      <div className='input-field col l6 m6 s12'>
-        <select id={this.props.id}>
-          <option value='None' disabled selected>{this.props.label}</option>
+      <div className='input-field col l6 m6 s6'>
+        <select id={this.props.id} defaultValue='None'>
+          <option disabled>{this.props.label}</option>
           {
             this.props.choices.map(function(d,i) {
               return (
-                <option value={d}>
+                <option value={d} key={i}>
                   {d + ' ' + this.renderUnits(d, this.props.units)}
                 </option>);
             }.bind(this))

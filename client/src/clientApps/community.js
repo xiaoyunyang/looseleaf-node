@@ -7,6 +7,7 @@ import 'materialize-css/dist/css/materialize.min.css';
 import 'materialize-css/dist/js/materialize.min';
 import App from '../shared/Community/App';
 import '../lib/tabs';
+import '../lib/chips';
 import '../assets/index.css';
 
 console.log('Browser packed file loaded');

@@ -10,7 +10,7 @@ import Three from './Community/Three';
 
 const root = '';
 
-function noop() {}
+// function noop() {}
 
 const communities = {
   one: 'developers',

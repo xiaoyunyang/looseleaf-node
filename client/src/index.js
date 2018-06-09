@@ -4,7 +4,8 @@ import { AppContainer } from 'react-hot-loader';
 import 'materialize-css';
 import 'materialize-css/dist/css/materialize.min.css';
 import 'materialize-css/dist/js/materialize.min';
-import './lib/tabs' // <- overriding the materialize tabs js
+import './lib/tabs'; // <- overriding the materialize tabs js
+import './lib/chips'; // <- overriding the materialize chips js
 // import AppOld from './craApps/App';
 import AppUser from './craApps/AppUser';
 import AppProject from './craApps/AppProject';
@@ -26,7 +27,7 @@ const Apps = {
   'recipe': AppRecipe
 }
 
-const App = Apps.project;
+const App = Apps.user;
 
 const render = (Component) => {
   ReactDOM.render(

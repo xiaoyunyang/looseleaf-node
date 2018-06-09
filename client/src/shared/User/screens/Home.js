@@ -12,15 +12,15 @@ const Stat = ({num, phrase}) => (
     </div>
   </div>
 )
-const Reaction =({tooltip, icon}) => (
-  <a href=""
-    className="tooltipped"
-    data-position="top"
-    data-delay="50"
-    data-tooltip={tooltip}>
-    <i className="material-icons">{icon}</i>
-  </a>
-)
+// const Reaction =({tooltip, icon}) => (
+//   <a href=""
+//     className="tooltipped"
+//     data-position="top"
+//     data-delay="50"
+//     data-tooltip={tooltip}>
+//     <i className="material-icons">{icon}</i>
+//   </a>
+// )
 const Reactions = () => (
   <div>
     <a href="">Interesting</a>

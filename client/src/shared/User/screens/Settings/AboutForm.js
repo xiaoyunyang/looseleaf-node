@@ -1,5 +1,5 @@
 import React from 'react';
-import InputTags from './InputTags';
+import InputTags from './../../../components/InputTags';
 
 export default class AboutForm extends React.Component {
   constructor(props) {
