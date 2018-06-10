@@ -3,7 +3,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import App from '../shared/Project/App';
 import { hot } from 'react-hot-loader';
-import configureStore from '../shared/redux/User/configureStore';
+import configureStore from '../shared/redux/Project/configureStore';
 
 const store = configureStore();
 const AppProject = () => (

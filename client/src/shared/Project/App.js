@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { withRouter } from "react-router-dom";
 import { bindActionCreators } from 'redux';
 import { getRoutes } from './routes';
-import * as actionCreators from '../redux/User/actions/content';
+import * as actionCreators from '../redux/Project/actions/content';
 
 class AppContainer extends React.Component {
   render() {
@@ -22,6 +22,7 @@ const App = ({ state }) => (
 
 // This function lets you convert the app state to properties on your component.
 function mapStateToProps(state) {
+console.log('state', state)
   return {
     state: state
   };

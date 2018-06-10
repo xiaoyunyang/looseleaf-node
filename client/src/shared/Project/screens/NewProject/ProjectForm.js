@@ -1,5 +1,4 @@
 import React from 'react';
-import $ from 'jquery';
 import InputTags from '../../../components/InputTags';
 import InputDropdown from '../../../components/InputDropdown';
 import DatePicker from '../../../components/DatePicker';
@@ -128,13 +127,13 @@ export default class AboutForm extends React.Component {
           <h5>Due Date</h5>
         </div>
         <div className="card-panel white">
-          <h5>Invite Project Collaborators</h5>
-          <p>{"Invite People to work on the project."}</p>
+          <h5>Invite Project Contributors</h5>
+          <p>{"Invite people you know or want to collaborate with to contribute to the project."}</p>
             {
               <InputTags
                 id='select-people'
-                label='collaborators'
-                hint='+collaborator'
+                label='contributors'
+                hint='+contributor'
                 tags={this.state.people}
                 selectedTags={this.state.selectedPeople}
                 setState={ds => this.setState({selectedPeople: ds})}

@@ -1,14 +1,16 @@
 import React from 'react';
 import { renderRoutes } from 'react-router-config';
 
-class Main extends React.Component {
+export default class Main extends React.Component {
   render() {
-    const user = {user: this.props.user}
+    const state = {
+      user: this.props.user,
+      project: this.props.project
+    }
     return (
       <div>
-        {renderRoutes(this.props.routes, user)}
+        {renderRoutes(this.props.routes, state)}
       </div>
     )
   }
 }
-export default Main;

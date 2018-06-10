@@ -5,7 +5,7 @@ import { BrowserRouter } from 'react-router-dom';
 import 'materialize-css';
 import 'materialize-css/dist/css/materialize.min.css';
 import 'materialize-css/dist/js/materialize.min';
-import configureStore from '../shared/redux/User/configureStore';
+import configureStore from '../shared/redux/Project/configureStore';
 import App from '../shared/Project/App';
 import '../lib/tabs';
 import '../lib/chips';
@@ -26,7 +26,7 @@ delete window.__PRELOADED_STATE__
 const store = configureStore(initialState);
 // const storeRoute = initRedux(initialStateRoute);
 
-console.log('Data to hydrate with', initialState);
+console.log('Data to hydrate with', initialState)
 /*
  * Main entry point for the client side isomorphic app
  */
