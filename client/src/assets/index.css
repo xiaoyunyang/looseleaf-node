@@ -758,3 +758,19 @@ nav .categories-wrapper .categories {
   }
 }
 /*  Sticky Tab Navbar Profile Page END */
+
+
+#contributors img {
+  width: 80px;
+}
+.card--hasHoverShadow {
+    transition: box-shadow .25s cubic-bezier(.4,0,.2,1),transform .25s cubic-bezier(.4,0,.2,1);
+}
+#contributors .row {
+  margin-bottom: 0px;
+}
+#contributors p {
+  line-height: 0.5em;
+  font-weight: 300;
+  color: #555;
+}

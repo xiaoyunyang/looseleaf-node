@@ -2,6 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { getNav } from '../../routes';
 
+const defaultUserPic = 'http://marketline.com/wp-content/plugins/all-in-one-seo-pack/images/default-user-image.png'
+
 const getMonthYear = (dateString) => {
   // dateStr looks like 'Fri Apr 06 2018'
   let dateArr = new Date(dateString).toDateString().split(' ')
@@ -90,7 +92,7 @@ export default ({ user }) => (
   <div className="hero-profile">
     <div className="row">
       <div className="col s12 m12 l3">
-        <img src={user.picture} alt="" className="circle" />
+        <img src={user.picture ? user.picture : defaultUserPic} alt="" className="circle" />
       </div>
       <div className="col s12 m12 l9 hero-info">
         <div className="hero-profile-center">

@@ -13,6 +13,8 @@ const platforms = [
   'Dropbox',
   'Github',
   'Codepen',
+  'Cloud9',
+  'Glitch',
   'Repl.it',
   'Other'
 ]
