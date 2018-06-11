@@ -13,8 +13,36 @@ const initState = {
     mission: "I'm building a startup called LooseLeaf"
   },
   contributors: [
-    {displayName: "Xiaoyun Yang", username: "xiaoyunyang", picture: ""},
-    {displayName: "Andrew Fenner", username: "afenner", picture: ""}
+    {
+      displayName: "Andrew Fenner",
+      username: "afenner",
+      intro: "Mobile Developer"
+    },
+    {
+      displayName: "Xiaoyun Yang",
+      username: "xiaoyunyang",
+      intro: "Web Developer"
+    },
+    {
+      displayName: "Desi Graphica",
+      username: "afenner",
+      intro: "Graphic Designer"
+    },
+    {
+      displayName: "Reallyreally Longname",
+      username: "xiaoyunyang",
+      intro: "Copywriter"
+    },
+    {
+      displayName: "Another Person",
+      username: "afenner",
+      intro: "Digital Marketer"
+    },
+    {
+      displayName: "Oscar Wilde",
+      username: "xiaoyunyang",
+      intro: "Illustrator"
+    }
   ]
 };
 

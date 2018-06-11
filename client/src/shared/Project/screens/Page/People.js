@@ -2,46 +2,6 @@ import React from 'react';
 
 const defaultUserPic = 'http://marketline.com/wp-content/plugins/all-in-one-seo-pack/images/default-user-image.png'
 
-const contributors = [
-  {
-    displayName: "Andrew Fenner",
-    username: "afenner",
-    intro: "Mobile Developer"
-  },
-  {
-    displayName: "Xiaoyun Yang",
-    username: "xiaoyunyang",
-    intro: "Web Developer"
-  },
-  {
-    displayName: "Desi Graphica",
-    username: "afenner",
-    intro: "Graphic Designer"
-  },
-  {
-    displayName: "Reallyreally Longname",
-    username: "xiaoyunyang",
-    intro: "Copywriter"
-  },
-  {
-    displayName: "Another Person",
-    username: "afenner",
-    intro: "Digital Marketer"
-  },
-  {
-    displayName: "Oscar Wilde",
-    username: "xiaoyunyang",
-    intro: "Illustrator"
-  }
-];
-
-class PersonModal extends React.Component {
-  render() {
-    return (
-      <div></div>
-    )
-  }
-}
 
 // This is a ES6 class - see https://toddmotto.com/react-create-class-versus-component/
 export default class People extends React.Component {
@@ -78,9 +38,9 @@ export default class People extends React.Component {
   }
   render() {
     return (
-      <div id="contributors" className="row">
+      <div className="row">
         {
-          contributors.map((d,i) =>
+          this.props.contributors.map((d,i) =>
             this.renderPersonCard(d,i)
           )
         }

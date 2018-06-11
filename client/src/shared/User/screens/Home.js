@@ -2,6 +2,16 @@ import React from 'react';
 import fetch from 'isomorphic-fetch';
 import TopNav from '../../components/TopNavUser';
 
+const updates = [
+  'A project update from someone you follow.',
+  'A project update from a co-contributor of a project on your todo-list.',
+  'An announcement from someone who follows you.',
+  'A project update from someone who follows you.',
+  'A project update from someone who follows you.',
+  'An announcement on the discussion board of the project on your todo-list.',
+  'An announcement on the community board.',
+]
+
 const Stat = ({num, phrase}) => (
   <div className="row">
     <div className="col s2 m2 l2">
@@ -119,22 +129,11 @@ class Home extends React.Component {
         </div>
         <div className="card-action">
           <Reactions />
-
         </div>
       </div>
     )
-
   }
   render() {
-    const updates = [
-      'A project update from someone you follow.',
-      'A project update from a co-contributor of a project on your todo-list.',
-      'An announcement from someone who follows you.',
-      'A project update from someone who follows you.',
-      'A project update from someone who follows you.',
-      'An announcement on the discussion board of the project on your todo-list.',
-            'An announcement on the community board.',
-    ]
     return (
       <div className="section-white">
         <TopNav route={this.props.route} user={this.props.user}/>
