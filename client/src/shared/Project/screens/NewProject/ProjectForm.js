@@ -2,22 +2,7 @@ import React from 'react';
 import InputTags from '../../../components/InputTags';
 import InputDropdown from '../../../components/InputDropdown';
 import DatePicker from '../../../components/DatePicker';
-
-const projects = [
-  'Web Development',
-  'Mobile Development',
-  'Data Science'
-]
-const platforms = [
-  'Google Doc',
-  'Dropbox',
-  'Github',
-  'Codepen',
-  'Cloud9',
-  'Glitch',
-  'Repl.it',
-  'Other'
-]
+import {interests, communities, platforms} from './../../../components/TempData';
 
 export default class AboutForm extends React.Component {
   constructor(props) {
@@ -27,7 +12,7 @@ export default class AboutForm extends React.Component {
       location: this.props.location,
       website: this.props.website,
       communities: this.props.communities,
-      tags: ['Advertising', 'AI', 'Animation', 'Art', 'AWS', 'Blogging', 'Branding', 'C++', 'D3.js', 'Data Science', 'Data Visualization', 'Design', 'Digital Marketing', 'Education', 'Entrepreneurship', 'Games', 'Go', 'JavaScript', 'Machine Learning', 'Node', 'Photography', 'Python', 'React', 'Ruby', 'Ruby on Rails', 'Social Media', 'SPA', 'UI', 'User Experience', 'UX Design', 'Writing'],
+      tags: interests,
       selectedTags: this.props.interests,
       people: ['Andrew Fenner', 'Peter Preston', 'Xiaoyun Yang'],
       selectedPeople: [],
@@ -94,7 +79,7 @@ export default class AboutForm extends React.Component {
                 <InputDropdown
                   id='select-project'
                   label='Project Type'
-                  choices={projects}
+                  choices={communities}
                   setState={d => this.setState({selectedProject: d})}
                 />
               }
@@ -126,9 +111,6 @@ export default class AboutForm extends React.Component {
           </div>
         </div>
         <div className="card-panel white">
-          <h5>Due Date</h5>
-        </div>
-        <div className="card-panel white">
           <h5>Invite Project Contributors</h5>
           <p>{"Invite people you know or want to collaborate with to contribute to the project."}</p>
             {
@@ -143,8 +125,8 @@ export default class AboutForm extends React.Component {
             }
         </div>
         <div className="card-panel white">
-          <h5>Logistics</h5>
-          <p>{"Submission Instruction."}</p>
+          <h5>Submission</h5>
+          <p style={{paddingLeft: '0.75em'}}>{"Submission Instruction."}</p>
           <div className="row">
             <div className="col s12">
               {
@@ -160,7 +142,7 @@ export default class AboutForm extends React.Component {
               }
             </div>
           </div>
-          <p>{"Set a due date. You can always change the deadline."}</p>
+          <p style={{paddingLeft: '0.75em'}}>{"Set a due date. You can change the due date anytime."}</p>
           <div className="row">
             <div className="col s12 m10 l8">
               <DatePicker setState={d => this.setState({dueDate: d})}/>

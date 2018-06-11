@@ -383,18 +383,7 @@ img.mod-round, picture.mod-round {
     padding-left: 8%;
   }
 }
-
 /**** User Home Page Stuff END ****/
-
-/**** form Page BEGIN ****/
-#project-form {
-  padding-bottom: 30px;
-}
-#project-form .container {
-  margin-top: 30px;
-}
-
-/**** form Page END ****/
 
 /**** profile Page Stuff BEGIN ****/
 #profile-tabs {
@@ -534,6 +523,10 @@ img[alt="medium center"] {
 .page-wrap {
   min-height: 76%;
   /* equal to footer height */
+}
+
+.section-white {
+  padding-bottom: 30px;
 }
 
 /** Theme Color BEGIN **/
@@ -759,18 +752,23 @@ nav .categories-wrapper .categories {
 }
 /*  Sticky Tab Navbar Profile Page END */
 
-
+/**** Project Page BEGIN ****/
 #contributors img {
   width: 80px;
-}
-.card--hasHoverShadow {
-    transition: box-shadow .25s cubic-bezier(.4,0,.2,1),transform .25s cubic-bezier(.4,0,.2,1);
 }
 #contributors .row {
   margin-bottom: 0px;
 }
 #contributors p {
-  line-height: 0.5em;
+  font-size: 0.9em;
   font-weight: 300;
+  margin-top: -5px;
   color: #555;
 }
+#contributors .card-panel {
+  height: 180px;
+}
+#invite-card .card-panel {
+  background-color: #eeeeee;
+}
+/**** Project Page END ****/

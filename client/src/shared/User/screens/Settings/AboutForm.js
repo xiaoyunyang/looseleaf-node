@@ -1,5 +1,6 @@
 import React from 'react';
 import InputTags from './../../../components/InputTags';
+import {interests} from './../../../components/TempData';
 
 export default class AboutForm extends React.Component {
   constructor(props) {
@@ -9,7 +10,7 @@ export default class AboutForm extends React.Component {
       location: this.props.location,
       website: this.props.website,
       communities: this.props.communities,
-      tags: ['Advertising', 'AI', 'Animation', 'Art', 'AWS', 'Blogging', 'Branding', 'C++', 'D3.js', 'Data Science', 'Data Visualization', 'Design', 'Digital Marketing', 'Education', 'Entrepreneurship', 'Games', 'Go', 'JavaScript', 'Machine Learning', 'Node', 'Photography', 'Python', 'React', 'Ruby', 'Ruby on Rails', 'Social Media', 'SPA', 'UI', 'User Experience', 'UX Design', 'Writing'],
+      tags: interests,
       selectedTags: this.props.interests,
     }
   }
