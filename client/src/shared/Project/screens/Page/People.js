@@ -1,13 +1,23 @@
 import React from 'react';
+import $ from 'jquery';
 
 const defaultUserPic = 'http://marketline.com/wp-content/plugins/all-in-one-seo-pack/images/default-user-image.png'
 
 
 // This is a ES6 class - see https://toddmotto.com/react-create-class-versus-component/
 export default class People extends React.Component {
+  componentDidMount() {
+    this.initializeModal();
+  }
+  initializeModal() {
+    $(document).ready(function(){
+      // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
+      $('.modal').modal();
+    });
+  }
   renderPersonCard(d,i) {
     return (
-      <a href="" key={i} className="col s6 m4 l3">
+      <a href="#person-card-modal" key={i} className="col s6 m4 l3 modal-trigger">
         <div className="card-panel center hoverable">
           <div className="row">
             <img src={defaultUserPic} alt="" className="circle" />
@@ -21,6 +31,20 @@ export default class People extends React.Component {
         </div>
       </a>
     );
+  }
+  renderPersonCardModal() {
+    return (
+      <div id="person-card-modal" className="modal">
+        <div className="modal-content">
+          <h4>Person's Name</h4>
+          <p>Short Intro</p>
+          <p>email</p>
+        </div>
+        <div className="modal-footer">
+          <a href="#!" className="modal-action modal-close waves-effect waves-green btn-flat">Visit Profile</a>
+        </div>
+      </div>
+    )
   }
   renderInvitePersonCard() {
     return (
@@ -46,6 +70,9 @@ export default class People extends React.Component {
         }
         {
           this.renderInvitePersonCard()
+        }
+        {
+          this.renderPersonCardModal()
         }
       </div>
     );

@@ -33,6 +33,14 @@ class Main extends React.Component {
           <h4>{project.title}</h4>
           <p>{project.description}</p>
           <p>{`Due Date: ${dueDateFormatted(project.dueDate)}`}</p>
+          <div className="row">
+            <div className="col s4 m2 l2">
+              <a className="waves-effect waves-light btn teal teal-text lighten-5">Follow</a>
+            </div>
+            <div className="col s4 m3 l3">
+              <a className="waves-effect waves-light btn teal lighten-1">Contribute</a>
+            </div>
+          </div>
         </div>
       </div>
     )
@@ -40,7 +48,7 @@ class Main extends React.Component {
   renderProjectContributors(contributors) {
     return (
       <div id="contributors">
-        <h5>Project Contributors</h5>
+        <h5>{`Project Contributors (${contributors.length})`}</h5>
         <People contributors={contributors}/>
       </div>
     )
@@ -69,6 +77,7 @@ class Main extends React.Component {
     )
   }
   renderPost(msg, id) {
+    // TODO: Each post needs to have a date
     return (
       <div key={id} className="card feed">
         <div className="card-content">
