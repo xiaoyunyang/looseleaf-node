@@ -35,7 +35,7 @@ class Main extends React.Component {
           <p>{`Due Date: ${dueDateFormatted(project.dueDate)}`}</p>
           <div className="row">
             <div className="col s4 m2 l2">
-              <a className="waves-effect waves-light btn teal teal-text lighten-5">Follow</a>
+              <a className="waves-effect waves-light btn teal teal-text lighten-5">Watch</a>
             </div>
             <div className="col s4 m3 l3">
               <a className="waves-effect waves-light btn teal lighten-1">Contribute</a>
@@ -119,7 +119,6 @@ class Main extends React.Component {
     );
   }
   render() {
-    console.log("Project page.....project", this.props.project)
     return (
       <div className="section-white">
         <TopNav route={this.props.route} user={this.props.user} useExternLinks={true}/>

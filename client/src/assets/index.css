@@ -771,4 +771,7 @@ nav .categories-wrapper .categories {
 #invite-card .card-panel {
   background-color: #eeeeee;
 }
+.modal-footer i {
+  padding-left: 5px;
+}
 /**** Project Page END ****/

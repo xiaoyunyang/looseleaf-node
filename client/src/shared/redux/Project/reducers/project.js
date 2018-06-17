@@ -16,32 +16,38 @@ const initState = {
     {
       displayName: "Andrew Fenner",
       username: "afenner",
-      intro: "Mobile Developer"
+      intro: "Mobile Developer",
+      email: "andrewfenner@numbershapes.com",
     },
     {
       displayName: "Xiaoyun Yang",
       username: "xiaoyunyang",
-      intro: "Web Developer"
+      intro: "Web Developer",
+      email: "yangx232@gmail.com",
     },
     {
       displayName: "Desi Graphica",
       username: "afenner",
-      intro: "Graphic Designer"
+      intro: "Graphic Designer",
+      email: "graphica@email.com",
     },
     {
       displayName: "Reallyreally Longname",
       username: "xiaoyunyang",
-      intro: "Copywriter"
+      intro: "Copywriter",
+      email: "longname@email.com"
     },
     {
       displayName: "Another Person",
       username: "afenner",
-      intro: "Digital Marketer"
+      intro: "Digital Marketer",
+      email: "randomPerson@email.com",
     },
     {
       displayName: "Oscar Wilde",
       username: "xiaoyunyang",
-      intro: "Illustrator"
+      intro: "Illustrator",
+      email: "illustrator@email.com",
     }
   ]
 };

@@ -6,6 +6,17 @@ const defaultUserPic = 'http://marketline.com/wp-content/plugins/all-in-one-seo-
 
 // This is a ES6 class - see https://toddmotto.com/react-create-class-versus-component/
 export default class People extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      modalPerson: {
+        fullName: 'Firstname Lastname',
+        email: 'a@b.com',
+        intro: "Hello!",
+        username: "username"
+      }
+    }
+  }
   componentDidMount() {
     this.initializeModal();
   }
@@ -15,17 +26,27 @@ export default class People extends React.Component {
       $('.modal').modal();
     });
   }
-  renderPersonCard(d,i) {
+  handlePersonCardClick(user) {
+    this.setState( {
+      modalPerson: {
+        fullName: user.displayName,
+        email: user.email,
+        username: user.username,
+        intro: user.intro
+      }
+    });
+  }
+  renderPersonCard(user,i) {
     return (
-      <a href="#person-card-modal" key={i} className="col s6 m4 l3 modal-trigger">
+      <a href="#person-card-modal" onClick={this.handlePersonCardClick.bind(this, user)} key={i} className="col s6 m4 l3 modal-trigger">
         <div className="card-panel center hoverable">
           <div className="row">
             <img src={defaultUserPic} alt="" className="circle" />
           </div>
           <div className="row">
             <span className="title">
-              <h6 className="truncate">{d.displayName}</h6>
-              <p>{d.intro}</p>
+              <h6 className="truncate">{user.displayName}</h6>
+              <p>{user.intro}</p>
             </span>
           </div>
         </div>
@@ -36,12 +57,18 @@ export default class People extends React.Component {
     return (
       <div id="person-card-modal" className="modal">
         <div className="modal-content">
-          <h4>Person's Name</h4>
-          <p>Short Intro</p>
-          <p>email</p>
+          <h4>{this.state.modalPerson.fullName}</h4>
+          <h6>{this.state.modalPerson.intro}</h6>
+          <a href={`mailto: ${this.state.modalPerson.email}`}>
+            {this.state.modalPerson.email}
+          </a>
         </div>
         <div className="modal-footer">
-          <a href="#!" className="modal-action modal-close waves-effect waves-green btn-flat">Visit Profile</a>
+          <a href={`/@${this.state.modalPerson.username}`} className="modal-action modal-close waves-effect waves-green btn-flat">
+            Visit Profile
+            <i className="fa fa-angle-right"></i>
+          </a>
+
         </div>
       </div>
     )
