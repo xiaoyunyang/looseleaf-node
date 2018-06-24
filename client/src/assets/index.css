@@ -753,7 +753,7 @@ nav .categories-wrapper .categories {
 /*  Sticky Tab Navbar Profile Page END */
 
 /**** Project Page BEGIN ****/
-#contributors img {
+#contributors .card-panel img {
   width: 80px;
 }
 #contributors .row {

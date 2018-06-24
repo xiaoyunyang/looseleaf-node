@@ -1,7 +1,7 @@
 import React from 'react';
 import $ from 'jquery';
 
-export default class InputTags extends React.Component {
+export default class InputDropDown extends React.Component {
 
   componentDidMount() {
     $('#'+this.props.id).material_select(

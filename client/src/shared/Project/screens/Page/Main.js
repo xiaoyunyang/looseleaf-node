@@ -49,7 +49,7 @@ class Main extends React.Component {
     return (
       <div id="contributors">
         <h5>{`Project Contributors (${contributors.length})`}</h5>
-        <People contributors={contributors}/>
+        <People contributors={contributors} username={this.props.user.username}/>
       </div>
     )
   }
