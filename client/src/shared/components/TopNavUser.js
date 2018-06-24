@@ -11,9 +11,6 @@ const MobileSideNav = ( {username, userPic} ) => (
   <ul id="mobile-menu" className="side-nav">
     <li>
       <div className="user-view">
-        <div className="background">
-          <img alt="looseleaf" src="http://xiaoyunyang.github.io/serverless-webapp/assets/images/table3.png"/>
-        </div>
         <img alt={`looseleaf user ${username}`}  className="circle" src={userPic}/>
          <div className="row">
            <div className="col l2 m2 s2">
@@ -60,7 +57,7 @@ export default class TopNavUser extends React.Component {
   }
   componentDidMount() {
     $('.button-collapse').sideNav({
-      edge: 'left',
+      edge: 'right',
       closeOnClick: true
     });
     $('.dropdown-button').dropdown({
@@ -143,9 +140,9 @@ export default class TopNavUser extends React.Component {
                 <li><button><i className="material-icons">notifications_none</i></button></li>
                 <UserDropdown username={username} userPic={userPic}/>
               </ul>
-              <ul className="left">
+              <ul className="right hide-on-med-and-up">
                 <li>
-                  <a data-activates="mobile-menu" className="button-collapse"><i className="material-icons">menu</i></a>
+                  <a data-activates="mobile-menu" className="button-collapse"><i id="top-nav-hamburger" className="material-icons large">menu</i></a>
                 </li>
               </ul>
             </div>

@@ -246,6 +246,10 @@ html{
 .nav-text-links i {
   margin-top: 3px;
 }
+#top-nav-hamburger {
+  font-size: 2.2rem;
+  margin-right: -30px;
+}
 
 .nav-text-links ul:not(.side-nav) li a:hover {
   color: #383435;
@@ -290,6 +294,12 @@ html{
   max-width: 72px;
   max-height: 72px;
   padding-top: 10px;
+}
+#mobile-menu .user-view img {
+  display: block;
+  width: 150px;
+  height: 150px;
+  margin: auto;
 }
 
 img.mod-round, picture.mod-round {
