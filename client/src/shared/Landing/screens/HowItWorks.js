@@ -1,11 +1,11 @@
 import React from 'react';
-import TopNav from '../TopNav';
+import TopNav from '../../components/TopNavGuest';
 import MdText from '../../components/MdText';
 
 export default ( {route} ) => (
   <div>
     <TopNav route={route} extended={false}/>
-    <div className="container main">
+    <div className="container" style={{marginTop: 40, marginBottom: 40}}>
       <div>
         <MdText filepath='http://localhost:3001/how-it-works.md' mdId='how-it-works'/>
       </div>

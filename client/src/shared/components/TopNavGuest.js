@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import $ from 'jquery';
 import { LoginModal, SignupModal } from './Login/Modal';
-import { root, getNav, communities } from './routes';
+import { root, getNav, communities } from '../Landing/routes';
 import { getPageName } from '../../lib/helpers';
 
-export default class TopNav extends React.Component {
+export default class TopNavGuest extends React.Component {
   static defalutProps = {
     extended: false
   }
@@ -210,9 +210,9 @@ export default class TopNav extends React.Component {
   }
 }
 
-TopNav.propTypes = {
+TopNavGuest.propTypes = {
   extended: PropTypes.bool
 }
-TopNav.defaultProps = {
+TopNavGuest.defaultProps = {
   extended: false
 }

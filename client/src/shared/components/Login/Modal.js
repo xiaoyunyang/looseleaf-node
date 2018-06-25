@@ -20,8 +20,7 @@ const SignupModal = () => (
         Already a member? <a className="modal-trigger modal-action modal-close" href="#login-modal">Log in</a>
       </div>
       <ModalInfo />
-  </div>
-
+    </div>
   </div>
 );
 

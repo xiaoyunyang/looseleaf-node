@@ -1,6 +1,6 @@
 import React from 'react';
-import TopNav from '../TopNav';
-
+import TopNav from '../../components/TopNavGuest';
+import Footer from '../../components/Footer';
 const styles = {
   marginTop: '-4.5%'
 }
@@ -134,6 +134,7 @@ export default ( {route} ) => (
         </div>
       </div>
     </div>
+    <Footer />
 
   </div>
 );

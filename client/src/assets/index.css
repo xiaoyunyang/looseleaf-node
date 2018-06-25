@@ -784,4 +784,13 @@ nav .categories-wrapper .categories {
 .modal-footer i {
   padding-left: 5px;
 }
+#invite-person-card-modal {
+  min-height: 400px;
+}
+#invite-person-card-modal .btn-flat {
+  color: #eeeeee;
+  text-transform: capitalize;
+  border-radius: 4px;
+  margin-right: 20px;
+}
 /**** Project Page END ****/

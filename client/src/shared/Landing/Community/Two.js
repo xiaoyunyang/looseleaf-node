@@ -1,5 +1,5 @@
 import React from 'react';
-import TopNav from '../TopNav';
+import TopNav from '../../components/TopNavGuest';
 import UserListing from './UserListing';
 import { communities } from '../routes';
 

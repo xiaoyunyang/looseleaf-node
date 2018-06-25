@@ -63,7 +63,7 @@ export default class People extends React.Component {
       <div id="person-card-modal" className="modal">
         <div className="modal-content">
           <div className="row">
-            <div className="col s10 m10 l8">
+            <div className="col s8 m10 l8">
               <h4>{this.state.modalPerson.fullName}</h4>
               <h6>role: {this.state.modalPerson.intro}</h6>
                 email: <a href={`mailto: ${this.state.modalPerson.email}`}>
@@ -71,7 +71,7 @@ export default class People extends React.Component {
                 </a>
               <h6>Some stats displayed about this person in a row...</h6>
             </div>
-            <div className="col s2 m2 l4">
+            <div className="col s4 m2 l4">
               <img className="circle" alt="" src={defaultUserPic}/>
             </div>
           </div>
@@ -126,8 +126,8 @@ export default class People extends React.Component {
               />
             }
         </div>
-        <div className="modal-footer">
-          <a href={`/@${this.state.modalPerson.username}`} className="modal-action modal-close waves-effect waves-green btn-flat">
+        <div className="modal-footer" style={{paddingBottom: 20}}>
+          <a href={`/@${this.state.modalPerson.username}`} className="modal-action modal-close teal btn-flat">
             Invite
             <i className="fa fa-paper-plane"></i>
           </a>
