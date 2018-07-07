@@ -274,7 +274,7 @@ router.get('/project*', (req, res, next) => {
   if (req.isAuthenticated()) {
     renderProjectAppMiddleware(req, res, next);
   }
-  renderCommunityAppMiddleware(req, res, next);
+  renderLandingAppMiddleware(req, res, next);
 });
 
 router.get('/*', (req, res, next) => {

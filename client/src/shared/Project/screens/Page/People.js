@@ -2,9 +2,8 @@ import React from 'react';
 import $ from 'jquery';
 import InputAutocomplete from '../../../components/InputAutocomplete';
 
-
 //const defaultUserPic = 'http://marketline.com/wp-content/plugins/all-in-one-seo-pack/images/default-user-image.png'
-const defaultUserPic = 'http://localhost:3001/user.png'
+const defaultUserPic = 'http://localhost:3001/user.png';
 
 // This is a ES6 class - see https://toddmotto.com/react-create-class-versus-component/
 export default class People extends React.Component {

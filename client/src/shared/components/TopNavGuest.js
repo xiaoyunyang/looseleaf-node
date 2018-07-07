@@ -103,6 +103,7 @@ export default class TopNavGuest extends React.Component {
       </div>
     );
   }
+  // This is the top nav where the logo is displayed
   renderPrimaryNavInner(selected) {
     return (
       <div className="nav-wrapper-white nav-text-links">
@@ -127,7 +128,14 @@ export default class TopNavGuest extends React.Component {
           <li className={selected === 'how-it-works'? 'active' : ''}>
             <Link
               to={getNav().howItWorks}>
-              How It Works</Link>
+              How It Works
+            </Link>
+          </li>
+          <li className={selected === 'about'? 'active' : ''}>
+            <Link
+              to={getNav().about}>
+              About
+            </Link>
           </li>
         </ul>
       </div>
@@ -192,7 +200,6 @@ export default class TopNavGuest extends React.Component {
   render() {
     let selected = (typeof this.props.route.path === 'string')
                     ? getPageName(this.props.route.path) : '';
-
     return (
       <div>
         { this.props.extended ?

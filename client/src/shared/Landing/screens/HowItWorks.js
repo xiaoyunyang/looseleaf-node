@@ -3,12 +3,10 @@ import TopNav from '../../components/TopNavGuest';
 import MdText from '../../components/MdText';
 
 export default ( {route} ) => (
-  <div>
+  <div className="section-white">
     <TopNav route={route} extended={false}/>
     <div className="container" style={{marginTop: 40, marginBottom: 40}}>
-      <div>
-        <MdText filepath='http://localhost:3001/how-it-works.md' mdId='how-it-works'/>
-      </div>
+      <MdText filepath='http://localhost:3001/how-it-works.md' mdId='how-it-works'/>
     </div>
   </div>
 );

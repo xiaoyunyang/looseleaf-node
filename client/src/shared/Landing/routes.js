@@ -1,6 +1,7 @@
 import Root from './Root';
 import Home from './screens/Home';
 import HowItWorks from './screens/HowItWorks';
+import About from './screens/About';
 import Signup from '../components/Login/SignupPage';
 import Login from '../components/Login/LoginPage'
 import NotFound from '../components/NotFound';
@@ -22,6 +23,7 @@ const getNav = () => {
   return {
     home: `/${root}`,
     howItWorks: `/${root}how-it-works`,
+    about: `/${root}about`,
     signup: `/${root}signup`,
     login: `/${root}login`,
     one: `/${root}community/${communities.one}`,
@@ -43,6 +45,11 @@ const routes = [
         path: getNav().howItWorks,
         exact: true,
         component: HowItWorks
+      },
+      {
+        path: getNav().about,
+        exact: true,
+        component: About
       },
       {
         path: getNav().signup,
