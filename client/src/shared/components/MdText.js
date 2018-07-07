@@ -1,6 +1,6 @@
 import React from 'react';
-import $ from 'jquery';
 import marked from 'marked';
+import axios from 'axios';
 
 export default class MdText extends React.Component {
   constructor(props) {
@@ -9,20 +9,19 @@ export default class MdText extends React.Component {
       mdData: this.loadData(this.props.filepath) // path to the md file
     };
   }
+  saveData(response) {
+    this.setState({
+      mdData: response.data
+    });
+    let html_content = marked( response.data );
+    document.getElementById(this.props.mdId).innerHTML = html_content;
+  }
   loadData(filepath) {
-    $.ajax({
-      url: filepath,
-      success: function(data) {
-        this.setState({
-          mdData: data
-        })
-        let html_content = marked( data );
-        document.getElementById(this.props.mdId).innerHTML = html_content;
-      }.bind(this),
-      error: function(xhr, status, err) {
-        console.error(this.props.url, status, err.toString());
-      }.bind(this)
-    })
+    axios.get(filepath)
+    .then(response => this.saveData(response))
+    .catch(function(error) {
+      console.log(error)
+    });
   }
   render() {
     return (
