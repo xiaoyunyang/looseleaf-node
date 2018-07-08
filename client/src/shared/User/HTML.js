@@ -28,8 +28,6 @@ const HTML = (props) => {
               ${JSON.stringify(props.userData)}`
           }}
         />
-
-
       <script type="application/javascript" src="/user.bundle.js" />
       </body>
     </html>

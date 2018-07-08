@@ -2,12 +2,25 @@ import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom';
 import { matchRoutes } from 'react-router-config';
-import { routes } from '../src/shared/Community/routes';
+import { Provider } from 'react-redux';
+import configureStore from '../src/shared/redux/Community/configureStore';
+import { getRoutes } from '../src/shared/Community/routes';
 import HTML from '../src/shared/Community/HTML';
 import App from '../src/shared/Community/App';
 
-export default function renderCommunityApp(req, res, next) {
-  const branch = matchRoutes(routes, req.url)
+export default function renderCommunityApp(req, res, next, community) {
+  // const community = {
+  //   name: communityName,
+  //   title: communityName,
+  //   desc: 'Mobile and Web developers',
+  //   members: ['xiaoyun-yang', 'afenner'],
+  //   projects: ['create-kids-app-12345', 'rewrite-website-for-nonprofit-56789']
+  // };
+
+  const store = configureStore(community);
+  const dataToSerialize = community;
+
+  const branch = matchRoutes(getRoutes(community.name), req.url)
 
   const promises = branch.map(({ route, match }) => {
     return route.loadData
@@ -24,12 +37,18 @@ export default function renderCommunityApp(req, res, next) {
   	}, {})
 
 		const app = renderToString(
-			<StaticRouter location={req.url} context={context} >
-				<App />
-			</StaticRouter>
+      <Provider store={store}>
+  			<StaticRouter location={req.url} context={context} >
+  				<App />
+  			</StaticRouter>
+      </Provider>
 		);
+    if(context.url) {
+			res.writeHead(301, {Location: context.url})
+			res.end()
+		}
     const html = renderToString(
-      <HTML html={app}/>
+      <HTML data={dataToSerialize} html={app}/>
     );
     return res.send(`<!DOCTYPE html>${html}`);
   });

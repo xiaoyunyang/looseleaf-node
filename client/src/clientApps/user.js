@@ -15,11 +15,7 @@ import '../assets/index.css';
 const initialState = window.__PRELOADED_STATE__;
 
 // Allow the passed state to be garbage-collected
-delete window.__PRELOADED_STATE__
-
-// const initialStateRoute = window.__SERIALIZED_STATE__;
-
-// console.log('initialStateRoute', initialStateRoute)
+delete window.__PRELOADED_STATE__;
 
 // Instead of starting Redux with an empty initial state on the server,
 // you pass the server data into the Redux setup.

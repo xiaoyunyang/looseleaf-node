@@ -71,26 +71,26 @@ export default class TopNav extends React.Component {
       </a>
     );
   }
-  renderNavHeader() {
+  renderNavHeader(community) {
     return (
       <div className="nav-header center">
-        <h4>{'Web Developer'}</h4>
+        <h4>{community.title}</h4>
         <div className="tagline">
-          {'A community of front-end, backend, full stack developers'}
+          {community.desc}
         </div>
         { this.renderJoinBtn('Join LooseLeaf', 'signup-btn-header') }
       </div>
     );
   }
-  renderPrimaryNavExtended(selected) {
+  renderPrimaryNavExtended(selected, community) {
     return (
       <div id="looseleaf-section-header">
         <nav className="nav-extended grey lighten-4">
           <div className="nav-background">
             <div className="pattern active"></div>
           </div>
-          {this.renderPrimaryNavInner(selected)}
-          { this.renderNavHeader() }
+          {this.renderPrimaryNavInner(selected, community)}
+          { this.renderNavHeader(community) }
         </nav>
       </div>
     );
@@ -99,7 +99,7 @@ export default class TopNav extends React.Component {
     return (
       <div className="navbar-fixed">
         <nav className="grey lighten-4">
-          {this.renderPrimaryNavInner(selected)}
+          {this.renderPrimaryNavInner(selected, community)}
         </nav>
       </div>
     );
@@ -107,7 +107,7 @@ export default class TopNav extends React.Component {
   handleLogoClick() {
     window.location = "/";
   }
-  renderPrimaryNavInner(selected) {
+  renderPrimaryNavInner(selected, community) {
     return (
       <div className="nav-wrapper-white nav-text-links">
         <div className="brand-logo">
@@ -126,7 +126,8 @@ export default class TopNav extends React.Component {
       </div>
     );
   }
-  renderTabs(selected) {
+  renderTabs(selected, communityName) {
+    console.log('pooop communityName', communityName)
     const style = {
       top: 0
     };
@@ -147,7 +148,7 @@ export default class TopNav extends React.Component {
                     <Link
                       id={`tab-one`}
                       className={selected === tabs.one ? 'active' : ''}
-                      to={getNav(community).one}>
+                      to={getNav(communityName).one}>
                       {tabs.one}
                     </Link>
                   </li>
@@ -155,7 +156,7 @@ export default class TopNav extends React.Component {
                     <Link
                       id={`tab-two`}
                       className={selected === tabs.two ? 'active' : ''}
-                      to={getNav(community).two}>
+                      to={getNav(communityName).two}>
                       {tabs.two}
                     </Link>
                   </li>
@@ -163,7 +164,7 @@ export default class TopNav extends React.Component {
                     <Link
                       id={`tab-three`}
                       className={selected === tabs.three ? 'active' : ''}
-                      to={getNav(community).three}>
+                      to={getNav(communityName).three}>
                       {tabs.three}
                     </Link>
                   </li>
@@ -189,12 +190,12 @@ export default class TopNav extends React.Component {
     return (
       <div>
         { this.props.extended ?
-            this.renderPrimaryNavExtended(selected) :
+            this.renderPrimaryNavExtended(selected, this.props.community) :
             this.renderPrimaryNav(selected)
         }
         {
           this.props.extended ?
-            this.renderTabs(selected) : null
+            this.renderTabs(selected, this.props.community.name) : null
         }
       </div>
     );

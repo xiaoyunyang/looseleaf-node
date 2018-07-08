@@ -126,37 +126,44 @@ export default class LandingHome extends React.Component {
       {
         title: 'Developers',
         desc: 'Full stack developer, frontend developer, and apps for desktop, mobile, webapp, and embedded systems',
-        icon: 'code'
+        icon: 'code',
+        link: '/community/developers'
       },
       {
         title: 'Designers',
         desc: 'Landing Page, Logo design, web design, UX design.',
-        icon: 'format_shapes'
+        icon: 'format_shapes',
+        link: '/community/designers'
       },
       {
         title: 'Illustrators',
         desc: 'Contribute comics and illustrations of blog posts, books, and advertising campaigns',
-        icon: 'palette'
+        icon: 'palette',
+        link: '/community/illustrators',
       },
       {
         title: 'Writers',
         desc: 'Copywriter, grant writing, press release, ghost writing',
-        icon: 'create'
+        icon: 'create',
+        link: '/community/writers'
       },
       {
         title: 'Data Scientists',
         desc: 'Organizing and making sense of information.',
-        icon: 'scatter_plot'
+        icon: 'scatter_plot',
+        link: '/community/data-scientists'
       },
       {
         title: 'Video Producers',
         desc: 'Animations and Explainer videos.',
-        icon: 'theaters'
+        icon: 'theaters',
+        link: '/community/video-producers'
       },
       {
         title: 'Everything Else',
         desc: 'Organizing and making sense of information.',
-        icon: 'public'
+        icon: 'public',
+        link: '/community/misc'
       },
     ];
     const short = (display) => {
@@ -165,8 +172,8 @@ export default class LandingHome extends React.Component {
           {
             communities.map((d,i) => {
               return (
-                <div className="col s12 m5 l3 offset-m1">
-                  <a href="" className="">
+                <div key={i} className="col s12 m5 l3 offset-m1">
+                  <a href={d.link} className="">
                     <div className="card-panel center hoverable" style={{padding: 5}}>
                       <div className="row valign-wrapper" style={{marginBottom: 0}}>
                         <div className="col s12 m4 l3">

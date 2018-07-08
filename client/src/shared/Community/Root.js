@@ -2,10 +2,9 @@ import React from 'react';
 import Main from './Main';
 import Footer from '../components/Footer';
 
-const Root = ({ route }) => (
+const Root = ({ route, community }) => (
   <div>
-    <Main routes={route.routes} />
-    <Footer />
+    <Main routes={route.routes} community={community} />
   </div>
 
 

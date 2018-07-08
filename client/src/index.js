@@ -27,7 +27,7 @@ const Apps = {
   'recipe': AppRecipe
 }
 
-const App = Apps.landing;
+const App = Apps.community;
 
 const render = (Component) => {
   ReactDOM.render(

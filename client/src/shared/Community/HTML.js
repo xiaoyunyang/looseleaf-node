@@ -24,11 +24,9 @@ const HTML = (props) => {
           dangerouslySetInnerHTML={{ __html: props.html }}
         />
         <script dangerouslySetInnerHTML={{
-          __html: `
-            window.__SERIALIZED_STATE__ =
-              JSON.stringify(${props.serverState})
-          `
-        }}
+            __html: `window.__PRELOADED_STATE__ =
+              ${JSON.stringify(props.data)}`
+          }}
         />
         <script type="application/javascript" src="/community.bundle.js" />
       </body>
