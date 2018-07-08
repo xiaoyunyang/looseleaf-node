@@ -6,10 +6,29 @@ import express from 'express';
 import arrayWrap from 'arraywrap';
 import fs from 'fs';
 import path from 'path';
+import User from '../models/User';
 
 import dataPreloading from '../../client/iso-middleware/dataPreloading'
 
 const api = express.Router();
+
+// Users ======================================================================
+api.get('/users', (req, res) => {
+  User.find({}, (err, users) => {
+    const userMap = {};
+
+    users.forEach((user) => {
+      const userInfo = {
+        username: user.username,
+        displayName: user.displayName,
+        email: user.email,
+        picture: user.picture
+      };
+      userMap[user.id] = userInfo;
+    });
+    res.send(userMap);
+  });
+});
 
 api.get('/hello', (req, res) => {
   res.send({ express: 'If you are seeing this, your frontend react app is hooked up to your backend Express app. CONGRATULATIONS!' });
@@ -72,7 +91,7 @@ api.get('/featured', (req, res) => {
     res.status(200).send({ recipe });
   });
 });
-api.get('/projects/new', (req, res) => {
+api.get('/projects/todos', (req, res) => {
   // Read and open the recipes json file
   const filePath = path.join(__dirname, '../data/recipes.json');
   fs.readFile(filePath, 'utf8', (err, data) => {

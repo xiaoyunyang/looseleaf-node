@@ -9,7 +9,7 @@ import validator from 'validator';
 import { Strategy as LocalStrategy } from 'passport-local';
 import { Strategy as FacebookStrategy } from 'passport-facebook';
 import { Strategy as GithubStrategy } from 'passport-github';
-import User from './User';
+import User from '../models/User';
 import chalk from 'chalk';
 
 const configAuth = require('./secrets');

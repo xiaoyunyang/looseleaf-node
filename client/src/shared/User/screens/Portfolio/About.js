@@ -74,19 +74,12 @@ const Communities= ({icon, cs}) => (
     <div className="col s11 m11 l11">
       {
         cs.map((c, i) => {
-        return <div key={i} className="chip"><a href={c.url}>{c.name}</a></div>
+        return <div key={i} className="chip"><a href={`/community/${c}`}>{c}</a></div>
         })
       }
     </div>
   </div>
 )
-
-const cs = [
-  {name: 'Web Developer', url: ''},
-  {name: 'Mobile Developer', url: ''},
-  {name: 'Graphic Designer', url: ''},
-  {name: 'Entrepreneur', url: ''},
-]
 
 export default ({ user }) => (
   <div className="hero-profile">
@@ -104,7 +97,7 @@ export default ({ user }) => (
               {`Member since ${getMonthYear(user.createdAt)}`}
             </p>
         </div>
-        <Communities icon={'group'} cs={cs} />
+        <Communities icon={'group'} cs={user.communities} />
         <UserInfo icon={iconEnums.location}
           info={user.location}
           orElse={'add location'}

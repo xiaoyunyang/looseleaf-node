@@ -29,7 +29,8 @@ const userSchema = mongoose.Schema({
   github: {
     id: String,
     token: String
-  }
+  },
+  communities: []
 });
 
 const SALT_FACTOR = 10;

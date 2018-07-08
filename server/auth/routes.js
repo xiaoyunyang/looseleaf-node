@@ -7,7 +7,7 @@ import passport from 'passport';
 import validator from 'validator';
 import csrf from 'csurf';
 import gravatarUrl from 'gravatar-url';
-import User from './User';
+import User from '../models/User';
 import chalk from 'chalk';
 
 import renderLandingAppMiddleware from '../../client/iso-middleware/renderLandingApp';
@@ -306,12 +306,28 @@ const community = (name) => {
   };
 };
 
+// Post Project ================================================================
+// router.post('/project/new', ensureAuthenticated, (req, res, next) => {
+//   req.user.displayName = req.body.displayname;
+//   req.user.location = req.body.location;
+//   req.user.bio = req.body.bio;
+//   req.user.save((err) => {
+//     if (err) {
+//       next(err);
+//       return;
+//     }
+//     req.flash('info', 'Profile updated!');
+//     res.statusMessage = 'info';
+//     res.send('Profile updated!');
+//     res.redirect(`/auth/users/${req.user.username}`);
+//   });
+// });
+
 // Render Apps ================================================================
 // Important: this has to remain at the bottom of the page because it's a wildcard
 // catch-all case
 // Gotcha: Order of code matters in determining middleware for the requested route
 router.get('/community/:name*', (req, res, next) => {
-  console.log(chalk.green('lulwut', req.params.name))
   renderCommunityAppMiddleware(req, res, next, community(req.params.name));
 });
 
@@ -329,17 +345,5 @@ router.get('/*', (req, res, next) => {
   renderLandingAppMiddleware(req, res, next);
 });
 
-/*
-router.get('/user*', (req, res) => {
-  renderUserAppMiddleware(req)
-});*/
-/*
-router.get('/*', (req, res) => {
-  if (req.isAuthenticated()) {
-    renderUserAppMiddleware(req)
-  }
-  renderGuestAppMiddleware(req)
-});
-*/
 
 module.exports = router;
