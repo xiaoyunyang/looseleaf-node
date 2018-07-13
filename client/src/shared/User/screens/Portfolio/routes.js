@@ -2,7 +2,7 @@ import One from './One';
 import Two from './Two';
 import Three from './Three';
 import Four from './Four';
-import NotFound from '../../../../components/NotFound';
+import NotFound from '../../../components/NotFound';
 import { root } from '../../routes'
 // const root = `/${store.root}${store.username}`;
 

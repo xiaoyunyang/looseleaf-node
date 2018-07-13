@@ -5,8 +5,21 @@ import $ from 'jquery';
 import { getNav, tabs } from './routes';
 import { getPageName } from '../../lib/helpers';
 
-const community = 'webdev';
-
+const UserDropdown = ( {username, userPic} ) => (
+  <li id="dropdown-block">
+    <a className="navbar-img dropdown-button" data-activates="user-dropdown">
+      <img alt={`looseleaf user ${username}`} className="mod-round" src={userPic} />
+      <div className="arrow-down" />
+    </a>
+    <ul id="user-dropdown" className="dropdown-content">
+      <li><a href="/project/new">Portfolio</a></li>
+      <li><a href="/project/new">New Project</a></li>
+      <li className="divider" />
+      <li><a href="/project/new">Settings</a></li>
+      <li><a href="/auth/logout">Log out</a></li>
+    </ul>
+  </li>
+);
 export default class TopNav extends React.Component {
   static defalutProps = {
     extended: false
@@ -82,24 +95,52 @@ export default class TopNav extends React.Component {
       </div>
     );
   }
-  renderPrimaryNavExtended(selected, community) {
+
+  renderPrimaryNavInner(selected, community, user) {
+    return (
+      <div className="nav-wrapper-white nav-text-links">
+        { user ? null :
+            <div className="brand-logo">
+              <Link className="navbar-brand" to={`/${community}`}
+                  onClick={this.handleLogoClick.bind(this)}
+                >
+                <img src="http://looseleafapp.com/assets/images/logo/logo.png" alt="LooseLeaf" />
+              </Link>
+            </div>
+        }
+        {
+          user ? null :
+            <div>
+              <ul className="right">
+                <li>{this.renderJoinBtn('Signup', 'signup-btn-main')}</li>
+              </ul>
+              <div className="right hide-on-small-only">
+                { this.renderLoginBtn() }
+              </div>
+            </div>
+        }
+        {
+          user ?
+            <div>
+              <ul className="right">
+                <UserDropdown username={user.username} userPic={user.picture}/>
+              </ul>
+            </div>
+            :
+            null
+        }
+      </div>
+    );
+  }
+  renderPrimaryNavExtended(selected, community, user) {
     return (
       <div id="looseleaf-section-header">
         <nav className="nav-extended grey lighten-4">
           <div className="nav-background">
             <div className="pattern active"></div>
           </div>
-          {this.renderPrimaryNavInner(selected, community)}
+          {this.renderPrimaryNavInner(selected, community, user)}
           { this.renderNavHeader(community) }
-        </nav>
-      </div>
-    );
-  }
-  renderPrimaryNav(selected) {
-    return (
-      <div className="navbar-fixed">
-        <nav className="grey lighten-4">
-          {this.renderPrimaryNavInner(selected, community)}
         </nav>
       </div>
     );
@@ -107,27 +148,7 @@ export default class TopNav extends React.Component {
   handleLogoClick() {
     window.location = "/";
   }
-  renderPrimaryNavInner(selected, community) {
-    return (
-      <div className="nav-wrapper-white nav-text-links">
-        <div className="brand-logo">
-          <Link className="navbar-brand" to={`/${community}`}
-              onClick={this.handleLogoClick.bind(this)}
-            >
-            <img src="http://looseleafapp.com/assets/images/logo/logo.png" alt="LooseLeaf" />
-          </Link>
-        </div>
-        <ul className="right">
-          <li>{this.renderJoinBtn('Join', 'signup-btn-main')}</li>
-        </ul>
-        <div className="right hide-on-small-only">
-          { this.renderLoginBtn() }
-        </div>
-      </div>
-    );
-  }
   renderTabs(selected, communityName) {
-    console.log('pooop communityName', communityName)
     const style = {
       top: 0
     };
@@ -184,18 +205,17 @@ export default class TopNav extends React.Component {
     );
   }
   render() {
+    console.log(this.props)
     let selected = (typeof this.props.route.path === 'string')
                     ? getPageName(this.props.route.path) : '';
 
     return (
       <div>
-        { this.props.extended ?
-            this.renderPrimaryNavExtended(selected, this.props.community) :
-            this.renderPrimaryNav(selected)
+        {
+          this.renderPrimaryNavExtended(selected, this.props.community, this.props.user)
         }
         {
-          this.props.extended ?
-            this.renderTabs(selected, this.props.community.name) : null
+            this.renderTabs(selected, this.props.community.name)
         }
       </div>
     );

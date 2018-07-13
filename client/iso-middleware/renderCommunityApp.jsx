@@ -9,13 +9,6 @@ import HTML from '../src/shared/Community/HTML';
 import App from '../src/shared/Community/App';
 
 export default function renderCommunityApp(req, res, next, community) {
-  // const community = {
-  //   name: communityName,
-  //   title: communityName,
-  //   desc: 'Mobile and Web developers',
-  //   members: ['xiaoyun-yang', 'afenner'],
-  //   projects: ['create-kids-app-12345', 'rewrite-website-for-nonprofit-56789']
-  // };
 
   const store = configureStore(community);
   const dataToSerialize = community;

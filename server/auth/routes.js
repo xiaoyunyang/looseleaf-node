@@ -9,12 +9,14 @@ import csrf from 'csurf';
 import gravatarUrl from 'gravatar-url';
 import User from '../models/User';
 import chalk from 'chalk';
-
 import renderLandingAppMiddleware from '../../client/iso-middleware/renderLandingApp';
 import renderGuestAppMiddleware from '../../client/iso-middleware/renderGuestApp';
 import renderUserAppMiddleware from '../../client/iso-middleware/renderUserApp';
 import renderCommunityAppMiddleware from '../../client/iso-middleware/renderCommunityApp';
 import renderProjectAppMiddleware from '../../client/iso-middleware/renderProjectApp';
+import urlFingerprint from '../modules/urlFingerprint';
+
+const cuid = require('cuid');
 
 const router = express.Router();
 // TODO: csrf commented out so client app can post. Need to figure out use
@@ -322,6 +324,18 @@ const community = (name) => {
 //     res.redirect(`/auth/users/${req.user.username}`);
 //   });
 // });
+
+
+/*
+TODO: code below is for development only. Remove for production
+ */
+
+router.get('/test', (req, res) => {
+  const slug = cuid.slug();
+  const title = "I'm a little Tea---Pot Short & Stout";
+  const output = urlFingerprint(title, slug);
+  res.send(`url: ${output}`);
+});
 
 // Render Apps ================================================================
 // Important: this has to remain at the bottom of the page because it's a wildcard

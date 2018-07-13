@@ -55,12 +55,12 @@ export default class TopNavGuest extends React.Component {
     return (
       <a href="#login-modal"
          onClick={this.closeModal.bind(this, '#signup-modal')}
-         className="modal-trigger">
+         className="modal-trigger" style={{color: '#00897b'}}>
         Log in
       </a>
     );
   }
-  renderJoinBtn(label, id) {
+  renderSignupBtn(label, id) {
     return (
       <a id={id}
          href="#signup-modal"
@@ -77,7 +77,7 @@ export default class TopNavGuest extends React.Component {
         <div className="tagline">
           {'Gain relevant work experience as a developer, designer, and writer'}
         </div>
-        { this.renderJoinBtn('Join LooseLeaf', 'signup-btn-header') }
+        { this.renderSignupBtn('Join LooseLeaf', 'signup-btn-header') }
       </div>
     );
   }
@@ -113,7 +113,7 @@ export default class TopNavGuest extends React.Component {
           </Link>
         </div>
         <ul className="right">
-          <li>{this.renderJoinBtn('Join', 'signup-btn-main')}</li>
+          <li>{this.renderSignupBtn('Signup', 'signup-btn-main')}</li>
         </ul>
         <div className="right hide-on-small-only">
           { this.renderLoginBtn() }
@@ -187,7 +187,7 @@ export default class TopNavGuest extends React.Component {
               <div className="col l2 m2 s2 offset-l1 offset-s2 nav-text-links">
                 <ul style={{paddingRight: 4}} className="right">
                   <li>
-                    { this.renderJoinBtn('Join', 'signup-btn-tab')}
+                    { this.renderSignupBtn('Signup', 'signup-btn-tab')}
                   </li>
                 </ul>
               </div>
