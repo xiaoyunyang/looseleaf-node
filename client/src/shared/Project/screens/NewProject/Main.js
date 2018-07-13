@@ -1,6 +1,7 @@
 import React from 'react';
 import TopNav from '../../../components/TopNavUser';
 import ProjectForm from './ProjectForm';
+import {interests, communities, platforms} from './../../../components/TempData';
 
 export default class extends React.Component {
   render() {
@@ -10,11 +11,11 @@ export default class extends React.Component {
         <div className="container">
           <h4>New Project</h4>
           <ProjectForm
-            bio={this.props.user.bio}
-            location={this.props.user.location}
-            website={this.props.user.website}
-            interests={this.props.user.interests}
-            communities={this.props.user.communities}
+            projectTypes={['Software Development', 'Design', 'Writng', 'Data Science', 'Illustration', 'Video Production']}
+            interests={interests}
+            platforms={platforms}
+            aboutMe={this.props.user.bio}
+            people={['Andrew Fenner', 'Peter Preston', 'Xiaoyun Yang']}
             />
         </div>
       </div>
