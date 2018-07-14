@@ -9,7 +9,7 @@ import * as actionCreators from '../redux/User/actions/content';
 class AppContainer extends React.Component {
   render() {
     // console.log('AppContainer', getRoutes(this.props.state.user))
-    console.log('AppContainer props', this.props)
+    // console.log('AppContainer props', this.props)
     return (
       <App {...this.props} />
     );

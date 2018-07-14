@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import FlashNotif from './FlashNotif';
+import FlashNotif from '../FlashNotif';
 import axios from 'axios';
 
 const redirPath = 'http://localhost:3001';
@@ -43,9 +43,9 @@ class LocalLogin extends React.Component {
   }
   // TODO: prevent axios from posting if client side validation has an error
   handleSubmit(formFields) {
-    console.log('submit btn pressed. action = ', this.getFormAction(this.props.action))
+    console.log('submit btn pressed. action = ', this.getPostPath(this.props.action))
 
-    axios.post(this.getFormAction(this.props.action), formFields)
+    axios.post(this.getPostPath(this.props.action), formFields)
       .then(res => {
         // console.log('login via axios is a success')
         // console.log(res);
@@ -81,7 +81,7 @@ class LocalLogin extends React.Component {
     }
     return null;
   }
-  getFormAction(action) {
+  getPostPath(action) {
     if(action === 'Continue') {
       return loginPath;
     }

@@ -2,111 +2,59 @@ import React from 'react';
 import InputTags from '../../../components/InputTags';
 import InputDropdown from '../../../components/InputDropdown';
 import DatePicker from '../../../components/DatePicker';
+import FlashNotif from '../../../components/FlashNotif';
+import TextAreaInput from '../../../components/TextAreaInput';
+import TextInput from '../../../components/TextInput';
+import axios from 'axios';
 
-class TextInput extends React.Component {
-  handleChange(e) {
-    this.props.setState(e.target.value);
-  }
-  render() {
-    return (
-      <div className="input-field col s12 m12 l12">
-        <input
-          id={this.props.id}
-          defaultValue={this.props.field}
-          onChange={this.handleChange.bind(this)}
-          type="text" className="validate"/>
-        <label htmlFor={this.props.id}
-          className={!this.props.field ? '' : 'active'}>
-          {this.props.label}
-        </label>
-      </div>
-    )
-  }
-}
-class TextAreaInput extends React.Component {
-  handleChange(e) {
-    this.props.setState(e.target.value);
-  }
-  render() {
-    return (
-      <div className="input-field col s12 m12 l12">
-        <textarea
-          id={this.props.id}
-          defaultValue={this.props.field}
-          onChange={this.handleChange.bind(this)}
-          className="materialize-textarea">
-        </textarea>
-        <label htmlFor={this.props.id} className={!this.props.field ? '' : 'active'}>
-          {this.props.label}
-        </label>
-      </div>
-    )
-  }
-}
+const redirPath = 'http://localhost:3001';
+const postPath = 'http://localhost:3001/api/project';
 
-export default class AboutForm extends React.Component {
+export default class ProjectForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       title: '',
       desc: '',
       selectedProjectType: this.props.projectTypes[0],
-      selectedInterests: [],
+      selectedTags: [],
       aboutMe: this.props.aboutMe,
       mission: '',
       contributors: [],
       selectedPlatform: this.props.platforms[0],
       submissionInst: '',
-      dueDate: ''
+      dueDate: '',
+      flash: {
+        state: 'ok',
+        msg: '',
+      },
     }
   }
-  handleChange(id, e) {
-    if(id==='bio') {
-      this.setState({bio: e.target.value})
-    } else if(id==='location') {
-      this.setState({location: e.target.value})
-    } else if(id==='website') {
-      this.setState({website: e.target.value})
-    } else if(id==='interests') {
-      this.setState({interests: e.target.value})
-    } else if(id==='communities') {
-      this.setState({communities: e.target.value})
-    }
-  }
-  renderTextInput(id, field, label) {
-    return (
-      <div className="input-field col s12 m12 l12">
-        <input
-          id={id}
-          defaultValue={field}
-          onChange={this.handleChange(this, id)}
-          type="text" className="validate"/>
-        <label htmlFor={id}
-          className={!field ? '' : 'active'}>
-          {label}
-        </label>
-      </div>
-    )
-  }
-  renderTextAreaInput(id, field, label) {
-    return (
-      <div className="input-field col s12 m12 l12">
-        <textarea
-          id={id}
-          defaultValue={field}
-          onChange={this.handleChange(this, id)}
-          className="materialize-textarea">
-        </textarea>
-        <label htmlFor={id} className={!field ? '' : 'active'}>
-          {label}
-        </label>
-      </div>
-    )
+  handleSubmit(formFields) {
+    const username = this.props.user.username;
+    axios.post(postPath, {formFields, username})
+    .then(res => {
+
+      if(res.statusText === 'error') {
+        this.setState({
+          flash: {state: res.statusText, msg: res.data}
+        })
+      } else if(res.statusText === 'OK') {
+        console.log('wooooooooow', res.data)
+        // redirect to /slug if the server responds with 200 ok...
+        //window.location = `/project/${res.data}`;
+      }
+
+      // Perform action based on response, such as flashing error notif
+    })
+    .catch(function(error) {
+      console.log(error);
+      //Perform action based on error
+    });
   }
   render() {
-    console.log(this.state)
     return (
-      <form className="col s12">
+      <div className="col s12">
         <div className="card-panel white">
           <h5>About The Project</h5>
           <div className="row">
@@ -133,11 +81,10 @@ export default class AboutForm extends React.Component {
                 id='select-areas'
                 label='Interest Areas'
                 hint='+Interest'
-                tags={this.props.interests}
-                selectedTags={this.state.selectedInterests}
-                setState={ds => this.setState({selectedInterests: ds})}
+                tags={this.props.tags}
+                selectedTags={this.state.selectedTags}
+                setState={ds => this.setState({selectedTags: ds})}
               />
-
             </div>
           </div>
         </div>
@@ -202,11 +149,12 @@ export default class AboutForm extends React.Component {
           </div>
         </div>
         <div className="row center">
-          <button className="btn" type="submit" name="action">
+          <a className="btn" onClick={this.handleSubmit.bind(this, this.state)}>
             Create Project
-          </button>
+          </a>
         </div>
-      </form>
+        <FlashNotif state={this.state.flash.state} msg={this.state.flash.msg}/>
+      </div>
     )
   }
 }

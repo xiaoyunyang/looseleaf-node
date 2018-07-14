@@ -11,7 +11,8 @@ const projectSchema = mongoose.Schema({
     about: { type: String, default: '' },
     mission: { type: String, default: '' }
   },
-  title: { type: String, required: true, unique: true },
+  urlSlug: { type: String, required: true, unique: true },
+  title: { type: String, required: true },
   desc: String,
   projectType: { type: String, required: true },
   tags: { type: [], get: getTags, set: setTags },
@@ -28,7 +29,7 @@ const projectSchema = mongoose.Schema({
   }]
 });
 
-ProjectSchema.path('title').required(true, 'Project title cannot be blank');
+projectSchema.path('title').required(true, 'Project title cannot be blank');
 
 // Model methods ===============================================================
 projectSchema.methods.list = function (options) {

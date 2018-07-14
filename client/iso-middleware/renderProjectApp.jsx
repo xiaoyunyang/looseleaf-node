@@ -13,8 +13,6 @@ export default function renderProjectApp(req, res, next) {
   const store = configureStore(req.user);
   const dataToSerialize = req.user;
 
-console.log("I'm in renderProjectApp!!! ")
-
   // console.log('dataToSerialize', dataToSerialize);
 
   const branch = matchRoutes(getRoutes(req.user.username), req.url)

@@ -11,8 +11,9 @@ export default class extends React.Component {
         <div className="container">
           <h4>New Project</h4>
           <ProjectForm
+            user={this.props.user}
             projectTypes={['Software Development', 'Design', 'Writng', 'Data Science', 'Illustration', 'Video Production']}
-            interests={interests}
+            tags={interests}
             platforms={platforms}
             aboutMe={this.props.user.bio}
             people={['Andrew Fenner', 'Peter Preston', 'Xiaoyun Yang']}

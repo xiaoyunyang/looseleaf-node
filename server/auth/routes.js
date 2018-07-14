@@ -14,9 +14,6 @@ import renderGuestAppMiddleware from '../../client/iso-middleware/renderGuestApp
 import renderUserAppMiddleware from '../../client/iso-middleware/renderUserApp';
 import renderCommunityAppMiddleware from '../../client/iso-middleware/renderCommunityApp';
 import renderProjectAppMiddleware from '../../client/iso-middleware/renderProjectApp';
-import urlFingerprint from '../modules/urlFingerprint';
-
-const cuid = require('cuid');
 
 const router = express.Router();
 // TODO: csrf commented out so client app can post. Need to figure out use
@@ -66,6 +63,7 @@ router.get('/auth/users/:username', (req, res, next) => {
 
 // Local Signup ================================================================
 // Saves user to the database
+// TODO: Do I really need to code below?
 router.get('/auth/signup', (req, res) => {
   res.render('signup', {
     // csrfToken: req.csrfToken()
@@ -325,17 +323,6 @@ const community = (name) => {
 //   });
 // });
 
-
-/*
-TODO: code below is for development only. Remove for production
- */
-
-router.get('/test', (req, res) => {
-  const slug = cuid.slug();
-  const title = "I'm a little Tea---Pot Short & Stout";
-  const output = urlFingerprint(title, slug);
-  res.send(`url: ${output}`);
-});
 
 // Render Apps ================================================================
 // Important: this has to remain at the bottom of the page because it's a wildcard

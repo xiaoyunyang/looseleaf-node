@@ -5,15 +5,75 @@
 import express from 'express';
 import arrayWrap from 'arraywrap';
 import fs from 'fs';
+import chalk from 'chalk';
+import validator from 'validator';
 import path from 'path';
 import User from '../models/User';
-
+import Project from '../models/Project';
+import urlSlug from '../modules/urlSlug';
 import dataPreloading from '../../client/iso-middleware/dataPreloading'
+
+const cuid = require('cuid');
 
 const api = express.Router();
 
+
+/*
+TODO: code below is for development only. Remove for production
+ */
+
+api.get('/test', (req, res) => {
+  const slug = cuid.slug();
+
+  const title = "<>/I'm a little Tea---Pot Short & Stout";
+  const sanitizedTitle = validator.escape(title);
+  const output = urlSlug(title, slug);
+  res.send(`url: ${output} \n santizedTitle: ${sanitizedTitle}`);
+});
+
+
+// Projects ======================================================================
+api.post('/project', (req, res, next) => {
+  const formFields = req.body.formFields;
+
+  console.log(chalk.blue('formFields', req.body.formFields));
+  console.log(chalk.blue('username', req.body.username));
+  // Do some error checking
+  if (validator.isEmpty(formFields.title)) {
+    res.statusMessage = 'error';
+    return res.send('Project must have a title!');
+  }
+  console.log(chalk.blue(formFields.title))
+
+
+  // TODO: Sanitize all inputs
+  const newProject = new Project();
+  const slug = urlSlug(formFields.title, cuid.slug());
+
+  newProject.creator = {
+    username: formFields.username,
+    about: validator.escape(formFields.aboutMe),
+    mission: validator.escape(formFields.mission)
+  };
+
+  newProject.title = validator.escape(formFields.title);
+  newProject.urlSlug = slug;
+  newProject.desc = validator.escape(formFields.desc);
+  newProject.projectType = formFields.projectType;
+  newProject.tags = formFields.selectedTags.map(d => validator.escape(d));
+  newProject.contributors = formFields.contributors;
+  newProject.submission = {
+    platform: formFields.selectedPlatform,
+    instruction: validator.escape(formFields.submissionInst)
+  };
+  newProject.dueDate = formFields.dueDate;
+  newProject.save(next);
+
+  return res.send(slug);
+});
+
 // Users ======================================================================
-api.get('/users', (req, res) => {
+api.get('/user', (req, res) => {
   User.find({}, (err, users) => {
     const userMap = {};
 
