@@ -37,7 +37,7 @@ api.post('/project', (req, res, next) => {
   const formFields = req.body.formFields;
 
   console.log(chalk.blue('formFields', req.body.formFields));
-  console.log(chalk.blue('username', req.body.username));
+  console.log(chalk.blue('username', req.body.userId));
   // Do some error checking
   if (validator.isEmpty(formFields.title)) {
     res.statusMessage = 'error';
@@ -51,7 +51,7 @@ api.post('/project', (req, res, next) => {
   const slug = urlSlug(formFields.title, cuid.slug());
 
   newProject.creator = {
-    username: formFields.username,
+    userId: req.body.userId,
     about: validator.escape(formFields.aboutMe),
     mission: validator.escape(formFields.mission)
   };
@@ -83,11 +83,11 @@ api.get('/project/:urlSlug', (req, res) => {
       req.flash('error', 'No project found');
       res.statusMessage = 'error';
       return res.send('No project found');
-      //return next(err);
     }
-    // If user successfully deleted
+    // If there's no error, send project if project exists
+    // NOTE project is an Array containing one element. We want to send a JSON
     if (project) {
-      return res.send(project);
+      return res.send(project.pop());
     }
   });
 });

@@ -31,10 +31,9 @@ export default class ProjectForm extends React.Component {
     }
   }
   handleSubmit(formFields) {
-    const username = this.props.user.username;
-    axios.post(postPath, {formFields, username})
+    const userId = this.props.user._id;
+    axios.post(postPath, {formFields, userId})
     .then(res => {
-
       if(res.statusText === 'error') {
         this.setState({
           flash: {state: res.statusText, msg: res.data}
@@ -124,14 +123,12 @@ export default class ProjectForm extends React.Component {
           <p style={{paddingLeft: '0.75em'}}>{"Submission Instruction."}</p>
           <div className="row">
             <div className="col s12">
-              {
-                <InputDropdown
-                  id='select-platform'
-                  label='Platform Type'
-                  choices={this.props.platforms}
-                  setState={d => this.setState({selectedPlatform: d})}
-                />
-              }
+              <InputDropdown
+                id='select-platform'
+                label='Platform Type'
+                choices={this.props.platforms}
+                setState={d => this.setState({selectedPlatform: d})}
+              />
               <TextAreaInput
                 id='text-desc'
                 field={this.state.submissionInst}

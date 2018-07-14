@@ -7,7 +7,7 @@ const setTags = tags => tags.split(',');
 const projectSchema = mongoose.Schema({
   createdAt: { type: Date, default: Date.now },
   creator: {
-    username: { type: String },
+    userId: { type: String, required: true },
     about: { type: String, default: '' },
     mission: { type: String, default: '' }
   },
