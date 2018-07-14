@@ -40,9 +40,8 @@ export default class ProjectForm extends React.Component {
           flash: {state: res.statusText, msg: res.data}
         })
       } else if(res.statusText === 'OK') {
-        console.log('wooooooooow', res.data)
         // redirect to /slug if the server responds with 200 ok...
-        //window.location = `/project/${res.data}`;
+        window.location = `/project/${res.data}`;
       }
 
       // Perform action based on response, such as flashing error notif

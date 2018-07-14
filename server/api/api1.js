@@ -46,7 +46,7 @@ api.post('/project', (req, res, next) => {
   console.log(chalk.blue(formFields.title))
 
 
-  // TODO: Sanitize all inputs
+  // Add new project to database
   const newProject = new Project();
   const slug = urlSlug(formFields.title, cuid.slug());
 
@@ -60,7 +60,7 @@ api.post('/project', (req, res, next) => {
   newProject.urlSlug = slug;
   newProject.desc = validator.escape(formFields.desc);
   newProject.projectType = formFields.projectType;
-  newProject.tags = formFields.selectedTags.map(d => validator.escape(d));
+  newProject.tags = formFields.selectedTags;
   newProject.contributors = formFields.contributors;
   newProject.submission = {
     platform: formFields.selectedPlatform,
@@ -68,8 +68,28 @@ api.post('/project', (req, res, next) => {
   };
   newProject.dueDate = formFields.dueDate;
   newProject.save(next);
-
   return res.send(slug);
+});
+
+
+api.get('/project', (req, res) => {
+  Project.find({}, (err, projects) => {
+    res.send(projects);
+  });
+});
+api.get('/project/:urlSlug', (req, res) => {
+  Project.find({ urlSlug: req.params.urlSlug }, (err, project) => {
+    if (err) {
+      req.flash('error', 'No project found');
+      res.statusMessage = 'error';
+      return res.send('No project found');
+      //return next(err);
+    }
+    // If user successfully deleted
+    if (project) {
+      return res.send(project);
+    }
+  });
 });
 
 // Users ======================================================================

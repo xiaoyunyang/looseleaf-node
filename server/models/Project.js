@@ -7,29 +7,29 @@ const setTags = tags => tags.split(',');
 const projectSchema = mongoose.Schema({
   createdAt: { type: Date, default: Date.now },
   creator: {
-    username: { type: String, required: true, unique: true },
+    username: { type: String },
     about: { type: String, default: '' },
     mission: { type: String, default: '' }
   },
   urlSlug: { type: String, required: true, unique: true },
   title: { type: String, required: true },
   desc: String,
-  projectType: { type: String, required: true },
-  tags: { type: [], get: getTags, set: setTags },
+  projectType: { type: String },
+  tags: Array,
   contributors: Array,
   submission: {
     platform: { type: String, required: true },
     instruction: { type: String, default: '' }
   },
   dueDate: Date,
-  updates: [{
-    body: { type: String, default: '' },
-    user: { type: Schema.ObjectId, ref: 'User' },
-    createdAt: { type: Date, default: Date.now }
-  }]
+  // updates: [{
+  //   body: { type: String, default: '' },
+  //   user: { type: Schema.ObjectId, ref: 'User' },
+  //   createdAt: { type: Date, default: Date.now }
+  // }]
 });
 
-projectSchema.path('title').required(true, 'Project title cannot be blank');
+// projectSchema.path('title').required(true, 'Project title cannot be blank');
 
 // Model methods ===============================================================
 projectSchema.methods.list = function (options) {
