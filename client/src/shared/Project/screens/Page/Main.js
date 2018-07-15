@@ -30,7 +30,7 @@ class Main extends React.Component {
     return (
       <div className="col s12 m12 l12">
         <div className="card-panel white">
-          <h4>{project.title}</h4>
+          <h4><div dangerouslySetInnerHTML={{__html: project.title}} /></h4>
           <p>{project.description}</p>
           <p>{`Due Date: ${dueDateFormatted(project.dueDate)}`}</p>
           <div className="row">

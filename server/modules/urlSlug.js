@@ -1,4 +1,4 @@
-const urlSlug = (title, slug) => {
+const urlSlug = (title, fingerprint) => {
   // This function creates a slugified version of the title
   const slugify = (string) => {
     const a = 'àáäâãåèéëêìíïîòóöôùúüûñçßÿœæŕśńṕẃǵǹḿǘẍźḧ·/_,:;';
@@ -13,7 +13,7 @@ const urlSlug = (title, slug) => {
       .replace(/^-+/, '') // Trim — from start of text
       .replace(/-+$/, ''); // Trim — from end of text
   };
-  return `${slugify(title)}-${slug}`;
+  return `${slugify(title)}-${fingerprint}`;
 };
 
 module.exports = urlSlug;
