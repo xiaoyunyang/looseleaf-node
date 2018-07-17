@@ -25,14 +25,23 @@ const Reactions = () => (
 )
 
 // This is a ES6 class - see https://toddmotto.com/react-create-class-versus-component/
-class Main extends React.Component {
+// NOTE: dangerouslySetInnerHTML is needed because the strings from server contains HTML entities
+// and react does a double escape of those HTML entities so “&lt;" will be displayed as “&lt;" in
+// the browser instead of "<". This is not the best solution as adviced by this post:
+// https://shripadk.github.io/react/docs/jsx-gotchas.html but it gets the job done.
+// A TODO would be to make this work without dangerouslySetInnerHTML.
+export default class Main extends React.Component {
   renderProjectInfo(project) {
+    const title = project ? project.info.title : 'placeholder title';
+    const desc = project ? project.info.desc : 'placeholder desc';
+    const dueDate = project ? project.info.dueDate : "2018-07-14T04:44:56.361Z";
+
     return (
-      <div className="col s12 m12 l12">
+      <div id="project-info" className="col s12 m12 l12">
         <div className="card-panel white">
-          <h4><div dangerouslySetInnerHTML={{__html: project.title}} /></h4>
-          <p>{project.description}</p>
-          <p>{`Due Date: ${dueDateFormatted(project.dueDate)}`}</p>
+          <h4 dangerouslySetInnerHTML={{__html: title}} />
+          <p dangerouslySetInnerHTML={{__html: desc}} />
+          <p>{`Due Date: ${dueDateFormatted(dueDate)}`}</p>
           <div className="row">
             <div className="col s4 m2 l2">
               <a className="waves-effect waves-light btn teal teal-text lighten-5">Watch</a>
@@ -43,7 +52,7 @@ class Main extends React.Component {
           </div>
         </div>
       </div>
-    )
+    );
   }
   renderProjectContributors(contributors) {
     return (
@@ -119,6 +128,10 @@ class Main extends React.Component {
     );
   }
   render() {
+    //let slug = this.props.params.slug;
+    // let slug = this.props.match.params.slug;
+    // console.log('ooooooooooo',slug)
+    // console.log('this.props', this.props)
     return (
       <div className="section-white">
         <TopNav route={this.props.route} user={this.props.user} useExternLinks={true}/>
@@ -127,15 +140,14 @@ class Main extends React.Component {
             this.renderProjectInfo(this.props.project)
           }
           {
-            this.renderProjectContributors(this.props.project.contributors)
+            this.props.project ?
+              this.renderProjectContributors(this.props.project.contributors) : null
           }
           {
-            this.renderFeed()
+            // this.renderFeed()
           }
         </div>
       </div>
     );
   }
 }
-
-export default Main;

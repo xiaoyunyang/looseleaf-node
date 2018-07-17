@@ -85,9 +85,9 @@ api.get('/project/:urlSlug', (req, res) => {
       return res.send('No project found');
     }
     // If there's no error, send project if project exists
-    // NOTE project is an Array containing one element. We want to send a JSON
+    // NOTE project is an Array containing one element.
     if (project) {
-      return res.send(project.pop());
+      return res.send(project);
     }
   });
 });

@@ -15,7 +15,7 @@ const configureStore = (preloadedState) => {
   );
   const store = createStore(
     reducers,
-    {project: preloadedState},
+    {user: preloadedState},
     enhancer
   );
   return store;

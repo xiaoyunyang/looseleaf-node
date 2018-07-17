@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { withRouter } from "react-router-dom";
 import { bindActionCreators } from 'redux';
 import { getRoutes } from './routes';
-import * as actionCreators from '../redux/Project/actions/content';
+import * as actionCreators from '../redux/Project/actions/project';
 
 class AppContainer extends React.Component {
   render() {
@@ -14,15 +14,31 @@ class AppContainer extends React.Component {
   }
 }
 
-const App = ({ state }) => (
+const App2 = ({ state }) => (
   <div>
     {renderRoutes(getRoutes(state.user), state)}
   </div>
 );
 
+class App extends React.Component {
+  componentDidMount() {
+    // TODO: The slug has to come from props if it's server side rendered
+    const slug = 'this-is-a-test-120s25q';
+
+    // With the component configured to use Redux, you can dispatch actions from the view.
+    this.props.actions.getProjectPageData(slug);
+  }
+  render() {
+    return (
+      <div>
+        {renderRoutes(getRoutes(this.props.state.user), this.props.state)}
+      </div>
+    )
+  }
+}
+
 // This function lets you convert the app state to properties on your component.
 function mapStateToProps(state) {
-console.log('state', state)
   return {
     state: state
   };

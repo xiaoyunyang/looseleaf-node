@@ -4,6 +4,7 @@ import { StaticRouter } from 'react-router-dom';
 import { matchRoutes } from 'react-router-config';
 import { Provider } from 'react-redux';
 import configureStore from '../src/shared/redux/User/configureStore';
+import * as actions from '../src/shared/redux/Project/actions/project';
 import { getRoutes } from '../src/shared/Project/routes';
 import HTML from '../src/shared/Project/HTML';
 import App from '../src/shared/Project/App';
@@ -12,10 +13,12 @@ export default function renderProjectApp(req, res, next) {
 //  console.log('preloadedState type: ', (typeof preloadedState));
   const store = configureStore(req.user);
   const dataToSerialize = req.user;
+  const slug = req.params.slug;
 
-  // console.log('dataToSerialize', dataToSerialize);
+  console.log('..............slug............', slug);
 
-  const branch = matchRoutes(getRoutes(req.user.username), req.url)
+  const branch = matchRoutes(getRoutes(req.user.username), req.url);
+
   const promises = branch.map(({ route, match }) => {
     return route.loadData
       ? route.loadData(match)
@@ -24,7 +27,6 @@ export default function renderProjectApp(req, res, next) {
 
   Promise.all(promises).then(data => {
     // data will be an array[] of datas returned by each promises.
-  	// console.log(data)
   	const context = data.reduce( (context, data) => {
   		return Object.assign(context, data)
   	}, {})
