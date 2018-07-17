@@ -32,6 +32,9 @@ const Reactions = () => (
 // A TODO would be to make this work without dangerouslySetInnerHTML.
 export default class Main extends React.Component {
   renderProjectInfo(project) {
+    // TODO and NOTE: Make sure the default values match the redux init state values.
+    // Otherwise, there's going to be a warning about how server and client do not match.
+    //
     const title = project ? project.info.title : 'placeholder title';
     const desc = project ? project.info.desc : 'placeholder desc';
     const dueDate = project ? project.info.dueDate : "2018-07-14T04:44:56.361Z";
@@ -144,7 +147,7 @@ export default class Main extends React.Component {
               this.renderProjectContributors(this.props.project.contributors) : null
           }
           {
-            // this.renderFeed()
+            this.renderFeed()
           }
         </div>
       </div>

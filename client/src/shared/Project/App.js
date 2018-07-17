@@ -22,11 +22,26 @@ const App2 = ({ state }) => (
 
 class App extends React.Component {
   componentDidMount() {
-    // TODO: The slug has to come from props if it's server side rendered
-    const slug = 'this-is-a-test-120s25q';
-
+    // example of a slug is 'this-is-a-test-120s25q'. NOTE, we can force the app
+    // to render any project page we want as long as we pass the slug into the
+    // getProjectPageData
     // With the component configured to use Redux, you can dispatch actions from the view.
-    this.props.actions.getProjectPageData(slug);
+    // as shown below.
+    // The slug has to come from props if it's server side rendered. For client test,
+    // we are just getting the default slug, which returns nothing.
+
+    // TODO: below code is a total hack. The project app renders a few pages but the
+    // only time we want to call getProjectPageData is if the route is /project/:slug
+    // Since we previously specify that /project/new and /project match on exact and
+    // render the project creation page and the project index page, respectively,
+    // we want to make sure we don't make unnecessary api calls to get project by slug
+    // if we are rendering /project/new or /project
+    if(this.props.location.pathname !== '/project/new'
+        && this.props.location.pathname !== '/project/'
+        && this.props.location.pathname !== '/project') {
+        this.props.actions.getProjectPageData(this.props.state.slug);
+    }
+
   }
   render() {
     return (

@@ -3,19 +3,22 @@ import { renderToString } from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom';
 import { matchRoutes } from 'react-router-config';
 import { Provider } from 'react-redux';
-import configureStore from '../src/shared/redux/User/configureStore';
-import * as actions from '../src/shared/redux/Project/actions/project';
+import configureStore from '../src/shared/redux/Project/configureStore';
 import { getRoutes } from '../src/shared/Project/routes';
 import HTML from '../src/shared/Project/HTML';
 import App from '../src/shared/Project/App';
 
 export default function renderProjectApp(req, res, next) {
 //  console.log('preloadedState type: ', (typeof preloadedState));
-  const store = configureStore(req.user);
-  const dataToSerialize = req.user;
-  const slug = req.params.slug;
+const slug = req.params.slug;
+const preloadedState = {
+  user: req.user,
+  slug: req.params.slug
+}
+console.log('..............slug............', slug);
+  const store = configureStore(preloadedState);
+  const dataToSerialize = preloadedState;
 
-  console.log('..............slug............', slug);
 
   const branch = matchRoutes(getRoutes(req.user.username), req.url);
 
@@ -33,7 +36,7 @@ export default function renderProjectApp(req, res, next) {
 
 		const app = renderToString(
       <Provider store={store}>
-        <StaticRouter location={req.url} context={context} >
+        <StaticRouter location={req.url} context={context} slug={slug} >
           <App />
         </StaticRouter>
       </Provider>

@@ -40,6 +40,10 @@ export default class ProjectForm extends React.Component {
         })
       } else if(res.statusText === 'OK') {
         // redirect to /slug if the server responds with 200 ok...
+
+        // TODO: This doesn't work that well. The page is redirected, but nothing
+        // shows up. The page eventually shows after I manually refresh
+        // the page in browser. Maybe I need to add a timer?
         window.location = `/project/${res.data}`;
       }
 

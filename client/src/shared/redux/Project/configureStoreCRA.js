@@ -6,16 +6,19 @@ import thunkMiddleware from 'redux-thunk';
 import loggerMiddleware from 'redux-logger';
 import reducers from './reducers';
 
-//TODO: remove logger for only production mode
-
-const configureStore = ({user, slug}, init) => {
+// NOTE: This file only exists in order to allow the create-react-app
+// render on default data. So the only caller of this file is
+// client/src/craApps/AppProject.js
+//
+// This function is not used in production. the iso-middleware renderProjectApp
+// function calls configureStore.
+const configureStore = () => {
   const middleware = [thunkMiddleware, loggerMiddleware];
   const enhancer = compose(
     applyMiddleware(...middleware)
   );
   const store = createStore(
     reducers,
-    {user: user, slug: slug},
     enhancer
   );
   return store;
