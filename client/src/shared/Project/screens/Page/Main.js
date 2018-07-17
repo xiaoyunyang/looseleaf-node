@@ -43,10 +43,10 @@ export default class Main extends React.Component {
           <p dangerouslySetInnerHTML={{__html: desc}} />
           <p>{`Due Date: ${dueDateFormatted(dueDate)}`}</p>
           <div className="row">
-            <div className="col s4 m2 l2">
+            <div className="col">
               <a className="waves-effect waves-light btn teal teal-text lighten-5">Watch</a>
             </div>
-            <div className="col s4 m3 l3">
+            <div className="col">
               <a className="waves-effect waves-light btn teal lighten-1">Contribute</a>
             </div>
           </div>
