@@ -199,7 +199,7 @@ export default class LandingHome extends React.Component {
           {
             communities.map((d,i) => {
               return (
-                <div className="col s12 m12 l4">
+                <div key={i} className="col s12 m12 l4">
                   <img className="materialboxed" width="650" src="/assets/images/landing/mobile-laptop1.png" alt=""/>
                   <h4 className="light text-green">{d.title}</h4>
                   <h6 className="light text-brown">{d.desc}</h6>
