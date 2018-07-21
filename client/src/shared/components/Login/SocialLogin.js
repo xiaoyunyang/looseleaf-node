@@ -17,7 +17,7 @@ class SocialLogin extends React.Component {
 
     return <div key={key} className={`btn-${oauth}`}>
       <a className="btn" href={`${authPath}/${oauth}`}>
-        <i className={`fa fa-${oauth} fa-lg`}></i>
+        <i className={`fab fa-${oauth} fa-lg`}></i>
         {`${this.props.action} with ${oauthName}`}
       </a>
     </div>

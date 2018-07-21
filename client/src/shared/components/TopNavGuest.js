@@ -5,6 +5,7 @@ import $ from 'jquery';
 import { LoginModal, SignupModal } from './Login/Modal';
 import { root, getNav, communities } from '../Landing/routes';
 import { getPageName } from '../../lib/helpers';
+import { landingImg } from '../data/landingLinks';
 
 export default class TopNavGuest extends React.Component {
   static defalutProps = {
@@ -109,7 +110,7 @@ export default class TopNavGuest extends React.Component {
       <div className="nav-wrapper-white nav-text-links">
         <div className="brand-logo">
           <Link className="navbar-brand" to={getNav().home}>
-            <img src="http://looseleafapp.com/assets/images/logo/logo.png" alt="LooseLeaf" />
+            <img src={landingImg.logo} alt="LooseLeaf" />
           </Link>
         </div>
         <ul className="right">

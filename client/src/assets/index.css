@@ -88,8 +88,8 @@ html{
   footer.page-footer {
     /*position: absolute;*/
     width: 100%;
-    bottom: 0;
-    min-height: 327px;
+    padding-bottom: 0px !important;
+    /* min-height: 327px; */
   }
   /* Note: main wraps the content above the footer. This code is needed so footer
      always appear at the bottom of the page and doesn't cover up content */
@@ -107,7 +107,7 @@ html{
 
 @media only screen and (max-width : 992px) {
     header, main, footer {
-        padding-left: 0;
+      padding-left: 0;
     }
     .main-content {
         padding-left: 0;
@@ -148,12 +148,10 @@ html{
   line-height: 1.50em;
   font-size: 14px;
 }
-
 .social-logins a {
   width: 100%;
   margin: 0 auto 10px;
 }
-
 .btn-facebook a {
   background-color: #3b5998;
 }
@@ -275,21 +273,34 @@ html{
   margin-top: 0px !important;
   padding-left: 10px;
 }
-.page-footer p {
-  font-size: 16px;
-  color: #eeeeee !important;
-}
-
+/*** Footer BEGIN ***/
 .footer-text-links {
   font-size: 16px;
   color: #eeeeee !important;
 }
 .footer-text-links a {
-  color: #eeeeee !important;
+  color:  #555;
 }
 .footer-text-links  a:hover {
-  color: #1de9b6 !important;
+  color: #26a69a;
 }
+.social-icons a {
+    color: #555;
+    padding-right: 20px;
+}
+.social-icons a:hover {
+    color: #26a69a;
+}
+.footer-copyright {
+  margin-left: -45px;
+  padding-left: 50px;
+  text-align: center;
+}
+.footer-copyright p {
+  font-size: 16px;
+  color: #bdbdbd !important;
+}
+/*** Footer END ***/
 .side-nav a:hover {
   color: #383435;
   font-weight: bolder;
@@ -594,11 +605,6 @@ footer.section-brown {
     padding-top: 30px;
     padding-bottom: 20px;
 }
-.social-icons a {
-    color: #f5f5f5;
-    padding-right: 20px;
-}
-
 
 /* Customize Color from the noUi-connect.css */
 .noUi-connect {

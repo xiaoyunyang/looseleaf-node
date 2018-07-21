@@ -3,8 +3,7 @@ import { Link } from 'react-router-dom';
 import TopNav from '../../components/TopNavGuest';
 import Footer from '../../components/Footer';
 import { getNav } from '../routes';
-
-const imgRoot = 'http://localhost:3001/landing/langing1.png'
+import { landingImg } from '../../data/landingLinks';
 
 const styles = {
   marginTop: '-4.5%',
@@ -43,24 +42,36 @@ const headline = {
   moreInfo: slogan[1]
 }
 
+// Responsive ClassName
+function respClassName(screenSize) {
+  switch (screenSize) {
+    case 'small':
+      return 'hide-on-med-and-up';
+    case 'medium':
+      return 'hide-on-large-only hide-on-small-only';
+    case 'large':
+      return 'hide-on-med-and-down';
+    default:
+      return '';
+  }
+}
 export default class LandingHome extends React.Component {
   renderArea1() {
-    const buttons = () => {
-        return (
-          <div className="row">
-            <div className="col s12 m12 l12">
-              <Link className="waves-effect waves-light btn white-text" style={{marginRight: 10}}
-                to={getNav().signup}>
-                Get Started
-              </Link>
-              <Link className="waves-effect waves-light btn teal teal-text lighten-5"
-                to={getNav().howItWorks}>
-                Learn More
-              </Link>
-            </div>
-          </div>
-        );
-    }
+    const buttons = () => (
+      <div className="row">
+        <div className="col s12 m12 l12">
+          <Link className="waves-effect waves-light btn white-text" style={{marginRight: 10}}
+            to={getNav().signup}>
+            Get Started
+          </Link>
+          <Link className="waves-effect waves-light btn teal teal-text lighten-5"
+            to={getNav().howItWorks}>
+            Learn More
+          </Link>
+        </div>
+      </div>
+    );
+
     const slogans = () => {
       return (
         <div className="row">
@@ -69,11 +80,16 @@ export default class LandingHome extends React.Component {
         </div>
       );
     }
+    const images = () => (
+      <div>
+        <img className={respClassName('large')} alt="https://unsplash.com/photos/FFLGD4o149E" src={landingImg.coverLarge} style={{ width: '100%' }} />
+        <img className={respClassName('medium')} alt="https://unsplash.com/photos/FFLGD4o149E" src={landingImg.coverMedium} style={{ width: '100%' }} />
+        <img className={respClassName('small')} alt="https://unsplash.com/photos/FFLGD4o149E" src={landingImg.coverSmall} style={{ width: '100%' }} />
+      </div>
+    );
     return (
         <div id="landing-top" style={{marginBottom: -7}}>
-          <img className="hide-on-med-and-down" alt="https://unsplash.com/photos/RYyr-k3Ysqg" src={getImgPath('landing1-large.png')} style={{width: '100%'}}/>
-          <img className="hide-on-large-only hide-on-small-only" alt="https://unsplash.com/photos/RYyr-k3Ysqg" src={getImgPath('landing1-medium.png')} style={{width: '100%'}}/>
-          <img className="hide-on-med-and-up" alt="https://unsplash.com/photos/RYyr-k3Ysqg" src={getImgPath('landing1-small.png')} style={{width: '100%'}}/>
+          { images() }
           <div id="landing-top-text" className="center">
             <div className="col s12 m12 l12">
               {slogans()}
@@ -100,7 +116,7 @@ export default class LandingHome extends React.Component {
         <div className="container text-white row" style={{width: "90%"}}>
           <div className="col s12 m4 l4">
             <div className="col s4 m9 l4">
-              <img src={getImgPath('expertise.png')} alt=""/>
+              <img src={ landingImg.expertise } alt=""/>
             </div>
             <div className="col s8 m12 l8">
               <p className="text-white">{"Try out a career path. Work on interesting side projects to build a portfolio and learn demonstrable skills."}</p>
@@ -108,7 +124,7 @@ export default class LandingHome extends React.Component {
           </div>
           <div className="col s12 m4 l4">
             <div className="col s4 m9 l4">
-              <img src={getImgPath('share.png')} alt=""/>
+              <img src={ landingImg.cultivate } alt=""/>
             </div>
             <div className="col s8 m12 l8">
               <p className="text-white">{"Acquire relevant work experience and professional connections."}</p>
@@ -116,7 +132,7 @@ export default class LandingHome extends React.Component {
           </div>
           <div className="col s12 m4 l4">
             <div className="col s4 m9 l4">
-              <img src={getImgPath('cultivate.png')} alt=""/>
+              <img src={ landingImg.share } alt=""/>
             </div>
             <div className="col s8 m12 l8">
               <p className="text-white">{"Collaborate with other career hackers and shadow professionals."}</p>
@@ -278,7 +294,7 @@ export default class LandingHome extends React.Component {
   }
   renderArea8() {
     return (
-      <div className="section section-green" style={styles, {marginBottom: 30}}>
+      <div className="section section-green" style={styles}>
         <div className="row container center">
           <h5 className="text-white">
             Join a community of career hackers and work on your portfolio today.
