@@ -12,7 +12,8 @@ import chalk from 'chalk';
 import renderLandingAppMiddleware from '../../client/iso-middleware/renderLandingApp';
 import renderGuestAppMiddleware from '../../client/iso-middleware/renderGuestApp';
 import renderUserAppMiddleware from '../../client/iso-middleware/renderUserApp';
-import renderCommunityAppMiddleware from '../../client/iso-middleware/renderCommunityApp';
+import renderCommunityUserAppMiddleware from '../../client/iso-middleware/renderCommunityUserApp';
+import renderCommunityGuestAppMiddleware from '../../client/iso-middleware/renderCommunityGuestApp';
 import renderProjectAppMiddleware from '../../client/iso-middleware/renderProjectApp';
 
 const router = express.Router();
@@ -329,7 +330,10 @@ const community = (name) => {
 // catch-all case
 // Gotcha: Order of code matters in determining middleware for the requested route
 router.get('/community/:name*', (req, res, next) => {
-  renderCommunityAppMiddleware(req, res, next, community(req.params.name));
+  if (req.isAuthenticated()) {
+    renderCommunityUserAppMiddleware(req, res, next, community(req.params.name));
+  }
+  renderCommunityGuestAppMiddleware(req, res, next, community(req.params.name));
 });
 router.get('/project/:slug*', (req, res, next) => {
   if (req.isAuthenticated()) {

@@ -12,10 +12,10 @@ const UserDropdown = ( {username, userPic} ) => (
       <div className="arrow-down" />
     </a>
     <ul id="user-dropdown" className="dropdown-content">
-      <li><a href="/project/new">Portfolio</a></li>
+      <li><a href={`/@${username}`}>Portfolio</a></li>
       <li><a href="/project/new">New Project</a></li>
       <li className="divider" />
-      <li><a href="/project/new">Settings</a></li>
+      <li><a href={`/@${username}/settings`}>Settings</a></li>
       <li><a href="/auth/logout">Log out</a></li>
     </ul>
   </li>
@@ -205,7 +205,7 @@ export default class TopNav extends React.Component {
     );
   }
   render() {
-    console.log(this.props)
+    console.log('In TopNavUser for Community', this.props)
     let selected = (typeof this.props.route.path === 'string')
                     ? getPageName(this.props.route.path) : '';
 

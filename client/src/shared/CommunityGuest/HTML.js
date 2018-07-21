@@ -28,7 +28,7 @@ const HTML = (props) => {
               ${JSON.stringify(props.data)}`
           }}
         />
-        <script type="application/javascript" src="/community.bundle.js" />
+      <script type="application/javascript" src="/communityguest.bundle.js" />
       </body>
     </html>
   );

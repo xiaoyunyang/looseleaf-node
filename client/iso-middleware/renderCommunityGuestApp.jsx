@@ -3,15 +3,15 @@ import { renderToString } from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom';
 import { matchRoutes } from 'react-router-config';
 import { Provider } from 'react-redux';
-import configureStore from '../src/shared/redux/Community/configureStore';
-import { getRoutes } from '../src/shared/Community/routes';
-import HTML from '../src/shared/Community/HTML';
-import App from '../src/shared/Community/App';
+import configureStore from '../src/shared/redux/Community/configureStoreGuest';
+import { getRoutes } from '../src/shared/CommunityGuest/routes';
+import HTML from '../src/shared/CommunityGuest/HTML';
+import App from '../src/shared/CommunityGuest/App';
 
-export default function renderCommunityApp(req, res, next, community) {
-
-  const store = configureStore(community);
-  const dataToSerialize = community;
+export default function renderCommunityGuestApp(req, res, next, community) {
+  const preloadedState = community;
+  const store = configureStore(preloadedState);
+  const dataToSerialize = preloadedState;
 
   const branch = matchRoutes(getRoutes(community.name), req.url)
 

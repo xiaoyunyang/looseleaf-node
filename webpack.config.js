@@ -6,7 +6,8 @@ module.exports = {
   entry: {
     landing: path.resolve(__dirname, 'client/src/clientApps/landing.js'),
     guest: path.resolve(__dirname, 'client/src/clientApps/guest.js'),
-    community: path.resolve(__dirname, 'client/src/clientApps/community.js'),
+    communityguest: path.resolve(__dirname, 'client/src/clientApps/communityguest.js'),
+    communityuser: path.resolve(__dirname, 'client/src/clientApps/communityuser.js'),
     user: path.resolve(__dirname, 'client/src/clientApps/user.js'),
     project: path.resolve(__dirname, 'client/src/clientApps/project.js'),
     recipe: path.resolve(__dirname, 'client/src/clientApps/recipe.js')

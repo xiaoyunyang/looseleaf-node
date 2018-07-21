@@ -10,7 +10,8 @@ import './lib/chips'; // <- overriding the materialize chips js
 import AppUser from './craApps/AppUser';
 import AppProject from './craApps/AppProject';
 import AppGuest from './craApps/AppGuest';
-import AppCommunity from './craApps/AppCommunity';
+import AppCommunityUser from './craApps/AppCommunityUser';
+import AppCommunityGuest from './craApps/AppCommunityGuest';
 import AppLanding from './craApps/AppLanding';
 import AppRecipe from './craApps/AppRecipe';
 import './assets/index.css';
@@ -22,12 +23,13 @@ const Apps = {
   user: AppUser,
   project: AppProject,
   guest: AppGuest,
-  community: AppCommunity,
+  communityUser: AppCommunityUser,
+  communityGuest: AppCommunityGuest,
   landing: AppLanding,
   recipe: AppRecipe
 }
 
-const App = Apps.landing;
+const App = Apps.communityGuest;
 
 const render = (Component) => {
   ReactDOM.render(
