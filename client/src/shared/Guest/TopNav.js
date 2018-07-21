@@ -11,7 +11,6 @@ export default class TopNav extends React.Component {
     extended: false
   }
   componentDidMount() {
-
     $('.modal').modal({
       dismissible: true, // Modal can be dismissed by clicking outside of the modal
       opacity: 0.5, // Opacity of modal background

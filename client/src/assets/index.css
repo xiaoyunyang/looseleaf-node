@@ -1,4 +1,4 @@
-@import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
+@import url("https://use.fontawesome.com/releases/v5.1.0/css/all.css");
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
 
 img {
@@ -277,7 +277,7 @@ html{
 }
 .page-footer p {
   font-size: 16px;
-  color: #eeeeee !important;  
+  color: #eeeeee !important;
 }
 
 .footer-text-links {

@@ -91,7 +91,7 @@ export default class TopNavUser extends React.Component {
   render() {
     const username = this.props.user.username;
     const userPic = this.props.user.picture;
-    let selected = (typeof this.props.route.path === 'string')
+    const selected = (typeof this.props.route.path === 'string')
                     ? getPageName(this.props.route.path) : '';
 
     // TODO: Still need the code below?

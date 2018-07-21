@@ -331,14 +331,13 @@ const community = (name) => {
 router.get('/community/:name*', (req, res, next) => {
   renderCommunityAppMiddleware(req, res, next, community(req.params.name));
 });
-
-router.get('/project/new', (req, res, next) => {
+router.get('/project/:slug*', (req, res, next) => {
   if (req.isAuthenticated()) {
     renderProjectAppMiddleware(req, res, next);
   }
   renderLandingAppMiddleware(req, res, next);
 });
-router.get('/project/:slug*', (req, res, next) => {
+router.get('/project*', (req, res, next) => {
   if (req.isAuthenticated()) {
     renderProjectAppMiddleware(req, res, next);
   }

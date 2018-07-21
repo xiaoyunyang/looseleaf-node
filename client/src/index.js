@@ -19,12 +19,12 @@ import './assets/index.css';
  * Main entry point for the create-react-app
  */
 const Apps = {
-  'user': AppUser,
-  'project': AppProject,
-  'guest': AppGuest,
-  'community': AppCommunity,
-  'landing': AppLanding,
-  'recipe': AppRecipe
+  user: AppUser,
+  project: AppProject,
+  guest: AppGuest,
+  community: AppCommunity,
+  landing: AppLanding,
+  recipe: AppRecipe
 }
 
 const App = Apps.project;

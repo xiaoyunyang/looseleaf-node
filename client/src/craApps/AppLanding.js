@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
-import App from '../shared/Landing/App';
 import { hot } from 'react-hot-loader';
+import App from '../shared/Landing/App';
 
 const AppLanding = () => (
   <BrowserRouter>

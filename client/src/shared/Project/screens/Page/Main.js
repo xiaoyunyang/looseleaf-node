@@ -4,7 +4,7 @@ import TopNav from '../../../components/TopNavUser';
 import People from './People';
 
 const dueDateFormatted = (dateStr) => {
-  return new Date(dateStr).toDateString()
+  return dateStr ? new Date(dateStr).toDateString() : '';
 }
 const updates = [
   'A project update from someone you follow.',
@@ -39,6 +39,7 @@ export default class Main extends React.Component {
     const desc = project ? project.info.desc : 'placeholder desc';
     const dueDate = project ? project.info.dueDate : "2018-07-14T04:44:56.361Z";
 
+console.log('dueDate...',dueDate)
     return (
       <div id="project-info" className="col s12 m12 l12">
         <div className="card-panel white">

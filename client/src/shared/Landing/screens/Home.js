@@ -38,6 +38,11 @@ const aboutMentorship = [
 
 const getImgPath = (imgName) => 'http://localhost:3001/landing/' + imgName;
 
+const headline = {
+  slogan: slogan[0],
+  moreInfo: slogan[1]
+}
+
 export default class LandingHome extends React.Component {
   renderArea1() {
     const buttons = () => {
@@ -59,8 +64,8 @@ export default class LandingHome extends React.Component {
     const slogans = () => {
       return (
         <div className="row">
-          <h4 className="text-green center">{slogan[0]}</h4>
-          <h5 className="text-green center">{slogan[1]}</h5>
+          <h4 className="text-green center">{ headline.slogan }</h4>
+          <h5 className="text-green center">{ headline.moreInfo }</h5>
         </div>
       );
     }
@@ -291,7 +296,6 @@ export default class LandingHome extends React.Component {
     return (
       <div>
         <TopNav route={this.props.route} extended={false}/>
-
         {
           this.renderArea1()
         }
