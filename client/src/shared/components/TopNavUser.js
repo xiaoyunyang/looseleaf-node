@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import $ from 'jquery';
 import { getNav, root } from '../User/routes';
+import { staticRoutes } from '../data/appRoutes';
 import { getPageName } from '../../lib/helpers';
+import { landingImg } from '../data/landingLinks';
 
 // const username = store.username;
 
@@ -109,7 +111,7 @@ export default class TopNavUser extends React.Component {
             <div className="nav-wrapper-white nav-text-links">
               <div className="brand-logo hide-on-med-and-down">
                 <Link className="navbar-brand" to={getNav(username).home}>
-                  <img src="http://looseleafapp.com/assets/images/logo/logo.png" alt="LooseLeaf" />
+                  <img src={landingImg.logo} alt="LooseLeaf" />
                 </Link>
               </div>
               <ul className="right hide-on-small-only">
@@ -117,6 +119,14 @@ export default class TopNavUser extends React.Component {
                   {
                     this.props.useExternLinks ?
                       <a href={getNav(username).home}>Home</a>
+                      :
+                      <Link id={`nav-${root}`} to={getNav(username).home}>Home</Link>
+                  }
+                </li>
+                <li className={selected === root ? 'active' : ''}>
+                  {
+                    this.props.useExternLinks ?
+                      <a href={staticRoutes.project}>Project</a>
                       :
                       <Link id={`nav-${root}`} to={getNav(username).home}>Home</Link>
                   }
