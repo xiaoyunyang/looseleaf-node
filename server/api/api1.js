@@ -95,18 +95,18 @@ api.get('/project/:urlSlug', (req, res) => {
 // Users ======================================================================
 api.get('/user', (req, res) => {
   User.find({}, (err, users) => {
-    const userMap = {};
-
+    const usersOut = [];
+    
     users.forEach((user) => {
       const userInfo = {
         username: user.username,
         displayName: user.displayName,
-        email: user.email,
         picture: user.picture
       };
-      userMap[user.id] = userInfo;
+      usersOut.push(userInfo);
     });
-    res.send(userMap);
+
+    res.send(usersOut);
   });
 });
 

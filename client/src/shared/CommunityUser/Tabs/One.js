@@ -15,9 +15,7 @@ export default class One extends React.Component {
   }
   componentDidMount() {
     const setApiData = data => this.setState({projects: data});
-    //const apiLink = 'http://localhost:3001/api/project';
     const apiLink = staticApiLink.projects;
-    console.log('apiLink', staticApiLink.projects)
     getApiData(apiLink, setApiData)
   }
   renderProjects(projects) {

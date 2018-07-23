@@ -2,7 +2,7 @@ import React from 'react';
 import Main from './Main';
 
 const Root = ({ route, user, community }) => (
-  <div>
+  <div className="section-white">
     <Main routes={route.routes} user={user} community={community} />
   </div>
 
