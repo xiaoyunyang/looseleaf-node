@@ -12,6 +12,8 @@ export const staticRoutes = {
 // dynamicRoutes(slug).project
 export const getAppRoute = (pageName) => {
   switch (pageName) {
+    case 'landingHome':
+      return '/';
     case 'userHome':
       return '/';
     case 'userPortfolio':

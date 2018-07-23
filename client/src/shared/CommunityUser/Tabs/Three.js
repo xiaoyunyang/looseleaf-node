@@ -44,7 +44,7 @@ export default class Three extends React.Component {
       <div>
         <TopNav route={this.props.route} user={this.props.user} community={this.props.community} />
         <div className="container">
-          <div id={tabs.one} className="col s12">
+          <div id={tabs.three} className="col s12">
             <h3>People</h3>
               {
                 this.state.users ? this.renderUsers(this.state.users) : null
@@ -53,6 +53,5 @@ export default class Three extends React.Component {
         </div>
       </div>
     );
-
   }
 }

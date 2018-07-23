@@ -1,6 +1,5 @@
 import React from 'react';
 import TopNav from '../TopNav';
-import UserListing from './UserListing';
 import { tabs } from '../routes';
 import { getApiData } from '../../../lib/helpers';
 import { staticApiLink } from '../../data/apiLinks';

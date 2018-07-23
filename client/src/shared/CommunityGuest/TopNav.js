@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import $ from 'jquery';
 import { getNav, tabs } from './routes';
 import { getPageName } from '../../lib/helpers';
+import { getAppRoute } from '../data/appRoutes';
+import { landingImg } from '../data/landingLinks';
 
 export default class TopNav extends React.Component {
   static defalutProps = {
@@ -85,11 +87,11 @@ export default class TopNav extends React.Component {
     return (
       <div className="nav-wrapper-white nav-text-links">
         <div className="brand-logo">
-          <Link className="navbar-brand" to={`/${community}`}
+          <a className="navbar-brand" href={getAppRoute('landingHome')}
               onClick={this.handleLogoClick.bind(this)}
             >
-            <img src="http://looseleafapp.com/assets/images/logo/logo.png" alt="LooseLeaf" />
-          </Link>
+            <img src={landingImg.logo} alt="LooseLeaf" />
+          </a>
         </div>
         <div>
           <ul className="right">

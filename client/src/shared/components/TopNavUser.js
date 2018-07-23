@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import $ from 'jquery';
-import { getNav, root } from '../User/routes';
+import { root } from '../User/routes';
 import { getAppRoute } from '../data/appRoutes';
 import { getPageName } from '../../lib/helpers';
 import { staticApiLink } from '../data/apiLinks';
@@ -111,7 +111,7 @@ export default class TopNavUser extends React.Component {
           <nav className="grey lighten-4">
             <div className="nav-wrapper-white nav-text-links">
               <div className="brand-logo hide-on-med-and-down">
-                <Link className="navbar-brand" to={getAppRoute('userHome')}>
+                <Link className="navbar-brand" to={getAppRoute('landingHome')}>
                   <img src={landingImg.logo} alt="LooseLeaf" />
                 </Link>
               </div>
@@ -124,13 +124,8 @@ export default class TopNavUser extends React.Component {
                       <Link id={`nav-${root}`} to={getAppRoute('userHome')}>Home</Link>
                   }
                 </li>
-                <li className={selected === root ? 'active' : ''}>
-                  {
-                    this.props.useExternLinks ?
-                      <a href={getAppRoute('project')}>Project</a>
-                      :
-                      <Link id={`nav-${root}`} to={getAppRoute('userHome')}>Home</Link>
-                  }
+                <li className={selected === 'project' ? 'active' : ''}>
+                  <a href={getAppRoute('project')}>Project</a>
                 </li>
                 <li className={selected === username ? 'active' : ''}>
                   {
