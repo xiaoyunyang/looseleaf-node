@@ -1,4 +1,21 @@
 import $ from 'jquery';
+import axios from 'axios';
+
+export const getApiData = (url, setState) => {
+  return axios.get(url)
+    .then(function (response) {
+      console.log('hey!!!!', response.data)
+      // handle success
+      setState(response.data)
+    })
+    .catch(function (error) {
+      // handle error
+      console.log(error);
+    })
+    .then(function () {
+      // always executed
+    });
+}
 
 // Get random users. See:  https://randomuser.me/
 // https://randomuser.me/documentation#format

@@ -45,7 +45,8 @@ class Footer extends React.Component {
                 <h6>Product
                   <ul style={{marginTop: 5}} className="light footer-text-links">
                     <li><a href="#!">FAQs</a></li>
-                    <li><a href="#!">Guidelines</a></li>
+                    <li><a href="#!">Support</a></li>
+                    <li><a href="#!">Guides</a></li>
                   </ul>
                 </h6>
               </div>
