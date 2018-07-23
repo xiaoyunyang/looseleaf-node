@@ -3,7 +3,6 @@ const root = 'http://localhost:3001';
 export const staticRoutes = {
   project: '/project',
   newProject: '/project/new',
-  newProject: '/project/:slug',
   userWildcard: `/*`
 };
 
@@ -11,12 +10,25 @@ export const staticRoutes = {
 // To use this, example:
 // dynamicRoutes(userId).user
 // dynamicRoutes(slug).project
-export const dynamicRoutes = (id) => {
-  return {
-    userPortfolio: `/@${id}`, // id = username
-    userSettings: `/@${id}/settings`, // id = username
-    userTabs: `/@${id}/:slug`,
-    community: `/${id}`,   // id = community name
-
+export const getAppRoute = (pageName) => {
+  switch (pageName) {
+    case 'userHome':
+      return '/';
+    case 'userPortfolio':
+      return username => `/@${username}`;
+    case 'userSettings':
+      return username => `/@${username}/settings`;
+    case 'userTabs':
+      return username => `/@${username}/:slug`;
+    case 'community':
+      return name => `/community/${name}/`;
+    case 'projectPage':
+      return slug => `/project/${slug}/`;
+    case 'project':
+      return '/project';
+    case 'projectNew':
+      return '/project/new';
+    default:
+      return '';
   }
 };

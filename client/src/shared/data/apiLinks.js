@@ -2,11 +2,12 @@
 const root = 'http://localhost:3001';
 
 export const staticApiLink = {
-  project: `${root}/api/project`,
-  user: `${root}/api/user`,
+  projects: `${root}/api/project`,
+  users: `${root}/api/user`,
   home: `${root}`,
   login: `${root}/auth/login`,
   signup: `${root}/auth/signup`,
+  logout: `${root}/auth/logout`,
 };
 
 // To use this, example:

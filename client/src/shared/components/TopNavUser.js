@@ -3,8 +3,9 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import $ from 'jquery';
 import { getNav, root } from '../User/routes';
-import { staticRoutes } from '../data/appRoutes';
+import { getAppRoute } from '../data/appRoutes';
 import { getPageName } from '../../lib/helpers';
+import { staticApiLink } from '../data/apiLinks';
 import { landingImg } from '../data/landingLinks';
 
 // const username = store.username;
@@ -30,8 +31,8 @@ const MobileSideNav = ( {username, userPic} ) => (
           </div>
       </div>
     </li>
-    <li><Link to={getNav(username).home} className="active">Home</Link></li>
-    <li><Link to={getNav(username).portfolio}>Portfolio</Link></li>
+    <li><Link to={getAppRoute('userHome')} className="active">Home</Link></li>
+    <li><Link to={getAppRoute('userPortfolio')(username)}>Portfolio</Link></li>
   </ul>
 );
 
@@ -42,12 +43,12 @@ const UserDropdown = ( {username, userPic} ) => (
       <div className="arrow-down" />
     </a>
     <ul id="user-dropdown" className="dropdown-content">
-      <li><Link to={getNav(username).portfolio}>Portfolio</Link></li>
-      <li><a href="/project/new">New Project</a></li>
+      <li><Link to={getAppRoute('userPortfolio')(username)}>Portfolio</Link></li>
+      <li><a href={getAppRoute('newProject')}>New Project</a></li>
       <li className="divider" />
       <li><a href="/">WebDev</a></li>
-      <li><Link to={getNav(username).settings}>Settings</Link></li>
-      <li><a href="/auth/logout">Log out</a></li>
+      <li><Link to={getAppRoute('userSettings')(username)}>Settings</Link></li>
+      <li><a href={staticApiLink.logout}>Log out</a></li>
     </ul>
   </li>
 );
@@ -110,7 +111,7 @@ export default class TopNavUser extends React.Component {
           <nav className="grey lighten-4">
             <div className="nav-wrapper-white nav-text-links">
               <div className="brand-logo hide-on-med-and-down">
-                <Link className="navbar-brand" to={getNav(username).home}>
+                <Link className="navbar-brand" to={getAppRoute('userHome')}>
                   <img src={landingImg.logo} alt="LooseLeaf" />
                 </Link>
               </div>
@@ -118,33 +119,33 @@ export default class TopNavUser extends React.Component {
                 <li className={selected === root ? 'active' : ''}>
                   {
                     this.props.useExternLinks ?
-                      <a href={getNav(username).home}>Home</a>
+                      <a href={getAppRoute('userHome')}>Home</a>
                       :
-                      <Link id={`nav-${root}`} to={getNav(username).home}>Home</Link>
+                      <Link id={`nav-${root}`} to={getAppRoute('userHome')}>Home</Link>
                   }
                 </li>
                 <li className={selected === root ? 'active' : ''}>
                   {
                     this.props.useExternLinks ?
-                      <a href={staticRoutes.project}>Project</a>
+                      <a href={getAppRoute('project')}>Project</a>
                       :
-                      <Link id={`nav-${root}`} to={getNav(username).home}>Home</Link>
+                      <Link id={`nav-${root}`} to={getAppRoute('userHome')}>Home</Link>
                   }
                 </li>
                 <li className={selected === username ? 'active' : ''}>
                   {
                     this.props.useExternLinks ?
-                    <a href={getNav(username).portfolio}>Portfolio</a>
+                    <a href={getAppRoute('userPortfolio')(username)}>Portfolio</a>
                     :
-                    <Link id={`nav-${username}`} to={getNav(username).portfolio}>Portfolio</Link>
+                    <Link id={`nav-${username}`} to={getAppRoute('userPortfolio')(username)}>Portfolio</Link>
                   }
                 </li>
                 <li>
                   {
                     this.props.useExternLinks ?
-                    <a href={`${getNav(username).home}foo`}>Foo</a>
+                    <a href={`${getAppRoute('userHome')}foo`}>Foo</a>
                     :
-                    <Link to={`${getNav(username).home}foo`}>Foo</Link>
+                    <Link to={`${getAppRoute('userHome')}foo`}>Foo</Link>
                   }
                 </li>
                 <li><button><i className="material-icons">notifications_none</i></button></li>
