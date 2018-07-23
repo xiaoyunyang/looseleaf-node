@@ -1,26 +1,7 @@
 import React from 'react';
 // TODO: Isomorphic app vs axios?
-import axios from 'axios';
 import TopNav from '../../components/TopNavUser';
-// import { getApiData } from '../../../lib/helpers';
-
-
-const getApiData = (url, setState) => {
-  axios.get(url)
-    .then(function (response) {
-      console.log('hey!!!!', response.data)
-      // handle success
-      setState(response.data)
-    })
-    .catch(function (error) {
-      // handle error
-      console.log(error);
-    })
-    .then(function () {
-      // always executed
-    });
-}
-
+import { getApiData } from '../../../lib/helpers';
 
 // This is a ES6 class - see https://toddmotto.com/react-create-class-versus-component/
 class Home extends React.Component {
@@ -30,24 +11,9 @@ class Home extends React.Component {
       projects: null
     }
   }
-  componentWillMount() {
-    // const setApiData = (data) => this.setState({project: data})
-    // getApiData('http://localhost:3001/api/project', setApiData)
-
-    axios.get('http://localhost:3001/api/project')
-      .then(function (response) {
-        // handle success
-        this.setState({
-          projects: response.data
-        })
-      }.bind(this))
-      .catch(function (error) {
-        // handle error
-        console.log(error);
-      })
-      .then(function () {
-        // always executed
-      });
+  componentDidMount() {
+    const setApiData = data => this.setState({projects: data})
+    getApiData('http://localhost:3001/api/project', setApiData)
   }
   renderProjects(projects) {
     return (
@@ -68,7 +34,6 @@ class Home extends React.Component {
   }
 
   render() {
-    console.log('state', this.state)
     return (
       <div className="section-white">
         <TopNav route={this.props.route} user={this.props.user} useExternLinks={true}/>

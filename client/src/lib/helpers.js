@@ -1,16 +1,18 @@
 import $ from 'jquery';
 import axios from 'axios';
 
-export const getApiData = (url, setState) => {
+export const getApiData = (url, setApiData) => {
   return axios.get(url)
     .then(function (response) {
       console.log('hey!!!!', response.data)
       // handle success
-      setState(response.data)
+      setApiData(response.data)
     })
     .catch(function (error) {
       // handle error
+      const code = error.response.status;
       console.log(error);
+      console.log(code);
     })
     .then(function () {
       // always executed
