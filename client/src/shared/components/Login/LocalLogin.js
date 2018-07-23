@@ -2,10 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import FlashNotif from '../FlashNotif';
 import axios from 'axios';
+import { staticApiLink } from '../../data/apiLinks'
 
-const redirPath = 'http://localhost:3001';
-const loginPath = 'http://localhost:3001/auth/login';
-const signupPath = 'http://localhost:3001/auth/signup';
+const redirPath = staticApiLink.home;
+const loginPath = staticApiLink.login;
+const signupPath = staticApiLink.signup;
 
 
 /* TODO: The propTypes checking is not the best. Check out this article for
@@ -58,7 +59,7 @@ class LocalLogin extends React.Component {
             flash: {state: res.statusText, msg: res.data}
           })
         } else if(res.statusText === 'OK') {
-          window.location = "/";
+          window.location = redirPath;
         }
 
         //Perform action based on response, such as flashing error notif

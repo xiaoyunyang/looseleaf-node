@@ -6,9 +6,7 @@ import FlashNotif from '../../../components/FlashNotif';
 import TextAreaInput from '../../../components/TextAreaInput';
 import TextInput from '../../../components/TextInput';
 import axios from 'axios';
-
-const redirPath = 'http://localhost:3001';
-const postPath = 'http://localhost:3001/api/project';
+import { staticApiLink } from '../../../data/apiLinks';
 
 export default class ProjectForm extends React.Component {
   constructor(props) {
@@ -32,7 +30,7 @@ export default class ProjectForm extends React.Component {
   }
   handleSubmit(formFields) {
     const userId = this.props.user._id;
-    axios.post(postPath, {formFields, userId})
+    axios.post(staticApiLink.project, {formFields, userId})
     .then(res => {
       if(res.statusText === 'error') {
         this.setState({

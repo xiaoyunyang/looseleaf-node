@@ -16,7 +16,6 @@ const iconEnums = {
 
 const TextOrLink = ({iconName, content}) => (
   <div>
-{      console.log('pooop', iconName)}
     {
 
       iconEnums[iconName] === 'email' ?
