@@ -45,7 +45,10 @@ export default class InputCheckboxes extends React.Component {
             const checked = this.props.selected.includes(d) ? 'checked' : ''
             return (
               <p key={`check-${d}`} >
-                <input type="checkbox" id={`${this.props.id}-${d}`} onChange={this.handleClick.bind(this, d)} checked={checked} />
+                <input type="checkbox"
+                  id={`${this.props.id}-${d}`}
+                  onChange={this.handleClick.bind(this, d)}
+                  checked={checked} />
                 <label htmlFor={`${this.props.id}-${d}`}>
                   {`${d} ${this.renderUnits(d, this.props.units)}`}
                 </label>
