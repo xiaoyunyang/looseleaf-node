@@ -42,14 +42,15 @@ export default class InputCheckboxes extends React.Component {
         <p>{this.props.title}</p>
         {
           this.props.choices.map(d => {
-            const checked = this.props.selected.includes(d) ? 'checked' : ''
+            const checked = this.props.selected.includes(d) ? 'checked' : '';
+            const dId = (typeof d === 'string') ? d.replace(/ /g, '-').toLowerCase() : d;
             return (
-              <p key={`check-${d}`} >
+              <p className={this.props.itemWidthStyle} key={`check-${dId}`} >
                 <input type="checkbox"
-                  id={`${this.props.id}-${d}`}
+                  id={`${this.props.id}-${dId}`}
                   onChange={this.handleClick.bind(this, d)}
                   checked={checked} />
-                <label htmlFor={`${this.props.id}-${d}`}>
+                <label htmlFor={`${this.props.id}-${dId}`}>
                   {`${d} ${this.renderUnits(d, this.props.units)}`}
                 </label>
               </p>

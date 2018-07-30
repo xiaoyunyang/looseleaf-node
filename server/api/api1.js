@@ -96,7 +96,7 @@ api.get('/project/:urlSlug', (req, res) => {
 api.get('/user', (req, res) => {
   User.find({}, (err, users) => {
     const usersOut = [];
-    
+
     users.forEach((user) => {
       const userInfo = {
         username: user.username,

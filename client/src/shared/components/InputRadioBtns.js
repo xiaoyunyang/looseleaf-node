@@ -26,10 +26,10 @@ export default class InputRadioBtns extends React.Component {
             const checked = (this.props.selected === d) ? 'checked' : '';
 
             // remove all white spaces
-            const dId = (typeof d === 'string') ? d.replace(/ /g,'-').toLowerCase() : d;
+            const dId = (typeof d === 'string') ? d.replace(/ /g, '-').toLowerCase() : d;
 
             return (
-              <p key={`check-${d}`}>
+              <p key={`check-${dId}`}>
                 <input
                   id={`${this.props.id}-${dId}`}
                   name={`${this.props.id}-${dId}`}
