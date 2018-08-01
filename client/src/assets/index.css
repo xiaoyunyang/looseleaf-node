@@ -83,12 +83,15 @@ html{
     left: 25%;
   }
 }
+footer.page-footer {
+  width: 100%;
+  padding-bottom: 0px !important;
+}
+
 /* Large Screen only */
 @media only screen and (min-width : 992px) {
   footer.page-footer {
     /*position: absolute;*/
-    width: 100%;
-    padding-bottom: 0px !important;
     /* min-height: 327px; */
   }
   /* Note: main wraps the content above the footer. This code is needed so footer
