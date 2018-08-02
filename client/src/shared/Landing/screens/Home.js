@@ -190,10 +190,11 @@ export default class LandingHome extends React.Component {
     const short = (display) => {
       return (
         <div className={'row ' + (display ? '' : 'hide')}>
+          <div className="col">
           {
             communities.map((d,i) => {
               return (
-                <div key={i} className="col s12 m5 l3 offset-m1">
+                <div key={i} className="col s10 m6 l4 offset-s1">
                   <a href={d.link} className="">
                     <div className="card-panel center hoverable" style={{padding: 5}}>
                       <div className="row valign-wrapper" style={{marginBottom: 0}}>
@@ -211,6 +212,7 @@ export default class LandingHome extends React.Component {
               );
             })
           }
+          </div>
         </div>
       );
     }

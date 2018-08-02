@@ -5,9 +5,6 @@ import About from './screens/About';
 import Signup from '../components/Login/SignupPage';
 import Login from '../components/Login/LoginPage'
 import NotFound from '../components/NotFound';
-import One from './Community/One';
-import Two from './Community/Two';
-import Three from './Community/Three';
 
 const root = '';
 
@@ -26,9 +23,6 @@ const getNav = () => {
     about: `/${root}about`,
     signup: `/${root}signup`,
     login: `/${root}login`,
-    one: `/${root}community/${communities.one}`,
-    two: `/${root}community/${communities.two}`,
-    three: `/${root}community/${communities.three}`,
     wildcard: `/${root}*`,
   }
 }
@@ -60,21 +54,6 @@ const routes = [
         path: getNav().login,
         exact: true,
         component: Login
-      },
-      {
-        path: getNav().one,
-        exact: true,
-        component: One
-      },
-      {
-        path: getNav().two,
-        exact: true,
-        component: Two
-      },
-      {
-        path: getNav().three,
-        exact: true,
-        component: Three
       },
       {
         path: getNav().wildcard,
