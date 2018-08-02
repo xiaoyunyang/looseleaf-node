@@ -135,7 +135,7 @@ export default class TopNav extends React.Component {
         <div className="categories-wrapper">
           <div className="categories-container pin-top" style={style}>
             <div className="categories grey lighten-4 row" style={noMarginBottom}>
-              <div className="col l9 m10 s10">
+              <div className="col l12 m12 s12">
                 <ul id="nav-tabs" className="tabs grey lighten-4">
                   <li className='tab'>
                     <Link
@@ -177,7 +177,6 @@ export default class TopNav extends React.Component {
     );
   }
   render() {
-    console.log(this.props)
     let selected = (typeof this.props.route.path === 'string')
                     ? getPageName(this.props.route.path) : '';
     return (

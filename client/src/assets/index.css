@@ -117,6 +117,11 @@ footer.page-footer {
     }
 }
 
+/***** Overwriting Materializecss default css ******/
+.row {
+  margin-bottom: 0px;
+}
+
 .btn {
   border-radius: 4px;
   text-transform: none;
@@ -137,6 +142,19 @@ footer.page-footer {
   max-height: 100%;
   overflow-y: scroll;
 }
+
+/* Medium and Small Screen */
+@media only screen and (max-width: 993px) {
+  nav .brand-logo {
+    left: 30px;
+    -webkit-transform: translateX(-15%);
+    -ms-transform: translateX(-15%);
+    transform: translateX(-15%);
+  }
+}
+
+
+
 
 /**** Signup / Login BEGIN ****/
 
