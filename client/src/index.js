@@ -27,7 +27,7 @@ const Apps = {
   communityGuest: AppCommunityGuest,
   landing: AppLanding,
   recipe: AppRecipe
-}
+};
 
 const App = Apps.communityGuest;
 

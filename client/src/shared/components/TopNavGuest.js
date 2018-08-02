@@ -12,7 +12,6 @@ export default class TopNavGuest extends React.Component {
     extended: false
   }
   componentDidMount() {
-
     $('.modal').modal({
       dismissible: true, // Modal can be dismissed by clicking outside of the modal
       opacity: 0.5, // Opacity of modal background
@@ -40,6 +39,31 @@ export default class TopNavGuest extends React.Component {
       });
     }
   }
+  closeModal(modalId) {
+    $(modalId).modal('close');
+  }
+  renderLoginBtn() {
+    return (
+      <a
+        href="#login-modal"
+        onClick={this.closeModal.bind(this, '#signup-modal')}
+        className="modal-trigger"
+      >
+        Log in
+      </a>
+    );
+  }
+  renderJoinBtn(label, id) {
+    return (
+      <a
+        id={id}
+        href="#signup-modal"
+        onClick={this.closeModal.bind(this, '#login-modal')}
+        className="btn modal-trigger signup-btn">
+        {label}
+      </a>
+    );
+  }
   toggleSignupBtnVisibility() {
     const signupBtn = $("#signup-btn-tab");
     const categories = $('nav .categories-container');
@@ -63,10 +87,12 @@ export default class TopNavGuest extends React.Component {
   }
   renderSignupBtn(label, id) {
     return (
-      <a id={id}
-         href="#signup-modal"
-         onClick={this.closeModal.bind(this, '#login-modal')}
-         className="btn modal-trigger signup-btn">
+      <a
+        id={id}
+        href="#signup-modal"
+        onClick={this.closeModal.bind(this, '#login-modal')}
+        className="btn modal-trigger signup-btn"
+      >
         {label}
       </a>
     );
@@ -74,11 +100,11 @@ export default class TopNavGuest extends React.Component {
   renderNavHeader() {
     return (
       <div className="nav-header center">
-        <h4>{'Build Skills by Helping Nonprofits'}</h4>
+        <h4>Build Skills by Helping Nonprofits</h4>
         <div className="tagline">
           {'Gain relevant work experience as a developer, designer, and writer'}
         </div>
-        { this.renderSignupBtn('Join LooseLeaf', 'signup-btn-header') }
+        { this.renderSignupBtn('Join', 'signup-btn-header') }
       </div>
     );
   }
@@ -198,6 +224,7 @@ export default class TopNavGuest extends React.Component {
       </nav>
     );
   }
+
   render() {
     let selected = (typeof this.props.route.path === 'string')
                     ? getPageName(this.props.route.path) : '';

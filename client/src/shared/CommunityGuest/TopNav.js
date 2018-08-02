@@ -6,6 +6,7 @@ import { getNav, tabs } from './routes';
 import { getPageName } from '../../lib/helpers';
 import { getAppRoute } from '../data/appRoutes';
 import { landingImg } from '../data/landingLinks';
+import { LoginModal, SignupModal } from '../components/Login/Modal';
 
 export default class TopNav extends React.Component {
   static defalutProps = {
@@ -26,14 +27,14 @@ export default class TopNav extends React.Component {
 
     this.initializeSticky();
 
-    if(typeof window !== undefined) {
+    if (typeof window !== undefined) {
       $(window).scroll(function(){
         this.toggleSignupBtnVisibility()
       }.bind(this))
     }
   }
   initializeSticky() {
-    let categories = $('nav .categories-container');
+    const categories = $('nav .categories-container');
     if (categories.length) {
       categories.pushpin({
         top: categories.offset().top
@@ -41,32 +42,38 @@ export default class TopNav extends React.Component {
     }
   }
   toggleSignupBtnVisibility() {
-    const signupBtn = $("#signup-btn-tab");
+    const signupBtn = $('#signup-btn-tab');
     const categories = $('nav .categories-container');
-    if(categories.hasClass('pinned')) {
+    if (categories.hasClass('pinned')) {
       signupBtn.css('visibility', 'visible');
-    } else if(categories.hasClass('pin-top')) {
+    } else if (categories.hasClass('pin-top')) {
       signupBtn.css('visibility', 'hidden');
     }
   }
   closeModal(modalId) {
     $(modalId).modal('close');
   }
+  handleLogoClick() {
+    window.location = '/';
+  }
   renderLoginBtn() {
     return (
-      <a href="#login-modal"
-         onClick={this.closeModal.bind(this, '#signup-modal')}
-         className="modal-trigger">
+      <a
+        href="#login-modal"
+        onClick={this.closeModal.bind(this, '#signup-modal')}
+        className="modal-trigger"
+      >
         Log in
       </a>
     );
   }
   renderJoinBtn(label, id) {
     return (
-      <a id={id}
-         href="#signup-modal"
-         onClick={this.closeModal.bind(this, '#login-modal')}
-         className="btn modal-trigger signup-btn">
+      <a
+        id={id}
+        href="#signup-modal"
+        onClick={this.closeModal.bind(this, '#login-modal')}
+        className="btn modal-trigger signup-btn">
         {label}
       </a>
     );
@@ -78,7 +85,7 @@ export default class TopNav extends React.Component {
         <div className="tagline">
           {community.desc}
         </div>
-        { this.renderJoinBtn('Join LooseLeaf', 'signup-btn-header') }
+        { this.renderJoinBtn('Join This Community', 'signup-btn-header') }
       </div>
     );
   }
@@ -109,16 +116,13 @@ export default class TopNav extends React.Component {
       <div id="looseleaf-section-header">
         <nav className="nav-extended grey lighten-4">
           <div className="nav-background">
-            <div className="pattern active"></div>
+            <div className="pattern active" />
           </div>
           {this.renderPrimaryNavInner(selected, community)}
           { this.renderNavHeader(community) }
         </nav>
       </div>
     );
-  }
-  handleLogoClick() {
-    window.location = "/";
   }
   renderTabs(selected, communityName) {
     const style = {
@@ -137,9 +141,9 @@ export default class TopNav extends React.Component {
             <div className="categories grey lighten-4 row" style={noMarginBottom}>
               <div className="col l12 m12 s12">
                 <ul id="nav-tabs" className="tabs grey lighten-4">
-                  <li className='tab'>
+                  <li className="tab">
                     <Link
-                      id={`tab-one`}
+                      id="tab-one"
                       className={selected === tabs.one ? 'active' : ''}
                       to={getNav(communityName).one}>
                       {tabs.one}
@@ -147,7 +151,7 @@ export default class TopNav extends React.Component {
                   </li>
                   <li className='tab'>
                     <Link
-                      id={`tab-two`}
+                      id="tab-two"
                       className={selected === tabs.two ? 'active' : ''}
                       to={getNav(communityName).two}>
                       {tabs.two}
@@ -155,16 +159,16 @@ export default class TopNav extends React.Component {
                   </li>
                   <li className='tab'>
                     <Link
-                      id={`tab-three`}
+                      id="tab-three"
                       className={selected === tabs.three ? 'active' : ''}
-                      to={getNav(communityName).three}>
+                      to={ getNav(communityName).three }>
                       {tabs.three}
                     </Link>
                   </li>
                 </ul>
               </div>
               <div className="col l2 m2 s2 offset-l1 offset-s2 nav-text-links">
-                <ul style={{paddingRight: 4}} className="right">
+                <ul style={{ paddingRight: 4 }} className="right">
                   <li>
                     { this.renderJoinBtn('Join', 'signup-btn-tab')}
                   </li>
@@ -177,8 +181,8 @@ export default class TopNav extends React.Component {
     );
   }
   render() {
-    let selected = (typeof this.props.route.path === 'string')
-                    ? getPageName(this.props.route.path) : '';
+    const selected = (typeof this.props.route.path === 'string')
+      ? getPageName(this.props.route.path) : '';
     return (
       <div>
         {
@@ -187,6 +191,8 @@ export default class TopNav extends React.Component {
         {
           this.renderTabs(selected, this.props.community.name)
         }
+        <LoginModal />
+        <SignupModal />
       </div>
     );
   }
@@ -194,7 +200,7 @@ export default class TopNav extends React.Component {
 
 TopNav.propTypes = {
   extended: PropTypes.bool
-}
+};
 TopNav.defaultProps = {
   extended: false
-}
+};
