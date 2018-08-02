@@ -1,6 +1,5 @@
 import React from 'react';
 import TopNav from '../TopNav';
-import UserListing from './UserListing';
 import { tabs } from '../routes';
 import { getApiData } from '../../../lib/helpers';
 import { staticApiLink } from '../../data/apiLinks';
@@ -21,13 +20,13 @@ export default class Three extends React.Component {
     console.log('api links', apiLink)
     getApiData(apiLink, setApiData)
   }
-  renderUsers(users) {
+
+  renderUsers2(users) {
     return (
       <div>
         { users.map((d,i) => {
-          console.log(d)
           return (
-            <div className="row" key={i}>
+            <div className="row" key={`user-${d.username}`}>
               <div className="col s12 m12 l12">
                 <div className="card-panel">
                   <a href={getAppRoute('userPortfolio')(d.username)} dangerouslySetInnerHTML={{__html: d.displayName}} />
@@ -38,6 +37,27 @@ export default class Three extends React.Component {
         })}
       </div>
     )
+  }
+  renderUsers(users) {
+    return (
+      <ul id="community-people" className="collection">
+        {
+          users.map((d,i) => (
+            <li key={`user-${d.username}`} className="collection-item avatar">
+              <a href={getAppRoute('userPortfolio')(d.username)}>
+              <img src={d.picture} alt={d.username} />
+              </a>
+              <div style={{paddingLeft: 20}}>
+                <a href={getAppRoute('userPortfolio')(d.username)}>
+                    {d.displayName}
+                  </a>
+                <p>{d.bio}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ul>
+    );
   }
   render() {
     return (

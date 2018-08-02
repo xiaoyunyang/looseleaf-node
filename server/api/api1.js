@@ -101,7 +101,8 @@ api.get('/user', (req, res) => {
       const userInfo = {
         username: user.username,
         displayName: user.displayName,
-        picture: user.picture
+        picture: user.picture,
+        bio: user.bio
       };
       usersOut.push(userInfo);
     });
