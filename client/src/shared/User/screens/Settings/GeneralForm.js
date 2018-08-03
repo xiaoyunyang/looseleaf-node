@@ -1,4 +1,7 @@
 import React from 'react';
+import axios from 'axios';
+import { dynamicApiLink } from '../../../data/apiLinks';
+import TextInput from '../../../components/Form/TextInput';
 
 export default class GeneralForm extends React.Component {
   constructor(props) {
@@ -7,103 +10,100 @@ export default class GeneralForm extends React.Component {
       email: this.props.email,
       username: this.props.username,
       displayName: this.props.displayName
-    }
+    };
   }
-  handleChange(id, e) {
-    if(id==='email') {
-      this.setState({email: e.target.value})
-    } else if(id==='username') {
-      this.setState({username: e.target.value})
-    } else if(id==='displayName') {
-      this.setState({displayName: e.target.value})
-    }
-  }
-  renderTextInput(id, field, label) {
-    const icon = (id) => {
-      switch(id) {
-        case 'username': return 'insert_link';
-        case 'displayName': return 'account_circle';
-        case 'email': return 'email';
-        default: return '';
-      }
-    }
-    const type = id==='email' ? 'email' : 'text'
-    const dataError = id==='email' ? 'invalid email' : ''
-    return (
-      <div className="row">
-        <div className="input-field col s12 m10 l10">
-          <i className="material-icons prefix">{icon(id)}</i>
-          <input
-            id={id}
-            defaultValue={field}
-            onChange={this.handleChange(this, id)}
-            type={type} className="validate"/>
-          <label htmlFor={id}
-            data-error={dataError}
-            data-success={''}
-            className={!field ? '' : 'active'}>
-            {label}
-          </label>
-        </div>
-      </div>
-    )
+  handleSubmit(formFields) {
+    const userId = this.props.userId;
+    axios.post(dynamicApiLink(userId).user, { formFields, userId })
+      .then(res => {
+        if (res.statusText === 'error') {
+          this.setState({
+            flash: {state: res.statusText, msg: res.data}
+          });
+        } else if (res.statusText === 'OK') {
+          // redirect to /slug if the server responds with 200 ok...
+
+          // TODO: This doesn't work that well. The page is redirected, but nothing
+          // shows up. The page eventually shows after I manually refresh
+          // the page in browser. Maybe I need to add a timer?
+          window.location = `/@${res.data}`;
+        }
+        // Perform action based on response, such as flashing error notif
+      })
+      .catch(function(error) {
+        console.log(error);
+        //Perform action based on error
+      });
   }
   renderPasswordInput() {
     return (
       <div className="row">
         <div className="input-field col s12 m6 l6">
           <i className="material-icons prefix">lock</i>
-          <input id="oldPassword" type="password"
-            className="validate"/>
+          <input
+            id="oldPassword"
+            type="password"
+            className="validate"
+          />
           <label htmlFor="oldPassword">Old Password</label>
         </div>
-        <div className="input-field col s10 m6 l6 offset-s1">
-          <input id="newPassword" type="password"
-            className="validate"/>
+        <div className="input-field col s10 m6 l6 offset-s2">
+          <input
+            id="newPassword"
+            type="password"
+            className="validate"
+          />
           <label htmlFor="newPassword">New Password</label>
         </div>
       </div>
-    )
+    );
   }
   renderImgInput(imgUrl) {
     return (
-      <img src={imgUrl} alt="" className="circle"/>
-    )
+      <img src={imgUrl} alt="" className="circle" />
+    );
   }
   render() {
     return (
       <div className="card-panel white">
         <h4>General</h4>
         <div className="row">
-        <div className="col s5 m3 l3 offset-s3">
-          {this.renderImgInput(this.props.picture)}
-        </div>
+          <div className="col s5 m3 l3 offset-s3">
+            { this.renderImgInput(this.props.picture) }
+          </div>
           <form className="col s12 m8 l8">
-            { this.state.username ?
-                this.renderTextInput('username', this.state.username, 'Username')
-                :
-                this.renderTextInput('username', '', 'Username')
-            }
-            { this.state.displayName ?
-                this.renderTextInput('displayName', this.state.displayName, 'Display Name')
-                :
-                this.renderTextInput('displayName', '', 'Display Name')
-            }
-            { this.state.email ?
-                this.renderTextInput('email', this.state.email, 'Email')
-                :
-                this.renderTextInput('email', '', 'Email')
-            }
+            <TextInput
+              id='username'
+              defaultValue=''
+              field={this.state.username}
+              onChange={d => this.setState({username: d})}
+              label='username'
+            />
+            <TextInput
+              id='displayName'
+              defaultValue=''
+              field={this.state.displayName}
+              onChange={d => this.setState({displayName: d})}
+              label='Firstname Lastname'
+            />
+            <TextInput
+              id='email'
+              defaultValue=''
+              field={this.state.email}
+              onChange={d => this.setState({email: d})}
+              label='Email'
+            />
             {
               this.renderPasswordInput()
             }
             <div className="col s12 m12 l12 center">
-              <button className="btn" type="submit" name="action">Save Changes
-              </button>
+              <a className="btn" onClick={this.handleSubmit.bind(this, this.state)}>
+                Save Changes
+              </a>
             </div>
           </form>
         </div>
       </div>
-    )
+    );
   }
 }

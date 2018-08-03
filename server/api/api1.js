@@ -36,15 +36,11 @@ api.get('/test', (req, res) => {
 api.post('/project', (req, res, next) => {
   const formFields = req.body.formFields;
 
-  console.log(chalk.blue('formFields', req.body.formFields));
-  console.log(chalk.blue('username', req.body.userId));
   // Do some error checking
   if (validator.isEmpty(formFields.title)) {
     res.statusMessage = 'error';
     return res.send('Project must have a title!');
   }
-  console.log(chalk.blue(formFields.title))
-
 
   // Add new project to database
   const newProject = new Project();
@@ -108,6 +104,37 @@ api.get('/user', (req, res) => {
     });
 
     res.send(usersOut);
+  });
+});
+
+api.post('/user/:id', (req, res, next) => {
+  User.findById(req.params.id, (err, user) => {
+    if (err) return res.send('Error');
+    const formFields = req.body.formFields;
+    console.log(chalk.red(formFields.displayName));
+
+    const username = formFields.username || user.username;
+    const displayName = formFields.displayName || user.displayName;
+    const email = formFields.email || user.email;
+    const location = formFields.location || user.location;
+    const interests = formFields.interests || user.interests;
+    const bio = formFields.bio || user.bio;
+    const website = formFields.website || user.website;
+
+    user.set({
+      username,
+      displayName,
+      email,
+      location,
+      interests,
+      bio,
+      website
+    });
+
+    user.save(next);
+
+    console.log(chalk.blue(user));
+    return res.send(user.username);
   });
 });
 

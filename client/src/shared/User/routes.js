@@ -12,9 +12,9 @@ const getNav = (username) => {
     portfolio: `/${root}@${username}`,
     settings: `/${root}@${username}/settings`,
     tabs: `/${root}@${username}/:slug`,
-    wildcard: `/${root}*`,
-  }
-}
+    wildcard: `/${root}*`
+  };
+};
 
 const getTabsRoutes = (username) => {
   const tabsRoutes = [
@@ -26,16 +26,16 @@ const getTabsRoutes = (username) => {
     {
       path: getNav(username).tabs,
       component: Portfolio
-    },
+    }
   ];
   return tabsRoutes;
-}
+};
 
 const getRoutes = (user) => {
 
   const username = user.username;
 
-  const routes =  [
+  const routes = [
     {
       component: Root,
       routes: [
@@ -62,7 +62,7 @@ const getRoutes = (user) => {
     }
   ];
   return routes;
-}
+};
 
 // Caller:
 // getRoutes is used by App.js

@@ -135,16 +135,8 @@ export default class TopNavUser extends React.Component {
                     <Link id={`nav-${username}`} to={getAppRoute('userPortfolio')(username)}>Portfolio</Link>
                   }
                 </li>
-                <li>
-                  {
-                    this.props.useExternLinks ?
-                    <a href={`${getAppRoute('userHome')}foo`}>Foo</a>
-                    :
-                    <Link to={`${getAppRoute('userHome')}foo`}>Foo</Link>
-                  }
-                </li>
                 <li><button><i className="material-icons">notifications_none</i></button></li>
-                <UserDropdown username={username} userPic={userPic}/>
+                <UserDropdown username={username} userPic={userPic} />
               </ul>
               <ul className="right hide-on-med-and-up">
                 <li>

@@ -7,7 +7,7 @@ export const staticApiLink = {
   home: `${root}`,
   login: `${root}/auth/login`,
   signup: `${root}/auth/signup`,
-  logout: `${root}/auth/logout`,
+  logout: `${root}/auth/logout`
 };
 
 // To use this, example:

@@ -1,11 +1,11 @@
 import React from 'react';
+import axios from 'axios';
 import InputTags from '../../../components/InputTags';
 import InputDropdown from '../../../components/InputDropdown';
 import DatePicker from '../../../components/DatePicker';
 import FlashNotif from '../../../components/FlashNotif';
 import TextAreaInput from '../../../components/TextAreaInput';
 import TextInput from '../../../components/TextInput';
-import axios from 'axios';
 import { staticApiLink } from '../../../data/apiLinks';
 
 export default class ProjectForm extends React.Component {
@@ -25,7 +25,7 @@ export default class ProjectForm extends React.Component {
       flash: {
         state: 'ok',
         msg: '',
-      },
+      }
     }
   }
   handleSubmit(formFields) {

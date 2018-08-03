@@ -7,7 +7,7 @@ export default class UserCard extends React.Component {
     this.state = {
       option: 0,
       user: {}
-    }
+    };
   }
   componentWillMount() {
     randomUser(u => this.setState({user: u}))
@@ -37,6 +37,6 @@ export default class UserCard extends React.Component {
           <i className="material-icons">{this.getIconName(this.state.option)}</i>
         </a>
       </li>
-    )
+    );
   }
 }

@@ -9,7 +9,6 @@ export const GET_PROJECT_BY_SLUG = 'GET_PROJECT_BY_SLUG';
 // The fetch recipes handles all of the logic for
 // making a request to the server for the project data.
 export function fetchProjects() {
-  console.log("in fetchProjects!!!!!!!!!!!!!!!")
   return dispatch => {
     return fetch('http://localhost:3001/api/project', { // Implement the fetch API for making a GET request to the appropriate endpoint.
       method: 'GET'
@@ -27,7 +26,6 @@ export function fetchProjects() {
   }
 }
 export function fetchProjectBySlug(slug) {
-  console.log("in fetchProjects by Slug!!!!!!!!!!!!!!!")
   return dispatch => {
     return fetch(`http://localhost:3001/api/project/${slug}`, { // Implement the fetch API for making a GET request to the appropriate endpoint.
       method: 'GET'
