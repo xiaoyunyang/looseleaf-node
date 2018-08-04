@@ -9,7 +9,7 @@
     "babel-eslint": "7.2.3",
     "babel-jest": "20.0.3",
     "babel-polyfill": "^6.26.0",
-    "babel-preset-react-app": "^3.1.1",
+    "babel-preset-react-app": "^3.1.2",
     "babel-runtime": "^6.26.0",
     "body-parser": "^1.18.2",
     "case-sensitive-paths-webpack-plugin": "2.1.1",
@@ -118,7 +118,7 @@
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.4",
     "babel-plugin-transform-runtime": "^6.23.0",
-    "babel-preset-env": "^1.6.1",
+    "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-1": "^6.24.1",
     "react-hot-loader": "^4.1.2"

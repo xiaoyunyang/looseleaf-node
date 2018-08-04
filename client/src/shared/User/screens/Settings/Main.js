@@ -25,9 +25,11 @@ export default class Settings extends React.Component {
     axios.post(dynamicApiLink(userId).user, { formFields, userId })
       .then(res => {
         if (res.statusText === 'error') {
-          this.showAlert(res.data.status, res.data.msg)
+          this.showAlert(res.data.status, res.data.msg);
         } else if (res.statusText === 'OK') {
-          this.showAlert(res.data.status, res.data.msg)
+          this.showAlert(res.data.status, res.data.msg);
+          // TODO: Make a redux fetch for state again so that when we navigate to
+          // the profile page, the latest data is shown
         }
       })
       .catch(function(error) {
