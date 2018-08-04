@@ -13,7 +13,7 @@ const LoginForm = ({header, action}) => (
     <div className="row or-divider">
       <span>OR</span>
     </div>
-    <LocalLogin action={action}/>
+    <LocalLogin action={action} />
   </div>
 );
 

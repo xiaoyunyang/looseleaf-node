@@ -1,7 +1,7 @@
 import React from 'react';
 import { renderRoutes } from 'react-router-config';
 
-const Main = ( {routes} ) => (
+const Main = ({ routes }) => (
   <div>
     {renderRoutes(routes)}
   </div>

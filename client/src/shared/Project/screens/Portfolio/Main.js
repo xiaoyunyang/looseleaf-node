@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Switch } from 'react-router-dom';
 import { polyfill } from 'es6-promise';
-import { Switch } from 'react-router-dom';
 import { renderRoutes } from 'react-router-config';
 import $ from 'jquery';
 import { getRoot, getRoutes, tabs } from './routes';

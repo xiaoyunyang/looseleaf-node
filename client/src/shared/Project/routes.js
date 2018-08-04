@@ -1,4 +1,3 @@
-import fetch from 'isomorphic-fetch';
 import Root from './Root';
 import Home from './screens/Home';
 import Page from './screens/Page/Main';

@@ -2,7 +2,7 @@ import Root from './Root';
 import Home from './Home';
 import HowItWorks from './HowItWorks';
 import Signup from './Login/SignupPage';
-import Login from './Login/LoginPage'
+import Login from './Login/LoginPage';
 import NotFound from '../components/NotFound';
 import One from './Community/One';
 import Two from './Community/Two';
@@ -16,7 +16,7 @@ const communities = {
   one: 'developers',
   two: 'designers',
   three: 'writers'
-}
+};
 
 const getNav = () => {
   return {
@@ -28,8 +28,8 @@ const getNav = () => {
     two: `/${root}community/${communities.two}`,
     three: `/${root}community/${communities.three}`,
     wildcard: `/${root}*`,
-  }
-}
+  };
+};
 const routes = [
   {
     component: Root,

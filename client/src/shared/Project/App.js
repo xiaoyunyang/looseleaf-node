@@ -1,7 +1,7 @@
 import React from 'react';
 import { renderRoutes } from 'react-router-config';
 import { connect } from 'react-redux';
-import { withRouter } from "react-router-dom";
+import { withRouter } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { getRoutes } from './routes';
 import * as actionCreators from '../redux/Project/actions/project';
@@ -55,7 +55,7 @@ class App extends React.Component {
 // This function lets you convert the app state to properties on your component.
 function mapStateToProps(state) {
   return {
-    state: state
+    state
   };
 }
 

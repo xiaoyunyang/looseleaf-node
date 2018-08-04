@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { getAppRoute } from '../../data/appRoutes';
 
 const Users = ({ users }) => (
