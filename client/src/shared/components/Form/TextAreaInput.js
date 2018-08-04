@@ -5,7 +5,7 @@ const icon = (id) => {
     case 'bio': return 'mode_edit';
     default: return '';
   }
-}
+};
 export default class TextAreaInput extends React.Component {
   handleChange(e) {
     this.props.onChange(e.target.value);
@@ -18,8 +18,8 @@ export default class TextAreaInput extends React.Component {
           id={this.props.id}
           defaultValue={this.props.field}
           onChange={this.handleChange.bind(this)}
-          className="materialize-textarea">
-        </textarea>
+          className="materialize-textarea"
+        />
         <label htmlFor={this.props.id} className={!this.props.field ? '' : 'active'}>
           {this.props.label}
         </label>

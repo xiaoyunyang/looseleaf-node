@@ -12,7 +12,7 @@ const iconEnums = {
   public: 'website',
   communities: 'group',
   group: 'communities'
-}
+};
 
 const TextOrLink = ({iconName, content}) => (
   <div>
@@ -26,7 +26,7 @@ const TextOrLink = ({iconName, content}) => (
     {
       iconEnums[iconName] === 'website' ?
         <a href={`${content}`} target="_blank">
-          {content} <i className="fa fa-external-link"></i>
+          {content} <i className="fa fa-external-link" />
         </a>
         :
         null
@@ -38,10 +38,10 @@ const TextOrLink = ({iconName, content}) => (
         null
     }
   </div>
-)
+);
 
 
-const UserInfo = ({icon, info, orElse, to}) => (
+const UserInfo = ({ icon, info, orElse, to }) => (
   <div className="row portfolio-user-info">
     <div className="col s1 m1 l1">
       <i className="material-icons">{icon}</i>
@@ -54,7 +54,7 @@ const UserInfo = ({icon, info, orElse, to}) => (
       }
     </div>
   </div>
-)
+);
 const Communities= ({icon, cs}) => (
   <div className="row portfolio-user-info">
     <div className="col s1 m1 l1">
@@ -63,19 +63,19 @@ const Communities= ({icon, cs}) => (
     <div className="col s11 m11 l11">
       {
         cs.map((c, i) => {
-        return <div key={i} className="chip"><a href={c.url}>{c.name}</a></div>
+        return <div key={i} className="chip"><a href={c.url}>{c.name}</a></div>;
         })
       }
     </div>
   </div>
-)
+);
 
 const cs = [
-  {name: 'Web Developer', url: ''},
-  {name: 'Mobile Developer', url: ''},
-  {name: 'Graphic Designer', url: ''},
-  {name: 'Entrepreneur', url: ''},
-]
+  { name: 'Web Developer', url: '' },
+  { name: 'Mobile Developer', url: '' },
+  { name: 'Graphic Designer', url: '' },
+  { name: 'Entrepreneur', url: '' },
+];
 
 export default ({ user }) => (
   <div className="hero-profile">
@@ -86,27 +86,27 @@ export default ({ user }) => (
       <div className="col s12 m12 l9 hero-info">
         <div className="hero-profile-center">
           <h4>{user.displayName}</h4>
-            <p>
-              {`@${user.username}`}
-            </p>
+          <p>
+            {`@${user.username}`}
+          </p>
         </div>
         <Communities icon={'group'} cs={cs} />
         <UserInfo icon={iconEnums.location}
           info={user.location}
           orElse={'add location'}
           to={getNav(user.username).settings}
-          />
+        />
         <UserInfo icon={iconEnums.bio}
           info={user.bio}
           orElse={'add bio'}
           to={getNav(user.username).settings}
-          />
+        />
         <UserInfo icon={iconEnums.email}
           info={user.email}
           orElse={'add email'}
           to={getNav(user.username).settings}
         />
-      <UserInfo icon={iconEnums.website}
+        <UserInfo icon={iconEnums.website}
           info={user.website}
           orElse={'add website'}
           to={getNav(user.username).settings}

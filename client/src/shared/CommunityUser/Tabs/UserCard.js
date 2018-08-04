@@ -7,20 +7,20 @@ export default class UserCard extends React.Component {
     this.state = {
       option: 0,
       user: {}
-    }
+    };
   }
   componentWillMount() {
-    randomUser(u => this.setState({user: u}))
+    randomUser(user => this.setState({ user }));
   }
   getIconName(option) {
-    const options = ['star_border', 'grade']
+    const options = ['star_border', 'grade'];
     return options[option % 2]; // mod 2 again just to be safe
   }
   toggleStar(option) {
     const newOption = (option + 1) % 2;
     this.setState({
       option: newOption
-    })
+    });
   }
   render() {
     return (
@@ -37,6 +37,6 @@ export default class UserCard extends React.Component {
           <i className="material-icons">{this.getIconName(this.state.option)}</i>
         </a>
       </li>
-    )
+    );
   }
 }

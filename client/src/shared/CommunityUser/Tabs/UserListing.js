@@ -6,7 +6,15 @@ export default class UserListing extends React.Component {
     super(props);
     this.state = {
       users: []
-    }
+    };
+  }
+  componentWillMount() {
+    const users = Array.from(Array(this.props.number).keys()).map(i => {
+      return {
+        stats: this.randomStats()
+      };
+    });
+    this.setState({ users });
   }
   randomStats() {
     const rand = Math.random();
@@ -17,18 +25,10 @@ export default class UserListing extends React.Component {
     const numBest = Math.floor(rand3 * numProj);
 
     return {
-        numProj: numProj,
-        numMonths: numMonths,
-        numBest: numBest
-    }
-  }
-  componentWillMount() {
-    const users = Array.from(Array(this.props.number).keys()).map(i => {
-      return {
-        stats: this.randomStats()
-      }
-    });
-    this.setState({users: users});
+      numProj,
+      numMonths,
+      numBest
+    };
   }
   render() {
     return (

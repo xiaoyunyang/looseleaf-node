@@ -11,12 +11,12 @@ export default class TeamMembers extends React.Component {
     this.state = {
       modalPerson: {
         fullName: 'Firstname Lastname',
-        role: "CEO",
-        bio: "stuff",
+        role: 'CEO',
+        bio: 'stuff',
         img: defaultUserPic,
-        linkedin: "https://linkedin.com",
-      },
-    }
+        linkedin: 'https://linkedin.com',
+      }
+    };
   }
   componentDidMount() {
     this.initializeModal();
@@ -27,7 +27,7 @@ export default class TeamMembers extends React.Component {
       $('.modal').modal();
     });
   }
-  renderPersonCard(user,i) {
+  renderPersonCard(user, i) {
     return (
       <div key={i} className="center col s6 m2 l2">
         <a href="#person-card-modal"
@@ -65,10 +65,10 @@ export default class TeamMembers extends React.Component {
           </div>
         </div>
       </div>
-    )
+    );
   }
   handlePersonCardClick(user) {
-    this.setState( {
+    this.setState({
       modalPerson: {
         fullName: user.fullName,
         bio: user.bio,
@@ -81,12 +81,11 @@ export default class TeamMembers extends React.Component {
   render() {
     return (
       <div className="row">
-      {
-        this.props.people.map((d,i) =>
-          this.renderPersonCard(d,i)
-        )
+        {
+        this.props.people.map((d, i) =>
+          this.renderPersonCard(d, i))
       }
-      {
+        {
         this.renderPersonCardModal()
       }
       </div>

@@ -16,8 +16,6 @@ import dataPreloading from '../../client/iso-middleware/dataPreloading'
 const cuid = require('cuid');
 
 const api = express.Router();
-
-
 /*
 TODO: code below is for development only. Remove for production
  */
@@ -122,14 +120,14 @@ api.post('/user/:id', (req, res, next) => {
     const interests = formFields.interests || user.interests;
     const bio = formFields.bio || user.bio;
     const website = formFields.website || user.website;
-console.log(chalk.blue(formFields.interests))
+
     if (!username) {
       res.statusText = 'error';
-
       // TODO: Below is the way we should be sending error messages. Make the same change
       // to POST /project and POST /auth/login
       return res.send({ status: 'error', msg: 'username cannot be empty!' });
     }
+    // TODO: Make sure username cannot contain any spaces or special characters
 
     user.set({
       username,

@@ -6,11 +6,11 @@ export default class Main extends React.Component {
     const state = {
       user: this.props.user,
       community: this.props.community
-    }
+    };
     return (
       <div>
         {renderRoutes(this.props.routes, state)}
       </div>
-    )
+    );
   }
 }

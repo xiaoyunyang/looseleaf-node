@@ -3,7 +3,7 @@ import Home from './screens/Home';
 import HowItWorks from './screens/HowItWorks';
 import About from './screens/About';
 import Signup from '../components/Login/SignupPage';
-import Login from '../components/Login/LoginPage'
+import Login from '../components/Login/LoginPage';
 import NotFound from '../components/NotFound';
 
 const root = '';
@@ -14,7 +14,7 @@ const communities = {
   one: 'developers',
   two: 'designers',
   three: 'writers'
-}
+};
 
 const getNav = () => {
   return {
@@ -24,8 +24,8 @@ const getNav = () => {
     signup: `/${root}signup`,
     login: `/${root}login`,
     wildcard: `/${root}*`,
-  }
-}
+  };
+};
 const routes = [
   {
     component: Root,

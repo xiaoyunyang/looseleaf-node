@@ -3,14 +3,14 @@ import Two from './Two';
 import Three from './Three';
 import Four from './Four';
 import NotFound from '../../../components/NotFound';
-import { root } from '../../routes'
+import { root } from '../../routes';
 // const root = `/${store.root}${store.username}`;
 
 const tabs = ['completed', 'todo', 'watch', 'contributions'];
 
 const getRoot = (username) => {
   return `/${root}@${username}`;
-}
+};
 
 const getRoutes = (username) => {
   const root = getRoot(username);
@@ -44,6 +44,6 @@ const getRoutes = (username) => {
     }
   ];
   return { root, routes, tabs };
-}
+};
 
 export { getRoot, getRoutes, tabs };

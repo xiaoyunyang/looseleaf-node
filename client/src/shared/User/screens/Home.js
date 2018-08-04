@@ -10,9 +10,9 @@ const updates = [
   'A project update from someone who follows you.',
   'An announcement on the discussion board of the project on your todo-list.',
   'An announcement on the community board.',
-]
+];
 
-const Stat = ({num, phrase}) => (
+const Stat = ({ num, phrase }) => (
   <div className="row">
     <div className="col s2 m2 l2">
       <h6>{num}</h6>
@@ -21,7 +21,7 @@ const Stat = ({num, phrase}) => (
       <p>{phrase}</p>
     </div>
   </div>
-)
+);
 // const Reaction =({tooltip, icon}) => (
 //   <a href=""
 //     className="tooltipped"
@@ -37,7 +37,7 @@ const Reactions = () => (
     <a href="">Clap</a>
     <a href="">Respond</a>
   </div>
-)
+);
 
 // This is a ES6 class - see https://toddmotto.com/react-create-class-versus-component/
 class Home extends React.Component {
@@ -50,7 +50,7 @@ class Home extends React.Component {
   componentDidMount() {
     // console.log("componentDidMount in Home ... ")
     // this.props.actions.getHomePageData();
-    console.log(this.props.actions)
+    console.log(this.props.actions);
     // Get hello message
     this.callApi('http://localhost:3001/api/hello')
       .then(res => this.setState({ resHello: res.express }))
@@ -76,7 +76,7 @@ class Home extends React.Component {
           </div>
           <div className="col s8 m8 l8">
             <h6>{this.props.user.displayName}</h6>
-            <p style={{marginTop: -1}}>{`@${this.props.user.username}`}</p>
+            <p style={{ marginTop: -1 }}>{`@${this.props.user.username}`}</p>
           </div>
         </div>
         <div className="or-divider"/>
@@ -110,7 +110,7 @@ class Home extends React.Component {
           <a href="">Announcement</a>
         </div>
       </div>
-    )
+    );
   }
   renderFeed(msg, id) {
     return (
@@ -124,14 +124,14 @@ class Home extends React.Component {
               <p>{this.props.user.displayName}</p>
             </div>
           </div>
-          <p href=''>{msg}</p>
+          <p>{msg}</p>
 
         </div>
         <div className="card-action">
           <Reactions />
         </div>
       </div>
-    )
+    );
   }
   render() {
     return (
@@ -153,7 +153,7 @@ class Home extends React.Component {
               }
               {
                 updates.map((d,i) => {
-                  return this.renderFeed(d, i)
+                  return this.renderFeed(d, i);
                 })
               }
             </div>

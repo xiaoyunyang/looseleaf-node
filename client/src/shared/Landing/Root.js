@@ -5,5 +5,5 @@ const Root = ({ route }) => (
   <div>
     <Main routes={route.routes} />
   </div>
-)
+);
 export default Root;

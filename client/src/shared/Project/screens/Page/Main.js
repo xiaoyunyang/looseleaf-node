@@ -5,7 +5,7 @@ import People from './People';
 
 const dueDateFormatted = (dateStr) => {
   return dateStr ? new Date(dateStr).toDateString() : '';
-}
+};
 const updates = [
   'A project update from someone you follow.',
   'A project update from a co-contributor of a project on your todo-list.',
@@ -13,8 +13,8 @@ const updates = [
   'A project update from someone who follows you.',
   'A project update from someone who follows you.',
   'An announcement on the discussion board of the project on your todo-list.',
-  'An announcement on the community board.',
-]
+  'An announcement on the community board.'
+];
 
 const Reactions = () => (
   <div>
@@ -22,7 +22,7 @@ const Reactions = () => (
     <a href="">Clap</a>
     <a href="">Respond</a>
   </div>
-)
+);
 
 // This is a ES6 class - see https://toddmotto.com/react-create-class-versus-component/
 // NOTE: dangerouslySetInnerHTML is needed because the strings from server contains HTML entities
@@ -37,14 +37,13 @@ export default class Main extends React.Component {
     //
     const title = project ? project.info.title : 'placeholder title';
     const desc = project ? project.info.desc : 'placeholder desc';
-    const dueDate = project ? project.info.dueDate : "2018-07-14T04:44:56.361Z";
+    const dueDate = project ? project.info.dueDate : '2018-07-14T04:44:56.361Z';
 
-console.log('dueDate...',dueDate)
     return (
       <div id="project-info" className="col s12 m12 l12">
         <div className="card-panel white">
-          <h4 dangerouslySetInnerHTML={{__html: title}} />
-          <p dangerouslySetInnerHTML={{__html: desc}} />
+          <h4 dangerouslySetInnerHTML={{ __html: title }} />
+          <p dangerouslySetInnerHTML={{ __html: desc }} />
           <p>{`Due Date: ${dueDateFormatted(dueDate)}`}</p>
           <div className="row">
             <div className="col">
@@ -62,9 +61,9 @@ console.log('dueDate...',dueDate)
     return (
       <div id="contributors">
         <h5>{`Project Contributors (${contributors.length})`}</h5>
-        <People contributors={contributors} username={this.props.user.username}/>
+        <People contributors={contributors} username={this.props.user.username} />
       </div>
-    )
+    );
   }
   renderNewPost() {
     return (
@@ -72,13 +71,13 @@ console.log('dueDate...',dueDate)
         <div className="card-content">
           <div className="row feed-user">
             <div className="col">
-              <img className="circle" src={this.props.user.picture} alt=""/>
+              <img className="circle" src={this.props.user.picture} alt="" />
             </div>
             <div className="col">
               <p>{this.props.user.displayName}</p>
             </div>
           </div>
-          <a href=''>
+          <a href="">
             <i className="material-icons">create</i> {'Post an announcement to your community or a project update'}
           </a>
         </div>
@@ -87,7 +86,7 @@ console.log('dueDate...',dueDate)
           <a href="">Announcement</a>
         </div>
       </div>
-    )
+    );
   }
   renderPost(msg, id) {
     // TODO: Each post needs to have a date
@@ -96,20 +95,20 @@ console.log('dueDate...',dueDate)
         <div className="card-content">
           <div className="row feed-user">
             <div className="col">
-              <img className="circle" src={this.props.user.picture} alt=""/>
+              <img className="circle" src={this.props.user.picture} alt="" />
             </div>
             <div className="col s8 m8 l8">
               <p>{this.props.user.displayName}</p>
             </div>
           </div>
-          <p href=''>{msg}</p>
+          <p href="">{msg}</p>
 
         </div>
         <div className="card-action">
           <Reactions />
         </div>
       </div>
-    )
+    );
   }
   renderFeed() {
     return (
@@ -122,8 +121,8 @@ console.log('dueDate...',dueDate)
               this.renderNewPost()
             }
             {
-              updates.map((d,i) => {
-                return this.renderPost(d, i)
+              updates.map((d, i) => {
+                return this.renderPost(d, i);
               })
             }
           </div>
@@ -132,13 +131,13 @@ console.log('dueDate...',dueDate)
     );
   }
   render() {
-    //let slug = this.props.params.slug;
+    // let slug = this.props.params.slug;
     // let slug = this.props.match.params.slug;
     // console.log('ooooooooooo',slug)
     // console.log('this.props', this.props)
     return (
       <div className="section-white">
-        <TopNav route={this.props.route} user={this.props.user} useExternLinks={true}/>
+        <TopNav route={this.props.route} user={this.props.user} useExternLinks />
         <div className="container">
           {
             this.renderProjectInfo(this.props.project)

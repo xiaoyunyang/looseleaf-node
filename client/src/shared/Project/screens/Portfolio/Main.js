@@ -56,11 +56,11 @@ export default class Main extends Component {
     const root = getRoot(this.props.user.username);
     return (
       <div>
-        <TopNav route={this.props.route} user={this.props.user} useExternLinks={true}/>
+        <TopNav route={this.props.route} user={this.props.user} useExternLinks={true} />
         <div className="container">
           <div className="row">
             <div className="col l12 m12 s12">
-              <About user={this.props.user}/>
+              <About user={this.props.user} />
             </div>
           </div>
         </div>

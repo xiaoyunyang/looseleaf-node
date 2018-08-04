@@ -12,7 +12,7 @@ const tabs = {
   one: 'projects',
   two: 'announcements',
   three: 'people'
-}
+};
 
 const getNav = (community) => {
   return {
@@ -20,9 +20,9 @@ const getNav = (community) => {
     one: `/${root}${community}/${tabs.one}`,
     two: `/${root}${community}/${tabs.two}`,
     three: `/${root}${community}/${tabs.three}`,
-    wildcard: `/${root}*`,
-  }
-}
+    wildcard: `/${root}*`
+  };
+};
 const getRoutes = (community) => {
   const routes = [
     {
@@ -56,6 +56,6 @@ const getRoutes = (community) => {
     }
   ];
   return routes;
-}
+};
 
 export { getRoutes, getNav, tabs, root };

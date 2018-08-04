@@ -11,33 +11,33 @@ export default class Three extends React.Component {
     super(props);
     this.state = {
       users: null
-    }
+    };
   }
   componentDidMount() {
-    const setApiData = data => this.setState({users: data});
-    //const apiLink = 'http://localhost:3001/api/project';
+    const setApiData = data => this.setState({ users: data });
+    // const apiLink = 'http://localhost:3001/api/project';
 
     const apiLink = staticApiLink.users;
-    console.log('api links', apiLink)
-    getApiData(apiLink, setApiData)
+    console.log('api links', apiLink);
+    getApiData(apiLink, setApiData);
   }
   renderUsers(users) {
     return (
       <div>
-        { users.map((d,i) => {
-          console.log(d)
+        { users.map((d, i) => {
+          console.log(d);
           return (
             <div className="row" key={i}>
               <div className="col s12 m12 l12">
                 <div className="card-panel">
-                  <a href={getAppRoute('userPortfolio')(d.username)} dangerouslySetInnerHTML={{__html: d.displayName}} />
+                  <a href={getAppRoute('userPortfolio')(d.username)} dangerouslySetInnerHTML={{ __html: d.displayName }} />
                 </div>
               </div>
             </div>
           );
         })}
       </div>
-    )
+    );
   }
   render() {
     return (
@@ -46,7 +46,7 @@ export default class Three extends React.Component {
         <div className="container">
           <div id={tabs.three} className="col s12">
             <h3>People</h3>
-              {
+            {
                 this.state.users ? this.renderUsers(this.state.users) : null
               }
           </div>

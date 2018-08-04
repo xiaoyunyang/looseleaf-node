@@ -12,7 +12,7 @@ export default class AboutForm extends React.Component {
       location: this.props.location,
       website: this.props.website,
       interests: this.props.interests,
-    }
+    };
   }
   handleSubmit() {
     this.props.handleSubmit(this.state);
@@ -25,7 +25,7 @@ export default class AboutForm extends React.Component {
         case 'interests': return 'loyalty';
         default: return '';
       }
-    }
+    };
     return (
       <div className="row">
         <div className="input-field col s12 m12 l12">
@@ -34,14 +34,14 @@ export default class AboutForm extends React.Component {
             id={id}
             defaultValue={field}
             onChange={this.handleChange(this, id)}
-            className="materialize-textarea">
-          </textarea>
+            className="materialize-textarea"
+          />
           <label htmlFor={id} className={!field ? '' : 'active'}>
             {label}
           </label>
         </div>
       </div>
-    )
+    );
   }
   render() {
     return (
@@ -50,48 +50,48 @@ export default class AboutForm extends React.Component {
         <div className="row">
           <div className="col s12 m12 l12">
             <TextAreaInput
-              id='bio'
-              defaultValue=''
+              id="bio"
+              defaultValue=""
               field={this.state.bio}
               onChange={d => this.setState({bio: d})}
-              label='Bio'
+              label="Bio"
             />
             <div className="row">
               <div className="col s12 m6 l6">
                 <TextInput
-                  id='location'
-                  defaultValue=''
+                  id="location"
+                  defaultValue=""
                   field={this.state.location}
                   onChange={d => this.setState({location: d})}
-                  label='Location'
+                  label="Location"
                 />
               </div>
               <div className="col s12 m6 l6">
                 <TextInput
-                  id='website'
-                  defaultValue=''
+                  id="website"
+                  defaultValue=""
                   field={this.state.website}
                   onChange={d => this.setState({website: d})}
-                  label='Website'
+                  label="Website"
                 />
               </div>
               <InputTags
-                id='select-areas'
-                label='Add Interests'
-                hint='+Interest'
+                id="select-areas"
+                label="Add Interests"
+                hint="+Interest"
                 tags={availableInterests}
                 selectedTags={this.state.interests}
                 setState={ds => this.setState({interests: ds})}
-            />
+              />
             </div>
             <div className="col s12 m12 l12 center">
-              <a className="btn" onClick={this.handleSubmit.bind(this, this.state)}>
+              <btn className="btn" onClick={this.handleSubmit.bind(this, this.state)}>
                 Save Changes
-              </a>
+              </btn>
             </div>
           </div>
         </div>
       </div>
-    )
+    );
   }
 }

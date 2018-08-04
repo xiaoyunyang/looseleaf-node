@@ -8,17 +8,17 @@ import AboutForm from './AboutForm';
 const statusClassName = {
   error: 'alert-danger',
   success: 'alert-success',
-  info: 'alert-info',
-}
+  info: 'alert-info'
+};
 
 export default class Settings extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      alertColor: statusClassName['success'],
+      alertColor: statusClassName.success,
       showAlertBox: false,
       alertMsg: 'Alert Message'
-    }
+    };
   }
   handleSubmit(formFields) {
     const userId = this.props.user._id;
@@ -32,9 +32,9 @@ export default class Settings extends React.Component {
           // the profile page, the latest data is shown
         }
       })
-      .catch(function(error) {
+      .catch((error) => {
         console.log(error);
-        //Perform action based on error
+        // Perform action based on error
       });
   }
   showAlert(status, msg) {
@@ -47,12 +47,12 @@ export default class Settings extends React.Component {
       alertMsg: msg
     });
     setTimeout(() => this.setState({
-      showAlertBox: false,
+      showAlertBox: false
     }),
     toWait);
   }
   handleCloseAlertBox() {
-    this.setState({showAlertBox: false});
+    this.setState({ showAlertBox: false });
   }
   renderAlertBox(show, msg, statusClassName) {
     const hide = show ? '' : 'hide';
@@ -62,31 +62,32 @@ export default class Settings extends React.Component {
           <div className={`center ${statusClassName}`}>
             <div className="row">
               <div className="col s12 m12 l12">
-                <div style={{padding: 8}}>
+                <div style={{ padding: 8 }}>
                   { msg }
+                </div>
               </div>
-            </div>
-            {
-              <div className="col s12 m2">
-                <i className="fa fa-times"
-                  id="alert-close"
-                  onClick={this.handleCloseAlertBox.bind(this)}></i>
-              </div>
+              {
+                <div className="col s12 m2">
+                  <i
+                    className="fa fa-times"
+                    id="alert-close"
+                    onClick={this.handleCloseAlertBox.bind(this)}
+                  />
+                </div>
             }
+            </div>
           </div>
-         </div>
         </div>
       </div>
     );
   }
   render() {
     return (
-      <div className='section-white'>
-        <TopNav route={this.props.route} user={this.props.user}/>
+      <div className="section-white">
+        <TopNav route={this.props.route} user={this.props.user} />
         { this.renderAlertBox(this.state.showAlertBox,
                               this.state.alertMsg,
-                              this.state.alertColor
-                            )
+                              this.state.alertColor)
         }
         <div className="container">
           <h2>Settings</h2>
@@ -110,15 +111,15 @@ export default class Settings extends React.Component {
             <h5>Deactivate account</h5>
             <p>
               {
-                "Deactivating your account will remove it from LooseLeaf. You can sign back in anytime to reactivate your account and restore its content."
+                'Deactivating your account will remove it from LooseLeaf. You can sign back in anytime to reactivate your account and restore its content.'
               }
             </p>
             <a href="">Deactivate account</a>
-            <div className="or-divider"/>
+            <div className="or-divider" />
             <h5>Delete account</h5>
             <p>
               {
-                "Permanently delete your account and all of your content."
+                'Permanently delete your account and all of your content.'
               }
             </p>
             <a href="">Delete account</a>

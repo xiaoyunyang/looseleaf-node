@@ -9,8 +9,8 @@ const icon = (id) => {
     case 'website': return 'public';
     default: return '';
   }
-}
-const type  = id => id === 'email' ? 'email' : 'text';
+};
+const type = id => id === 'email' ? 'email' : 'text';
 const dataError = id => id === 'email' ? 'invalid email' : '';
 
 export default class TextInput extends React.Component {
@@ -32,13 +32,13 @@ export default class TextInput extends React.Component {
           <label
             htmlFor={this.props.id}
             data-error={dataError(this.props.id)}
-            data-success={''}
+            data-success=""
             className={!this.props.field ? '' : 'active'}
           >
             {this.props.label}
           </label>
         </div>
       </div>
-    )
+    );
   }
 }

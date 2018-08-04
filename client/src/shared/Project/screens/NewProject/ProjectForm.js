@@ -24,33 +24,33 @@ export default class ProjectForm extends React.Component {
       dueDate: '',
       flash: {
         state: 'ok',
-        msg: '',
+        msg: ''
       }
-    }
+    };
   }
   handleSubmit(formFields) {
     const userId = this.props.user._id;
-    axios.post(staticApiLink.project, {formFields, userId})
-    .then(res => {
-      if(res.statusText === 'error') {
-        this.setState({
-          flash: {state: res.statusText, msg: res.data}
-        })
-      } else if(res.statusText === 'OK') {
+    axios.post(staticApiLink.projects, { formFields, userId })
+      .then(res => {
+        if (res.statusText === 'error') {
+          this.setState({
+            flash: { state: res.statusText, msg: res.data }
+          });
+        } else if (res.statusText === 'OK') {
         // redirect to /slug if the server responds with 200 ok...
 
         // TODO: This doesn't work that well. The page is redirected, but nothing
         // shows up. The page eventually shows after I manually refresh
         // the page in browser. Maybe I need to add a timer?
-        window.location = `/project/${res.data}`;
-      }
+          window.location = `/project/${res.data}`;
+        }
 
       // Perform action based on response, such as flashing error notif
-    })
-    .catch(function(error) {
-      console.log(error);
+      })
+      .catch((error) => {
+        console.log(error);
       //Perform action based on error
-    });
+      });
   }
   render() {
     return (
@@ -60,89 +60,89 @@ export default class ProjectForm extends React.Component {
           <div className="row">
             <div className="col s12">
               <TextInput
-                id='text-title'
-                field=''
-                label='Title'
-                setState={d => this.setState({title: d})}
+                id="text-title"
+                field=""
+                label="Title"
+                setState={d => this.setState({ title: d })}
               />
               <TextAreaInput
-                id='text-desc'
-                field=''
-                label='Description'
-                setState={d => this.setState({desc: d})}
+                id="text-desc"
+                field=""
+                label="Description"
+                setState={d => this.setState({ desc: d })}
               />
               <InputDropdown
-                id='select-project'
-                label='Project Type'
+                id="select-project"
+                label="Project Type"
                 choices={this.props.projectTypes}
-                setState={d => this.setState({selectedProjectType: d})}
+                setState={d => this.setState({ selectedProjectType: d })}
               />
               <InputTags
-                id='select-areas'
-                label='Interest Areas'
-                hint='+Interest'
+                id="select-areas"
+                label="Interest Areas"
+                hint="+Interest"
                 tags={this.props.tags}
                 selectedTags={this.state.selectedTags}
-                setState={ds => this.setState({selectedTags: ds})}
+                setState={ds => this.setState({ selectedTags: ds })}
               />
             </div>
           </div>
         </div>
         <div className="card-panel white">
           <h5>About You And Your Mission</h5>
-          <p style={{opacity: '0.8'}}>{'Introduce yourself. Give people a reason to get really excited about working on this project with you.'}</p>
+          <p style={{ opacity: '0.8' }}>Introduce yourself. Give people a reason to get really excited about working on this project with you.</p>
           <div className="row">
             <div className="col s12">
               <TextAreaInput
-                id='text-about-me'
+                id="text-about-me"
                 field={this.state.aboutMe}
-                label='About Me'
-                setState={d => this.setState({aboutMe: d})}
+                label="About Me"
+                setState={d => this.setState({ aboutMe: d })}
               />
               <TextAreaInput
-                id='text-mission'
+                id="text-mission"
                 field={this.state.mission}
-                label='My Mission'
-                setState={d => this.setState({mission: d})}
+                label="My Mission"
+                setState={d => this.setState({ mission: d })}
               />
             </div>
           </div>
         </div>
         <div className="card-panel white">
           <h5>Invite Project Contributors</h5>
-          <p style={{opacity: '0.8'}}>{"Invite people you know or want to collaborate with to contribute to the project."}</p>
+          <p style={{ opacity: '0.8' }}>Invite people you know or want to collaborate with to contribute to the project.</p>
           <InputTags
-            id='select-people'
-            label='contributors'
-            hint='+contributor'
+            id="select-people"
+            label="contributors"
+            hint="+contributor"
             tags={this.props.people}
             selectedTags={this.state.contributors}
-            setState={ds => this.setState({contributors: ds})}
+            setState={ds => this.setState({ contributors: ds })}
           />
         </div>
         <div className="card-panel white">
           <h5>Submission</h5>
-          <p style={{paddingLeft: '0.75em'}}>{"Submission Instruction."}</p>
+          <p style={{ paddingLeft: '0.75em' }}>Submission Instruction.</p>
           <div className="row">
             <div className="col s12">
               <InputDropdown
-                id='select-platform'
-                label='Platform Type'
+                id="select-platform"
+                label="Platform Type"
                 choices={this.props.platforms}
-                setState={d => this.setState({selectedPlatform: d})}
+                setState={d => this.setState({ selectedPlatform: d })}
               />
               <TextAreaInput
-                id='text-desc'
+                id="text-desc"
                 field={this.state.submissionInst}
-                label='Optional Submission Instruction'
-                setState={d => this.setState({submissionInst: d})}
+                label="Optional Submission Instruction"
+                setState={d => this.setState({ submissionInst: d })}
               />
             </div>
           </div>
-          <p style={{paddingLeft: '0.75em'}}>{"Set a due date. You can change the due date anytime."}</p>
+          <p style={{ paddingLeft: '0.75em' }}>Set a due date. You can change the due date anytime.</p>
           <div className="row">
             <div className="col s12 m10 l8">
-              <DatePicker setState={d => this.setState({dueDate: d})}/>
+              <DatePicker setState={d => this.setState({ dueDate: d })} />
             </div>
           </div>
         </div>
@@ -151,8 +151,8 @@ export default class ProjectForm extends React.Component {
             Create Project
           </a>
         </div>
-        <FlashNotif state={this.state.flash.state} msg={this.state.flash.msg}/>
+        <FlashNotif state={this.state.flash.state} msg={this.state.flash.msg} />
       </div>
-    )
+    );
   }
 }
