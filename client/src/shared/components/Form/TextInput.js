@@ -5,6 +5,8 @@ const icon = (id) => {
     case 'username': return 'insert_link';
     case 'displayName': return 'account_circle';
     case 'email': return 'email';
+    case 'location': return 'location_on';
+    case 'website': return 'public';
     default: return '';
   }
 }

@@ -1,6 +1,8 @@
 import React from 'react';
 import InputTags from './../../../components/InputTags';
-import {interests} from './../../../components/TempData';
+import { interests as availableInterests} from './../../../components/TempData';
+import TextInput from '../../../components/Form/TextInput';
+import TextAreaInput from '../../../components/Form/TextAreaInput';
 
 export default class AboutForm extends React.Component {
   constructor(props) {
@@ -9,47 +11,11 @@ export default class AboutForm extends React.Component {
       bio: this.props.bio,
       location: this.props.location,
       website: this.props.website,
-      communities: this.props.communities,
-      tags: interests,
-      selectedTags: this.props.interests,
+      interests: this.props.interests,
     }
   }
-  handleChange(id, e) {
-    if(id==='bio') {
-      this.setState({bio: e.target.value})
-    } else if(id==='location') {
-      this.setState({location: e.target.value})
-    } else if(id==='website') {
-      this.setState({website: e.target.value})
-    } else if(id==='interests') {
-      this.setState({interests: e.target.value})
-    } else if(id==='communities') {
-      this.setState({communities: e.target.value})
-    }
-  }
-  renderTextInput(id, field, label) {
-    const icon = (id) => {
-      switch(id) {
-        case 'website': return 'public';
-        case 'location': return 'location_on';
-        default: return '';
-      }
-    }
-    return (
-
-        <div className="input-field col s12 m8 l6">
-          <i className="material-icons prefix">{icon(id)}</i>
-          <input
-            id={id}
-            defaultValue={field}
-            onChange={this.handleChange(this, id)}
-            type="text" className="validate"/>
-          <label htmlFor={id}
-            className={!field ? '' : 'active'}>
-            {label}
-          </label>
-        </div>
-    )
+  handleSubmit() {
+    this.props.handleSubmit(this.state);
   }
   renderTextAreaInput(id, field, label) {
     const icon = (id) => {
@@ -77,43 +43,53 @@ export default class AboutForm extends React.Component {
       </div>
     )
   }
-
   render() {
     return (
       <div className="card-panel white">
         <h4>About Me</h4>
         <div className="row">
-          <form className="col s12">
-            { this.state.bio ?
-              this.renderTextAreaInput('bio', this.state.bio, 'Bio')
-              :
-              this.renderTextAreaInput('bio', '', 'Bio')
-            }
+          <div className="col s12 m12 l12">
+            <TextAreaInput
+              id='bio'
+              defaultValue=''
+              field={this.state.bio}
+              onChange={d => this.setState({bio: d})}
+              label='Bio'
+            />
             <div className="row">
-              { this.state.location ?
-                  this.renderTextInput('location', this.state.location, 'Location')
-                  :
-                  this.renderTextInput('location', '', 'Location')
-              }
-              { this.state.website ?
-                this.renderTextInput('website', this.state.website, 'Website')
-                :
-                this.renderTextInput('website', '', 'Website')
-              }
+              <div className="col s12 m6 l6">
+                <TextInput
+                  id='location'
+                  defaultValue=''
+                  field={this.state.location}
+                  onChange={d => this.setState({location: d})}
+                  label='Location'
+                />
+              </div>
+              <div className="col s12 m6 l6">
+                <TextInput
+                  id='website'
+                  defaultValue=''
+                  field={this.state.website}
+                  onChange={d => this.setState({website: d})}
+                  label='Website'
+                />
+              </div>
               <InputTags
                 id='select-areas'
                 label='Add Interests'
                 hint='+Interest'
-                tags={this.state.tags}
-                selectedTags={this.state.selectedTags}
-                setState={ds => this.setState({selectedTags: ds})}
+                tags={availableInterests}
+                selectedTags={this.state.interests}
+                setState={ds => this.setState({interests: ds})}
             />
             </div>
             <div className="col s12 m12 l12 center">
-              <button className="btn" type="submit" name="action">Save Changes
-              </button>
+              <a className="btn" onClick={this.handleSubmit.bind(this, this.state)}>
+                Save Changes
+              </a>
             </div>
-          </form>
+          </div>
         </div>
       </div>
     )

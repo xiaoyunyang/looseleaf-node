@@ -910,3 +910,52 @@ nav .categories-wrapper .categories {
   }
 
 }
+
+
+/******** Alert *******/
+#alert-box i {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  font-size: 20px;
+  cursor:pointer;
+  padding-right: 20px;
+}
+#alert-box {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 80px;
+  z-index: 999;
+}
+.alert-danger, .alert-success, .alert-info {
+  border: 1px solid transparent;
+  border-radius: .25rem;
+}
+.alert-danger {
+  color: #721c24;
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+
+}
+.alert-danger i {
+  color: #721c24;
+}
+.alert-success {
+  color: #155724;
+  background-color: #d4edda;
+  border-color: #c3e6cb;
+}
+.alert-success i {
+  color: #155724;
+}
+.alert-info {
+  color: #0c5460;
+  background-color: #d1ecf1;
+  border-color: #bee5eb;
+}
+.alert-info i {
+  color: #0c5460;
+}
+/* #alert-box .row {
+  height: 37px;
+} */

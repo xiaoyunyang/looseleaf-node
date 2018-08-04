@@ -89,6 +89,7 @@ api.get('/project/:urlSlug', (req, res) => {
 });
 
 // Users ======================================================================
+// Get all users
 api.get('/user', (req, res) => {
   User.find({}, (err, users) => {
     const usersOut = [];
@@ -98,7 +99,9 @@ api.get('/user', (req, res) => {
         username: user.username,
         displayName: user.displayName,
         picture: user.picture,
-        bio: user.bio
+        bio: user.bio,
+        website: user.website,
+        interests: user.interests
       };
       usersOut.push(userInfo);
     });
@@ -107,12 +110,11 @@ api.get('/user', (req, res) => {
   });
 });
 
+// Update user based on id
 api.post('/user/:id', (req, res, next) => {
   User.findById(req.params.id, (err, user) => {
     if (err) return res.send('Error');
     const formFields = req.body.formFields;
-    console.log(chalk.red(formFields.displayName));
-
     const username = formFields.username || user.username;
     const displayName = formFields.displayName || user.displayName;
     const email = formFields.email || user.email;
@@ -120,6 +122,14 @@ api.post('/user/:id', (req, res, next) => {
     const interests = formFields.interests || user.interests;
     const bio = formFields.bio || user.bio;
     const website = formFields.website || user.website;
+console.log(chalk.blue(formFields.interests))
+    if (!username) {
+      res.statusText = 'error';
+
+      // TODO: Below is the way we should be sending error messages. Make the same change
+      // to POST /project and POST /auth/login
+      return res.send({ status: 'error', msg: 'username cannot be empty!' });
+    }
 
     user.set({
       username,
@@ -130,11 +140,8 @@ api.post('/user/:id', (req, res, next) => {
       bio,
       website
     });
-
     user.save(next);
-
-    console.log(chalk.blue(user));
-    return res.send(user.username);
+    return res.send({ status: 'success', msg: 'change success!' });
   });
 });
 
