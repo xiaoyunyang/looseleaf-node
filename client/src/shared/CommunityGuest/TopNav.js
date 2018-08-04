@@ -29,8 +29,8 @@ export default class TopNav extends React.Component {
 
     if (typeof window !== undefined) {
       $(window).scroll(function(){
-        this.toggleSignupBtnVisibility()
-      }.bind(this))
+        this.toggleSignupBtnVisibility();
+      }.bind(this));
     }
   }
   initializeSticky() {

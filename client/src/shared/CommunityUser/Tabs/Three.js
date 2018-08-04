@@ -5,6 +5,7 @@ import { tabs } from '../routes';
 import { getApiData } from '../../../lib/helpers';
 import { staticApiLink } from '../../data/apiLinks';
 import { getAppRoute } from '../../data/appRoutes';
+import UsersCollections from '../../components/Collection/Users';
 
 export default class Three extends React.Component {
   constructor(props) {
@@ -46,9 +47,7 @@ export default class Three extends React.Component {
         <div className="container">
           <div id={tabs.three} className="col s12">
             <h3>People</h3>
-            {
-                this.state.users ? this.renderUsers(this.state.users) : null
-              }
+            <UsersCollections users={this.state.users} />
           </div>
         </div>
       </div>

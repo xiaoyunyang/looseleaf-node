@@ -4,27 +4,25 @@ import { tabs } from '../routes';
 import { getApiData } from '../../../lib/helpers';
 import { staticApiLink } from '../../data/apiLinks';
 import { getAppRoute } from '../../data/appRoutes';
+import UsersCollections from '../../components/Collection/Users';
 
 export default class Three extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       users: null
-    }
+    };
   }
   componentDidMount() {
-    const setApiData = data => this.setState({users: data});
-    //const apiLink = 'http://localhost:3001/api/project';
-
+    const setApiData = data => this.setState({ users: data });
     const apiLink = staticApiLink.users;
-    console.log('api links', apiLink)
-    getApiData(apiLink, setApiData)
+    getApiData(apiLink, setApiData);
   }
 
   renderUsers2(users) {
     return (
       <div>
-        { users.map((d,i) => {
+        { users.map((d) => {
           return (
             <div className="row" key={`user-${d.username}`}>
               <div className="col s12 m12 l12">
@@ -38,27 +36,6 @@ export default class Three extends React.Component {
       </div>
     )
   }
-  renderUsers(users) {
-    return (
-      <ul id="community-people" className="collection">
-        {
-          users.map((d,i) => (
-            <li key={`user-${d.username}`} className="collection-item avatar">
-              <a href={getAppRoute('userPortfolio')(d.username)}>
-              <img src={d.picture} alt={d.username} />
-              </a>
-              <div style={{paddingLeft: 20}}>
-                <a href={getAppRoute('userPortfolio')(d.username)}>
-                    {d.displayName}
-                  </a>
-                <p>{d.bio}</p>
-              </div>
-            </li>
-          ))
-        }
-      </ul>
-    );
-  }
   render() {
     return (
       <div>
@@ -66,9 +43,7 @@ export default class Three extends React.Component {
         <div className="container">
           <div id={tabs.three} className="col s12">
             <h3>People</h3>
-              {
-                this.state.users ? this.renderUsers(this.state.users) : null
-              }
+            <UsersCollections users={this.state.users} />
           </div>
         </div>
       </div>
