@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { getAppRoute } from '../../data/appRoutes';
 
@@ -23,5 +24,8 @@ const Users = ({ users }) => (
     }
   </ul>
 );
+Users.propTypes = {
+  users: PropTypes.object.isRequired
+};
 
 export default Users;

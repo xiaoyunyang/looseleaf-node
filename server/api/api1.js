@@ -65,12 +65,14 @@ api.post('/project', (req, res, next) => {
   return res.send(slug);
 });
 
-
 api.get('/project', (req, res) => {
-  Project.find({}, (err, projects) => {
-    res.send(projects);
-  });
+  Project.find({}).sort({ createdAt: -1 }).limit(10).exec(
+    (err, projects) => {
+      res.send(projects);
+    }
+  );
 });
+
 api.get('/project/:urlSlug', (req, res) => {
   Project.find({ urlSlug: req.params.urlSlug }, (err, project) => {
     if (err) {

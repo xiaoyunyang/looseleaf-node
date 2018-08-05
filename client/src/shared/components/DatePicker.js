@@ -15,27 +15,27 @@ export default class DatePicker extends React.Component {
       clear: 'Clear',
       close: 'Ok',
       closeOnSelect: false,
-      onClose: function() {
+      onClose() {
         $(":focus").blur();
       },
-      onSet: function(context) {
-        this.handleDueDateChange(context.select)
+      onSet: function (context) {
+        this.handleDueDateChange(context.select);
       }.bind(this)
     });
   }
   handleDueDateChange(dueDate_ms) {
-    var dueDate = new Date(dueDate_ms);
-    this.props.setState(dueDate)
+    const dueDate = new Date(dueDate_ms);
+    this.props.setState(dueDate);
   }
   render() {
     return (
       <div className="input-field col l11 m11 s11">
         <input type="text"
-           placeholder="Click to select date"
-           onChange={this.handleDueDateChange}
-           className="datepicker"
-         />
-     </div>
+          placeholder="Click to select date"
+          onChange={this.handleDueDateChange}
+          className="datepicker"
+        />
+      </div>
     );
   }
 }
