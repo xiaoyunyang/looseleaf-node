@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 import { getAppRoute } from '../../data/appRoutes';
 import { dateFormatted } from '../../../lib/helpers';
 
-const Users = ({ projects }) => (
+const Projects = ({ projects }) => (
   <div>
     { projects ?
       projects.map(d => {
         return (
-          <div className="row" key={`projects-${projects.urlSlug}`}>
+          <div className="row" key={`projects-${d.urlSlug}`}>
             <div className="col s12 m12 l12">
               <div className="card-panel">
                 <a href={getAppRoute('projectPage')(d.urlSlug)} dangerouslySetInnerHTML={{ __html: d.title }} />
@@ -23,8 +23,8 @@ const Users = ({ projects }) => (
     }
   </div>
 );
-Users.propTypes = {
-  users: PropTypes.object.isRequired
+Projects.propTypes = {
+  projects: PropTypes.array
 };
 
-export default Users;
+export default Projects;

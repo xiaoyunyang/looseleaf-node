@@ -19,6 +19,7 @@ export default class PostEditor extends React.Component {
       return 'not-handled';
     }
     render() {
+      console.log(this.props)
       return (
         <div className="card feed">
         <div className="card-content">

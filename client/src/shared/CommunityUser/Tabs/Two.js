@@ -10,7 +10,8 @@ export default ({ route, user, community }) => (
     <div className="container main">
       <div id={tabs.two} className="col s12">
         <h3>Announcements</h3>
-        <PostEditor 
+        <PostEditor
+          userId={user._id}
           userDisplayName={user.displayName}
           userPic={user.picture}
           placeholder="Post an announcement to this community."
