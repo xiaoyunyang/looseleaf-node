@@ -2,6 +2,7 @@ import React from 'react';
 import fetch from 'isomorphic-fetch';
 import TopNav from '../../../components/TopNavUser';
 import People from './People';
+import PostEditor from '../../../components/Form/PostEditor';
 
 const dueDateFormatted = (dateStr) => {
   return dateStr ? new Date(dateStr).toDateString() : '';
@@ -110,16 +111,17 @@ export default class Main extends React.Component {
       </div>
     );
   }
-  renderFeed() {
+  renderFeed(userDisplayName, userPic) {
     return (
       <div>
         <h5>Updates</h5>
         <div className="row">
           <div className="col s12 m12 l12 user-feed">
-
-            {
-              this.renderNewPost()
-            }
+            <PostEditor 
+              userDisplayName={userDisplayName}
+              userPic={userPic}
+              placeholder="Post an update or question to this project."
+            />
             {
               updates.map((d, i) => {
                 return this.renderPost(d, i);
@@ -147,7 +149,7 @@ export default class Main extends React.Component {
               this.renderProjectContributors(this.props.project.contributors) : null
           }
           {
-            this.renderFeed()
+            this.renderFeed(this.props.user.displayName, this.props.user.picture)
           }
         </div>
       </div>

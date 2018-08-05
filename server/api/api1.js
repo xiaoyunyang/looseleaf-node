@@ -65,8 +65,10 @@ api.post('/project', (req, res, next) => {
   return res.send(slug);
 });
 
+// NOTE: No limit for how many can be displayed...but obviously we
+// want to put a limit if the number gets really big.
 api.get('/project', (req, res) => {
-  Project.find({}).sort({ createdAt: -1 }).limit(10).exec(
+  Project.find({}).sort({ createdAt: -1 }).limit().exec(
     (err, projects) => {
       res.send(projects);
     }

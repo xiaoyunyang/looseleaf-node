@@ -18,6 +18,7 @@
     "cookie-parser": "^1.4.3",
     "css-loader": "0.28.7",
     "dotenv": "4.0.0",
+    "draft-js": "^0.10.5",
     "es6-promise": "^4.2.4",
     "eslint": "^4.19.1",
     "eslint-config-react-app": "^2.1.0",

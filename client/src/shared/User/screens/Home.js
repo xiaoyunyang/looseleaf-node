@@ -1,6 +1,7 @@
 import React from 'react';
 import fetch from 'isomorphic-fetch';
 import TopNav from '../../components/TopNavUser';
+import PostEditor from '../../components/Form/PostEditor';
 
 const updates = [
   'A project update from someone you follow.',
@@ -89,29 +90,6 @@ class Home extends React.Component {
       </div>
     );
   }
-  renderNewPost() {
-    return (
-      <div className="card feed">
-        <div className="card-content">
-          <div className="row feed-user">
-            <div className="col">
-              <img className="circle" src={this.props.user.picture} alt=""/>
-            </div>
-            <div className="col">
-              <p>{this.props.user.displayName}</p>
-            </div>
-          </div>
-          <a href=''>
-            <i className="material-icons">create</i> {'Post an announcement to your community or a project update'}
-          </a>
-        </div>
-        <div className="card-action">
-          <a href="">Project Update</a>
-          <a href="">Announcement</a>
-        </div>
-      </div>
-    );
-  }
   renderFeed(msg, id) {
     return (
       <div key={id} className="card feed">
@@ -145,9 +123,11 @@ class Home extends React.Component {
               }
             </div>
             <div className="col s12 m8 l9 user-feed">
-              {
-                this.renderNewPost()
-              }
+              <PostEditor 
+                userDisplayName={this.props.user.displayName}
+                userPic={this.props.user.picture}
+                placeholder="Post an announcement to your community or a project update."
+              />
               {
                 this.renderFeed(this.state.resHello, -1)
               }

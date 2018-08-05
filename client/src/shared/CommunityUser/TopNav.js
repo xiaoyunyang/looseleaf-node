@@ -91,7 +91,7 @@ export default class TopNav extends React.Component {
         <div className="tagline">
           {community.desc}
         </div>
-        { this.renderJoinBtn('Join LooseLeaf', 'signup-btn-header') }
+        { this.renderJoinBtn('Join This Community', 'signup-btn-header') }
       </div>
     );
   }

@@ -1,9 +1,8 @@
 import React from 'react';
 import TopNav from '../TopNav';
-import UserListing from './UserListing';
 import { tabs } from '../routes';
 
-export default ( {route, community} ) => (
+export default ({ route, community }) => (
   <div>
     <TopNav route={route} community={community} />
     <div className="container main">

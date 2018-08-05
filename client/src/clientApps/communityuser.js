@@ -10,6 +10,7 @@ import App from '../shared/CommunityUser/App';
 import '../lib/tabs';
 import '../lib/chips';
 import '../assets/index.css';
+import 'draft-js/dist/Draft.css';
 
 // Grab the server serialized state off of the window object.
 const initialState = window.__PRELOADED_STATE__;

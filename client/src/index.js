@@ -15,6 +15,7 @@ import AppCommunityGuest from './craApps/AppCommunityGuest';
 import AppLanding from './craApps/AppLanding';
 import AppRecipe from './craApps/AppRecipe';
 import './assets/index.css';
+import 'draft-js/dist/Draft.css';
 
 /*
  * Main entry point for the create-react-app
@@ -29,7 +30,7 @@ const Apps = {
   recipe: AppRecipe
 };
 
-const App = Apps.communityGuest;
+const App = Apps.project;
 
 const render = (Component) => {
   ReactDOM.render(
