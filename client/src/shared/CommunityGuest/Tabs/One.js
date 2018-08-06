@@ -22,9 +22,11 @@ export default class One extends React.Component {
       <div>
         <TopNav route={this.props.route} community={this.props.community} />
         <div className="container">
-          <div id={tabs.one} className="col s12">
-            <h3>Projects</h3>
-            <Projects projects={this.state.projects} />
+          <div className="row">
+            <div id={tabs.one} className="col s12">
+              <h3>Projects</h3>
+              <Projects projects={this.state.projects} />
+            </div>
           </div>
         </div>
       </div>

@@ -16,6 +16,8 @@ import AppLanding from './craApps/AppLanding';
 import AppRecipe from './craApps/AppRecipe';
 import './assets/index.css';
 import 'draft-js/dist/Draft.css';
+import 'draft-js-inline-toolbar-plugin/lib/plugin.css';
+import 'draft-js-anchor-plugin/lib/plugin.css';
 
 /*
  * Main entry point for the create-react-app
@@ -30,7 +32,7 @@ const Apps = {
   recipe: AppRecipe
 };
 
-const App = Apps.communityUser;
+const App = Apps.user;
 
 const render = (Component) => {
   ReactDOM.render(

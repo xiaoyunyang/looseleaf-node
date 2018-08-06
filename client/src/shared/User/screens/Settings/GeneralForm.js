@@ -75,9 +75,9 @@ export default class GeneralForm extends React.Component {
               // this.renderPasswordInput()
             }
             <div className="col s12 m12 l12 center">
-              <btn className="btn" onClick={this.handleSubmit.bind(this, this.state)}>
+              <button className="btn" onClick={this.handleSubmit.bind(this, this.state)}>
                 Save Changes
-              </btn>
+              </button>
             </div>
           </div>
         </div>

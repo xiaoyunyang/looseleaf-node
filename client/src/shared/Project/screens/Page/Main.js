@@ -32,6 +32,9 @@ const Reactions = () => (
 // https://shripadk.github.io/react/docs/jsx-gotchas.html but it gets the job done.
 // A TODO would be to make this work without dangerouslySetInnerHTML.
 export default class Main extends React.Component {
+  handlePost(d) {
+    console.log('creating post for ', d);
+  }
   renderProjectInfo(project) {
     // TODO and NOTE: Make sure the default values match the redux init state values.
     // Otherwise, there's going to be a warning about how server and client do not match.
@@ -111,13 +114,14 @@ export default class Main extends React.Component {
       </div>
     );
   }
-  renderFeed(userDisplayName, userPic) {
+  renderFeed(userId, userDisplayName, userPic) {
     return (
       <div>
         <h5>Updates</h5>
         <div className="row">
           <div className="col s12 m12 l12 user-feed">
             <PostEditor 
+              handlePost={d => this.handlePost(d)}
               userDisplayName={userDisplayName}
               userPic={userPic}
               placeholder="Post an update or question to this project."
@@ -149,7 +153,7 @@ export default class Main extends React.Component {
               this.renderProjectContributors(this.props.project.contributors) : null
           }
           {
-            this.renderFeed(this.props.user.displayName, this.props.user.picture)
+            this.renderFeed(this.props.user._id, this.props.user.displayName, this.props.user.picture)
           }
         </div>
       </div>

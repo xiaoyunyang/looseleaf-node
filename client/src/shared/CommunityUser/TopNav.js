@@ -205,7 +205,6 @@ export default class TopNav extends React.Component {
     );
   }
   render() {
-    console.log('In TopNavUser for Community', this.props)
     let selected = (typeof this.props.route.path === 'string')
                     ? getPageName(this.props.route.path) : '';
 

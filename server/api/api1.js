@@ -100,6 +100,7 @@ api.get('/user', (req, res) => {
       const userInfo = {
         username: user.username,
         displayName: user.displayName,
+        email: user.email,
         picture: user.picture,
         bio: user.bio,
         website: user.website,
@@ -116,7 +117,23 @@ api.get('/user', (req, res) => {
 api.post('/user/:id', (req, res, next) => {
   User.findById(req.params.id, (err, user) => {
     if (err) return res.send('Error');
+
     const formFields = req.body.formFields;
+    console.log(chalk.blue(formFields.email))
+    if (formFields.username === '') {
+      res.statusText = 'error';
+      // TODO: Below is the way we should be sending error messages. Make the same change
+      // to POST /project and POST /auth/login
+      return res.send({ status: 'error', msg: 'username cannot be empty!' });
+    }
+    if (formFields.email === '') {
+      res.statusText = 'error';
+      // TODO: Below is the way we should be sending error messages. Make the same change
+      // to POST /project and POST /auth/login
+      return res.send({ status: 'error', msg: 'email cannot be empty!' });
+    }
+
+
     const username = formFields.username || user.username;
     const displayName = formFields.displayName || user.displayName;
     const email = formFields.email || user.email;
@@ -125,12 +142,6 @@ api.post('/user/:id', (req, res, next) => {
     const bio = formFields.bio || user.bio;
     const website = formFields.website || user.website;
 
-    if (!username) {
-      res.statusText = 'error';
-      // TODO: Below is the way we should be sending error messages. Make the same change
-      // to POST /project and POST /auth/login
-      return res.send({ status: 'error', msg: 'username cannot be empty!' });
-    }
     // TODO: Make sure username cannot contain any spaces or special characters
 
     user.set({

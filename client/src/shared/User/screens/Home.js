@@ -67,7 +67,9 @@ class Home extends React.Component {
 
     return body;
   }
-
+  handlePost(d) {
+    console.log('creating post for ', d);
+  }
   renderUserCard() {
     return (
       <div className="card-panel hide-on-small-only" id="user-card">
@@ -123,7 +125,8 @@ class Home extends React.Component {
               }
             </div>
             <div className="col s12 m8 l9 user-feed">
-              <PostEditor 
+              <PostEditor
+                handlePost={d => this.handlePost(d)}
                 userDisplayName={this.props.user.displayName}
                 userPic={this.props.user.picture}
                 placeholder="Post an announcement to your community or a project update."
