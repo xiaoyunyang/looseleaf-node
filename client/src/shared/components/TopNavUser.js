@@ -72,10 +72,10 @@ export default class TopNavUser extends React.Component {
       alignment: 'left', // Displays dropdown with edge aligned to the left of button
       stopPropagation: false // Stops event propagation
     });
-    if(typeof window !== undefined) {
+    if (typeof window !== 'undefined') {
       $(window).scroll(function(){
         this.toggleNavbarBoxShadow()
-      }.bind(this))
+      }.bind(this));
     }
   }
   // TODO: I don't know if there's a more elegant way to do this in css

@@ -25,10 +25,9 @@ export default class Three extends React.Component {
   renderUsers(users) {
     return (
       <div>
-        { users.map((d, i) => {
-          console.log(d);
+        { users.map(d => {
           return (
-            <div className="row" key={i}>
+            <div className="row" key={`tab3-${d.username}`}>
               <div className="col s12 m12 l12">
                 <div className="card-panel">
                   <a href={getAppRoute('userPortfolio')(d.username)} dangerouslySetInnerHTML={{ __html: d.displayName }} />

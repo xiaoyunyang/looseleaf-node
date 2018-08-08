@@ -133,7 +133,6 @@ api.post('/user/:id', (req, res, next) => {
       return res.send({ status: 'error', msg: 'email cannot be empty!' });
     }
 
-
     const username = formFields.username || user.username;
     const displayName = formFields.displayName || user.displayName;
     const email = formFields.email || user.email;
@@ -142,7 +141,11 @@ api.post('/user/:id', (req, res, next) => {
     const bio = formFields.bio || user.bio;
     const website = formFields.website || user.website;
 
-    // TODO: Make sure username cannot contain any spaces or special characters
+    // TODO: If user is making a request to change the username,
+    // (1) Make sure username cannot contain any spaces or special characters.
+    // (2) Make sure the desired username is not already taken
+    // (3) If username change is successful, make sure to have the server
+    // redirect to the settings page with username changed?
 
     user.set({
       username,
