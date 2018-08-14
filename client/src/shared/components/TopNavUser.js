@@ -85,9 +85,9 @@ export default class TopNavUser extends React.Component {
     const boxShadow = "0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2)";
     const topNav = $("#user-navbar-fixed .navbar-fixed nav");
     const tabs = $('.tabs-container');
-    if(tabs.hasClass('pinned')) {
+    if (tabs.hasClass('pinned')) {
       topNav.css('box-shadow', 'none');
-    } else if(tabs.hasClass('pin-top')) {
+    } else if (tabs.hasClass('pin-top')) {
       topNav.css('box-shadow', boxShadow);
     }
   }

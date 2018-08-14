@@ -5,7 +5,9 @@ import {
   EditorState,
   RichUtils } from 'draft-js';
 import Editor from 'draft-js-plugins-editor';
-import createMarkdownShortcutsPlugin from 'draft-js-markdown-shortcuts-plugin';
+import createMarkdownPlugin from 'draft-js-markdown-plugin';
+
+// import createMarkdownShortcutsPlugin from 'draft-js-markdown-shortcuts-plugin';
 import createInlineToolbarPlugin, { Separator } from 'draft-js-inline-toolbar-plugin';
 import {
   ItalicButton,
@@ -65,7 +67,7 @@ const { InlineToolbar } = inlineToolbarPlugin;
 const plugins = [
   inlineToolbarPlugin,
   linkPlugin,
-  createMarkdownShortcutsPlugin()
+  createMarkdownPlugin()
 ];
 
 export default class PostEditor extends React.Component {
@@ -75,12 +77,12 @@ export default class PostEditor extends React.Component {
       {
         strategy: findLinkEntities,
         component: Link,
-      },
+      }
     ]);
     this.state = {
       editorState: EditorState.createEmpty(decorator),
       showURLInput: false,
-      url: '',
+      url: ''
     };
     // Functions called by the render function
     this.onChange = (editorState) => this.setState({ editorState });
