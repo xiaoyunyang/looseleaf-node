@@ -1,7 +1,6 @@
 import React from 'react';
 import {
   convertToRaw,
-  CompositeDecorator,
   EditorState,
   RichUtils } from 'draft-js';
 import Editor from 'draft-js-plugins-editor';
@@ -27,42 +26,7 @@ Add Link Examples from Draft-js github: https://goo.gl/3NG89J
 Codepen: https://codepen.io/xiaoyunyang/pen/QBBaPq
 */
 
-//import linkStyles from './linkStyles.modulecss';
-
-// const linkStyles = {
-
-//   //.input
-//   input: {
-//       height: "34px",
-//       width: "220px",
-//       padding: "0 12px",
-//       fontSize: "15px",
-//       fontFamily: "inherit",
-//       backgroundColor: "transparent",
-//       border: "none",
-//       color: "#ddd"
-//       },
-//   //.input:focus
-//       inputFocus: {
-//               outline: "none"
-//       },
-//   //.input::placeholder
-//       inputPlaceholderClass: {
-//               color: "#aaa"
-//       },
-//   //.inputInvalid
-//       inputInvalid: {
-//               color: "#e65757"
-//       },
-//   //.link
-//       link: {
-//               color: "#2996da",
-//               textDecoration: "underline"
-//       }
-//   }
-
 const linkPlugin = createLinkPlugin({
-  //theme: linkStyles,
   placeholder: 'Enter a URL and press enter'
 });
 
@@ -84,9 +48,6 @@ const inlineToolbarPlugin = createInlineToolbarPlugin({
 // const inlineToolbarPlugin = createInlineToolbarPlugin();
 const { InlineToolbar } = inlineToolbarPlugin;
 
-// TODO: linkPlugin validation doesn't highlight when the provided input is
-// not a valid url. Either disable the validation and accept any input or find
-// a way to fix this
 // TODO: Is there a way to recognize "cmd + k" or "ctrl + k" to open the url input?
 const plugins = [
   inlineToolbarPlugin,
@@ -98,7 +59,8 @@ export default class PostEditor extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      editorState: EditorState.createEmpty()
+      editorState: EditorState.createEmpty(),
+      clientModeOn: false
     };
     // Functions called by the render function
     this.onChange = (editorState) => this.setState({ editorState });
@@ -107,6 +69,9 @@ export default class PostEditor extends React.Component {
     // TODO: Is there a way to increase the height of the input area
     // when on focus?
     this.focus = () => this.refs.editor.focus();
+  }
+  componentDidMount() {
+    this.setState({clientModeOn: true});
   }
   // Here, we are passing a command (like bold or underline) as an argument,
   // which will get passed to the RichUtils.handleKeyCommand, which handles
@@ -124,7 +89,10 @@ export default class PostEditor extends React.Component {
     console.log(convertToRaw(content));
     this.props.handlePost(this.state.editorState);
   }
-  render() {
+  renderEditor() {
+    if (!this.state.clientModeOn) {
+      return null;
+    }
     return (
       <div className="card feed">
         <div className="card-content">
@@ -136,7 +104,7 @@ export default class PostEditor extends React.Component {
               <p>{this.props.userDisplayName}</p>
             </div>
           </div>
-          <div id="draft-js" className="draft-js-editor">
+          <div className="draft-js-editor">
             <Editor
               editorState={this.state.editorState}
               plugins={plugins}
@@ -154,6 +122,11 @@ export default class PostEditor extends React.Component {
           </button>
         </div>
       </div>
+    );
+  }
+  render() {
+    return (
+      <div>{ this.renderEditor() }</div>
     );
   }
 }

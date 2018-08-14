@@ -1016,7 +1016,7 @@ nav .categories-wrapper .categories {
 }
 
 /* Link */
-#draft-js .draftJsMentionPlugin__input__1Wxng {
+.draft-js-editor .draftJsMentionPlugin__input__1Wxng {
   border-bottom: none !important;
   margin: 0 0 0 0 !important;
   height: 34px !important;
@@ -1029,25 +1029,25 @@ nav .categories-wrapper .categories {
   color: #444 !important;
 }
 
-#draft-js .draftJsMentionPlugin__input__1Wxng:focus {
+.draft-js-editor .draftJsMentionPlugin__input__1Wxng:focus {
   border-bottom: none !important;
   -webkit-box-shadow: none !important;
   box-shadow: none !important;
   outline: none !important;
 }
 
-#draft-js .draftJsMentionPlugin__input__1Wxng::-webkit-input-placeholder {
+.draft-js-editor .draftJsMentionPlugin__input__1Wxng::-webkit-input-placeholder {
   color: #888 !important;
 }
 
-#draft-js .draftJsMentionPlugin__input__1Wxng:-ms-input-placeholder {
+.draft-js-editor .draftJsMentionPlugin__input__1Wxng:-ms-input-placeholder {
   color: #888 !important;
 }
 
-#draft-js .draftJsMentionPlugin__input__1Wxng::placeholder {
+.draft-js-editor .draftJsMentionPlugin__input__1Wxng::placeholder {
   color: #888 !important;
 }
 
-#draft-js .draftJsMentionPlugin__inputInvalid__X9hHv {
-  color: #e65757 !important;
+.draft-js-editor .draftJsMentionPlugin__inputInvalid__X9hHv {
+  color: rgb(184, 115, 115) !important;
 }

@@ -125,11 +125,11 @@ class Home extends React.Component {
               }
             </div>
             <div className="col s12 m8 l9 user-feed">
-              <PostEditor
+               <PostEditor
                 handlePost={d => this.handlePost(d)}
                 userDisplayName={this.props.user.displayName}
                 userPic={this.props.user.picture}
-                placeholder="Post an announcement to your community or a project update."
+                placeholder="Post an announcement to a project or community."
               />
               {
                 this.renderFeed(this.state.resHello, -1)

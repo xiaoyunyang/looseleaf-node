@@ -9,7 +9,6 @@ import App from '../shared/Landing/App';
 import '../lib/tabs';
 import '../lib/chips';
 import '../assets/index.css';
-import 'draft-js/dist/Draft.css';
 
 console.log('Browser packed file loaded');
 

@@ -15,7 +15,7 @@ export default class Two extends React.Component {
         <div className="container">
           <div className="row">
             <div id={tabs.two} className="col s12 m12 l12">
-              <h3>Announcements</h3>
+              <h3>Announcements</h3>      
               <PostEditor
                 handlePost={d => this.handlePost(d)}
                 userDisplayName={this.props.user.displayName}
