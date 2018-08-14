@@ -1014,7 +1014,9 @@ nav .categories-wrapper .categories {
 .headlineButton:focus {
   background: #f3f3f3;
 }
-.draft-js-editor input {
+
+/* Link */
+#draft-js .draftJsMentionPlugin__input__1Wxng {
   border-bottom: none !important;
   margin: 0 0 0 0 !important;
   height: 34px !important;
@@ -1024,36 +1026,28 @@ nav .categories-wrapper .categories {
   font-family: inherit !important;
   background-color: transparent !important;
   border: none !important;
-  color: #555 !important;
+  color: #444 !important;
 }
-/* #draft-js, input {
-  border-bottom: none;
-  margin: 0 0 0 0;
-  height: 34px;
-  width: 420px;
-  padding: 0 12px;
-  font-size: 15px;
-  font-family: inherit;
-  background-color: transparent;
-  border: none;
-  color: #ddd;
-} */
-.draft-js-editor input:focus {
+
+#draft-js .draftJsMentionPlugin__input__1Wxng:focus {
   border-bottom: none !important;
   -webkit-box-shadow: none !important;
   box-shadow: none !important;
   outline: none !important;
 }
 
-.draft-js-editor input::placeholder {
-  color: #ddd;
+#draft-js .draftJsMentionPlugin__input__1Wxng::-webkit-input-placeholder {
+  color: #888 !important;
 }
 
-.inputInvalid {
-  color: #e65757;
+#draft-js .draftJsMentionPlugin__input__1Wxng:-ms-input-placeholder {
+  color: #888 !important;
 }
 
-.link {
-  color: #2996da;
-  text-decoration: underline;
+#draft-js .draftJsMentionPlugin__input__1Wxng::placeholder {
+  color: #888 !important;
+}
+
+#draft-js .draftJsMentionPlugin__inputInvalid__X9hHv {
+  color: #e65757 !important;
 }

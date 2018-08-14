@@ -41,6 +41,7 @@
     "jquery": "^3.3.1",
     "marked": "^0.3.19",
     "materialize-css": "^0.100.2",
+    "medium-draft": "^0.6.0-beta1",
     "object-assign": "4.1.1",
     "postcss-flexbugs-fixes": "^3.3.0",
     "postcss-loader": "2.0.8",
