@@ -65,6 +65,7 @@ export default class PostEditor extends React.Component {
     // Functions called by the render function
     this.onChange = (editorState) => this.setState({ editorState });
     this.handleKeyCommand = this.handleKeyCommand.bind(this);
+    this.renderPlaceholder = this.renderPlaceholder.bind(this);
 
     // TODO: Is there a way to increase the height of the input area
     // when on focus?
@@ -83,6 +84,11 @@ export default class PostEditor extends React.Component {
       return 'handled';
     }
     return 'not-handled';
+  }
+  renderPlaceholder(placeholder, editorState) {
+    const contentState = editorState.getCurrentContent();
+    const shouldHide = contentState.hasText() || contentState.getBlockMap().first().getType() !== 'unstyled';
+    return shouldHide ? '' : placeholder;
   }
   handlePost() {
     const content = this.state.editorState.getCurrentContent();
@@ -110,7 +116,7 @@ export default class PostEditor extends React.Component {
               plugins={plugins}
               handleKeyCommand={this.handleKeyCommand}
               onChange={this.onChange}
-              placeholder={this.props.placeholder}
+              placeholder={this.renderPlaceholder(this.props.placeholder, this.state.editorState)}
               ref={(element) => { this.editor = element; }}
             />
           <InlineToolbar />
