@@ -1,8 +1,10 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {
   convertToRaw,
   EditorState,
-  RichUtils } from 'draft-js';
+  RichUtils
+} from 'draft-js';
 import Editor from 'draft-js-plugins-editor';
 import createMarkdownPlugin from 'draft-js-markdown-plugin';
 
@@ -56,6 +58,9 @@ const plugins = [
 ];
 
 export default class PostEditor extends React.Component {
+  static defaultProps = {
+    placeholder: 'Write something...'
+  }
   constructor(props) {
     super(props);
     this.state = {
@@ -66,13 +71,14 @@ export default class PostEditor extends React.Component {
     this.onChange = (editorState) => this.setState({ editorState });
     this.handleKeyCommand = this.handleKeyCommand.bind(this);
     this.renderPlaceholder = this.renderPlaceholder.bind(this);
+    this.handlePost = this.handlePost.bind(this);
 
     // TODO: Is there a way to increase the height of the input area
     // when on focus?
     this.focus = () => this.refs.editor.focus();
   }
   componentDidMount() {
-    this.setState({clientModeOn: true});
+    this.setState({ clientModeOn: true });
   }
   // Here, we are passing a command (like bold or underline) as an argument,
   // which will get passed to the RichUtils.handleKeyCommand, which handles
@@ -85,17 +91,16 @@ export default class PostEditor extends React.Component {
     }
     return 'not-handled';
   }
-  renderPlaceholder(placeholder, editorState) {
-    const contentState = editorState.getCurrentContent();
-    const shouldHide = contentState.hasText() || contentState.getBlockMap().first().getType() !== 'unstyled';
-    return shouldHide ? '' : placeholder;
-  }
   handlePost() {
     const content = this.state.editorState.getCurrentContent();
     // content to save to the db
     const contentToSave = JSON.stringify(convertToRaw(content));
-    //console.log('PostEditor contentToSave - ', contentToSave)
     this.props.handlePost(contentToSave);
+  }
+  renderPlaceholder(placeholder, editorState) {
+    const contentState = editorState.getCurrentContent();
+    const shouldHide = contentState.hasText() || contentState.getBlockMap().first().getType() !== 'unstyled';
+    return shouldHide ? '' : placeholder;
   }
   renderEditor() {
     if (!this.state.clientModeOn) {
@@ -121,11 +126,11 @@ export default class PostEditor extends React.Component {
               placeholder={this.renderPlaceholder(this.props.placeholder, this.state.editorState)}
               ref={(element) => { this.editor = element; }}
             />
-          <InlineToolbar />
+            <InlineToolbar />
           </div>
         </div>
         <div className="card-action">
-          <button className="btn" onClick={this.handlePost.bind(this)}>
+          <button className="btn" onClick={this.handlePost}>
             Post
           </button>
         </div>
@@ -138,3 +143,10 @@ export default class PostEditor extends React.Component {
     );
   }
 }
+
+PostEditor.propTypes = {
+  handlePost: PropTypes.func.isRequired,
+  userDisplayName: PropTypes.string.isRequired,
+  userPic: PropTypes.string.isRequired,
+  placeholder: PropTypes.string
+};

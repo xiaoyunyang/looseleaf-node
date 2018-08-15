@@ -29,6 +29,6 @@ class FlashNotif extends React.Component {
 FlashNotif.propTypes = {
   state: PropTypes.string.isRequired,
   msg: PropTypes.string
-}
+};
 
 export default FlashNotif;

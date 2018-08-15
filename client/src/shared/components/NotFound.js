@@ -33,4 +33,4 @@ const NotFound = () => (
   </Status>
 );
 
-export default NotFound
+export default NotFound;
