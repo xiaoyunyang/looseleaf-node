@@ -92,8 +92,10 @@ export default class PostEditor extends React.Component {
   }
   handlePost() {
     const content = this.state.editorState.getCurrentContent();
-    console.log(convertToRaw(content));
-    this.props.handlePost(this.state.editorState);
+    // content to save to the db
+    const contentToSave = JSON.stringify(convertToRaw(content));
+    //console.log('PostEditor contentToSave - ', contentToSave)
+    this.props.handlePost(contentToSave);
   }
   renderEditor() {
     if (!this.state.clientModeOn) {
