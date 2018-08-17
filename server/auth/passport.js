@@ -147,6 +147,10 @@ console.log('login-local req.body', req.body);
 
         // if the user is found, then log them in
         if (user) {
+          user.set({
+            lastLoggedIn: new Date()
+          });
+          user.save();
           return done(null, user); // user found, return that user
         }
         // if there is no user found with that facebook id, create them
@@ -171,6 +175,7 @@ console.log('login-local req.body', req.body);
           newUser.gender = profile.gender;
           newUser.location = profile._json.location.name;
           newUser.picture = `https://graph.facebook.com/${profile.id}/picture?type=large`;
+          newUser.lastLoggedIn = new Date();
           // save our user to the database
           newUser.save(done);
         });
@@ -192,8 +197,13 @@ console.log('login-local req.body', req.body);
 
         // if the user is found, then log them in
         if (user) {
+          user.set({
+            lastLoggedIn: new Date()
+          });
+          user.save();
           return done(null, user); // user found, return that user
         }
+
         // if there is no user found with that facebook id, create them
         const newUser = new User();
         // set all of the facebook information in our user model
@@ -218,6 +228,7 @@ console.log('login-local req.body', req.body);
           newUser.bio = profile._json.bio;
           newUser.local.password = crypto.randomBytes(20).toString('hex');
           newUser.picture = profile._json.avatar_url;
+          newUser.lastLoggedIn = new Date();
           // save our user to the database
           newUser.save(done);
         });

@@ -111,7 +111,7 @@ router.post('/auth/signup', (req, res, next) => {
     newUser.email = email;
 
     // Error checking for email to make sure it is an email...
-
+    newUser.lastLoggedIn = new Date();
     newUser.local.password = password;
     // TODO: newUser.picture = Gravatar
     newUser.picture = gravatarUrl(email, { size: 120, default: 'mm' });
@@ -167,6 +167,10 @@ router.post('/auth/login', (req, res, next) => {
       if (err) {
         return next(err);
       }
+      user.set({
+        lastLoggedIn: new Date()
+      });
+      user.save(next);
       return res.redirect('/');
     });
   })(req, res, next);

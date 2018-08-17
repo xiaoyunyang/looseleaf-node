@@ -7,6 +7,7 @@ import bcrypt from 'bcrypt-nodejs';
 
 const userSchema = mongoose.Schema({
   createdAt: { type: Date, default: Date.now },
+  lastLoggedIn: { type: Date },
   email: { type: String, unique: true },
   username: { type: String, required: true, unique: true },
   displayName: String,
