@@ -10,6 +10,7 @@ import validator from 'validator';
 import path from 'path';
 import User from '../models/User';
 import Project from '../models/Project';
+import Post from '../models/Post';
 import urlSlug from '../modules/urlSlug';
 import dataPreloading from '../../client/iso-middleware/dataPreloading';
 
@@ -17,6 +18,26 @@ const cuid = require('cuid');
 
 const api = express.Router();
 
+// Posts ======================================================================
+api.post('/post', (req, res, next) => {
+  const { content, userId, context } = req.body;
+  const newPost = new Post();
+  newPost.content = content;
+  newPost.postedBy = userId;
+  newPost.context = context;
+  newPost.save(next);
+  return res.send({ status: 'success', msg: 'post success!' });
+});
+
+api.get('/post', (req, res) => {
+  // Queries
+  const limit = parseInt(req.query.limit, 10);
+  Post.find({}).sort({ createdAt: -1 }).limit(limit).exec(
+    (err, posts) => {
+      res.send(posts);
+    }
+  );
+});
 // Projects ======================================================================
 api.post('/project', (req, res, next) => {
   const formFields = req.body.formFields;
@@ -32,7 +53,7 @@ api.post('/project', (req, res, next) => {
   const slug = urlSlug(formFields.title, cuid.slug());
 
   newProject.creator = {
-    userId: req.body.userId,
+    postedBy: req.body.userId,
     about: validator.escape(formFields.aboutMe),
     mission: validator.escape(formFields.mission)
   };
@@ -56,7 +77,9 @@ api.post('/project', (req, res, next) => {
 // want to put a limit if the number gets really big.
 // TODO: Get project based on descending order ("trendiest" project at the top)
 api.get('/project', (req, res) => {
-  Project.find({}).sort({ createdAt: -1 }).limit().exec(
+  // Queries
+  const limit = parseInt(req.query.limit, 10);
+  Project.find({}).sort({ createdAt: -1 }).limit(limit).exec(
     (err, projects) => {
       res.send(projects);
     }
@@ -113,7 +136,6 @@ api.post('/user/:id', (req, res, next) => {
     if (err) return res.send('Error');
 
     const formFields = req.body.formFields;
-    console.log(chalk.blue(formFields.email))
     if (formFields.username === '') {
       res.statusText = 'error';
       // TODO: Below is the way we should be sending error messages. Make the same change

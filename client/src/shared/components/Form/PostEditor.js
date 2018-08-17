@@ -80,6 +80,11 @@ export default class PostEditor extends React.Component {
   componentDidMount() {
     this.setState({ clientModeOn: true });
   }
+  clearEditor() {
+    this.setState({
+      editorState: EditorState.createEmpty()
+    })
+  }
   // Here, we are passing a command (like bold or underline) as an argument,
   // which will get passed to the RichUtils.handleKeyCommand, which handles
   // key commands out of the box, along with the current EditorState object.
@@ -95,7 +100,7 @@ export default class PostEditor extends React.Component {
     const content = this.state.editorState.getCurrentContent();
     // content to save to the db
     const contentToSave = JSON.stringify(convertToRaw(content));
-    this.props.handlePost(contentToSave);
+    this.props.handlePost(contentToSave, this.clearEditor());
   }
   renderPlaceholder(placeholder, editorState) {
     const contentState = editorState.getCurrentContent();

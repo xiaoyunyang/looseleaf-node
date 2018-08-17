@@ -43,7 +43,7 @@ export default class Three extends React.Component {
     return (
       <div>
         <TopNav route={this.props.route} user={this.props.user} community={this.props.community} />
-        <div className="container">
+        <div className="community-page container">
           <div className="row">
             <div id={tabs.three} className="col s12">
               <h3>People</h3>

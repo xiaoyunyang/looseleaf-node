@@ -7,7 +7,7 @@ const setTags = tags => tags.split(',');
 const projectSchema = mongoose.Schema({
   createdAt: { type: Date, default: Date.now },
   creator: {
-    userId: { type: String, required: true },
+    postedBy: { type: mongoose.Schema.ObjectId, ref: 'User' },
     about: { type: String, default: '' },
     mission: { type: String, default: '' }
   },
@@ -21,7 +21,7 @@ const projectSchema = mongoose.Schema({
     platform: { type: String, required: true },
     instruction: { type: String, default: '' }
   },
-  dueDate: Date,
+  dueDate: Date
   // updates: [{
   //   body: { type: String, default: '' },
   //   user: { type: Schema.ObjectId, ref: 'User' },

@@ -28,7 +28,7 @@ export const getAppRoute = (pageName) => {
       return slug => `/project/${slug}/`;
     case 'project':
       return '/project';
-    case 'projectNew':
+    case 'newproject':
       return '/project/new';
     default:
       return '';

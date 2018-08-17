@@ -635,6 +635,10 @@ footer.section-brown {
   height: 400px;
 }
 
+/* Community Page Style */
+.community-page {
+  min-height: 300px;
+}
 /* Override collection item avatar */
 #community-people {
   background-color: white;

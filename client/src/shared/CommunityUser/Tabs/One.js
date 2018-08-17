@@ -21,7 +21,7 @@ export default class One extends React.Component {
     return (
       <div>
         <TopNav route={this.props.route} user={this.props.user} community={this.props.community} />
-        <div className="container">
+        <div className="community-page container">
           <div className="row">
             <div id={tabs.one} className="col s12">
               <h3>Projects</h3>
