@@ -108,7 +108,8 @@ api.get('/project/:urlSlug', (req, res) => {
 // NOTE: this handles finding using id name:
 // http://localhost:3001/api/user?id=5b25d5d8bbb7ca0765de2127
 api.get('/user', (req, res) => {
-  User.find({_id: req.query.id}, (err, users) => {
+  const filter = req.query.id ? {_id: req.query.id } : {};
+  User.find(filter, (err, users) => {
     const usersOut = [];
 
     users.forEach((user) => {
