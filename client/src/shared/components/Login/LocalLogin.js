@@ -113,6 +113,7 @@ class LocalLogin extends React.Component {
         </div>
         <button
           className="btn"
+          style={{ marginTop: 20 }}
           onClick={this.handleSubmit.bind(this, this.state.formFields)}
         >
           {`${this.props.action} with Email`}

@@ -3,7 +3,7 @@ import LoginForm from './LoginForm';
 
 const SignupPage = ({ route }) => (
   <div className="section-white row" style={{ minHeight: '45em' }}>
-    <div className="col s12 m6 l10 offset-m3 offset-l1" style={{ paddingTop: '50px' }}>
+    <div className="col s12 m10 l10 offset-m1 offset-l1" style={{ paddingTop: '50px' }}>
       <LoginForm
         action="Join"
         header="Signup"
