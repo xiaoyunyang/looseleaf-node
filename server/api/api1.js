@@ -105,12 +105,15 @@ api.get('/project/:urlSlug', (req, res) => {
 // Get all users
 // TODO: List in descending order (most recently signed up user at the top).
 // Also, return the users JSON with date of creation.
+// NOTE: this handles finding using id name:
+// http://localhost:3001/api/user?id=5b25d5d8bbb7ca0765de2127
 api.get('/user', (req, res) => {
-  User.find({}, (err, users) => {
+  User.find({_id: req.query.id}, (err, users) => {
     const usersOut = [];
 
     users.forEach((user) => {
       const userInfo = {
+        id: user._id,
         username: user.username,
         displayName: user.displayName,
         email: user.email,
@@ -125,8 +128,6 @@ api.get('/user', (req, res) => {
     res.send(usersOut);
   });
 });
-//TODO: Get user based on username
-
 // Update user based on id
 // TODO: This is dangerous. This API lets anyone update user information
 // based on user id. How do we make sure the request is coming from the 

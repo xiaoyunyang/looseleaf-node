@@ -3,6 +3,7 @@ import axios from 'axios';
 import TopNav from '../TopNav';
 import { tabs } from '../routes';
 import PostEditor from '../../components/Form/PostEditor';
+import Posts from '../../components/Collection/Posts';
 import PostDisplay from '../../components/Form/PostDisplay';
 import { staticApiLink } from '../../data/apiLinks';
 import { getApiData } from '../../../lib/helpers';
@@ -60,18 +61,22 @@ export default class Two extends React.Component {
                 userPic={this.props.user.picture}
                 placeholder="Post an announcement to this community."
               />
+
               {
-                this.state.posts &&
-                this.state.posts.map(d =>
-                  <div key={`post-${d._id}`}>
-                    <PostDisplay
-                      userDisplayName={this.props.user.displayName}
-                      userPic={this.props.user.picture}
-                      editorContent={d.content}
-                    />
-                  </div>
-                )
+                // this.state.posts &&
+                // this.state.posts.map(d =>
+                //   <div key={`post-${d._id}`}>
+                //     <PostDisplay
+                //       userDisplayName={this.props.user.displayName}
+                //       userPic={this.props.user.picture}
+                //       editorContent={d.content}
+                //     />
+                //   </div>
+                // )
               }
+              <Posts 
+                posts={this.state.posts}
+              />
             </div>
           </div>
         </div>

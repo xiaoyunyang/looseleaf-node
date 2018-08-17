@@ -1,3 +1,5 @@
+// TODO: consolidate this file with appLinks.
+
 export const socialMedia = {
   twitter: 'https://twitter.com/mylooseleaf',
   angellist: 'https://angel.co/looseleafapp',

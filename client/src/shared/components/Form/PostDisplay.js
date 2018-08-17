@@ -44,7 +44,7 @@ const convertToEditorState = (editorContent) => {
   return editorState;
 };
 
-const PostDisplay = ({ userDisplayName, userPic, editorContent }) => (
+const PostDisplay = ({ userDisplayName, username, userPic, editorContent }) => (
   editorContent &&
     <div className="card feed">
       <div className="card-content">
@@ -52,8 +52,8 @@ const PostDisplay = ({ userDisplayName, userPic, editorContent }) => (
           <div className="col">
             <img className="circle" src={userPic} alt="" />
           </div>
-          <div className="col s8 m8 l8">
-            <p>{userDisplayName}</p>
+          <div className="col" style={{marginLeft: -18}}>
+            <a href={`/@${username}`}>{userDisplayName}</a>
           </div>
         </div>
         <div className="draft-js-editor">
@@ -73,6 +73,7 @@ const PostDisplay = ({ userDisplayName, userPic, editorContent }) => (
 
 PostDisplay.propTypes = {
   userDisplayName: PropTypes.string.isRequired,
+  username: PropTypes.string.isRequired,
   userPic: PropTypes.string.isRequired,
   editorContent: PropTypes.string
 };
