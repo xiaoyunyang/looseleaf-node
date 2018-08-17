@@ -12,11 +12,13 @@ export default class TextInput extends React.Component {
           defaultValue={this.props.field}
           onChange={this.handleChange.bind(this)}
           type="text" className="validate"/>
-        <label htmlFor={this.props.id}
-          className={!this.props.field ? '' : 'active'}>
+        <label
+          htmlFor={this.props.id}
+          className={!this.props.field ? '' : 'active'}
+        >
           {this.props.label}
         </label>
       </div>
-    )
+    );
   }
 }

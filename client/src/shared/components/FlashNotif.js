@@ -6,16 +6,16 @@ class FlashNotif extends React.Component {
     msg: 'Error. something wrong with your login'
   }
   renderNotif(state, text) {
-    switch(state) {
+    switch (state) {
       case 'error':
-        return this.renderError(text)
+        return this.renderError(text);
       default:
         return null;
     }
   }
   renderError(msg) {
     return (
-      <p style={{color: '#e57373'}}>{msg}</p>
+      <p style={{ color: '#e57373' }}>{msg}</p>
     );
   }
   render() {

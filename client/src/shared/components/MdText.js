@@ -13,21 +13,21 @@ export default class MdText extends React.Component {
     this.setState({
       mdData: response.data
     });
-    let html_content = marked( response.data );
+    let html_content = marked(response.data);
     document.getElementById(this.props.mdId).innerHTML = html_content;
   }
   loadData(filepath) {
     axios.get(filepath)
-    .then(response => this.saveData(response))
-    .catch(function(error) {
-      console.log(error)
-    });
+      .then(response => this.saveData(response))
+      .catch((error) => {
+        console.log(error);
+      });
   }
   render() {
     return (
       <div id={this.props.mdId}>
         {this.mdData}
       </div>
-    )
+    );
   }
 }

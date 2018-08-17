@@ -22,21 +22,33 @@ export default class TeamMembers extends React.Component {
     this.initializeModal();
   }
   initializeModal() {
-    $(document).ready(function(){
+    $(document).ready(() => {
       // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
       $('.modal').modal();
+    });
+  }
+  handlePersonCardClick(user) {
+    this.setState({
+      modalPerson: {
+        fullName: user.fullName,
+        bio: user.bio,
+        role: user.role,
+        linkedin: user.linkedin,
+        img: user.img
+      }
     });
   }
   renderPersonCard(user, i) {
     return (
       <div key={i} className="center col s6 m2 l2">
-        <a href="#person-card-modal"
-           onClick={this.handlePersonCardClick.bind(this, user)}
-           key={i}
-           className="modal-trigger"
+        <a
+          href="#person-card-modal"
+          onClick={this.handlePersonCardClick.bind(this, user)}
+          key={i}
+          className="modal-trigger"
         >
           <div className="team-member-picture z-depth-2">
-            <img src={user.img} alt=""/>
+            <img src={user.img} alt="" />
           </div>
         </a>
         <div className="team-member-info">
@@ -66,17 +78,6 @@ export default class TeamMembers extends React.Component {
         </div>
       </div>
     );
-  }
-  handlePersonCardClick(user) {
-    this.setState({
-      modalPerson: {
-        fullName: user.fullName,
-        bio: user.bio,
-        role: user.role,
-        linkedin: user.linkedin,
-        img: user.img
-      }
-    });
   }
   render() {
     return (

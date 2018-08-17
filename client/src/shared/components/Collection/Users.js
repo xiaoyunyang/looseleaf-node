@@ -5,7 +5,7 @@ import { getAppRoute } from '../../data/appRoutes';
 
 const Users = ({ users }) => (
   <ul id="community-people" className="collection">
-    { users ?
+    { users &&
       users.map(d => (
         <li key={`user-${d.username}`} className="collection-item avatar">
           <a href={getAppRoute('userPortfolio')(d.username)}>
@@ -19,13 +19,11 @@ const Users = ({ users }) => (
           </div>
         </li>
       ))
-     :
-    null
     }
   </ul>
 );
 Users.propTypes = {
-  users: PropTypes.array
+  users: PropTypes.array.isRequired
 };
 
 export default Users;

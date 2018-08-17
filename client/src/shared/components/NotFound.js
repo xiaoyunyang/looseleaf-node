@@ -13,14 +13,16 @@ const containerStyle = {
 const h1Style = {
   fontSize: '2em',
   fontWeight: '400'
-}
+};
 
 const Status = ({ code, children }) => (
-	<Route render={({ staticContext }) => {
-		if (staticContext)
-			staticContext.status = code
-		return children
-	}}/>
+  <Route render={({ staticContext }) => {
+    if (staticContext) {
+      staticContext.status = code;
+    }
+		return children;
+	  }}
+  />
 );
 
 const NotFound = () => (

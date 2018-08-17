@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const authPath = 'http://localhost:3001/auth'
+const authPath = 'http://localhost:3001/auth';
 
 class SocialLogin extends React.Component {
   constructor() {
@@ -15,23 +15,25 @@ class SocialLogin extends React.Component {
     // capitalize first letter of oath. Example: facebook => Facebook
     const oauthName = oauth[0].toUpperCase() + oauth.substr(1);
 
-    return <div key={key} className={`btn-${oauth}`}>
-      <a className="btn" href={`${authPath}/${oauth}`}>
-        <i className={`fab fa-${oauth} fa-lg`}></i>
-        {`${this.props.action} with ${oauthName}`}
-      </a>
-    </div>
+    return (
+      <div key={key} className={`btn-${oauth}`}>
+        <a className="btn" href={`${authPath}/${oauth}`}>
+          <i className={`fab fa-${oauth} fa-lg`} />
+          {`${this.props.action} with ${oauthName}`}
+        </a>
+      </div>
+    );
   }
   render() {
     return (
       <div className="col s12 m10 offset-m1 l8 offset-l2 social-logins">
-      {
-        this.props.oauthOpts.map((oauth, i) => {
-          return this.renderLoginBtn(oauth, this.props.action, i);
-        })
-      }
+        {
+          this.props.oauthOpts.map((oauth, i) => {
+            return this.renderLoginBtn(oauth, this.props.action, i);
+          })
+        }
       </div>
-    )
+    );
   }
 }
 export default SocialLogin;

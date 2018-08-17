@@ -32,7 +32,7 @@ export default class InputDropDown extends React.Component {
     return (
       <div style={{ paddingTop: '12px' }} className="input-field col l6 m6 s6">
         <p>{this.props.title}</p>
-        <select id={this.props.id} defaultValue='None'>
+        <select id={this.props.id} defaultValue="None">
           <option value="" disabled selected>
             {this.props.label ? this.props.label : 'Choose your option'}
           </option>

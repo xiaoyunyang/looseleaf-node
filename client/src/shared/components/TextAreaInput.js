@@ -10,13 +10,13 @@ export default class TextAreaInput extends React.Component {
         <textarea
           id={this.props.id}
           defaultValue={this.props.field}
-          onChange={this.handleChange.bind(this)}
-          className="materialize-textarea">
-        </textarea>
+          onChange={ this.handleChange.bind(this) }
+          className="materialize-textarea"
+        />
         <label htmlFor={this.props.id} className={!this.props.field ? '' : 'active'}>
           {this.props.label}
         </label>
       </div>
-    )
+    );
   }
 }

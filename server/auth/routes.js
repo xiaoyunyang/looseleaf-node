@@ -44,7 +44,10 @@ router.use((req, res, next) => {
 });
 
 // List User(s) ================================================================
+// TODO: Do we need the code below? That can be deleted.
+
 // returns all the users, newest one first
+// TODO: change the following URI to /auth/user
 router.get('/auth/users', (req, res, next) => {
   User.find()
     .sort({ createdAt: 'descending' })
@@ -54,6 +57,7 @@ router.get('/auth/users', (req, res, next) => {
     });
 });
 
+// TODO: change the following URI to /auth/user/:username
 router.get('/auth/users/:username', (req, res, next) => {
   User.findOne({ username: req.params.username }, (err, user) => {
     if (err) { return next(err); }

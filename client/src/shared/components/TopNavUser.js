@@ -14,21 +14,21 @@ const MobileSideNav = ( {username, userPic} ) => (
   <ul id="mobile-menu" className="side-nav">
     <li>
       <div className="user-view">
-        <img alt={`looseleaf user ${username}`}  className="circle" src={userPic}/>
-         <div className="row">
-           <div className="col l2 m2 s2">
-             <a href="https://github.com/xiaoyunyang"><i className="fa fa-github fa-lg"></i></a>
-           </div>
-           <div className="col l2 m2 s2">
-             <a href="https://www.linkedin.com/in/xiaoyun-yang"><i className="fa fa-linkedin fa-lg"></i></a>
-           </div>
-           <div className="col l2 m2 s2">
-             <a href="https://medium.com/@xiaoyunyang"><i className="fa fa-medium fa-lg"></i></a>
-           </div>
-           <div className="col l2 m2 s2">
-             <a href="mailto:xiaoyun@looseleafapp.com"><i className="fa fa-envelope fa-lg"></i></a>
-           </div>
+        <img alt={`looseleaf user ${username}`} className="circle" src={userPic} />
+        <div className="row">
+          <div className="col l2 m2 s2">
+            <a href="https://github.com/xiaoyunyang"><i className="fa fa-github fa-lg" /></a>
           </div>
+          <div className="col l2 m2 s2">
+            <a href="https://www.linkedin.com/in/xiaoyun-yang"><i className="fa fa-linkedin fa-lg" /></a>
+          </div>
+          <div className="col l2 m2 s2">
+            <a href="https://medium.com/@xiaoyunyang"><i className="fa fa-medium fa-lg" /></a>
+          </div>
+          <div className="col l2 m2 s2">
+            <a href="mailto:xiaoyun@looseleafapp.com"><i className="fa fa-envelope fa-lg" /></a>
+          </div>
+        </div>
       </div>
     </li>
     <li><Link to={getAppRoute('userHome')} className="active">Home</Link></li>
@@ -36,7 +36,7 @@ const MobileSideNav = ( {username, userPic} ) => (
   </ul>
 );
 
-const UserDropdown = ( {username, userPic} ) => (
+const UserDropdown = ({ username, userPic }) => (
   <li id="dropdown-block">
     <a className="navbar-img dropdown-button" data-activates="user-dropdown">
       <img alt={`looseleaf user ${username}`} className="mod-round" src={userPic} />
@@ -73,9 +73,9 @@ export default class TopNavUser extends React.Component {
       stopPropagation: false // Stops event propagation
     });
     if (typeof window !== 'undefined') {
-      $(window).scroll(function(){
-        this.toggleNavbarBoxShadow()
-      }.bind(this));
+      $(window).scroll(() => {
+        this.toggleNavbarBoxShadow();
+      });
     }
   }
   // TODO: I don't know if there's a more elegant way to do this in css
@@ -95,7 +95,7 @@ export default class TopNavUser extends React.Component {
     const username = this.props.user.username;
     const userPic = this.props.user.picture;
     const selected = (typeof this.props.route.path === 'string')
-                    ? getPageName(this.props.route.path) : '';
+      ? getPageName(this.props.route.path) : '';
 
     // TODO: Still need the code below?
 /*
@@ -154,4 +154,4 @@ export default class TopNavUser extends React.Component {
 }
 TopNavUser.proTypes = {
   useExternLinks: PropTypes.bool
-}
+};

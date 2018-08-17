@@ -33,6 +33,7 @@ function findLinkEntities(contentBlock, callback, contentState) {
     callback
   );
 }
+
 const decorator = new CompositeDecorator([{
   strategy: findLinkEntities,
   component: Link
@@ -44,7 +45,7 @@ const convertToEditorState = (editorContent) => {
 };
 
 const PostDisplay = ({ userDisplayName, userPic, editorContent }) => (
-  editorContent ?
+  editorContent &&
     <div className="card feed">
       <div className="card-content">
         <div className="row feed-user">
@@ -62,12 +63,12 @@ const PostDisplay = ({ userDisplayName, userPic, editorContent }) => (
           />
         </div>
       </div>
-      <div className="card-action">
-        <Reactions />
-      </div>
+      {
+        <div className="card-action">
+          <Reactions />
+        </div>
+      }
     </div>
-    :
-    null
 );
 
 PostDisplay.propTypes = {

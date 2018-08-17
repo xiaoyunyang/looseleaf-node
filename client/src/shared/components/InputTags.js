@@ -4,20 +4,20 @@ import $ from 'jquery';
 export default class InputTags extends React.Component {
 
   componentDidMount() {
-    let tags = this.props.selectedTags.map(d => {
-      return {tag: d};
+    const tags = this.props.selectedTags.map(d => {
+      return { tag: d };
     });
-    let options = this.props.tags.map(d => {
-      let tmp = {};
+    const options = this.props.tags.map(d => {
+      const tmp = {};
       tmp[d] = null;
       return tmp;
-    }).reduce(function(acc, x) {
-      for (let key in x) acc[key] = x[key];
+    }).reduce((acc, x) => {
+      for (const key in x) acc[key] = x[key];
       return acc;
     }, {});
 
-    $(document).ready(function(){
-      $('#'+this.props.id).material_chip({
+    $(document).ready(() => {
+      $(`#${this.props.id}`).material_chip({
         data: tags,
         placeholder: this.props.label,
         secondaryPlaceholder: this.props.hint,
@@ -27,22 +27,22 @@ export default class InputTags extends React.Component {
           minLength: 1
         }
       });
-    }.bind(this))
+    });
 
-    $('#'+this.props.id).on('chip.add', function(e, chip){
+    $(`#${this.props.id}`).on('chip.add', (e, chip) => {
       this.handleAddTag(chip.tag);
-    }.bind(this));
-    $('#'+this.props.id).on('chip.delete', function(e, chip){
+    });
+    $(`#${this.props.id}`).on('chip.delete', (e, chip) => {
       this.handleDeleteTag(chip.tag);
-    }.bind(this));
+    });
   }
 
   handleAddTag(tag) {
-    var selectedNew = this.props.selectedTags.concat(tag);
+    const selectedNew = this.props.selectedTags.concat(tag);
     this.props.setState(selectedNew);
   }
   handleDeleteTag(tag) {
-    var selectedNew = this.props.selectedTags.filter(function(d){
+    const selectedNew = this.props.selectedTags.filter((d) => {
       return d !== tag;
     });
     this.props.setState(selectedNew);
@@ -51,7 +51,7 @@ export default class InputTags extends React.Component {
     return (
       <div className="col s12 m12 l12">
         <label>{this.props.label}</label>
-        <div className="chips" id={this.props.id}></div>
+        <div className="chips" id={this.props.id} />
       </div>
     );
   }

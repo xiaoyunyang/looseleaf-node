@@ -30,7 +30,8 @@ export default class DatePicker extends React.Component {
   render() {
     return (
       <div className="input-field col l11 m11 s11">
-        <input type="text"
+        <input
+          type="text"
           placeholder="Click to select date"
           onChange={this.handleDueDateChange}
           className="datepicker"

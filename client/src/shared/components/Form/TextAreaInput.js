@@ -7,6 +7,10 @@ const icon = (id) => {
   }
 };
 export default class TextAreaInput extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleChange = this.handleChange.bind(this);
+  }
   handleChange(e) {
     this.props.onChange(e.target.value);
   }
@@ -17,7 +21,7 @@ export default class TextAreaInput extends React.Component {
         <textarea
           id={this.props.id}
           defaultValue={this.props.field}
-          onChange={this.handleChange.bind(this)}
+          onChange={this.handleChange}
           className="materialize-textarea"
         />
         <label htmlFor={this.props.id} className={!this.props.field ? '' : 'active'}>

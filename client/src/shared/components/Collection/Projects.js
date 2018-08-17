@@ -5,7 +5,7 @@ import { dateFormatted } from '../../../lib/helpers';
 
 const Projects = ({ projects }) => (
   <div>
-    { projects ?
+    { projects &&
       projects.map(d => {
         return (
           <div className="row" key={`projects-${d.urlSlug}`}>
@@ -18,13 +18,11 @@ const Projects = ({ projects }) => (
           </div>
         );
       })
-     :
-    null
     }
   </div>
 );
 Projects.propTypes = {
-  projects: PropTypes.array
+  projects: PropTypes.array.isRequired
 };
 
 export default Projects;

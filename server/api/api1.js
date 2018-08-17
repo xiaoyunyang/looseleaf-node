@@ -11,24 +11,11 @@ import path from 'path';
 import User from '../models/User';
 import Project from '../models/Project';
 import urlSlug from '../modules/urlSlug';
-import dataPreloading from '../../client/iso-middleware/dataPreloading'
+import dataPreloading from '../../client/iso-middleware/dataPreloading';
 
 const cuid = require('cuid');
 
 const api = express.Router();
-/*
-TODO: code below is for development only. Remove for production
- */
-
-api.get('/test', (req, res) => {
-  const slug = cuid.slug();
-
-  const title = "<>/I'm a little Tea---Pot Short & Stout";
-  const sanitizedTitle = validator.escape(title);
-  const output = urlSlug(title, slug);
-  res.send(`url: ${output} \n santizedTitle: ${sanitizedTitle}`);
-});
-
 
 // Projects ======================================================================
 api.post('/project', (req, res, next) => {
@@ -67,6 +54,7 @@ api.post('/project', (req, res, next) => {
 
 // NOTE: No limit for how many can be displayed...but obviously we
 // want to put a limit if the number gets really big.
+// TODO: Get project based on descending order ("trendiest" project at the top)
 api.get('/project', (req, res) => {
   Project.find({}).sort({ createdAt: -1 }).limit().exec(
     (err, projects) => {
@@ -92,6 +80,8 @@ api.get('/project/:urlSlug', (req, res) => {
 
 // Users ======================================================================
 // Get all users
+// TODO: List in descending order (most recently signed up user at the top).
+// Also, return the users JSON with date of creation.
 api.get('/user', (req, res) => {
   User.find({}, (err, users) => {
     const usersOut = [];
@@ -112,8 +102,12 @@ api.get('/user', (req, res) => {
     res.send(usersOut);
   });
 });
+//TODO: Get user based on username
 
 // Update user based on id
+// TODO: This is dangerous. This API lets anyone update user information
+// based on user id. How do we make sure the request is coming from the 
+// actual user?
 api.post('/user/:id', (req, res, next) => {
   User.findById(req.params.id, (err, user) => {
     if (err) return res.send('Error');
@@ -161,6 +155,8 @@ api.post('/user/:id', (req, res, next) => {
   });
 });
 
+// Misc Code =======================================================
+// TODO: Dead code below for testing only. Delete.
 api.get('/hello', (req, res) => {
   res.send({ express: 'If you are seeing this, your frontend react app is hooked up to your backend Express app. CONGRATULATIONS!' });
 });
@@ -222,6 +218,7 @@ api.get('/featured', (req, res) => {
     res.status(200).send({ recipe });
   });
 });
+
 api.get('/projects/todos', (req, res) => {
   // Read and open the recipes json file
   const filePath = path.join(__dirname, '../data/recipes.json');
@@ -249,6 +246,20 @@ api.get('/projects/completed', (req, res) => {
   });
 });
 
+/*
+TODO: code below is for development only. Remove for production
+ */
+
+api.get('/test', (req, res) => {
+  const slug = cuid.slug();
+
+  const title = "<>/I'm a little Tea---Pot Short & Stout";
+  const sanitizedTitle = validator.escape(title);
+  const output = urlSlug(title, slug);
+  res.send(`url: ${output} \n santizedTitle: ${sanitizedTitle}`);
+});
+
+// TODO: Don't know if following code is dead code or not...need to delete?
 api.use('/assets', (req, res, next) => {
   const filePath = path.join(__dirname, '../assets', req.url);
   res.sendFile(filePath, (err) => {

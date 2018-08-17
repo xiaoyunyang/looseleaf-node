@@ -23,7 +23,7 @@ const getNav = () => {
     about: `/${root}about`,
     signup: `/${root}signup`,
     login: `/${root}login`,
-    wildcard: `/${root}*`,
+    wildcard: `/${root}*`
   };
 };
 const routes = [

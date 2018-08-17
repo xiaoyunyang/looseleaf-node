@@ -25,10 +25,10 @@ export default class TopNavGuest extends React.Component {
 
     this.initializeSticky();
 
-    if(typeof window !== undefined) {
-      $(window).scroll(function(){
+    if (typeof window !== undefined) {
+      $(window).scroll(() => {
         this.toggleSignupBtnVisibility()
-      }.bind(this))
+      });
     }
   }
   initializeSticky() {
@@ -67,14 +67,11 @@ export default class TopNavGuest extends React.Component {
   toggleSignupBtnVisibility() {
     const signupBtn = $("#signup-btn-tab");
     const categories = $('nav .categories-container');
-    if(categories.hasClass('pinned')) {
+    if (categories.hasClass('pinned')) {
       signupBtn.css('visibility', 'visible');
-    } else if(categories.hasClass('pin-top')) {
+    } else if (categories.hasClass('pin-top')) {
       signupBtn.css('visibility', 'hidden');
     }
-  }
-  closeModal(modalId) {
-    $(modalId).modal('close');
   }
   renderLoginBtn() {
     return (
@@ -193,15 +190,15 @@ export default class TopNavGuest extends React.Component {
                       Developers
                     </Link>
                   </li>
-                  <li className='tab'>
+                  <li className="tab">
                     <Link
-                      id={`tab-two`}
+                      id="tab-two"
                       className={selected === communities.two ? 'active' : ''}
                       to={getNav().two}>
                       Designers
                     </Link>
                   </li>
-                  <li className='tab'>
+                  <li className="tab">
                     <Link
                       id={`tab-three`}
                       className={selected === communities.three ? 'active' : ''}
@@ -212,7 +209,7 @@ export default class TopNavGuest extends React.Component {
                 </ul>
               </div>
               <div className="col l2 m2 s2 offset-l1 offset-s2 nav-text-links">
-                <ul style={{paddingRight: 4}} className="right">
+                <ul style={{ paddingRight: 4 }} className="right">
                   <li>
                     { this.renderSignupBtn('Signup', 'signup-btn-tab')}
                   </li>
@@ -227,7 +224,7 @@ export default class TopNavGuest extends React.Component {
 
   render() {
     let selected = (typeof this.props.route.path === 'string')
-                    ? getPageName(this.props.route.path) : '';
+      ? getPageName(this.props.route.path) : '';
     return (
       <div>
         { this.props.extended ?
@@ -247,7 +244,7 @@ export default class TopNavGuest extends React.Component {
 
 TopNavGuest.propTypes = {
   extended: PropTypes.bool
-}
+};
 TopNavGuest.defaultProps = {
   extended: false
-}
+};

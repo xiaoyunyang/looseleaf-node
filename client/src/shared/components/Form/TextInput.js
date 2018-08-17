@@ -14,6 +14,10 @@ const type = id => id === 'email' ? 'email' : 'text';
 const dataError = id => id === 'email' ? 'invalid email' : '';
 
 export default class TextInput extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleChange = this.handleChange.bind(this);
+  }
   handleChange(e) {
     this.props.onChange(e.target.value);
   }
@@ -25,7 +29,7 @@ export default class TextInput extends React.Component {
           <input
             id={this.props.id}
             defaultValue={this.props.field}
-            onChange={this.handleChange.bind(this)}
+            onChange={this.handleChange}
             type={type(this.props.id)}
             className="validate"
           />

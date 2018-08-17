@@ -49,7 +49,8 @@ export default class InputCheckboxes extends React.Component {
                 <input type="checkbox"
                   id={`${this.props.id}-${dId}`}
                   onChange={this.handleClick.bind(this, d)}
-                  checked={checked} />
+                  checked={checked}
+                />
                 <label htmlFor={`${this.props.id}-${dId}`}>
                   {`${d} ${this.renderUnits(d, this.props.units)}`}
                 </label>
@@ -61,7 +62,6 @@ export default class InputCheckboxes extends React.Component {
     );
   }
 }
-
 
 InputCheckboxes.propTypes = {
   id: PropTypes.string.isRequired,

@@ -2,7 +2,7 @@ import React from 'react';
 import TopNav from '../../components/TopNavGuest';
 import TeamMembers from './TeamMembers';
 
-const imgBaseUrl='http://localhost:3001/team';
+const imgBaseUrl = 'http://localhost:3001/team';
 const mission =
 {
   0: "The major challenges of self-study for a career change include the lack of insight on what skills to build, what to work on to build these skills, and how the skill building activity will improve chance of employment in a chosen career track. LooseLeaf's mission is to help career changers build a portfolio with real projects from non-profits."
@@ -23,7 +23,7 @@ const people = [
     linkedin: 'https://linkedin.com/in/andrew-fenner'
   }
 ];
-export default ( {route} ) => (
+export default ({ route }) => (
   <div className="section-white">
     <TopNav route={route} extended={false} />
     <div id="team-pg" className="container">
@@ -31,7 +31,7 @@ export default ( {route} ) => (
         <div className="team-section section-green">
           <h4>About LooseLeaf</h4>
         </div>
-        <img alt="looseleaf team (https://unsplash.com/photos/TamMbr4okv4)" src="http://localhost:3001/team1.png"/>
+        <img alt="looseleaf team (https://unsplash.com/photos/TamMbr4okv4)" src="http://localhost:3001/team1.png" />
         <div className="row" style={{ padding: 25 }}>
           <div className="col s12 m6 l6">
             <h5 className="center">
