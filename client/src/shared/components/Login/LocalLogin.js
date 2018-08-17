@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import axios from 'axios';
 import FlashNotif from '../FlashNotif';
+import axios from 'axios';
 import { staticApiLink } from '../../data/apiLinks';
 
 const redirPath = staticApiLink.home;
@@ -26,21 +26,6 @@ class LocalLogin extends React.Component {
         password: ''
       }
     };
-    this.handleInput = this.handleInput.bind(this);
-    this.handleKeyPress = this.handleKeyPress.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-  getPostPath(action) {
-    if (action === 'Continue') {
-      return loginPath;
-    }
-    return signupPath;
-  }
-  handleKeyPress(e) {
-    const code = e.keyCode || e.which;
-    if (code === 13) { // 13 is the enter keycode
-      this.handleSubmit(this.state.formFields);
-    }
   }
   // TODO: detect invalid email addresses or email address with invalid characters
   // such as angle brackets
@@ -51,8 +36,16 @@ class LocalLogin extends React.Component {
       formFields
     });
   }
+  handleKeyPress(e) {
+    const code = e.keyCode || e.which;
+    if (code === 13) { // 13 is the enter keycode
+      this.handleSubmit(this.state.formFields);
+    }
+  }
   // TODO: prevent axios from posting if client side validation has an error
   handleSubmit(formFields) {
+    console.log('submit btn pressed. action = ', this.getPostPath(this.props.action));
+
     axios.post(this.getPostPath(this.props.action), formFields)
       .then(res => {
         // console.log('login via axios is a success')
@@ -83,29 +76,35 @@ class LocalLogin extends React.Component {
     if (this.props.action === 'Continue') {
       return (
         <div style={style} className="col l8 offset-l5 m10 offset-m4 s12">
-          <a className="" href="/forgot">Forgot password</a>
-        </div>
+            <a className="" href="/forgot">Forgot password</a>
+          </div>
       );
     }
     return null;
+  }
+  getPostPath(action) {
+    if (action === 'Continue') {
+      return loginPath;
+    }
+    return signupPath;
   }
   render() {
     return (
       <div className="col s12 m10 offset-m1 l8 offset-l2 center">
         <div className="row">
           <FlashNotif state={this.state.flash.state} msg={this.state.flash.msg} />
-          <form className="col s12" onSubmit={this.handleInput}>
+          <form className="col s12" onSubmit={this.handleInput.bind(this)}>
             <div className="input-field col s12 m6 l6">
-              <input type="email" name="email" className="validate" onChange={this.handleInput} />
+              <input type="email" name="email" className="validate" onChange={this.handleInput.bind(this)} />
               <label htmlFor="email"><i className="fa fa-envelope" /> Email</label>
             </div>
             <div className="input-field col s12 m6 l6">
               <input
                 type="password"
-                name="password"
+                name='password'
                 className="validate"
-                onChange={this.handleInput}
-                onKeyPress={this.handleKeyPress}
+                onChange={this.handleInput.bind(this)}
+                onKeyPress={this.handleKeyPress.bind(this)}
               />
               <label htmlFor="password"><i className="fa fa-lock" /> Password</label>
               { this.renderForgotPass() }
@@ -114,7 +113,7 @@ class LocalLogin extends React.Component {
         </div>
         <button
           className="btn"
-          onClick={this.handleSubmit(this.state.formFields)}
+          onClick={this.handleSubmit.bind(this, this.state.formFields)}
         >
           {`${this.props.action} with Email`}
         </button>
