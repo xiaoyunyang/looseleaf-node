@@ -50,7 +50,9 @@ export default function renderProjectApp(req, res, next) {
 			res.end()
 		}
     const html = renderToString(
-      <HTML userData={dataToSerialize}
+      <HTML
+        title={req.params.slug}
+        userData={dataToSerialize}
         html={app}/>
     );
     return res.send(`<!DOCTYPE html>${html}`);

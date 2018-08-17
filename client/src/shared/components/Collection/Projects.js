@@ -22,7 +22,7 @@ const Projects = ({ projects }) => (
   </div>
 );
 Projects.propTypes = {
-  projects: PropTypes.array.isRequired
+  projects: PropTypes.array
 };
 
 export default Projects;

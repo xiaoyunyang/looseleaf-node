@@ -10,7 +10,7 @@ const HTML = (props) => {
   return (
     <html lang="en">
       <head>
-        <title>{`${props.userData.displayName} - LooseLeaf `}</title>
+        <title>{`${props.title} - LooseLeaf `}</title>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link
@@ -29,8 +29,6 @@ const HTML = (props) => {
               ${JSON.stringify(props.userData)}`
           }}
         />
-
-
       <script type="application/javascript" src="/project.bundle.js" />
       </body>
     </html>

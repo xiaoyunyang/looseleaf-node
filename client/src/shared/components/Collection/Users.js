@@ -23,7 +23,7 @@ const Users = ({ users }) => (
   </ul>
 );
 Users.propTypes = {
-  users: PropTypes.array.isRequired
+  users: PropTypes.array
 };
 
 export default Users;

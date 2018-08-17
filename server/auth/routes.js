@@ -266,50 +266,6 @@ router.post('/auth/edit', ensureAuthenticated, (req, res, next) => {
   });
 });
 
-const community = (name) => {
-  if (name === 'developers') {
-    return {
-      name: 'developers',
-      title: 'Developers',
-      desc: 'web and mobile developers'
-    };
-  } else if (name === 'designers') {
-    return {
-      name: 'designers',
-      title: 'Designers',
-      desc: 'web design, UX design, UI design'
-    };
-  } else if (name === 'illustrators') {
-    return {
-      name: 'illustrators',
-      title: 'Illustrators',
-      desc: 'book cover illustration, illustrations for blog'
-    };
-  } else if (name === 'writers') {
-    return {
-      name: 'writers',
-      title: 'Writers',
-      desc: 'copy writer, editor, grant writer, press release writer'
-    };
-  } else if (name === 'data-scientists') {
-    return {
-      name: 'data-scientists',
-      title: 'Data Scientists',
-      desc: 'Analyze and visualize trends in data'
-    };
-  } else if (name === 'video-producers') {
-    return {
-      name: 'video-producers',
-      title: 'Developer',
-      desc: 'Make videos'
-    };
-  }
-  return {
-    name: 'misc',
-    title: 'Other Creators',
-    description: 'comic book writers'
-  };
-};
 
 // Post Project ================================================================
 // router.post('/project/new', ensureAuthenticated, (req, res, next) => {
@@ -333,11 +289,13 @@ const community = (name) => {
 // Important: this has to remain at the bottom of the page because it's a wildcard
 // catch-all case
 // Gotcha: Order of code matters in determining middleware for the requested route
+const community = require('../data/community.json');
+
 router.get('/community/:name*', (req, res, next) => {
   if (req.isAuthenticated()) {
-    renderCommunityUserAppMiddleware(req, res, next, community(req.params.name));
+    renderCommunityUserAppMiddleware(req, res, next, community[req.params.name]);
   }
-  renderCommunityGuestAppMiddleware(req, res, next, community(req.params.name));
+  renderCommunityGuestAppMiddleware(req, res, next, community[req.params.name]);
 });
 router.get('/project/:slug*', (req, res, next) => {
   if (req.isAuthenticated()) {
