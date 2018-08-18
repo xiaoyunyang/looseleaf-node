@@ -156,7 +156,9 @@ footer.page-footer {
 }
 
 /**** Signup / Login BEGIN ****/
-
+.login-btn {
+  color: #00897b !important;
+}
 .social-logins .btn {
   height: 100%;
   color: white;
@@ -754,7 +756,13 @@ nav .categories-wrapper .categories {
   overflow-y: hidden;
 }
 
+/* The following lines are needed to initialize the two
+   elments to to hidden upon page refresh
+*/
 #signup-btn-tab {
+  visibility: hidden;
+}
+#login-btn-tab {
   visibility: hidden;
 }
 /*  Sticky Tab Navbar Guest Page END */

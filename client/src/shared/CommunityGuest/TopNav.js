@@ -43,11 +43,14 @@ export default class TopNav extends React.Component {
   }
   toggleSignupBtnVisibility() {
     const signupBtn = $('#signup-btn-tab');
+    const loginBtn = $('#login-btn-tab');
     const categories = $('nav .categories-container');
     if (categories.hasClass('pinned')) {
       signupBtn.css('visibility', 'visible');
+      loginBtn.css('visibility', 'visible');
     } else if (categories.hasClass('pin-top')) {
       signupBtn.css('visibility', 'hidden');
+      loginBtn.css('visibility', 'hidden');
     }
   }
   closeModal(modalId) {
@@ -56,12 +59,13 @@ export default class TopNav extends React.Component {
   handleLogoClick() {
     window.location = '/';
   }
-  renderLoginBtn() {
+  renderLoginBtn(id) {
     return (
       <a
+        id={id}
         href="#login-modal"
         onClick={this.closeModal.bind(this, '#signup-modal')}
-        className="modal-trigger"
+        className="modal-trigger login-btn"
       >
         Log in
       </a>
@@ -89,7 +93,6 @@ export default class TopNav extends React.Component {
       </div>
     );
   }
-
   renderPrimaryNavInner(selected, community) {
     return (
       <div className="nav-wrapper-white nav-text-links">
@@ -105,7 +108,7 @@ export default class TopNav extends React.Component {
             <li>{this.renderJoinBtn('Signup', 'signup-btn-main')}</li>
           </ul>
           <div className="right hide-on-small-only">
-            { this.renderLoginBtn() }
+            { this.renderLoginBtn('login-btn-main') }
           </div>
         </div>
       </div>
@@ -118,7 +121,7 @@ export default class TopNav extends React.Component {
           <div className="nav-background">
             <div className="pattern active" />
           </div>
-          {this.renderPrimaryNavInner(selected, community)}
+          { this.renderPrimaryNavInner(selected, community) }
           { this.renderNavHeader(community) }
         </nav>
       </div>
@@ -139,7 +142,7 @@ export default class TopNav extends React.Component {
         <div className="categories-wrapper">
           <div className="categories-container pin-top" style={style}>
             <div className="categories grey lighten-4 row" style={noMarginBottom}>
-              <div className="col l12 m12 s12">
+              <div className="col l8 m7 s12 offset-l1">
                 <ul id="nav-tabs" className="tabs grey lighten-4">
                   <li className="tab">
                     <Link
@@ -167,10 +170,13 @@ export default class TopNav extends React.Component {
                   </li>
                 </ul>
               </div>
-              <div className="col l2 m2 s2 offset-l1 offset-s2 nav-text-links">
+              <div className="col l3 m5 s2 nav-text-links">
                 <ul style={{ paddingRight: 4 }} className="right">
+                  <li className="hide-on-small-only">
+                    { this.renderLoginBtn('login-btn-tab') }
+                  </li>
                   <li>
-                    { this.renderJoinBtn('Join', 'signup-btn-tab')}
+                    { this.renderJoinBtn('Signup', 'signup-btn-tab')}
                   </li>
                 </ul>
               </div>

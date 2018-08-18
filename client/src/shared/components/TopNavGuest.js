@@ -47,7 +47,7 @@ export default class TopNavGuest extends React.Component {
       <a
         href="#login-modal"
         onClick={this.closeModal.bind(this, '#signup-modal')}
-        className="modal-trigger"
+        className="modal-trigger login-btn"
       >
         Log in
       </a>
@@ -72,15 +72,6 @@ export default class TopNavGuest extends React.Component {
     } else if (categories.hasClass('pin-top')) {
       signupBtn.css('visibility', 'hidden');
     }
-  }
-  renderLoginBtn() {
-    return (
-      <a href="#login-modal"
-         onClick={this.closeModal.bind(this, '#signup-modal')}
-         className="modal-trigger" style={{color: '#00897b'}}>
-        Log in
-      </a>
-    );
   }
   renderSignupBtn(label, id) {
     return (

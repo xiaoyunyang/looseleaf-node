@@ -33,8 +33,8 @@ const Apps = {
   recipe: AppRecipe
 };
 
-const App = Apps.guest;
-
+const App = Apps.communityGuest;
+//const App = Apps.guest;
 const render = (Component) => {
   ReactDOM.render(
     <AppContainer>

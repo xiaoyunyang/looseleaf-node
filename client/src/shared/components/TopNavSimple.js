@@ -46,7 +46,7 @@ export default class TopNavSimple extends React.Component {
       <a
         href="#login-modal"
         onClick={this.closeModal.bind(this, '#signup-modal')}
-        className="modal-trigger"
+        className="modal-trigger login-btn"
       >
         Log in
       </a>
