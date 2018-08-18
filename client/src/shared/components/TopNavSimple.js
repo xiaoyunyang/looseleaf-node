@@ -1,13 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 import $ from 'jquery';
 import { LoginModal, SignupModal } from './Login/Modal';
 import { root, getNav, communities } from '../Landing/routes';
 import { getPageName } from '../../lib/helpers';
 import { landingImg } from '../data/landingLinks';
 
-export default class TopNavGuest extends React.Component {
+export default class TopNavSimple extends React.Component {
   static defalutProps = {
     extended: false
   }
@@ -132,9 +131,9 @@ export default class TopNavGuest extends React.Component {
     return (
       <div className="nav-wrapper-white nav-text-links">
         <div className="brand-logo">
-          <Link className="navbar-brand" to={getNav().home}>
+          <a href="/" className="navbar-brand" >
             <img src={landingImg.logo} alt="LooseLeaf" />
-          </Link>
+          </a>
         </div>
         <ul className="right">
           <li>{this.renderSignupBtn('Signup', 'signup-btn-main')}</li>
@@ -142,90 +141,13 @@ export default class TopNavGuest extends React.Component {
         <div className="right hide-on-small-only">
           { this.renderLoginBtn() }
         </div>
-        <ul className="right hide-on-med-and-down">
-          <li className={selected === root ? 'active' : ''}>
-            <Link
-              to={getNav().home}>
-              Home
-            </Link>
-          </li>
-          <li className={selected === 'how-it-works'? 'active' : ''}>
-            <Link
-              to={getNav().howItWorks}>
-              How It Works
-            </Link>
-          </li>
-          <li className={selected === 'about'? 'active' : ''}>
-            <Link
-              to={getNav().about}>
-              About
-            </Link>
-          </li>
-        </ul>
       </div>
-    );
-  }
-  renderTabs(selected) {
-    const style = {
-      top: 0
-    };
-    const noMarginBottom = {
-      marginBottom: 0
-    };
-    const styleHeight = {
-      height: '48px'
-    };
-    return (
-      <nav className="filter-navbar" style={styleHeight}>
-        <div className="categories-wrapper">
-          <div className="categories-container pin-top" style={style}>
-            <div className="categories grey lighten-4 row" style={noMarginBottom}>
-              <div className="col l9 m10 s10">
-                <ul id="nav-tabs" className="tabs grey lighten-4">
-                  <li className='tab'>
-                    <Link
-                      id={`tab-one`}
-                      className={selected === communities.one ? 'active' : ''}
-                      to={getNav().one}>
-                      Developers
-                    </Link>
-                  </li>
-                  <li className="tab">
-                    <Link
-                      id="tab-two"
-                      className={selected === communities.two ? 'active' : ''}
-                      to={getNav().two}>
-                      Designers
-                    </Link>
-                  </li>
-                  <li className="tab">
-                    <Link
-                      id={`tab-three`}
-                      className={selected === communities.three ? 'active' : ''}
-                      to={getNav().three}>
-                      Writers
-                    </Link>
-                  </li>
-                </ul>
-              </div>
-              <div className="col l2 m2 s2 offset-l1 offset-s2 nav-text-links">
-                <ul style={{ paddingRight: 4 }} className="right">
-                  <li>
-                    { this.renderSignupBtn('Signup', 'signup-btn-tab')}
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-      </nav>
     );
   }
 
   render() {
     let selected = (typeof this.props.route.path === 'string')
       ? getPageName(this.props.route.path) : '';
-    console.log('selected', selected)
     return (
       <div>
         { this.props.extended ?
@@ -243,11 +165,11 @@ export default class TopNavGuest extends React.Component {
   }
 }
 
-TopNavGuest.propTypes = {
+TopNavSimple.propTypes = {
   extended: PropTypes.bool,
   route: PropTypes.object,
 };
-TopNavGuest.defaultProps = {
+TopNavSimple.defaultProps = {
   extended: false,
   route: {path: undefined}
 };

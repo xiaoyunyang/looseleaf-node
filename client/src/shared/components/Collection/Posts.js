@@ -7,9 +7,6 @@ import { getApiData } from '../../../lib/helpers';
 import { images } from '../../data/assetLinks';
 import { apiLink } from '../../data/apiLinks';
 
-const fetchUserById = (id) => {
-
-}
 class Post extends React.Component {
   constructor(props) {
     super(props);
@@ -29,7 +26,6 @@ class Post extends React.Component {
       username: data[0].username
     });
     const link = apiLink.user(id);
-    console.log(link)
     getApiData(link, setApiData);
   }
   render() {

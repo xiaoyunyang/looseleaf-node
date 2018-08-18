@@ -10,11 +10,11 @@ import gravatarUrl from 'gravatar-url';
 import User from '../models/User';
 import chalk from 'chalk';
 import renderLandingAppMiddleware from '../../client/iso-middleware/renderLandingApp';
-import renderGuestAppMiddleware from '../../client/iso-middleware/renderGuestApp';
 import renderUserAppMiddleware from '../../client/iso-middleware/renderUserApp';
 import renderCommunityUserAppMiddleware from '../../client/iso-middleware/renderCommunityUserApp';
 import renderCommunityGuestAppMiddleware from '../../client/iso-middleware/renderCommunityGuestApp';
 import renderProjectAppMiddleware from '../../client/iso-middleware/renderProjectApp';
+import renderProjectPageMiddleware from '../../client/iso-middleware/renderProjectPage';
 
 const router = express.Router();
 // TODO: csrf commented out so client app can post. Need to figure out use
@@ -305,7 +305,7 @@ router.get('/project/:slug*', (req, res, next) => {
   if (req.isAuthenticated()) {
     renderProjectAppMiddleware(req, res, next);
   }
-  renderLandingAppMiddleware(req, res, next);
+  renderProjectPageMiddleware(req, res, next);
 });
 router.get('/project*', (req, res, next) => {
   if (req.isAuthenticated()) {

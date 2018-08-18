@@ -9,6 +9,7 @@ module.exports = {
     communityguest: path.resolve(__dirname, 'client/src/clientApps/communityguest.js'),
     communityuser: path.resolve(__dirname, 'client/src/clientApps/communityuser.js'),
     user: path.resolve(__dirname, 'client/src/clientApps/user.js'),
+    projectpage: path.resolve(__dirname, 'client/src/clientApps/projectpage.js'),
     project: path.resolve(__dirname, 'client/src/clientApps/project.js'),
     recipe: path.resolve(__dirname, 'client/src/clientApps/recipe.js')
   },
