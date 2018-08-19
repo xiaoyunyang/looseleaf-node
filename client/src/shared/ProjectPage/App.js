@@ -10,7 +10,7 @@ const dueDateFormatted = (dateStr) => {
 
 class App extends React.Component {
   componentDidMount() {
-    this.props.actions.getHomePageData();
+    // TODO: Get contributor data 
   }
   renderProjectInfo(project) {
     // TODO and NOTE: Make sure the default values match the redux init state values.
