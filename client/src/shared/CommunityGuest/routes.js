@@ -3,25 +3,17 @@ import NotFound from '../components/NotFound';
 import One from './Tabs/One';
 import Two from './Tabs/Two';
 import Three from './Tabs/Three';
-
-const root = 'community/';
+import appRoute from '../data/appRoute';
 
 function noop() {}
 
-const tabs = {
-  one: 'projects',
-  two: 'announcements',
-  three: 'people'
-}
-
-const getNav = (community) => {
+const page = (community) => {
   return {
-    home: `/${root}${community}`,
-    one: `/${root}${community}/${tabs.one}`,
-    two: `/${root}${community}/${tabs.two}`,
-    three: `/${root}${community}/${tabs.three}`,
-    wildcard: `/${root}*`
-  };
+    home: {name: 'Projects', slug: 'projects', link: appRoute('communityHome')(community)},
+    one: {name: 'Projects', slug: 'projects', link: appRoute('communityOne')(community)},
+    two: {name: 'Announcements', slug: 'announcements', link: appRoute('communityTwo')(community)},
+    three: {name: 'People', slug: 'people', link: appRoute('communityThree')(community)},
+  }
 }
 const getRoutes = (community) => {
   const routes = [
@@ -29,27 +21,27 @@ const getRoutes = (community) => {
       component: Root,
       routes: [
         {
-          path: getNav(community).home,
+          path: page(community).home.link,
           exact: true,
           component: One
         },
         {
-          path: getNav(community).one,
+          path: page(community).one.link,
           exact: true,
           component: One
         },
         {
-          path: getNav(community).two,
+          path: page(community).two.link,
           exact: true,
           component: Two
         },
         {
-          path: getNav(community).three,
+          path: page(community).three.link,
           exact: true,
           component: Three
         },
         {
-          path: getNav(community).wildcard,
+          path: appRoute('communityWildcard')(community),
           component: NotFound
         }
       ]
@@ -58,4 +50,4 @@ const getRoutes = (community) => {
   return routes;
 }
 
-export { getRoutes, getNav, tabs, root };
+export { getRoutes, page };

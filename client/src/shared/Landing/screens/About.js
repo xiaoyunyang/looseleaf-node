@@ -1,5 +1,5 @@
 import React from 'react';
-import TopNav from '../../components/TopNavGuest';
+import TopNav from '../TopNav';
 import TeamMembers from './TeamMembers';
 import { image } from '../../data/assetLinks';
 

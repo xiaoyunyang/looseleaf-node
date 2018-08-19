@@ -72,7 +72,7 @@ class Footer extends React.Component {
             </div>
           </div>
         </div>
-        <div className="footer-copyright">
+        <div className="footer-copyright" style={{marginTop: 25}}>
           <div className="container">
             <p>
               &copy; 2018 LooseLeaf, LLC.

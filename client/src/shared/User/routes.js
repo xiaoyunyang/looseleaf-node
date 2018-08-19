@@ -6,27 +6,15 @@ import NewProject from './screens/NewProject/Main';
 import NotFound from '../components/NotFound';
 import appRoute from '../data/appRoute';
 
-const root = '';
-
-const getNav = (username) => {
-  return {
-    home: `/${root}`,
-    portfolio: `/${root}@${username}`,
-    settings: `/${root}@${username}/settings`,
-    tabs: `/${root}@${username}/:slug`,
-    wildcard: `/${root}*`
-  };
-};
-
 const getTabsRoutes = (username) => {
   const tabsRoutes = [
     {
-      path: getNav(username).portfolio,
+      path: appRoute('userPortfolio')(username),
       exact: true,
       component: Portfolio
     },
     {
-      path: getNav(username).tabs,
+      path: appRoute('userPortfolioTab')(username),
       component: Portfolio
     }
   ];
@@ -74,4 +62,4 @@ const getRoutes = (user) => {
 // Caller:
 // getRoutes is used by App.js
 // getNav is used by TopNav.js
-export { getRoutes, getNav, root };
+export { getRoutes };

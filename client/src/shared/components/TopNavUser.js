@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import $ from 'jquery';
-import { root } from '../User/routes';
 import { getPageName } from '../../lib/helpers';
 import { staticApiLink } from '../data/apiLinks';
 import { image } from '../data/assetLinks';
@@ -116,12 +115,12 @@ export default class TopNavUser extends React.Component {
                 </Link>
               </div>
               <ul className="right hide-on-small-only">
-                <li className={selected === root ? 'active' : ''}>
+                <li className={selected === '' ? 'active' : ''}>
                   {
                     this.props.useExternLinks ?
                       <a href={appRoute('userHome')}>Home</a>
                       :
-                      <Link id={`nav-${root}`} to={appRoute('userHome')}>Home</Link>
+                      <Link id={`nav-`} to={appRoute('userHome')}>Home</Link>
                   }
                 </li>
                 <li className={selected === 'project' ? 'active' : ''}>

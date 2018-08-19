@@ -3,13 +3,14 @@ import Two from './Two';
 import Three from './Three';
 import Four from './Four';
 import NotFound from '../../../components/NotFound';
-import { root } from '../../routes';
+import appRoute from '../../../data/appRoute';
+
 // const root = `/${store.root}${store.username}`;
 
 const tabs = ['completed', 'todo', 'watch', 'contributions'];
 
 const getRoot = (username) => {
-  return `/${root}@${username}`;
+  return appRoute('userPortfolio')(username);
 };
 
 const getRoutes = (username) => {

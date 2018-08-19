@@ -5,62 +5,46 @@ import About from './screens/About';
 import Signup from '../components/Login/SignupPage';
 import Login from '../components/Login/LoginPage';
 import NotFound from '../components/NotFound';
+import appRoute from '../data/appRoute';
 
 const root = '';
 
 // function noop() {}
-
-const communities = {
-  one: 'developers',
-  two: 'designers',
-  three: 'writers'
-};
-
-const getNav = () => {
-  return {
-    home: `/${root}`,
-    howItWorks: `/${root}how-it-works`,
-    about: `/${root}about`,
-    signup: `/${root}auth/signup`,
-    login: `/${root}auth/login`,
-    wildcard: `/${root}*`
-  };
-};
 const routes = [
   {
     component: Root,
     routes: [
       {
-        path: getNav().home,
+        path: appRoute('landingHome'),
         exact: true,
         component: Home
       },
       {
-        path: getNav().howItWorks,
+        path: appRoute('landingHowItWorks'),
         exact: true,
         component: HowItWorks
       },
       {
-        path: getNav().about,
+        path: appRoute('landingAbout'),
         exact: true,
         component: About
       },
       {
-        path: getNav().signup,
+        path: appRoute('signup'),
         exact: true,
         component: Signup
       },
       {
-        path: getNav().login,
+        path: appRoute('login'),
         exact: true,
         component: Login
       },
       {
-        path: getNav().wildcard,
+        path: appRoute('landingWildcard'),
         component: NotFound
       }
     ]
   }
 ];
 
-export { routes, getNav, communities, root };
+export { routes };

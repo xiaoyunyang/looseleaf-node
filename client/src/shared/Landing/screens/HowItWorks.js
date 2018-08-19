@@ -1,5 +1,5 @@
 import React from 'react';
-import TopNav from '../../components/TopNavGuest';
+import TopNav from '../TopNav';
 import MdText from '../../components/MdText';
 
 export default ({ route }) => (

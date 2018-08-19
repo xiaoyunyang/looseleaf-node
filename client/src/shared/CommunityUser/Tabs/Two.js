@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import TopNav from '../TopNav';
-import { tabs } from '../routes';
+import { page } from '../routes';
 import PostEditor from '../../components/Form/PostEditor';
 import Posts from '../../components/Collection/Posts';
 import PostDisplay from '../../components/Form/PostDisplay';
@@ -49,11 +49,11 @@ export default class Two extends React.Component {
   }
   render() {
     return (
-      <div>
+      <div className="section-white">
         <TopNav route={this.props.route} user={this.props.user} community={this.props.community} />
         <div className="community-page container">
           <div className="row">
-            <div id={tabs.two} className="col s12 m12 l12">
+            <div id={page(this.props.community).two.slug} className="col s12 m12 l12">
               <h3>Announcements</h3>
               <PostEditor
                 handlePost={d => this.handlePost(d)}
@@ -74,7 +74,7 @@ export default class Two extends React.Component {
                 //   </div>
                 // )
               }
-              <Posts 
+              <Posts
                 posts={this.state.posts}
               />
             </div>

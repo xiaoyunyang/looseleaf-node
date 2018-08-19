@@ -7,24 +7,40 @@ const appRoute = (pageName) => {
   switch (pageName) {
     case 'landingHome':
       return '/';
+    case 'landingHowItWorks':
+      return '/how-it-works';
+    case 'landingAbout':
+      return '/about';
     case 'login':
       return '/auth/login';
     case 'signup':
       return '/auth/signup';
+    case 'landingWildcard':
+      return '/*';
     case 'userHome':
       return '/';
     case 'userPortfolio':
       return username => `/@${username}`;
+    case 'userPortfolioTab':
+      return username => `/@${username}/:slug`;
     case 'userSettings':
       return username => `/@${username}/settings`;
     case 'userWildcard':
       return '/*';
     case 'userTabs':
       return username => `/@${username}/:slug`;
-    case 'community':
-      return name => `/community/${name}/`;
+    case 'communityHome':
+      return name => `/community/${name}`;
+    case 'communityOne':
+      return name => `/community/${name}/projects`;
+    case 'communityTwo':
+      return name => `/community/${name}/announcements`;
+    case 'communityThree':
+      return name => `/community/${name}/people`;
+    case 'communityWildcard':
+      return name => `/community/${name}/*`;
     case 'projectPage':
-      return slug => `/project/${slug}/`;
+      return slug => `/project/${slug}`;
     case 'project':
       return '/project';
     case 'newProject':

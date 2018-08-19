@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import TopNav from '../../components/TopNavGuest';
+import TopNav from '../TopNav';
 import Footer from '../../components/Footer';
-import { getNav } from '../routes';
+import appRoute from '../../data/appRoute';
 import { image } from '../../data/assetLinks';
 
 const styles = {
@@ -61,13 +61,13 @@ export default class LandingHome extends React.Component {
           <Link
             className="waves-effect waves-light btn white-text"
             style={{marginRight: 10}}
-            to={getNav().signup}
+            to={appRoute('signup')}
           >
             Get Started
           </Link>
           <Link
             className="waves-effect waves-light btn teal teal-text lighten-5"
-            to={getNav().howItWorks}
+            to={appRoute('landingHowItWorks')}
           >
             Learn More
           </Link>
@@ -308,7 +308,7 @@ export default class LandingHome extends React.Component {
           <Link
             className="waves-effect waves-light btn teal teal-text lighten-5"
             style={{marginRight: 10}}
-            to={getNav().signup}
+            to={appRoute('signup')}
           >
             Get Started
           </Link>

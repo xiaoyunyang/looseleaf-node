@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import $ from 'jquery';
-import { getNav, tabs } from './routes';
 import { getPageName } from '../../lib/helpers';
+import { page } from './routes';
 import appRoute from '../data/appRoute';
 import { image } from '../data/assetLinks';
 import { LoginModal, SignupModal } from '../components/Login/Modal';
@@ -147,25 +147,25 @@ export default class TopNav extends React.Component {
                   <li className="tab">
                     <Link
                       id="tab-one"
-                      className={selected === tabs.one ? 'active' : ''}
-                      to={getNav(communityName).one}>
-                      {tabs.one}
+                      className={selected === page(communityName).one.slug ? 'active' : ''}
+                      to={page(communityName).one.link}>
+                      {page(communityName).one.name}
                     </Link>
                   </li>
                   <li className='tab'>
                     <Link
                       id="tab-two"
-                      className={selected === tabs.two ? 'active' : ''}
-                      to={getNav(communityName).two}>
-                      {tabs.two}
+                      className={selected === page(communityName).two.slug ? 'active' : ''}
+                      to={page(communityName).two.link}>
+                      {page(communityName).two.name}
                     </Link>
                   </li>
                   <li className='tab'>
                     <Link
                       id="tab-three"
-                      className={selected === tabs.three ? 'active' : ''}
-                      to={ getNav(communityName).three }>
-                      {tabs.three}
+                      className={selected === page(communityName).three.slug ? 'active' : ''}
+                      to={page(communityName).three.link}>
+                      {page(communityName).three.name}
                     </Link>
                   </li>
                 </ul>
@@ -205,7 +205,8 @@ export default class TopNav extends React.Component {
 }
 
 TopNav.propTypes = {
-  extended: PropTypes.bool
+  extended: PropTypes.bool,
+  route: PropTypes.object,
 };
 TopNav.defaultProps = {
   extended: false

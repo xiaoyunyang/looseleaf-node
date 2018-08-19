@@ -1,6 +1,6 @@
 import React from 'react';
 import TopNav from '../TopNav';
-import { tabs } from '../routes';
+import { page } from '../routes';
 import { getApiData } from '../../../lib/helpers';
 import { staticApiLink } from '../../data/apiLinks';
 import Projects from '../../components/Collection/Projects';
@@ -19,11 +19,11 @@ export default class One extends React.Component {
   }
   render() {
     return (
-      <div>
+      <div className="section-white">
         <TopNav route={this.props.route} user={this.props.user} community={this.props.community} />
         <div className="community-page container">
           <div className="row">
-            <div id={tabs.one} className="col s12">
+            <div id={page(this.props.community).one.slug} className="col s12">
               <h3>Projects</h3>
               <Projects projects={this.state.projects} />
             </div>

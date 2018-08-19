@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { getNav } from '../../routes';
+import appRoute from '../../../data/appRoute';
 
 const defaultUserPic = 'http://marketline.com/wp-content/plugins/all-in-one-seo-pack/images/default-user-image.png';
 
@@ -100,22 +100,22 @@ export default ({ user }) => (
         <UserInfo icon={iconEnums.location}
           info={user.location}
           orElse="add location"
-          to={getNav(user.username).settings}
+          to={appRoute('userSettings')(user.username)}
         />
         <UserInfo icon={iconEnums.bio}
           info={user.bio}
           orElse="add bio"
-          to={getNav(user.username).settings}
+          to={appRoute('userSettings')(user.username)}
         />
         <UserInfo icon={iconEnums.email}
           info={user.email}
           orElse="add email"
-          to={getNav(user.username).settings}
+          to={appRoute('userSettings')(user.username)}
         />
         <UserInfo icon={iconEnums.website}
           info={user.website}
           orElse="add website"
-          to={getNav(user.username).settings}
+          to={appRoute('userSettings')(user.username)}
         />
       </div>
     </div>

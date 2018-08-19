@@ -210,7 +210,8 @@ export default class TopNav extends React.Component {
 }
 
 TopNav.propTypes = {
-  extended: PropTypes.bool
+  extended: PropTypes.bool,
+  route: PropTypes.object,
 }
 TopNav.defaultProps = {
   extended: false

@@ -2,10 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import $ from 'jquery';
-import { LoginModal, SignupModal } from './Login/Modal';
-import { root, getNav, communities } from '../Landing/routes';
+import { LoginModal, SignupModal } from '../components/Login/Modal';
 import { getPageName } from '../../lib/helpers';
 import { image } from '../data/assetLinks';
+import appRoute from '../data/appRoute';
+
+const page = {
+  one: {name: 'Home', slug: '', link: appRoute('landingHome')},
+  two: {name: 'How It Works', slug: 'how-it-works', link: appRoute('landingHowItWorks')},
+  three: {name: 'About', slug: 'about', link: appRoute('landingAbout')},
+}
 
 export default class TopNavGuest extends React.Component {
   static defalutProps = {
@@ -123,7 +129,7 @@ export default class TopNavGuest extends React.Component {
     return (
       <div className="nav-wrapper-white nav-text-links">
         <div className="brand-logo">
-          <Link className="navbar-brand" to={getNav().home}>
+          <Link className="navbar-brand" to={page.one.link}>
             <img src={image.logo} alt="LooseLeaf" />
           </Link>
         </div>
@@ -134,22 +140,22 @@ export default class TopNavGuest extends React.Component {
           { this.renderLoginBtn() }
         </div>
         <ul className="right hide-on-med-and-down">
-          <li className={selected === root ? 'active' : ''}>
+          <li className={selected === page.one.slug ? 'active' : ''}>
             <Link
-              to={getNav().home}>
-              Home
+              to={page.one.link}>
+              {page.one.name}
             </Link>
           </li>
-          <li className={selected === 'how-it-works'? 'active' : ''}>
+          <li className={selected === page.two.slug ? 'active' : ''}>
             <Link
-              to={getNav().howItWorks}>
-              How It Works
+              to={page.two.link}>
+              {page.two.name}
             </Link>
           </li>
-          <li className={selected === 'about'? 'active' : ''}>
+          <li className={selected === page.three.slug ? 'active' : ''}>
             <Link
-              to={getNav().about}>
-              About
+              to={page.three.link}>
+              {page.three.name}
             </Link>
           </li>
         </ul>
@@ -176,25 +182,25 @@ export default class TopNavGuest extends React.Component {
                   <li className='tab'>
                     <Link
                       id={`tab-one`}
-                      className={selected === communities.one ? 'active' : ''}
-                      to={getNav().one}>
-                      Developers
+                      className={selected === page.one.slug ? 'active' : ''}
+                      to={page.one.link}>
+                      {page.one.name}
                     </Link>
                   </li>
                   <li className="tab">
                     <Link
                       id="tab-two"
-                      className={selected === communities.two ? 'active' : ''}
-                      to={getNav().two}>
-                      Designers
+                      className={selected === page.two.slug ? 'active' : ''}
+                      to={page.two.link}>
+                      {page.two.name}
                     </Link>
                   </li>
                   <li className="tab">
                     <Link
                       id={`tab-three`}
-                      className={selected === communities.three ? 'active' : ''}
-                      to={getNav().three}>
-                      Writers
+                      className={selected === page.three.slug ? 'active' : ''}
+                      to={page.three.link}>
+                      {page.three.name}
                     </Link>
                   </li>
                 </ul>
@@ -216,7 +222,6 @@ export default class TopNavGuest extends React.Component {
   render() {
     let selected = (typeof this.props.route.path === 'string')
       ? getPageName(this.props.route.path) : '';
-    console.log('selected', selected)
     return (
       <div>
         { this.props.extended ?

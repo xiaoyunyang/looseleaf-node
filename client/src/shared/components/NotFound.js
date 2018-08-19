@@ -1,8 +1,9 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
+import Footer from './Footer';
 
 const containerStyle = {
-  minHeight: '50vh',
+  minHeight: '58vh',
   overflow: 'hidden',
   display: 'block',
   position: 'relative',
@@ -32,6 +33,7 @@ const NotFound = () => (
       <p>Sorry, but the page you were trying to view does not exist.</p>
         <a className="waves-effect waves-light btn" href="/">Go to home page</a>
     </div>
+    <Footer />
   </Status>
 );
 
