@@ -8,7 +8,7 @@
     "build:dev": "./node_modules/.bin/webpack --mode development",
     "prestart": "npm run build:dev",
     "start": "node server/run-dev.js",
-    "start-server-dev": "nodemon server/run-dev.js --watch server --watch client/shared --watch client/src",
+    "start-server-dev": "nodemon server/run-dev.js --watch server --watch client/shared client/iso-middleware --watch client/src",
     "build": "npm run build-client && npm run build-server",
     "build-server": "./node_modules/.bin/babel server/server.js -o server/build/main.bundle.js",
     "build-client": "cd  client && npm run build && cd ..",

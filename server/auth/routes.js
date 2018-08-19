@@ -8,6 +8,7 @@ import validator from 'validator';
 import csrf from 'csurf';
 import gravatarUrl from 'gravatar-url';
 import User from '../models/User';
+import Project from '../models/Project';
 import chalk from 'chalk';
 import renderLandingAppMiddleware from '../../client/iso-middleware/renderLandingApp';
 import renderUserAppMiddleware from '../../client/iso-middleware/renderUserApp';
@@ -301,18 +302,28 @@ router.get('/community/:name*', (req, res, next) => {
   }
   renderCommunityGuestAppMiddleware(req, res, next, community[req.params.name]);
 });
-router.get('/project/:slug*', (req, res, next) => {
-  if (req.isAuthenticated()) {
-    renderProjectAppMiddleware(req, res, next);
-  }
-  renderProjectPageMiddleware(req, res, next);
-});
-router.get('/project*', (req, res, next) => {
+router.get('/project/new*', (req, res, next) => {
   if (req.isAuthenticated()) {
     renderProjectAppMiddleware(req, res, next);
   }
   renderLandingAppMiddleware(req, res, next);
 });
+router.get('/project/:slug*', (req, res, next) => {
+  // First find if a project with req.params.slug exists in the Project collection
+  // If not ...
+  Project.findOne({ urlSlug: req.params.slug }, (err, project) => {
+    if (err) { return next(err); }
+    if (!project) {
+      return renderLandingAppMiddleware(req, res, next);
+    }
+
+    if (req.isAuthenticated()) {
+      return renderProjectAppMiddleware(req, res, next);
+    }
+    return renderProjectPageMiddleware(req, res, next, project);
+  });
+});
+
 
 router.get('/*', (req, res, next) => {
   if (req.isAuthenticated()) {

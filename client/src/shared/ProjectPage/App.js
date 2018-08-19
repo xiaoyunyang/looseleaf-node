@@ -10,7 +10,7 @@ const dueDateFormatted = (dateStr) => {
 
 class App extends React.Component {
   componentDidMount() {
-    // TODO: Get contributor data 
+    // TODO: Get contributor data
   }
   renderProjectInfo(project) {
     // TODO and NOTE: Make sure the default values match the redux init state values.
@@ -54,10 +54,7 @@ class App extends React.Component {
 
 // This function lets you convert the app state to properties on your component.
 function mapStateToProps(state) {
-  const project = state.project;
-  return {
-    project
-  };
+  return state;
 }
 
 function mapDispatchToProps(dispatch) {
