@@ -7,29 +7,7 @@ import configureStore from '../src/shared/redux/Project/configureStoreGuest';
 import * as actions from '../src/shared/redux/Project/actions/project';
 import HTML from '../src/shared/ProjectPage/HTML';
 import App from '../src/shared/ProjectPage/App';
-
-const decodeHTMLEntities = (text) => {
-  const entities = [
-      ['amp', '&'],
-      ['apos', '\''],
-      ['#x27', '\''],
-      ['#x2F', '/'],
-      ['#39', '\''],
-      ['#47', '/'],
-      ['lt', '<'],
-      ['gt', '>'],
-      ['nbsp', ' '],
-      ['quot', '"']
-  ];
-
-  for (let i = 0, max = entities.length; i < max; ++i)  {
-      text = text.replace(
-        new RegExp('&'+entities[i][0]+';', 'g'),
-        entities[i][1]);
-  }
-
-  return text;
-}
+import { decodeHTMLEntities } from '../src/lib/helpers';
 
 export default function renderProjectApp(req, res, next, project) {
   // console.log(chalk.green(typeof project))

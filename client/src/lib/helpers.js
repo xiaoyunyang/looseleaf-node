@@ -60,3 +60,24 @@ export const getPageName = (url) => {
 export const dateFormatted = (dateStr) => {
   return dateStr ? new Date(dateStr).toDateString() : '';
 };
+export const decodeHTMLEntities = (text) => {
+  const entities = [
+      ['amp', '&'],
+      ['apos', '\''],
+      ['#x27', '\''],
+      ['#x2F', '/'],
+      ['#39', '\''],
+      ['#47', '/'],
+      ['lt', '<'],
+      ['gt', '>'],
+      ['nbsp', ' '],
+      ['quot', '"']
+  ];
+
+  for (let i = 0; i < entities.length; i++)  {
+    text = text.replace(
+      new RegExp('&'+entities[i][0]+';', 'g'),
+      entities[i][1]);
+  }
+  return text;
+}
