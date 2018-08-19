@@ -8,14 +8,7 @@ import validator from 'validator';
 import csrf from 'csurf';
 import gravatarUrl from 'gravatar-url';
 import User from '../models/User';
-import Project from '../models/Project';
 import chalk from 'chalk';
-import renderLandingAppMiddleware from '../../client/iso-middleware/renderLandingApp';
-import renderUserAppMiddleware from '../../client/iso-middleware/renderUserApp';
-import renderCommunityUserAppMiddleware from '../../client/iso-middleware/renderCommunityUserApp';
-import renderCommunityGuestAppMiddleware from '../../client/iso-middleware/renderCommunityGuestApp';
-import renderProjectAppMiddleware from '../../client/iso-middleware/renderProjectApp';
-import renderProjectPageMiddleware from '../../client/iso-middleware/renderProjectPage';
 
 const router = express.Router();
 // TODO: csrf commented out so client app can post. Need to figure out use
@@ -49,7 +42,7 @@ router.use((req, res, next) => {
 
 // returns all the users, newest one first
 // TODO: change the following URI to /auth/user
-router.get('/auth/users', (req, res, next) => {
+router.get('/users', (req, res, next) => {
   User.find()
     .sort({ createdAt: 'descending' })
     .exec((err, users) => {
@@ -59,7 +52,7 @@ router.get('/auth/users', (req, res, next) => {
 });
 
 // TODO: change the following URI to /auth/user/:username
-router.get('/auth/users/:username', (req, res, next) => {
+router.get('/users/:username', (req, res, next) => {
   User.findOne({ username: req.params.username }, (err, user) => {
     if (err) { return next(err); }
     if (!user) { return next(404); }
@@ -70,13 +63,13 @@ router.get('/auth/users/:username', (req, res, next) => {
 // Local Signup ================================================================
 // Saves user to the database
 // TODO: Do I really need to code below?
-router.get('/auth/signup', (req, res) => {
+router.get('/signup', (req, res) => {
   res.render('signup', {
     // csrfToken: req.csrfToken()
   });
 });
 
-router.post('/auth/signup', (req, res, next) => {
+router.post('/signup', (req, res, next) => {
   // body-parser adds the username and password to req.body
   const email = req.body.email;
   const password = req.body.password;
@@ -144,7 +137,7 @@ router.post('/auth/signup', (req, res, next) => {
 }));
 
 // Local Login ==================================================================
-router.get('/auth/login', (req, res) => {
+router.get('/login', (req, res) => {
   res.render('login', {
     // csrfToken: req.csrfToken()
   });
@@ -157,7 +150,7 @@ router.post('/auth/login', passport.authenticate('login-local', {
   failureFlash: true
 }));
 */
-router.post('/auth/login', (req, res, next) => {
+router.post('/login', (req, res, next) => {
   passport.authenticate('login-local', (err, user, info) => {
     if (err) { return next(err); }
     if (!user) {
@@ -178,7 +171,7 @@ router.post('/auth/login', (req, res, next) => {
 });
 
 // Facebook ====================================================================
-router.get('/auth/facebook', passport.authenticate('facebook'));
+router.get('/facebook', passport.authenticate('facebook'));
 
 // handle the callback after facebook has authenticated the user
 router.get(
@@ -190,7 +183,7 @@ router.get(
 );
 
 // Github =====================================================================
-router.get('/auth/github', passport.authenticate('github'));
+router.get('/github', passport.authenticate('github'));
 
 // handle the callback after facebook has authenticated the user
 router.get(
@@ -205,7 +198,7 @@ router.get(
 // Delete ======================================================================
 // Delete user from the database
 router.post(
-  '/auth/delete/:username',
+  '/delete/:username',
   ensureAuthenticated,
   (req, res, next) => {
     User.findOneAndRemove({ username: req.params.username }, (err, user) => {
@@ -232,7 +225,7 @@ router.post(
 
 // Logout ======================================================================
 // Passport populates req.user for you
-router.get('/auth/logout', (req, res) => {
+router.get('/logout', (req, res) => {
   req.logout();
   res.redirect('/');
 });
@@ -246,16 +239,16 @@ router.use((req, res, next) => {
 
 // edit ========================================================================
 // Passport populates req.user for you
-router.get('/auth/edit', ensureAuthenticated, (req, res) => {
+router.get('/edit', ensureAuthenticated, (req, res) => {
   res.render('edit', {
     csrfToken: req.csrfToken()
   });
 });
-router.get('/auth/edit-csrf', ensureAuthenticated, (req, res) => {
+router.get('/edit-csrf', ensureAuthenticated, (req, res) => {
   res.render('edit-csrf');
 });
 
-router.post('/auth/edit', ensureAuthenticated, (req, res, next) => {
+router.post('/edit', ensureAuthenticated, (req, res, next) => {
   req.user.displayName = req.body.displayname;
   req.user.location = req.body.location;
   req.user.bio = req.body.bio;
@@ -269,67 +262,6 @@ router.post('/auth/edit', ensureAuthenticated, (req, res, next) => {
     res.send('Profile updated!');
     res.redirect(`/auth/users/${req.user.username}`);
   });
-});
-
-
-// Post Project ================================================================
-// router.post('/project/new', ensureAuthenticated, (req, res, next) => {
-//   req.user.displayName = req.body.displayname;
-//   req.user.location = req.body.location;
-//   req.user.bio = req.body.bio;
-//   req.user.save((err) => {
-//     if (err) {
-//       next(err);
-//       return;
-//     }
-//     req.flash('info', 'Profile updated!');
-//     res.statusMessage = 'info';
-//     res.send('Profile updated!');
-//     res.redirect(`/auth/users/${req.user.username}`);
-//   });
-// });
-
-
-// Render Apps ================================================================
-// Important: this has to remain at the bottom of the page because it's a wildcard
-// catch-all case
-// Gotcha: Order of code matters in determining middleware for the requested route
-const community = require('../data/community.json');
-
-router.get('/community/:name*', (req, res, next) => {
-  if (req.isAuthenticated()) {
-    renderCommunityUserAppMiddleware(req, res, next, community[req.params.name]);
-  }
-  renderCommunityGuestAppMiddleware(req, res, next, community[req.params.name]);
-});
-router.get('/project/new*', (req, res, next) => {
-  if (req.isAuthenticated()) {
-    renderProjectAppMiddleware(req, res, next);
-  }
-  renderLandingAppMiddleware(req, res, next);
-});
-router.get('/project/:slug*', (req, res, next) => {
-  // First find if a project with req.params.slug exists in the Project collection
-  // If not ...
-  Project.findOne({ urlSlug: req.params.slug }, (err, project) => {
-    if (err) { return next(err); }
-    if (!project) {
-      return renderLandingAppMiddleware(req, res, next);
-    }
-
-    if (req.isAuthenticated()) {
-      return renderProjectAppMiddleware(req, res, next);
-    }
-    return renderProjectPageMiddleware(req, res, next, project);
-  });
-});
-
-
-router.get('/*', (req, res, next) => {
-  if (req.isAuthenticated()) {
-    renderUserAppMiddleware(req, res, next);
-  }
-  renderLandingAppMiddleware(req, res, next);
 });
 
 

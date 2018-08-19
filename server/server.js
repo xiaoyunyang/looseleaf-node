@@ -116,9 +116,11 @@ app.use(flash()); // use connect-flash for flash messages stored in session
 app.use(bodyParser.urlencoded({ extended: false }));
 
 const authRoutes = require('./auth/routes');
+const appRoutes = require('./routes');
 const configPassport = require('./auth/passport.js');
 
-app.use('/', authRoutes);
+app.use('/auth', authRoutes);
+app.use('/', appRoutes);
 configPassport();
 
 // Guestbook ===================================================================
