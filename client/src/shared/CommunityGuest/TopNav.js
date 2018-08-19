@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 import $ from 'jquery';
 import { getNav, tabs } from './routes';
 import { getPageName } from '../../lib/helpers';
-import { getAppRoute } from '../data/appRoutes';
-import { landingImg } from '../data/landingLinks';
+import appRoute from '../data/appRoute';
+import { image } from '../data/assetLinks';
 import { LoginModal, SignupModal } from '../components/Login/Modal';
 
 export default class TopNav extends React.Component {
@@ -97,10 +97,10 @@ export default class TopNav extends React.Component {
     return (
       <div className="nav-wrapper-white nav-text-links">
         <div className="brand-logo">
-          <a className="navbar-brand" href={getAppRoute('landingHome')}
+          <a className="navbar-brand" href={appRoute('landingHome')}
               onClick={this.handleLogoClick.bind(this)}
             >
-            <img src={landingImg.logo} alt="LooseLeaf" />
+            <img src={image.logo} alt="LooseLeaf" />
           </a>
         </div>
         <div>

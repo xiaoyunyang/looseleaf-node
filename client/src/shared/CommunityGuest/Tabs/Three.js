@@ -3,7 +3,7 @@ import TopNav from '../TopNav';
 import { tabs } from '../routes';
 import { getApiData } from '../../../lib/helpers';
 import { staticApiLink } from '../../data/apiLinks';
-import { getAppRoute } from '../../data/appRoutes';
+import appRoute from '../../data/appRoute';
 import UsersCollections from '../../components/Collection/Users';
 
 export default class Three extends React.Component {
@@ -27,7 +27,7 @@ export default class Three extends React.Component {
             <div className="row" key={`user-${d.username}`}>
               <div className="col s12 m12 l12">
                 <div className="card-panel">
-                  <a href={getAppRoute('userPortfolio')(d.username)} dangerouslySetInnerHTML={{__html: d.displayName}} />
+                  <a href={appRoute('userPortfolio')(d.username)} dangerouslySetInnerHTML={{__html: d.displayName}} />
                 </div>
               </div>
             </div>

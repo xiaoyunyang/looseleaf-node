@@ -1,19 +1,16 @@
 const root = 'http://localhost:3001';
 
-export const staticRoutes = {
-  project: '/project',
-  newProject: '/project/new',
-  userWildcard: `/*`
-};
-
-
 // To use this, example:
 // dynamicRoutes(userId).user
 // dynamicRoutes(slug).project
-export const getAppRoute = (pageName) => {
+const appRoute = (pageName) => {
   switch (pageName) {
     case 'landingHome':
       return '/';
+    case 'login':
+      return '/auth/login';
+    case 'signup':
+      return '/auth/signup';
     case 'userHome':
       return '/';
     case 'userPortfolio':
@@ -29,8 +26,13 @@ export const getAppRoute = (pageName) => {
     case 'project':
       return '/project';
     case 'newProject':
-      return '/project/new';
+      return '/project/edit/new';
     default:
       return '';
   }
 };
+
+// TODO: create absolute version of the above routes. Basically the same
+// except prepended by 'root'
+
+export default appRoute;

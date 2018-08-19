@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import $ from 'jquery';
 import { root } from '../User/routes';
-import { getAppRoute } from '../data/appRoutes';
 import { getPageName } from '../../lib/helpers';
 import { staticApiLink } from '../data/apiLinks';
-import { landingImg } from '../data/landingLinks';
+import { image } from '../data/assetLinks';
+import appRoute from '../data/appRoute';
 
 // const username = store.username;
 
@@ -31,8 +31,8 @@ const MobileSideNav = ( {username, userPic} ) => (
         </div>
       </div>
     </li>
-    <li><Link to={getAppRoute('userHome')} className="active">Home</Link></li>
-    <li><Link to={getAppRoute('userPortfolio')(username)}>Portfolio</Link></li>
+    <li><Link to={appRoute('userHome')} className="active">Home</Link></li>
+    <li><Link to={appRoute('userPortfolio')(username)}>Portfolio</Link></li>
   </ul>
 );
 
@@ -43,11 +43,11 @@ const UserDropdown = ({ username, userPic }) => (
       <div className="arrow-down" />
     </a>
     <ul id="user-dropdown" className="dropdown-content">
-      <li><Link to={getAppRoute('userPortfolio')(username)}>Portfolio</Link></li>
-      <li><a href={getAppRoute('newProject')}>New Project</a></li>
+      <li><Link to={appRoute('userPortfolio')(username)}>Portfolio</Link></li>
+      <li><a href={appRoute('newProject')}>New Project</a></li>
       <li className="divider" />
       <li><a href="/">WebDev</a></li>
-      <li><Link to={getAppRoute('userSettings')(username)}>Settings</Link></li>
+      <li><Link to={appRoute('userSettings')(username)}>Settings</Link></li>
       <li><a href={staticApiLink.logout}>Log out</a></li>
     </ul>
   </li>
@@ -111,28 +111,28 @@ export default class TopNavUser extends React.Component {
           <nav className="grey lighten-4">
             <div className="nav-wrapper-white nav-text-links">
               <div className="brand-logo hide-on-med-and-down">
-                <Link className="navbar-brand" to={getAppRoute('landingHome')}>
-                  <img src={landingImg.logo} alt="LooseLeaf" />
+                <Link className="navbar-brand" to={appRoute('landingHome')}>
+                  <img src={image.logo} alt="LooseLeaf" />
                 </Link>
               </div>
               <ul className="right hide-on-small-only">
                 <li className={selected === root ? 'active' : ''}>
                   {
                     this.props.useExternLinks ?
-                      <a href={getAppRoute('userHome')}>Home</a>
+                      <a href={appRoute('userHome')}>Home</a>
                       :
-                      <Link id={`nav-${root}`} to={getAppRoute('userHome')}>Home</Link>
+                      <Link id={`nav-${root}`} to={appRoute('userHome')}>Home</Link>
                   }
                 </li>
                 <li className={selected === 'project' ? 'active' : ''}>
-                  <a href={getAppRoute('project')}>Project</a>
+                  <a href={appRoute('project')}>Project</a>
                 </li>
                 <li className={selected === username ? 'active' : ''}>
                   {
                     this.props.useExternLinks ?
-                    <a href={getAppRoute('userPortfolio')(username)}>Portfolio</a>
+                    <a href={appRoute('userPortfolio')(username)}>Portfolio</a>
                     :
-                    <Link id={`nav-${username}`} to={getAppRoute('userPortfolio')(username)}>Portfolio</Link>
+                    <Link id={`nav-${username}`} to={appRoute('userPortfolio')(username)}>Portfolio</Link>
                   }
                 </li>
                 <li><button><i className="material-icons">notifications_none</i></button></li>

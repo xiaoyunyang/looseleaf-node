@@ -1,8 +1,8 @@
 import React from 'react';
 import TopNav from '../../components/TopNavGuest';
 import TeamMembers from './TeamMembers';
+import { image } from '../../data/assetLinks';
 
-const imgBaseUrl = 'http://localhost:3001/team';
 const mission =
 {
   0: "The major challenges of self-study for a career change include the lack of insight on what skills to build, what to work on to build these skills, and how the skill building activity will improve chance of employment in a chosen career track. LooseLeaf's mission is to help career changers build a portfolio with real projects from non-profits."
@@ -12,14 +12,14 @@ const people = [
     fullName: 'Xiaoyun Yang',
     role: 'Founder',
     bio: "Xiaoyun's Bio",
-    img: `${imgBaseUrl}-xiaoyun-yang.png`,
+    img: image.team.xiaoyunyang,
     linkedin: 'https://linkedin.com/in/xiaoyun-yang'
   },
   {
     fullName: 'Andrew Fenner',
     role: 'Designer',
     bio: "Andrew's Bio",
-    img: `${imgBaseUrl}-andrew-fenner.png`,
+    img: image.team.andrewfenner,
     linkedin: 'https://linkedin.com/in/andrew-fenner'
   }
 ];
@@ -31,7 +31,7 @@ export default ({ route }) => (
         <div className="team-section section-green">
           <h4>About LooseLeaf</h4>
         </div>
-        <img alt="looseleaf team (https://unsplash.com/photos/TamMbr4okv4)" src="http://localhost:3001/team1.png" />
+        <img alt="looseleaf team (https://unsplash.com/photos/TamMbr4okv4)" src={image.team.team} />
         <div className="row" style={{ padding: 25 }}>
           <div className="col s12 m6 l6">
             <h5 className="center">

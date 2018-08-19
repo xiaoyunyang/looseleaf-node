@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import TopNav from '../../components/TopNavGuest';
 import Footer from '../../components/Footer';
 import { getNav } from '../routes';
-import { landingImg } from '../../data/landingLinks';
+import { image } from '../../data/assetLinks';
 
 const styles = {
   marginTop: '-4.5%',
@@ -85,9 +85,9 @@ export default class LandingHome extends React.Component {
     };
     const images = () => (
       <div>
-        <img className={respClassName('large')} alt="https://unsplash.com/photos/FFLGD4o149E" src={landingImg.coverLarge} style={{ width: '100%' }} />
-        <img className={respClassName('medium')} alt="https://unsplash.com/photos/FFLGD4o149E" src={landingImg.coverMedium} style={{ width: '100%' }} />
-        <img className={respClassName('small')} alt="https://unsplash.com/photos/FFLGD4o149E" src={landingImg.coverSmall} style={{ width: '100%' }} />
+        <img className={respClassName('large')} alt="https://unsplash.com/photos/FFLGD4o149E" src={image.landing.coverLarge} style={{ width: '100%' }} />
+        <img className={respClassName('medium')} alt="https://unsplash.com/photos/FFLGD4o149E" src={image.landing.coverMedium} style={{ width: '100%' }} />
+        <img className={respClassName('small')} alt="https://unsplash.com/photos/FFLGD4o149E" src={image.landing.coverSmall} style={{ width: '100%' }} />
       </div>
     );
     return (
@@ -119,7 +119,7 @@ export default class LandingHome extends React.Component {
         <div className="container text-white row" style={{ width: '90%' }}>
           <div className="col s12 m4 l4">
             <div className="col s4 m9 l4">
-              <img src={landingImg.expertise} alt="" />
+              <img src={image.landing.expertise} alt="" />
             </div>
             <div className="col s8 m12 l8">
               <p className="text-white">Try out a career path. Work on interesting side projects to build a portfolio and learn demonstrable skills.</p>
@@ -127,7 +127,7 @@ export default class LandingHome extends React.Component {
           </div>
           <div className="col s12 m4 l4">
             <div className="col s4 m9 l4">
-              <img src={landingImg.cultivate} alt="" />
+              <img src={image.landing.cultivate} alt="" />
             </div>
             <div className="col s8 m12 l8">
               <p className="text-white">Acquire relevant work experience and professional connections.</p>
@@ -135,7 +135,7 @@ export default class LandingHome extends React.Component {
           </div>
           <div className="col s12 m4 l4">
             <div className="col s4 m9 l4">
-              <img src={landingImg.share} alt="" />
+              <img src={image.landing.share} alt="" />
             </div>
             <div className="col s8 m12 l8">
               <p className="text-white">Collaborate with other career hackers and shadow professionals.</p>

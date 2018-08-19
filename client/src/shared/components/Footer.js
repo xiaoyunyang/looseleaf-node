@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import $ from 'jquery';
-import { socialMedia, landingImg } from '../data/landingLinks';
+import { socialMedia, image } from '../data/assetLinks';
 
 class Footer extends React.Component {
   componentDidMount() {
@@ -36,7 +36,7 @@ class Footer extends React.Component {
       <footer className="page-footer section-white">
         <div className="container">
           <div className="row left-align">
-            <img style={{ paddingTop: 12, paddingLeft: 25, maxWidth: 200 }} alt='LooseLeaf' src={landingImg.logo} />
+            <img style={{ paddingTop: 12, paddingLeft: 25, maxWidth: 200 }} alt='LooseLeaf' src={image.logo} />
           </div>
           <div className="row">
             <div className="col s12 m12 l10">

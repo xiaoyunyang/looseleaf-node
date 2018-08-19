@@ -4,7 +4,7 @@ import $ from 'jquery';
 import { LoginModal, SignupModal } from './Login/Modal';
 import { root, getNav, communities } from '../Landing/routes';
 import { getPageName } from '../../lib/helpers';
-import { landingImg } from '../data/landingLinks';
+import { image } from '../data/assetLinks';
 
 export default class TopNavSimple extends React.Component {
   static defalutProps = {
@@ -132,7 +132,7 @@ export default class TopNavSimple extends React.Component {
       <div className="nav-wrapper-white nav-text-links">
         <div className="brand-logo">
           <a href="/" className="navbar-brand" >
-            <img src={landingImg.logo} alt="LooseLeaf" />
+            <img src={image.logo} alt="LooseLeaf" />
           </a>
         </div>
         <ul className="right">

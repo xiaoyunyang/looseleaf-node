@@ -1,5 +1,7 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import LoginForm from './LoginForm';
+import appRoute from '../../data/appRoute';
 
 const LoginPage = ({ route }) => (
   <div className="section-white row" style={{ minHeight: '45em' }}>
@@ -11,7 +13,7 @@ const LoginPage = ({ route }) => (
       <div className="row center hero">
         <div className="col l12 m12 s12">
           <h6 style={{ marginTop: 40 }}>
-            New to LooseLeaf? <a href="/signup">Sign up</a>
+            New to LooseLeaf? <Link to={appRoute('signup')}>Sign up</Link>
           </h6>
         </div>
       </div>

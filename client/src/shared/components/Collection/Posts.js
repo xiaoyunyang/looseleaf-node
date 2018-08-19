@@ -1,10 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { getAppRoute } from '../../data/appRoutes';
 import { dateFormatted } from '../../../lib/helpers';
 import PostDisplay from '../Form/PostDisplay';
 import { getApiData } from '../../../lib/helpers';
-import { images } from '../../data/assetLinks';
+import { image } from '../../data/assetLinks';
 import { apiLink } from '../../data/apiLinks';
 
 class Post extends React.Component {
@@ -12,15 +11,15 @@ class Post extends React.Component {
     super(props);
     this.state = {
       userDisplayName: 'Firstname Lastname',
-      userPic: images.defaultUser,
-      username: '',
-    }
+      userPic: image.defaultUser,
+      username: ''
+    };
   }
   componentDidMount() {
     this.fetchUserInfo(this.props.userId);
   }
   fetchUserInfo(id) {
-    const setApiData = data => this.setState({ 
+    const setApiData = data => this.setState({
       userDisplayName: data[0].displayName,
       userPic: data[0].picture,
       username: data[0].username
@@ -29,7 +28,6 @@ class Post extends React.Component {
     getApiData(link, setApiData);
   }
   render() {
-    console.log(this.props.userId)
     return (
       <div key={`post-${this.props.id}`}>
         <PostDisplay
@@ -38,7 +36,7 @@ class Post extends React.Component {
           username={this.state.username}
           editorContent={this.props.content}
         />
-    </div>
+      </div>
     );
   }
 }

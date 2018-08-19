@@ -21,8 +21,8 @@ const getNav = () => {
     home: `/${root}`,
     howItWorks: `/${root}how-it-works`,
     about: `/${root}about`,
-    signup: `/${root}signup`,
-    login: `/${root}login`,
+    signup: `/${root}auth/signup`,
+    login: `/${root}auth/login`,
     wildcard: `/${root}*`
   };
 };

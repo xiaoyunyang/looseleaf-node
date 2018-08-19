@@ -22,7 +22,7 @@ function ensureAuthenticated(req, res, next) {
     next();
   } else {
     req.flash('info', 'You must be logged in to see this page.');
-    res.redirect('/auth/login');
+    res.redirect('/login'); // NOTE: this gets routed to /auth/login by LandingAppMiddleware
   }
 }
 
@@ -63,12 +63,13 @@ router.get('/users/:username', (req, res, next) => {
 // Local Signup ================================================================
 // Saves user to the database
 // TODO: Do I really need to code below?
-router.get('/signup', (req, res) => {
-  res.render('signup', {
-    // csrfToken: req.csrfToken()
-  });
-});
+// router.get('/signup', (req, res) => {
+//   res.render('signup', {
+//     // csrfToken: req.csrfToken()
+//   });
+// });
 
+// NOTE POST '/auth/signup' and POST '/auth/login' are handled by LandingAppMiddleware
 router.post('/signup', (req, res, next) => {
   // body-parser adds the username and password to req.body
   const email = req.body.email;
@@ -84,10 +85,7 @@ router.post('/signup', (req, res, next) => {
       console.log(chalk.red('error: user already exists'));
       req.flash('error', 'User already exists');
       res.statusMessage = 'error';
-      return res.send('User already exists')
-      //return res.redirect('/login');
-      // return res.status(404).json("Not Found");
-      // return res.redirect('/signup'); // res.redirect('/how-it-works');
+      return res.send('User already exists');
     }
     // Else if user does not exist, Let's create new user
 
@@ -132,24 +130,11 @@ router.post('/signup', (req, res, next) => {
   });
 }, passport.authenticate('login-local', {
   successRedirect: '/',
-  failureRedirect: '/login',
+  failureRedirect: '/login', // I don't think we ever get here...
   failureFlash: true
 }));
 
 // Local Login ==================================================================
-router.get('/login', (req, res) => {
-  res.render('login', {
-    // csrfToken: req.csrfToken()
-  });
-});
-
-/*
-router.post('/auth/login', passport.authenticate('login-local', {
-  successRedirect: '/',
-  failureRedirect: '/login',
-  failureFlash: true
-}));
-*/
 router.post('/login', (req, res, next) => {
   passport.authenticate('login-local', (err, user, info) => {
     if (err) { return next(err); }
@@ -175,10 +160,10 @@ router.get('/facebook', passport.authenticate('facebook'));
 
 // handle the callback after facebook has authenticated the user
 router.get(
-  '/auth/facebook/callback',
+  '/facebook/callback',
   passport.authenticate('facebook', {
     successRedirect: '/',
-    failureRedirect: '/auth/login'
+    failureRedirect: '/login'
   }),
 );
 
@@ -187,10 +172,10 @@ router.get('/github', passport.authenticate('github'));
 
 // handle the callback after facebook has authenticated the user
 router.get(
-  '/auth/github/callback',
+  '/github/callback',
   passport.authenticate('github', {
     successRedirect: '/',
-    failureRedirect: '/auth/login'
+    failureRedirect: '/login'
   }),
 );
 

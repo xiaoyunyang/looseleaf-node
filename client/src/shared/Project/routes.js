@@ -5,7 +5,7 @@ import NotFound from '../components/NotFound';
 import NewProject from './screens/NewProject/Main';
 import { getProjectPageData } from '../redux/Project/actions/project';
 
-const root = 'project';
+const root = 'project/edit';
 
 const getNav = (username) => {
   return {

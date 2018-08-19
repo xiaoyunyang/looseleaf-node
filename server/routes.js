@@ -41,7 +41,7 @@ router.get('/community/:name*', (req, res, next) => {
   }
   renderCommunityGuestAppMiddleware(req, res, next, community[req.params.name]);
 });
-router.get('/project/new*', (req, res, next) => {
+router.get('/project/edit*', (req, res, next) => {
   if (req.isAuthenticated()) {
     renderProjectAppMiddleware(req, res, next);
   }

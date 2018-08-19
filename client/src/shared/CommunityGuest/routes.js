@@ -20,8 +20,8 @@ const getNav = (community) => {
     one: `/${root}${community}/${tabs.one}`,
     two: `/${root}${community}/${tabs.two}`,
     three: `/${root}${community}/${tabs.three}`,
-    wildcard: `/${root}*`,
-  }
+    wildcard: `/${root}*`
+  };
 }
 const getRoutes = (community) => {
   const routes = [
