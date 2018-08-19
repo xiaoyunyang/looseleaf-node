@@ -43,7 +43,7 @@ router.get('/community/:name*', (req, res, next) => {
 });
 router.get('/project/edit*', (req, res, next) => {
   if (req.isAuthenticated()) {
-    renderProjectAppMiddleware(req, res, next);
+    renderUserAppMiddleware(req, res, next);
   }
   renderLandingAppMiddleware(req, res, next);
 });
@@ -57,7 +57,7 @@ router.get('/project/:slug*', (req, res, next) => {
     }
 
     if (req.isAuthenticated()) {
-      return renderProjectAppMiddleware(req, res, next);
+      return renderProjectPageMiddleware(req, res, next, project);
     }
     return renderProjectPageMiddleware(req, res, next, project);
   });

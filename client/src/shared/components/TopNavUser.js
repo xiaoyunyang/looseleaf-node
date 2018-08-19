@@ -44,7 +44,7 @@ const UserDropdown = ({ username, userPic }) => (
     </a>
     <ul id="user-dropdown" className="dropdown-content">
       <li><Link to={appRoute('userPortfolio')(username)}>Portfolio</Link></li>
-      <li><a href={appRoute('newProject')}>New Project</a></li>
+      <li><Link to={appRoute('newProject')}>New Project</Link></li>
       <li className="divider" />
       <li><a href="/">WebDev</a></li>
       <li><Link to={appRoute('userSettings')(username)}>Settings</Link></li>

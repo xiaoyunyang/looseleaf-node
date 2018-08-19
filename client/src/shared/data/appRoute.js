@@ -17,6 +17,8 @@ const appRoute = (pageName) => {
       return username => `/@${username}`;
     case 'userSettings':
       return username => `/@${username}/settings`;
+    case 'userWildcard':
+      return '/*';
     case 'userTabs':
       return username => `/@${username}/:slug`;
     case 'community':

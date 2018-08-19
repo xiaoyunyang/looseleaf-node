@@ -2,7 +2,9 @@ import Root from './Root';
 import Home from './screens/Home';
 import Settings from './screens/Settings/Main';
 import Portfolio from './screens/Portfolio/Main';
+import NewProject from './screens/NewProject/Main';
 import NotFound from '../components/NotFound';
+import appRoute from '../data/appRoute';
 
 const root = '';
 
@@ -40,22 +42,27 @@ const getRoutes = (user) => {
       component: Root,
       routes: [
         {
-          path: getNav(username).home,
+          path: appRoute('userHome'),
           exact: true,
           component: Home
         },
         {
-          path: getNav(username).settings,
+          path: appRoute('userSettings')(username),
           exact: true,
           component: Settings
         },
         {
-          path: getNav(username).portfolio,
+          path: appRoute('newProject'),
+          exact: true,
+          component: NewProject
+        },
+        {
+          path: appRoute('userPortfolio')(username),
           component: Portfolio,
           routes: getTabsRoutes(username)
         },
         {
-          path: getNav(username).wildcard,
+          path: appRoute('userWildcard'),
           component: NotFound
         }
       ]
