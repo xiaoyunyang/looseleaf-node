@@ -51,15 +51,14 @@ api.post('/project', (req, res, next) => {
   // Add new project to database
   const newProject = new Project();
   const slug = urlSlug(formFields.title, cuid.slug());
-
+  newProject.postedBy = req.body.userId;
   newProject.creator = {
-    postedBy: req.body.userId,
     about: validator.escape(formFields.aboutMe),
     mission: validator.escape(formFields.mission)
   };
 
   newProject.title = validator.escape(formFields.title);
-  newProject.urlSlug = slug;
+  newProject.slug = slug;
   newProject.desc = validator.escape(formFields.desc);
   newProject.projectType = formFields.projectType;
   newProject.tags = formFields.selectedTags;
@@ -79,15 +78,15 @@ api.post('/project', (req, res, next) => {
 api.get('/project', (req, res) => {
   // Queries
   const limit = parseInt(req.query.limit, 10);
-  Project.find({}).sort({ createdAt: -1 }).limit(limit).exec(
+  Project.find(req.query).sort({ createdAt: -1 }).limit(limit).exec(
     (err, projects) => {
       res.send(projects);
     }
   );
 });
 
-api.get('/project/:urlSlug', (req, res) => {
-  Project.find({ urlSlug: req.params.urlSlug }, (err, project) => {
+api.get('/project/:slug', (req, res) => {
+  Project.find({ slug: req.params.slug }, (err, project) => {
     if (err) {
       req.flash('error', 'No project found');
       res.statusMessage = 'error';
@@ -108,13 +107,13 @@ api.get('/project/:urlSlug', (req, res) => {
 // NOTE: this handles finding using id name:
 // http://localhost:3001/api/user?id=5b25d5d8bbb7ca0765de2127
 api.get('/user', (req, res) => {
-  const filter = req.query.id ? {_id: req.query.id } : {};
+  const filter = req.query;
   User.find(filter, (err, users) => {
     const usersOut = [];
 
     users.forEach((user) => {
       const userInfo = {
-        id: user._id,
+        _id: user._id,
         lastLoggedIn: user.lastLoggedIn,
         username: user.username,
         displayName: user.displayName,
@@ -132,7 +131,7 @@ api.get('/user', (req, res) => {
 });
 // Update user based on id
 // TODO: This is dangerous. This API lets anyone update user information
-// based on user id. How do we make sure the request is coming from the 
+// based on user id. How do we make sure the request is coming from the
 // actual user?
 api.post('/user/:id', (req, res, next) => {
   User.findById(req.params.id, (err, user) => {

@@ -24,7 +24,7 @@ class Post extends React.Component {
       userPic: data[0].picture,
       username: data[0].username
     });
-    const link = apiLink.user(id);
+    const link = apiLink.userById(id);
     getApiData(link, setApiData);
   }
   render() {

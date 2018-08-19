@@ -6,12 +6,12 @@ const setTags = tags => tags.split(',');
 
 const projectSchema = mongoose.Schema({
   createdAt: { type: Date, default: Date.now },
+  postedBy: { type: mongoose.Schema.ObjectId, ref: 'User' },
   creator: {
-    postedBy: { type: mongoose.Schema.ObjectId, ref: 'User' },
     about: { type: String, default: '' },
     mission: { type: String, default: '' }
   },
-  urlSlug: { type: String, required: true, unique: true },
+  slug: { type: String, required: true, unique: true },
   title: { type: String, required: true },
   desc: String,
   projectType: { type: String },

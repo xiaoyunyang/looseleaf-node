@@ -50,7 +50,7 @@ router.get('/project/edit*', (req, res, next) => {
 router.get('/project/:slug*', (req, res, next) => {
   // First find if a project with req.params.slug exists in the Project collection
   // If not ...
-  Project.findOne({ urlSlug: req.params.slug }, (err, project) => {
+  Project.findOne({ slug: req.params.slug }, (err, project) => {
     if (err) { return next(err); }
     if (!project) {
       return renderLandingAppMiddleware(req, res, next);

@@ -2,7 +2,7 @@ import React from 'react';
 import TopNav from '../TopNav';
 import { page } from '../routes';
 import { getApiData } from '../../../lib/helpers';
-import { staticApiLink } from '../../data/apiLinks';
+import { apiLink } from '../../data/apiLinks';
 import appRoute from '../../data/appRoute';
 import UsersCollections from '../../components/Collection/Users';
 
@@ -15,8 +15,7 @@ export default class Three extends React.Component {
   }
   componentDidMount() {
     const setApiData = data => this.setState({ users: data });
-    const apiLink = staticApiLink.users;
-    getApiData(apiLink, setApiData);
+    getApiData(apiLink.users, setApiData);
   }
 
   renderUsers2(users) {

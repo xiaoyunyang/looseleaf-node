@@ -5,15 +5,15 @@ import {
 const initState = {
   info: {
     createdAt: "2018-07-14T04:44:56.361Z",
+    postedBy: "5ac7f29dcc78928a6f24a100",
     creator: {
-      userId:"5aa5fdc30f8220abf3ec12fa",
       about: "I love the idea of services exchanged without money. The world needs more of this! For too long a lack of finances has kept people from doing the work that they love and are actually most competent at. Here&#x27;s to LooseLeaf and a great concept well executed.",
       mission: "I'm building a startup called LooseLeaf"
     },
     tags:[],
     submission: {"instruction":"","platform":"Dropbox"},
     title: "Paint My Dog&#x27;s Portrait&lt;script&gt;alert('hey')&lt;/script&gt",
-    urlSlug: "paint-my-dogs-portrait-720e2ev",
+    slug: "paint-my-dogs-portrait-720e2ev",
     desc: "My dog, Ollie, is a Shichon Teddy Bear.",
     dueDate: null,
     type: "Web Development",
