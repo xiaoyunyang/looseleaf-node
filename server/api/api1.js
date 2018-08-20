@@ -85,6 +85,7 @@ api.get('/project', (req, res) => {
   );
 });
 
+// TODO: The following is probably not needed
 api.get('/project/:slug', (req, res) => {
   Project.find({ slug: req.params.slug }, (err, project) => {
     if (err) {
@@ -105,30 +106,32 @@ api.get('/project/:slug', (req, res) => {
 // TODO: List in descending order (most recently signed up user at the top).
 // Also, return the users JSON with date of creation.
 // NOTE: this handles finding using id name:
-// http://localhost:3001/api/user?id=5b25d5d8bbb7ca0765de2127
+// http://localhost:3001/api/user?_id=5b25d5d8bbb7ca0765de2127
+// http://localhost:3001/api/username?username=xyang
 api.get('/user', (req, res) => {
-  const filter = req.query;
-  User.find(filter, (err, users) => {
-    const usersOut = [];
+  User.find(req.query).sort({ lastLoggedIn: -1 }).exec(
+    (err, users) => {
+      const usersOut = [];
 
-    users.forEach((user) => {
-      const userInfo = {
-        _id: user._id,
-        lastLoggedIn: user.lastLoggedIn,
-        username: user.username,
-        displayName: user.displayName,
-        email: user.email,
-        picture: user.picture,
-        bio: user.bio,
-        website: user.website,
-        interests: user.interests
-      };
-      usersOut.push(userInfo);
-    });
-
-    res.send(usersOut);
-  });
+      users.forEach((user) => {
+        const userInfo = {
+          _id: user._id,
+          lastLoggedIn: user.lastLoggedIn,
+          username: user.username,
+          displayName: user.displayName,
+          email: user.email,
+          picture: user.picture,
+          bio: user.bio,
+          website: user.website,
+          interests: user.interests
+        };
+        usersOut.push(userInfo);
+      });
+      res.send(usersOut);
+    }
+  );
 });
+
 // Update user based on id
 // TODO: This is dangerous. This API lets anyone update user information
 // based on user id. How do we make sure the request is coming from the
