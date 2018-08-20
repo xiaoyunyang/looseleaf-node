@@ -3,35 +3,38 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import $ from 'jquery';
 import { getPageName } from '../../lib/helpers';
-import { staticApiLink } from '../data/apiLinks';
+import { apiLink } from '../data/apiLinks';
 import { image } from '../data/assetLinks';
 import appRoute from '../data/appRoute';
 
 // const username = store.username;
 
-const MobileSideNav = ( {username, userPic} ) => (
+const MobileSideNav = ( {username, userPic, userWebsite, userEmail} ) => (
   <ul id="mobile-menu" className="side-nav">
     <li>
       <div className="user-view">
         <img alt={`looseleaf user ${username}`} className="circle" src={userPic} />
         <div className="row">
           <div className="col l2 m2 s2">
-            <a href="https://github.com/xiaoyunyang"><i className="fa fa-github fa-lg" /></a>
+            <a href={`mailto:${userEmail}`}><i className="fa fa-envelope fa-lg" /></a>
           </div>
-          <div className="col l2 m2 s2">
-            <a href="https://www.linkedin.com/in/xiaoyun-yang"><i className="fa fa-linkedin fa-lg" /></a>
-          </div>
-          <div className="col l2 m2 s2">
-            <a href="https://medium.com/@xiaoyunyang"><i className="fa fa-medium fa-lg" /></a>
-          </div>
-          <div className="col l2 m2 s2">
-            <a href="mailto:xiaoyun@looseleafapp.com"><i className="fa fa-envelope fa-lg" /></a>
-          </div>
+          {
+            userWebsite &&
+            <div className="col l2 m2 s2">
+              <a target="_blank" href={userWebsite} rel="noopener noreferrer">
+                <i className="fa fa-globe-americas fa-lg" />
+              </a>
+            </div>
+          }
         </div>
       </div>
     </li>
     <li><Link to={appRoute('userHome')} className="active">Home</Link></li>
     <li><Link to={appRoute('userPortfolio')(username)}>Portfolio</Link></li>
+    <li><Link to={appRoute('newProject')}>newProject</Link></li>
+    <li className="divider" />
+    <li><Link to={appRoute('userSettings')(username)}>Settings</Link></li>
+    <li><Link to={apiLink.logout}>Log out</Link></li>
   </ul>
 );
 
@@ -47,7 +50,7 @@ const UserDropdown = ({ username, userPic }) => (
       <li className="divider" />
       <li><a href="/">WebDev</a></li>
       <li><Link to={appRoute('userSettings')(username)}>Settings</Link></li>
-      <li><a href={staticApiLink.logout}>Log out</a></li>
+      <li><a href={apiLink.logout}>Log out</a></li>
     </ul>
   </li>
 );
@@ -84,15 +87,23 @@ export default class TopNavUser extends React.Component {
     const boxShadow = "0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2)";
     const topNav = $("#user-navbar-fixed .navbar-fixed nav");
     const tabs = $('.tabs-container');
+    const profileUserpic = $('#profile-userpic-tab');
+    const navbarLogo = $('#navbar-logo');
     if (tabs.hasClass('pinned')) {
       topNav.css('box-shadow', 'none');
+      profileUserpic.css('visibility', 'visible');
+      navbarLogo.css('visibility', 'hidden');
     } else if (tabs.hasClass('pin-top')) {
       topNav.css('box-shadow', boxShadow);
+      profileUserpic.css('visibility', 'hidden');
+      navbarLogo.css('visibility', 'visible');
     }
   }
   render() {
     const username = this.props.user.username;
     const userPic = this.props.user.picture;
+    const userWebsite = this.props.user.website;
+    const userEmail = this.props.user.email;
     const selected = (typeof this.props.route.path === 'string')
       ? getPageName(this.props.route.path) : '';
 
@@ -110,7 +121,7 @@ export default class TopNavUser extends React.Component {
           <nav className="grey lighten-4">
             <div className="nav-wrapper-white nav-text-links">
               <div className="brand-logo hide-on-med-and-down">
-                <Link className="navbar-brand" to={appRoute('landingHome')}>
+                <Link id="navbar-logo" className="navbar-brand" to={appRoute('landingHome')}>
                   <img src={image.logo} alt="LooseLeaf" />
                 </Link>
               </div>
@@ -145,7 +156,8 @@ export default class TopNavUser extends React.Component {
             </div>
           </nav>
         </div>
-        <MobileSideNav username={username} userPic={userPic} />
+        <MobileSideNav
+          username={username} userPic={userPic} userWebsite={userWebsite} userEmail={userEmail}/>
       </div>
 
     );

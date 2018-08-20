@@ -765,18 +765,43 @@ nav .categories-wrapper .categories {
 #login-btn-tab {
   visibility: hidden;
 }
+#profile-userpic-tab {
+  visibility: hidden;
+}
 /*  Sticky Tab Navbar Guest Page END */
 
 /*  Sticky Tab Navbar Profile Page BEGIN */
 #profile-tabs {
   width: 100%;
 }
-@media only screen and (min-width : 992px) {
+#profile-tabs .tabs {
+  max-width: 650px;
+}
+#profile-userpic-tab img {
+  max-width: 35px;
+  max-height: 35px;
+  border-radius: 5px;
+  -webkit-transform: translate(0, 8px);
+  -ms-transform: translate(0, 8px);
+  transform: translate(0, 8px);
+}
+#profile-userpic-tab p {
+  -webkit-transform: translate(-15px, 2px);
+  -ms-transform: translate(-15px, 2px);
+  transform: translate(-15px, 2px);
+  max-width: 15px;
+  font-size: 14px;
+}
+/* Medium and Large Screens */
+@media only screen and (min-width: 601px) {
   #profile-tabs .tabs {
     width: 70%;
-    margin-left: auto;
+    margin-left: 15%;
     left: auto;
     right: auto;
+  }
+  #profile-tabs .row {
+    margin-bottom: -1.5px;
   }
 }
 .tabs-container.pinned {

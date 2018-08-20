@@ -89,12 +89,8 @@ export default ({ user }) => (
       <div className="col s12 m12 l9 hero-info">
         <div className="hero-profile-center">
           <h4>{user.displayName}</h4>
-          <p>
-              {`@${user.username}`}
-            </p>
-          <p>
-              {`Member since ${getMonthYear(user.createdAt)}`}
-            </p>
+          <p>{`@${user.username}`}</p>
+          <p>{`Member since ${getMonthYear(user.createdAt)}`}</p>
         </div>
         <Communities icon="group" cs={user.communities} />
         <UserInfo icon={iconEnums.location}

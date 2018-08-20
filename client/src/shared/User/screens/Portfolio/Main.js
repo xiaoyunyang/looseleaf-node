@@ -21,33 +21,51 @@ export default class Main extends Component {
       });
     }
   }
-  renderTabsNav(selected, root) {
-    const style = {
-      top: 0
-    };
+  // TODO: username must be less than 10 characters long
+  renderProfileUserpic(username, userPic) {
     return (
-      <div id="profile-tabs" className="tabs-container pin-top" style={style}>
-        <ul className="tabs">
-          {
-          tabs.map((tab, i) => {
-            return (
-              <li key={i} className="tab col l3 m2 s3">
-                <Link
-                  id={`tab-${tab}`}
-                  to={`${root}/${tab}`}
-                  className={selected === tab ? 'active' : ''}
-                >
-                  {tab}
-                </Link>
-              </li>);
-          })
-        }
-        </ul>
+      <div className="row" id='profile-userpic-tab' >
+        <div className="col">
+          <img src={userPic} alt={username}/>
+        </div>
+        <div className="col">
+          <p>{`@${username}`}</p>
+        </div>
+      </div>
+    );
+  }
+  renderTabsNav(selected, root) {
+    return (
+      <div id="profile-tabs" className="tabs-container pin-top" style={{top: 0}}>
+        <div className="row">
+          <div className="col">
+          {this.renderProfileUserpic(
+            this.props.user.info.username,
+            this.props.user.info.picture,
+          )}
+          </div>
+          <ul className="tabs">
+            {
+            tabs.map((tab, i) => {
+              return (
+                <li key={i} className="tab col">
+                  <Link
+                    id={`tab-${tab}`}
+                    to={`${root}/${tab}`}
+                    className={selected === tab ? 'active' : ''}
+                  >
+                    {tab}
+                  </Link>
+                </li>);
+            })
+          }
+          </ul>
+        </div>
       </div>
     );
   }
   render() {
-    // TODO: The code below is an ugly hac but it worksk. I don't know why
+    // TODO: The code below is an ugly hac but it works. I don't know why
     // this.props.match.slug no longer provides the tab name
     // It worked before ... not sure why it doesn't work now
     const selected = this.props.location.pathname.split('/').pop() || 'completed';
