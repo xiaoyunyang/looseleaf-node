@@ -75,11 +75,11 @@ class Home extends React.Component {
       <div className="card-panel hide-on-small-only" id="user-card">
         <div className="row">
           <div className="col s4 m4 l4">
-            <img className="circle" src={this.props.user.picture} alt=""/>
+            <img className="circle" src={this.props.user.info.picture} alt=""/>
           </div>
           <div className="col s8 m8 l8">
             <h6>{this.props.user.displayName}</h6>
-            <p style={{ marginTop: -1 }}>{`@${this.props.user.username}`}</p>
+            <p style={{ marginTop: -1 }}>{`@${this.props.user.info.username}`}</p>
           </div>
         </div>
         <div className="or-divider"/>
@@ -98,10 +98,10 @@ class Home extends React.Component {
         <div className="card-content">
           <div className="row feed-user">
             <div className="col">
-              <img className="circle" src={this.props.user.picture} alt=""/>
+              <img className="circle" src={this.props.user.info.picture} alt=""/>
             </div>
             <div className="col s8 m8 l8">
-              <p>{this.props.user.displayName}</p>
+              <p>{this.props.user.info.displayName}</p>
             </div>
           </div>
           <p>{msg}</p>
@@ -113,10 +113,11 @@ class Home extends React.Component {
       </div>
     );
   }
+
   render() {
     return (
       <div className="section-white">
-        <TopNav route={this.props.route} user={this.props.user}/>
+        <TopNav route={this.props.route} user={this.props.user.info}/>
         <div className="container" id="user-home">
           <div className="row">
             <div className="col s12 m4 l3">
@@ -127,8 +128,8 @@ class Home extends React.Component {
             <div className="col s12 m8 l9 user-feed">
                <PostEditor
                 handlePost={d => this.handlePost(d)}
-                userDisplayName={this.props.user.displayName}
-                userPic={this.props.user.picture}
+                userDisplayName={this.props.user.info.displayName}
+                userPic={this.props.user.info.picture}
                 placeholder="Post an announcement to a project or community."
               />
               {

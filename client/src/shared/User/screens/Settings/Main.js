@@ -21,7 +21,7 @@ export default class Settings extends React.Component {
     };
   }
   handleSubmit(formFields) {
-    const userId = this.props.user._id;
+    const userId = this.props.user.info._id;
     axios.post(dynamicApiLink(userId).user, { formFields, userId })
       .then(res => {
         if (res.statusText === 'error') {
@@ -84,7 +84,7 @@ export default class Settings extends React.Component {
   render() {
     return (
       <div className="section-white">
-        <TopNav route={this.props.route} user={this.props.user} />
+        <TopNav route={this.props.route} user={this.props.user.info} />
         { this.renderAlertBox(this.state.showAlertBox,
                               this.state.alertMsg,
                               this.state.alertColor)
@@ -92,19 +92,19 @@ export default class Settings extends React.Component {
         <div className="container">
           <h2>Settings</h2>
           <GeneralForm
-            userId={this.props.user._id}
-            email={this.props.user.email}
-            displayName={this.props.user.displayName}
-            username={this.props.user.username}
-            picture={this.props.user.picture}
+            userId={this.props.user.info._id}
+            email={this.props.user.info.email}
+            displayName={this.props.user.info.displayName}
+            username={this.props.user.info.username}
+            picture={this.props.user.info.picture}
             handleSubmit={formFields => this.handleSubmit(formFields)}
           />
           <AboutForm
-            userId={this.props.user._id}
-            bio={this.props.user.bio}
-            location={this.props.user.location}
-            website={this.props.user.website}
-            interests={this.props.user.interests}
+            userId={this.props.user.info._id}
+            bio={this.props.user.info.bio}
+            location={this.props.user.info.location}
+            website={this.props.user.info.website}
+            interests={this.props.user.info.interests}
             handleSubmit={formFields => this.handleSubmit(formFields)}
           />
           <div className="card-panel white">

@@ -5,11 +5,11 @@ import {
   compose } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import loggerMiddleware from 'redux-logger';
-import project from './reducers/project';
+import user from './reducers/user';
 
 export default function (initialStore={}) {
   const reducer = combineReducers({
-    project
+    user
   });
   const middleware = [thunkMiddleware, loggerMiddleware];
   return compose(

@@ -10,8 +10,16 @@ import App from '../src/shared/User/App';
 
 export default function renderUserApp(req, res, next) {
 
-  const store = configureStore(req.user);
-  const dataToSerialize = req.user;
+  const preloadedState = {
+    user: { info: req.user }
+  }
+
+  const store = configureStore(preloadedState);
+  const dataToSerialize = preloadedState;
+  const meta = {
+    title: `${req.user.displayName} - LooseLeaf`
+  };
+
 
   const branch = matchRoutes(getRoutes(req.user.username), req.url)
   const promises = branch.map(({ route, match }) => {
@@ -39,8 +47,11 @@ export default function renderUserApp(req, res, next) {
 			res.end()
 		}
     const html = renderToString(
-      <HTML userData={dataToSerialize}
-        html={app}/>
+      <HTML
+        meta={meta}
+        dataToSerialize={dataToSerialize}
+        html={app}
+      />
     );
     return res.send(`<!DOCTYPE html>${html}`);
   });

@@ -6,11 +6,11 @@ import React from 'react';
 // They should be equal.
 // Make sure to minify the index.css for production
 
-const HTML = (props) => {
+const HTML = ({meta, html, dataToSerialize}) => {
   return (
     <html lang="en">
       <head>
-        <title>{`${props.userData.displayName} - LooseLeaf `}</title>
+        <title>{meta.title}</title>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link
@@ -22,11 +22,11 @@ const HTML = (props) => {
       <body>
         <div
           id="root"
-          dangerouslySetInnerHTML={{ __html: props.html }}
+          dangerouslySetInnerHTML={{ __html: html }}
         />
         <script dangerouslySetInnerHTML={{
             __html: `window.__PRELOADED_STATE__ =
-              ${JSON.stringify(props.userData)}`
+              ${JSON.stringify(dataToSerialize)}`
           }}
         />
       <script type="application/javascript" src="/user.bundle.js" />

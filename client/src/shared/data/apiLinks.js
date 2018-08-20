@@ -15,7 +15,7 @@ export const staticApiLink = {
 // combine everything into apiLink and change the file name.
 export const apiLink = {
  userById: (id) =>  `${root}/api/user?_id=${id}`,
- userByUsername: (username) =>  `${root}/api/user?username=${username}`,
+ userByUsername: (username) => `${root}/api/user?username=${username}`,
  users: `${root}/api/user`,
  projectBySlug: (slug) => `${root}/api/project?slug=${slug}`,
  projects: `${root}/api/project`,

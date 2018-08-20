@@ -8,6 +8,7 @@ import './lib/tabs'; // <- overriding the materialize tabs js
 import './lib/chips'; // <- overriding the materialize chips js
 // import AppOld from './craApps/App';
 import AppUser from './craApps/AppUser';
+import AppUserPage from './craApps/AppUserPage';
 import AppProject from './craApps/AppProject';
 import AppProjectPage from './craApps/AppProjectPage';
 import AppGuest from './craApps/AppGuest';
@@ -24,6 +25,7 @@ import 'draft-js-inline-toolbar-plugin/lib/plugin.css';
  */
 const Apps = {
   user: AppUser,
+  userPage: AppUserPage,
   project: AppProject,
   projectPage: AppProjectPage,
   guest: AppGuest,
@@ -33,7 +35,7 @@ const Apps = {
   recipe: AppRecipe
 };
 
-const App = Apps.communityUser;
+const App = Apps.user;
 
 const render = (Component) => {
   ReactDOM.render(

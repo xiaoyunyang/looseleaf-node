@@ -1,61 +1,44 @@
 import Root from './Root';
-import Home from './screens/Home';
-import Settings from './screens/Settings/Main';
 import Portfolio from './screens/Portfolio/Main';
 import NotFound from '../components/NotFound';
-
-const root = '';
-
-const getNav = (username) => {
-  return {
-    home: `/${root}`,
-    portfolio: `/${root}@${username}`,
-    settings: `/${root}@${username}/settings`,
-    tabs: `/${root}@${username}/:slug`,
-    wildcard: `/${root}*`
-  };
-};
+import appRoute from '../data/appRoute';
 
 const getTabsRoutes = (username) => {
   const tabsRoutes = [
     {
-      path: getNav(username).portfolio,
+      path: appRoute('userPortfolio')(username),
       exact: true,
       component: Portfolio
     },
     {
-      path: getNav(username).tabs,
+      path: appRoute('userPortfolioTab')(username),
       component: Portfolio
     }
   ];
   return tabsRoutes;
 };
 
+
+// const page = (community) => {
+//   return {
+//     home: {name: 'Projects', slug: 'projects', link: appRoute('communityHome')(community)},
+//     one: {name: 'Projects', slug: 'projects', link: appRoute('communityOne')(community)},
+//     two: {name: 'Announcements', slug: 'announcements', link: appRoute('communityTwo')(community)},
+//     three: {name: 'People', slug: 'people', link: appRoute('communityThree')(community)},
+//   }
+// }
+
+
 const getRoutes = (user) => {
 
   const username = user.username;
-
   const routes = [
     {
       component: Root,
       routes: [
         {
-          path: getNav(username).home,
+          path: appRoute('userPortfolio')(username),
           exact: true,
-          component: Home
-        },
-        {
-          path: getNav(username).settings,
-          exact: true,
-          component: Settings
-        },
-        {
-          path: getNav(username).portfolio,
-          component: Portfolio,
-          routes: getTabsRoutes(username)
-        },
-        {
-          path: getNav(username).wildcard,
           component: NotFound
         }
       ]
@@ -67,4 +50,4 @@ const getRoutes = (user) => {
 // Caller:
 // getRoutes is used by App.js
 // getNav is used by TopNav.js
-export { getRoutes, getNav, root };
+export { getRoutes };

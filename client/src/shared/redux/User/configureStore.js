@@ -8,14 +8,14 @@ import reducers from './reducers';
 
 //TODO: remove logger for only production mode
 
-const configureStore = (preloadedState) => {
+const configureStore = ({user}) => {
   const middleware = [thunkMiddleware, loggerMiddleware];
   const enhancer = compose(
     applyMiddleware(...middleware)
   );
   const store = createStore(
     reducers,
-    {user: preloadedState},
+    {user: user},
     enhancer
   );
   return store;

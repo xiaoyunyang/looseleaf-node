@@ -40,7 +40,8 @@ export default function renderProjectApp(req, res, next, project) {
     <HTML
       meta={meta}
       dataToSerialize={dataToSerialize}
-      html={app}/>
+      html={app}
+    />
   );
   return res.send(`<!DOCTYPE html>${html}`);
 

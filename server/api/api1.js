@@ -116,6 +116,7 @@ api.get('/user', (req, res) => {
       users.forEach((user) => {
         const userInfo = {
           _id: user._id,
+          createdAt: user.createdAt,
           lastLoggedIn: user.lastLoggedIn,
           username: user.username,
           displayName: user.displayName,

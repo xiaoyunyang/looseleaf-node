@@ -57,15 +57,15 @@ export default class Main extends Component {
       $(`#tab-${selected}`).trigger('click');
     }
 
-    const root = getRoot(this.props.user.username);
+    const root = getRoot(this.props.user.info.username);
 
     return (
       <div>
-        <TopNav route={this.props.route} user={this.props.user} />
+        <TopNav route={this.props.route} user={this.props.user.info} />
         <div className="container">
           <div className="row">
             <div className="col l12 m12 s12">
-              <About user={this.props.user} />
+              <About user={this.props.user.info} />
             </div>
           </div>
         </div>
@@ -74,7 +74,7 @@ export default class Main extends Component {
           <div className="row">
             <div className="col l10 m10 s12">
               <Switch>
-                {renderRoutes(getRoutes(this.props.user.username).routes)}
+                {renderRoutes(getRoutes(this.props.user.info.username).routes)}
               </Switch>
             </div>
           </div>

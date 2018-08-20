@@ -1,24 +1,27 @@
 import React from 'react';
+import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import App from '../shared/ProjectPage/App';
+import App from '../shared/UserPage/App';
 import { hot } from 'react-hot-loader';
-import initRedux from '../shared/redux/Project/init-redux';
-import * as actions from '../shared/redux/Project/actions/project';
-//import configureStore from '../shared/redux/Project/configureStoreCRA';
+import initRedux from '../shared/redux/User/init-redux';
+import * as actions from '../shared/redux/User/actions/user';
 
 const store = initRedux();
 
 class AppUserPage extends React.Component {
   componentDidMount() {
     if (typeof document !== 'undefined') {
-      const username = document.location.pathname.split('/').pop();
-      store.dispatch(actions.getUserPageData(username));
+      const username = document.location.pathname.split('/@').pop();
+      console.log('AppUserPage actions = ', actions)
+      store.dispatch(actions.getUserProfileData(username));
     }
   }
   render() {
     return (
       <Provider store={store}>
-        <App />
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
       </Provider>
     );
   }
