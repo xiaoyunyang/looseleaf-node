@@ -62,7 +62,6 @@ const UserDropdown = ({ username, userPic, useExternLinks }) => (
       {
         // <div className="arrow-down" />
       }
-
     </a>
     <ul id="user-dropdown" className="dropdown-content topnav-dropdown">
       <li>

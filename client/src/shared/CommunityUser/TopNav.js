@@ -9,14 +9,17 @@ const UserDropdown = ( {username, userPic} ) => (
   <li id="dropdown-block">
     <a className="navbar-img dropdown-button" data-activates="user-dropdown">
       <img alt={`looseleaf user ${username}`} className="mod-round" src={userPic} />
-      <div className="arrow-down" />
+      {
+        // <div className="arrow-down" />
+      }
     </a>
-    <ul id="user-dropdown" className="dropdown-content">
+    <ul id="user-dropdown" className="dropdown-content topnav-dropdown">
       <li><a href={`/@${username}`}>Portfolio</a></li>
       <li><a href="/project/new">New Project</a></li>
       <li className="divider" />
       <li><a href={`/@${username}/settings`}>Settings</a></li>
       <li><a href="/auth/logout">Log out</a></li>
+      <div className="popover-arrow"></div>
     </ul>
   </li>
 );
@@ -95,7 +98,6 @@ export default class TopNav extends React.Component {
       </div>
     );
   }
-
   renderPrimaryNavInner(selected, community, user) {
     return (
       <div className="nav-wrapper-white nav-text-links">
