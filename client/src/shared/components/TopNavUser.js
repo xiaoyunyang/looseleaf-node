@@ -40,7 +40,7 @@ const MobileSideNav = ( {username, userPic, userWebsite, userEmail, useExternLin
       <NavLink to={appRoute('userHome')} name='Home' external={useExternLinks}/>
     </li>
     <li>
-      <NavLink to={appRoute('userPortfolio')(username)} name='Porfolio' external={useExternLinks}/>
+      <NavLink to={appRoute('userProfile')(username)} name='Profile' external={useExternLinks}/>
     </li>
     <li>
       <NavLink to={appRoute('newProject')} name='New Project' external={useExternLinks}/>
@@ -63,7 +63,7 @@ const UserDropdown = ({ username, userPic, useExternLinks }) => (
     </a>
     <ul id="user-dropdown" className="dropdown-content">
       <li>
-        <NavLink to={appRoute('userPortfolio')(username)} name='Porfolio' external={useExternLinks}/>
+        <NavLink to={appRoute('userProfile')(username)} name='Profile' external={useExternLinks}/>
       </li>
       <li>
         <NavLink to={appRoute('newProject')} name='New Project' external={useExternLinks}/>
@@ -164,7 +164,7 @@ export default class TopNavUser extends React.Component {
                   <a href={appRoute('project')}>Project</a>
                 </li>
                 <li className={selected === username ? 'active' : ''}>
-                  <NavLink id={`nav-${username}`} to={appRoute('userPortfolio')(username)} name='Portfolio' external={this.props.useExternLinks}/>
+                  <NavLink id={`nav-${username}`} to={appRoute('userProfile')(username)} name='Profile' external={this.props.useExternLinks}/>
                 </li>
                 <li><button><i className="material-icons">notifications_none</i></button></li>
                 <UserDropdown

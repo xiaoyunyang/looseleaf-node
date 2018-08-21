@@ -12,7 +12,7 @@ const tabs = [
 ];
 
 const getRoot = (username) => {
-  return appRoute('userPortfolio')(username);
+  return appRoute('userProfile')(username);
 };
 
 const getRoutes = (username) => {

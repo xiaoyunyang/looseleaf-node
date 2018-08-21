@@ -9,12 +9,12 @@ import appRoute from '../data/appRoute';
 const getTabsRoutes = (username) => {
   const tabsRoutes = [
     {
-      path: appRoute('userPortfolio')(username),
+      path: appRoute('userProfile')(username),
       exact: true,
       component: Portfolio
     },
     {
-      path: appRoute('userPortfolioTab')(username),
+      path: appRoute('userProfileTab')(username),
       component: Portfolio
     }
   ];
@@ -45,7 +45,7 @@ const getRoutes = (user) => {
           component: NewProject
         },
         {
-          path: appRoute('userPortfolio')(username),
+          path: appRoute('userProfile')(username),
           component: Portfolio,
           routes: getTabsRoutes(username)
         },
