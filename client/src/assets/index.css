@@ -796,12 +796,9 @@ nav .categories-wrapper .categories {
 @media only screen and (min-width: 601px) {
   #profile-tabs .tabs {
     width: 70%;
-    margin-left: 180px;
+    margin-left: 15%;
     left: auto;
     right: auto;
-  }
-  #profile-tabs .row {
-    margin-bottom: -1.5px;
   }
 }
 .tabs-container.pinned {

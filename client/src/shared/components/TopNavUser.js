@@ -9,7 +9,14 @@ import appRoute from '../data/appRoute';
 
 // const username = store.username;
 
-const MobileSideNav = ( {username, userPic, userWebsite, userEmail} ) => (
+const NavLink = ({external, to, className, id, name}) => (
+  external ?
+    <a id={id} className={className} href={to}>{name}</a>
+    :
+    <Link d={id} className={className} to={to}>{name}</Link>
+);
+
+const MobileSideNav = ( {username, userPic, userWebsite, userEmail, useExternLinks} ) => (
   <ul id="mobile-menu" className="side-nav">
     <li>
       <div className="user-view">
@@ -29,28 +36,44 @@ const MobileSideNav = ( {username, userPic, userWebsite, userEmail} ) => (
         </div>
       </div>
     </li>
-    <li><Link to={appRoute('userHome')} className="active">Home</Link></li>
-    <li><Link to={appRoute('userPortfolio')(username)}>Portfolio</Link></li>
-    <li><Link to={appRoute('newProject')}>newProject</Link></li>
+    <li>
+      <NavLink to={appRoute('userHome')} name='Home' external={useExternLinks}/>
+    </li>
+    <li>
+      <NavLink to={appRoute('userPortfolio')(username)} name='Porfolio' external={useExternLinks}/>
+    </li>
+    <li>
+      <NavLink to={appRoute('newProject')} name='New Project' external={useExternLinks}/>
+    </li>
     <li className="divider" />
-    <li><Link to={appRoute('userSettings')(username)}>Settings</Link></li>
-    <li><Link to={apiLink.logout}>Log out</Link></li>
+    <li>
+      <NavLink to={appRoute('userSettings')(username)} name='Settings' external={useExternLinks}/>
+    </li>
+    <li>
+      <NavLink to={apiLink.logout} name='Log out' external={true}/>
+    </li>
   </ul>
 );
 
-const UserDropdown = ({ username, userPic }) => (
+const UserDropdown = ({ username, userPic, useExternLinks }) => (
   <li id="dropdown-block">
     <a className="navbar-img dropdown-button" data-activates="user-dropdown">
       <img alt={`looseleaf user ${username}`} className="mod-round" src={userPic} />
       <div className="arrow-down" />
     </a>
     <ul id="user-dropdown" className="dropdown-content">
-      <li><Link to={appRoute('userPortfolio')(username)}>Portfolio</Link></li>
-      <li><Link to={appRoute('newProject')}>New Project</Link></li>
+      <li>
+        <NavLink to={appRoute('userPortfolio')(username)} name='Porfolio' external={useExternLinks}/>
+      </li>
+      <li>
+        <NavLink to={appRoute('newProject')} name='New Project' external={useExternLinks}/>
+      </li>
       <li className="divider" />
-      <li><a href="/">WebDev</a></li>
-      <li><Link to={appRoute('userSettings')(username)}>Settings</Link></li>
-      <li><a href={apiLink.logout}>Log out</a></li>
+      <li><a href="/community">Communities</a></li>
+      <li>
+        <NavLink to={appRoute('userSettings')(username)} name='Settings' external={useExternLinks}/>
+      </li>
+      <li><NavLink to={apiLink.logout} name='Log out' external={true}/></li>
     </ul>
   </li>
 );
@@ -100,11 +123,12 @@ export default class TopNavUser extends React.Component {
     }
   }
   render() {
+    console.log('TopNavUser', this.props)
     const username = this.props.user.username;
     const userPic = this.props.user.picture;
     const userWebsite = this.props.user.website;
     const userEmail = this.props.user.email;
-    const selected = (typeof this.props.route.path === 'string')
+    const selected = this.props.route && (typeof this.props.route.path === 'string')
       ? getPageName(this.props.route.path) : '';
 
     // TODO: Still need the code below?
@@ -121,32 +145,33 @@ export default class TopNavUser extends React.Component {
           <nav className="grey lighten-4">
             <div className="nav-wrapper-white nav-text-links">
               <div className="brand-logo hide-on-med-and-down">
-                <Link id="navbar-logo" className="navbar-brand" to={appRoute('landingHome')}>
-                  <img src={image.logo} alt="LooseLeaf" />
-                </Link>
+                {
+                  this.props.useExternLinks ?
+                    <a className="navbar-brand" href={appRoute('landingHome')}>
+                      <img src={image.logo} alt="LooseLeaf" />
+                    </a>
+                    :
+                    <Link id="navbar-logo" className="navbar-brand" to={appRoute('landingHome')}>
+                      <img src={image.logo} alt="LooseLeaf" />
+                    </Link>
+                }
               </div>
               <ul className="right hide-on-small-only">
                 <li className={selected === '' ? 'active' : ''}>
-                  {
-                    this.props.useExternLinks ?
-                      <a href={appRoute('userHome')}>Home</a>
-                      :
-                      <Link id={`nav-`} to={appRoute('userHome')}>Home</Link>
-                  }
+                  <NavLink id={`nav-`} to={appRoute('userHome')} name='Home' external={this.props.useExternLinks} />
                 </li>
                 <li className={selected === 'project' ? 'active' : ''}>
                   <a href={appRoute('project')}>Project</a>
                 </li>
                 <li className={selected === username ? 'active' : ''}>
-                  {
-                    this.props.useExternLinks ?
-                    <a href={appRoute('userPortfolio')(username)}>Portfolio</a>
-                    :
-                    <Link id={`nav-${username}`} to={appRoute('userPortfolio')(username)}>Portfolio</Link>
-                  }
+                  <NavLink id={`nav-${username}`} to={appRoute('userPortfolio')(username)} name='Portfolio' external={this.props.useExternLinks}/>
                 </li>
                 <li><button><i className="material-icons">notifications_none</i></button></li>
-                <UserDropdown username={username} userPic={userPic} />
+                <UserDropdown
+                  username={username}
+                  userPic={userPic}
+                  useExternLinks={this.props.useExternLinks}
+                />
               </ul>
               <ul className="right hide-on-med-and-up">
                 <li>
@@ -157,7 +182,8 @@ export default class TopNavUser extends React.Component {
           </nav>
         </div>
         <MobileSideNav
-          username={username} userPic={userPic} userWebsite={userWebsite} userEmail={userEmail}/>
+          username={username} userPic={userPic} userWebsite={userWebsite} userEmail={userEmail} useExternLinks={this.props.useExternLinks}
+        />
       </div>
 
     );

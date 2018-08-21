@@ -125,7 +125,6 @@ export default class Settings extends React.Component {
             <a href="">Delete account</a>
           </div>
         </div>
-
       </div>
     );
   }

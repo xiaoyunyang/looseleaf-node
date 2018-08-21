@@ -5,7 +5,7 @@ import { BrowserRouter } from 'react-router-dom';
 import 'materialize-css';
 import 'materialize-css/dist/css/materialize.min.css';
 import 'materialize-css/dist/js/materialize.min';
-import initRedux from '../shared/redux/Project/init-redux';
+import configureStore from '../shared/redux/configureStore/projectPage';
 import App from '../shared/ProjectPage/App';
 import '../lib/tabs';
 import '../lib/chips';
@@ -17,11 +17,11 @@ import 'draft-js-inline-toolbar-plugin/lib/plugin.css';
 const initialState = window.__PRELOADED_STATE__;
 
 // Allow the passed state to be garbage-collected
-delete window.__PRELOADED_STATE__
+delete window.__PRELOADED_STATE__;
 
 // Instead of starting Redux with an empty initial state on the server,
 // you pass the server data into the Redux setup.
-const store = initRedux(initialState);
+const store = configureStore(initialState);
 /*
  * Main entry point for the client side isomorphic app
  */

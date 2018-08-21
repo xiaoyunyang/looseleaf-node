@@ -53,11 +53,7 @@ router.get('/project/:slug*', (req, res, next) => {
   Project.findOne({ slug: req.params.slug }, (err, project) => {
     if (err) { return next(err); }
     if (!project) {
-      return renderLandingAppMiddleware(req, res, next);
-    }
-
-    if (req.isAuthenticated()) {
-      return renderProjectPageMiddleware(req, res, next, project);
+      return renderLandingAppMiddleware(req, res, next); // This will display the NotFound page
     }
     return renderProjectPageMiddleware(req, res, next, project);
   });

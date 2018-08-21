@@ -5,14 +5,17 @@ import {
   compose } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import loggerMiddleware from 'redux-logger';
-import project from './reducers/project';
+import project from '../reducers/project';
+import user from '../reducers/user';
 
+// NOTE: The init[blank]Page are exclusively used by CRA for testing only
 export default function (initialStore={}) {
-  const reducer = combineReducers({
-    project
+  const reducers = combineReducers({
+    project,
+    user
   });
   const middleware = [thunkMiddleware, loggerMiddleware];
   return compose(
     applyMiddleware(...middleware)
-  )(createStore)(reducer, initialStore); // the initialStore value is passed into the Redux createStore function. The store is now hydrated with the data from the server
+  )(createStore)(reducers, initialStore); // the initialStore value is passed into the Redux createStore function. The store is now hydrated with the data from the server
 }

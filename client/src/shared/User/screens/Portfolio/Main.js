@@ -28,9 +28,12 @@ export default class Main extends Component {
         <div className="col">
           <img src={userPic} alt={username}/>
         </div>
-        <div className="col">
-          <p>{`@${username}`}</p>
-        </div>
+        {
+          <div className="col hide-on-med-only">
+            <p>{`@${username}`}</p>
+          </div>
+        }
+
       </div>
     );
   }
