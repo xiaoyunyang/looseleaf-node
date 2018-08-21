@@ -1,22 +1,22 @@
 import Root from './Root';
-import Portfolio from './screens/Portfolio/Main';
+// import Portfolio from './screens/Portfolio/Main';
 import NotFound from '../components/NotFound';
 import appRoute from '../data/appRoute';
 
-const getTabsRoutes = (username) => {
-  const tabsRoutes = [
-    {
-      path: appRoute('userPortfolio')(username),
-      exact: true,
-      component: Portfolio
-    },
-    {
-      path: appRoute('userPortfolioTab')(username),
-      component: Portfolio
-    }
-  ];
-  return tabsRoutes;
-};
+// const getTabsRoutes = (username) => {
+//   const tabsRoutes = [
+//     {
+//       path: appRoute('userPortfolio')(username),
+//       exact: true,
+//       component: Portfolio
+//     },
+//     {
+//       path: appRoute('userPortfolioTab')(username),
+//       component: Portfolio
+//     }
+//   ];
+//   return tabsRoutes;
+// };
 
 
 // const page = (community) => {

@@ -7,8 +7,6 @@ import Login from '../components/Login/LoginPage';
 import NotFound from '../components/NotFound';
 import appRoute from '../data/appRoute';
 
-const root = '';
-
 // function noop() {}
 const routes = [
   {

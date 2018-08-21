@@ -1,5 +1,4 @@
 import React from 'react';
-import axios from 'axios';
 import TopNav from '../TopNav';
 import { page } from '../routes';
 import Posts from '../../components/Collection/Posts';

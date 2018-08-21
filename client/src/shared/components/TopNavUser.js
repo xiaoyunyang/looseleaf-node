@@ -168,7 +168,6 @@ export default class TopNavUser extends React.Component {
     }
   }
   render() {
-    console.log('TopNavUser ...', this.props)
     const username = this.props.user.username;
     const userPic = this.props.user.picture;
     const userWebsite = this.props.user.website;

@@ -1,5 +1,4 @@
 import React from 'react';
-import fetch from 'isomorphic-fetch';
 import TopNav from '../../../components/TopNavUser';
 import People from './People';
 import PostEditor from '../../../components/Form/PostEditor';
@@ -120,7 +119,7 @@ export default class Main extends React.Component {
         <h5>Updates</h5>
         <div className="row">
           <div className="col s12 m12 l12 user-feed">
-            <PostEditor 
+            <PostEditor
               handlePost={d => this.handlePost(d)}
               userDisplayName={userDisplayName}
               userPic={userPic}

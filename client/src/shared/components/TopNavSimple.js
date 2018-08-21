@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import $ from 'jquery';
 import { LoginModal, SignupModal } from './Login/Modal';
-import { root, getNav, communities } from '../Landing/routes';
 import { getPageName } from '../../lib/helpers';
 import { image } from '../data/assetLinks';
 
@@ -71,15 +70,6 @@ export default class TopNavSimple extends React.Component {
     } else if (categories.hasClass('pin-top')) {
       signupBtn.css('visibility', 'hidden');
     }
-  }
-  renderLoginBtn() {
-    return (
-      <a href="#login-modal"
-         onClick={this.closeModal.bind(this, '#signup-modal')}
-         className="modal-trigger" style={{color: '#00897b'}}>
-        Log in
-      </a>
-    );
   }
   renderSignupBtn(label, id) {
     return (

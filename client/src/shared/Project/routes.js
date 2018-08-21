@@ -3,7 +3,7 @@ import Home from './screens/Home';
 import Page from './screens/Page/Main';
 import NotFound from '../components/NotFound';
 import NewProject from './screens/NewProject/Main';
-import { getProjectPageData } from '../redux/Project/actions/project';
+//import { getProjectPageData } from '../redux/Project/actions/project';
 
 const root = 'project/edit';
 
@@ -15,13 +15,13 @@ const getNav = (username) => {
     wildcard: `/${root}*`,
   }
 }
-const loadData  = (match) => {
-  //return getProjectPageData(match);
-  // Alert a warning if not an absolute url
-  console.log('wooooooooooo', match.params.slug);
-  getProjectPageData(match.params.slug)
-
-}
+// const loadData  = (match) => {
+//   //return getProjectPageData(match);
+//   // Alert a warning if not an absolute url
+//   console.log('wooooooooooo', match.params.slug);
+//   getProjectPageData(match.params.slug)
+//
+// }
 const getRoutes = (user) => {
 
   const username = user.username;

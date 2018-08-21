@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { dateFormatted } from '../../../lib/helpers';
 import PostDisplay from '../Form/PostDisplay';
 import { getApiData } from '../../../lib/helpers';
 import { image } from '../../data/assetLinks';

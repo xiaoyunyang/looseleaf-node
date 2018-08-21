@@ -1,4 +1,4 @@
-const root = 'http://localhost:3001';
+// const root = 'http://localhost:3001';
 
 // To use this, example:
 // dynamicRoutes(userId).user

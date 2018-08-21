@@ -1,5 +1,4 @@
 import React from 'react';
-import Collection from './Collection';
 import { getApiData } from '../../../../lib/helpers';
 import { apiLink } from '../../../data/apiLinks';
 import Posts from '../../../components/Collection/Posts';

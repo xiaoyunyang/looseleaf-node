@@ -11,7 +11,6 @@ import AppUser from './craApps/AppUser';
 import AppUserPage from './craApps/AppUserPage';
 import AppProject from './craApps/AppProject';
 import AppProjectPage from './craApps/AppProjectPage';
-import AppGuest from './craApps/AppGuest';
 import AppCommunityUser from './craApps/AppCommunityUser';
 import AppCommunityGuest from './craApps/AppCommunityGuest';
 import AppLanding from './craApps/AppLanding';
@@ -28,14 +27,13 @@ const Apps = {
   userPage: AppUserPage,
   project: AppProject,
   projectPage: AppProjectPage,
-  guest: AppGuest,
   communityUser: AppCommunityUser,
   communityGuest: AppCommunityGuest,
   landing: AppLanding,
   recipe: AppRecipe
 };
 
-const App = Apps.user;
+const App = Apps.projectPage;
 
 const render = (Component) => {
   ReactDOM.render(

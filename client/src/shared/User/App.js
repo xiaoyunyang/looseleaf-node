@@ -18,9 +18,6 @@ class AppContainer extends React.Component {
 
 const App = ({ state }) => (
   <div>
-    {
-    console.log('state....', this.props)
-    }
     {renderRoutes(getRoutes(state.user.info), state)}
   </div>
 );

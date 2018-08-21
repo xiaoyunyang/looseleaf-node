@@ -14,12 +14,6 @@ class AppContainer extends React.Component {
   }
 }
 
-const App2 = ({ state }) => (
-  <div>
-    {renderRoutes(getRoutes(state.user), state)}
-  </div>
-);
-
 class App extends React.Component {
   componentDidMount() {
     // example of a slug is 'this-is-a-test-120s25q'. NOTE, we can force the app

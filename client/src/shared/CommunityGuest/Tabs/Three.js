@@ -1,6 +1,5 @@
 import React from 'react';
 import TopNav from '../TopNav';
-import UserListing from './UserListing';
 import { page } from '../routes';
 import { getApiData } from '../../../lib/helpers';
 import { apiLink } from '../../data/apiLinks';

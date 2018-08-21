@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import $ from 'jquery';
 import { socialMedia, image } from '../data/assetLinks';
 

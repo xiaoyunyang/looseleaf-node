@@ -1,9 +1,6 @@
 import React from 'react';
 import $ from 'jquery';
 
-const defaultUserPic = 'http://localhost:3001/user.png';
-
-
 export default class InputAutocomplete extends React.Component {
   componentDidMount() {
     const data = this.props.choices;

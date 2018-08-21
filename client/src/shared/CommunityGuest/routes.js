@@ -5,7 +5,7 @@ import Two from './Tabs/Two';
 import Three from './Tabs/Three';
 import appRoute from '../data/appRoute';
 
-function noop() {}
+// function noop() {}
 
 const page = (community) => {
   return {

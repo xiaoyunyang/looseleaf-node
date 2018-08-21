@@ -1,5 +1,5 @@
 import {
-  GET_PROJECTS,
+  // GET_PROJECTS,
   GET_PROJECT_BY_SLUG } from '../actions/project';
 
 const initState = {
