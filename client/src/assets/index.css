@@ -796,7 +796,7 @@ nav .categories-wrapper .categories {
 @media only screen and (min-width: 601px) {
   #profile-tabs .tabs {
     width: 70%;
-    margin-left: 15%;
+    margin-left: 180px;
     left: auto;
     right: auto;
   }
