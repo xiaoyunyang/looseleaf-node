@@ -19,7 +19,8 @@ export const apiLink = {
  users: `${root}/api/user`,
  projectBySlug: (slug) => `${root}/api/project?slug=${slug}`,
  projects: `${root}/api/project`,
- logout: `${root}/auth/logout`
+ logout: `${root}/auth/logout`,
+ posts: `${root}/api/post`,
 }
 
 // To use this, example:

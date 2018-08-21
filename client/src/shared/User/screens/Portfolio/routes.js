@@ -7,7 +7,9 @@ import appRoute from '../../../data/appRoute';
 
 // const root = `/${store.root}${store.username}`;
 
-const tabs = ['completed', 'todo', 'watch', 'contributions'];
+const tabs = [
+  'projects', 'posts', 'followers', 'following'
+];
 
 const getRoot = (username) => {
   return appRoute('userPortfolio')(username);

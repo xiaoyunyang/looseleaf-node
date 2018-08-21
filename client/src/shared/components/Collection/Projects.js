@@ -8,10 +8,10 @@ const Projects = ({ projects }) => (
     { projects &&
       projects.map(d => {
         return (
-          <div className="row" key={`projects-${d.urlSlug}`}>
+          <div className="row" key={`projects-${d.slug}`}>
             <div className="col s12 m12 l12">
               <div className="card-panel">
-                <a href={appRoute('projectPage')(d.urlSlug)} dangerouslySetInnerHTML={{ __html: d.title }} />
+                <a href={appRoute('projectPage')(d.slug)} dangerouslySetInnerHTML={{ __html: d.title }} />
                 <p className="grey-text text-darken-1">Created: {dateFormatted(d.createdAt)}</p>
               </div>
             </div>

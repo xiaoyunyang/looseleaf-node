@@ -1,12 +1,31 @@
 import React from 'react';
 import Collection from './Collection';
+import { getApiData } from '../../../../lib/helpers';
+import { apiLink } from '../../../data/apiLinks';
+import Projects from '../../../components/Collection/Projects';
 
-const data = ['One1', 'One2', 'One3', 'One4', 'One5', 'One6', 'One7', 'One8'];
-
-export default () => (
-  <div id="one" className="col l12 m12 s12">
-    <h2>Completed Projects</h2>
-    <p>Projects you have completed.</p>
-    <Collection data={data} />
-  </div>
-);
+export default class One extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      projects: null
+    };
+  }
+  componentDidMount() {
+    this.fetchProjects();
+  }
+  fetchProjects() {
+    const setApiData = data => this.setState({ projects: data });
+    getApiData(apiLink.projects, setApiData);
+  }
+  render() {
+    return (
+      <div className="container">
+        <div className="row">
+          <h3>Projects</h3>
+          <Projects projects={this.state.projects} />
+        </div>
+      </div>
+    );
+  }
+}

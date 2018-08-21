@@ -19,7 +19,7 @@ class AppProjectPage extends React.Component {
         valid: 'xiaoyunyang',
         invalid: 'foop'
       }
-      store.dispatch(actions.getProjectPageData(slug, username.invalid));
+      store.dispatch(actions.getProjectPageData(slug, username.valid));
     }
   }
   render() {

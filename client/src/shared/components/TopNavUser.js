@@ -144,10 +144,10 @@ export default class TopNavUser extends React.Component {
         <div className="navbar-fixed">
           <nav className="grey lighten-4">
             <div className="nav-wrapper-white nav-text-links">
-              <div className="brand-logo hide-on-med-and-down">
+              <div className="brand-logo hide-on-small-only">
                 {
                   this.props.useExternLinks ?
-                    <a className="navbar-brand" href={appRoute('landingHome')}>
+                    <a id="navbar-logo" className="navbar-brand" href={appRoute('landingHome')}>
                       <img src={image.logo} alt="LooseLeaf" />
                     </a>
                     :

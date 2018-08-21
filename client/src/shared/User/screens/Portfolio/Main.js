@@ -24,7 +24,7 @@ export default class Main extends Component {
   // TODO: username must be less than 10 characters long
   renderProfileUserpic(username, userPic) {
     return (
-      <div className="row" id='profile-userpic-tab' >
+      <div className="row" id='profile-userpic-tab'>
         <div className="col">
           <img src={userPic} alt={username}/>
         </div>
@@ -47,7 +47,7 @@ export default class Main extends Component {
             this.props.user.info.picture,
           )}
           </div>
-          <ul className="tabs">
+          <ul className="tabs section-white">
             {
             tabs.map((tab, i) => {
               return (
@@ -81,7 +81,7 @@ export default class Main extends Component {
     const root = getRoot(this.props.user.info.username);
 
     return (
-      <div>
+      <div className="section-white">
         <TopNav route={this.props.route} user={this.props.user.info} />
         <div className="container">
           <div className="row">
@@ -91,15 +91,14 @@ export default class Main extends Component {
           </div>
         </div>
         { this.renderTabsNav(selected, root) }
-        <div className="container">
-          <div className="row">
-            <div className="col l10 m10 s12">
-              <Switch>
-                {renderRoutes(getRoutes(this.props.user.info.username).routes)}
-              </Switch>
-            </div>
+        <div className="row">
+          <div className="col l12 m12 s12">
+            <Switch>
+              {renderRoutes(getRoutes(this.props.user.info.username).routes)}
+            </Switch>
           </div>
         </div>
+
       </div>
     );
   }

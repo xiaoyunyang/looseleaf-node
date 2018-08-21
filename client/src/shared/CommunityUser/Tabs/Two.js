@@ -5,7 +5,7 @@ import { page } from '../routes';
 import PostEditor from '../../components/Form/PostEditor';
 import Posts from '../../components/Collection/Posts';
 import PostDisplay from '../../components/Form/PostDisplay';
-import { staticApiLink } from '../../data/apiLinks';
+import { apiLink } from '../../data/apiLinks';
 import { getApiData } from '../../../lib/helpers';
 
 export default class Two extends React.Component {
@@ -21,8 +21,7 @@ export default class Two extends React.Component {
   }
   fetchPosts() {
     const setApiData = data => this.setState({ posts: data });
-    const apiLink = staticApiLink.posts;
-    getApiData(apiLink, setApiData);
+    getApiData(apiLink.posts, setApiData);
   }
   // Returns True if successful post. False Otherwise.
   handlePost(d) {
@@ -33,7 +32,7 @@ export default class Two extends React.Component {
     const userId = this.props.user._id;
     const content = d;
     const context = {project: null, community: this.props.community.name}
-    axios.post(staticApiLink.posts, { content, userId, context })
+    axios.post(apiLink.posts, { content, userId, context })
       .then(res => {
         if (res.statusText === 'error') {
           // If there's error, do something

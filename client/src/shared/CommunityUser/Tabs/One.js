@@ -2,7 +2,7 @@ import React from 'react';
 import TopNav from '../TopNav';
 import { page } from '../routes';
 import { getApiData } from '../../../lib/helpers';
-import { staticApiLink } from '../../data/apiLinks';
+import { apiLink } from '../../data/apiLinks';
 import Projects from '../../components/Collection/Projects';
 
 export default class One extends React.Component {
@@ -13,9 +13,11 @@ export default class One extends React.Component {
     };
   }
   componentDidMount() {
+    this.fetchProjects();
+  }
+  fetchProjects() {
     const setApiData = data => this.setState({ projects: data });
-    const apiLink = staticApiLink.projects;
-    getApiData(apiLink, setApiData);
+    getApiData(apiLink.projects, setApiData);
   }
   render() {
     return (
