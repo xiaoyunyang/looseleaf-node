@@ -5,6 +5,7 @@ import { apiLink } from '../../data/apiLinks';
 //  both the action creators (the functions listed here) and the reducers can
 //  use them. This way you won’t have discrepancies between the strings.
 export const GET_USER = 'GET_USER';
+export const SET_USER = 'SET_USER';
 export const GET_USER_BY_USERNAME = 'GET_USER_BY_USERNAME';
 export const GET_USER_BY_ID = 'GET_USER_BY_ID';
 
@@ -26,12 +27,11 @@ export function fetchUser(username) {
     });
   }
 }
-export function getUserProfileData(username) {
-  return (dispatch, getState) => {
-    return Promise.all([
-      dispatch(fetchUser(username)),
-    ])
-  }
+export function setUser(user) {
+  return {  // Dispatch the action.
+    type: SET_USER,
+    data: user
+  };
 }
 
 //TODO add checks for existence of data so that things don't get rerequested on the browser

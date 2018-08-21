@@ -3,11 +3,13 @@ import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import App from '../shared/User/App';
 import { hot } from 'react-hot-loader';
-//import configureStore from '../shared/redux/User/configureStore';
-import initRedux from '../shared/redux/User/init-redux';
-import * as actions from '../shared/redux/User/actions/user';
+import axios from 'axios';
+import initStore from '../shared/redux/configureStore/initUserPage';
+// import * as actions from '../shared/redux/actions/page';
+import * as actions from '../shared/redux/actions/user';
+import { apiLink } from '../shared/data/apiLinks';
 
-const store = initRedux();
+const store = initStore();
 
 // Get username from document.location.pathname
 const getUsername = (path) => {
@@ -21,13 +23,34 @@ const getUsername = (path) => {
 }
 
 class AppUser extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      users: null
+    };
+  }
   componentDidMount() {
     if (typeof document !== 'undefined') {
       const username = getUsername(document.location.pathname);
-      if(username) {
-        store.dispatch(actions.getUserProfileData(username));
+      if(username && username !== 'default') {
+        this.fetchUser(username);
       }
     }
+  }
+  fetchUser(username) {
+    axios.get(apiLink.userByUsername(username))
+      .then((response) => {
+        if(response.data.length === 1) {
+          store.dispatch(actions.setUser(response.data.pop()));
+        } else {
+          const oldUsername = store.getState().user.info.username
+          window.location = `/@${oldUsername}`
+        }
+      })
+      .catch((error) => {
+        // handle error
+        console.log(error);
+      })
   }
   render() {
     return (

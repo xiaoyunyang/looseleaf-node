@@ -31,7 +31,7 @@ const userSchema = mongoose.Schema({
     id: String,
     token: String
   },
-  communities: []
+  communities: Array
 });
 
 const SALT_FACTOR = 10;

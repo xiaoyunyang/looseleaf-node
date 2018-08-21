@@ -342,10 +342,39 @@ footer.page-footer {
 img.mod-round, picture.mod-round {
   border-radius: 50%;
 }
-#user-dropdown {
-  top: 55px !important;
+.topnav-dropdown {
+  top: 68px !important;
   font-weight: 200;
   width: 150px !important;
+}
+#user-dropdown .popover-arrow {
+  left: 105px;
+}
+#notif-dropdown {
+  margin-left: 70px;
+  width: 270px !important;
+}
+#notif-dropdown .popover-arrow {
+  left: 162px;
+}
+.dropdown-content {
+  z-index: 998;
+  overflow-y: visible;
+}
+.popover-arrow {
+  z-index: 999;
+	position: absolute;
+	top: 7px;
+	left: 50px;
+  -webkit-transform: translate(0, -20px);
+  -ms-transform: translate(0, -20px);
+  transform: translate(0, -20px);
+	border-left: 12px solid transparent;
+	border-right: 12px solid transparent;
+	border-bottom: 13px solid rgb(255, 255, 255);
+  width: 0;
+  height: 0;
+  -webkit-filter: drop-shadow(0 -0.5px 0.5px rgba(0,0,0,0.12));
 }
 .dropdown-content a:hover {
   color: #26a69a;

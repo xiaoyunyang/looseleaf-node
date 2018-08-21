@@ -124,7 +124,8 @@ api.get('/user', (req, res) => {
           picture: user.picture,
           bio: user.bio,
           website: user.website,
-          interests: user.interests
+          interests: user.interests,
+          communities: user.communities
         };
         usersOut.push(userInfo);
       });

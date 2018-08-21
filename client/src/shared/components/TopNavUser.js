@@ -59,9 +59,12 @@ const UserDropdown = ({ username, userPic, useExternLinks }) => (
   <li id="dropdown-block">
     <a className="navbar-img dropdown-button" data-activates="user-dropdown">
       <img alt={`looseleaf user ${username}`} className="mod-round" src={userPic} />
-      <div className="arrow-down" />
+      {
+        // <div className="arrow-down" />
+      }
+
     </a>
-    <ul id="user-dropdown" className="dropdown-content">
+    <ul id="user-dropdown" className="dropdown-content topnav-dropdown">
       <li>
         <NavLink to={appRoute('userProfile')(username)} name='Profile' external={useExternLinks}/>
       </li>
@@ -74,6 +77,46 @@ const UserDropdown = ({ username, userPic, useExternLinks }) => (
         <NavLink to={appRoute('userSettings')(username)} name='Settings' external={useExternLinks}/>
       </li>
       <li><NavLink to={apiLink.logout} name='Log out' external={true}/></li>
+      <div className="popover-arrow"></div>
+    </ul>
+  </li>
+);
+
+const CommunityDropdown = ({ communities }) => (
+  <li id="dropdown-block">
+    <a className="dropdown-button" data-activates="community-dropdown">
+      Communities
+    </a>
+    <ul id="community-dropdown" className="dropdown-content topnav-dropdown">
+      { communities.length === 0 ?
+        <li>
+          <a href='/community/explore'>Join One</a>
+        </li>
+        :
+        communities.map(d =>  (
+            <li key={`community-link-${d.name}`}>
+              <a href={d.link}>{d.name}</a>
+            </li>
+          )
+        )
+      }
+      <div className="popover-arrow"></div>
+    </ul>
+  </li>
+);
+
+const NotifDropdown = ({ notifs }) => (
+  <li id="dropdown-block">
+    <a className="dropdown-button" data-activates="notif-dropdown">
+      <i className="material-icons">notifications_none</i>
+    </a>
+    <ul id="notif-dropdown" className="dropdown-content topnav-dropdown">
+      {
+        <li>
+          <a href="">Stuff</a>
+        </li>
+      }
+      <div className="popover-arrow"></div>
     </ul>
   </li>
 );
@@ -91,10 +134,10 @@ export default class TopNavUser extends React.Component {
     $('.dropdown-button').dropdown({
       inDuration: 300,
       outDuration: 225,
-      constrainWidth: false, // Does not change width of dropdown to that of the activator
       gutter: 0, // Spacing from edge
-      belowOrigin: false, // Displays dropdown below the button
+      belowOrigin: true, // Displays dropdown below the button
       alignment: 'left', // Displays dropdown with edge aligned to the left of button
+      constrainWidth: false, // Does not change width of dropdown to that of the activator
       stopPropagation: false // Stops event propagation
     });
     if (typeof window !== 'undefined') {
@@ -114,20 +157,23 @@ export default class TopNavUser extends React.Component {
     const navbarLogo = $('#navbar-logo');
     if (tabs.hasClass('pinned')) {
       topNav.css('box-shadow', 'none');
+      topNav.css('-webkit-box-shadow', 'none');
       profileUserpic.css('visibility', 'visible');
       navbarLogo.css('visibility', 'hidden');
     } else if (tabs.hasClass('pin-top')) {
       topNav.css('box-shadow', boxShadow);
+      topNav.css('-webkit-box-shadow', boxShadow);
       profileUserpic.css('visibility', 'hidden');
       navbarLogo.css('visibility', 'visible');
     }
   }
   render() {
-    console.log('TopNavUser', this.props)
+    console.log('TopNavUser ...', this.props)
     const username = this.props.user.username;
     const userPic = this.props.user.picture;
     const userWebsite = this.props.user.website;
     const userEmail = this.props.user.email;
+    const communities = this.props.user.communities;
     const selected = this.props.route && (typeof this.props.route.path === 'string')
       ? getPageName(this.props.route.path) : '';
 
@@ -160,13 +206,11 @@ export default class TopNavUser extends React.Component {
                 <li className={selected === '' ? 'active' : ''}>
                   <NavLink id={`nav-`} to={appRoute('userHome')} name='Home' external={this.props.useExternLinks} />
                 </li>
-                <li className={selected === 'project' ? 'active' : ''}>
-                  <a href={appRoute('project')}>Project</a>
-                </li>
+                <CommunityDropdown communities={communities} />
                 <li className={selected === username ? 'active' : ''}>
                   <NavLink id={`nav-${username}`} to={appRoute('userProfile')(username)} name='Profile' external={this.props.useExternLinks}/>
                 </li>
-                <li><button><i className="material-icons">notifications_none</i></button></li>
+                <NotifDropdown notifs={'stuff'} />
                 <UserDropdown
                   username={username}
                   userPic={userPic}

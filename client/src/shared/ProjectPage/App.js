@@ -39,7 +39,6 @@ class App extends React.Component {
     );
   }
   render() {
-    console.log('state....', this.props)
     return (
       <div className="section-white">
         {

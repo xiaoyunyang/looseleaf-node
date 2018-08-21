@@ -14,3 +14,11 @@ export function getProjectPageData(slug, username) {
     ])
   }
 }
+
+export function getUserProfileData(username) {
+  return (dispatch, getState) => {
+    return Promise.all([
+      dispatch(fetchUser(username))
+    ])
+  }
+}
