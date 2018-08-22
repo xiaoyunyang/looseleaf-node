@@ -434,9 +434,6 @@ img.mod-round, picture.mod-round {
 .card-action a {
   color: #555 !important;
 }
-.card-content {
-  min-height: 150px;
-}
 .feed a:hover {
   color: #26a69a !important;
 }
