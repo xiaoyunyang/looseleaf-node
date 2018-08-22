@@ -818,6 +818,9 @@ nav .categories-wrapper .categories {
   max-width: 15px;
   font-size: 14px;
 }
+.nowrap {
+  white-space: nowrap;
+}
 /* Big Screen */
 @media only screen and (min-width: 993px) {
   #profile-tabs .tabs {
