@@ -104,10 +104,14 @@ export default class PostEditor extends React.Component {
   }
   hasContent(editorState) {
     const contentState = editorState.getCurrentContent();
+    return contentState.hasText();
+  }
+  hasContentAndStyle(editorState) {
+    const contentState = editorState.getCurrentContent();
     return contentState.hasText() || contentState.getBlockMap().first().getType() !== 'unstyled';
   }
   renderPlaceholder(placeholder, editorState) {
-    return this.hasContent(editorState) ? '' : placeholder;
+    return this.hasContentAndStyle(editorState) ? '' : placeholder;
   }
   renderPostBtn(editorState) {
     return (
