@@ -136,6 +136,7 @@ export default class TopNavSimple extends React.Component {
   }
 
   render() {
+    const location = (typeof document !== 'undefined') ? document.location.pathname : undefined;
     let selected = (typeof this.props.route.path === 'string')
       ? getPageName(this.props.route.path) : '';
     return (
@@ -148,8 +149,8 @@ export default class TopNavSimple extends React.Component {
           this.props.extended ?
             this.renderTabs(selected) : null
         }
-        <LoginModal />
-        <SignupModal />
+        <LoginModal redirPath={location} />
+        <SignupModal redirPath={location} />
       </div>
     );
   }

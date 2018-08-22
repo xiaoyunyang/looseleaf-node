@@ -19,6 +19,7 @@ const router = express.Router();
 // route middleware to make sure a user is authenticated
 function ensureAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
+    console.log(chalk.green('is authenticated!'))
     next();
   } else {
     req.flash('info', 'You must be logged in to see this page.');
@@ -150,7 +151,8 @@ router.post('/login', (req, res, next) => {
         lastLoggedIn: new Date()
       });
       user.save(next);
-      return res.redirect('/');
+      res.statusMessage = 'OK'; // NOTE: res.statusMessage is seen by axios as res.statusText
+      return res.send('OK'); // NOTE: axios sees this data as res.data
     });
   })(req, res, next);
 });

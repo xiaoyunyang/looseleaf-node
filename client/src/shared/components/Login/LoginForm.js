@@ -2,7 +2,7 @@ import React from 'react';
 import LocalLogin from './LocalLogin';
 import SocialLogin from './SocialLogin';
 
-const LoginForm = ({header, action}) => (
+const LoginForm = ({ header, action, redirPath }) => (
   <div className="modal-content">
     <div className="row container center">
       <h5 className="text-brown">{header}</h5>
@@ -13,7 +13,7 @@ const LoginForm = ({header, action}) => (
     <div className="row or-divider">
       <span>OR</span>
     </div>
-    <LocalLogin action={action} />
+    <LocalLogin action={action} redirPath={redirPath}/>
   </div>
 );
 

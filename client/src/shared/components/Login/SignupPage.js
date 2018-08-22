@@ -9,6 +9,7 @@ const SignupPage = ({ route }) => (
       <LoginForm
         action="Join"
         header="Signup"
+        redirPath="/"
       />
       <div className="row center hero">
         <div className="col l12 m12 s12">

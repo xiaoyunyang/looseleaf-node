@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
-const authPath = 'http://localhost:3001/auth';
+import { apiLink } from '../../data/apiLinks'
 
 class SocialLogin extends React.Component {
   constructor() {
@@ -17,7 +16,7 @@ class SocialLogin extends React.Component {
 
     return (
       <div key={key} className={`btn-${oauth}`}>
-        <a className="btn" href={`${authPath}/${oauth}`}>
+        <a className="btn" href={`${apiLink.authPath}/${oauth}`}>
           <i className={`fab fa-${oauth} fa-lg`} />
           {`${this.props.action} with ${oauthName}`}
         </a>

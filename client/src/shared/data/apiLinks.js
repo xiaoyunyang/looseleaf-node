@@ -21,6 +21,7 @@ export const apiLink = {
  projects: `${root}/api/project`,
  logout: `${root}/auth/logout`,
  posts: `${root}/api/post`,
+ authPath: `${root}/auth`
 }
 
 // To use this, example:

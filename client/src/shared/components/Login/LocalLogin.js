@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import FlashNotif from '../FlashNotif';
 import axios from 'axios';
 import { staticApiLink } from '../../data/apiLinks';
+import appRoute from '../../data/appRoute';
 
-const redirPath = staticApiLink.home;
 const loginPath = staticApiLink.login;
 const signupPath = staticApiLink.signup;
 
@@ -14,6 +14,7 @@ const signupPath = staticApiLink.signup;
    https://engineering.musefind.com/our-best-practices-for-writing-react-components-dec3eb5c3fc8
 */
 class LocalLogin extends React.Component {
+
   constructor(props) {
     super(props);
     this.state = {
@@ -43,26 +44,17 @@ class LocalLogin extends React.Component {
     }
   }
   // TODO: prevent axios from posting if client side validation has an error
-  handleSubmit(formFields) {
-    console.log('submit btn pressed. action = ', this.getPostPath(this.props.action));
-
+  handleSubmit(formFields, redirPath) {
     axios.post(this.getPostPath(this.props.action), formFields)
       .then(res => {
-        // console.log('login via axios is a success')
-        // console.log(res);
-        //
-        // redirect to /signup if action is signup and user already exists
-        // redirect to / if the server responds with 200 ok...
+        // Perform action based on response, such as flashing error notif
         if (res.statusText === 'error') {
-          // window.location = "/signup";
           this.setState({
             flash: { state: res.statusText, msg: res.data }
           });
         } else if (res.statusText === 'OK') {
           window.location = redirPath;
         }
-
-        // Perform action based on response, such as flashing error notif
       })
       .catch((error) => {
         console.log(error);
@@ -114,7 +106,7 @@ class LocalLogin extends React.Component {
         <button
           className="btn"
           style={{ marginTop: 20 }}
-          onClick={this.handleSubmit.bind(this, this.state.formFields)}
+          onClick={this.handleSubmit.bind(this, this.state.formFields, this.props.redirPath)}
         >
           {`${this.props.action} with Email`}
         </button>
@@ -124,6 +116,9 @@ class LocalLogin extends React.Component {
 }
 LocalLogin.propTypes = {
   action: PropTypes.string.isRequired,
-  formFields: PropTypes.object
+  redirPath: PropTypes.string
+};
+LocalLogin.defaultProps = {
+  redirPath: appRoute('userHome')
 };
 export default LocalLogin;

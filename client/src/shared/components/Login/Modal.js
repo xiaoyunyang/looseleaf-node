@@ -9,11 +9,12 @@ const ModalInfo = () => (
   </div>
 
 )
-const SignupModal = () => (
+const SignupModal = ({redirPath}) => (
   <div id="signup-modal" className="modal">
     <LoginForm
       action="Join"
       header="Join LooseLeaf"
+      redirPath={redirPath}
     />
     <div className="row center hero">
       <div className="col l12 m12 s12">
@@ -24,11 +25,12 @@ const SignupModal = () => (
   </div>
 );
 
-const LoginModal = () => (
+const LoginModal = ({redirPath}) => (
   <div id="login-modal" className="modal">
     <LoginForm
       action="Continue"
       header="Welcome Back!"
+      redirPath={redirPath}
     />
     <div className="row center hero">
       <div className="col l12 m12 s12">
