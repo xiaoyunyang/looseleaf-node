@@ -35,12 +35,19 @@ router.use((req, res, next) => {
 // catch-all case
 // Gotcha: Order of code matters in determining middleware for the requested route
 
-// TODO: if community name is undefined, an incorrect page will be displayed
 router.get('/community/:name*', (req, res, next) => {
-  if (req.isAuthenticated()) {
+  const isAuthenticated = req.isAuthenticated();
+  const isValidCommunity = community[req.params.name];
+
+  if (isValidCommunity && isAuthenticated) {
     renderCommunityUserAppMiddleware(req, res, next, community[req.params.name]);
+  } else if (!isValidCommunity && isAuthenticated) {
+    renderUserAppMiddleware(req, res, next);
+  } else if (isValidCommunity && !isAuthenticated) {
+    renderCommunityGuestAppMiddleware(req, res, next, community[req.params.name]);
+  } else if (!isAuthenticated && !isValidCommunity) {
+    return renderLandingAppMiddleware(req, res, next);
   }
-  renderCommunityGuestAppMiddleware(req, res, next, community[req.params.name]);
 });
 router.get('/project/edit*', (req, res, next) => {
   if (req.isAuthenticated()) {
