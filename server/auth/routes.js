@@ -228,7 +228,7 @@ router.post(
 // Passport populates req.user for you
 router.get('/logout', (req, res) => {
   req.logout();
-  res.redirect('/');
+  res.redirect(req.query.redirPath);
 });
 
 router.use((req, res, next) => {

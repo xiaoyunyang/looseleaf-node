@@ -4,8 +4,10 @@ import { Link } from 'react-router-dom';
 import $ from 'jquery';
 import { page } from './routes';
 import { getPageName } from '../../lib/helpers';
+import { apiLink } from '../data/apiLinks';
 
-const UserDropdown = ( {username, userPic} ) => (
+// TODO: consolidate this UserDropdown with the one from TopNavUser
+const UserDropdown = ( {username, userPic, redirPath} ) => (
   <li id="dropdown-block">
     <a className="navbar-img dropdown-button" data-activates="user-dropdown">
       <img alt={`looseleaf user ${username}`} className="mod-round" src={userPic} />
@@ -18,7 +20,8 @@ const UserDropdown = ( {username, userPic} ) => (
       <li><a href="/project/new">New Project</a></li>
       <li className="divider" />
       <li><a href={`/@${username}/settings`}>Settings</a></li>
-      <li><a href="/auth/logout">Log out</a></li>
+      <li><a href={`${apiLink.logout}?redirPath=${redirPath}`}>Log out</a>
+      </li>
       <div className="popover-arrow"></div>
     </ul>
   </li>
@@ -107,7 +110,7 @@ export default class TopNav extends React.Component {
       </div>
     );
   }
-  renderPrimaryNavInner(selected, community, user) {
+  renderPrimaryNavInner(selected, community, user, redirPath) {
     return (
       <div className="nav-wrapper-white nav-text-links">
         { user ? null :
@@ -134,7 +137,10 @@ export default class TopNav extends React.Component {
           user ?
             <div>
               <ul className="right">
-                <UserDropdown username={user.username} userPic={user.picture}/>
+                <UserDropdown
+                  username={user.username} userPic={user.picture}
+                  redirPath={redirPath}
+                />
               </ul>
             </div>
             :
@@ -143,14 +149,14 @@ export default class TopNav extends React.Component {
       </div>
     );
   }
-  renderPrimaryNavExtended(selected, community, user) {
+  renderPrimaryNavExtended(selected, community, user, redirPath) {
     return (
       <div id="looseleaf-section-header">
         <nav className="nav-extended grey lighten-4">
           <div className="nav-background">
             <div className="pattern active"></div>
           </div>
-          {this.renderPrimaryNavInner(selected, community, user)}
+          {this.renderPrimaryNavInner(selected, community, user, redirPath)}
           { this.renderNavHeader(community) }
         </nav>
       </div>
@@ -218,14 +224,14 @@ export default class TopNav extends React.Component {
   render() {
     let selected = (typeof this.props.route.path === 'string')
                     ? getPageName(this.props.route.path) : '';
-
+    const redirPath = (typeof this.props.route.path === 'string') ? this.props.route.path : '/';
     return (
       <div>
         {
-          this.renderPrimaryNavExtended(selected, this.props.community, this.props.user)
+          this.renderPrimaryNavExtended(selected, this.props.community, this.props.user, redirPath)
         }
         {
-            this.renderTabs(selected, this.props.community.name)
+          this.renderTabs(selected, this.props.community.name)
         }
       </div>
     );

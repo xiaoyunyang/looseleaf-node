@@ -136,8 +136,8 @@ export default class TopNavSimple extends React.Component {
   }
 
   render() {
-    const location = (typeof document !== 'undefined') ? document.location.pathname : undefined;
-    console.log('location', location)
+    // const location = (typeof document !== 'undefined') ? document.location.pathname : undefined;
+    // console.log('location', location)
     let selected = (typeof this.props.route.path === 'string')
       ? getPageName(this.props.route.path) : '';
     return (
@@ -150,8 +150,8 @@ export default class TopNavSimple extends React.Component {
           this.props.extended ?
             this.renderTabs(selected) : null
         }
-        <LoginModal redirPath={location} />
-        <SignupModal redirPath={location} />
+        <LoginModal redirPath={this.props.redirPath} />
+        <SignupModal redirPath={this.props.redirPath} />
       </div>
     );
   }
@@ -160,8 +160,10 @@ export default class TopNavSimple extends React.Component {
 TopNavSimple.propTypes = {
   extended: PropTypes.bool,
   route: PropTypes.object,
+  redirPath: PropTypes.string
 };
 TopNavSimple.defaultProps = {
   extended: false,
-  route: {path: undefined}
+  route: {path: undefined},
+  redirPath: '/'
 };

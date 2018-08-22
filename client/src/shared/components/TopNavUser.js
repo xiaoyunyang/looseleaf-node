@@ -16,7 +16,7 @@ const NavLink = ({external, to, className, id, name}) => (
     <Link d={id} className={className} to={to}>{name}</Link>
 );
 
-const MobileSideNav = ( {username, userPic, userWebsite, userEmail, useExternLinks} ) => (
+const MobileSideNav = ( {username, userPic, userWebsite, userEmail, useExternLinks, redirPath, clientModeOn} ) => (
   <ul id="mobile-menu" className="side-nav">
     <li>
       <div className="user-view">
@@ -50,12 +50,17 @@ const MobileSideNav = ( {username, userPic, userWebsite, userEmail, useExternLin
       <NavLink to={appRoute('userSettings')(username)} name='Settings' external={useExternLinks}/>
     </li>
     <li>
-      <NavLink to={apiLink.logout} name='Log out' external={true}/>
+      {
+        clientModeOn ?
+          <NavLink to={`${apiLink.logout}?redirPath=${redirPath}`} name='Log out' external={true}/>
+          :
+          null
+      }
     </li>
   </ul>
 );
 
-const UserDropdown = ({ username, userPic, useExternLinks }) => (
+const UserDropdown = ({ username, userPic, useExternLinks, redirPath, clientModeOn }) => (
   <li id="dropdown-block">
     <a className="navbar-img dropdown-button" data-activates="user-dropdown">
       <img alt={`looseleaf user ${username}`} className="mod-round" src={userPic} />
@@ -75,7 +80,14 @@ const UserDropdown = ({ username, userPic, useExternLinks }) => (
       <li>
         <NavLink to={appRoute('userSettings')(username)} name='Settings' external={useExternLinks}/>
       </li>
-      <li><NavLink to={apiLink.logout} name='Log out' external={true}/></li>
+      <li>
+        {
+          clientModeOn ?
+            <NavLink to={`${apiLink.logout}?redirPath=${redirPath}`} name='Log out' external={true}/>
+            :
+            null
+        }
+      </li>
       <div className="popover-arrow"></div>
     </ul>
   </li>
@@ -122,10 +134,16 @@ const NotifDropdown = ({ notifs }) => (
 
 // Callers:  User/Home.js and User/Porfolio/Main.js and User/Settings/Main.js
 export default class TopNavUser extends React.Component {
-  static defaultProps = {
-    useExternLinks: false
+  constructor(props) {
+    super(props);
+    this.state = {
+      clientModeOn: false
+    }
   }
   componentDidMount() {
+    this.setState({
+      clientModeOn: true
+    })
     $('.button-collapse').sideNav({
       edge: 'right',
       closeOnClick: true
@@ -213,6 +231,8 @@ export default class TopNavUser extends React.Component {
                   username={username}
                   userPic={userPic}
                   useExternLinks={this.props.useExternLinks}
+                  redirPath={this.props.redirPath}
+                  clientModeOn={this.state.clientModeOn}
                 />
               </ul>
               <ul className="right hide-on-med-and-up">
@@ -224,7 +244,11 @@ export default class TopNavUser extends React.Component {
           </nav>
         </div>
         <MobileSideNav
-          username={username} userPic={userPic} userWebsite={userWebsite} userEmail={userEmail} useExternLinks={this.props.useExternLinks}
+          username={username}
+          userPic={userPic} userWebsite={userWebsite} userEmail={userEmail}
+          useExternLinks={this.props.useExternLinks}
+          redirPath={this.props.redirPath}
+          clientModeOn={this.state.clientModeOn}
         />
       </div>
 
@@ -232,5 +256,10 @@ export default class TopNavUser extends React.Component {
   }
 }
 TopNavUser.proTypes = {
-  useExternLinks: PropTypes.bool
+  useExternLinks: PropTypes.bool,
+  user: PropTypes.object.isRequired
+};
+TopNavUser.defaultProps = {
+  redirPath: '/',
+  useExternLinks: false
 };

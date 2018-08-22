@@ -31,7 +31,7 @@ export default class Main extends Component {
         {
           <div className="col hide-on-med-only">
             <p>
-              <span class="nowrap">{`@${username}`}</span>
+              <span className="nowrap">{`@${username}`}</span>
             </p>
           </div>
         }

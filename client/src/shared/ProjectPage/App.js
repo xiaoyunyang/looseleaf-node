@@ -39,13 +39,15 @@ class App extends React.Component {
     );
   }
   render() {
+    const location = (typeof document !== 'undefined') ? document.location.pathname : undefined;
+    console.log('location', location)
     return (
       <div className="section-white">
         {
           this.props.user.info ?
-            <TopNavUser user={this.props.user.info} useExternLinks={true} />
+            <TopNavUser redirPath={location} user={this.props.user.info} useExternLinks={true} />
             :
-            <TopNavGuest useExternLinks />
+            <TopNavGuest redirPath={location} useExternLinks />
         }
         <div className="container">
           {
