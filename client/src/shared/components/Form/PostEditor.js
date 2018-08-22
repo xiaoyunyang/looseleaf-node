@@ -102,10 +102,24 @@ export default class PostEditor extends React.Component {
     const contentToSave = JSON.stringify(convertToRaw(content));
     this.props.handlePost(contentToSave, this.clearEditor());
   }
-  renderPlaceholder(placeholder, editorState) {
+  hasContent(editorState) {
     const contentState = editorState.getCurrentContent();
-    const shouldHide = contentState.hasText() || contentState.getBlockMap().first().getType() !== 'unstyled';
-    return shouldHide ? '' : placeholder;
+    return contentState.hasText() || contentState.getBlockMap().first().getType() !== 'unstyled';
+  }
+  renderPlaceholder(placeholder, editorState) {
+    return this.hasContent(editorState) ? '' : placeholder;
+  }
+  renderPostBtn(editorState) {
+    return (
+      this.hasContent(editorState) ?
+        <button className="btn" onClick={this.handlePost}>
+          Post
+        </button>
+        :
+        <button className="btn disabled">
+          Post
+        </button>
+    );
   }
   renderEditor() {
     if (!this.state.clientModeOn) {
@@ -135,9 +149,7 @@ export default class PostEditor extends React.Component {
           </div>
         </div>
         <div className="card-action">
-          <button className="btn" onClick={this.handlePost}>
-            Post
-          </button>
+          {this.renderPostBtn(this.state.editorState)}
         </div>
       </div>
     );
