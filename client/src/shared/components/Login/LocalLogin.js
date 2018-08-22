@@ -44,7 +44,7 @@ class LocalLogin extends React.Component {
     }
   }
   // TODO: prevent axios from posting if client side validation has an error
-  handleSubmit(formFields, redirPath) {
+  handleSubmit(formFields) {
     axios.post(this.getPostPath(this.props.action), formFields)
       .then(res => {
         // Perform action based on response, such as flashing error notif
@@ -53,7 +53,7 @@ class LocalLogin extends React.Component {
             flash: { state: res.statusText, msg: res.data }
           });
         } else if (res.statusText === 'OK') {
-          window.location = redirPath;
+          window.location = this.props.redirPath;
         }
       })
       .catch((error) => {
@@ -81,6 +81,7 @@ class LocalLogin extends React.Component {
     return signupPath;
   }
   render() {
+    console.log('redirPath', this.props.redirPath)
     return (
       <div className="col s12 m10 offset-m1 l8 offset-l2 center">
         <div className="row">
@@ -106,7 +107,7 @@ class LocalLogin extends React.Component {
         <button
           className="btn"
           style={{ marginTop: 20 }}
-          onClick={this.handleSubmit.bind(this, this.state.formFields, this.props.redirPath)}
+          onClick={this.handleSubmit.bind(this, this.state.formFields)}
         >
           {`${this.props.action} with Email`}
         </button>

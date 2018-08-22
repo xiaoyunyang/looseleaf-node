@@ -33,7 +33,7 @@ const Apps = {
   recipe: AppRecipe
 };
 
-const App = Apps.projectPage;
+const App = Apps.communityGuest;
 
 const render = (Component) => {
   ReactDOM.render(

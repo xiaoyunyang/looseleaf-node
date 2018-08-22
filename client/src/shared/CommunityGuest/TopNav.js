@@ -187,7 +187,8 @@ export default class TopNav extends React.Component {
     );
   }
   render() {
-    const location = (typeof document !== 'undefined') ? document.location.pathname : undefined;
+    const location = (typeof this.props.route.path === 'string') ? this.props.route.path : '/';
+    console.log('location', location)
     const selected = (typeof this.props.route.path === 'string')
       ? getPageName(this.props.route.path) : '';
     return (
