@@ -137,6 +137,7 @@ export default class TopNavSimple extends React.Component {
 
   render() {
     const location = (typeof document !== 'undefined') ? document.location.pathname : undefined;
+    console.log('location', location)
     let selected = (typeof this.props.route.path === 'string')
       ? getPageName(this.props.route.path) : '';
     return (

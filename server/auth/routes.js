@@ -137,50 +137,64 @@ router.post('/signup', (req, res, next) => {
 
 // Local Login ==================================================================
 router.post('/login', (req, res, next) => {
-  passport.authenticate('login-local', (err, user, info) => {
-    if (err) { return next(err); }
-    if (!user) {
-      res.statusMessage = 'error';
-      return res.send(info.message);
-    }
-    req.logIn(user, (err) => {
-      if (err) {
-        return next(err);
+  passport.authenticate('login-local',
+    (err, user, info) => {
+      if (err) { return next(err); }
+      if (!user) {
+        res.statusMessage = 'error';
+        return res.send(info.message);
       }
-      user.set({
-        lastLoggedIn: new Date()
+      return req.logIn(user, (err) => {
+        if (err) {
+          return next(err);
+        }
+        user.set({
+          lastLoggedIn: new Date()
+        });
+        user.save(next);
+        res.statusMessage = 'OK'; // NOTE: res.statusMessage is seen by axios as res.statusText
+        return res.send('OK'); // NOTE: axios sees this data as res.data
       });
-      user.save(next);
-      res.statusMessage = 'OK'; // NOTE: res.statusMessage is seen by axios as res.statusText
-      return res.send('OK'); // NOTE: axios sees this data as res.data
-    });
-  })(req, res, next);
+    })(req, res, next);
 });
 
 // Facebook ====================================================================
-router.get('/facebook', passport.authenticate('facebook'));
+// NOTE: The code below has this error:
+// UnhandledPromiseRejectionWarning: Error [ERR_HTTP_HEADERS_SENT]:
+// Cannot set headers after they are sent to the client
+// (node:92442) UnhandledPromiseRejectionWarning: Error [ERR_HTTP_HEADERS_SENT]:
+// Cannot set headers after they are sent to the client
+router.get('/facebook', (req, res, next) => {
+  req.session.redirect = req.query.redirPath;
+  console.log(chalk.green('redirPath', req.query.redirPath))
+  passport.authenticate('facebook')(req, res, next)
+});
 
 // handle the callback after facebook has authenticated the user
-router.get(
-  '/facebook/callback',
-  passport.authenticate('facebook', {
-    successRedirect: '/',
-    failureRedirect: '/login'
-  }),
-);
+router.get('/facebook/callback',
+  passport.authenticate('facebook', { failureRedirect: '/login' }),
+  (req, res) => {
+    // Successful authentication, redirect
+    const redirPath = req.session.redirect
+    delete req.session.redirect;
+    res.redirect(redirPath);
+  });
 
 // Github =====================================================================
-router.get('/github', passport.authenticate('github'));
+router.get('/github', (req, res, next) => {
+  req.session.redirect = req.query.redirPath;
+  passport.authenticate('github')(req, res, next)
+});
 
-// handle the callback after facebook has authenticated the user
-router.get(
-  '/github/callback',
-  passport.authenticate('github', {
-    successRedirect: '/',
-    failureRedirect: '/login'
-  }),
-);
-
+// handle the callback after github has authenticated the user
+router.get('/github/callback',
+  passport.authenticate('github', { failureRedirect: '/login' }),
+  (req, res) => {
+    // Successful authentication, redirect
+    const redirPath = req.session.redirect
+    delete req.session.redirect;
+    res.redirect(redirPath);
+  });
 
 // Delete ======================================================================
 // Delete user from the database

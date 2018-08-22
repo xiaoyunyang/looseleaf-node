@@ -81,7 +81,6 @@ class LocalLogin extends React.Component {
     return signupPath;
   }
   render() {
-    console.log('redirPath', this.props.redirPath)
     return (
       <div className="col s12 m10 offset-m1 l8 offset-l2 center">
         <div className="row">

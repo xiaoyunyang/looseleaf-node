@@ -8,12 +8,12 @@ const LoginForm = ({ header, action, redirPath }) => (
       <h5 className="text-brown">{header}</h5>
     </div>
     <div className="row center">
-      <SocialLogin oauthOpts={['facebook', 'github']} action={action} />
+      <SocialLogin oauthOpts={['facebook', 'github']} action={action} redirPath={redirPath} />
     </div>
     <div className="row or-divider">
       <span>OR</span>
     </div>
-    <LocalLogin action={action} redirPath={redirPath}/>
+    <LocalLogin action={action} redirPath={redirPath} />
   </div>
 );
 

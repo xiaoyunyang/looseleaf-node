@@ -35,6 +35,7 @@ router.use((req, res, next) => {
 // catch-all case
 // Gotcha: Order of code matters in determining middleware for the requested route
 
+// TODO: if community name is undefined, an incorrect page will be displayed
 router.get('/community/:name*', (req, res, next) => {
   if (req.isAuthenticated()) {
     renderCommunityUserAppMiddleware(req, res, next, community[req.params.name]);
