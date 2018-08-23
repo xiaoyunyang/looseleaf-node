@@ -4,7 +4,7 @@ import initRedux from '../src/shared/redux/Recipe/init-redux';
 
 // TODO: server calls this function to render data to '/api/hello-recipe'. We
 // need to change this to render data to /api/user or something like that
-import * as actions from '../src/shared/redux/User/actions/content';
+import * as actions from '../src/shared/redux/actions/page';
 import chalk from 'chalk';
 
 export default function dataPreloading(req, res, next) {

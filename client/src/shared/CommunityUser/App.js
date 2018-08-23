@@ -4,9 +4,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { getRoutes } from './routes';
-
-// TODO: change the import below once redux/actions/community.js is created
-import * as actionCreators from '../redux/Community/actions/content';
+import * as actionCreators from '../redux/actions/page';
 
 class AppContainer extends React.Component {
   render() {

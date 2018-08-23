@@ -14,7 +14,6 @@ const reducers = combineReducers({
 });
 
 //TODO: remove logger for only production mode
-//TODO:
 const configureStore = ({project, user}, init) => {
   const middleware = [thunkMiddleware, loggerMiddleware];
   const enhancer = compose(
