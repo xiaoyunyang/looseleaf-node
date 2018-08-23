@@ -23,12 +23,6 @@ const getUsername = (path) => {
 }
 
 class AppUser extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      users: null
-    };
-  }
   componentDidMount() {
     if (typeof document !== 'undefined') {
       const username = getUsername(document.location.pathname);
