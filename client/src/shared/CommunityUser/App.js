@@ -4,8 +4,9 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { getRoutes } from './routes';
-import * as actionCreators from '../redux/Community/actions/content';
 
+// TODO: change the import below once redux/actions/community.js is created
+import * as actionCreators from '../redux/Community/actions/content';
 
 class AppContainer extends React.Component {
   render() {
@@ -19,7 +20,6 @@ const App = ({ state }) => (
   <div>
     {renderRoutes(getRoutes(state.community.info.name), state)}
   </div>
-
 );
 // This function lets you convert the app state to properties on your component.
 function mapStateToProps(state) {

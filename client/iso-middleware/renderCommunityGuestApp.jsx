@@ -3,13 +3,15 @@ import { renderToString } from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom';
 import { matchRoutes } from 'react-router-config';
 import { Provider } from 'react-redux';
-import configureStore from '../src/shared/redux/Community/configureStoreGuest';
+import configureStore from '../src/shared/redux/configureStore/communityGuestPage';
 import { getRoutes } from '../src/shared/CommunityGuest/routes';
 import HTML from '../src/shared/CommunityGuest/HTML';
 import App from '../src/shared/CommunityGuest/App';
 
 export default function renderCommunityGuestApp(req, res, next, community) {
-  const preloadedState = community;
+  const preloadedState = {
+    community: {info: community},
+  }
   const store = configureStore(preloadedState);
   const dataToSerialize = preloadedState;
 

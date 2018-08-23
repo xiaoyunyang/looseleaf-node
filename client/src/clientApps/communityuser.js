@@ -5,7 +5,7 @@ import { BrowserRouter } from 'react-router-dom';
 import 'materialize-css';
 import 'materialize-css/dist/css/materialize.min.css';
 import 'materialize-css/dist/js/materialize.min';
-import configureStore from '../shared/redux/Community/configureStoreUser';
+import configureStore from '../shared/redux/configureStore/communityUserPage';
 import App from '../shared/CommunityUser/App';
 import '../lib/tabs';
 import '../lib/chips';

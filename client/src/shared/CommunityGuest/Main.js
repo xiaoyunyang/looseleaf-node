@@ -4,8 +4,7 @@ import { renderRoutes } from 'react-router-config';
 export default class Main extends React.Component {
   render() {
     const state = {
-      user: this.props.user,
-      community: this.props.community
+      community: this.props.community.info
     }
     return (
       <div>

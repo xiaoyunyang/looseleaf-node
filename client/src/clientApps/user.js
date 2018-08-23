@@ -5,6 +5,7 @@ import { BrowserRouter } from 'react-router-dom';
 import 'materialize-css';
 import 'materialize-css/dist/css/materialize.min.css';
 import 'materialize-css/dist/js/materialize.min';
+// TODO: consolidate the following file into redux/configureStore
 import configureStore from '../shared/redux/User/configureStore';
 import App from '../shared/User/App';
 import '../lib/tabs';

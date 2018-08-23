@@ -3,9 +3,10 @@ import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import App from '../shared/CommunityGuest/App';
 import { hot } from 'react-hot-loader';
-import configureStore from '../shared/redux/Community/configureStoreCRA';
+import initStore from '../shared/redux/configureStore/initCommunityGuestPage';
 
-const store = configureStore();
+const store = initStore();
+
 const AppCommunity = () => (
   <Provider store={store}>
     <BrowserRouter>
