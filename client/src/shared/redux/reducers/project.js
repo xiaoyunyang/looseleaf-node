@@ -4,18 +4,19 @@ import {
 
 const initState = {
   info: {
+    _id: "5b79ff0c2034dc84ee5e72fe",
+    postedBy: "5ac7f2b6cc78928a6f24a101",
     createdAt: "2018-07-14T04:44:56.361Z",
-    postedBy: "5ac7f29dcc78928a6f24a100",
     creator: {
       about: "I love the idea of services exchanged without money. The world needs more of this! For too long a lack of finances has kept people from doing the work that they love and are actually most competent at. Here&#x27;s to LooseLeaf and a great concept well executed.",
       mission: "I'm building a startup called LooseLeaf"
     },
-    tags:[],
-    submission: {"instruction":"","platform":"Dropbox"},
-    title: "Paint My Dog&#x27;s Portrait&lt;script&gt;alert('hey')&lt;/script&gt",
+    tags:["Logo Design"],
+    submission: {"instruction":"Submission Instruction","platform":"Dropbox"},
+    title: "Dummy project",
     slug: "paint-my-dogs-portrait-720e2ev",
-    desc: "My dog, Ollie, is a Shichon Teddy Bear.",
-    dueDate: null,
+    desc: "This project is a placeholder to support rapid app prototyping with CRA.",
+    dueDate: "2018-08-31T04:00:00.000Z", // or null if not specified
     type: "Web Development",
     interests: ['JavaScript', 'React'],
   },

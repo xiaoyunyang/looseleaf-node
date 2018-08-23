@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import NavLink from './NavLink';
 import { userPage } from '../../data/appPage';
 

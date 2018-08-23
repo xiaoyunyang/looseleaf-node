@@ -112,7 +112,8 @@ export default class TopNavUser extends React.Component {
     );
   }
 }
-TopNavUser.proTypes = {
+TopNavUser.propTypes = {
+  redirPath: PropTypes.string,
   useExternLinks: PropTypes.bool,
   user: PropTypes.object.isRequired
 };
