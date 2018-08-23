@@ -57,4 +57,16 @@ class UserDropdown extends React.Component {
   }
 }
 
+UserDropdown.proTypes = {
+  username: PropTypes.string.isRequred,
+  userPic: PropTypes.string.isRequred, // url
+  useExternLinks: PropTypes.bool, //this determines if <a/>  (if true) or <Link /> (if false) is rendered.
+  redirPath: PropTypes.string //redirect for log out.
+};
+
+UserDropdown.defaultProps = {
+  useExternLinks: true,
+  redirPath: '/',
+};
+
 export default UserDropdown;

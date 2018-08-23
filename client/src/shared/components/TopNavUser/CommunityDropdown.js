@@ -40,4 +40,8 @@ class CommunityDropdown extends React.Component {
   }
 }
 
+CommunityDropdown.proTypes = {
+  communities: PropTypes.array.isRequred
+};
+
 export default CommunityDropdown;

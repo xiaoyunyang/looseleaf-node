@@ -60,4 +60,15 @@ class MobileSideNav extends React.Component {
     );
   }
 }
+MobileSideNav.proTypes = {
+  username: PropTypes.string.isRequred,
+  userPic: PropTypes.string.isRequred, // url
+  userWebsite: PropTypes.string.isRequred, // url
+  useExternLinks: PropTypes.bool, //this determines if <a/>  (if true) or <Link /> (if false) is rendered.
+  redirPath: PropTypes.string //redirect for log out.
+};
+MobileSideNav.defaultProps = {
+  useExternLinks: true,
+  redirPath: '/',
+};
 export default MobileSideNav;
