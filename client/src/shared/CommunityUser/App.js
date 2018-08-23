@@ -16,7 +16,7 @@ class AppContainer extends React.Component {
 
 const App = ({ state }) => (
   <div>
-    {renderRoutes(getRoutes(state.community.info.name), state)}
+    {renderRoutes(getRoutes(state.community.info.slug), state)}
   </div>
 );
 // This function lets you convert the app state to properties on your component.

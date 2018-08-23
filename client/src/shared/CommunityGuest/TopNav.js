@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import $ from 'jquery';
 import { getPageName } from '../../lib/helpers';
-import { page } from './routes';
+import { communityPage as page }  from '../data/appPage';
 import appRoute from '../data/appRoute';
 import { image } from '../data/assetLinks';
 import { LoginModal, SignupModal } from '../components/Login/Modal';
@@ -56,9 +56,6 @@ export default class TopNav extends React.Component {
   closeModal(modalId) {
     $(modalId).modal('close');
   }
-  handleLogoClick() {
-    window.location = '/';
-  }
   renderLoginBtn(id) {
     return (
       <a
@@ -85,7 +82,7 @@ export default class TopNav extends React.Component {
   renderNavHeader(community) {
     return (
       <div className="nav-header center">
-        <h4>{community.title}</h4>
+        <h4>{community.name}</h4>
         <div className="tagline">
           {community.desc}
         </div>
@@ -93,13 +90,11 @@ export default class TopNav extends React.Component {
       </div>
     );
   }
-  renderPrimaryNavInner(selected, community) {
+  renderPrimaryNavInner(selected) {
     return (
       <div className="nav-wrapper-white nav-text-links">
         <div className="brand-logo">
-          <a className="navbar-brand" href={appRoute('landingHome')}
-              onClick={this.handleLogoClick.bind(this)}
-            >
+          <a className="navbar-brand" href={appRoute('landingHome')}>
             <img src={image.logo} alt="LooseLeaf" />
           </a>
         </div>
@@ -121,7 +116,7 @@ export default class TopNav extends React.Component {
           <div className="nav-background">
             <div className="pattern active" />
           </div>
-          { this.renderPrimaryNavInner(selected, community) }
+          { this.renderPrimaryNavInner(selected) }
           { this.renderNavHeader(community) }
         </nav>
       </div>
@@ -196,7 +191,7 @@ export default class TopNav extends React.Component {
           this.renderPrimaryNavExtended(selected, this.props.community)
         }
         {
-          this.renderTabs(selected, this.props.community.name)
+          this.renderTabs(selected, this.props.community.slug)
         }
         <LoginModal redirPath={location} />
         <SignupModal redirPath={location} />

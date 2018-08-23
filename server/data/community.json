@@ -1,37 +1,37 @@
 {
     "developers": {
-        "name": "developers",
-        "title": "Developers",
+        "slug": "developers",
+        "name": "Developers",
         "desc": "web and mobile developers"
     },
     "designers": {
-        "name": "designers",
-        "title": "Designers",
+        "slug": "designers",
+        "name": "Designers",
         "desc": "Web design, UX design, UI design"
     },
     "illustrators": {
-        "name": "illustrators",
-        "title": "Illustrators",
+        "slug": "illustrators",
+        "name": "Illustrators",
         "desc": "Book cover illustrations, illustrations for blog"
     },
     "writers": {
-        "name": "writers",
-        "title": "Writers",
+        "slug": "writers",
+        "name": "Writers",
         "desc": "Copy writer, editor, grant writer, press release writer"
     },
     "data-scientists": {
-        "name": "data-scientists",
-        "title": "Data Scientists",
+        "slug": "data-scientists",
+        "name": "Data Scientists",
         "desc": "Analyze and visualize trends in data to gain insights"
     },
     "video-producers": {
-        "name": "video-producers",
-        "title": "Video Producers",
+        "slug": "video-producers",
+        "name": "Video Producers",
         "desc": "Make Videos"
     },
     "misc": {
-        "name": "misc",
-        "title": "Creators",
+        "slug": "misc",
+        "name": "Creators",
         "desc": "All other creators"
     }
 }

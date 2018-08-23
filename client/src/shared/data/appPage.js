@@ -4,7 +4,7 @@ const communityPage = (communityName) => {
   return {
     home: {name: 'Projects', slug: 'projects', link: appRoute('communityHome')(communityName)},
     one: {name: 'Projects', slug: 'projects', link: appRoute('communityOne')(communityName)},
-    two: {name: 'Announcements', slug: 'announcements', link: appRoute('communityTwo')(communityName)},
+    two: {name: 'Discussion', slug: 'discussion', link: appRoute('communityTwo')(communityName)},
     three: {name: 'People', slug: 'people', link: appRoute('communityThree')(communityName)},
     wildcard: {link: appRoute('communityWildcard')(communityName)},
   }

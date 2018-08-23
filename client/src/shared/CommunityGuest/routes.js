@@ -7,33 +7,33 @@ import { communityPage as page }  from '../data/appPage';
 
 // function noop() {}
 
-const getRoutes = (communityName) => {
+const getRoutes = (communitySlug) => {
   const routes = [
     {
       component: Root,
       routes: [
         {
-          path: page(communityName).home.link,
+          path: page(communitySlug).home.link,
           exact: true,
           component: One
         },
         {
-          path: page(communityName).one.link,
+          path: page(communitySlug).one.link,
           exact: true,
           component: One
         },
         {
-          path: page(communityName).two.link,
+          path: page(communitySlug).two.link,
           exact: true,
           component: Two
         },
         {
-          path: page(communityName).three.link,
+          path: page(communitySlug).three.link,
           exact: true,
           component: Three
         },
         {
-          path: page(communityName).wildcard.link,
+          path: page(communitySlug).wildcard.link,
           component: NotFound
         }
       ]
@@ -42,4 +42,4 @@ const getRoutes = (communityName) => {
   return routes;
 }
 
-export { getRoutes, page };
+export { getRoutes };

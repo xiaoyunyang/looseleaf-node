@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import $ from 'jquery';
-import { page } from './routes';
+import { communityPage as page }  from '../data/appPage';
 import { getPageName } from '../../lib/helpers';
-import { apiLink } from '../data/apiLinks';
+import { image } from '../data/assetLinks';
 import appRoute from '../data/appRoute';
 import UserDropdown from '../components/TopNavUser/UserDropdown';
 
@@ -75,7 +75,7 @@ export default class TopNav extends React.Component {
   renderNavHeader(community) {
     return (
       <div className="nav-header center">
-        <h4>{community.title}</h4>
+        <h4>{community.name}</h4>
         <div className="tagline">
           {community.desc}
         </div>
@@ -83,15 +83,13 @@ export default class TopNav extends React.Component {
       </div>
     );
   }
-  renderPrimaryNavInner(selected, community, user, redirPath) {
+  renderPrimaryNavInner(selected, user, redirPath) {
     return (
       <div className="nav-wrapper-white nav-text-links">
         <div className="brand-logo">
-          <Link className="navbar-brand" to={appRoute('userHome')}
-              onClick={this.handleLogoClick.bind(this)}
-            >
-            <img src="http://looseleafapp.com/assets/images/logo/logo.png" alt="LooseLeaf" />
-          </Link>
+          <a className="navbar-brand" href={appRoute('userHome')}>
+            <img src={image.logo} alt="LooseLeaf" />
+          </a>
         </div>
         { user ?
             <div>
@@ -116,14 +114,11 @@ export default class TopNav extends React.Component {
           <div className="nav-background">
             <div className="pattern active"></div>
           </div>
-          {this.renderPrimaryNavInner(selected, community, user, redirPath)}
+          {this.renderPrimaryNavInner(selected, user, redirPath)}
           { this.renderNavHeader(community) }
         </nav>
       </div>
     );
-  }
-  handleLogoClick() {
-    window.location = "/";
   }
   renderTabs(selected, communityName) {
     const style = {
@@ -191,7 +186,7 @@ export default class TopNav extends React.Component {
           this.renderPrimaryNavExtended(selected, this.props.community, this.props.user, redirPath)
         }
         {
-          this.renderTabs(selected, this.props.community.name)
+          this.renderTabs(selected, this.props.community.slug)
         }
       </div>
     );

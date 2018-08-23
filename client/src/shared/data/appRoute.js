@@ -34,7 +34,7 @@ const appRoute = (pageName) => {
     case 'communityOne':
       return name => `/community/${name}/projects`;
     case 'communityTwo':
-      return name => `/community/${name}/announcements`;
+      return name => `/community/${name}/discussion`;
     case 'communityThree':
       return name => `/community/${name}/people`;
     case 'communityWildcard':

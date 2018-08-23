@@ -1,5 +1,5 @@
 import React from 'react';
-import Discussion from './Discussion';
+import Discussion from '../../components/Discussion';
 
 const Feed = ({ user, projectId }) => (
   <div id="project-page-discussion">

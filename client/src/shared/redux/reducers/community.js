@@ -1,7 +1,7 @@
 const initState = {
   info: {
-    name: "developers",
-    title: "Developers",
+    slug: "developers",
+    name: "Developers",
     desc: "Make web, mobile, and desktop apps.",
     members: ['xiaoyun-yang', 'afenner'],
     projects: ['create-kids-app-12345', 'rewrite-website-for-nonprofit-56789']
