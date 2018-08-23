@@ -7,7 +7,6 @@ import { communityPage as page }  from '../data/appPage';
 
 // function noop() {}
 
-
 const getRoutes = (community) => {
   const routes = [
     {
@@ -34,7 +33,7 @@ const getRoutes = (community) => {
           component: Three
         },
         {
-          path: page(community).wildcard,
+          path: page(community).wildcard.link,
           component: NotFound
         }
       ]

@@ -33,7 +33,7 @@ const getRoutes = (community) => {
           component: Three
         },
         {
-          path: page(community).wildcard,
+          path: page(community).wildcard.link,
           component: NotFound
         }
       ]
