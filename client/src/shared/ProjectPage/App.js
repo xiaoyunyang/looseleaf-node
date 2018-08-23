@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actionCreators from '../redux/Project/actions/project';
 import TopNavGuest from '../components/TopNavSimple';
-import TopNavUser from '../components/TopNavUser';
+import TopNavUser from '../components/TopNavUser/Main';
 
 const dueDateFormatted = (dateStr) => {
   return dateStr ? new Date(dateStr).toDateString() : '';

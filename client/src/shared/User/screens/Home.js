@@ -1,6 +1,6 @@
 import React from 'react';
 import fetch from 'isomorphic-fetch';
-import TopNav from '../../components/TopNavUser';
+import TopNav from '../../components/TopNavUser/Main';
 import PostEditor from '../../components/Form/PostEditor';
 
 const updates = [

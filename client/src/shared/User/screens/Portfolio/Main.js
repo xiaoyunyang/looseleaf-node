@@ -5,7 +5,7 @@ import { renderRoutes } from 'react-router-config';
 import $ from 'jquery';
 import { getRoot, getRoutes, tabs } from './routes';
 import About from './About';
-import TopNav from '../../../components/TopNavUser';
+import TopNav from '../../../components/TopNavUser/Main';
 
 polyfill();
 export default class Main extends Component {

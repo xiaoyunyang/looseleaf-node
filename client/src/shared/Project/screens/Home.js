@@ -1,6 +1,6 @@
 import React from 'react';
 // TODO: Isomorphic app vs axios?
-import TopNav from '../../components/TopNavUser';
+import TopNav from '../../components/TopNavUser/Main';
 import { getApiData } from '../../../lib/helpers';
 
 // This is a ES6 class - see https://toddmotto.com/react-create-class-versus-component/

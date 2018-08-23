@@ -275,14 +275,13 @@ footer.page-footer {
   color: #383435;
   background-color: transparent;
 }
-#dropdown-block a {
-  background-color: transparent;
-  color: #616161;
+.dropdown-block a {
+  background-color: transparent !important;
+  color: #616161 !important;
 }
-#dropdown-block a:hover {
-  background-color: transparent;
-  color: #383435;
-  font-weight: bolder;
+.dropdown-block a:hover {
+  background-color: transparent !important;
+  color: #383435 !important;
 }
 .nav-text-links ul li.active {
   background-color: transparent;

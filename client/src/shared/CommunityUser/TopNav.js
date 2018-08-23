@@ -5,6 +5,7 @@ import $ from 'jquery';
 import { page } from './routes';
 import { getPageName } from '../../lib/helpers';
 import { apiLink } from '../data/apiLinks';
+import appRoute from '../data/appRoute';
 
 // TODO: consolidate this UserDropdown with the one from TopNavUser
 const UserDropdown = ( {username, userPic, redirPath} ) => (
@@ -113,28 +114,14 @@ export default class TopNav extends React.Component {
   renderPrimaryNavInner(selected, community, user, redirPath) {
     return (
       <div className="nav-wrapper-white nav-text-links">
-        { user ? null :
-            <div className="brand-logo">
-              <Link className="navbar-brand" to={`/${community}`}
-                  onClick={this.handleLogoClick.bind(this)}
-                >
-                <img src="http://looseleafapp.com/assets/images/logo/logo.png" alt="LooseLeaf" />
-              </Link>
-            </div>
-        }
-        {
-          user ? null :
-            <div>
-              <ul className="right">
-                <li>{this.renderJoinBtn('Signup', 'signup-btn-main')}</li>
-              </ul>
-              <div className="right hide-on-small-only">
-                { this.renderLoginBtn() }
-              </div>
-            </div>
-        }
-        {
-          user ?
+        <div className="brand-logo">
+          <Link className="navbar-brand" to={appRoute('userHome')}
+              onClick={this.handleLogoClick.bind(this)}
+            >
+            <img src="http://looseleafapp.com/assets/images/logo/logo.png" alt="LooseLeaf" />
+          </Link>
+        </div>
+        { user ?
             <div>
               <ul className="right">
                 <UserDropdown

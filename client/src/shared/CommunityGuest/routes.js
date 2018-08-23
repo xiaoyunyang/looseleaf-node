@@ -3,18 +3,10 @@ import NotFound from '../components/NotFound';
 import One from './Tabs/One';
 import Two from './Tabs/Two';
 import Three from './Tabs/Three';
-import appRoute from '../data/appRoute';
+import { communityPage as page }  from '../data/appPage';
 
 // function noop() {}
 
-const page = (community) => {
-  return {
-    home: {name: 'Projects', slug: 'projects', link: appRoute('communityHome')(community)},
-    one: {name: 'Projects', slug: 'projects', link: appRoute('communityOne')(community)},
-    two: {name: 'Announcements', slug: 'announcements', link: appRoute('communityTwo')(community)},
-    three: {name: 'People', slug: 'people', link: appRoute('communityThree')(community)},
-  }
-}
 const getRoutes = (community) => {
   const routes = [
     {
@@ -41,7 +33,7 @@ const getRoutes = (community) => {
           component: Three
         },
         {
-          path: appRoute('communityWildcard')(community),
+          path: page(community).wildcard,
           component: NotFound
         }
       ]

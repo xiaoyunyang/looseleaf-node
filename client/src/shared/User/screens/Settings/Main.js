@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { dynamicApiLink } from '../../../data/apiLinks';
-import TopNav from '../../../components/TopNavUser';
+import TopNav from '../../../components/TopNavUser/Main';
 import GeneralForm from './GeneralForm';
 import AboutForm from './AboutForm';
 

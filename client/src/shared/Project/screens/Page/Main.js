@@ -1,5 +1,5 @@
 import React from 'react';
-import TopNav from '../../../components/TopNavUser';
+import TopNav from '../../../components/TopNavUser/Main';
 import People from './People';
 import PostEditor from '../../../components/Form/PostEditor';
 
