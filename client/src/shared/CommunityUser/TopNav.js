@@ -6,42 +6,14 @@ import { page } from './routes';
 import { getPageName } from '../../lib/helpers';
 import { apiLink } from '../data/apiLinks';
 import appRoute from '../data/appRoute';
+import UserDropdown from '../components/TopNavUser/UserDropdown';
 
-// TODO: consolidate this UserDropdown with the one from TopNavUser
-const UserDropdown = ( {username, userPic, redirPath} ) => (
-  <li id="dropdown-block">
-    <a className="navbar-img dropdown-button" data-activates="user-dropdown">
-      <img alt={`looseleaf user ${username}`} className="mod-round" src={userPic} />
-      {
-        // <div className="arrow-down" />
-      }
-    </a>
-    <ul id="user-dropdown" className="dropdown-content topnav-dropdown">
-      <li><a href={`/@${username}`}>Portfolio</a></li>
-      <li><a href="/project/new">New Project</a></li>
-      <li className="divider" />
-      <li><a href={`/@${username}/settings`}>Settings</a></li>
-      <li><a href={`${apiLink.logout}?redirPath=${redirPath}`}>Log out</a>
-      </li>
-      <div className="popover-arrow"></div>
-    </ul>
-  </li>
-);
 export default class TopNav extends React.Component {
   static defalutProps = {
     extended: false
   }
 
   componentDidMount() {
-    $('.dropdown-button').dropdown({
-      inDuration: 300,
-      outDuration: 225,
-      gutter: 0, // Spacing from edge
-      belowOrigin: true, // Displays dropdown below the button
-      alignment: 'left', // Displays dropdown with edge aligned to the left of button
-      constrainWidth: false, // Does not change width of dropdown to that of the activator
-      stopPropagation: false // Stops event propagation
-    });
     $('.modal').modal({
       dismissible: true, // Modal can be dismissed by clicking outside of the modal
       opacity: 0.5, // Opacity of modal background
@@ -125,7 +97,8 @@ export default class TopNav extends React.Component {
             <div>
               <ul className="right">
                 <UserDropdown
-                  username={user.username} userPic={user.picture}
+                  username={user.username}
+                  userPic={user.picture}
                   redirPath={redirPath}
                 />
               </ul>
