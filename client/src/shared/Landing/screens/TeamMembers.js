@@ -83,7 +83,7 @@ export default class TeamMembers extends React.Component {
     return (
       <div className="row">
         {
-        this.props.people.map((d, i) =>
+        this.props.team.map((d, i) =>
           this.renderPersonCard(d, i))
       }
         {

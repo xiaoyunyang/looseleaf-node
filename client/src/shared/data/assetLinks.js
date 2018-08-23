@@ -16,8 +16,32 @@ export const image = {
     team: `${root}/team/team.png`,
     xiaoyunyang: `${root}/team/xiaoyunyang.png`,
     andrewfenner: `${root}/team/andrewfenner.png`,
+    ollie: `${root}/team/ollie.png`,
   }
 }
+export const team = [
+  {
+    fullName: 'Xiaoyun Yang',
+    role: 'Founder',
+    bio: "Xiaoyun's Bio",
+    img: image.team.xiaoyunyang,
+    linkedin: 'https://linkedin.com/in/xiaoyun-yang'
+  },
+  {
+    fullName: 'Andrew Fenner',
+    role: 'Designer',
+    bio: "Andrew's Bio",
+    img: image.team.andrewfenner,
+    linkedin: 'https://linkedin.com/in/andrew-fenner'
+  },
+  {
+    fullName: 'Ollie',
+    role: 'HR',
+    bio: "Ollie's Bio",
+    img: image.team.ollie,
+    linkedin: 'https://linkedin.com/in/andrew-fenner'
+  }
+];
 
 export const socialMedia = {
   twitter: 'https://twitter.com/mylooseleaf',
