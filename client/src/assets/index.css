@@ -246,6 +246,10 @@ footer.page-footer {
 .navbar-brand img {
   vertical-align:top;
 }
+.cta-btn {
+  background-color: #26a69a !important;
+  color: white !important;
+}
 .signup-btn {
   background-color: #26a69a !important;
   color: white !important;
@@ -405,6 +409,15 @@ img.mod-round, picture.mod-round {
 }
 #nav-tabs .indicator {
   background-color: #26a69a;
+}
+#community-cta p {
+  display: block;
+  margin: -20px 0 40px 0;
+  color: rgba(85,85,85,0.8);
+  font-size: 14px;
+}
+#community-cta a {
+  color: #26a69a;
 }
 
 /**** Navbar END ****/

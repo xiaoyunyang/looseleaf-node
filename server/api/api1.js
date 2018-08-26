@@ -133,7 +133,18 @@ api.get('/user', (req, res) => {
     }
   );
 });
-
+api.post('/user/community', (req, res, next) => {
+  User.findById(req.query._id, (err, user) => {
+    if (err) return res.send('Error');
+    const formFields = req.body.formFields;
+    const communities = formFields;
+    user.set({
+      communities
+    });
+    user.save();
+    return res.send({ status: 'success', msg: 'change success!' });
+  });
+});
 // Update user based on id
 // TODO: This is dangerous. This API lets anyone update user information
 // based on user id. How do we make sure the request is coming from the
@@ -149,13 +160,14 @@ api.post('/user/:id', (req, res, next) => {
       // to POST /project and POST /auth/login
       return res.send({ status: 'error', msg: 'username cannot be empty!' });
     }
+
+
     if (formFields.email === '') {
       res.statusText = 'error';
       // TODO: Below is the way we should be sending error messages. Make the same change
       // to POST /project and POST /auth/login
       return res.send({ status: 'error', msg: 'email cannot be empty!' });
     }
-
     const username = formFields.username || user.username;
     const displayName = formFields.displayName || user.displayName;
     const email = formFields.email || user.email;

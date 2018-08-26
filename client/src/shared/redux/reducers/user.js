@@ -16,16 +16,7 @@ const initState = {
     interests: [],
     gender: "female",
     location: "Washington, District of Columbia",
-    communities: [
-      {
-        name: 'developer',
-        link: '/community/developer'
-      },
-      {
-        name: 'designer',
-        link: '/community/designer'
-      }
-    ],
+    communities: [],
     picture: "https://graph.facebook.com/10213296357138004/picture?type=large","__v":0
   }
 };

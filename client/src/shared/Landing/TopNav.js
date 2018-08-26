@@ -139,7 +139,7 @@ export default class TopNavGuest extends React.Component {
         <div className="right hide-on-small-only">
           { this.renderLoginBtn() }
         </div>
-        <ul className="right hide-on-med-and-down">
+        <ul className="right hide-on-med-and-down" style={{marginRight: 20}}>
           <li className={selected === page.one.slug ? 'active' : ''}>
             <Link
               to={page.one.link}>

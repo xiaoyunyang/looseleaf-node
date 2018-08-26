@@ -22,6 +22,7 @@ export default class Settings extends React.Component {
   }
   handleSubmit(formFields) {
     const userId = this.props.user.info._id;
+    // TODO: simplify this to use the helper instead 
     axios.post(dynamicApiLink(userId).user, { formFields, userId })
       .then(res => {
         if (res.statusText === 'error') {

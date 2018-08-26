@@ -33,7 +33,7 @@ const Apps = {
   recipe: AppRecipe
 };
 
-const App = Apps.landing;
+const App = Apps.communityUser;
 
 const render = (Component) => {
   ReactDOM.render(

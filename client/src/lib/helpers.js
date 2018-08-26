@@ -16,6 +16,23 @@ export const getApiData = (url, setApiData) => {
     });
 };
 
+export const postToApiData = (url, data, cbFailure, cbSuccess) => {
+  return axios.post(url, data)
+    .then(res => {
+      if (res.statusText === 'error') {
+        cbFailure(res.data.status, res.data.msg);
+      } else if (res.statusText === 'OK') {
+        cbSuccess(res.data.status, res.data.msg);
+        // TODO: Make a redux fetch for state again so that when we navigate to
+        // the profile page, the latest data is shown
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+      // Perform action based on error
+    });
+};
+
 // Get random users. See:  https://randomuser.me/
 // https://randomuser.me/documentation#format
 

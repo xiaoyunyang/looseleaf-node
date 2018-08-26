@@ -1,17 +1,28 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import axios from 'axios';
 import { Link } from 'react-router-dom';
 import $ from 'jquery';
 import { communityPage as page }  from '../data/appPage';
-import { getPageName } from '../../lib/helpers';
+import { getPageName, postToApiData } from '../../lib/helpers';
 import { image } from '../data/assetLinks';
 import appRoute from '../data/appRoute';
+import { dynamicApiLink } from '../data/apiLinks'
 import UserDropdown from '../components/TopNavUser/UserDropdown';
 
 export default class TopNav extends React.Component {
   static defalutProps = {
     extended: false
   }
+  // constructor(props) {
+  //   super(props);
+    // TODO: I don't know why having the lines below make handleJoinClick get called
+    // Does this happen elsewhere? Gotta check all the handle functions elsewhere
+    // to see if this is happening
+    // four times upon initial mount
+    // this.handleLeaveClick = this.handleLeaveClick.bind(this);
+    // this.handleJoinClick = this.handleJoinClick.bind(this);
+  // }
 
   componentDidMount() {
     $('.modal').modal({
@@ -27,11 +38,6 @@ export default class TopNav extends React.Component {
 
     this.initializeSticky();
 
-    if(typeof window !== undefined) {
-      $(window).scroll(function(){
-        this.toggleSignupBtnVisibility()
-      }.bind(this))
-    }
   }
   initializeSticky() {
     let categories = $('nav .categories-container');
@@ -41,45 +47,90 @@ export default class TopNav extends React.Component {
       });
     }
   }
-  toggleSignupBtnVisibility() {
-    const signupBtn = $("#signup-btn-tab");
-    const categories = $('nav .categories-container');
-    if(categories.hasClass('pinned')) {
-      signupBtn.css('visibility', 'visible');
-    } else if(categories.hasClass('pin-top')) {
-      signupBtn.css('visibility', 'hidden');
-    }
-  }
   closeModal(modalId) {
     $(modalId).modal('close');
   }
-  renderLoginBtn() {
-    return (
-      <a href="#login-modal"
-         onClick={this.closeModal.bind(this, '#signup-modal')}
-         className="modal-trigger">
-        Log in
-      </a>
-    );
+  handleJoinClick(userId, updatedCommunities) {
+    console.log('handleJoinClick.......')
+    console.log('userId', userId)
+    console.log('updatedCommunities', updatedCommunities)
+    const url = `/api/user/community?_id=${userId}`;
+
+    const data = {formFields: updatedCommunities}
+    const cbFailure = () => {};
+    const cbSuccess = () => {};
+
+    //postToApiData(url, data, cbFailure, cbSuccess)
+    axios.post(url, data)
+      .then(res => {
+         console.log(res)
+        if (res.statusText === 'error') {
+          cbFailure();
+        } else if (res.statusText === 'OK') {
+          cbSuccess();
+          // TODO: Make a redux fetch for state again so that when we navigate to
+          // the profile page, the latest data is shown
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        // Perform action based on error
+      });
   }
-  renderJoinBtn(label, id) {
+  handleLeaveClick(userId, updatedCommunities) {
+
+  }
+  renderJoinBtn(label, id, userId, updatedCommunities) {
     return (
-      <a id={id}
-         href="#signup-modal"
-         onClick={this.closeModal.bind(this, '#login-modal')}
-         className="btn modal-trigger signup-btn">
+      <button id={id}
+         onClick={this.handleJoinClick.bind(this, userId, updatedCommunities)}
+         className="btn cta-btn">
         {label}
-      </a>
+      </button>
     );
   }
-  renderNavHeader(community) {
+  renderLeaveBtn(userId, updatedCommunities) {
+    return (
+      <button
+        className="btn"
+        onClick={this.handleLeaveClick(userId, updatedCommunities)}>
+        Leave
+      </button>
+    )
+  }
+  renderCta(userId, userCommunities, communitySlug) {
+    // If user is a member of the community
+    if (!userCommunities.includes(communitySlug)) {
+      return this.renderJoinBtn(
+        'Join This Community',
+        'signup-btn-header',
+        userId,
+        userCommunities.concat(communitySlug)
+      );
+    }
+    // If user is not a member of the community
+    return (
+      <div id='community-cta'>
+        <p>You are a member of this community. <br/>
+        {
+          this.renderLeaveBtn(
+            userId,
+            userCommunities.filter(a => a !== communitySlug)
+          )
+        }
+        </p>
+      </div>
+
+    );
+  }
+  renderNavHeader(userId, userCommunities, community) {
     return (
       <div className="nav-header center">
         <h4>{community.name}</h4>
         <div className="tagline">
           {community.desc}
         </div>
-        { this.renderJoinBtn('Join This Community', 'signup-btn-header') }
+        { this.renderCta(userId, userCommunities, community.slug) }
       </div>
     );
   }
@@ -91,18 +142,16 @@ export default class TopNav extends React.Component {
             <img src={image.logo} alt="LooseLeaf" />
           </a>
         </div>
-        { user ?
-            <div>
-              <ul className="right">
-                <UserDropdown
-                  username={user.username}
-                  userPic={user.picture}
-                  redirPath={redirPath}
-                />
-              </ul>
-            </div>
-            :
-            null
+        { user &&
+          <div>
+            <ul className="right">
+              <UserDropdown
+                username={user.username}
+                userPic={user.picture}
+                redirPath={redirPath}
+              />
+            </ul>
+          </div>
         }
       </div>
     );
@@ -114,13 +163,13 @@ export default class TopNav extends React.Component {
           <div className="nav-background">
             <div className="pattern active"></div>
           </div>
-          {this.renderPrimaryNavInner(selected, user, redirPath)}
-          { this.renderNavHeader(community) }
+          { this.renderPrimaryNavInner(selected, user, redirPath) }
+          { this.renderNavHeader(user._id, user.communities, community) }
         </nav>
       </div>
     );
   }
-  renderTabs(selected, communityName) {
+  renderTabs(selected, userId, userCommunities, communitySlug) {
     const style = {
       top: 0
     };
@@ -140,33 +189,26 @@ export default class TopNav extends React.Component {
                   <li className='tab'>
                     <Link
                       id={`tab-one`}
-                      className={selected === page(communityName).one.slug ? 'active' : ''}
-                      to={page(communityName).one.link}>
-                      {page(communityName).one.name}
+                      className={selected === page(communitySlug).one.slug ? 'active' : ''}
+                      to={page(communitySlug).one.link}>
+                      {page(communitySlug).one.name}
                     </Link>
                   </li>
                   <li className='tab'>
                     <Link
                       id={`tab-two`}
-                      className={selected === page(communityName).two.slug ? 'active' : ''}
-                      to={page(communityName).two.link}>
-                      {page(communityName).two.name}
+                      className={selected === page(communitySlug).two.slug ? 'active' : ''}
+                      to={page(communitySlug).two.link}>
+                      {page(communitySlug).two.name}
                     </Link>
                   </li>
                   <li className='tab'>
                     <Link
                       id={`tab-three`}
-                      className={selected === page(communityName).three.slug ? 'active' : ''}
-                      to={page(communityName).three.link}>
-                      {page(communityName).three.name}
+                      className={selected === page(communitySlug).three.slug ? 'active' : ''}
+                      to={page(communitySlug).three.link}>
+                      {page(communitySlug).three.name}
                     </Link>
-                  </li>
-                </ul>
-              </div>
-              <div className="col l2 m2 s2 offset-l1 offset-s2 nav-text-links">
-                <ul style={{paddingRight: 4}} className="right">
-                  <li>
-                    { this.renderJoinBtn('Join', 'signup-btn-tab')}
                   </li>
                 </ul>
               </div>
@@ -186,12 +228,31 @@ export default class TopNav extends React.Component {
           this.renderPrimaryNavExtended(selected, this.props.community, this.props.user, redirPath)
         }
         {
-          this.renderTabs(selected, this.props.community.slug)
+          this.renderTabs(selected, this.props.user._id, this.props.user.communities, this.props.community.slug)
         }
       </div>
     );
   }
 }
+
+// class JoinBtn extends React.component {
+//   constructor(props) {
+//     super(props);
+//     this.handleJoinClick = this.handleJoinClick.bind(this);
+//   }
+//   handleJoinClick() {
+//
+//   }
+//   render() {
+//     return (
+//       <a id={this.props.id}
+//          onClick={this.handleJoinClick(this.props.userId, this.props.updatedCommunities)}
+//          className="btn modal-trigger signup-btn">
+//         {this.props.label}
+//       </a>
+//     );
+//   }
+// }
 
 TopNav.propTypes = {
   extended: PropTypes.bool
