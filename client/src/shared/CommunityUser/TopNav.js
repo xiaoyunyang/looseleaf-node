@@ -9,6 +9,7 @@ import { image } from '../data/assetLinks';
 import appRoute from '../data/appRoute';
 import { dynamicApiLink } from '../data/apiLinks'
 import UserDropdown from '../components/TopNavUser/UserDropdown';
+import * as actions from '../redux/actions/page';
 
 export default class TopNav extends React.Component {
   static defalutProps = {
@@ -50,15 +51,14 @@ export default class TopNav extends React.Component {
   closeModal(modalId) {
     $(modalId).modal('close');
   }
-  handleJoinClick(userId, updatedCommunities) {
-    console.log('handleJoinClick.......')
-    console.log('userId', userId)
-    console.log('updatedCommunities', updatedCommunities)
+  handleCtaClick(userId, updatedCommunities) {
+
+    console.log('this.props', this.props)
     const url = `/api/user/community?_id=${userId}`;
 
     const data = {formFields: updatedCommunities}
     const cbFailure = () => {};
-    const cbSuccess = () => {};
+    const cbSuccess = actions.getUserProfileData(this.props.user.username) // TODO: This has to be redux action to fetch user for updated state
 
     //postToApiData(url, data, cbFailure, cbSuccess)
     axios.post(url, data)
@@ -77,13 +77,10 @@ export default class TopNav extends React.Component {
         // Perform action based on error
       });
   }
-  handleLeaveClick(userId, updatedCommunities) {
-
-  }
   renderJoinBtn(label, id, userId, updatedCommunities) {
     return (
       <button id={id}
-         onClick={this.handleJoinClick.bind(this, userId, updatedCommunities)}
+         onClick={this.handleCtaClick.bind(this, userId, updatedCommunities)}
          className="btn cta-btn">
         {label}
       </button>
@@ -92,11 +89,11 @@ export default class TopNav extends React.Component {
   renderLeaveBtn(userId, updatedCommunities) {
     return (
       <button
-        className="btn"
-        onClick={this.handleLeaveClick(userId, updatedCommunities)}>
+         onClick={this.handleCtaClick.bind(this, userId, updatedCommunities)}
+         className="btn cta-btn">
         Leave
       </button>
-    )
+    );
   }
   renderCta(userId, userCommunities, communitySlug) {
     // If user is a member of the community
@@ -111,7 +108,7 @@ export default class TopNav extends React.Component {
     // If user is not a member of the community
     return (
       <div id='community-cta'>
-        <p>You are a member of this community. <br/>
+        <p>You are a member of this community.<br/>
         {
           this.renderLeaveBtn(
             userId,
@@ -120,7 +117,6 @@ export default class TopNav extends React.Component {
         }
         </p>
       </div>
-
     );
   }
   renderNavHeader(userId, userCommunities, community) {

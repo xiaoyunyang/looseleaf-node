@@ -133,6 +133,7 @@ api.get('/user', (req, res) => {
     }
   );
 });
+
 api.post('/user/community', (req, res, next) => {
   User.findById(req.query._id, (err, user) => {
     if (err) return res.send('Error');
@@ -141,7 +142,7 @@ api.post('/user/community', (req, res, next) => {
     user.set({
       communities
     });
-    user.save();
+    user.save(); // NOTE: changing from user.save(next) to user.save() removes the cannot set header error
     return res.send({ status: 'success', msg: 'change success!' });
   });
 });
@@ -149,6 +150,8 @@ api.post('/user/community', (req, res, next) => {
 // TODO: This is dangerous. This API lets anyone update user information
 // based on user id. How do we make sure the request is coming from the
 // actual user?
+// TODO: Make the id come from req.query._id, as consistent from the previous api.post request handler
+// for user community
 api.post('/user/:id', (req, res, next) => {
   User.findById(req.params.id, (err, user) => {
     if (err) return res.send('Error');

@@ -15,10 +15,11 @@ class AppCommunityUser extends React.Component {
   componentDidMount() {
     const usernames = [
       'default',
+      'xyang',
       'xiaoyunyang',
       'kyle'
     ];
-    const username = usernames[0];
+    const username = usernames[2];
 
     if(username && username !== 'default') {
       this.fetchUser(username);
