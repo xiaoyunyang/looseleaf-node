@@ -20,13 +20,20 @@ export default class Three extends React.Component {
     getApiData(apiLink.users, setApiData);
   }
   render() {
+    const userInfo = this.props.state.user.info;
+    const communityInfo = this.props.state.community.info;
     return (
       <div className="section-white">
-        <TopNav route={this.props.route} user={this.props.user} community={this.props.community} />
+        <TopNav
+          route={this.props.route}
+          user={userInfo}
+          community={communityInfo}
+          actions={this.props.actions}
+        />
         <div className="community-page container">
           <div className="row">
-            <div id={page(this.props.community.slug).three.slug} className="col s12">
-              <h3>{page(this.props.community.slug).three.name}</h3>
+            <div id={page(communityInfo.slug).three.slug} className="col s12">
+              <h3>{page(communityInfo.slug).three.name}</h3>
               <Users users={this.state.users} />
             </div>
           </div>

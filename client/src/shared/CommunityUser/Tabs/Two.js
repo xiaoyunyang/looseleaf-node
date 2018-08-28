@@ -5,15 +5,22 @@ import Discussion from '../../components/Discussion';
 
 export default class Two extends React.Component {
   render() {
+    const userInfo = this.props.state.user.info;
+    const communityInfo = this.props.state.community.info;
     return (
       <div className="section-white">
-        <TopNav route={this.props.route} user={this.props.user} community={this.props.community} />
+        <TopNav
+          route={this.props.route}
+          user={userInfo}
+          community={communityInfo}
+          actions={this.props.actions}
+        />
         <div className="community-page container">
-          <div id={page(this.props.community.slug).two.slug}>
-            <h3>{page(this.props.community.slug).two.name}</h3>
+          <div id={page(communityInfo.slug).two.slug}>
+            <h3>{page(communityInfo.slug).two.name}</h3>
             <Discussion
               user={this.props.user}
-              newPostContext={{project: null, community: this.props.community.slug }}
+              newPostContext={{project: null, community: communityInfo.slug }}
               newPostPlaceholder='Post an announcement or question to this community.'
             />
           </div>

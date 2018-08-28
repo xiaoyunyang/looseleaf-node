@@ -53,12 +53,12 @@ export default class TopNav extends React.Component {
   }
   handleCtaClick(userId, updatedCommunities) {
 
-    console.log('this.props', this.props)
+
     const url = `/api/user/community?_id=${userId}`;
 
     const data = {formFields: updatedCommunities}
     const cbFailure = () => {};
-    const cbSuccess = actions.getUserProfileData(this.props.user.username) // TODO: This has to be redux action to fetch user for updated state
+    const cbSuccess = this.props.actions.getUserProfileData(this.props.user.username) // TODO: This has to be redux action to fetch user for updated state
 
     //postToApiData(url, data, cbFailure, cbSuccess)
     axios.post(url, data)
@@ -67,9 +67,10 @@ export default class TopNav extends React.Component {
         if (res.statusText === 'error') {
           cbFailure();
         } else if (res.statusText === 'OK') {
-          cbSuccess();
+          // cbSuccess();
           // TODO: Make a redux fetch for state again so that when we navigate to
           // the profile page, the latest data is shown
+          this.props.actions.getUserProfileData(this.props.user.username);
         }
       })
       .catch((error) => {

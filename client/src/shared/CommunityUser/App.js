@@ -8,17 +8,27 @@ import * as actionCreators from '../redux/actions/page';
 
 class AppContainer extends React.Component {
   render() {
+    console.log('AppContainer props:', this.props)
     return (
       <App {...this.props} />
     );
   }
 }
 
-const App = ({ state }) => (
-  <div>
-    {renderRoutes(getRoutes(state.community.info.slug), state)}
-  </div>
-);
+class App extends React.Component {
+  render() {
+    const appProps = {
+      state: this.props.state,
+      actions: this.props.actions
+    }
+    return (
+      <div>
+        {renderRoutes(getRoutes(this.props.state.community.info.slug), appProps)}
+      </div>
+    )
+  }
+}
+
 // This function lets you convert the app state to properties on your component.
 function mapStateToProps(state) {
   return {
