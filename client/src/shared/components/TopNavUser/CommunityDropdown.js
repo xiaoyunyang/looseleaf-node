@@ -26,9 +26,9 @@ class CommunityDropdown extends React.Component {
               <a href='/community/explore'>Join One</a>
             </li>
             :
-            this.props.communities.map(d =>  (
-                <li key={`community-link-${d.name}`}>
-                  <a href={d.link}>{d.name}</a>
+            this.props.communities.map(c =>  (
+                <li key={`community-dropdown-${c}`}>
+                  <a href={`/community/${c}`}>{c}</a>
                 </li>
               )
             )

@@ -72,8 +72,10 @@ const Communities= ({icon, cs}) => (
     </div>
     <div className="col s11 m11 l11">
       {
-        cs && cs.map((c, i) => {
-        return <div key={i} className="chip"><a href={`/community/${c.name}`}>{c.name}</a></div>;
+        cs && cs.map(c => {
+        return <div key={`community-chip-${c}`} className="chip">
+          <a href={`/community/${c}`}>{c}</a>
+        </div>;
         })
       }
     </div>
