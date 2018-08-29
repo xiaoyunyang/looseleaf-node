@@ -1,15 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import axios from 'axios';
 import { Link } from 'react-router-dom';
 import $ from 'jquery';
 import { communityPage as page }  from '../data/appPage';
 import { getPageName, postToApiData } from '../../lib/helpers';
 import { image } from '../data/assetLinks';
+import { apiLink } from '../data/apiLinks';
 import appRoute from '../data/appRoute';
-import { dynamicApiLink } from '../data/apiLinks'
 import UserDropdown from '../components/TopNavUser/UserDropdown';
-import * as actions from '../redux/actions/page';
 
 export default class TopNav extends React.Component {
   static defalutProps = {
@@ -52,31 +50,12 @@ export default class TopNav extends React.Component {
     $(modalId).modal('close');
   }
   handleCtaClick(userId, updatedCommunities) {
-
-
-    const url = `/api/user/community?_id=${userId}`;
-
+    const url = apiLink.userCommunities(userId);
     const data = {formFields: updatedCommunities}
     const cbFailure = () => {};
-    const cbSuccess = this.props.actions.getUserProfileData(this.props.user.username) // TODO: This has to be redux action to fetch user for updated state
+    const cbSuccess = () =>  this.props.actions.getUserProfileData(this.props.user.username);
 
-    //postToApiData(url, data, cbFailure, cbSuccess)
-    axios.post(url, data)
-      .then(res => {
-         console.log(res)
-        if (res.statusText === 'error') {
-          cbFailure();
-        } else if (res.statusText === 'OK') {
-          // cbSuccess();
-          // TODO: Make a redux fetch for state again so that when we navigate to
-          // the profile page, the latest data is shown
-          this.props.actions.getUserProfileData(this.props.user.username);
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-        // Perform action based on error
-      });
+    postToApiData(url, data, cbFailure, cbSuccess)
   }
   renderJoinBtn(label, id, userId, updatedCommunities) {
     return (
@@ -231,25 +210,6 @@ export default class TopNav extends React.Component {
     );
   }
 }
-
-// class JoinBtn extends React.component {
-//   constructor(props) {
-//     super(props);
-//     this.handleJoinClick = this.handleJoinClick.bind(this);
-//   }
-//   handleJoinClick() {
-//
-//   }
-//   render() {
-//     return (
-//       <a id={this.props.id}
-//          onClick={this.handleJoinClick(this.props.userId, this.props.updatedCommunities)}
-//          className="btn modal-trigger signup-btn">
-//         {this.props.label}
-//       </a>
-//     );
-//   }
-// }
 
 TopNav.propTypes = {
   extended: PropTypes.bool

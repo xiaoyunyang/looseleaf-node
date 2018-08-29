@@ -3,10 +3,10 @@ import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import App from '../shared/UserPage/App';
 import { hot } from 'react-hot-loader';
-import initRedux from '../shared/redux/User/init-redux';
-import * as actions from '../shared/redux/User/actions/user';
+import initStore from '../shared/redux/configureStore/initUserPage';
+import * as actions from '../shared/redux/actions/page';
 
-const store = initRedux();
+const store = initStore();
 
 class AppUserPage extends React.Component {
   componentDidMount() {
