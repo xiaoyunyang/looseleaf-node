@@ -1,6 +1,6 @@
 import React from 'react';
-import axios from 'axios';
-import { dynamicApiLink } from '../../../data/apiLinks';
+import { postToApiData } from '../../../../lib/helpers';
+import { apiLink } from '../../../data/apiLinks';
 import TopNav from '../../../components/TopNavUser/Main';
 import GeneralForm from './GeneralForm';
 import AboutForm from './AboutForm';
@@ -22,21 +22,14 @@ export default class Settings extends React.Component {
   }
   handleSubmit(formFields) {
     const userId = this.props.user.info._id;
-    // TODO: simplify this to use the helper instead 
-    axios.post(dynamicApiLink(userId).user, { formFields, userId })
-      .then(res => {
-        if (res.statusText === 'error') {
-          this.showAlert(res.data.status, res.data.msg);
-        } else if (res.statusText === 'OK') {
-          this.showAlert(res.data.status, res.data.msg);
-          // TODO: Make a redux fetch for state again so that when we navigate to
-          // the profile page, the latest data is shown
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-        // Perform action based on error
-      });
+    const url = apiLink.userById(userId);
+    const data = { formFields, userId };
+    const cbFailure = (status, msg) => this.showAlert(status, msg);
+
+    // TODO: For the success case, make a redux fetch for state again so that 
+    // when we navigate to the profile page, the latest data is shown
+    const cbSuccess = cbFailure;
+    postToApiData(url, data, cbFailure, cbSuccess);
   }
   showAlert(status, msg) {
     const toWait = 3000; // 3 seconds

@@ -142,7 +142,8 @@ api.post('/user/community', (req, res, next) => {
     user.set({
       communities
     });
-    user.save(); // NOTE: changing from user.save(next) to user.save() removes the cannot set header error
+    user.save(); // NOTE: changing from user.save(next) to user.save()
+    // removes the cannot set header error
     return res.send({ status: 'success', msg: 'change success!' });
   });
 });
@@ -152,8 +153,8 @@ api.post('/user/community', (req, res, next) => {
 // actual user?
 // TODO: Make the id come from req.query._id, as consistent from the previous api.post request handler
 // for user community
-api.post('/user/:id', (req, res, next) => {
-  User.findById(req.params.id, (err, user) => {
+api.post('/user', (req, res) => {
+  User.findById(req.query._id, (err, user) => {
     if (err) return res.send('Error');
 
     const formFields = req.body.formFields;
@@ -194,7 +195,7 @@ api.post('/user/:id', (req, res, next) => {
       bio,
       website
     });
-    user.save(next);
+    user.save();
     return res.send({ status: 'success', msg: 'change success!' });
   });
 });
