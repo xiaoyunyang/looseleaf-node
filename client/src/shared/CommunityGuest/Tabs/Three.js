@@ -16,8 +16,9 @@ export default class Three extends React.Component {
     this.fetchUsers();
   }
   fetchUsers() {
+    const communitySlug = this.props.community.slug;
     const setApiData = data => this.setState({ users: data });
-    getApiData(apiLink.users, setApiData);
+    getApiData(apiLink.usersByCommunity(communitySlug), setApiData);
   }
   render() {
     return (

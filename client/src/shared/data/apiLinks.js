@@ -16,8 +16,9 @@ export const staticApiLink = {
 export const apiLink = {
  userById: (id) =>  `${root}/api/user?_id=${id}`,
  userByUsername: (username) => `${root}/api/user?username=${username}`,
- userCommunities: userId => `${root}/api/user/community?_id=${userId}`,
+ userCommunities: userId => `${root}/api/user/community?_id=${userId}`, // TODO: refactor this
  users: `${root}/api/user`,
+ usersByCommunity: (slug) => `${root}/api/user?communities=${slug}`,
  projectBySlug: (slug) => `${root}/api/project?slug=${slug}`,
  projects: `${root}/api/project`,
  logout: `${root}/auth/logout`,

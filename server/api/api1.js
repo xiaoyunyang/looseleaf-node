@@ -102,14 +102,8 @@ api.get('/project/:slug', (req, res) => {
 });
 
 // Users ======================================================================
-// Get all users
-// TODO: List in descending order (most recently signed up user at the top).
-// Also, return the users JSON with date of creation.
-// NOTE: this handles finding using id name:
-// http://localhost:3001/api/user?_id=5b25d5d8bbb7ca0765de2127
-// http://localhost:3001/api/username?username=xyang
-api.get('/user', (req, res) => {
-  User.find(req.query).sort({ lastLoggedIn: -1 }).exec(
+const getUsers = (findCriteria, cbSuccess) => {
+  return User.find(findCriteria).sort({ lastLoggedIn: -1 }).exec(
     (err, users) => {
       const usersOut = [];
 
@@ -129,9 +123,22 @@ api.get('/user', (req, res) => {
         };
         usersOut.push(userInfo);
       });
-      res.send(usersOut);
+      cbSuccess(usersOut);
     }
   );
+};
+// Get all users
+// TODO: List in descending order (most recently signed up user at the top).
+// Also, return the users JSON with date of creation.
+// NOTE: this handles finding using these queries:
+// http://localhost:3001/api/user?_id=5b25d5d8bbb7ca0765de2127
+// http://localhost:3001/api/username?username=xyang
+// http://localhost:3001/api/user?communities=video-producers
+// http://localhost:3001/api/user?communities=misc
+api.get('/user', (req, res) => {
+  const cbSuccess = result => res.send(result);
+  const findCriteria = req.query;
+  getUsers(findCriteria, cbSuccess);
 });
 
 api.post('/user/community', (req, res, next) => {
