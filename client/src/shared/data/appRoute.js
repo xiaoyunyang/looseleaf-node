@@ -45,6 +45,8 @@ const appRoute = (pageName) => {
       return '/project';
     case 'newProject':
       return '/project/edit/new';
+    case 'exploreCommunities': 
+      return '/explore/communities';
     default:
       return '';
   }

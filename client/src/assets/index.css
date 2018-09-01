@@ -285,7 +285,7 @@ footer.page-footer {
 }
 .dropdown-block a:hover {
   background-color: transparent !important;
-  color: #383435 !important;
+  color: #212121 !important;
 }
 .nav-text-links ul li.active {
   background-color: transparent;
@@ -379,8 +379,8 @@ img.mod-round, picture.mod-round {
   height: 0;
   -webkit-filter: drop-shadow(0 -0.5px 0.5px rgba(0,0,0,0.12));
 }
-.dropdown-content a:hover {
-  color: #26a69a;
+.dropdown-content li:hover {
+  background-color: transparent;
 }
 .arrow-up {
   width: 0;

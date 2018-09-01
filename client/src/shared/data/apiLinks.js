@@ -24,16 +24,3 @@ export const apiLink = {
  posts: `${root}/api/post`,
  authPath: `${root}/auth`
 }
-
-// To use this, example:
-// dynamicApiLink(userId).user
-// dynamicApiLink(slug).project
-
-export const dynamicApiLink = (id) => {
-  return {
-    project: `${root}/api/project/${id}`, // id = slugname
-    user: `${root}/api/user/${id}`, // id = user._id
-    userQuery: `${root}/api/user?_id=${id}`,
-    community: `${root}/api/${id}` // id = community name
-  };
-};

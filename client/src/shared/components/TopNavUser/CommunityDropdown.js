@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import $ from 'jquery';
+import appRoute from '../../data/appRoute';
 
 class CommunityDropdown extends React.Component {
   componentDidMount() {
@@ -23,7 +24,7 @@ class CommunityDropdown extends React.Component {
         <ul id="community-dropdown" className="dropdown-content topnav-dropdown">
           { this.props.communities.length === 0 ?
             <li>
-              <a href='/community/explore'>Join One</a>
+              <a href={appRoute('exploreCommunities')}>Join One</a>
             </li>
             :
             this.props.communities.map(c =>  (

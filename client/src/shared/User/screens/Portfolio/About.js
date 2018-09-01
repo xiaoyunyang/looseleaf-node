@@ -72,11 +72,13 @@ const Communities= ({icon, cs}) => (
     </div>
     <div className="col s11 m11 l11">
       {
-        cs && cs.map(c => {
+        cs.length > 0 ? cs.map(c => {
         return <div key={`community-chip-${c}`} className="chip">
           <a href={`/community/${c}`}>{c}</a>
         </div>;
         })
+        :
+        <a href={appRoute('exploreCommunities')}>Join a community</a>
       }
     </div>
   </div>
