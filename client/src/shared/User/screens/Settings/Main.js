@@ -28,7 +28,12 @@ export default class Settings extends React.Component {
 
     // TODO: For the success case, make a redux fetch for state again so that 
     // when we navigate to the profile page, the latest data is shown
-    const cbSuccess = cbFailure;
+    const redirect = (username) => {
+      window.location = `/@${username}/settings`
+    }
+    const oldUsername = this.props.user.info.username;
+    const newUsername = formFields.username ? formFields.username : oldUsername;
+    const cbSuccess = (oldUsername === newUsername) ? cbFailure : redirect(newUsername);
     postToApiData(url, data, cbFailure, cbSuccess);
   }
   showAlert(status, msg) {

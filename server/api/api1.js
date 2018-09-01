@@ -196,6 +196,7 @@ api.post('/user', (req, res) => {
       website
     });
     user.save();
+
     return res.send({ status: 'success', msg: 'change success!' });
   });
 });
