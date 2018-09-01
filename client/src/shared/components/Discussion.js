@@ -27,7 +27,7 @@ export default class Discussion extends React.Component {
     this.setState({
       editorContent: d
     });
-    const userId = this.props.user._id;
+    const userId = this.props.user.info._id;
     const content = d;
     const context = this.props.newPostContext;
     axios.post(apiLink.posts, { content, userId, context })
@@ -51,8 +51,8 @@ export default class Discussion extends React.Component {
           this.props.user &&
             <PostEditor
               handlePost={d => this.handlePost(d)}
-              userDisplayName={this.props.user.displayName}
-              userPic={this.props.user.picture}
+              userDisplayName={this.props.user.info.displayName}
+              userPic={this.props.user.info.picture}
               placeholder={this.props.newPostPlaceholder}
             />
         }

@@ -19,7 +19,7 @@ export default class Two extends React.Component {
           <div id={page(communityInfo.slug).two.slug}>
             <h3>{page(communityInfo.slug).two.name}</h3>
             <Discussion
-              user={this.props.user}
+              user={this.props.state.user}
               newPostContext={{project: null, community: communityInfo.slug }}
               newPostPlaceholder='Post an announcement or question to this community.'
             />
