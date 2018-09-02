@@ -15,12 +15,14 @@ export default class Discussion extends React.Component {
     };
   }
   componentWillMount() {
-    this.fetchPosts(this.props.context, this.props.slug);
+    this.fetchPosts();
   }
-  fetchPosts(context, slug) {
-    const url = apiLink.postsByContext(context, slug);
+  fetchPosts() {
+    const context = this.props.context;
+    const slug = this.props.slug;
+    const link = apiLink.postsByContext(context, slug);
     const setApiData = data => this.setState({ posts: data });
-    getApiData(url, setApiData);
+    getApiData(link, setApiData);
   }
     // Returns True if successful post. False Otherwise.
   handlePost(d) {
@@ -31,6 +33,8 @@ export default class Discussion extends React.Component {
     const userId = this.props.user.info._id;
     const content = d;
     const context = this.props.newPostContext; // TODO: construct this based on the context and slug props.
+
+    // TODO: Move this to helper file
     axios.post(apiLink.posts, { content, userId, context })
       .then(res => {
         if (res.statusText === 'error') {
