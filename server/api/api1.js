@@ -19,6 +19,14 @@ const cuid = require('cuid');
 const api = express.Router();
 
 // Posts ======================================================================
+const getPosts = ({ findCriteria, limit, cbSuccess }) => {
+  console.log(chalk.cyan(JSON.stringify(findCriteria)))
+  return Post.find(findCriteria).sort({ createdAt: -1 }).limit(limit).exec(
+    (err, posts) => {
+      cbSuccess(posts);
+    }
+  );
+};
 api.post('/post', (req, res, next) => {
   const { content, userId, context } = req.body;
   const newPost = new Post();
@@ -32,12 +40,18 @@ api.post('/post', (req, res, next) => {
 api.get('/post', (req, res) => {
   // Queries
   const limit = parseInt(req.query.limit, 10);
-  Post.find({}).sort({ createdAt: -1 }).limit(limit).exec(
-    (err, posts) => {
-      res.send(posts);
-    }
-  );
+  const cbSuccess = result => res.send(result);
+  const findCriteria = req.query;
+  getPosts({ findCriteria, limit, cbSuccess });
 });
+api.get('/post/community/:slug', (req, res) => {
+  // Queries
+  const limit = parseInt(req.query.limit, 10);
+  const cbSuccess = result => res.send(result);
+  const findCriteria = { 'context.community': req.params.slug };
+  getPosts({ findCriteria, limit, cbSuccess });
+});
+
 // Projects ======================================================================
 api.post('/project', (req, res, next) => {
   const formFields = req.body.formFields;
@@ -102,7 +116,7 @@ api.get('/project/:slug', (req, res) => {
 });
 
 // Users ======================================================================
-const getUsers = (findCriteria, cbSuccess) => {
+const getUsers = ({ findCriteria, cbSuccess }) => {
   return User.find(findCriteria).sort({ lastLoggedIn: -1 }).exec(
     (err, users) => {
       const usersOut = [];
@@ -138,7 +152,7 @@ const getUsers = (findCriteria, cbSuccess) => {
 api.get('/user', (req, res) => {
   const cbSuccess = result => res.send(result);
   const findCriteria = req.query;
-  getUsers(findCriteria, cbSuccess);
+  getUsers({ findCriteria, cbSuccess });
 });
 
 api.post('/user/community', (req, res, next) => {

@@ -15,11 +15,12 @@ export default class Discussion extends React.Component {
     };
   }
   componentWillMount() {
-    this.fetchPosts();
+    this.fetchPosts(this.props.context, this.props.slug);
   }
-  fetchPosts() {
+  fetchPosts(context, slug) {
+    const url = apiLink.postsByContext(context, slug);
     const setApiData = data => this.setState({ posts: data });
-    getApiData(apiLink.posts, setApiData);
+    getApiData(url, setApiData);
   }
     // Returns True if successful post. False Otherwise.
   handlePost(d) {
@@ -29,7 +30,7 @@ export default class Discussion extends React.Component {
     });
     const userId = this.props.user.info._id;
     const content = d;
-    const context = this.props.newPostContext;
+    const context = this.props.newPostContext; // TODO: construct this based on the context and slug props.
     axios.post(apiLink.posts, { content, userId, context })
       .then(res => {
         if (res.statusText === 'error') {
@@ -71,4 +72,6 @@ Discussion.propTypes = {
   user: PropTypes.object,
   newPostContext: PropTypes.object,
   newPostPlaceholder: PropTypes.string,
+  slug: PropTypes.string,
+  context: PropTypes.string
 };

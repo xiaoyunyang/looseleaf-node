@@ -13,6 +13,8 @@ export const staticApiLink = {
 
 // TODO: apiLink is the only one that should exist in this file.
 // combine everything into apiLink and change the file name.
+// NOTE:
+// postsByContext: context can be 'project' or 'community'
 export const apiLink = {
  userById: (id) =>  `${root}/api/user?_id=${id}`,
  userByUsername: (username) => `${root}/api/user?username=${username}`,
@@ -23,5 +25,7 @@ export const apiLink = {
  projects: `${root}/api/project`,
  logout: `${root}/auth/logout`,
  posts: `${root}/api/post`,
+ postsByContext: (context, slug) => `${root}/api/post/${context}/${slug}`,
+ postsByUserId: userId => `${root}/api/post?postedBy=${userId}`,
  authPath: `${root}/auth`
 }
