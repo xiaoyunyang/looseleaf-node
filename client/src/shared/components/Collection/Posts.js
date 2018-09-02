@@ -41,7 +41,7 @@ class Post extends React.Component {
 }
 const Posts = ({ posts }) => (
   <div>
-    { posts &&
+    { posts && posts.length>0 ?
       posts.map(d => {
         return (
           <div key={`post-${d._id}`}>
@@ -52,6 +52,8 @@ const Posts = ({ posts }) => (
           </div>
         );
       })
+      :
+      <p>There are no posts.</p>
     }
   </div>
 );

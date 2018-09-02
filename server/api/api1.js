@@ -20,7 +20,6 @@ const api = express.Router();
 
 // Posts ======================================================================
 const getPosts = ({ findCriteria, limit, cbSuccess }) => {
-  console.log(chalk.cyan(JSON.stringify(findCriteria)))
   return Post.find(findCriteria).sort({ createdAt: -1 }).limit(limit).exec(
     (err, posts) => {
       cbSuccess(posts);

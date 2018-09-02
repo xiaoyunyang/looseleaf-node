@@ -5,23 +5,29 @@ import TopNavGuest from '../../components/TopNavSimple';
 import ProjectInfo from './ProjectInfo';
 import Contributors from './Contributors';
 import Feed from './Feed';
+import Footer from '../../components/Footer';
 
 class Main extends React.Component {
   render() {
     const location = (typeof document !== 'undefined') ? document.location.pathname : undefined;
     return (
-      <div className="section-white">
-        {
-          this.props.user.info ?
-            <TopNavUser redirPath={location} user={this.props.user.info} useExternLinks />
-            :
-            <TopNavGuest redirPath={location} useExternLinks />
-        }
-        <div className="container">
-          <ProjectInfo projectInfo={this.props.projectInfo} />
-          <Contributors contributors={this.props.contributors} />
-          <Feed user={this.props.user} projectId={this.props.projectInfo._id} />
+      <div>
+        <div className="section-white">
+          {
+            this.props.user.info ?
+              <TopNavUser redirPath={location} user={this.props.user.info} useExternLinks />
+              :
+              <TopNavGuest redirPath={location} useExternLinks />
+          }
+          <div className="container">
+            <ProjectInfo projectInfo={this.props.projectInfo} />
+            <Contributors contributors={this.props.contributors} />
+            <Feed user={this.props.user} projectId={this.props.projectInfo._id} />
+          </div>
         </div>
+        {
+          !this.props.user.info && <Footer />
+        }
       </div>
     );
   }
