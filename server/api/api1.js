@@ -51,6 +51,13 @@ api.get('/post/community/:slug', (req, res) => {
   const findCriteria = { 'context.community': req.params.slug };
   getPosts({ findCriteria, limit, cbSuccess });
 });
+api.get('/post/project/:slug', (req, res) => {
+  // Queries
+  const limit = parseInt(req.query.limit, 10);
+  const cbSuccess = result => res.send(result);
+  const findCriteria = { 'context.project': req.params.slug };
+  getPosts({ findCriteria, limit, cbSuccess });
+});
 
 // Projects ======================================================================
 api.post('/project', (req, res, next) => {

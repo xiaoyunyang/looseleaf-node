@@ -8,7 +8,8 @@ const Feed = ({ user, projectId }) => (
     {
       <Discussion
         user={user}
-        newPostContext={{project: projectId, community: null }}
+        context='project'
+        slug={projectId}
         newPostPlaceholder='Post an update, question, or clarification to this project.'
       />
     }

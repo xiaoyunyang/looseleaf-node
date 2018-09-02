@@ -22,7 +22,6 @@ export default class Two extends React.Component {
               context='community'
               slug={communityInfo.slug}
               user={this.props.state.user}
-              newPostContext={{project: null, community: communityInfo.slug }}
               newPostPlaceholder='Post an announcement or question to this community.'
             />
           </div>

@@ -12,8 +12,8 @@ class Main extends React.Component {
     return (
       <div className="section-white">
         {
-          this.props.user ?
-            <TopNavUser redirPath={location} user={this.props.user} useExternLinks />
+          this.props.user.info ?
+            <TopNavUser redirPath={location} user={this.props.user.info} useExternLinks />
             :
             <TopNavGuest redirPath={location} useExternLinks />
         }

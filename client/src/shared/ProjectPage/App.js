@@ -14,7 +14,7 @@ class App extends React.Component {
       <Main
         projectInfo={this.props.project.info}
         contributors={this.props.project.contributors}
-        user={this.props.user.info}
+        user={this.props.user}
       />
     );
   }
