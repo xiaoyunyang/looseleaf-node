@@ -62,7 +62,7 @@ Posts.propTypes = {
   noPostDisp: PropTypes.string
 };
 Posts.defaultProps = {
-  noPostDisp: 'There are no posts.'
+  noPostDisp: 'No post found.'
 };
 
 export default Posts;

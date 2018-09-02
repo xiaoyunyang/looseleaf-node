@@ -25,7 +25,7 @@ export default class Two extends React.Component {
           <h3>Posts</h3>
           <Posts
             posts={this.state.posts}
-            noPostDisp='There are no posts by this user'
+            noPostDisp='This user has no posts.'
           />
         </div>
       </div>

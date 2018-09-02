@@ -38,7 +38,8 @@ class Main extends React.Component {
 const defaultProjectInfo = {
   title: 'placeholder title',
   desc: 'placeholder desc',
-  dueDate: '2018-07-14T04:44:56.361Z'
+  dueDate: '2018-07-14T04:44:56.361Z',
+  postedBy: ''
 }
 
 Main.propTypes = {

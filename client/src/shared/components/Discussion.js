@@ -60,7 +60,7 @@ export default class Discussion extends React.Component {
     return (
       <div>
         {
-          this.props.user &&
+          this.props.user && this.props.user.info &&
             <PostEditor
               handlePost={d => this.handlePost(d)}
               userDisplayName={this.props.user.info.displayName}

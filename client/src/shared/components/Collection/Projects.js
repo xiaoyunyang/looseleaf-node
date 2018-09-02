@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import appRoute from '../../data/appRoute';
 import { dateFormatted } from '../../../lib/helpers';
 
-const Projects = ({ projects }) => (
+const Projects = ({ projects, noProjectDisp }) => (
   <div>
-    { projects &&
+    { projects && projects.length>0 ?
       projects.map(d => {
         return (
           <div className="row" key={`projects-${d.slug}`}>
@@ -18,11 +18,16 @@ const Projects = ({ projects }) => (
           </div>
         );
       })
+      :
+      <p>{noProjectDisp}</p> 
     }
   </div>
 );
 Projects.propTypes = {
-  projects: PropTypes.array
+  projects: PropTypes.array,
+  noProjectDisp: PropTypes.string
 };
-
+Projects.defaultProps = {
+  noProjectDisp: 'No projects found.' 
+}
 export default Projects;
