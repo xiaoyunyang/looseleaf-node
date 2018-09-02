@@ -3,10 +3,13 @@ import { renderRoutes } from 'react-router-config';
 
 class Main extends React.Component {
   render() {
-    const user = {user: this.props.user}
+    const appProps = {
+      user: this.props.user,
+      actions: this.props.actions
+    }
     return (
       <div>
-        {renderRoutes(this.props.routes, user)}
+        {renderRoutes(this.props.routes, appProps)}
       </div>
     )
   }

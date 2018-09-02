@@ -24,7 +24,8 @@ export default class Settings extends React.Component {
     const userId = this.props.user.info._id;
     const url = apiLink.userById(userId);
     const data = { formFields, userId };
-    const cbFailure = (status, msg) => this.showAlert(status, msg);
+    const flashStatusMsg = (status, msg) => this.showAlert(status, msg);
+    const cbFailure = flashStatusMsg; 
 
     // TODO: For the success case, make a redux fetch for state again so that 
     // when we navigate to the profile page, the latest data is shown
@@ -33,7 +34,11 @@ export default class Settings extends React.Component {
     }
     const oldUsername = this.props.user.info.username;
     const newUsername = formFields.username ? formFields.username : oldUsername;
-    const cbSuccess = (oldUsername === newUsername) ? cbFailure : redirect(newUsername);
+     const cbSuccess = (status, msg) => {
+      this.props.actions.getUserProfileData(newUsername);
+      return (oldUsername === newUsername) ? flashStatusMsg(status, msg) : redirect(newUsername);
+    }
+
     postToApiData(url, data, cbFailure, cbSuccess);
   }
   showAlert(status, msg) {
