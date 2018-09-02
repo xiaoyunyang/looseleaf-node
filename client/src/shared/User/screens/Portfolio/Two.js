@@ -14,8 +14,9 @@ export default class Two extends React.Component {
     this.fetchPosts();
   }
   fetchPosts() {
+    const url = apiLink.postsByUserId(this.props.userId);
     const setApiData = data => this.setState({ posts: data });
-    getApiData(apiLink.posts, setApiData);
+    getApiData(url, setApiData);
   }
   render() {
     return (
@@ -24,6 +25,7 @@ export default class Two extends React.Component {
           <h3>Posts</h3>
           <Posts
             posts={this.state.posts}
+            noPostDisp='There are no posts by this user'
           />
         </div>
       </div>

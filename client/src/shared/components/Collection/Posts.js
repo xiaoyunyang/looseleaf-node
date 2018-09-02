@@ -39,7 +39,7 @@ class Post extends React.Component {
     );
   }
 }
-const Posts = ({ posts }) => (
+const Posts = ({ posts, noPostDisp }) => (
   <div>
     { posts && posts.length>0 ?
       posts.map(d => {
@@ -53,12 +53,16 @@ const Posts = ({ posts }) => (
         );
       })
       :
-      <p>There are no posts.</p>
+      <p>{noPostDisp}</p>
     }
   </div>
 );
 Posts.propTypes = {
-  posts: PropTypes.array
+  posts: PropTypes.array,
+  noPostDisp: PropTypes.string
+};
+Posts.defaultProps = {
+  noPostDisp: 'There are no posts.'
 };
 
 export default Posts;

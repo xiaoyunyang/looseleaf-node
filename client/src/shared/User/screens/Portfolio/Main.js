@@ -81,7 +81,8 @@ export default class Main extends Component {
     }
 
     const root = getRoot(this.props.user.info.username);
-
+    const username = this.props.user.info.username;
+    const userId = {userId: this.props.user.info._id};
     return (
       <div className="section-white">
         <TopNav route={this.props.route} user={this.props.user.info} />
@@ -96,7 +97,7 @@ export default class Main extends Component {
         <div className="row">
           <div className="col l12 m12 s12">
             <Switch>
-              {renderRoutes(getRoutes(this.props.user.info.username).routes)}
+              {renderRoutes(getRoutes(username).routes, userId)}
             </Switch>
           </div>
         </div>
