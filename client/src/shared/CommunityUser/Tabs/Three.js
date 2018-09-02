@@ -30,12 +30,18 @@ export default class Three extends React.Component {
           user={userInfo}
           community={communityInfo}
           actions={this.props.actions}
+          updateState={this.fetchUsers.bind(this)}
         />
         <div className="community-page container">
           <div className="row">
             <div id={page(communityInfo.slug).three.slug} className="col s12">
               <h3>{page(communityInfo.slug).three.name}</h3>
-              <Users users={this.state.users} />
+              {
+                this.state.users && this.state.users.length > 0 ?
+                  <Users users={this.state.users} />
+                  :
+                  <p>There are no members in this community.</p>
+              }
             </div>
           </div>
         </div>

@@ -10,9 +10,6 @@ import appRoute from '../data/appRoute';
 import UserDropdown from '../components/TopNavUser/UserDropdown';
 
 export default class TopNav extends React.Component {
-  static defalutProps = {
-    extended: false
-  }
   // constructor(props) {
   //   super(props);
     // TODO: I don't know why having the lines below make handleJoinClick get called
@@ -22,7 +19,6 @@ export default class TopNav extends React.Component {
     // this.handleLeaveClick = this.handleLeaveClick.bind(this);
     // this.handleJoinClick = this.handleJoinClick.bind(this);
   // }
-
   componentDidMount() {
     $('.modal').modal({
       dismissible: true, // Modal can be dismissed by clicking outside of the modal
@@ -36,7 +32,6 @@ export default class TopNav extends React.Component {
     $('ul.tabs').tabs();
 
     this.initializeSticky();
-
   }
   initializeSticky() {
     let categories = $('nav .categories-container');
@@ -53,9 +48,12 @@ export default class TopNav extends React.Component {
     const url = apiLink.userCommunities(userId);
     const data = {formFields: updatedCommunities}
     const cbFailure = () => {};
-    const cbSuccess = () =>  this.props.actions.getUserProfileData(this.props.user.username);
+    const cbSuccess = () =>  {
+      this.props.actions.getUserProfileData(this.props.user.username);
+      this.props.updateState();
+    }
 
-    postToApiData(url, data, cbFailure, cbSuccess)
+    postToApiData(url, data, cbFailure, cbSuccess);
   }
   renderJoinBtn(label, id, userId, updatedCommunities) {
     return (
@@ -212,7 +210,8 @@ export default class TopNav extends React.Component {
 }
 
 TopNav.propTypes = {
-  extended: PropTypes.bool
+  extended: PropTypes.bool,
+  updateState: PropTypes.func,
 }
 TopNav.defaultProps = {
   extended: false

@@ -40,7 +40,7 @@ export default class Discussion extends React.Component {
     const userId = this.props.user.info._id;
     const content = d;
     const context = constructContext(this.props.context, this.props.slug)
-    
+
     // TODO: Move this to helper file
     axios.post(apiLink.posts, { content, userId, context })
       .then(res => {
@@ -60,7 +60,7 @@ export default class Discussion extends React.Component {
     return (
       <div>
         {
-          this.props.user.info &&
+          this.props.user &&
             <PostEditor
               handlePost={d => this.handlePost(d)}
               userDisplayName={this.props.user.info.displayName}
