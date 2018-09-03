@@ -5,7 +5,7 @@ import Discussion from '../../components/Discussion';
 
 export default class Two extends React.Component {
   render() {
-    const userInfo = this.props.state.user.info;
+    const userInfo = this.props.state.user.loggedinUser;
     const communityInfo = this.props.state.community.info;
     return (
       <div className="section-white">
@@ -21,7 +21,7 @@ export default class Two extends React.Component {
             <Discussion
               context='community'
               slug={communityInfo.slug}
-              user={this.props.state.user}
+              user={this.props.state.user.loggedinUser}
               newPostPlaceholder='Post an announcement or question to this community.'
             />
           </div>

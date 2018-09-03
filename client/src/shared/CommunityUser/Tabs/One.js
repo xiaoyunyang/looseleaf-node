@@ -20,7 +20,7 @@ export default class One extends React.Component {
     getApiData(apiLink.projects, setApiData);
   }
   render() {
-    const userInfo = this.props.state.user.info;
+    const userInfo = this.props.state.user.loggedinUser;
     const communityInfo = this.props.state.community.info;
     return (
       <div className="section-white">

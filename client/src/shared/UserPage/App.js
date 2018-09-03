@@ -8,17 +8,15 @@ import * as actionCreators from '../redux/actions/page';
 
 class AppContainer extends React.Component {
   render() {
-    console.log('AppContainer', this.props)
-    // console.log('AppContainer props', this.props)
     return (
       <App {...this.props} />
     );
   }
 }
 
-const App = ({ state }) => (
+const App = ({ state, actions }) => (
   <div>
-    {renderRoutes(getRoutes(state.user.info), state.user.info)}
+    {renderRoutes(getRoutes(state.user.info), {state, actions})}
   </div>
 );
 

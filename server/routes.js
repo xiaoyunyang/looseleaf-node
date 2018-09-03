@@ -12,6 +12,7 @@ import Project from './models/Project';
 import chalk from 'chalk';
 import renderLandingAppMiddleware from '../client/iso-middleware/renderLandingApp';
 import renderUserAppMiddleware from '../client/iso-middleware/renderUserApp';
+import renderUserPageMiddleware from '../client/iso-middleware/renderUserPage';
 import renderCommunityUserAppMiddleware from '../client/iso-middleware/renderCommunityUserApp';
 import renderCommunityGuestAppMiddleware from '../client/iso-middleware/renderCommunityGuestApp';
 import renderProjectAppMiddleware from '../client/iso-middleware/renderProjectApp';
@@ -64,6 +65,16 @@ router.get('/project/:slug*', (req, res, next) => {
       return renderLandingAppMiddleware(req, res, next); // This will display the NotFound page
     }
     return renderProjectPageMiddleware(req, res, next, project);
+  });
+});
+router.get('/@:username*', (req, res, next) => {
+  console.log(chalk.red('username:', req.params.username))
+  User.findOne({ username: req.params.username }, (err, user) => {
+    if (err) { return next(err); }
+    if (!user) {
+      return renderLandingAppMiddleware(req, res, next);
+    }
+    return renderUserPageMiddleware(req, res, next, user)
   });
 });
 

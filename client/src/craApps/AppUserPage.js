@@ -10,15 +10,20 @@ const store = initStore();
 
 class AppUserPage extends React.Component {
   componentDidMount() {
+    // The logged in user's username
+    const loggedinUsername = {
+      valid: 'kyle',
+      invalid: 'foop'
+    }
     if (typeof document !== 'undefined') {
       const username = document.location.pathname.split('/@').pop();
       console.log('AppUserPage actions = ', actions)
-      store.dispatch(actions.getUserProfileData(username));
+      store.dispatch(actions.getUserProfileData(username, loggedinUsername.valid));
     }
   }
   render() {
     return (
-      <Provider store={store}>
+      <Provider store={store} loggedIn={'5ac7f2b6cc78928a6f24a101'}>
         <BrowserRouter>
           <App />
         </BrowserRouter>

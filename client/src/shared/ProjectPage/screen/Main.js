@@ -14,19 +14,19 @@ class Main extends React.Component {
       <div>
         <div className="section-white">
           {
-            this.props.user.info ?
-              <TopNavUser redirPath={location} user={this.props.user.info} useExternLinks />
+            this.props.user.loggedinUser ?
+              <TopNavUser redirPath={location} user={this.props.user.loggedinUser} useExternLinks />
               :
               <TopNavGuest redirPath={location} useExternLinks />
           }
           <div className="container">
             <ProjectInfo projectInfo={this.props.projectInfo} />
             <Contributors contributors={this.props.contributors} />
-            <Feed user={this.props.user} projectId={this.props.projectInfo._id} />
+            <Feed user={this.props.user.loggedinUser} projectId={this.props.projectInfo._id} />
           </div>
         </div>
         {
-          !this.props.user.info && <Footer />
+          !this.props.user.loggedinUser && <Footer />
         }
       </div>
     );

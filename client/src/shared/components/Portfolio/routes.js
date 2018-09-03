@@ -2,15 +2,17 @@ import One from './One';
 import Two from './Two';
 import Three from './Three';
 import Four from './Four';
-import NotFound from '../../../components/NotFound';
-import appRoute from '../../../data/appRoute';
+import NotFound from '../NotFound';
+import appRoute from '../../data/appRoute';
 
 // const root = `/${store.root}${store.username}`;
 
-const tabs = ['completed', 'todo', 'watch', 'contributions'];
+const tabs = [
+  'projects', 'posts', 'followers', 'following'
+];
 
 const getRoot = (username) => {
-  return appRoute('userPortfolio')(username);
+  return appRoute('userProfile')(username);
 };
 
 const getRoutes = (username) => {

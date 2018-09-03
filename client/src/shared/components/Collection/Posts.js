@@ -67,11 +67,11 @@ const Posts = ({ posts, deletePost, noPostDisp, loggedInAs }) => (
 Posts.propTypes = {
   posts: PropTypes.array,
   noPostDisp: PropTypes.string,
-  loggedInAs: PropTypes.string,
+  loggedInAs: PropTypes.object,
 };
 Posts.defaultProps = {
   noPostDisp: 'No post found.',
-  loggedInAs: 'none'
+  loggedInAs: {}
 };
 
 export default Posts;

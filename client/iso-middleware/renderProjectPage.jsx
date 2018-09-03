@@ -20,7 +20,7 @@ export default function renderProjectApp(req, res, next, project) {
    */
   const preloadedState = {
     project: { info: project },
-    user: {info: req.user }
+    user: {loggedinUser: req.user }
   }
   const store = configureStore(preloadedState);
 

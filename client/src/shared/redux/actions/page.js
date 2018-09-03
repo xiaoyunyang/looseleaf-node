@@ -3,22 +3,24 @@ import {
 } from './project';
 
 import {
-  fetchUser
+  fetchUser,
+  fetchLoggedinUser,
 } from './user';
 
 export function getProjectPageData(slug, username) {
   return (dispatch, getState) => {
     return Promise.all([
       dispatch(fetchProjectBySlug(slug)),
-      dispatch(fetchUser(username))
+      dispatch(fetchLoggedinUser(username))
     ])
   }
 }
 
-export function getUserProfileData(username) {
+export function getUserProfileData(username, loggedinUsername) {
   return (dispatch, getState) => {
     return Promise.all([
-      dispatch(fetchUser(username))
+      dispatch(fetchUser(username)),
+      dispatch(fetchLoggedinUser(loggedinUsername))
     ])
   }
 }

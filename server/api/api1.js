@@ -27,7 +27,6 @@ const getPosts = ({ findCriteria, limit, cbSuccess }) => {
   );
 };
 api.delete('/post', (req, res) => {
-  console.log(chalk.red(req.query._id))
   Post.findByIdAndRemove(req.query._id, (err, post) => {
     // As always, handle any potential errors:
     if (err) return res.status(500).send(err);

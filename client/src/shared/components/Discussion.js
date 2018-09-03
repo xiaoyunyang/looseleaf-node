@@ -37,7 +37,7 @@ export default class Discussion extends React.Component {
     this.setState({
       editorContent: d
     });
-    const userId = this.props.user.info._id;
+    const userId = this.props.user._id;
     const content = d;
     const context = constructContext(this.props.context, this.props.slug)
 
@@ -67,17 +67,17 @@ export default class Discussion extends React.Component {
     return (
       <div>
         {
-          this.props.user && this.props.user.info &&
+          this.props.user &&
             <PostEditor
               handlePost={d => this.handlePost(d)}
-              userDisplayName={this.props.user.info.displayName}
-              userPic={this.props.user.info.picture}
+              userDisplayName={this.props.user.displayName}
+              userPic={this.props.user.picture}
               placeholder={this.props.newPostPlaceholder}
             />
         }
         <Posts
           posts={this.state.posts}
-          loggedInAs={this.props.user.info._id}
+          loggedInAs={this.props.user}
           deletePost={this.deletePost.bind(this)}
         />
       </div>

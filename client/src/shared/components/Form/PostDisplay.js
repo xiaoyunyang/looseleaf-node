@@ -58,7 +58,7 @@ const PostDisplay = ({
     <div className="card feed">
       <div className="card-content">
         {
-          loggedInAs === userId ?
+          loggedInAs && loggedInAs._id === userId ?
             <PostEditMenu postId={postId} deletePost={deletePost} />
             :
             null

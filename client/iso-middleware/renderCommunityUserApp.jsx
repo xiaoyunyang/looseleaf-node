@@ -11,7 +11,7 @@ import App from '../src/shared/CommunityUser/App';
 export default function renderCommunityUserApp(req, res, next, community) {
   const preloadedState = {
     community: {info: community},
-    user: {info: req.user }
+    user: {loggedinUser: req.user }
   }
   const store = configureStore(preloadedState);
   const dataToSerialize = preloadedState;

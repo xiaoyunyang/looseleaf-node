@@ -25,17 +25,17 @@ export default class Settings extends React.Component {
     const url = apiLink.userById(userId);
     const data = { formFields, userId };
     const flashStatusMsg = (status, msg) => this.showAlert(status, msg);
-    const cbFailure = flashStatusMsg; 
+    const cbFailure = flashStatusMsg;
     const redirect = (username) => {
       window.location = `/@${username}/settings`
     }
     const oldUsername = this.props.user.info.username;
     const newUsername = formFields.username ? formFields.username : oldUsername;
 
-    // For the success case, make a redux fetch for state again so that 
+    // For the success case, make a redux fetch for state again so that
     // when we navigate to the profile page, the latest data is shown
     const cbSuccess = (status, msg) => {
-      this.props.actions.getUserProfileData(newUsername);
+      this.props.actions.getUserProfileData(newUsername, newUsername);
       (oldUsername === newUsername) ? flashStatusMsg(status, msg) : redirect(newUsername);
     }
 

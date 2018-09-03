@@ -23,10 +23,29 @@ export default class TopNavSimple extends React.Component {
 
     this.initializeSticky();
 
-    if (typeof window !== undefined) {
+    if (typeof window !== 'undefined') {
       $(window).scroll(() => {
-        this.toggleSignupBtnVisibility()
+        this.toggleSignupBtnVisibility();
+        this.toggleNavbarBoxShadow();
       });
+    }
+  }
+  toggleNavbarBoxShadow() {
+    const boxShadow = "0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2)";
+    const topNav = $("#user-navbar-fixed .navbar-fixed nav");
+    const tabs = $('.tabs-container');
+    const profileUserpic = $('#profile-userpic-tab');
+    const navbarLogo = $('#navbar-logo');
+    if (tabs.hasClass('pinned')) {
+      topNav.css('box-shadow', 'none');
+      topNav.css('-webkit-box-shadow', 'none');
+      profileUserpic.css('visibility', 'visible');
+      navbarLogo.css('visibility', 'hidden');
+    } else if (tabs.hasClass('pin-top')) {
+      topNav.css('box-shadow', boxShadow);
+      topNav.css('-webkit-box-shadow', boxShadow);
+      profileUserpic.css('visibility', 'hidden');
+      navbarLogo.css('visibility', 'visible');
     }
   }
   initializeSticky() {
@@ -141,7 +160,7 @@ export default class TopNavSimple extends React.Component {
     let selected = (typeof this.props.route.path === 'string')
       ? getPageName(this.props.route.path) : '';
     return (
-      <div>
+      <div id="user-navbar-fixed">
         { this.props.extended ?
             this.renderPrimaryNavExtended(selected) :
             this.renderPrimaryNav(selected)
