@@ -23,7 +23,7 @@ class AppUserPage extends React.Component {
   }
   render() {
     return (
-      <Provider store={store} loggedIn={'5ac7f2b6cc78928a6f24a101'}>
+      <Provider store={store}>
         <BrowserRouter>
           <App />
         </BrowserRouter>

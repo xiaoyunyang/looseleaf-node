@@ -35,6 +35,8 @@ class AppUser extends React.Component {
     axios.get(apiLink.userByUsername(username))
       .then((response) => {
         if(response.data.length === 1) {
+          // TODO: This should really be setLoggedinUser but app won't render in that case ...
+          // store.dispatch(actions.setLoggedinUser(response.data.pop()));
           store.dispatch(actions.setUser(response.data.pop()));
         } else {
           const oldUsername = store.getState().user.info.username

@@ -83,7 +83,11 @@ export default class Main extends Component {
     }
     const root = getRoot(this.props.user.info.username);
     const username = this.props.user.info.username;
-    const userId = {userId: this.props.user.info._id};
+    const portfolioProps = {
+      userId: this.props.user.info._id,
+      loggedInUser: this.props.user.loggedinUser
+    };
+
     return (
       <div className="section-white">
         {
@@ -103,7 +107,7 @@ export default class Main extends Component {
         <div className="row">
           <div className="col l12 m12 s12">
             <Switch>
-              {renderRoutes(getRoutes(username).routes, userId)}
+              {renderRoutes(getRoutes(username).routes, portfolioProps)}
             </Switch>
           </div>
         </div>
