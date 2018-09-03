@@ -56,6 +56,13 @@ export default class Discussion extends React.Component {
        //Perform action based on error
       });
   }
+  // TODO: create addPost which gets passed down to PostEditor
+  deletePost(postId) {
+   const newPosts = this.state.posts.filter(d => {
+     return d._id !== postId;
+   });
+   this.setState({posts: newPosts});
+  }
   render() {
     return (
       <div>
@@ -68,7 +75,11 @@ export default class Discussion extends React.Component {
               placeholder={this.props.newPostPlaceholder}
             />
         }
-        <Posts posts={this.state.posts} />
+        <Posts
+          posts={this.state.posts}
+          loggedInAs={this.props.user.info._id}
+          deletePost={this.deletePost.bind(this)}
+        />
       </div>
     );
   }

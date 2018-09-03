@@ -26,6 +26,19 @@ const getPosts = ({ findCriteria, limit, cbSuccess }) => {
     }
   );
 };
+api.delete('/post', (req, res) => {
+  console.log(chalk.red(req.query._id))
+  Post.findByIdAndRemove(req.query._id, (err, post) => {
+    // As always, handle any potential errors:
+    if (err) return res.status(500).send(err);
+    const response = {
+      message: "Post successfully deleted",
+      id: post._id
+    };
+    return res.status(200).send(response);
+  });
+});
+
 api.post('/post', (req, res, next) => {
   const { content, userId, context } = req.body;
   const newPost = new Post();

@@ -26,6 +26,7 @@ export const apiLink = {
  projectBySlug: slug => `${root}/api/project?slug=${slug}`,
  logout: `${root}/auth/logout`,
  posts: `${root}/api/post`,
+ postById: id => `${root}/api/post?_id=${id}`,
  postsByContext: (context, slug) => `${root}/api/post/${context}/${slug}`,
  postsByUserId: userId => `${root}/api/post?postedBy=${userId}`,
  authPath: `${root}/auth`

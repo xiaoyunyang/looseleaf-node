@@ -33,13 +33,17 @@ class Post extends React.Component {
           userDisplayName={this.state.userDisplayName}
           userPic={this.state.userPic}
           username={this.state.username}
+          userId={this.props.userId}
+          postId={this.props.postId}
           editorContent={this.props.content}
+          loggedInAs={this.props.loggedInAs}
+          deletePost={this.props.deletePost}
         />
       </div>
     );
   }
 }
-const Posts = ({ posts, noPostDisp }) => (
+const Posts = ({ posts, deletePost, noPostDisp, loggedInAs }) => (
   <div>
     { posts && posts.length>0 ?
       posts.map(d => {
@@ -48,6 +52,9 @@ const Posts = ({ posts, noPostDisp }) => (
             <Post
               userId={d.postedBy}
               content={d.content}
+              postId={d._id}
+              loggedInAs={loggedInAs}
+              deletePost={deletePost}
             />
           </div>
         );
@@ -59,10 +66,12 @@ const Posts = ({ posts, noPostDisp }) => (
 );
 Posts.propTypes = {
   posts: PropTypes.array,
-  noPostDisp: PropTypes.string
+  noPostDisp: PropTypes.string,
+  loggedInAs: PropTypes.string,
 };
 Posts.defaultProps = {
-  noPostDisp: 'No post found.'
+  noPostDisp: 'No post found.',
+  loggedInAs: 'none'
 };
 
 export default Posts;

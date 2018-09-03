@@ -379,7 +379,7 @@ img.mod-round, picture.mod-round {
   height: 0;
   -webkit-filter: drop-shadow(0 -0.5px 0.5px rgba(0,0,0,0.12));
 }
-.dropdown-content li:hover {
+nav .dropdown-content li:hover {
   background-color: transparent;
 }
 .arrow-up {
@@ -442,6 +442,16 @@ img.mod-round, picture.mod-round {
   font-weight: 300;
   color: #555;
   margin-left: -15px !important;
+}
+.feed .dropdown-content a {
+  color: #26a69a;
+}
+.feed .dropdown-content i {
+  margin-right: 10px;
+}
+.feed .dropdown-content {
+  margin-left: -40px;
+  margin-top: 18px;
 }
 .card-action a {
   color: #555 !important;

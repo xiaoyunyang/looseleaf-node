@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { CompositeDecorator, convertFromRaw, Editor, EditorState } from 'draft-js';
+import PostEditMenu from './PostEditMenu';
 
 const Reactions = () => (
   <div>
@@ -44,10 +45,24 @@ const convertToEditorState = (editorContent) => {
   return editorState;
 };
 
-const PostDisplay = ({ userDisplayName, username, userPic, editorContent }) => (
+const PostDisplay = ({
+  userDisplayName,
+  userPic,
+  username,
+  userId,
+  postId,
+  loggedInAs,
+  deletePost,
+  editorContent }) => (
   editorContent &&
     <div className="card feed">
       <div className="card-content">
+        {
+          loggedInAs === userId ?
+            <PostEditMenu postId={postId} deletePost={deletePost} />
+            :
+            null
+        }
         <div className="row feed-user">
           <div className="col">
             <img className="circle" src={userPic} alt="" />
