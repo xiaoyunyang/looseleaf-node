@@ -27,7 +27,6 @@ const iconEnums = {
 const TextOrLink = ({ iconName, content }) => (
   <div>
     {
-
       iconEnums[iconName] === 'email' ?
         <a href={`mailto: ${content}`}>{content}</a>
         :
@@ -49,7 +48,6 @@ const TextOrLink = ({ iconName, content }) => (
     }
   </div>
 );
-
 
 const UserInfo = ({ icon, info, orElse, to }) => (
   <div className="row portfolio-user-info">

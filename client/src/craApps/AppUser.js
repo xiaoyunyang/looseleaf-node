@@ -5,8 +5,7 @@ import App from '../shared/User/App';
 import { hot } from 'react-hot-loader';
 import axios from 'axios';
 import initStore from '../shared/redux/configureStore/initUserPage';
-// import * as actions from '../shared/redux/actions/page';
-import * as actions from '../shared/redux/actions/user';
+import * as actions from '../shared/redux/actions/page';
 import { apiLink } from '../shared/data/apiLinks';
 
 const store = initStore();
@@ -35,9 +34,7 @@ class AppUser extends React.Component {
     axios.get(apiLink.userByUsername(username))
       .then((response) => {
         if(response.data.length === 1) {
-          // TODO: This should really be setLoggedinUser but app won't render in that case ...
-          // store.dispatch(actions.setLoggedinUser(response.data.pop()));
-          store.dispatch(actions.setUser(response.data.pop()));
+          store.dispatch(actions.getUserProfileData(username, username));
         } else {
           const oldUsername = store.getState().user.info.username
           window.location = `/@${oldUsername}`

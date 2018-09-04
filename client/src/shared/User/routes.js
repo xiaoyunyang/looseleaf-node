@@ -1,7 +1,6 @@
 import Root from './Root';
 import Home from './screens/Home';
 import Settings from './screens/Settings/Main';
-//import Portfolio from './screens/Portfolio/Main';
 import Portfolio from '../components/Portfolio/Main';
 import NewProject from './screens/NewProject/Main';
 import NotFound from '../components/NotFound';
