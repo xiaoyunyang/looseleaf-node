@@ -91,7 +91,12 @@ export const getPageName = (url) => {
   return url.split('/').pop();
 };
 export const dateFormatted = (dateStr) => {
-  return dateStr ? new Date(dateStr).toDateString() : '';
+  if (!dateStr) return '';
+
+  const options = { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' };
+  // The split is to chop off the day of the week
+  const formatted = new Date(dateStr).toLocaleDateString('en-US', options).split(/,(.+)/)[1];
+  return formatted;
 };
 export const decodeHTMLEntities = (text) => {
   const entities = [

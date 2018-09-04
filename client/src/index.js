@@ -33,7 +33,7 @@ const Apps = {
   recipe: AppRecipe
 };
 
-const App = Apps.userPage;
+const App = Apps.projectPage;
 
 const render = (Component) => {
   ReactDOM.render(
