@@ -36,11 +36,11 @@ export default class extends React.Component {
         <div className="container">
           <h4>New Project</h4>
           <ProjectForm
-            user={this.props.user.info}
+            user={this.props.user.loggedinUser}
             projectTypes={['Software Development', 'Design', 'Writng', 'Data Science', 'Illustration', 'Video Production']}
             tags={interests}
             platforms={platforms}
-            aboutMe={this.props.user.info.bio}
+            aboutMe={this.props.user.loggedinUser.bio}
             people={this.state.people}
             />
         </div>

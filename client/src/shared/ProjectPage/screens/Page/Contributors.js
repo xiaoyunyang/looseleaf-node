@@ -1,5 +1,5 @@
 import React from 'react';
-import UserCards from '../../components/Collection/UserCards';
+import UserCards from '../../../components/Collection/UserCards';
 
 const Contributors = ({ contributors }) => (
   <div id="contributors">

@@ -49,7 +49,9 @@ export default class InputTags extends React.Component {
     this.props.onChange(selectedNew);
   }
   render() {
-    this.initializeOptions(); // Need this in render because props are dynamically loaded
+    if (typeof document !== 'undefined') {
+      this.initializeOptions(); // Need this in render because props are dynamically loaded
+    }
     return (
       <div className="row">
         <div className="col s12 m12 l12">

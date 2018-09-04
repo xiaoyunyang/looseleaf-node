@@ -62,13 +62,13 @@ export default class ProjectForm extends React.Component {
             <div className="col s12">
               <TextInput
                 id="text-title"
-                field=""
+                field={this.props.title}
                 label="Title"
                 onChange={d => this.setState({ title: d })}
               />
               <TextAreaInput
                 id="text-desc"
-                field=""
+                field={this.props.desc}
                 label="Description"
                 onChange={d => this.setState({ desc: d })}
               />
@@ -158,8 +158,12 @@ export default class ProjectForm extends React.Component {
   }
 }
 ProjectForm.propTypes = {
-  people: PropTypes.array
+  people: PropTypes.array,
+  title: PropTypes.string,
+  desc: PropTypes.string
 }
 ProjectForm.defaultProps = {
-  people: ['Andrew Fenner', 'Xiaoyun Yang']
+  people: ['Andrew Fenner', 'Xiaoyun Yang'],
+  title: '',
+  desc: ''
 }

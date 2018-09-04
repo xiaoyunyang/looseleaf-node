@@ -1,4 +1,5 @@
 import React from 'react';
+import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import App from '../shared/ProjectPage/App';
 import { hot } from 'react-hot-loader';
@@ -25,7 +26,9 @@ class AppProjectPage extends React.Component {
   render() {
     return (
       <Provider store={store}>
-        <App />
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
       </Provider>
     );
   }

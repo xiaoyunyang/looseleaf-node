@@ -46,7 +46,9 @@ const appRoute = (pageName) => {
     case 'newProject':
       return '/project/edit/new';
     case 'editProject':
-      return '/project/edit/:slug';
+      return slug => `/project/edit/${slug}`;
+    case 'projectWildcard':
+      return '/project/*';
     case 'exploreCommunities':
       return '/explore/communities';
     default:

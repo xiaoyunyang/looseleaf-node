@@ -20,7 +20,9 @@ export default class InputAutocomplete extends React.Component {
     this.props.onChange(newData);
   }
   render() {
-    this.initializeAutoComplete();
+    if (typeof document !== 'undefined') {
+      this.initializeAutoComplete();
+    }
     return (
       <div className="input-field col l9 m9 s12">
         <input type="text" id={this.props.id} className="autocomplete" />

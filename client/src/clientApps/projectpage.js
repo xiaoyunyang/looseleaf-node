@@ -28,7 +28,9 @@ const store = configureStore(initialState);
 const render = (Component, store) => {
   ReactDOM.hydrate(
     <Provider store={store}>
-      <Component />
+      <BrowserRouter>
+        <Component />
+      </BrowserRouter>
     </Provider>,
     document.getElementById('root')
   );

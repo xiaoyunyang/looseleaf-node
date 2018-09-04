@@ -32,16 +32,18 @@ export default class extends React.Component {
   render() {
     return (
       <div className="section-white" id="project-form">
-        <TopNav route={this.props.route} user={this.props.user.loggedinUser} />
+        <TopNav route={this.props.route} user={this.props.user.loggedinUser} useExternLinks />
         <div className="container">
           <h4>Edit Project</h4>
           <ProjectForm
-            user={this.props.user.info}
+            user={this.props.user.loggedinUser}
             projectTypes={['Software Development', 'Design', 'Writng', 'Data Science', 'Illustration', 'Video Production']}
             tags={interests}
             platforms={platforms}
-            aboutMe={this.props.user.info.bio}
+            aboutMe={this.props.user.loggedinUser.bio}
             people={['Andrew Fenner', 'Peter Preston', 'Xiaoyun Yang']}
+            title={this.props.projectInfo.title}
+            desc={this.props.projectInfo.desc}
             />
         </div>
       </div>

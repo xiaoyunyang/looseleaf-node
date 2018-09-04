@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import TopNavUser from '../../components/TopNavUser/Main';
-import TopNavGuest from '../../components/TopNavSimple';
+import TopNavUser from '../../../components/TopNavUser/Main';
+import TopNavGuest from '../../../components/TopNavSimple';
 import ProjectInfo from './ProjectInfo';
 import Contributors from './Contributors';
 import Feed from './Feed';
-import Footer from '../../components/Footer';
+import Footer from '../../../components/Footer';
 
 class Main extends React.Component {
   render() {
@@ -20,7 +20,7 @@ class Main extends React.Component {
               <TopNavGuest redirPath={location} useExternLinks />
           }
           <div className="container">
-            <ProjectInfo projectInfo={this.props.projectInfo} />
+            <ProjectInfo projectInfo={this.props.projectInfo} loggedinUser={this.props.user.loggedinUser}/>
             <Contributors contributors={this.props.contributors} />
             <Feed user={this.props.user.loggedinUser} projectId={this.props.projectInfo._id} />
           </div>

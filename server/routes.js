@@ -49,11 +49,30 @@ router.get('/community/:name*', (req, res, next) => {
     return renderLandingAppMiddleware(req, res, next);
   }
 });
-router.get('/project/edit*', (req, res, next) => {
+router.get('/project/edit/new', (req, res, next) => {
   if (req.isAuthenticated()) {
     renderUserAppMiddleware(req, res, next);
   }
   renderLandingAppMiddleware(req, res, next);
+});
+router.get('/project/edit/:slug', (req, res, next) => {
+  if (!req.isAuthenticated()) {
+    return renderLandingAppMiddleware(req, res, next);
+  }
+  // If user is loggedin is authenticated
+  Project.findOne({ slug: req.params.slug }, (err, project) => {
+    if (err) { return next(err); }
+    // If project doesn't exist, have landingApp render NotFound page
+    if (!project) {
+      return renderLandingAppMiddleware(req, res, next); // This will display the NotFound page
+    }
+    // If project is found, render only render project edit page if the logged in user
+    // is the same as the project creator. Otherwise, have the UserApp render the NotFound page
+    if (req.isAuthenticated() && req.user._id.equals(project.postedBy)) {
+      return renderProjectPageMiddleware(req, res, next, project);
+    }
+    return renderUserAppMiddleware(req, res, next);
+  });
 });
 router.get('/project/:slug*', (req, res, next) => {
   // First find if a project with req.params.slug exists in the Project collection
