@@ -3,6 +3,7 @@ import Home from './screens/Home';
 import Settings from './screens/Settings/Main';
 import Portfolio from '../components/Portfolio/Main';
 import NewProject from './screens/NewProject/Main';
+import EditProject from './screens/EditProject/Main';
 import NotFound from '../components/NotFound';
 import appRoute from '../data/appRoute';
 
@@ -43,6 +44,10 @@ const getRoutes = (user) => {
           path: appRoute('newProject'),
           exact: true,
           component: NewProject
+        },
+        {
+          path: appRoute('editProject'),
+          component: EditProject
         },
         {
           path: appRoute('userProfile')(username),

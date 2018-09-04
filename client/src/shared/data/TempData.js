@@ -8,53 +8,190 @@
 // TODO: Keep track of how strong someone is in an interest area based on how many
 // projects they've completed or how many contributions they've made in that interest areas
 const interests = [
-  'Advertising',
-  'AI',
-  'Animation',
-  'Angular',
-  'Art',
-  'AWS',
-  'Audio Production',
-  'Blogging',
-  'Branding',
-  'C++',
-  'CSS',
-  'D3.js',
-  'Data Science',
-  'Data Visualization',
-  'Design',
-  'Digital Marketing',
-  'Education',
-  'Editing',
-  'Email Marketing',
-  'Entrepreneurship',
-  'Game Development',
-  'Go',
-  'Graphic Design',
-  'Illustration',
-  'Infographics',
-  'JavaScript',
-  'Logo Design',
-  'Machine Learning',
-  'Mobile Development',
-  'Node.js',
-  'Photography',
-  'Python',
-  'React.js',
-  'React Native',
-  'Ruby',
-  'Ruby on Rails',
-  'Scripting',
-  'SPA',
-  'Swift',
-  'Translating',
-  'UI',
-  'User Experience',
-  'UX Design',
-  'Video Production',
-  'Vue.js',
-  'Web Development',
-  'Writing'
+  {
+    name: 'Advertising',
+    picture: null
+  },
+  {
+    name: 'AI',
+    picture: null
+  },
+  {
+    name: 'Animation',
+    picture: null
+  },
+  {
+    name: 'Angular',
+    picture: null
+  },
+  {
+    name: 'Art',
+    picture: null
+  },
+  {
+    name: 'AWS',
+    picture: null
+  },
+  {
+    name: 'Audio Production',
+    picture: null
+  },
+  {
+    name: 'Blogging',
+    picture: null
+  },
+  {
+    name: 'Branding',
+    picture: null
+  },
+  {
+    name: 'C++',
+    picture: null
+  },
+  {
+    name: 'CSS',
+    picture: null
+  },
+  {
+    name: 'D3.js',
+    picture: null
+  },
+  {
+    name: 'Data Science',
+    picture: null
+  },
+  {
+    name: 'Data Visualization',
+    picture: null
+  },
+  {
+    name: 'Design',
+    picture: null
+  },
+  {
+    name: 'Digital Marketing',
+    picture: null
+  },
+  {
+    name: 'Education',
+    picture: null
+  },
+  {
+    name: 'Editing',
+    picture: null
+  },
+  {
+    name: 'Email Marketing',
+    picture: null
+  },
+  {
+    name: 'Entrepreneurship',
+    picture: null
+  },
+  {
+    name: 'Game Development',
+    picture: null
+  },
+  {
+    name: 'Go',
+    picture: null
+  },
+  {
+    name: 'Graphic Design',
+    picture: null
+  },
+  {
+    name: 'Illustration',
+    picture: null
+  },
+  {
+    name: 'Infographics',
+    picture: null
+  },
+  {
+    name: 'JavaScript',
+    picture: null
+  },
+  {
+    name: 'Logo Design',
+    picture: null
+  },
+  {
+    name: 'Machine Learning',
+    picture: null
+  },
+  {
+    name: 'Mobile Development',
+    picture: null
+  },
+  {
+    name: 'Node.js',
+    picture: null
+  },
+  {
+    name: 'Photography',
+    picture: null
+  },
+  {
+    name: 'Python',
+    picture: null
+  },
+  {
+    name: 'React.js',
+    picture: null
+  },
+  {
+    name: 'Ruby',
+    picture: null
+  },
+  {
+    name: 'Ruby on Rails',
+    picture: null
+  },
+  {
+    name: 'Scripting',
+    picture: null
+  },
+  {
+    name: 'SPA',
+    picture: null
+  },
+  {
+    name: 'Swift',
+    picture: null
+  },
+  {
+    name: 'Translating',
+    picture: null
+  },
+  {
+    name: 'UI',
+    picture: null
+  },
+  {
+    name: 'User Experience',
+    picture: null
+  },
+  {
+    name: 'UX Design',
+    picture: null
+  },
+  {
+    name: 'Video Production',
+    picture: null
+  },
+  {
+    name: 'Vue.js',
+    picture: null
+  },
+  {
+    name: 'Web Development',
+    picture: null
+  },
+  {
+    name: 'Writing',
+    picture: null
+  }
 ];
 
 const communities = [
@@ -71,5 +208,45 @@ const platforms = [
   'Glitch',
   'Repl.it',
   'Other'
-]
+];
+/*
+const platforms = [
+  {
+    name: 'Google Doc',
+    picture: null
+  },
+  {
+    name: 'Dropbox',
+    picture: null
+  },
+  {
+    name: 'Github',
+    picture: null
+  },
+  {
+    name: 'Codepen',
+    picture: null
+  },
+  {
+    name: 'CodeSandbox',
+    picture: null
+  },
+  {
+    name: 'Cloud9',
+    picture: null
+  },
+  {
+    name: 'Glitch',
+    picture: null
+  },
+  {
+    name: 'Repl.it',
+    picture: null
+  },
+  {
+    name: 'Other',
+    picture: null
+  }
+];
+ */
 export { interests, communities, platforms };

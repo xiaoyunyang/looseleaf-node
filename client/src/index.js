@@ -9,7 +9,6 @@ import './lib/chips'; // <- overriding the materialize chips js
 // import AppOld from './craApps/App';
 import AppUser from './craApps/AppUser';
 import AppUserPage from './craApps/AppUserPage';
-import AppProject from './craApps/AppProject';
 import AppProjectPage from './craApps/AppProjectPage';
 import AppCommunityUser from './craApps/AppCommunityUser';
 import AppCommunityGuest from './craApps/AppCommunityGuest';
@@ -25,7 +24,6 @@ import 'draft-js-inline-toolbar-plugin/lib/plugin.css';
 const Apps = {
   user: AppUser,
   userPage: AppUserPage,
-  project: AppProject,
   projectPage: AppProjectPage,
   communityUser: AppCommunityUser,
   communityGuest: AppCommunityGuest,

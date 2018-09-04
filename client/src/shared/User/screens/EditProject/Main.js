@@ -34,14 +34,14 @@ export default class extends React.Component {
       <div className="section-white" id="project-form">
         <TopNav route={this.props.route} user={this.props.user.loggedinUser} />
         <div className="container">
-          <h4>New Project</h4>
+          <h4>Edit Project</h4>
           <ProjectForm
             user={this.props.user.info}
             projectTypes={['Software Development', 'Design', 'Writng', 'Data Science', 'Illustration', 'Video Production']}
             tags={interests}
             platforms={platforms}
             aboutMe={this.props.user.info.bio}
-            people={this.state.people}
+            people={['Andrew Fenner', 'Peter Preston', 'Xiaoyun Yang']}
             />
         </div>
       </div>

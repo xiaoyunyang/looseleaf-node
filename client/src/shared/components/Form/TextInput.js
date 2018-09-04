@@ -7,7 +7,7 @@ const icon = (id) => {
     case 'email': return 'email';
     case 'location': return 'location_on';
     case 'website': return 'public';
-    default: return '';
+    default: return null;
   }
 };
 const type = id => id === 'email' ? 'email' : 'text';
@@ -22,10 +22,13 @@ export default class TextInput extends React.Component {
     this.props.onChange(e.target.value);
   }
   render() {
+    const iconName = icon(this.props.id);
     return (
       <div className="row">
-        <div className="input-field col s12 m10 l10">
-          <i className="material-icons prefix">{icon(this.props.id)}</i>
+        <div className={`input-field col s12 m12 l12`}>
+          {iconName &&
+            <i className="material-icons prefix">{iconName}</i>
+          }
           <input
             id={this.props.id}
             defaultValue={this.props.field}

@@ -19,7 +19,7 @@ export default class InputDropDown extends React.Component {
   }
   handleClick() {
     const newData = $(`#${this.props.id}`).val();
-    this.props.setState(newData);
+    this.props.onChange(newData);
   }
   renderUnits(data, units) {
     if (typeof data === 'number') {
@@ -30,21 +30,23 @@ export default class InputDropDown extends React.Component {
 
   render() {
     return (
-      <div style={{ paddingTop: '12px' }} className="input-field col l6 m6 s6">
-        <p>{this.props.title}</p>
-        <select id={this.props.id} defaultValue="None">
-          <option value="" disabled selected>
-            {this.props.label ? this.props.label : 'Choose your option'}
-          </option>
-          {
-            this.props.choices.map(d => (
-              <option value={d} key={`dropdown-${d}`}>
-                {`${d} ${this.renderUnits(d, this.props.units)}`}
-              </option>
-            ))
-          }
-        </select>
-        <label>{this.props.label}</label>
+      <div className="row">
+        <div style={{ paddingTop: '12px' }} className="input-field col l6 m6 s6">
+          <p>{this.props.title}</p>
+          <select id={this.props.id} defaultValue="None">
+            <option value="" disabled selected>
+              {this.props.label ? this.props.label : 'Choose your option'}
+            </option>
+            {
+              this.props.choices.map(d => (
+                <option value={d} key={`dropdown-${d}`}>
+                  {`${d} ${this.renderUnits(d, this.props.units)}`}
+                </option>
+              ))
+            }
+          </select>
+          <label>{this.props.label}</label>
+        </div>
       </div>
     );
   }
@@ -52,7 +54,7 @@ export default class InputDropDown extends React.Component {
 InputDropDown.propTypes = {
   id: PropTypes.string.isRequired,
   choices: PropTypes.array.isRequired,
-  setState: PropTypes.func.isRequired,
+  onChange: PropTypes.func.isRequired,
   units: PropTypes.string,
   label: PropTypes.string,
   title: PropTypes.string

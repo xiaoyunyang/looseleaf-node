@@ -18,7 +18,7 @@ export default class InputCheckboxes extends React.Component {
     } else {
       newArr = this.props.selected.filter(d => d !== clicked);
     }
-    this.props.handleChange(newArr);
+    this.props.onChange(newArr);
   }
   renderUnits(data, units) {
     if (typeof data === 'number') {
@@ -66,7 +66,7 @@ export default class InputCheckboxes extends React.Component {
 InputCheckboxes.propTypes = {
   id: PropTypes.string.isRequired,
   choices: PropTypes.array.isRequired,
-  handleChange: PropTypes.func.isRequired,
+  onChange: PropTypes.func.isRequired,
   units: PropTypes.string,
   label: PropTypes.string,
   title: PropTypes.string

@@ -1,12 +1,13 @@
 import React from 'react';
 import axios from 'axios';
-import InputTags from '../../../components/InputTags';
-import InputDropdown from '../../../components/InputDropdown';
-import DatePicker from '../../../components/DatePicker';
-import FlashNotif from '../../../components/FlashNotif';
-import TextAreaInput from '../../../components/TextAreaInput';
-import TextInput from '../../../components/TextInput';
-import { staticApiLink } from '../../../data/apiLinks';
+import PropTypes from 'prop-types';
+import InputTags from './InputTags';
+import InputDropdown from './InputDropdown';
+import DatePicker from './DatePicker';
+import FlashNotif from '../FlashNotif';
+import TextAreaInput from './TextAreaInput';
+import TextInput from './TextInput';
+import { staticApiLink } from '../../data/apiLinks';
 
 export default class ProjectForm extends React.Component {
   constructor(props) {
@@ -63,19 +64,19 @@ export default class ProjectForm extends React.Component {
                 id="text-title"
                 field=""
                 label="Title"
-                setState={d => this.setState({ title: d })}
+                onChange={d => this.setState({ title: d })}
               />
               <TextAreaInput
                 id="text-desc"
                 field=""
                 label="Description"
-                setState={d => this.setState({ desc: d })}
+                onChange={d => this.setState({ desc: d })}
               />
               <InputDropdown
                 id="select-project"
                 label="Project Type"
                 choices={this.props.projectTypes}
-                setState={d => this.setState({ selectedProjectType: d })}
+                onChange={d => this.setState({ selectedProjectType: d })}
               />
               <InputTags
                 id="select-areas"
@@ -83,7 +84,7 @@ export default class ProjectForm extends React.Component {
                 hint="+Interest"
                 tags={this.props.tags}
                 selectedTags={this.state.selectedTags}
-                setState={ds => this.setState({ selectedTags: ds })}
+                onChange={ds => this.setState({ selectedTags: ds })}
               />
             </div>
           </div>
@@ -97,13 +98,13 @@ export default class ProjectForm extends React.Component {
                 id="text-about-me"
                 field={this.state.aboutMe}
                 label="About Me"
-                setState={d => this.setState({ aboutMe: d })}
+                onChange={d => this.setState({ aboutMe: d })}
               />
               <TextAreaInput
                 id="text-mission"
                 field={this.state.mission}
                 label="My Mission"
-                setState={d => this.setState({ mission: d })}
+                onChange={d => this.setState({ mission: d })}
               />
             </div>
           </div>
@@ -117,32 +118,32 @@ export default class ProjectForm extends React.Component {
             hint="+contributor"
             tags={this.props.people}
             selectedTags={this.state.contributors}
-            setState={ds => this.setState({ contributors: ds })}
+            onChange={ds => this.setState({ contributors: ds })}
           />
         </div>
         <div className="card-panel white">
           <h5>Submission</h5>
-          <p style={{ paddingLeft: '0.75em' }}>Submission Instruction.</p>
+          <p>Submission Instruction</p>
           <div className="row">
             <div className="col s12">
               <InputDropdown
                 id="select-platform"
                 label="Platform Type"
                 choices={this.props.platforms}
-                setState={d => this.setState({ selectedPlatform: d })}
+                onChange={d => this.setState({ selectedPlatform: d })}
               />
               <TextAreaInput
                 id="text-desc"
                 field={this.state.submissionInst}
                 label="Optional Submission Instruction"
-                setState={d => this.setState({ submissionInst: d })}
+                onChange={d => this.setState({ submissionInst: d })}
               />
             </div>
           </div>
-          <p style={{ paddingLeft: '0.75em' }}>Set a due date. You can change the due date anytime.</p>
+          <p>Set a due date. You can change the due date anytime.</p>
           <div className="row">
             <div className="col s12 m10 l8">
-              <DatePicker setState={d => this.setState({ dueDate: d })} />
+              <DatePicker onChange={d => this.setState({ dueDate: d })} />
             </div>
           </div>
         </div>
@@ -155,4 +156,10 @@ export default class ProjectForm extends React.Component {
       </div>
     );
   }
+}
+ProjectForm.propTypes = {
+  people: PropTypes.array
+}
+ProjectForm.defaultProps = {
+  people: ['Andrew Fenner', 'Xiaoyun Yang']
 }

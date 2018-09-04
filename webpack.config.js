@@ -10,7 +10,6 @@ module.exports = {
     user: path.resolve(__dirname, 'client/src/clientApps/user.js'),
     userpage: path.resolve(__dirname, 'client/src/clientApps/userpage.js'),
     projectpage: path.resolve(__dirname, 'client/src/clientApps/projectpage.js'),
-    project: path.resolve(__dirname, 'client/src/clientApps/project.js'),
     recipe: path.resolve(__dirname, 'client/src/clientApps/recipe.js')
   },
   output: {

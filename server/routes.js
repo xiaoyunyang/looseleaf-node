@@ -15,7 +15,6 @@ import renderUserAppMiddleware from '../client/iso-middleware/renderUserApp';
 import renderUserPageMiddleware from '../client/iso-middleware/renderUserPage';
 import renderCommunityUserAppMiddleware from '../client/iso-middleware/renderCommunityUserApp';
 import renderCommunityGuestAppMiddleware from '../client/iso-middleware/renderCommunityGuestApp';
-import renderProjectAppMiddleware from '../client/iso-middleware/renderProjectApp';
 import renderProjectPageMiddleware from '../client/iso-middleware/renderProjectPage';
 
 const community = require('./data/community.json');

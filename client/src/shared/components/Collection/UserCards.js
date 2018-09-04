@@ -1,6 +1,8 @@
 import React from 'react';
 import $ from 'jquery';
-import InputAutocomplete from '../InputAutocomplete';
+import InputAutocomplete from '../Form/InputAutocomplete';
+import { apiLink } from '../../data/apiLinks';
+import { getApiData } from '../../../lib/helpers';
 
 // const defaultUserPic = 'http://marketline.com/wp-content/plugins/all-in-one-seo-pack/images/default-user-image.png'
 const defaultUserPic = 'http://localhost:3001/user.png';
@@ -11,11 +13,7 @@ export default class UserCards extends React.Component {
     super(props);
     // TODO: Below code is just placeholder. This should talk to an api to get
     // everyone who the user with the username follows or is followed by
-    const users = {
-      'Johnny Spice': defaultUserPic,
-      'Cassie Cassidy': defaultUserPic,
-      'Dexter Rabe': defaultUserPic
-    };
+
     this.state = {
       modalPerson: {
         fullName: 'Firstname Lastname',
@@ -23,12 +21,24 @@ export default class UserCards extends React.Component {
         intro: 'Hello!',
         username: 'username'
       },
-      inviteChoices: users,
+      inviteChoices: {},
       invited: ''
     };
   }
   componentDidMount() {
+    this.loadPeople();
     this.initializeModal();
+  }
+  loadPeople() {
+    const url = apiLink.users;
+    const setApiData = users => {
+      const people = {};
+      users.forEach(user => {
+        people[user.displayName] = user.picture;
+      });
+      this.setState({inviteChoices: people})
+    }
+    getApiData(url, setApiData);
   }
   initializeModal() {
     $(document).ready(() => {
@@ -124,7 +134,7 @@ export default class UserCards extends React.Component {
               id="select-invites"
               choices={this.state.inviteChoices}
               label="Full Name"
-              setState={d => this.setState({ invited: d })}
+              onChange={d => this.setState({ invited: d })}
             />
             }
         </div>

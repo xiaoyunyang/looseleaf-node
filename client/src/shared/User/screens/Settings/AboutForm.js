@@ -1,5 +1,5 @@
 import React from 'react';
-import InputTags from './../../../components/InputTags';
+import InputTags from './../../../components/Form/InputTags';
 import { interests as availableInterests } from './../../../data/TempData';
 import TextInput from '../../../components/Form/TextInput';
 import TextAreaInput from '../../../components/Form/TextAreaInput';
@@ -75,14 +75,16 @@ export default class AboutForm extends React.Component {
                   label="Website"
                 />
               </div>
-              <InputTags
-                id="select-areas"
-                label="Add Interests"
-                hint="+Interest"
-                tags={availableInterests}
-                selectedTags={this.state.interests}
-                setState={ds => this.setState({interests: ds})}
-              />
+              <div className="col s12 m12 l12">
+                <InputTags
+                  id="select-areas"
+                  label="Add Interests"
+                  hint="+Interest"
+                  tags={availableInterests}
+                  selectedTags={this.state.interests}
+                  onChange={ds => this.setState({interests: ds})}
+                />
+            </div>
             </div>
             <div className="col s12 m12 l12 center">
               <button className="btn" onClick={this.handleSubmit.bind(this, this.state)}>

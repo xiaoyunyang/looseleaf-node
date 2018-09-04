@@ -9,7 +9,7 @@ export default class InputRadioBtns extends React.Component {
   }
 
   handleClick(d, event) {
-    this.props.handleChange(d);
+    this.props.onChange(d);
   }
   renderUnits(data, units) {
     if (typeof data === 'number') {
@@ -53,7 +53,7 @@ export default class InputRadioBtns extends React.Component {
 InputRadioBtns.propTypes = {
   id: PropTypes.string.isRequired,
   choices: PropTypes.array.isRequired,
-  handleChange: PropTypes.func.isRequired,
+  onChange: PropTypes.func.isRequired,
   units: PropTypes.string,
   label: PropTypes.string,
   title: PropTypes.string
