@@ -23,8 +23,8 @@ export default class DatePicker extends React.Component {
       }.bind(this)
     });
   }
-  handleDueDateChange(dueDate_ms) {
-    const dueDate = new Date(dueDate_ms);
+  handleDueDateChange(dueDateMs) {
+    const dueDate = new Date(dueDateMs);
     this.props.setState(dueDate);
   }
   render() {

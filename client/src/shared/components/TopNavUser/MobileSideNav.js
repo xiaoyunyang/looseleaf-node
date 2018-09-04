@@ -22,7 +22,7 @@ class MobileSideNav extends React.Component {
     });
   }
   render() {
-    const {username, userPic, userWebsite, userEmail, useExternLinks, redirPath } = this.props;
+    const { username, userPic, userWebsite, userEmail, useExternLinks, redirPath } = this.props;
     return (
       <ul id="mobile-menu" className="side-nav">
         <li>
@@ -62,6 +62,7 @@ class MobileSideNav extends React.Component {
 }
 MobileSideNav.propTypes = {
   username: PropTypes.string,
+  userEmail: PropTypes.string,
   userPic: PropTypes.string, // url
   userWebsite: PropTypes.string, // url
   useExternLinks: PropTypes.bool, //this determines if <a/>  (if true) or <Link /> (if false) is rendered.

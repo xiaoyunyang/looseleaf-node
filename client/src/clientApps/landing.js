@@ -10,8 +10,6 @@ import '../lib/tabs';
 import '../lib/chips';
 import '../assets/index.css';
 
-console.log('Browser packed file loaded');
-
 // Grab the server serialized state off of the window object.
 const initialState = window.__INITIAL_STATE;
 // const initialStateRoute = window.__SERIALIZED_STATE__;

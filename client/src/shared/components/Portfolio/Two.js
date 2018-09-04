@@ -26,7 +26,7 @@ export default class Two extends React.Component {
           <Posts
             posts={this.state.posts}
             loggedInAs={this.props.loggedInUser}
-            noPostDisp='This user has no posts.'
+            noPostDisp="This user has no posts."
           />
         </div>
       </div>

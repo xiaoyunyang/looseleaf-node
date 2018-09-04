@@ -1,7 +1,7 @@
 import React from 'react';
 import TopNav from '../../../components/TopNavUser/Main';
 import ProjectForm from './ProjectForm';
-import {interests, platforms} from '../../../data/TempData';
+import { interests, platforms } from '../../../data/TempData';
 
 export default class extends React.Component {
   render() {

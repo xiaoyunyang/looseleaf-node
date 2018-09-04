@@ -27,17 +27,16 @@ class CommunityDropdown extends React.Component {
               <a href={appRoute('exploreCommunities')}>Join One</a>
             </li>
             :
-            this.props.communities.map(c =>  (
-                <li key={`community-dropdown-${c}`}>
-                  <a href={`/community/${c}`}>{c}</a>
-                </li>
-              )
-            )
+            this.props.communities.map(c => (
+              <li key={`community-dropdown-${c}`}>
+                <a href={`/community/${c}`}>{c}</a>
+              </li>
+              ))
           }
-          <div className="popover-arrow"></div>
+          <div className="popover-arrow" />
         </ul>
       </li>
-    )
+    );
   }
 }
 

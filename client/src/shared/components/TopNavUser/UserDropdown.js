@@ -24,7 +24,7 @@ class UserDropdown extends React.Component {
     });
     this.setState({
       clientModeOn: true
-    })
+    });
   }
   render() {
     const { username, userPic, useExternLinks, redirPath } = this.props;
@@ -50,10 +50,10 @@ class UserDropdown extends React.Component {
                 null
             }
           </li>
-          <div className="popover-arrow"></div>
+          <div className="popover-arrow" />
         </ul>
       </li>
-    )
+    );
   }
 }
 

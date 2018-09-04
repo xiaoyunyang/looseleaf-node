@@ -30,4 +30,4 @@ export default class Collection extends React.Component {
 
 Collection.propTypes = {
   data: PropTypes.array
-}
+};

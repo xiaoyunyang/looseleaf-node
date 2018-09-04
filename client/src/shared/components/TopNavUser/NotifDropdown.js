@@ -29,7 +29,7 @@ class NotifDropdown extends React.Component {
           <div className="popover-arrow"></div>
         </ul>
       </li>
-    )
+    );
   }
 }
 

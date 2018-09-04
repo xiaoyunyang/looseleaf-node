@@ -46,10 +46,10 @@ export default class Main extends Component {
       <div id="profile-tabs" className="tabs-container pin-top" style={{top: 0}}>
         <div className="row">
           <div className="col">
-          {this.renderProfileUserpic(
-            this.props.user.info.username,
-            this.props.user.info.picture,
-          )}
+            {this.renderProfileUserpic(
+              this.props.user.info.username,
+              this.props.user.info.picture,
+            )}
           </div>
           <ul className="tabs section-white">
             {

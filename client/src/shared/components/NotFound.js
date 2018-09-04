@@ -18,11 +18,11 @@ const h1Style = {
 
 const Status = ({ code, children }) => (
   <Route render={({ staticContext }) => {
-    if (staticContext) {
-      staticContext.status = code;
-    }
-		return children;
-	  }}
+      if (staticContext) {
+        staticContext.status = code;
+      }
+      return children;
+    }}
   />
 );
 

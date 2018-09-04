@@ -25,7 +25,7 @@ export default class One extends React.Component {
           <h3>Projects</h3>
           <Projects
             projects={this.state.projects}
-            noProjectDisp='This user has no projects.'
+            noProjectDisp="This user has no projects."
           />
         </div>
       </div>

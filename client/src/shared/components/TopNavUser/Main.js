@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import $ from 'jquery';
 import { getPageName } from '../../../lib/helpers';
-import { apiLink } from '../../data/apiLinks';
 import { image } from '../../data/assetLinks';
 import appRoute from '../../data/appRoute';
 import { UserAppNav } from '../Nav/AppNav';
@@ -25,8 +24,8 @@ export default class TopNavUser extends React.Component {
   // This function is essentially doing the same thing as the one in the topNav
   // component of the Guest App. Can we create a template for it somehow?
   toggleNavbarBoxShadow() {
-    const boxShadow = "0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2)";
-    const topNav = $("#user-navbar-fixed .navbar-fixed nav");
+    const boxShadow = '0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2)';
+    const topNav = $('#user-navbar-fixed .navbar-fixed nav');
     const tabs = $('.tabs-container');
     const profileUserpic = $('#profile-userpic-tab');
     const navbarLogo = $('#navbar-logo');
@@ -79,13 +78,13 @@ export default class TopNavUser extends React.Component {
               </div>
               <ul className="right hide-on-small-only">
                 <li className={selected === '' ? 'active' : ''}>
-                  <UserAppNav pageName='home' id='nav-' username={username} external={useExternLinks}/>
+                  <UserAppNav pageName="home" id="nav-" username={username} external={useExternLinks}/>
                 </li>
                 <CommunityDropdown communities={communities} />
                 <li className={selected === username ? 'active' : ''}>
-                  <UserAppNav pageName='profile' id={`nav-${username}`} username={username} external={useExternLinks}/>
+                  <UserAppNav pageName="profile" id={`nav-${username}`} username={username} external={useExternLinks}/>
                 </li>
-                <NotifDropdown notifs={'stuff'} />
+                <NotifDropdown notifs="stuff" />
                 <UserDropdown
                   username={username}
                   userPic={userPic}

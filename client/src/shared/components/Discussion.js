@@ -7,9 +7,9 @@ import { apiLink } from '../data/apiLinks';
 import { getApiData } from '../../lib/helpers';
 
 const constructContext = (context, slug) => {
-  const project = context ==='project' ? slug : null
-  const community = context ==='community' ? slug : null
-  return {project, community}
+  const project = context === 'project' ? slug : null;
+  const community = context === 'community' ? slug : null;
+  return { project, community };
 }
 
 export default class Discussion extends React.Component {
@@ -31,7 +31,7 @@ export default class Discussion extends React.Component {
     getApiData(link, setApiData);
   }
 
-    // Returns True if successful post. False Otherwise.
+  // Returns True if successful post. False Otherwise.
   handlePost(d) {
     // The d received here are in the format that can be saved to the DB
     this.setState({
@@ -58,10 +58,10 @@ export default class Discussion extends React.Component {
   }
   // TODO: create addPost which gets passed down to PostEditor
   deletePost(postId) {
-   const newPosts = this.state.posts.filter(d => {
-     return d._id !== postId;
-   });
-   this.setState({posts: newPosts});
+    const newPosts = this.state.posts.filter(d => {
+      return d._id !== postId;
+    });
+    this.setState({ posts: newPosts });
   }
   render() {
     return (

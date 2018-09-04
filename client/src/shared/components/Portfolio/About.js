@@ -24,7 +24,7 @@ const iconEnums = {
   group: 'communities'
 };
 
-const TextOrLink = ({iconName, content}) => (
+const TextOrLink = ({ iconName, content }) => (
   <div>
     {
 
@@ -51,7 +51,7 @@ const TextOrLink = ({iconName, content}) => (
 );
 
 
-const UserInfo = ({icon, info, orElse, to}) => (
+const UserInfo = ({ icon, info, orElse, to }) => (
   <div className="row portfolio-user-info">
     <div className="col s1 m1 l1">
       <i className="material-icons">{icon}</i>
