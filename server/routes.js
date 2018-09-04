@@ -68,13 +68,15 @@ router.get('/project/:slug*', (req, res, next) => {
   });
 });
 router.get('/@:username*', (req, res, next) => {
-  console.log(chalk.red('username:', req.params.username))
   User.findOne({ username: req.params.username }, (err, user) => {
     if (err) { return next(err); }
     if (!user) {
       return renderLandingAppMiddleware(req, res, next);
     }
-    return renderUserPageMiddleware(req, res, next, user)
+    if (req.isAuthenticated() && req.user._id.equals(user._id)) {
+      return renderUserAppMiddleware(req, res, next);
+    }
+    return renderUserPageMiddleware(req, res, next, user);
   });
 });
 

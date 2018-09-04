@@ -75,11 +75,13 @@ export default class Main extends Component {
     // TODO: The code below is an ugly hac but it works. I don't know why
     // this.props.match.slug no longer provides the tab name
     // It worked before ... not sure why it doesn't work now
-    const selected = this.props.location.pathname.split('/').pop() || 'completed';
+    const selected = this.props.location.pathname.split('/').pop() || 'projects';
+    let location = (typeof this.props.route.path === 'string') ? this.props.route.path : '/';
     if (typeof window !== 'undefined' &&
         (selected === tabs[0] || selected === tabs[1] || selected === tabs[2] || selected === tabs[3])
     ) {
       $(`#tab-${selected}`).trigger('click');
+      location = this.props.location.pathname;
     }
     const root = getRoot(this.props.user.info.username);
     const username = this.props.user.info.username;
@@ -87,14 +89,19 @@ export default class Main extends Component {
       userId: this.props.user.info._id,
       loggedInUser: this.props.user.loggedinUser
     };
-
+    
     return (
       <div className="section-white">
         {
           this.props.user.loggedinUser ?
-            <TopNavUser route={this.props.route} user={this.props.user.loggedinUser} useExternLinks />
+            <TopNavUser
+              route={this.props.route}
+              user={this.props.user.loggedinUser}
+              useExternLinks={!(this.props.user.loggedinUser._id === this.props.user.info._id)}
+              redirPath={location}
+            />
             :
-            <TopNavGuest />
+            <TopNavGuest redirPath={location} />
         }
         <div className="container">
           <div className="row">
