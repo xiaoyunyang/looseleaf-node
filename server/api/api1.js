@@ -31,7 +31,7 @@ api.delete('/post', (req, res) => {
     // As always, handle any potential errors:
     if (err) return res.status(500).send(err);
     const response = {
-      message: "Post successfully deleted",
+      message: 'Post successfully deleted',
       id: post._id
     };
     return res.status(200).send(response);

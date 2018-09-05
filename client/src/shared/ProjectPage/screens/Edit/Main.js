@@ -41,7 +41,7 @@ export default class extends React.Component {
             tags={interests}
             platforms={platforms}
             aboutMe={this.props.user.loggedinUser.bio}
-            people={['Andrew Fenner', 'Peter Preston', 'Xiaoyun Yang']}
+            people={this.state.people}
             title={this.props.projectInfo.title}
             desc={this.props.projectInfo.desc}
             />

@@ -1,5 +1,6 @@
 import Root from './Root';
 import Page from './screens/Page/Main';
+import New from './screens/New/Main';
 import Edit from './screens/Edit/Main';
 import NotFound from '../components/NotFound';
 import appRoute from '../data/appRoute';
@@ -13,6 +14,11 @@ const getRoutes = (slug) => {
         {
           path: appRoute('projectPage')(slug),
           component: Page
+        },
+        {
+          path: appRoute('newProject'),
+          exact: true,
+          component: New
         },
         {
           path: appRoute('editProject')(slug),

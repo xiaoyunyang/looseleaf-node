@@ -19,7 +19,7 @@ export default function renderUserPage(req, res, next, user) {
     title: `${user.displayName} - LooseLeaf`
   };
 
-  const branch = matchRoutes(getRoutes(user.username), req.url)
+  const branch = matchRoutes(getRoutes(user.username), req.url);
   const promises = branch.map(({ route, match }) => {
     return route.loadData
       ? route.loadData(match)

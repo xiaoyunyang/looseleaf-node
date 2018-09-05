@@ -38,14 +38,14 @@ class UserDropdown extends React.Component {
         </a>
         <ul id="user-dropdown" className="dropdown-content topnav-dropdown">
           <li><UserAppNav pageName='profile' username={username} external={useExternLinks}/></li>
-          <li><UserAppNav pageName='newProject' username={username} external={useExternLinks}/></li>
+          <li><UserAppNav pageName='newProject' username={username} external={true}/></li>
           <li className="divider" />
           <li><a href="/community">Communities</a></li>
           <li><UserAppNav pageName='userSettings' username={username} external={useExternLinks}/></li>
           <li>
             {
               this.state.clientModeOn ?
-                <NavLink to={`${apiLink.logout}?redirPath=${redirPath}`} name='Log out' external={true}/>
+                <NavLink to={`${apiLink.logout}?redirPath=${redirPath}`} name='Log out' external={true} />
                 :
                 null
             }

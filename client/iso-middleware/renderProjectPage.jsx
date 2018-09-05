@@ -11,7 +11,6 @@ import App from '../src/shared/ProjectPage/App';
 import { decodeHTMLEntities } from '../src/lib/helpers';
 
 export default function renderProjectApp(req, res, next, project) {
-  console.log(chalk.red('renderProjectApp'))
   // console.log(chalk.green('title', project['title']))
 
   /* Expected redux state:
