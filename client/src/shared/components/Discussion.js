@@ -6,12 +6,6 @@ import PostEditor from './Form/PostEditor';
 import { apiLink } from '../data/apiLinks';
 import { getApiData } from '../../lib/helpers';
 
-const constructContext = (context, slug) => {
-  const project = context === 'project' ? slug : null;
-  const community = context === 'community' ? slug : null;
-  return { project, community };
-}
-
 export default class Discussion extends React.Component {
   constructor(props) {
     super(props);
@@ -25,8 +19,8 @@ export default class Discussion extends React.Component {
   }
   fetchPosts() {
     const context = this.props.context;
-    const slug = this.props.slug;
-    const link = apiLink.postsByContext(context, slug);
+    const findBy = context === 'project' ? this.props.projectId : this.props.communitySlug;
+    const link = apiLink.postsByContext(context, findBy);
     const setApiData = data => this.setState({ posts: data });
     getApiData(link, setApiData);
   }
@@ -39,7 +33,10 @@ export default class Discussion extends React.Component {
     });
     const userId = this.props.user._id;
     const content = d;
-    const context = constructContext(this.props.context, this.props.slug)
+    const context = {
+      project: this.props.projectId,
+      community: this.props.communitySlug
+    }
 
     // TODO: Move this to helper file
     axios.post(apiLink.posts, { content, userId, context })
@@ -93,6 +90,11 @@ export default class Discussion extends React.Component {
 Discussion.propTypes = {
   user: PropTypes.object,
   newPostPlaceholder: PropTypes.string,
-  slug: PropTypes.string,
-  context: PropTypes.string
+  communitySlug: PropTypes.string,
+  projectId: PropTypes.object,
+  context: PropTypes.string.isRequired
 };
+Discussion.defaultProps = {
+  projectId: null,
+  communitySlug: null,
+}

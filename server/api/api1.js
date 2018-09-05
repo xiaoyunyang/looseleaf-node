@@ -38,13 +38,13 @@ api.delete('/post', (req, res) => {
   });
 });
 
-api.post('/post', (req, res, next) => {
+api.post('/post', (req, res) => {
   const { content, userId, context } = req.body;
   const newPost = new Post();
   newPost.content = content;
   newPost.postedBy = userId;
   newPost.context = context;
-  newPost.save(next);
+  newPost.save();
   return res.send({ status: 'success', msg: 'post success!' });
 });
 
@@ -62,11 +62,11 @@ api.get('/post/community/:slug', (req, res) => {
   const findCriteria = { 'context.community': req.params.slug };
   getPosts({ findCriteria, limit, cbSuccess });
 });
-api.get('/post/project/:slug', (req, res) => {
+api.get('/post/project/:id', (req, res) => {
   // Queries
   const limit = parseInt(req.query.limit, 10);
   const cbSuccess = result => res.send(result);
-  const findCriteria = { 'context.project': req.params.slug };
+  const findCriteria = { 'context.project': req.params.id };
   getPosts({ findCriteria, limit, cbSuccess });
 });
 
