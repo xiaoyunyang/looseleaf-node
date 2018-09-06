@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import $ from 'jquery';
 
 export default class InputTags extends React.Component {
@@ -14,17 +15,13 @@ export default class InputTags extends React.Component {
     });
   }
   initializeOptions() {
-    const tags = this.props.selectedTags.map(d => {
-      return { tag: d };
+    const tags = this.props.selectedTags.map(tag => {
+      return { tag: tag.name };
     });
-    const options = this.props.tags.map(d => {
-      const tmp = {};
-      tmp[d.name] = d.picture;
-      return tmp;
-    }).reduce((acc, x) => {
-      for (const key in x) acc[key] = x[key];
-      return acc;
-    }, {});
+    const options = {};
+    for(const key in this.props.tags) {
+      options[key] = this.props.tags[key].picture
+    }
     $(document).ready(() => {
       $(`#${this.props.id}`).material_chip({
         data: tags,
@@ -38,13 +35,14 @@ export default class InputTags extends React.Component {
       });
     });
   }
-  handleAddTag(tag) {
-    const selectedNew = this.props.selectedTags.concat(tag);
+  handleAddTag(tagName) {
+    const newField = { name: tagName, id: this.props.tags[tagName].id };
+    const selectedNew = this.props.selectedTags.concat(newField);
     this.props.onChange(selectedNew);
   }
   handleDeleteTag(tag) {
     const selectedNew = this.props.selectedTags.filter((d) => {
-      return d !== tag;
+      return d.name !== tag;
     });
     this.props.onChange(selectedNew);
   }
@@ -61,4 +59,14 @@ export default class InputTags extends React.Component {
       </div>
     );
   }
+}
+InputTags.propTypes = {
+  label: PropTypes.string,
+  id: PropTypes.string,
+  tags: PropTypes.object,
+  selectedTags: PropTypes.array,
+}
+InputTags.defaultProps = {
+  tags: {name: {picture: '', id: ''}},
+  selectedTags: [{name: '', id: ''}]
 }

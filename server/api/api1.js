@@ -71,13 +71,13 @@ api.get('/post/project/:id', (req, res) => {
 });
 
 // Projects ======================================================================
-api.post('/project', (req, res, next) => {
+api.post('/project', (req, res) => {
   const formFields = req.body.formFields;
 
   // Do some error checking
   if (validator.isEmpty(formFields.title)) {
     res.statusMessage = 'error';
-    return res.send('Project must have a title!');
+    return res.send({ status: 'error', msg: 'Project must have a title!' });
   }
 
   // Add new project to database
@@ -92,16 +92,16 @@ api.post('/project', (req, res, next) => {
   newProject.title = validator.escape(formFields.title);
   newProject.slug = slug;
   newProject.desc = validator.escape(formFields.desc);
-  newProject.projectType = formFields.projectType;
-  newProject.tags = formFields.selectedTags;
-  newProject.contributors = formFields.contributors;
+  newProject.communities = formFields.communities;
+  newProject.interestAreas = formFields.interestAreas;
+  newProject.contributors = formFields.contributors.map(c => c.id);
   newProject.submission = {
     platform: formFields.selectedPlatform,
     instruction: validator.escape(formFields.submissionInst)
   };
   newProject.dueDate = formFields.dueDate;
-  newProject.save(next);
-  return res.send(slug);
+  newProject.save();
+  return res.send({ status: 'success', msg: slug });
 });
 
 // NOTE: No limit for how many can be displayed...but obviously we
@@ -239,6 +239,20 @@ api.post('/user', (req, res) => {
     return res.send({ status: 'success', msg: 'change success!' });
   });
 });
+
+api.get('/community', (req, res) => {
+  const filePath = path.join(__dirname, '../data/community.json');
+  fs.readFile(filePath, 'utf8', (err, data) => {
+    // Error handling - return an error
+    if (err) {
+      res.status(500).end();
+      return console.error(err);
+    }
+    const community = JSON.parse(data); // object
+    res.status(200).send(Object.values(community)); // send array version
+  });
+});
+
 
 // Misc Code =======================================================
 // TODO: Dead code below for testing only. Delete.

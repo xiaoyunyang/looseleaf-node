@@ -9,7 +9,7 @@ const Feed = ({ user, projectId }) => (
       <Discussion
         user={user}
         context='project'
-        projectId={projectId}
+        projectId={projectId.toString()}
         newPostPlaceholder='Post an update, question, or clarification to this project.'
       />
     }

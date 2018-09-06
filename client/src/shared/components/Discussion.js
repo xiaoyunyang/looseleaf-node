@@ -91,7 +91,7 @@ Discussion.propTypes = {
   user: PropTypes.object,
   newPostPlaceholder: PropTypes.string,
   communitySlug: PropTypes.string,
-  projectId: PropTypes.object,
+  projectId: PropTypes.string,
   context: PropTypes.string.isRequired
 };
 Discussion.defaultProps = {

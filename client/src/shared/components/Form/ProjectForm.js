@@ -3,23 +3,26 @@ import axios from 'axios';
 import PropTypes from 'prop-types';
 import InputTags from './InputTags';
 import InputDropdown from './InputDropdown';
+import InputCheckboxes from './InputCheckboxes';
 import DatePicker from './DatePicker';
 import FlashNotif from '../FlashNotif';
 import TextAreaInput from './TextAreaInput';
 import TextInput from './TextInput';
-import { staticApiLink } from '../../data/apiLinks';
+import { postToApiData } from '../../../lib/helpers';
+import { apiLink } from '../../data/apiLinks';
 
 export default class ProjectForm extends React.Component {
   constructor(props) {
     super(props);
+    // Everything in the state is a formField
     this.state = {
       title: '',
       desc: '',
-      selectedProjectType: this.props.projectTypes[0],
-      selectedTags: [],
+      communities: [],
+      interestAreas: [],
       aboutMe: this.props.aboutMe,
       mission: '',
-      contributors: [],
+      contributors: [], // should be an array of ids
       selectedPlatform: this.props.platforms[0],
       submissionInst: '',
       dueDate: '',
@@ -31,27 +34,17 @@ export default class ProjectForm extends React.Component {
   }
   handleSubmit(formFields) {
     const userId = this.props.user._id;
-    axios.post(staticApiLink.projects, { formFields, userId })
-      .then(res => {
-        if (res.statusText === 'error') {
-          this.setState({
-            flash: { state: res.statusText, msg: res.data }
-          });
-        } else if (res.statusText === 'OK') {
-        // redirect to /slug if the server responds with 200 ok...
-
-        // TODO: This doesn't work that well. The page is redirected, but nothing
-        // shows up. The page eventually shows after I manually refresh
-        // the page in browser. Maybe I need to add a timer?
-          window.location = `/project/${res.data}`;
-        }
-
-      // Perform action based on response, such as flashing error notif
-      })
-      .catch((error) => {
-        console.log(error);
-      //Perform action based on error
+    const url = apiLink.projects;
+    const data = { formFields, userId };
+    const cbFailure = (status, msg) => {
+      this.setState({
+        flash: { state: status, msg: msg }
       });
+    }
+    const cbSucess = (status, msg) => {
+      window.location = `/project/${msg}`;
+    }
+    postToApiData(url, data, cbFailure, cbSucess);
   }
   render() {
     return (
@@ -72,19 +65,23 @@ export default class ProjectForm extends React.Component {
                 label="Description"
                 onChange={d => this.setState({ desc: d })}
               />
-              <InputDropdown
-                id="select-project"
-                label="Project Type"
-                choices={this.props.projectTypes}
-                onChange={d => this.setState({ selectedProjectType: d })}
+              <InputCheckboxes
+                id="select-coverage-types"
+                itemWidthStyle="col s12 m4 l6"
+                title={'What type of project?'}
+                choices={this.props.communities}
+                selected={this.state.communities}
+                onChange={d => this.setState({
+                  communities: d
+                })}
               />
               <InputTags
                 id="select-areas"
                 label="Interest Areas"
                 hint="+Interest"
                 tags={this.props.tags}
-                selectedTags={this.state.selectedTags}
-                onChange={ds => this.setState({ selectedTags: ds })}
+                selectedTags={this.state.interestAreas}
+                onChange={ds => this.setState({ interestAreas: ds })}
               />
             </div>
           </div>
@@ -158,12 +155,14 @@ export default class ProjectForm extends React.Component {
   }
 }
 ProjectForm.propTypes = {
-  people: PropTypes.array,
+  people: PropTypes.object,
+  communities: PropTypes.array,
   title: PropTypes.string,
   desc: PropTypes.string
 }
 ProjectForm.defaultProps = {
-  people: ['Andrew Fenner', 'Xiaoyun Yang'],
+  people: {name: {picture: '', id: ''}},
+  communities: [],
   title: '',
   desc: ''
 }

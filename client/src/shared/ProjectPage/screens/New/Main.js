@@ -9,23 +9,49 @@ export default class extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      people: []
+      people: {},
+      communities: []
     }
   }
   componentDidMount() {
     this.loadPeople();
+    this.loadCommunities();
   }
   loadPeople() {
     const url = apiLink.users;
     const setApiData = users => {
       const people = users.map(user => {
-        const out = {
-          name: user.displayName,
-          picture: user.picture
-        }
-        return out;
-      });
+        const tmp = {};
+        tmp[`@${user.username}`] = {picture: user.picture, id: user._id};
+        return tmp;
+      }).reduce((acc, x) => {
+        for (const key in x) acc[key] = x[key];
+        return acc;
+      }, {});
+      // const people = users.map(user => {
+      //   const obj = {};
+      //   obj[`@${user.username}`] = {
+      //       name: `@${user.username}`,
+      //       picture: user.picture,
+      //       id: user._id
+      //     };
+      //   return obj;
+      // });
+console.log('people.....', people)
       this.setState({people: people})
+    }
+    getApiData(url, setApiData);
+  }
+  loadCommunities() {
+    const url = apiLink.communities;
+    const setApiData = communities => {
+      const names = communities.map(community => {
+        return {
+          slug: community.slug,
+          name: community.name
+        };
+      });
+      this.setState({communities: names})
     }
     getApiData(url, setApiData);
   }
@@ -42,6 +68,7 @@ export default class extends React.Component {
             platforms={platforms}
             aboutMe={this.props.user.loggedinUser.bio}
             people={this.state.people}
+            communities={this.state.communities}
             />
         </div>
       </div>

@@ -14,8 +14,8 @@ const projectSchema = mongoose.Schema({
   slug: { type: String, required: true, unique: true },
   title: { type: String, required: true },
   desc: String,
-  projectType: { type: String },
-  tags: Array,
+  communities: Array,
+  interestAreas: Array,
   contributors: Array,
   submission: {
     platform: { type: String, required: true },
