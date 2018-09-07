@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { dateFormatted, getApiData } from '../../../../lib/helpers';
 import { apiLink } from '../../../data/apiLinks';
 import appRoute from '../../../data/appRoute';
+import Communities from '../../../components/Collection/Communities';
 
 export default class ProjectInfo extends React.Component {
   constructor(props) {
@@ -19,10 +20,10 @@ export default class ProjectInfo extends React.Component {
   }
   renderProjectCreator(user) {
     return user && (
-      <div>
+      <p>
         <span>Posted by </span>
         <a href={`/@${user.username}`}>{user.displayName}</a>
-      </div>
+      </p>
     );
   }
   renderEditProjectLink(loggedinAsId, projectCreatorId) {
@@ -44,20 +45,31 @@ export default class ProjectInfo extends React.Component {
       desc,
       dueDate,
       createdAt,
-      postedBy
+      postedBy,
+      communities
     } = this.props.projectInfo;
 
     return (
       <div id="project-info" className="col s12 m12 l12">
-        <div className="card-panel white">
+        <div className="card-panel white hero-info">
           {
             this.props.loggedinUser &&
             this.renderEditProjectLink(this.props.loggedinUser._id, postedBy)
           }
           <h4 dangerouslySetInnerHTML={{ __html: title }} />
           {this.renderProjectCreator(this.state.user)}
-          <p dangerouslySetInnerHTML={{ __html: desc }} />
+          {
+            desc !== '' && <p dangerouslySetInnerHTML={{ __html: desc }} />
+          }
           <p>{`Created On: ${dateFormatted(createdAt)}`}</p>
+          <div style={{maxWidth: 400}}>
+            <Communities
+              icon="group"
+              cs={communities}
+              altern={<a href={appRoute('exploreCommunities')}>Join a community</a>}
+            />
+          </div>
+
           <p>{`Due Date: ${dateFormatted(dueDate)}`}</p>
           <div className="row">
             <div className="col">

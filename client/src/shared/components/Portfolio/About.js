@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import appRoute from '../../data/appRoute';
+import Communities from '../Collection/Communities';
 
 const defaultUserPic = 'http://marketline.com/wp-content/plugins/all-in-one-seo-pack/images/default-user-image.png';
 
@@ -63,24 +64,7 @@ const UserInfo = ({ icon, info, orElse, to }) => (
     </div>
   </div>
 );
-const Communities= ({icon, cs}) => (
-  <div className="row portfolio-user-info">
-    <div className="col s1 m1 l1">
-      <i className="material-icons">{icon}</i>
-    </div>
-    <div className="col s11 m11 l11">
-      {
-        cs.length > 0 ? cs.map(c => {
-        return <div key={`community-chip-${c}`} className="chip">
-          <a href={`/community/${c}`}>{c}</a>
-        </div>;
-        })
-        :
-        <a href={appRoute('exploreCommunities')}>Join a community</a>
-      }
-    </div>
-  </div>
-);
+
 
 export default ({ user }) => (
   <div className="hero-profile">
@@ -94,7 +78,11 @@ export default ({ user }) => (
           <p>{`@${user.username}`}</p>
           <p>{`Member since ${getMonthYear(user.createdAt)}`}</p>
         </div>
-        <Communities icon="group" cs={user.communities} />
+        <Communities
+          icon="group"
+          cs={user.communities}
+          altern={<a href={appRoute('exploreCommunities')}>Join a community</a>}
+        />
         <UserInfo icon={iconEnums.location}
           info={user.location}
           orElse="add location"
