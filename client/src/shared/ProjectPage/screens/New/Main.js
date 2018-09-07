@@ -28,16 +28,6 @@ export default class extends React.Component {
         for (const key in x) acc[key] = x[key];
         return acc;
       }, {});
-      // const people = users.map(user => {
-      //   const obj = {};
-      //   obj[`@${user.username}`] = {
-      //       name: `@${user.username}`,
-      //       picture: user.picture,
-      //       id: user._id
-      //     };
-      //   return obj;
-      // });
-console.log('people.....', people)
       this.setState({people: people})
     }
     getApiData(url, setApiData);
@@ -69,6 +59,9 @@ console.log('people.....', people)
             aboutMe={this.props.user.loggedinUser.bio}
             people={this.state.people}
             communities={this.state.communities}
+            selectedCommunities={[]}
+            selectedInterestAreas={[]}
+            actionBtn={{label: 'Create Project', postUrl: apiLink.projects}}
             />
         </div>
       </div>

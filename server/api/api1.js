@@ -71,19 +71,10 @@ api.get('/post/project/:id', (req, res) => {
 });
 
 // Projects ======================================================================
-api.post('/project', (req, res) => {
-  const formFields = req.body.formFields;
-
-  // Do some error checking
-  if (validator.isEmpty(formFields.title)) {
-    res.statusMessage = 'error';
-    return res.send({ status: 'error', msg: 'Project must have a title!' });
-  }
-
-  // Add new project to database
+const addNewProject = (formFields, postedBy) => {
   const newProject = new Project();
   const slug = urlSlug(formFields.title, cuid.slug());
-  newProject.postedBy = req.body.userId;
+  newProject.postedBy = postedBy;
   newProject.creator = {
     about: validator.escape(formFields.aboutMe),
     mission: validator.escape(formFields.mission)
@@ -101,6 +92,54 @@ api.post('/project', (req, res) => {
   };
   newProject.dueDate = formFields.dueDate;
   newProject.save();
+  return slug;
+};
+const updateProject = (formFields, slug, cbFailure) => {
+  Project.findOne({ slug }, (err, project) => {
+    if (err) {
+      return cbFailure();
+    }
+    if (project) {
+      const title = validator.escape(formFields.title);
+      const desc = validator.escape(formFields.desc);
+      const communities = formFields.communities;
+      const interestAreas = formFields.interestAreas;
+      const submission = {
+        platform: formFields.selectedPlatform,
+        instruction: validator.escape(formFields.submissionInst)
+      };
+      const dueDate = formFields.dueDate;
+
+      project.set({
+        title, desc, communities, interestAreas, submission, dueDate
+      });
+      project.save();
+      return slug;
+    }
+  });
+};
+
+api.post('/project', (req, res) => {
+
+  const formFields = req.body.formFields;
+
+  // Do some error checking
+  if (validator.isEmpty(formFields.title)) {
+    res.statusMessage = 'error';
+    return res.send({ status: 'error', msg: 'Project must have a title!' });
+  }
+  if (req.query.slug) {
+    // Update existing project in database
+    const cbFailure = () => {
+      req.flash('error', 'No project found');
+      res.statusMessage = 'error';
+      return res.send('No project found');
+    };
+    updateProject(formFields, req.query.slug, cbFailure);
+    return res.send({ status: 'success', msg: req.query.slug });
+  }
+  // Add new project to database
+  const slug = addNewProject(formFields, req.body.userId);
   return res.send({ status: 'success', msg: slug });
 });
 

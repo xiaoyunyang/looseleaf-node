@@ -1,5 +1,4 @@
 import React from 'react';
-import axios from 'axios';
 import PropTypes from 'prop-types';
 import InputTags from './InputTags';
 import InputDropdown from './InputDropdown';
@@ -9,17 +8,16 @@ import FlashNotif from '../FlashNotif';
 import TextAreaInput from './TextAreaInput';
 import TextInput from './TextInput';
 import { postToApiData } from '../../../lib/helpers';
-import { apiLink } from '../../data/apiLinks';
 
 export default class ProjectForm extends React.Component {
   constructor(props) {
     super(props);
     // Everything in the state is a formField
     this.state = {
-      title: '',
-      desc: '',
-      communities: [],
-      interestAreas: [],
+      title: this.props.title,
+      desc: this.props.desc,
+      communities: this.props.selectedCommunities,
+      interestAreas: this.props.selectedInterestAreas,
       aboutMe: this.props.aboutMe,
       mission: '',
       contributors: [], // should be an array of ids
@@ -32,9 +30,8 @@ export default class ProjectForm extends React.Component {
       }
     };
   }
-  handleSubmit(formFields) {
+  handleSubmit(postUrl, formFields) {
     const userId = this.props.user._id;
-    const url = apiLink.projects;
     const data = { formFields, userId };
     const cbFailure = (status, msg) => {
       this.setState({
@@ -44,7 +41,7 @@ export default class ProjectForm extends React.Component {
     const cbSucess = (status, msg) => {
       window.location = `/project/${msg}`;
     }
-    postToApiData(url, data, cbFailure, cbSucess);
+    postToApiData(postUrl, data, cbFailure, cbSucess);
   }
   render() {
     return (
@@ -55,7 +52,7 @@ export default class ProjectForm extends React.Component {
             <div className="col s12">
               <TextInput
                 id="text-title"
-                field={this.props.title}
+                field={this.state.title}
                 label="Title"
                 onChange={d => this.setState({ title: d })}
               />
@@ -145,8 +142,8 @@ export default class ProjectForm extends React.Component {
           </div>
         </div>
         <div className="row center">
-          <a className="btn" onClick={this.handleSubmit.bind(this, this.state)}>
-            Create Project
+          <a className="btn" onClick={this.handleSubmit.bind(this, this.props.actionBtn.postUrl, this.state)}>
+            {this.props.actionBtn.label}
           </a>
         </div>
         <FlashNotif state={this.state.flash.state} msg={this.state.flash.msg} />
@@ -157,12 +154,16 @@ export default class ProjectForm extends React.Component {
 ProjectForm.propTypes = {
   people: PropTypes.object,
   communities: PropTypes.array,
+  selectedCommunities: PropTypes.array,
+  selectedInterestAreas: PropTypes.array,
   title: PropTypes.string,
   desc: PropTypes.string
 }
 ProjectForm.defaultProps = {
   people: {name: {picture: '', id: ''}},
   communities: [],
+  selectedCommunities: [],
+  selectedInterestAreas: [],
   title: '',
   desc: ''
 }
