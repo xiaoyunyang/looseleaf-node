@@ -16,17 +16,12 @@ const projectSchema = mongoose.Schema({
   desc: String,
   communities: Array,
   interestAreas: Array,
-  contributors: Array,
+  contributors: Object,
   submission: {
     platform: { type: String, required: true },
     instruction: { type: String, default: '' }
   },
   dueDate: Date
-  // updates: [{
-  //   body: { type: String, default: '' },
-  //   user: { type: Schema.ObjectId, ref: 'User' },
-  //   createdAt: { type: Date, default: Date.now }
-  // }]
 });
 
 // projectSchema.path('title').required(true, 'Project title cannot be blank');

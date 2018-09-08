@@ -62,7 +62,11 @@ export default class extends React.Component {
             communities={this.state.communities}
             selectedCommunities={[]}
             selectedInterestAreas={[]}
-            actionBtn={{label: 'Create Project', postUrl: apiLink.projects}}
+            actionBtn={{
+              label: 'Create Project',
+              postUrl: apiLink.projects,
+              getProjectData: this.props.actions.getProjectData
+            }}
             />
         </div>
       </div>

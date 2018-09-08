@@ -18,6 +18,7 @@ const userSchema = mongoose.Schema({
   location: String,
   gender: String,
   hireable: String,
+  projects: Object,
   interests: Array,
   local: {
     password: { type: String, required: true },

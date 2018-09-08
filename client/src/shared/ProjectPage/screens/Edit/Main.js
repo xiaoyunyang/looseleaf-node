@@ -64,7 +64,6 @@ export default class extends React.Component {
             communities={this.state.communities}
             selectedCommunities={this.props.projectInfo.communities}
             selectedInterestAreas={this.props.projectInfo.interestAreas}
-            getProjectData={this.props.actions.getProjectData}
             actionBtn={{
               label: 'Update Project',
               postUrl: apiLink.projectBySlug(this.props.projectInfo.slug),

@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { dateFormatted, getApiData } from '../../../../lib/helpers';
 import { apiLink } from '../../../data/apiLinks';
 import appRoute from '../../../data/appRoute';
+import { postToApiData } from '../../../../lib/helpers';
 import Communities from '../../../components/Collection/Communities';
 
 export default class ProjectInfo extends React.Component {
@@ -36,6 +37,35 @@ export default class ProjectInfo extends React.Component {
         <Link to={appRoute('editProject')(this.props.projectInfo.slug)}>
           Edit Project Info
         </Link>
+      </div>
+    );
+  }
+  renderContributeAndWatchBtns(userId, projectId) {
+    const handleContributeClick = () => {
+      const url = apiLink.userProjects(userId, projectId);
+      const data = {formFields: null};
+      const cbFailure = () => {};
+      const cbSuccess = (status, msg) =>  {
+        this.props.actions.getProjectPageData(msg.projectSlug, msg.userUsername);
+        //this.props.updateState();
+      }
+      postToApiData(url, data, cbFailure, cbSuccess);
+    }
+    return (
+      <div className="row" style={{marginTop: 20}}>
+        <div className="col">
+          <button className="btn teal teal-text lighten-5">
+            Watch
+          </button>
+        </div>
+        <div className="col">
+          <button
+            className="btn teal lighten-1"
+            onClick={handleContributeClick}
+            >
+            Contribute
+          </button>
+        </div>
       </div>
     );
   }
@@ -74,14 +104,10 @@ export default class ProjectInfo extends React.Component {
               dueDate &&  <p>{`Due Date: ${dateFormatted(dueDate)}`}</p>
             }
           </div>
-          <div className="row" style={{marginTop: 20}}>
-            <div className="col">
-              <a className="waves-effect waves-light btn teal teal-text lighten-5">Watch</a>
-            </div>
-            <div className="col">
-              <a className="waves-effect waves-light btn teal lighten-1">Contribute</a>
-            </div>
-          </div>
+          {
+            this.props.loggedinUser &&
+            this.renderContributeAndWatchBtns(this.props.loggedinUser._id,  this.props.projectInfo._id)
+          }
         </div>
       </div>
     );

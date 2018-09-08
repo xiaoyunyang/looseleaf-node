@@ -11,7 +11,7 @@ import path from 'path';
 import User from '../models/User';
 import Project from '../models/Project';
 import Post from '../models/Post';
-import urlSlug from '../modules/urlSlug';
+import { urlSlug, addToDict } from '../modules/util';
 import dataPreloading from '../../client/iso-middleware/dataPreloading';
 
 const cuid = require('cuid');
@@ -86,6 +86,7 @@ const addNewProject = (formFields, postedBy) => {
   newProject.communities = formFields.communities;
   newProject.interestAreas = formFields.interestAreas;
   newProject.contributors = formFields.contributors.map(c => c.id);
+
   newProject.submission = {
     platform: formFields.selectedPlatform,
     instruction: validator.escape(formFields.submissionInst)
@@ -168,6 +169,45 @@ api.get('/project/:slug', (req, res) => {
     // NOTE project is an Array containing one element.
     if (project) {
       return res.send(project);
+    }
+  });
+});
+
+api.post('/user/project', (req, res) => {
+  Project.findById(req.query.projectId, (err, project) => {
+    if (err) {
+      req.status = 'error';
+      return res.send('No project found');
+    }
+
+    if (project) {
+      User.findById(req.query.userId, (err, user) => {
+
+        if (err) {
+          req.status = 'error';
+          return res.send('No user found');
+        }
+
+        if (user) {
+          // Add user as a contributor of the project
+          const updatedContributors = addToDict(project.contributors, req.query.userId);
+          project.set({
+            contributors: updatedContributors
+          });
+          project.save();
+          // Add project to user
+          const updatedProject = addToDict(user.projects, req.query.projectId);
+          user.set({
+            project: updatedProject
+          });
+          user.save();
+
+          return res.send({
+            status: 'success',
+            msg: { projectSlug: project.slug, userUsername: user.username }
+          });
+        }
+      });
     }
   });
 });

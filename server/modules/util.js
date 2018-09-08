@@ -1,4 +1,11 @@
-const urlSlug = (title, fingerprint) => {
+export const addToDict = (dict, newKey) => {
+  if (dict[newKey]) return dict;
+  const newDict = Object.assign({}, dict)
+  newDict[newKey] = new Date();
+  return newDict;
+};
+
+export const urlSlug = (title, fingerprint) => {
   // This function creates a slugified version of the title
   const slugify = (string) => {
     const a = 'àáäâãåèéëêìíïîòóöôùúüûñçßÿœæŕśńṕẃǵǹḿǘẍźḧ·/_,:;';
@@ -15,5 +22,3 @@ const urlSlug = (title, fingerprint) => {
   };
   return `${slugify(title)}-${fingerprint}`;
 };
-
-module.exports = urlSlug;

@@ -20,7 +20,11 @@ class Main extends React.Component {
               <TopNavGuest redirPath={location} useExternLinks />
           }
           <div className="container">
-            <ProjectInfo projectInfo={this.props.projectInfo} loggedinUser={this.props.user.loggedinUser}/>
+            <ProjectInfo
+              projectInfo={this.props.projectInfo}
+              loggedinUser={this.props.user.loggedinUser}
+              actions={this.props.actions}
+            />
             <Contributors contributors={this.props.contributors} />
             <Feed user={this.props.user.loggedinUser} projectId={this.props.projectInfo._id} />
           </div>

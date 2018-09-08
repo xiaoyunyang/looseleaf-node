@@ -128,15 +128,13 @@ export default class UserCards extends React.Component {
     return (
       <div id="invite-person-card-modal" style={{ paddingBottom: 20 }} className="modal">
         <div className="modal-content">
-          <h4>Invite A New Contributor</h4>
-          {
-            <InputAutocomplete
-              id="select-invites"
-              choices={this.state.inviteChoices}
-              label="Full Name"
-              onChange={d => this.setState({ invited: d })}
-            />
-            }
+          <h4>Invite A New Contributor</h4>          
+          <InputAutocomplete
+            id="select-invites"
+            choices={this.state.inviteChoices}
+            label="Full Name"
+            onChange={d => this.setState({ invited: d })}
+          />
         </div>
         <div className="modal-footer" style={{ paddingBottom: 20 }}>
           <a href={`/@${this.state.modalPerson.username}`} className="modal-action modal-close teal btn-flat">
