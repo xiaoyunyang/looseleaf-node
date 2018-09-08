@@ -89,7 +89,7 @@ export default class Main extends Component {
       userId: this.props.user.info._id,
       loggedInUser: this.props.user.loggedinUser
     };
-    
+
     return (
       <div className="section-white">
         {
@@ -106,7 +106,10 @@ export default class Main extends Component {
         <div className="container">
           <div className="row">
             <div className="col l12 m12 s12">
-              <About user={this.props.user.info} />
+              <About
+                user={this.props.user.info}
+                isLoggedinUser={this.props.user.info._id === this.props.user.loggedinUser._id}
+              />
             </div>
           </div>
         </div>

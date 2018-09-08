@@ -51,26 +51,30 @@ export default class ProjectInfo extends React.Component {
 
     return (
       <div id="project-info" className="col s12 m12 l12">
-        <div className="card-panel white hero-info">
-          {
-            this.props.loggedinUser &&
-            this.renderEditProjectLink(this.props.loggedinUser._id, postedBy)
-          }
-          <h4 dangerouslySetInnerHTML={{ __html: title }} />
-          {this.renderProjectCreator(this.state.user)}
-          {
-            desc !== '' && <p dangerouslySetInnerHTML={{ __html: desc }} />
-          }
-          <p>{`Created On: ${dateFormatted(createdAt)}`}</p>
-          <div style={{maxWidth: 500}}>
-            <Communities
-              icon="group"
-              cs={communities}
-              altern={<a href={appRoute('exploreCommunities')}>Join a community</a>}
-            />
+        <div className="card-panel white">
+          <div className="hero-info">
+            {
+              this.props.loggedinUser &&
+              this.renderEditProjectLink(this.props.loggedinUser._id, postedBy)
+            }
+            <h4 dangerouslySetInnerHTML={{ __html: title }} />
+            {this.renderProjectCreator(this.state.user)}
+            {
+              desc !== '' && <p dangerouslySetInnerHTML={{ __html: desc }} />
+            }
+            <p>{`Created On: ${dateFormatted(createdAt)}`}</p>
+            <div style={{maxWidth: 500}}>
+              <Communities
+                icon="group"
+                cs={communities}
+                altern={<a href={appRoute('exploreCommunities')}>Join a community</a>}
+              />
+            </div>
+            {
+              dueDate &&  <p>{`Due Date: ${dateFormatted(dueDate)}`}</p>
+            }
           </div>
-          <p>{`Due Date: ${dateFormatted(dueDate)}`}</p>
-          <div className="row">
+          <div className="row" style={{marginTop: 20}}>
             <div className="col">
               <a className="waves-effect waves-light btn teal teal-text lighten-5">Watch</a>
             </div>

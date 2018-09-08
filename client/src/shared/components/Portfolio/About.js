@@ -66,15 +66,23 @@ const UserInfo = ({ icon, info, orElse, to }) => (
 );
 
 
-export default ({ user }) => (
+export default ({ user, isLoggedinUser }) => (
   <div className="hero-profile">
     <div className="row">
       <div className="col s12 m12 l3">
         <img src={user.picture ? user.picture : defaultUserPic} alt="" className="circle" />
+        {
+          isLoggedinUser &&
+          <div className="center">
+            <Link to={appRoute('userSettings')(user.username)}>
+              Edit Profile
+            </Link>
+          </div>
+        }
       </div>
       <div className="col s12 m12 l9 hero-info">
         <div className="hero-profile-center">
-          <h4>{user.displayName}</h4>
+          <span><h4>{user.displayName}</h4></span>
           <p>{`@${user.username}`}</p>
           <p>{`Member since ${getMonthYear(user.createdAt)}`}</p>
         </div>
@@ -91,11 +99,6 @@ export default ({ user }) => (
         <UserInfo icon={iconEnums.bio}
           info={user.bio}
           orElse="add bio"
-          to={appRoute('userSettings')(user.username)}
-        />
-        <UserInfo icon={iconEnums.email}
-          info={user.email}
-          orElse="add email"
           to={appRoute('userSettings')(user.username)}
         />
         <UserInfo icon={iconEnums.website}
