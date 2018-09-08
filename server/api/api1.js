@@ -11,7 +11,7 @@ import path from 'path';
 import User from '../models/User';
 import Project from '../models/Project';
 import Post from '../models/Post';
-import { urlSlug, addToDict } from '../modules/util';
+import { urlSlug, addToDict, deleteFromDict } from '../modules/util';
 import dataPreloading from '../../client/iso-middleware/dataPreloading';
 
 const cuid = require('cuid');
@@ -173,13 +173,42 @@ api.get('/project/:slug', (req, res) => {
   });
 });
 
+const updateProjectAndUser = ({
+  project, user, userId, projectId, action
+}) => {
+  let updatedContributors = project.contributors;
+
+  let updatedProject = user.projects;
+  if (action === 'contribute') {
+    // Add user as a contributor of the project
+    updatedContributors = addToDict(project.contributors, userId);
+    updatedProject = addToDict(user.projects, projectId);
+  } else if (action === 'uncontribute') {
+    console.log(chalk.cyan('action === ', action))
+    updatedContributors = deleteFromDict(project.contributors, userId);
+    updatedProject = deleteFromDict(user.projects, projectId);
+  }
+
+  project.set({
+    contributors: updatedContributors
+  });
+  project.save();
+  // Add project to user
+  user.set({
+    project: updatedProject
+  });
+  user.save();
+};
+
 api.post('/user/project', (req, res) => {
   Project.findById(req.query.projectId, (err, project) => {
     if (err) {
       req.status = 'error';
       return res.send('No project found');
     }
-
+  console.log(chalk.cyan('action === ', req.query.action))
+  console.log(chalk.cyan('projectId === ', req.query.projectId))
+    console.log(chalk.cyan('project === ', project))
     if (project) {
       User.findById(req.query.userId, (err, user) => {
 
@@ -189,19 +218,11 @@ api.post('/user/project', (req, res) => {
         }
 
         if (user) {
-          // Add user as a contributor of the project
-          const updatedContributors = addToDict(project.contributors, req.query.userId);
-          project.set({
-            contributors: updatedContributors
-          });
-          project.save();
-          // Add project to user
-          const updatedProject = addToDict(user.projects, req.query.projectId);
-          user.set({
-            project: updatedProject
-          });
-          user.save();
+          const { userId, projectId, action } = req.query;
 
+          updateProjectAndUser({
+            project, user, userId, projectId, action
+          });
           return res.send({
             status: 'success',
             msg: { projectSlug: project.slug, userUsername: user.username }

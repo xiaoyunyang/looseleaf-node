@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { dateFormatted, getApiData } from '../../../../lib/helpers';
 import { apiLink } from '../../../data/apiLinks';
 import appRoute from '../../../data/appRoute';
-import { postToApiData } from '../../../../lib/helpers';
+import { postToApiData,  } from '../../../../lib/helpers';
 import Communities from '../../../components/Collection/Communities';
 
 export default class ProjectInfo extends React.Component {
@@ -40,17 +40,17 @@ export default class ProjectInfo extends React.Component {
       </div>
     );
   }
-  renderContributeAndWatchBtns(userId, projectId) {
-    const handleContributeClick = () => {
-      const url = apiLink.userProjects(userId, projectId);
-      const data = {formFields: null};
-      const cbFailure = () => {};
-      const cbSuccess = (status, msg) =>  {
-        this.props.actions.getProjectPageData(msg.projectSlug, msg.userUsername);
-        //this.props.updateState();
-      }
-      postToApiData(url, data, cbFailure, cbSuccess);
+  handleCtaClick(userId, projectId, action) {
+    const url = apiLink.userProjects(userId, projectId, action);
+    const data = {formFields: null};
+    const cbFailure = () => {};
+    const cbSuccess = (status, msg) =>  {
+      this.props.actions.getProjectPageData(msg.projectSlug, msg.userUsername);
+      //this.props.updateState();
     }
+    postToApiData(url, data, cbFailure, cbSuccess);
+  }
+  renderContributeAndWatchBtns(userId, projectId) {
     return (
       <div className="row" style={{marginTop: 20}}>
         <div className="col">
@@ -61,12 +61,25 @@ export default class ProjectInfo extends React.Component {
         <div className="col">
           <button
             className="btn teal lighten-1"
-            onClick={handleContributeClick}
+            onClick={this.handleCtaClick.bind(this, userId, projectId, 'contribute')}
             >
             Contribute
           </button>
         </div>
       </div>
+    );
+  }
+  renderProjectContributorStatus(dateJoined, userId, projectId) {
+    return (
+      <p>
+        {`You are a contributor of this project since ${dateJoined}. `}
+        <span
+          className="span-anchor"
+          onClick={this.handleCtaClick.bind(this, userId, projectId, 'uncontribute')}
+        >
+          Unjoin
+        </span>
+      </p>
     );
   }
   render() {
@@ -76,16 +89,18 @@ export default class ProjectInfo extends React.Component {
       dueDate,
       createdAt,
       postedBy,
-      communities
+      communities,
+      contributors,
     } = this.props.projectInfo;
 
+    const loggedinAs = this.props.loggedinUser._id.toString();
     return (
       <div id="project-info" className="col s12 m12 l12">
         <div className="card-panel white">
           <div className="hero-info">
             {
               this.props.loggedinUser &&
-              this.renderEditProjectLink(this.props.loggedinUser._id, postedBy)
+              this.renderEditProjectLink(loggedinAs, postedBy)
             }
             <h4 dangerouslySetInnerHTML={{ __html: title }} />
             {this.renderProjectCreator(this.state.user)}
@@ -104,10 +119,17 @@ export default class ProjectInfo extends React.Component {
               dueDate &&  <p>{`Due Date: ${dateFormatted(dueDate)}`}</p>
             }
           </div>
+
           {
-            this.props.loggedinUser &&
+            this.props.loggedinUser && contributors[loggedinAs] ?
+            this.renderProjectContributorStatus(
+              dateFormatted(contributors[loggedinAs]),
+              this.props.loggedinUser._id,
+              this.props.projectInfo._id
+            ) :
             this.renderContributeAndWatchBtns(this.props.loggedinUser._id,  this.props.projectInfo._id)
           }
+
         </div>
       </div>
     );

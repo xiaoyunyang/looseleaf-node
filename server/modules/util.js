@@ -1,7 +1,13 @@
 export const addToDict = (dict, newKey) => {
   if (dict[newKey]) return dict;
-  const newDict = Object.assign({}, dict)
+  const newDict = Object.assign({}, dict);
   newDict[newKey] = new Date();
+  return newDict;
+};
+export const deleteFromDict = (dict, key) => {
+  if (!dict[key]) return dict;
+  const newDict = Object.assign({}, dict);
+  newDict[key] = null;
   return newDict;
 };
 

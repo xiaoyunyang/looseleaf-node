@@ -20,7 +20,7 @@ export const apiLink = {
   userById: id =>  `${root}/api/user?_id=${id}`,
   userByUsername: username => `${root}/api/user?username=${username}`,
   userCommunities: userId => `${root}/api/user/community?_id=${userId}`, // TODO: refactor this
-  userProjects: (userId, projectId) => `${root}/api/user/project?projectId=${projectId}&userId=${userId}`,
+  userProjects: (userId, projectId, action) => `${root}/api/user/project?projectId=${projectId}&userId=${userId}&action=${action}`,
   users: `${root}/api/user`,
   usersByCommunity: (slug) => `${root}/api/user?communities=${slug}`,
   projects: `${root}/api/project`,
