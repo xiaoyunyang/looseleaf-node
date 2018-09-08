@@ -52,6 +52,7 @@ export default class extends React.Component {
         <div className="container">
           <h4>Edit Project</h4>
           <ProjectForm
+            history={this.props.history}
             user={this.props.user.loggedinUser}
             projectTypes={['Software Development', 'Design', 'Writng', 'Data Science', 'Illustration', 'Video Production']}
             tags={interests}
@@ -63,7 +64,12 @@ export default class extends React.Component {
             communities={this.state.communities}
             selectedCommunities={this.props.projectInfo.communities}
             selectedInterestAreas={this.props.projectInfo.interestAreas}
-            actionBtn={{label: 'Update Project', postUrl: apiLink.projectBySlug(this.props.projectInfo.slug)}}
+            getProjectData={this.props.actions.getProjectData}
+            actionBtn={{
+              label: 'Update Project',
+              postUrl: apiLink.projectBySlug(this.props.projectInfo.slug),
+              getProjectData: this.props.actions.getProjectData
+            }}
             />
         </div>
       </div>

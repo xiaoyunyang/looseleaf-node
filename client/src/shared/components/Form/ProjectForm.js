@@ -39,7 +39,10 @@ export default class ProjectForm extends React.Component {
       });
     }
     const cbSucess = (status, msg) => {
-      window.location = `/project/${msg}`;
+       // window.location = `/project/${msg}`;
+      // TODO: Need to call redux action to update project state
+      this.props.actionBtn.getProjectData(msg);
+      this.props.history.push(`/project/${msg}`);
     }
     postToApiData(postUrl, data, cbFailure, cbSucess);
   }

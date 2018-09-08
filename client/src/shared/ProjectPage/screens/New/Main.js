@@ -52,6 +52,7 @@ export default class extends React.Component {
         <div className="container">
           <h4>New Project</h4>
           <ProjectForm
+            history={this.props.history}
             user={this.props.user.loggedinUser}
             projectTypes={['Software Development', 'Design', 'Writng', 'Data Science', 'Illustration', 'Video Production']}
             tags={interests}

@@ -48,8 +48,9 @@ export default class TopNav extends React.Component {
     const url = apiLink.userCommunities(userId);
     const data = {formFields: updatedCommunities}
     const cbFailure = () => {};
+
     const cbSuccess = () =>  {
-      this.props.actions.getUserProfileData(this.props.user.username);
+      this.props.actions.getLoggedinUserData(this.props.user.username);
       this.props.updateState();
     }
 

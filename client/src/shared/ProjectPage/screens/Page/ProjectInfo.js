@@ -62,14 +62,13 @@ export default class ProjectInfo extends React.Component {
             desc !== '' && <p dangerouslySetInnerHTML={{ __html: desc }} />
           }
           <p>{`Created On: ${dateFormatted(createdAt)}`}</p>
-          <div style={{maxWidth: 400}}>
+          <div style={{maxWidth: 500}}>
             <Communities
               icon="group"
               cs={communities}
               altern={<a href={appRoute('exploreCommunities')}>Join a community</a>}
             />
           </div>
-
           <p>{`Due Date: ${dateFormatted(dueDate)}`}</p>
           <div className="row">
             <div className="col">

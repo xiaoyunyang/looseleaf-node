@@ -15,6 +15,20 @@ export function getProjectPageData(slug, username) {
     ])
   }
 }
+export function getProjectData(slug) {
+  return (dispatch, getState) => {
+    return Promise.all([
+      dispatch(fetchProjectBySlug(slug))
+    ])
+  }
+}
+export function getLoggedinUserData(loggedinUsername) {
+  return (dispatch, getState) => {
+    return Promise.all([
+      dispatch(fetchLoggedinUser(loggedinUsername))
+    ])
+  }
+}
 
 export function getUserProfileData(username, loggedinUsername) {
   return (dispatch, getState) => {

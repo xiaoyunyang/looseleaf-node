@@ -3,7 +3,7 @@ import { renderRoutes } from 'react-router-config';
 import { connect } from 'react-redux';
 import { withRouter } from "react-router-dom";
 import { bindActionCreators } from 'redux';
-import * as actionCreators from '../redux/Project/actions/project';
+import * as actionCreators from '../redux/actions/page';
 import { getRoutes } from './routes';
 
 class AppContainer extends React.Component {

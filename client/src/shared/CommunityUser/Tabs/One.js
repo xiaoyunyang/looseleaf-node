@@ -20,13 +20,13 @@ export default class One extends React.Component {
     getApiData(apiLink.projects, setApiData);
   }
   render() {
-    const userInfo = this.props.state.user.loggedinUser;
+    const loggedinUser = this.props.state.user.loggedinUser;
     const communityInfo = this.props.state.community.info;
     return (
       <div className="section-white">
         <TopNav
           route={this.props.route}
-          user={userInfo}
+          user={loggedinUser}
           community={communityInfo}
           actions={this.props.actions}
         />
