@@ -184,7 +184,6 @@ const updateProjectAndUser = ({
     updatedContributors = addToDict(project.contributors, userId);
     updatedProject = addToDict(user.projects, projectId);
   } else if (action === 'uncontribute') {
-    console.log(chalk.cyan('action === ', action))
     updatedContributors = deleteFromDict(project.contributors, userId);
     updatedProject = deleteFromDict(user.projects, projectId);
   }
@@ -206,9 +205,6 @@ api.post('/user/project', (req, res) => {
       req.status = 'error';
       return res.send('No project found');
     }
-  console.log(chalk.cyan('action === ', req.query.action))
-  console.log(chalk.cyan('projectId === ', req.query.projectId))
-    console.log(chalk.cyan('project === ', project))
     if (project) {
       User.findById(req.query.userId, (err, user) => {
 

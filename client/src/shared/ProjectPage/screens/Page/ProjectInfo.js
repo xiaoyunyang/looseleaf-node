@@ -50,7 +50,26 @@ export default class ProjectInfo extends React.Component {
     }
     postToApiData(url, data, cbFailure, cbSuccess);
   }
-  renderContributeAndWatchBtns(userId, projectId) {
+  renderProjectContributorStatus(loggedinUser, projectInfo) {
+    const contributors = projectInfo.contributors;
+    const projectId = projectInfo._id;
+    const userId = loggedinUser._id.toString();
+    const dateJoined = dateFormatted(userId);
+    // If this user is a contributor ...
+    if (contributors[userId]) {
+      return (
+        <p>
+          {`You are a contributor of this project since ${dateJoined}. `}
+          <span
+            className="span-anchor"
+            onClick={this.handleCtaClick.bind(this, userId, projectId, 'uncontribute')}
+          >
+            Unjoin
+          </span>
+        </p>
+      );
+    }
+    // If this user is not a contributor ...
     return (
       <div className="row" style={{marginTop: 20}}>
         <div className="col">
@@ -69,19 +88,7 @@ export default class ProjectInfo extends React.Component {
       </div>
     );
   }
-  renderProjectContributorStatus(dateJoined, userId, projectId) {
-    return (
-      <p>
-        {`You are a contributor of this project since ${dateJoined}. `}
-        <span
-          className="span-anchor"
-          onClick={this.handleCtaClick.bind(this, userId, projectId, 'uncontribute')}
-        >
-          Unjoin
-        </span>
-      </p>
-    );
-  }
+
   render() {
     const {
       title,
@@ -90,17 +97,14 @@ export default class ProjectInfo extends React.Component {
       createdAt,
       postedBy,
       communities,
-      contributors,
     } = this.props.projectInfo;
-
-    const loggedinAs = this.props.loggedinUser._id.toString();
     return (
       <div id="project-info" className="col s12 m12 l12">
         <div className="card-panel white">
           <div className="hero-info">
             {
               this.props.loggedinUser &&
-              this.renderEditProjectLink(loggedinAs, postedBy)
+              this.renderEditProjectLink(this.props.loggedinUser._id.toString(), postedBy)
             }
             <h4 dangerouslySetInnerHTML={{ __html: title }} />
             {this.renderProjectCreator(this.state.user)}
@@ -119,17 +123,13 @@ export default class ProjectInfo extends React.Component {
               dueDate &&  <p>{`Due Date: ${dateFormatted(dueDate)}`}</p>
             }
           </div>
-
           {
-            this.props.loggedinUser && contributors[loggedinAs] ?
+            this.props.loggedinUser &&
             this.renderProjectContributorStatus(
-              dateFormatted(contributors[loggedinAs]),
-              this.props.loggedinUser._id,
-              this.props.projectInfo._id
-            ) :
-            this.renderContributeAndWatchBtns(this.props.loggedinUser._id,  this.props.projectInfo._id)
+              this.props.loggedinUser,
+              this.props.projectInfo
+            )
           }
-
         </div>
       </div>
     );

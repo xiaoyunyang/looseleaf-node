@@ -108,7 +108,10 @@ export default class Main extends Component {
             <div className="col l12 m12 s12">
               <About
                 user={this.props.user.info}
-                isLoggedinUser={this.props.user.info._id === this.props.user.loggedinUser._id}
+                isLoggedinUser={
+                  this.props.user.loggedinUser &&
+                  this.props.user.info._id === this.props.user.loggedinUser._id
+                }
               />
             </div>
           </div>
