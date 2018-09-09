@@ -20,7 +20,8 @@ export const apiLink = {
   userById: id =>  `${root}/api/user?_id=${id}`,
   usersByIds: ids =>  ids.reduce((acc, id) => `${acc}_id=${id}&`,`${root}/api/user?`).slice(0, -1),
   userByUsername: username => `${root}/api/user?username=${username}`,
-  userCommunities: userId => `${root}/api/user/community?_id=${userId}`, // TODO: refactor this
+  userCommunities: userId => `${root}/api/user/community?_id=${userId}`, // NOTE: this is used when user clicks to join/unjoin a community
+  userFollowing: userId => `${root}/api/user/following?_id=${userId}`, // NOTE: this is used when user with userId clicks to follow/unfollow another user
   userProjects: (userId, projectId, action) => `${root}/api/user/project?projectId=${projectId}&userId=${userId}&action=${action}`,
   users: `${root}/api/user`,
   usersByCommunity: (slug) => `${root}/api/user?communities=${slug}`,

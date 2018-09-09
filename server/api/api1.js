@@ -248,7 +248,9 @@ const getUsers = ({ findCriteria, cbSuccess }) => {
           website: user.website,
           interests: user.interests,
           communities: user.communities,
-          projects: user.projects
+          projects: user.projects,
+          followers: user.followers,
+          following: user.following
         };
         usersOut.push(userInfo);
       });
@@ -270,7 +272,7 @@ api.get('/user', (req, res) => {
   getUsers({ findCriteria, cbSuccess });
 });
 
-api.post('/user/community', (req, res, next) => {
+api.post('/user/community', (req, res) => {
   User.findById(req.query._id, (err, user) => {
     if (err) return res.send('Error');
     const formFields = req.body.formFields;
@@ -283,6 +285,42 @@ api.post('/user/community', (req, res, next) => {
     return res.send({ status: 'success', msg: 'change success!' });
   });
 });
+// This is executed when loggedinUser "follow" or "unfollow" on userToFollow
+api.post('/user/following', (req, res) => {
+  // req.query._id is the id of userA
+  User.findById(req.query._id, (err, loggedinUser) => {
+    if (err) return res.send('Error');
+    if (loggedinUser) {
+      const formFields = req.body.formFields;
+      const { userId, action } = formFields;
+      User.findById(userId, (err, userToFollow) => {
+        if (err) return res.send('Error');
+        if (userToFollow) {
+          let following = loggedinUser.following;
+          let followers = userToFollow.followers;
+
+          if (action === 'follow') {
+            // add userToFollow's id to loggedinUser's following field
+            // add loggedinUser's id to userToFollow's followers field
+            following = loggedinUser.following.concat(userToFollow._id);
+            followers = userToFollow.followers.concat(loggedinUser._id);
+          } else if (action === 'unfollow') {
+            // remove userToFollow's id to loggedinUser's following field
+            // remove loggedinUser's id to userToFollow's followers field
+            following = loggedinUser.following.filter(d => !d.equals(userToFollow._id));
+            followers = userToFollow.followers.filter(d => !d.equals(loggedinUser._id));
+          }
+          loggedinUser.set({ following });
+          userToFollow.set({ followers });
+          loggedinUser.save();
+          userToFollow.save();
+          return res.send({ status: 'success', msg: 'change success!' });
+        }
+      });
+    }
+  });
+});
+
 // Update user based on id
 // TODO: This is dangerous. This API lets anyone update user information
 // based on user id. How do we make sure the request is coming from the

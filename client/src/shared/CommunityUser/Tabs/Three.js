@@ -37,8 +37,14 @@ export default class Three extends React.Component {
             <div id={page(communityInfo.slug).three.slug} className="col s12">
               <h3>{page(communityInfo.slug).three.name}</h3>
               {
-                this.state.users && this.state.users.length > 0 ?
-                  <Users users={this.state.users} />
+                loggedinUser && this.state.users && this.state.users.length > 0 ?
+                  <Users
+                    users={this.state.users}
+                    loggedinAs={loggedinUser._id.toString()}
+                    loggedinUsername={loggedinUser.username}
+                    updateState={this.fetchUsers.bind(this)}
+                    updateLoggedinUser={this.props.actions.getLoggedinUserData}
+                  />
                   :
                   <p>There are no members in this community.</p>
               }

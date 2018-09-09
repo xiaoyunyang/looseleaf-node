@@ -19,6 +19,8 @@ const userSchema = mongoose.Schema({
   gender: String,
   hireable: String,
   projects: Object,
+  followers: Array,
+  following: Array,
   interests: Array,
   local: {
     password: { type: String, required: true },
