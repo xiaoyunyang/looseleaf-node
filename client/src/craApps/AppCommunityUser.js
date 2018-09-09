@@ -19,7 +19,7 @@ class AppCommunityUser extends React.Component {
       'xiaoyunyang',
       'kyle'
     ];
-    const username = usernames[2];
+    const username = usernames[1];
 
     if(username && username !== 'default') {
       this.fetchUser(username);

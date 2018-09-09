@@ -6,19 +6,18 @@ import { dateFormatted, postToApiData } from '../../../lib/helpers';
 
 class Users extends React.Component {
   handleFollowBtnClick(userToFollow, action) {
-    const url = apiLink.userFollowing(this.props.loggedinAs);
+    const url = apiLink.userFollowing(this.props.loggedinAs._id);
     const data = {formFields: {userId: userToFollow, action: action}};
     const cbFailure = () => {};
 
-    const cbSuccess = () =>  {
+    const cbSuccess = (status, msg) =>  {
       this.props.updateState();
       // TODO: Do I really need to updateLoggedinUser again?
-      this.props.updateLoggedinUser(this.props.loggedinUsername)
     }
     postToApiData(url, data, cbFailure, cbSuccess);
   }
   renderFollowBtn(userId, followers) {
-    if (followers.includes(this.props.loggedinAs)) {
+    if (followers.includes(this.props.loggedinAs._id)) {
       return <button
         className="btn secondary-content"
         onClick={this.handleFollowBtnClick.bind(this, userId, 'unfollow')}
@@ -50,7 +49,8 @@ class Users extends React.Component {
                 </p>
                 <p>{user.bio}</p>
                 {
-                  this.props.loggedinAs !== user._id.toString() &&
+                  this.props.loggedinAs &&
+                  this.props.loggedinAs._id.toString() !== user._id.toString() &&
                   this.renderFollowBtn(user._id, user.followers)
                 }
               </div>
@@ -64,10 +64,10 @@ class Users extends React.Component {
 
 Users.propTypes = {
   users: PropTypes.array,
-  loggedinAs: PropTypes.string
+  loggedinAs: PropTypes.object
 };
 Users.defaultProps = {
-  loggedinAs: ''
+  loggedinAs: null
 }
 
 export default Users;

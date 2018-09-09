@@ -64,6 +64,7 @@ const Posts = ({ posts, deletePost, noPostDisp, loggedInAs }) => (
     }
   </div>
 );
+// TODO: change Posts's props from loggedInAs to 'loggedinAs'
 Posts.propTypes = {
   posts: PropTypes.array,
   noPostDisp: PropTypes.string,

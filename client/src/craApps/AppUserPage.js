@@ -12,13 +12,13 @@ class AppUserPage extends React.Component {
   componentDidMount() {
     // The logged in user's username
     const loggedinUsername = {
-      valid: 'kyle',
+      valid: 'xiaoyunyang',
+      valid2: 'kyle',
       invalid: 'foop'
     }
     if (typeof document !== 'undefined') {
       const username = document.location.pathname.split('/@').pop();
-      console.log('AppUserPage actions = ', actions)
-      store.dispatch(actions.getUserProfileData(username, loggedinUsername.valid));
+      store.dispatch(actions.getUserProfileData(username, loggedinUsername.valid2));
     }
   }
   render() {

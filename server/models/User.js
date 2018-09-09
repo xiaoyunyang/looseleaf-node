@@ -5,6 +5,7 @@
 import mongoose from 'mongoose';
 import bcrypt from 'bcrypt-nodejs';
 
+// TODO: change field "lastLoggedIn" to "lastLoggedin"
 const userSchema = mongoose.Schema({
   createdAt: { type: Date, default: Date.now },
   lastLoggedIn: { type: Date },

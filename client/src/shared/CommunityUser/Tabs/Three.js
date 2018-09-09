@@ -20,6 +20,10 @@ export default class Three extends React.Component {
     const setApiData = data => this.setState({ users: data });
     getApiData(apiLink.usersByCommunity(communitySlug), setApiData);
   }
+  updateState() {
+    this.props.actions.getLoggedinUserData(this.props.state.user.loggedinUser.username);
+    this.fetchUsers();
+  }
   render() {
     const loggedinUser = this.props.state.user.loggedinUser;
     const communityInfo = this.props.state.community.info;
@@ -40,10 +44,8 @@ export default class Three extends React.Component {
                 loggedinUser && this.state.users && this.state.users.length > 0 ?
                   <Users
                     users={this.state.users}
-                    loggedinAs={loggedinUser._id.toString()}
-                    loggedinUsername={loggedinUser.username}
-                    updateState={this.fetchUsers.bind(this)}
-                    updateLoggedinUser={this.props.actions.getLoggedinUserData}
+                    loggedinAs={loggedinUser}
+                    updateState={this.updateState.bind(this)}
                   />
                   :
                   <p>There are no members in this community.</p>

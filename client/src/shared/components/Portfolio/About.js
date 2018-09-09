@@ -90,6 +90,7 @@ export default ({ user, isLoggedinUser }) => (
           icon="group"
           cs={user.communities}
           altern={<a href={appRoute('exploreCommunities')}>Join a community</a>}
+          hasIcon
         />
         <UserInfo icon={iconEnums.location}
           info={user.location}

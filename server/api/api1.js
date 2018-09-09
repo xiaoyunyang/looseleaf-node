@@ -314,7 +314,7 @@ api.post('/user/following', (req, res) => {
           userToFollow.set({ followers });
           loggedinUser.save();
           userToFollow.save();
-          return res.send({ status: 'success', msg: 'change success!' });
+          return res.send({ status: 'success', msg: { following, followers } });
         }
       });
     }

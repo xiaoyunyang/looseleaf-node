@@ -86,8 +86,10 @@ export default class Main extends Component {
     const root = getRoot(this.props.user.info.username);
     const username = this.props.user.info.username;
     const portfolioProps = {
-      userId: this.props.user.info._id,
-      loggedInUser: this.props.user.loggedinUser
+      userId: this.props.user.info._id, // TODO: remove this
+      user: this.props.user.info,
+      loggedinAs: this.props.user.loggedinUser,
+      actions: this.props.actions
     };
 
     return (

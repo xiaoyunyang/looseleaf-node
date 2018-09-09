@@ -7,22 +7,45 @@ export default class Three extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      users: null
+      users: []
     };
   }
   componentDidMount() {
-    this.fetchUsers();
+    this.fetchUsers(this.props.user.following);
   }
-  fetchUsers() {
-    const setApiData = data => this.setState({ users: data });
-    getApiData(apiLink.users, setApiData);
+  componentWillReceiveProps(nextProps) {
+    if(nextProps.user.following !== this.props.following) {
+      this.fetchUsers(nextProps.user.following)
+    }
+  }
+  fetchUsers(following) {
+     if (following.length > 0) {
+      const setApiData = data => this.setState({ users: data });
+      const url = apiLink.usersByIds(following);
+      getApiData(url, setApiData);
+    }
+  }
+  updateState() {
+    this.props.actions.getUserProfileData(
+      this.props.user.username,
+      this.props.loggedinAs.username
+    );
   }
   render() {
     return (
       <div className="container">
         <div className="row">
           <h3>Following</h3>
-          <Users users={this.state.users} />
+          {
+            this.state.users.length > 0 ?
+              <Users
+                users={this.state.users}
+                loggedinAs={this.props.loggedinAs}
+                updateState={this.updateState.bind(this)}
+              />
+              :
+              <p>Not following anyone.</p>
+          }
         </div>
       </div>
     );

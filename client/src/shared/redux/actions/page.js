@@ -43,6 +43,7 @@ export function getLoggedinUserData(loggedinUsername) {
 }
 
 export function getUserProfileData(username, loggedinUsername) {
+  console.log('getUserProfileData is called...')
   return (dispatch, getState) => {
     return Promise.all([
       dispatch(fetchUser(username)),
