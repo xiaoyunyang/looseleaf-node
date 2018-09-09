@@ -56,44 +56,31 @@ export default class TopNav extends React.Component {
 
     postToApiData(url, data, cbFailure, cbSuccess);
   }
-  renderJoinBtn(label, id, userId, updatedCommunities) {
-    return (
-      <button id={id}
-         onClick={this.handleCtaClick.bind(this, userId, updatedCommunities)}
-         className="btn cta-btn">
-        {label}
-      </button>
-    );
-  }
-  renderLeaveBtn(userId, updatedCommunities) {
-    return (
-      <button
-         onClick={this.handleCtaClick.bind(this, userId, updatedCommunities)}
-         className="btn cta-btn">
-        Leave
-      </button>
-    );
-  }
   renderCta(userId, userCommunities, communitySlug) {
+    let updatedCommunities = userCommunities;
     // If user is a member of the community
     if (!userCommunities.includes(communitySlug)) {
-      return this.renderJoinBtn(
-        'Join This Community',
-        'signup-btn-header',
-        userId,
-        userCommunities.concat(communitySlug)
+      updatedCommunities = userCommunities.concat(communitySlug);
+      return (
+        <button
+          id='signup-btn-header'
+           onClick={this.handleCtaClick.bind(this, userId, updatedCommunities)}
+           className="btn cta-btn"
+           style={{marginTop: -70}}
+         >
+          Join This Community
+        </button>
       );
     }
     // If user is not a member of the community
+    updatedCommunities = userCommunities.filter(a => a !== communitySlug);
     return (
       <div id='community-cta'>
-        <p>You are a member of this community.<br/>
-        {
-          this.renderLeaveBtn(
-            userId,
-            userCommunities.filter(a => a !== communitySlug)
-          )
-        }
+        <p>
+          <span>You are a member of this community. </span>
+          <a onClick={this.handleCtaClick.bind(this, userId, updatedCommunities)}>
+            Leave
+          </a>
         </p>
       </div>
     );

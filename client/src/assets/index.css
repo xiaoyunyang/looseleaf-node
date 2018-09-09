@@ -34,7 +34,7 @@ a {
 }
 .span-anchor {
   color: #26a69a;
-  cursor: pointer;  
+  cursor: pointer;
 }
 main a:hover {
   text-decoration: underline;

@@ -1,20 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import appRoute from '../../data/appRoute';
+import { dateFormatted } from '../../../lib/helpers';
 
 const Users = ({ users }) => (
   <ul id="community-people" className="collection">
     { users &&
-      users.map(d => (
-        <li key={`user-${d.username}`} className="collection-item avatar">
-          <a href={appRoute('userProfile')(d.username)}>
-            <img src={d.picture} alt={d.username} />
+      users.map(user => (
+        <li key={`user-${user.username}`} className="collection-item avatar">
+          <a href={appRoute('userProfile')(user.username)}>
+            <img src={user.picture} alt={user.username} />
           </a>
-          <div style={{ paddingLeft: 20 }}>
-            <a href={appRoute('userProfile')(d.username)}>
-              {d.displayName}
+          <div style={{ paddingLeft: 20, paddingRight: 150 }}>
+            <a href={appRoute('userProfile')(user.username)}>
+            {user.displayName}
             </a>
-            <p>{d.bio}</p>
+            <p style={{fontSize: 14, fontWeight: 300, paddingBottom: 10}}>
+              {`Last Logged in ${dateFormatted(user.lastLoggedIn)}`}
+            </p>
+            <p>{user.bio}</p>
+            <button className="btn secondary-content" href="#!">Follow</button>
           </div>
         </li>
       ))
