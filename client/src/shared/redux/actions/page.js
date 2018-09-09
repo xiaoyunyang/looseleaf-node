@@ -6,6 +6,7 @@ import {
 
 import {
   fetchUser,
+  fetchUserFollowers,
   fetchLoggedinUser,
 } from './user';
 
@@ -43,11 +44,17 @@ export function getLoggedinUserData(loggedinUsername) {
 }
 
 export function getUserProfileData(username, loggedinUsername) {
-  console.log('getUserProfileData is called...')
   return (dispatch, getState) => {
     return Promise.all([
       dispatch(fetchUser(username)),
       dispatch(fetchLoggedinUser(loggedinUsername))
+    ])
+  }
+}
+export function getUserFollowers(username) {
+  return (dispatch, getState) => {
+    return Promise.all([
+      dispatch(fetchUserFollowers(username))
     ])
   }
 }

@@ -71,6 +71,9 @@ export default class Main extends Component {
       </div>
     );
   }
+  updateState() {
+    this.props.actions.getUserFollowers(this.props.user.info.username);
+  }
   render() {
     // TODO: The code below is an ugly hac but it works. I don't know why
     // this.props.match.slug no longer provides the tab name
@@ -110,10 +113,8 @@ export default class Main extends Component {
             <div className="col l12 m12 s12">
               <About
                 user={this.props.user.info}
-                isLoggedinUser={
-                  this.props.user.loggedinUser &&
-                  this.props.user.info._id === this.props.user.loggedinUser._id
-                }
+                loggedinUser={this.props.user.loggedinUser}
+                updateState={this.updateState.bind(this)}
               />
             </div>
           </div>

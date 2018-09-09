@@ -2,6 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import appRoute from '../../data/appRoute';
 import Communities from '../Collection/Communities';
+import { apiLink } from '../../data/apiLinks';
+import { postToApiData } from '../../../lib/helpers';
+
 
 const defaultUserPic = 'http://marketline.com/wp-content/plugins/all-in-one-seo-pack/images/default-user-image.png';
 
@@ -64,50 +67,105 @@ const UserInfo = ({ icon, info, orElse, to }) => (
     </div>
   </div>
 );
+class About extends React.Component {
+  handleFollowBtnClick(loggedinUserId, userToFollowId, action) {
 
+    // NOTE: the user who is doing the following isthe loggedinUser
+    const url = apiLink.userFollowing(loggedinUserId);
 
-export default ({ user, isLoggedinUser }) => (
-  <div className="hero-profile">
-    <div className="row">
-      <div className="col s12 m12 l3">
-        <img src={user.picture ? user.picture : defaultUserPic} alt="" className="circle" />
-        {
-          isLoggedinUser &&
-          <div className="center">
-            <Link to={appRoute('userSettings')(user.username)}>
-              Edit Profile
-            </Link>
-          </div>
-        }
-      </div>
-      <div className="col s12 m12 l9 hero-info">
-        <div className="hero-profile-center">
-          <span><h4>{user.displayName}</h4></span>
-          <p>{`@${user.username}`}</p>
-          <p>{`Member since ${getMonthYear(user.createdAt)}`}</p>
+    const data = {formFields: {userId: userToFollowId, action: action}};
+    const cbFailure = () => {};
+
+    const cbSuccess = (status, msg) =>  {
+      this.props.updateState();
+      // TODO: Do I really need to updateLoggedinUser again?
+    }
+    postToApiData(url, data, cbFailure, cbSuccess);
+  }
+  renderFollowBtn(loggedinUserId, currUserFollowers) {
+    if (currUserFollowers.includes(loggedinUserId)) {
+      return (
+        <div className="center" style={{paddingTop: 10}}>
+          <button
+            className="btn"
+            style={{paddingLeft: 15, paddingRight: 15}}
+            onClick={this.handleFollowBtnClick.bind(this, loggedinUserId, this.props.user._id, 'unfollow')}
+          >
+            Unfollow
+          </button>
         </div>
-        <Communities
-          icon="group"
-          cs={user.communities}
-          altern={<a href={appRoute('exploreCommunities')}>Join a community</a>}
-          hasIcon
-        />
-        <UserInfo icon={iconEnums.location}
-          info={user.location}
-          orElse="add location"
-          to={appRoute('userSettings')(user.username)}
-        />
-        <UserInfo icon={iconEnums.bio}
-          info={user.bio}
-          orElse="add bio"
-          to={appRoute('userSettings')(user.username)}
-        />
-        <UserInfo icon={iconEnums.website}
-          info={user.website}
-          orElse="add website"
-          to={appRoute('userSettings')(user.username)}
-        />
+      );
+    }
+    // TODO: Put the style stuff into the css file.
+    return (
+      <div className="center" style={{paddingTop: 10}}>
+        <button
+          className="btn"
+          style={{paddingLeft: 15, paddingRight: 15}}
+          onClick={this.handleFollowBtnClick.bind(this, loggedinUserId, this.props.user._id, 'follow')}
+        >
+          Follow
+        </button>
       </div>
-    </div>
-  </div>
-);
+    );
+  }
+  render() {
+    const isLoggedinUser= this.props.loggedinUser &&
+      this.props.user._id === this.props.loggedinUser._id;
+
+    return (
+      <div className="hero-profile">
+        <div className="row">
+          <div className="col s12 m12 l3">
+            <img
+              src={this.props.user.picture ? this.props.user.picture : defaultUserPic}
+              alt="" className="circle"
+            />
+            {
+              this.props.loggedinUser && isLoggedinUser &&
+              <div className="center">
+                <Link to={appRoute('userSettings')(this.props.user.username)}>
+                  Edit Profile
+                </Link>
+              </div>
+            }
+            {
+              this.props.loggedinUser && !isLoggedinUser &&
+              this.renderFollowBtn(this.props.loggedinUser._id, this.props.user.followers)
+            }
+          </div>
+          <div className="col s12 m12 l9 hero-info">
+            <div className="hero-profile-center">
+              <span><h4>{this.props.user.displayName}</h4></span>
+              <p>{`@${this.props.user.username}`}</p>
+              <p>{`Member since ${getMonthYear(this.props.user.createdAt)}`}</p>
+            </div>
+            <Communities
+              icon="group"
+              cs={this.props.user.communities}
+              altern={<a href={appRoute('exploreCommunities')}>Join a community</a>}
+              hasIcon
+            />
+            <UserInfo icon={iconEnums.location}
+              info={this.props.user.location}
+              orElse="add location"
+              to={appRoute('userSettings')(this.props.user.username)}
+            />
+            <UserInfo icon={iconEnums.bio}
+              info={this.props.user.bio}
+              orElse="add bio"
+              to={appRoute('userSettings')(this.props.user.username)}
+            />
+            <UserInfo icon={iconEnums.website}
+              info={this.props.user.website}
+              orElse="add website"
+              to={appRoute('userSettings')(this.props.user.username)}
+            />
+          </div>
+        </div>
+      </div>
+    );
+  }
+}
+
+export default About;

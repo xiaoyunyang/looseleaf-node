@@ -1,4 +1,5 @@
 import {
+  GET_USER_FOLLOWERS,
   GET_USER,
   SET_USER,
   GET_LOGGED_IN_USER,
@@ -22,6 +23,8 @@ const initState = {
     gender: "female",
     location: "Washington, District of Columbia",
     communities: [],
+    followers: [],
+    following: [],
     picture: "https://graph.facebook.com/10213296357138004/picture?type=large","__v":0
   },
   loggedinUser: {
@@ -37,6 +40,8 @@ const initState = {
     gender: "female",
     location: "Washington, District of Columbia",
     communities: [],
+    followers: [],
+    following: [],
     picture: "https://graph.facebook.com/10213296357138004/picture?type=large","__v":0
   }
 };
@@ -47,6 +52,11 @@ export default function user(state = initState, action) {
       return {
         ...state,
         info: action.data
+      }
+    case GET_USER_FOLLOWERS:
+      return {
+        ...state,
+        info: {...state.info, followers: action.data}
       }
     case SET_USER:
       return {

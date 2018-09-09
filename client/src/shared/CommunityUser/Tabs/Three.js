@@ -22,6 +22,7 @@ export default class Three extends React.Component {
   }
   updateState() {
     this.props.actions.getLoggedinUserData(this.props.state.user.loggedinUser.username);
+    // TODO: remove this and implement componentWillReceiveProps
     this.fetchUsers();
   }
   render() {
