@@ -2,11 +2,9 @@ import React from 'react';
 import $ from 'jquery';
 import InputAutocomplete from '../Form/InputAutocomplete';
 import { apiLink } from '../../data/apiLinks';
+import { image } from '../../data/assetLinks';
 import { getApiData } from '../../../lib/helpers';
 import Communities from './Communities';
-
-// const defaultUserPic = 'http://marketline.com/wp-content/plugins/all-in-one-seo-pack/images/default-user-image.png'
-const defaultUserPic = 'http://localhost:3001/user.png';
 
 // This is a ES6 class - see https://toddmotto.com/react-create-class-versus-component/
 export default class UserCards extends React.Component {
@@ -21,7 +19,8 @@ export default class UserCards extends React.Component {
         email: 'a@b.com',
         communities: ['Developers'],
         bio: 'hello.',
-        username: 'username'
+        username: 'username',
+        picture: image.defaultUser
       },
       inviteChoices: {},
       invited: ''
@@ -55,7 +54,8 @@ export default class UserCards extends React.Component {
         email: user.email,
         username: user.username,
         bio: user.bio,
-        communities: user.communities
+        communities: user.communities,
+        picture: user.picture
       }
     });
     $('select').material_select();
@@ -70,7 +70,7 @@ export default class UserCards extends React.Component {
       >
         <div className="card-panel center hoverable">
           <div className="row">
-            <img src={defaultUserPic} alt="" className="circle" />
+            <img src={user.picture} alt="" className="circle" />
           </div>
           <div className="row">
             <span className="title">
@@ -89,14 +89,17 @@ export default class UserCards extends React.Component {
           <div className="row">
             <div className="col s8 m10 l8">
               <h4>{this.state.modalPerson.fullName}</h4>
+              <p>{`@${this.state.modalPerson.username}`} </p>
+              <h6 style={{marginBottom: 20}}>
+                {this.state.modalPerson.bio}
+              </h6>
               <Communities
                 cs={this.state.modalPerson.communities}
                 altern={<div style={{fontWeight: 350}}>This user is not part of a community</div>}
                 hasIcon />
-              <h6>{this.state.modalPerson.bio}</h6>
             </div>
             <div className="col s4 m2 l4">
-              <img className="circle" alt="" src={defaultUserPic} />
+              <img className="circle" alt="" src={this.state.modalPerson.picture} />
             </div>
           </div>
         </div>

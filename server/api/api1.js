@@ -194,7 +194,7 @@ const updateProjectAndUser = ({
   project.save();
   // Add project to user
   user.set({
-    project: updatedProject
+    projects: updatedProject
   });
   user.save();
 };
@@ -247,7 +247,8 @@ const getUsers = ({ findCriteria, cbSuccess }) => {
           bio: user.bio,
           website: user.website,
           interests: user.interests,
-          communities: user.communities
+          communities: user.communities,
+          projects: user.projects
         };
         usersOut.push(userInfo);
       });
