@@ -1,5 +1,7 @@
 import {
   fetchProjectBySlug,
+  fetchContributorsByIds,
+  setContributors
 } from './project';
 
 import {
@@ -14,6 +16,16 @@ export function getProjectPageData(slug, username) {
       dispatch(fetchLoggedinUser(username))
     ])
   }
+}
+export function getProjectContributors(contributorIds) {
+  return (dispatch, getState) => {
+    return Promise.all([
+      dispatch(fetchContributorsByIds(contributorIds)),
+    ])
+  }
+}
+export function setProjectContributors(contributors) {
+  return setContributors(contributors);
 }
 export function getProjectData(slug) {
   return (dispatch, getState) => {

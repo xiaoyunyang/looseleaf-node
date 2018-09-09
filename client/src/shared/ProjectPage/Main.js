@@ -6,6 +6,7 @@ class Main extends React.Component {
     const appProps = {
       user: this.props.state.user,
       projectInfo: this.props.state.project.info,
+      contributors: this.props.state.project.contributors,
       actions: this.props.actions
     }
     return (

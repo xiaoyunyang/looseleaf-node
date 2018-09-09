@@ -3,6 +3,7 @@ import $ from 'jquery';
 import InputAutocomplete from '../Form/InputAutocomplete';
 import { apiLink } from '../../data/apiLinks';
 import { getApiData } from '../../../lib/helpers';
+import Communities from './Communities';
 
 // const defaultUserPic = 'http://marketline.com/wp-content/plugins/all-in-one-seo-pack/images/default-user-image.png'
 const defaultUserPic = 'http://localhost:3001/user.png';
@@ -16,9 +17,10 @@ export default class UserCards extends React.Component {
 
     this.state = {
       modalPerson: {
-        fullName: 'Firstname Lastname',
+        displayName: 'Firstname Lastname',
         email: 'a@b.com',
-        intro: 'Hello!',
+        communities: ['Developers'],
+        bio: 'hello.',
         username: 'username'
       },
       inviteChoices: {},
@@ -52,7 +54,8 @@ export default class UserCards extends React.Component {
         fullName: user.displayName,
         email: user.email,
         username: user.username,
-        intro: user.intro
+        bio: user.bio,
+        communities: user.communities
       }
     });
     $('select').material_select();
@@ -72,7 +75,7 @@ export default class UserCards extends React.Component {
           <div className="row">
             <span className="title">
               <h6 className="truncate">{user.displayName}</h6>
-              <p>{user.intro}</p>
+              <p>{user.communities.length > 0 && user.communities[0]}</p>
             </span>
           </div>
         </div>
@@ -86,11 +89,11 @@ export default class UserCards extends React.Component {
           <div className="row">
             <div className="col s8 m10 l8">
               <h4>{this.state.modalPerson.fullName}</h4>
-              <h6>role: {this.state.modalPerson.intro}</h6>
-                email: <a href={`mailto: ${this.state.modalPerson.email}`}>
-                  {this.state.modalPerson.email}
-                       </a>
-              <h6>Some stats displayed about this person in a row...</h6>
+              <Communities
+                cs={this.state.modalPerson.communities}
+                altern={<div style={{fontWeight: 350}}>This user is not part of a community</div>}
+                hasIcon />
+              <h6>{this.state.modalPerson.bio}</h6>
             </div>
             <div className="col s4 m2 l4">
               <img className="circle" alt="" src={defaultUserPic} />
@@ -128,7 +131,7 @@ export default class UserCards extends React.Component {
     return (
       <div id="invite-person-card-modal" style={{ paddingBottom: 20 }} className="modal">
         <div className="modal-content">
-          <h4>Invite A New Contributor</h4>          
+          <h4>Invite A New Contributor</h4>
           <InputAutocomplete
             id="select-invites"
             choices={this.state.inviteChoices}

@@ -6,8 +6,32 @@ import ProjectInfo from './ProjectInfo';
 import Contributors from './Contributors';
 import Feed from './Feed';
 import Footer from '../../../components/Footer';
+import { contributorIds as getIds } from '../../../../lib/helpers';
 
 class Main extends React.Component {
+  componentDidMount() {
+    this.fetchContributors();
+  }
+  fetchContributors() {
+    // NOTE: contributors is a dictionary which looks like this:
+    // {
+    //  {"5ac7f2b6cc78928a6f24a101":null},
+    //  {"5ac7f2b6cc78928a6f24a102":"2018-09-09T01:50:11.781Z"}
+    // }
+    // Where the key is the contributorId and value is either null (which means
+    // the user was a contributor once but quit) or a date (which signifies the date
+    // the user joined as a contributor)
+    // We only want keys whose values are not null
+    const contributors = this.props.projectInfo.contributors;
+
+    const contributorIds = getIds(contributors);
+    // If there is no contributor, do not fetch because that would cause api to return every user
+    if (contributorIds.length > 0) {
+      this.props.actions.getProjectContributors(contributorIds);
+    } else {
+      this.props.actions.setProjectContributors([]);
+    }
+  }
   render() {
     const location = (typeof document !== 'undefined') ? document.location.pathname : undefined;
     return (

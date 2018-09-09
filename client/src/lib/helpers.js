@@ -119,3 +119,9 @@ export const decodeHTMLEntities = (text) => {
   }
   return text;
 }
+
+export const contributorIds = contributors => {
+  return  Object.keys(contributors).filter(key => {
+   return contributors[key] !== null
+ });
+};

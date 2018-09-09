@@ -6,6 +6,7 @@ import { apiLink } from '../../../data/apiLinks';
 import appRoute from '../../../data/appRoute';
 import { postToApiData,  } from '../../../../lib/helpers';
 import Communities from '../../../components/Collection/Communities';
+import { contributorIds as getIds } from '../../../../lib/helpers';
 
 export default class ProjectInfo extends React.Component {
   constructor(props) {
@@ -15,13 +16,16 @@ export default class ProjectInfo extends React.Component {
     }
   }
   componentDidMount() {
+    this.fetchProjectCreator();
+  }
+  fetchProjectCreator() {
     const url = apiLink.userById(this.props.projectInfo.postedBy);
     const setApiData = data => this.setState({ user: data[0] });
     getApiData(url, setApiData);
   }
   renderProjectCreator(user) {
     return user && (
-      <p>
+      <p style={{marginBottom: 0, marginTop: -10}}>
         <span>Posted by </span>
         <a href={`/@${user.username}`}>{user.displayName}</a>
       </p>
@@ -40,13 +44,27 @@ export default class ProjectInfo extends React.Component {
       </div>
     );
   }
-  handleCtaClick(userId, projectId, action) {
+  handleCtaClick(userId, projectId, currContributors, action) {
+    const updatedContributors = Object.assign({}, currContributors);
+    if (action === 'contribute') {
+      // Add userId to updatedContributorIds
+      updatedContributors[userId] = 'dc'; // dc stands for don't care.
+    } else if (action === 'uncontribute') {
+      // remove userId from updatedContributorIds
+      updatedContributors[userId] = null;
+    }
+
     const url = apiLink.userProjects(userId, projectId, action);
     const data = {formFields: null};
     const cbFailure = () => {};
     const cbSuccess = (status, msg) =>  {
       this.props.actions.getProjectPageData(msg.projectSlug, msg.userUsername);
-      //this.props.updateState();
+      const contributorIds = getIds(updatedContributors);
+      if (contributorIds.length > 0) {
+        this.props.actions.getProjectContributors(contributorIds);
+      } else {
+        this.props.actions.setProjectContributors([]);
+      }
     }
     postToApiData(url, data, cbFailure, cbSuccess);
   }
@@ -54,15 +72,14 @@ export default class ProjectInfo extends React.Component {
     const contributors = projectInfo.contributors;
     const projectId = projectInfo._id;
     const userId = loggedinUser._id.toString();
-    const dateJoined = dateFormatted(userId);
     // If this user is a contributor ...
     if (contributors[userId]) {
       return (
         <p>
-          {`You are a contributor of this project since ${dateJoined}. `}
+          {`You are a contributor of this project since ${dateFormatted(contributors[userId])}. `}
           <span
             className="span-anchor"
-            onClick={this.handleCtaClick.bind(this, userId, projectId, 'uncontribute')}
+            onClick={this.handleCtaClick.bind(this, userId, projectId, projectInfo.contributors, 'uncontribute')}
           >
             Unjoin
           </span>
@@ -80,7 +97,7 @@ export default class ProjectInfo extends React.Component {
         <div className="col">
           <button
             className="btn teal lighten-1"
-            onClick={this.handleCtaClick.bind(this, userId, projectId, 'contribute')}
+            onClick={this.handleCtaClick.bind(this, userId, projectId, projectInfo.contributors, 'contribute')}
             >
             Contribute
           </button>
@@ -88,7 +105,14 @@ export default class ProjectInfo extends React.Component {
       </div>
     );
   }
-
+  renderDesc(desc) {
+    return (
+      <div>
+        <h6>Description:</h6>
+        <p style={{marginTop: -3}} dangerouslySetInnerHTML={{ __html: desc }} />
+      </div>
+    )
+  }
   render() {
     const {
       title,
@@ -108,15 +132,17 @@ export default class ProjectInfo extends React.Component {
             }
             <h4 dangerouslySetInnerHTML={{ __html: title }} />
             {this.renderProjectCreator(this.state.user)}
+            <p style={{marginTop: 0}}>
+              {`Created On: ${dateFormatted(createdAt)}`}
+            </p>
             {
-              desc !== '' && <p dangerouslySetInnerHTML={{ __html: desc }} />
+              desc !== '' && this.renderDesc(desc)
             }
-            <p>{`Created On: ${dateFormatted(createdAt)}`}</p>
             <div style={{maxWidth: 500}}>
               <Communities
-                icon="group"
                 cs={communities}
-                altern={<a href={appRoute('exploreCommunities')}>Join a community</a>}
+                altern={<div style={{fontWeight: 350}}>{'This project is not associated with a community'}</div>}
+                hasIcon
               />
             </div>
             {

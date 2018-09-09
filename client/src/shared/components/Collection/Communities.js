@@ -1,11 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Communities= ({icon, cs, altern}) => (
+const Communities= ({ cs, altern, hasIcon }) => (
   <div className="row portfolio-user-info">
-    <div className="col s1 m1 l1">
-      <i className="material-icons">{icon}</i>
-    </div>
+    {
+      hasIcon &&
+      <div className="col s1 m1 l1">
+        <i className="material-icons">group</i>
+      </div>
+    }
     <div className="col s11 m11 l11">
       {
         cs && cs.length>0 ? cs.map(c => {
@@ -21,10 +24,12 @@ const Communities= ({icon, cs, altern}) => (
 );
 Communities.propTypes = {
   cs: PropTypes.array,
-  altern: PropTypes.object
+  altern: PropTypes.object,
+  hasIcon: PropTypes.bool
 };
 Communities.defaultProps = {
   cs: null,
-  altern: null
+  altern: null,
+  hasIcon: false
 }
 export default Communities;
