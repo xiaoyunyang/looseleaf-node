@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { slug2Name } from '../../../lib/helpers';
 
 const Communities= ({ cs, altern, hasIcon }) => (
   <div className="row portfolio-user-info">
@@ -13,7 +14,7 @@ const Communities= ({ cs, altern, hasIcon }) => (
       {
         cs && cs.length>0 ? cs.map(c => {
         return <div key={`community-chip-${c}`} className="chip">
-          <a href={`/community/${c}`}>{c}</a>
+          <a href={`/community/${c}`}>{slug2Name(c)}</a>
         </div>;
         })
         :

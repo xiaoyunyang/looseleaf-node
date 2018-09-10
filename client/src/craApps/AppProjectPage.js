@@ -17,11 +17,12 @@ class AppProjectPage extends React.Component {
       // by supplying the username. If the username exists, a user version of the app will be displayed.
       // If the username does not exist, a guest version of the app will be displayed
       const username = {
-        valid: 'xiaoyunyang',
+        github: 'xiaoyunyang',
+        kyle: 'kyle',
         invalid: 'foop'
       }
       if (slug !== 'default') {
-        store.dispatch(actions.getProjectPageData(slug, username.valid));
+        store.dispatch(actions.getProjectPageData(slug, username.kyle));
       }
     }
   }

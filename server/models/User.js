@@ -19,10 +19,10 @@ const userSchema = mongoose.Schema({
   location: String,
   gender: String,
   hireable: String,
-  projects: Object,
-  followers: Array,
-  following: Array,
-  interests: Array,
+  projects: { type: Object, default: {} },
+  followers: { type: Array, default: [] },
+  following: { type: Array, default: [] },
+  interests: { type: Array, default: [] },
   local: {
     password: { type: String, required: true },
     passwordResetToken: String

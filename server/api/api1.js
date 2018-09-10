@@ -177,7 +177,6 @@ const updateProjectAndUser = ({
   project, user, userId, projectId, action
 }) => {
   let updatedContributors = project.contributors;
-
   let updatedProject = user.projects;
   if (action === 'contribute') {
     // Add user as a contributor of the project

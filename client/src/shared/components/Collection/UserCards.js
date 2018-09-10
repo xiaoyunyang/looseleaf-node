@@ -3,7 +3,7 @@ import $ from 'jquery';
 import InputAutocomplete from '../Form/InputAutocomplete';
 import { apiLink } from '../../data/apiLinks';
 import { image } from '../../data/assetLinks';
-import { getApiData } from '../../../lib/helpers';
+import { getApiData, slug2Name } from '../../../lib/helpers';
 import Communities from './Communities';
 
 // This is a ES6 class - see https://toddmotto.com/react-create-class-versus-component/
@@ -29,7 +29,6 @@ export default class UserCards extends React.Component {
   }
   componentDidMount() {
     this.loadPeople();
-    this.loadCommunities();
     this.initializeModal();
   }
   loadPeople() {
@@ -49,17 +48,6 @@ export default class UserCards extends React.Component {
       $('.modal').modal();
     });
   }
-  loadCommunities() {
-    const url = apiLink.communities;
-    const setApiData = communities => {
-      const names = {};
-      for (let i in communities) {
-        names[communities[i].slug] = communities[i].name.slice(0, -1) // the slice is to make plural word singular
-      }
-      this.setState({communities: names})
-    }
-    getApiData(url, setApiData);
-  }
   handlePersonCardClick(user) {
     this.setState({
       modalPerson: {
@@ -74,7 +62,6 @@ export default class UserCards extends React.Component {
     $('select').material_select();
   }
   renderPersonCard(user, i) {
-    console.log('communities', this.state.communities)
     return (
       <a
         href="#person-card-modal"
@@ -89,7 +76,7 @@ export default class UserCards extends React.Component {
           <div className="row">
             <span className="title">
               <h6 className="truncate">{user.displayName}</h6>
-              <p>{user.communities.length > 0 && this.state.communities[user.communities[0]]}</p>
+              <p>{user.communities.length > 0 && slug2Name(user.communities[0], true)}</p>
             </span>
           </div>
         </div>

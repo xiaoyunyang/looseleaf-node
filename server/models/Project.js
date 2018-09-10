@@ -16,7 +16,7 @@ const projectSchema = mongoose.Schema({
   desc: String,
   communities: Array,
   interestAreas: Array,
-  contributors: Object,
+  contributors: { type: Object, default: {} },
   submission: {
     platform: { type: String, required: true },
     instruction: { type: String, default: '' }

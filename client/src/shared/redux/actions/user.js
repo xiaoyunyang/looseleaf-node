@@ -36,8 +36,6 @@ export function fetchUserFollowers(username) {
       method: 'GET'
     }).then((response) => {
       return response.json().then((data) => { // On a successful response, get the JSON from the response.
-console.log('fetchUserFollowers...data', data)
-console.log('username...', username)
         return dispatch({  // Dispatch the action.
           type: GET_USER_FOLLOWERS,  // Type is the only required property of every action.
           data: data.pop().followers  // Attach the JSON data to the action payload on a property called data.

@@ -125,3 +125,17 @@ export const contributorIds = contributors => {
    return contributors[key] !== null
  });
 };
+export const slug2Name = (slug, singularize) => {
+
+  const capitalized = slug.split('-')
+    .reduce((acc, curr) =>
+    {
+      const currCapitalized = curr.charAt(0).toUpperCase() + curr.slice(1);
+      return `${acc}${currCapitalized} `
+    }, 
+    '');
+
+  const final = singularize ? capitalized.slice(0,-2) : capitalized.slice(0,-1); // because there's an extra space at the end of capitalized
+
+  return final;
+}
