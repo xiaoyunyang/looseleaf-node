@@ -19,7 +19,7 @@ class AppUserPage extends React.Component {
     }
     if (typeof document !== 'undefined') {
       const username = document.location.pathname.split('/@').pop();
-      store.dispatch(actions.getUserProfileData(username, loggedinUsername.invalid));
+      store.dispatch(actions.getUserProfileData(username, loggedinUsername.github));
     }
   }
   render() {

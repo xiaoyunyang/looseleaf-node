@@ -13,13 +13,15 @@ const store = initStore();
 class AppCommunityUser extends React.Component {
 
   componentDidMount() {
-    const usernames = [
-      'default',
-      'xyang',
-      'xiaoyunyang',
-      'kyle'
-    ];
-    const username = usernames[1];
+    const usernames = {
+      nil: 'default',
+      facebook: 'xyang',
+      github: 'xiaoyunyang',
+      chandler: 'chandler',
+      kyle: 'kyle'
+    }
+
+    const username = usernames.kyle;
 
     if(username && username !== 'default') {
       this.fetchUser(username);

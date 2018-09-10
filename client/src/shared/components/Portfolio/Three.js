@@ -19,14 +19,19 @@ export default class Three extends React.Component {
     }
   }
   fetchUsers(followers) {
-     if (followers.length > 0) {
+    if (followers.length === 0) {
+      this.setState({users: []});
+    } else {
       const setApiData = data => this.setState({ users: data });
       const url = apiLink.usersByIds(followers);
       getApiData(url, setApiData);
     }
   }
   updateState() {
-    this.props.actions.getUserProfileData(this.props.user.username, this.props.loggedinAs.username);
+    this.props.actions.getUserProfileData(
+      this.props.user.username,
+      this.props.loggedinAs.username
+    );
   }
   render() {
     return (

@@ -14,12 +14,14 @@ export default class Three extends React.Component {
     this.fetchUsers(this.props.user.following);
   }
   componentWillReceiveProps(nextProps) {
-    if(nextProps.user.following !== this.props.following) {
+    if(nextProps.user.following !== this.props.user.following) {
       this.fetchUsers(nextProps.user.following)
     }
   }
   fetchUsers(following) {
-     if (following.length > 0) {
+    if (following.length === 0) {
+      this.setState({ users: []})
+    } else {
       const setApiData = data => this.setState({ users: data });
       const url = apiLink.usersByIds(following);
       getApiData(url, setApiData);
