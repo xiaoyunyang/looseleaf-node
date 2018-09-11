@@ -1,7 +1,7 @@
 import React from 'react';
 import fetch from 'isomorphic-fetch';
 import TopNav from '../../components/TopNavUser/Main';
-import PostEditor from '../../components/Form/PostEditor';
+import PostEditor from '../../components/Discussion/PostEditor';
 
 const updates = [
   'A project update from someone you follow.',

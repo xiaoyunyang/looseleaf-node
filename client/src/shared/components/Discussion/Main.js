@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-import Posts from './Collection/Posts';
-import PostEditor from './Form/PostEditor';
-import { apiLink } from '../data/apiLinks';
-import { getApiData } from '../../lib/helpers';
+import Posts from './Posts';
+import PostEditor from './PostEditor';
+import { apiLink } from '../../data/apiLinks';
+import { getApiData } from '../../../lib/helpers';
 
 export default class Discussion extends React.Component {
   constructor(props) {

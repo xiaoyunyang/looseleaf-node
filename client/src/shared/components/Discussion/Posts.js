@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import PostDisplay from '../Form/PostDisplay';
-import PostEditor from '../Form/PostEditor2';
+import PostDisplay from './PostDisplay';
+import PostEditor from './PostEditor2';
 import { getApiData } from '../../../lib/helpers';
 import { image } from '../../data/assetLinks';
 import { apiLink } from '../../data/apiLinks';

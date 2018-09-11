@@ -1,8 +1,8 @@
 import React from 'react';
 import { getApiData } from '../../../lib/helpers';
 import { apiLink } from '../../data/apiLinks';
-import Posts from '../Collection/Posts';
-import Discussion from '../Discussion';
+import Posts from '../Discussion/Posts';
+import Discussion from '../Discussion/Main';
 
 export default class Two extends React.Component {
   constructor(props) {

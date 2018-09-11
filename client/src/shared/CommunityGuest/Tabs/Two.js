@@ -1,7 +1,7 @@
 import React from 'react';
 import TopNav from '../TopNav';
 import { communityPage as page }  from '../../data/appPage';
-import Discussion from '../../components/Discussion';
+import Discussion from '../../components/Discussion/Main';
 
 export default class Two extends React.Component {
   render() {
@@ -13,6 +13,7 @@ export default class Two extends React.Component {
             <h3>{page(this.props.community.slug).two.name}</h3>
               <Discussion
                 context='community'
+                communitySlug={this.props.community.slug}
                 slug={this.props.community.slug}
               />
           </div>
