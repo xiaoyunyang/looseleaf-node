@@ -32,7 +32,7 @@ export default class Two extends React.Component {
           <h3>Posts</h3>
           <Posts
             posts={this.state.posts}
-            loggedInAs={this.props.loggedinAs}
+            loggedinAs={this.props.loggedinAs}
             noPostDisp="This user has no posts."
             deletePost={this.deletePost.bind(this)}
           />

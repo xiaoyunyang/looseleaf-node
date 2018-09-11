@@ -31,7 +31,7 @@ export default class Discussion extends React.Component {
     this.setState({
       editorContent: d
     });
-    const userId = this.props.user._id;
+    const userId = this.props.loggedinUser._id;
     const content = d;
     const context = {
       project: this.props.projectId,
@@ -64,17 +64,17 @@ export default class Discussion extends React.Component {
     return (
       <div>
         {
-          this.props.user &&
+          this.props.loggedinUser &&
             <PostEditor
               handlePost={d => this.handlePost(d)}
-              userDisplayName={this.props.user.displayName}
-              userPic={this.props.user.picture}
+              userDisplayName={this.props.loggedinUser.displayName}
+              userPic={this.props.loggedinUser.picture}
               placeholder={this.props.newPostPlaceholder}
             />
         }
         <Posts
           posts={this.state.posts}
-          loggedInAs={this.props.user}
+          loggedinAs={this.props.loggedinUser}
           deletePost={this.deletePost.bind(this)}
         />
       </div>
@@ -88,7 +88,7 @@ export default class Discussion extends React.Component {
 // "Post an announcement, question, or insight to this community.
 // "Post an update, question, or clarification to this project."
 Discussion.propTypes = {
-  user: PropTypes.object,
+  loggedinUser: PropTypes.object,
   newPostPlaceholder: PropTypes.string,
   communitySlug: PropTypes.string,
   projectId: PropTypes.string,

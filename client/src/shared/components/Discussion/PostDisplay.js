@@ -54,14 +54,14 @@ const PostDisplay = ({
   username,
   userId,
   postId,
-  loggedInAs,
+  loggedinUser,
   deletePost,
   editorContent }) => (
   editorContent &&
     <div className="card feed">
       <div className="card-content">
         {
-          loggedInAs && loggedInAs._id === userId ?
+          loggedinUser && loggedinUser._id === userId ?
             <PostEditMenu
               postId={postId}
               deletePost={deletePost}

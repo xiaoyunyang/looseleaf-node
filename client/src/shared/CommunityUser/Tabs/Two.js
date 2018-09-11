@@ -21,7 +21,7 @@ export default class Two extends React.Component {
             <Discussion
               context='community'
               communitySlug={communityInfo.slug}
-              user={this.props.state.user.loggedinUser}
+              loggedinUser={this.props.state.user.loggedinUser}
               newPostPlaceholder='Post an announcement or question to this community.'
             />
           </div>
