@@ -118,5 +118,5 @@ TopNavUser.propTypes = {
 };
 TopNavUser.defaultProps = {
   redirPath: '/',
-  useExternLinks: false
+  useExternLinks: true
 };
