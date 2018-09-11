@@ -17,16 +17,19 @@ class Users extends React.Component {
     postToApiData(url, data, cbFailure, cbSuccess);
   }
   renderFollowBtn(userId, followers) {
+    if(!this.props.loggedinAs || this.props.loggedinAs._id.toString() === userId.toString()) {
+      return null;
+    }
     if (followers.includes(this.props.loggedinAs._id)) {
       return <button
-        className="btn secondary-content"
+        className="btn"
         onClick={this.handleFollowBtnClick.bind(this, userId, 'unfollow')}
         >
         Unfollow
       </button>
     }
     return <button
-      className="btn secondary-content"
+      className="btn"
       onClick={this.handleFollowBtnClick.bind(this, userId, 'follow')}>
       Follow
     </button>
@@ -40,19 +43,26 @@ class Users extends React.Component {
               <a href={appRoute('userProfile')(user.username)}>
                 <img src={user.picture} alt={user.username} />
               </a>
-              <div style={{ paddingLeft: 20, paddingRight: 150 }}>
+              <div className="user-info">
                 <a href={appRoute('userProfile')(user.username)}>
                 {user.displayName}
                 </a>
                 <p style={{fontSize: 14, fontWeight: 300, paddingBottom: 10}}>
                   {`Last Logged in ${dateFormatted(user.lastLoggedIn)}`}
                 </p>
-                <p>{user.bio}</p>
-                {
-                  this.props.loggedinAs &&
-                  this.props.loggedinAs._id.toString() !== user._id.toString() &&
-                  this.renderFollowBtn(user._id, user.followers)
-                }
+                <p>
+                  {user.bio}
+                </p>
+                <div className="hide-on-small-only secondary-content">
+                  {
+                    this.renderFollowBtn(user._id, user.followers)
+                  }
+                </div>
+                <div className="hide-on-med-and-up" style={{paddingTop: 20, paddingBottom: 20}}>
+                  {
+                    this.renderFollowBtn(user._id, user.followers)
+                  }
+                </div>
               </div>
             </li>
           ))
