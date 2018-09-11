@@ -31,6 +31,7 @@ export const apiLink = {
   logout: `${root}/auth/logout`,
   posts: `${root}/api/post`,
   postById: id => `${root}/api/post?_id=${id}`,
+  postEdit: id => `${root}/api/post/edit?_id=${id}`,
   postsByContext: (context, findBy) => `${root}/api/post/${context}/${findBy}`,
   postsByUserId: userId => `${root}/api/post?postedBy=${userId}`,
   authPath: `${root}/auth`

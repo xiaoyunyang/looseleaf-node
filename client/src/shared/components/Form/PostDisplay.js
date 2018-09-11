@@ -39,6 +39,8 @@ const decorator = new CompositeDecorator([{
   strategy: findLinkEntities,
   component: Link
 }]);
+
+// TODO: import the below code from draftjsHelpers
 const convertToEditorState = (editorContent) => {
   const content = convertFromRaw(JSON.parse(editorContent));
   const editorState = EditorState.createWithContent(content, decorator);
@@ -46,6 +48,7 @@ const convertToEditorState = (editorContent) => {
 };
 
 const PostDisplay = ({
+  handleToggleEditMode,
   userDisplayName,
   userPic,
   username,
@@ -59,7 +62,11 @@ const PostDisplay = ({
       <div className="card-content">
         {
           loggedInAs && loggedInAs._id === userId ?
-            <PostEditMenu postId={postId} deletePost={deletePost} />
+            <PostEditMenu
+              postId={postId}
+              deletePost={deletePost}
+              handleToggleEditMode={handleToggleEditMode}
+            />
             :
             null
         }

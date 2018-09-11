@@ -4,6 +4,9 @@ const Schema = mongoose.Schema;
 const getTags = tags => tags.join(',');
 const setTags = tags => tags.split(',');
 
+// TODO: contributors needs to be:
+// userId: { contribute: Date, watch: Date, submit: Date }
+
 const projectSchema = mongoose.Schema({
   createdAt: { type: Date, default: Date.now },
   postedBy: { type: mongoose.Schema.ObjectId, ref: 'User' },

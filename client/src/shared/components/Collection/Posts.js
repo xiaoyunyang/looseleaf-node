@@ -1,9 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import PostDisplay from '../Form/PostDisplay';
+import PostEditor from '../Form/PostEditor2';
 import { getApiData } from '../../../lib/helpers';
 import { image } from '../../data/assetLinks';
 import { apiLink } from '../../data/apiLinks';
+import { postToApiData } from '../../../lib/helpers';
 
 class Post extends React.Component {
   constructor(props) {
@@ -11,7 +13,9 @@ class Post extends React.Component {
     this.state = {
       userDisplayName: 'Firstname Lastname',
       userPic: image.defaultUser,
-      username: ''
+      username: '',
+      editMode: false,
+      editorContent: this.props.content
     };
   }
   componentDidMount() {
@@ -26,19 +30,53 @@ class Post extends React.Component {
     const link = apiLink.userById(id);
     getApiData(link, setApiData);
   }
+  handleToggleEditMode(editModeOn) {
+    this.setState({
+      editMode: editModeOn
+    });
+  }
+  handleEditPost(editedContent, postId) {
+    console.log('handleEditPost triggered!')
+    console.log('editedContent', editedContent)
+    console.log('typeof editedContent', typeof editedContent)
+    console.log('postId', postId)
+    const url = apiLink.postEdit(postId);
+    const data = { content: editedContent };
+    const cbFailure = () => {};
+    const cbSuccess = (status, msg) => {
+      this.setState({
+        editMode: false,
+        editorContent: msg
+      });
+    };
+    postToApiData(url, data , cbFailure, cbSuccess);
+
+  }
   render() {
     return (
       <div key={`post-${this.props.id}`}>
-        <PostDisplay
-          userDisplayName={this.state.userDisplayName}
-          userPic={this.state.userPic}
-          username={this.state.username}
-          userId={this.props.userId}
-          postId={this.props.postId}
-          editorContent={this.props.content}
-          loggedInAs={this.props.loggedInAs}
-          deletePost={this.props.deletePost}
-        />
+        { this.state.editMode ?
+          <PostEditor
+            userDisplayName={this.state.userDisplayName}
+            userPic={this.state.userPic}
+            editorContent={this.state.editorContent}
+            placeholder='Write something.'
+            handleToggleEditMode={this.handleToggleEditMode.bind(this)}
+            handlePost={editedContent => this.handleEditPost(editedContent, this.props.postId) }
+          />
+          :
+          <PostDisplay
+            userDisplayName={this.state.userDisplayName}
+            userPic={this.state.userPic}
+            username={this.state.username}
+            userId={this.props.userId}
+            postId={this.props.postId}
+            editorContent={this.state.editorContent}
+            loggedInAs={this.props.loggedInAs}
+            deletePost={this.props.deletePost}
+            handleToggleEditMode={this.handleToggleEditMode.bind(this)}
+          />
+        }
       </div>
     );
   }

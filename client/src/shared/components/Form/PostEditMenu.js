@@ -24,6 +24,9 @@ export default class PostEditMenu extends React.Component {
     };
     deleteFromApiData(url, cbFailure, cbSuccess);
   }
+  handleToggleEditClick() {
+    this.props.handleToggleEditMode(true);
+  }
   render() {
     return (
       <div className="right" style={{maxWidth: 35}}>
@@ -31,7 +34,7 @@ export default class PostEditMenu extends React.Component {
           <i className="material-icons grey-text text-darken-4">more_vertical</i>
         </a>
         <ul id={`post-edit-dropdown-${this.props.postId}`} className="dropdown-content">
-          <li><a>
+          <li><a onClick={this.handleToggleEditClick.bind(this)}>
             <span><i className="far fa-edit"/></span>Edit</a>
           </li>
           <li><a onClick={this.handleDeleteClick.bind(this, this.props.postId)}>

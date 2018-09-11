@@ -38,6 +38,26 @@ api.delete('/post', (req, res) => {
   });
 });
 
+// edit post as the person who contributes to the post
+api.post('/post/edit', (req, res) => {
+  const { content } = req.body;
+  const editedOn = new Date();
+  Post.findById(req.query._id, (err, post) => {
+    if (err) return res.send('Error');
+    if (post) {
+      post.set({
+        content,
+        editedOn
+      });
+      post.save();
+      return res.send({
+        status: 'success',
+        msg: content
+      });
+    }
+  });
+});
+
 api.post('/post', (req, res) => {
   const { content, userId, context } = req.body;
   const newPost = new Post();

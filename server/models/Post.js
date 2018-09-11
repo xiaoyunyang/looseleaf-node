@@ -11,6 +11,7 @@ const projectSchema = mongoose.Schema({
     type: String,
     required: true
   },
+  editedOn: { type: Date, default: null },
   comments: [{
     text: String,
     created: { type: Date, default: Date.now },

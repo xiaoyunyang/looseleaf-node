@@ -2,67 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {
   convertToRaw,
-  convertFromRaw,
   EditorState,
   RichUtils
 } from 'draft-js';
 import Editor from 'draft-js-plugins-editor';
-import createMarkdownPlugin from 'draft-js-markdown-plugin';
 
-// import createMarkdownShortcutsPlugin from 'draft-js-markdown-shortcuts-plugin';
-import createInlineToolbarPlugin, { Separator } from 'draft-js-inline-toolbar-plugin';
-import {
-  ItalicButton,
-  BoldButton,
-  UnderlineButton,
-  CodeButton,
-  UnorderedListButton,
-  OrderedListButton,
-  BlockquoteButton,
-  CodeBlockButton
-} from 'draft-js-buttons';
-import createLinkPlugin from 'draft-js-anchor-plugin';
-/*
-NOTE:
-Basic Setup: https://goo.gl/nwPu5Y
-Add Link Examples from Draft-js github: https://goo.gl/3NG89J
-Codepen: https://codepen.io/xiaoyunyang/pen/QBBaPq
-*/
-
-const convertToEditorState = (editorContent) => {
-  const content = convertFromRaw(JSON.parse(editorContent));
-  const editorState = EditorState.createWithContent(content);
-  return editorState;
-};
-
-const linkPlugin = createLinkPlugin({
-  placeholder: 'Enter a URL and press enter'
-});
-
-const inlineToolbarPlugin = createInlineToolbarPlugin({
-  structure: [
-    BoldButton,
-    ItalicButton,
-    UnderlineButton,
-    CodeButton,
-    Separator,
-    UnorderedListButton,
-    OrderedListButton,
-    BlockquoteButton,
-    CodeBlockButton,
-    linkPlugin.LinkButton
-  ]
-});
-
-// const inlineToolbarPlugin = createInlineToolbarPlugin();
+import { convertToEditorState, newPlugins } from './draftjsHelpers';
+const { plugins, inlineToolbarPlugin } = newPlugins();
 const { InlineToolbar } = inlineToolbarPlugin;
-
-// TODO: Is there a way to recognize "cmd + k" or "ctrl + k" to open the url input?
-const plugins = [
-  inlineToolbarPlugin,
-  linkPlugin,
-  createMarkdownPlugin()
-];
 
 export default class PostEditor extends React.Component {
   static defaultProps = {
@@ -79,6 +26,7 @@ export default class PostEditor extends React.Component {
     this.handleKeyCommand = this.handleKeyCommand.bind(this);
     this.renderPlaceholder = this.renderPlaceholder.bind(this);
     this.handlePost = this.handlePost.bind(this);
+    this.handleCancel = this.handleCancel.bind(this);
 
     // TODO: Is there a way to increase the height of the input area
     // when on focus?
@@ -113,7 +61,10 @@ export default class PostEditor extends React.Component {
     const content = this.state.editorState.getCurrentContent();
     // content to save to the db
     const contentToSave = JSON.stringify(convertToRaw(content));
-    this.props.handlePost(contentToSave, this.clearEditor());
+    this.props.handlePost(contentToSave);
+  }
+  handleCancel() {
+    this.props.handleToggleEditMode(false);
   }
   hasContent(editorState) {
     const contentState = editorState.getCurrentContent();
@@ -136,6 +87,13 @@ export default class PostEditor extends React.Component {
         <button className="btn disabled">
           Post
         </button>
+    );
+  }
+  renderCancelBtn() {
+    return (
+      <button style={{marginLeft: 20}} className="btn red lighten-2" onClick={this.handleCancel}>
+        Cancel
+      </button>
     );
   }
   renderEditor() {
@@ -167,6 +125,7 @@ export default class PostEditor extends React.Component {
         </div>
         <div className="card-action">
           {this.renderPostBtn(this.state.editorState)}
+          {this.renderCancelBtn()}
         </div>
       </div>
     );
