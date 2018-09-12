@@ -7,6 +7,8 @@ import { image } from '../../data/assetLinks';
 import { apiLink } from '../../data/apiLinks';
 import { postToApiData } from '../../../lib/helpers';
 
+// TODO: For consistency, change the name of one of the props for this component from
+// loggedInAs to loggedinUser
 class Post extends React.Component {
   constructor(props) {
     super(props);
@@ -15,6 +17,7 @@ class Post extends React.Component {
       userPic: image.defaultUser,
       username: '',
       editMode: false,
+      editedOn: this.props.post.editedOn,
       editorContent: this.props.post.content
     };
   }
@@ -42,7 +45,8 @@ class Post extends React.Component {
     const cbSuccess = (status, msg) => {
       this.setState({
         editMode: false,
-        editorContent: msg
+        editorContent: msg.content,
+        editedOn: msg.editedOn
       });
     };
     postToApiData(url, data , cbFailure, cbSuccess);
@@ -67,6 +71,7 @@ class Post extends React.Component {
             username={this.state.username}
             userId={this.props.post.postedBy}
             postId={this.props.post._id}
+            editedOn={this.state.editedOn}
             editorContent={this.state.editorContent}
             loggedinUser={this.props.loggedinAs}
             deletePost={this.props.deletePost}

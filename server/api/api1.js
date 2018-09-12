@@ -52,7 +52,7 @@ api.post('/post/edit', (req, res) => {
       post.save();
       return res.send({
         status: 'success',
-        msg: content
+        msg: { content, editedOn }
       });
     }
   });

@@ -54,6 +54,7 @@ const PostDisplay = ({
   username,
   userId,
   postId,
+  editedOn,
   loggedinUser,
   deletePost,
   editorContent }) => (
@@ -77,6 +78,11 @@ const PostDisplay = ({
           <div className="col" style={{marginLeft: -18}}>
             <a href={`/@${username}`}>{userDisplayName}</a>
           </div>
+          { editedOn &&
+            <div className="col">
+              <p style={{fontWeight: 300, fontSize: 14, paddingTop: 5}}>Edited</p>
+            </div>
+          }
         </div>
         <div className="draft-js-editor">
           <Editor
