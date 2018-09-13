@@ -4,9 +4,7 @@ import appRoute from '../../data/appRoute';
 import Communities from '../Collection/Communities';
 import { apiLink } from '../../data/apiLinks';
 import { postToApiData } from '../../../lib/helpers';
-
-
-const defaultUserPic = 'http://marketline.com/wp-content/plugins/all-in-one-seo-pack/images/default-user-image.png';
+import { image } from '../../data/assetLinks';
 
 const getMonthYear = (dateString) => {
   // dateStr looks like 'Fri Apr 06 2018'
@@ -53,19 +51,36 @@ const TextOrLink = ({ iconName, content }) => (
   </div>
 );
 
-const UserInfo = ({ icon, info, orElse, to }) => (
-  <div className="row portfolio-user-info">
-    <div className="col s1 m1 l1">
-      <i className="material-icons">{icon}</i>
+const UserInfo = ({ icon, info, orElse, to, isLoggedinUser }) => (
+  <div>
+  {
+    isLoggedinUser &&
+    <div className="row portfolio-user-info">
+      <div className="col s1 m1 l1">
+        <i className="material-icons">{icon}</i>
+      </div>
+      <div className="col s11 m11 l11">
+        { info ?
+          <TextOrLink iconName={icon} content={info} />
+          :
+          <Link to={to}>{orElse}</Link>
+        }
+      </div>
     </div>
-    <div className="col s11 m11 l11">
-      { info ?
-        <TextOrLink iconName={icon} content={info} />
-        :
-        <Link to={to}>{orElse}</Link>
-      }
-    </div>
+    }
+    {
+      !isLoggedinUser && info &&
+      <div className="row portfolio-user-info">
+        <div className="col s1 m1 l1">
+          <i className="material-icons">{icon}</i>
+        </div>
+        <div className="col s11 m11 l11">
+          <TextOrLink iconName={icon} content={info} />
+        </div>
+      </div>
+    }
   </div>
+
 );
 class About extends React.Component {
   handleFollowBtnClick(loggedinUserId, userToFollowId, action) {
@@ -114,11 +129,11 @@ class About extends React.Component {
       this.props.user._id === this.props.loggedinUser._id;
 
     return (
-      <div className="hero-profile">
+      <div className="hero-profile" style={{paddingBottom: 20}}>
         <div className="row">
           <div className="col s12 m12 l3">
             <img
-              src={this.props.user.picture ? this.props.user.picture : defaultUserPic}
+              src={this.props.user.picture ? this.props.user.picture : image.defaultUser}
               alt="" className="circle"
             />
             {
@@ -144,21 +159,25 @@ class About extends React.Component {
               icon="group"
               cs={this.props.user.communities}
               altern={<a href={appRoute('exploreCommunities')}>Join a community</a>}
+              isLoggedinUser={isLoggedinUser}
               hasIcon
             />
             <UserInfo icon={iconEnums.location}
               info={this.props.user.location}
               orElse="add location"
+              isLoggedinUser={isLoggedinUser}
               to={appRoute('userSettings')(this.props.user.username)}
             />
             <UserInfo icon={iconEnums.bio}
               info={this.props.user.bio}
               orElse="add bio"
+              isLoggedinUser={isLoggedinUser}
               to={appRoute('userSettings')(this.props.user.username)}
             />
             <UserInfo icon={iconEnums.website}
               info={this.props.user.website}
               orElse="add website"
+              isLoggedinUser={isLoggedinUser}
               to={appRoute('userSettings')(this.props.user.username)}
             />
           </div>
