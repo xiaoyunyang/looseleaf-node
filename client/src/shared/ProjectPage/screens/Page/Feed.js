@@ -7,7 +7,7 @@ const Feed = ({ user, projectId }) => (
     <div className="col s12 m12 l12 user-feed">
     {
       <Discussion
-        user={user}
+        loggedinUser={user}
         context='project'
         projectId={projectId.toString()}
         newPostPlaceholder='Post an update, question, or clarification to this project.'

@@ -464,11 +464,18 @@ nav .dropdown-content li:hover {
   color: #26a69a !important;
 }
 .feed .card-action a {
-  font-size: 13px;
+  font-size: 12px;
+}
+.feed-user a {
+  font-size: 16px;
 }
 .feed-user img {
-  width: 30px;
+  width: 45px;
   margin-right: 5px;
+}
+.feed-user p {
+  font-weight: 300;
+  font-size: 14px;
 }
 #user-home .card-panel {
   position: fixed;

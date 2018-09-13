@@ -90,7 +90,8 @@ export const randomUser = (setState) => {
 export const getPageName = (url) => {
   return url.split('/').pop();
 };
-export const dateFormatted = (dateStr) => {
+
+export const dateFormatted = dateStr => {
   if (!dateStr) return '';
 
   const options = { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' };
@@ -98,6 +99,7 @@ export const dateFormatted = (dateStr) => {
   const formatted = new Date(dateStr).toLocaleDateString('en-US', options).split(/,(.+)/)[1];
   return formatted;
 };
+
 export const decodeHTMLEntities = (text) => {
   const entities = [
       ['amp', '&'],
@@ -125,6 +127,8 @@ export const contributorIds = contributors => {
    return contributors[key] !== null
  });
 };
+
+// This function is used for displaying community tags properties
 export const slug2Name = (slug, singularize) => {
 
   const capitalized = slug.split('-')
@@ -132,7 +136,7 @@ export const slug2Name = (slug, singularize) => {
     {
       const currCapitalized = curr.charAt(0).toUpperCase() + curr.slice(1);
       return `${acc}${currCapitalized} `
-    }, 
+    },
     '');
 
   const final = singularize ? capitalized.slice(0,-2) : capitalized.slice(0,-1); // because there's an extra space at the end of capitalized

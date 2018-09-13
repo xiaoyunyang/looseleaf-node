@@ -115,7 +115,6 @@ export default class ProjectInfo extends React.Component {
     )
   }
   renderCreatorInfo({ about, mission }) {
-    console.log('about...', about)
     if (about === '' && mission === '') return;
     return (
       <div>
@@ -165,7 +164,7 @@ export default class ProjectInfo extends React.Component {
             <div style={{maxWidth: 500}}>
               <Communities
                 cs={communities}
-                altern={<div style={{fontWeight: 350}}>{'This project is not associated with a community'}</div>}
+                altern={<div style={{fontWeight: 350}}>{'This project is not associated with a community.'}</div>}
                 showAltern
                 hasIcon
               />

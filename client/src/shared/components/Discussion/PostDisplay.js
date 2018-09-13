@@ -1,13 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { CompositeDecorator, convertFromRaw, Editor, EditorState } from 'draft-js';
+import { dateFormatted } from '../../../lib/helpers';
 import PostEditMenu from './PostEditMenu';
 
 const Reactions = () => (
   <div>
     <a href="">Interesting</a>
     <a href="">Clap</a>
-    <a href="">Respond</a>
+    <a href="">Response</a>
   </div>
 );
 
@@ -57,6 +58,7 @@ const PostDisplay = ({
   editedOn,
   loggedinUser,
   deletePost,
+  createdAt,
   editorContent }) => (
   editorContent &&
     <div className="card feed">
@@ -76,11 +78,17 @@ const PostDisplay = ({
             <img className="circle" src={userPic} alt="" />
           </div>
           <div className="col" style={{marginLeft: -18}}>
-            <a href={`/@${username}`}>{userDisplayName}</a>
+            <span>
+              <a href={`/@${username}`}>{userDisplayName}</a>
+            </span>
+            <p style={{paddingLeft: 15, fontSize: 14}}>
+              {dateFormatted(createdAt)}
+            </p>
           </div>
-          { editedOn &&
+          {
+            editedOn &&
             <div className="col">
-              <p style={{fontWeight: 300, fontSize: 14, paddingTop: 5}}>Edited</p>
+              <p style={{marginLeft: 12, paddingTop: 5}}>Edited</p>
             </div>
           }
         </div>
