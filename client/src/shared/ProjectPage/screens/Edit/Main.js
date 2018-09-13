@@ -1,6 +1,6 @@
 import React from 'react';
 import TopNav from '../../../components/TopNavUser/Main';
-import ProjectForm from '../../../components/Form/ProjectForm';
+import ProjectForm from './ProjectForm';
 import { apiLink } from '../../../data/apiLinks';
 import { getApiData } from '../../../../lib/helpers';
 import { interests, platforms } from '../../../data/TempData';
@@ -57,7 +57,7 @@ export default class extends React.Component {
             projectTypes={['Software Development', 'Design', 'Writng', 'Data Science', 'Illustration', 'Video Production']}
             tags={interests}
             platforms={platforms}
-            aboutMe={this.props.user.loggedinUser.bio}
+            creator={this.props.projectInfo.creator}
             people={this.state.people}
             title={this.props.projectInfo.title}
             desc={this.props.projectInfo.desc}

@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { slug2Name } from '../../../lib/helpers';
 
-const Communities= ({ cs, altern, hasIcon, isLoggedinUser }) => (
+const Communities= ({ cs, altern, hasIcon, showAltern }) => (
   <div>
     {
-      isLoggedinUser &&
+      showAltern &&
       <div className="row portfolio-user-info">
         {
           hasIcon &&
@@ -27,7 +27,7 @@ const Communities= ({ cs, altern, hasIcon, isLoggedinUser }) => (
       </div>
     }
     {
-      !isLoggedinUser && cs && cs.length > 0 &&
+      !showAltern && cs && cs.length > 0 &&
       <div className="row portfolio-user-info">
         {
           hasIcon &&

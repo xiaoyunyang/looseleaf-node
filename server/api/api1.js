@@ -91,27 +91,37 @@ api.get('/post/project/:id', (req, res) => {
 });
 
 // Projects ======================================================================
+const updatedProjectProps = formFields => {
+  return {
+    creator: {
+      about: validator.escape(formFields.creatorAbout),
+      mission: validator.escape(formFields.creatorMission)
+    },
+    title: validator.escape(formFields.title),
+    desc: validator.escape(formFields.desc),
+    communities: formFields.communities,
+    interestAreas: formFields.interestAreas,
+    contributors: formFields.contributors.map(c => c.id),
+    submission: {
+      platform: formFields.selectedPlatform,
+      instruction: validator.escape(formFields.submissionInst)
+    },
+    dueDate: formFields.dueDate
+  };
+};
 const addNewProject = (formFields, postedBy) => {
   const newProject = new Project();
+
+  // Fields you cannot update:
   const slug = urlSlug(formFields.title, cuid.slug());
   newProject.postedBy = postedBy;
-  newProject.creator = {
-    about: validator.escape(formFields.aboutMe),
-    mission: validator.escape(formFields.mission)
-  };
-
-  newProject.title = validator.escape(formFields.title);
   newProject.slug = slug;
-  newProject.desc = validator.escape(formFields.desc);
-  newProject.communities = formFields.communities;
-  newProject.interestAreas = formFields.interestAreas;
-  newProject.contributors = formFields.contributors.map(c => c.id);
 
-  newProject.submission = {
-    platform: formFields.selectedPlatform,
-    instruction: validator.escape(formFields.submissionInst)
-  };
-  newProject.dueDate = formFields.dueDate;
+  // Fields you can update:
+  // Below line of code combines properties from the updatedProject factory
+  // function into newProject
+  Object.assign(newProject, updatedProjectProps(formFields));
+
   newProject.save();
   return slug;
 };
@@ -121,19 +131,7 @@ const updateProject = (formFields, slug, cbFailure) => {
       return cbFailure();
     }
     if (project) {
-      const title = validator.escape(formFields.title);
-      const desc = validator.escape(formFields.desc);
-      const communities = formFields.communities;
-      const interestAreas = formFields.interestAreas;
-      const submission = {
-        platform: formFields.selectedPlatform,
-        instruction: validator.escape(formFields.submissionInst)
-      };
-      const dueDate = formFields.dueDate;
-
-      project.set({
-        title, desc, communities, interestAreas, submission, dueDate
-      });
+      project.set(updatedProjectProps(formFields));
       project.save();
       return slug;
     }

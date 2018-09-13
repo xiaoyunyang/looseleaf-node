@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import InputTags from './InputTags';
-import InputDropdown from './InputDropdown';
-import InputCheckboxes from './InputCheckboxes';
-import DatePicker from './DatePicker';
-import FlashNotif from '../FlashNotif';
-import TextAreaInput from './TextAreaInput';
-import TextInput from './TextInput';
-import { postToApiData } from '../../../lib/helpers';
+import InputTags from '../../../components/Form/InputTags';
+import InputDropdown from '../../../components/Form/InputDropdown';
+import InputCheckboxes from '../../../components/Form/InputCheckboxes';
+import DatePicker from '../../../components/Form/DatePicker';
+import FlashNotif from '../../../components/FlashNotif';
+import TextAreaInput from '../../../components/Form/TextAreaInput';
+import TextInput from '../../../components/Form/TextInput';
+import { postToApiData } from '../../../../lib/helpers';
 
 export default class ProjectForm extends React.Component {
   constructor(props) {
@@ -18,8 +18,8 @@ export default class ProjectForm extends React.Component {
       desc: this.props.desc,
       communities: this.props.selectedCommunities,
       interestAreas: this.props.selectedInterestAreas,
-      aboutMe: this.props.aboutMe,
-      mission: '',
+      creatorAbout: this.props.creator.about,
+      creatorMission: this.props.creator.mission,
       contributors: [], // should be an array of ids
       selectedPlatform: this.props.platforms[0],
       submissionInst: '',
@@ -47,6 +47,8 @@ export default class ProjectForm extends React.Component {
     postToApiData(postUrl, data, cbFailure, cbSucess);
   }
   render() {
+        console.log('foooo', this.props.creator.about)
+      console.log('foooo', this.props.creator.mission)
     return (
       <div className="col s12">
         <div className="card-panel white">
@@ -93,15 +95,15 @@ export default class ProjectForm extends React.Component {
             <div className="col s12">
               <TextAreaInput
                 id="text-about-me"
-                field={this.state.aboutMe}
+                field={this.state.creatorAbout}
                 label="About Me"
-                onChange={d => this.setState({ aboutMe: d })}
+                onChange={d => this.setState({ creatorAbout: d })}
               />
               <TextAreaInput
                 id="text-mission"
-                field={this.state.mission}
+                field={this.state.creatorMission}
                 label="My Mission"
-                onChange={d => this.setState({ mission: d })}
+                onChange={d => this.setState({ creatorMission: d })}
               />
             </div>
           </div>

@@ -159,7 +159,7 @@ class About extends React.Component {
               icon="group"
               cs={this.props.user.communities}
               altern={<a href={appRoute('exploreCommunities')}>Join a community</a>}
-              isLoggedinUser={isLoggedinUser}
+              showAltern={isLoggedinUser}
               hasIcon
             />
             <UserInfo icon={iconEnums.location}

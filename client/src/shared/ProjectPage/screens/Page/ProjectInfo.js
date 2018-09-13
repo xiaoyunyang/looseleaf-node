@@ -106,12 +106,32 @@ export default class ProjectInfo extends React.Component {
     );
   }
   renderDesc(desc) {
+    if (desc === '') return;
     return (
       <div>
         <h6>Description:</h6>
         <p style={{marginTop: -3}} dangerouslySetInnerHTML={{ __html: desc }} />
       </div>
     )
+  }
+  renderCreatorInfo({ about, mission }) {
+    console.log('about...', about)
+    if (about === '' && mission === '') return;
+    return (
+      <div>
+        <h6>About the Project Creator:</h6>
+        { about !== '' &&
+          <p style={{marginTop: -3}} dangerouslySetInnerHTML={{ __html: about }} />
+        }
+        {
+          mission !== '' &&
+          <p>
+            <span style={{marginRight: 4}}>Mission:</span>{mission}
+          </p>
+        }
+      </div>
+    )
+
   }
   render() {
     const {
@@ -120,6 +140,7 @@ export default class ProjectInfo extends React.Component {
       dueDate,
       createdAt,
       postedBy,
+      creator,
       communities,
     } = this.props.projectInfo;
     return (
@@ -136,12 +157,16 @@ export default class ProjectInfo extends React.Component {
               {`Created On: ${dateFormatted(createdAt)}`}
             </p>
             {
-              desc !== '' && this.renderDesc(desc)
+              this.renderDesc(desc)
+            }
+            {
+              this.renderCreatorInfo(creator)
             }
             <div style={{maxWidth: 500}}>
               <Communities
                 cs={communities}
                 altern={<div style={{fontWeight: 350}}>{'This project is not associated with a community'}</div>}
+                showAltern
                 hasIcon
               />
             </div>
