@@ -2,67 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {
   convertToRaw,
-  convertFromRaw,
   EditorState,
   RichUtils
 } from 'draft-js';
 import Editor from 'draft-js-plugins-editor';
-import createMarkdownPlugin from 'draft-js-markdown-plugin';
-
-// import createMarkdownShortcutsPlugin from 'draft-js-markdown-shortcuts-plugin';
-import createInlineToolbarPlugin, { Separator } from 'draft-js-inline-toolbar-plugin';
-import {
-  ItalicButton,
-  BoldButton,
-  UnderlineButton,
-  CodeButton,
-  UnorderedListButton,
-  OrderedListButton,
-  BlockquoteButton,
-  CodeBlockButton
-} from 'draft-js-buttons';
-import createLinkPlugin from 'draft-js-anchor-plugin';
-/*
-NOTE:
-Basic Setup: https://goo.gl/nwPu5Y
-Add Link Examples from Draft-js github: https://goo.gl/3NG89J
-Codepen: https://codepen.io/xiaoyunyang/pen/QBBaPq
-*/
-
-const convertToEditorState = (editorContent) => {
-  const content = convertFromRaw(JSON.parse(editorContent));
-  const editorState = EditorState.createWithContent(content);
-  return editorState;
-};
-
-const linkPlugin = createLinkPlugin({
-  placeholder: 'Enter a URL and press enter'
-});
-
-const inlineToolbarPlugin = createInlineToolbarPlugin({
-  structure: [
-    BoldButton,
-    ItalicButton,
-    UnderlineButton,
-    CodeButton,
-    Separator,
-    UnorderedListButton,
-    OrderedListButton,
-    BlockquoteButton,
-    CodeBlockButton,
-    linkPlugin.LinkButton
-  ]
-});
-
-// const inlineToolbarPlugin = createInlineToolbarPlugin();
-const { InlineToolbar } = inlineToolbarPlugin;
-
-// TODO: Is there a way to recognize "cmd + k" or "ctrl + k" to open the url input?
-const plugins = [
-  inlineToolbarPlugin,
-  linkPlugin,
-  createMarkdownPlugin()
-];
+import { convertToEditorState } from './draftjsHelpers';
 
 export default class PostEditor extends React.Component {
   static defaultProps = {
@@ -79,6 +23,7 @@ export default class PostEditor extends React.Component {
     this.handleKeyCommand = this.handleKeyCommand.bind(this);
     this.renderPlaceholder = this.renderPlaceholder.bind(this);
     this.handlePost = this.handlePost.bind(this);
+    this.handleCancel = this.handleCancel.bind(this); // post edit mode only
 
     // TODO: Is there a way to increase the height of the input area
     // when on focus?
@@ -90,13 +35,13 @@ export default class PostEditor extends React.Component {
       const newEditorState = convertToEditorState(this.props.editorContent);
       this.setState({
         editorState: newEditorState
-      })
+      });
     }
   }
   clearEditor() {
     this.setState({
       editorState: EditorState.createEmpty()
-    })
+    });
   }
   // Here, we are passing a command (like bold or underline) as an argument,
   // which will get passed to the RichUtils.handleKeyCommand, which handles
@@ -113,7 +58,16 @@ export default class PostEditor extends React.Component {
     const content = this.state.editorState.getCurrentContent();
     // content to save to the db
     const contentToSave = JSON.stringify(convertToRaw(content));
+
+    // TODO: we only want to clearEditor if the post has been successfully created
+    // or updated. If the server does not respond with OK, we do not want to clearEditor.
+    // We want to retain the editor state so user can try posting again later without
+    // having to re-type everything.
     this.props.handlePost(contentToSave, this.clearEditor());
+  }
+  // post edit mode only
+  handleCancel() {
+    this.props.handleToggleEditMode(false);
   }
   hasContent(editorState) {
     const contentState = editorState.getCurrentContent();
@@ -138,6 +92,13 @@ export default class PostEditor extends React.Component {
         </button>
     );
   }
+  renderCancelBtn() {
+    return (
+      <button style={{marginLeft: 20}} className="btn red lighten-2" onClick={this.handleCancel}>
+        Cancel
+      </button>
+    );
+  }
   renderEditor() {
     if (!this.state.clientModeOn) {
       return null;
@@ -156,17 +117,18 @@ export default class PostEditor extends React.Component {
           <div className="draft-js-editor">
             <Editor
               editorState={this.state.editorState}
-              plugins={plugins}
+              plugins={this.props.plugins}
               handleKeyCommand={this.handleKeyCommand}
               onChange={this.onChange}
               placeholder={this.renderPlaceholder(this.props.placeholder, this.state.editorState)}
               ref={(element) => { this.editor = element; }}
             />
-            <InlineToolbar />
+            {this.props.InlineToolbar}
           </div>
         </div>
         <div className="card-action">
           {this.renderPostBtn(this.state.editorState)}
+          {this.props.editorContent && this.renderCancelBtn()}
         </div>
       </div>
     );
@@ -179,8 +141,12 @@ export default class PostEditor extends React.Component {
 }
 
 PostEditor.propTypes = {
+  editorContent: PropTypes.string, // not null if edit post mode
+  handleToggleEditMode: PropTypes.func, // not null if edit post mode
   handlePost: PropTypes.func.isRequired,
+  InlineToolbar: PropTypes.element,
+  placeholder: PropTypes.string,
+  plugins: PropTypes.array,
   userDisplayName: PropTypes.string.isRequired,
   userPic: PropTypes.string.isRequired,
-  placeholder: PropTypes.string
 };

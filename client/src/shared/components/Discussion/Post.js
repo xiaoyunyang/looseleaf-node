@@ -1,11 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import PostDisplay from './PostDisplay';
-import PostEditor from './PostEditor2';
+import PostEditor from './PostEditor';
 import { getApiData } from '../../../lib/helpers';
 import { image } from '../../data/assetLinks';
 import { apiLink } from '../../data/apiLinks';
 import { postToApiData } from '../../../lib/helpers';
+import { newPlugins } from './draftjsHelpers';
+const { plugins, inlineToolbarPlugin } = newPlugins();
+const { InlineToolbar } = inlineToolbarPlugin;
 
 // TODO: For consistency, change the name of one of the props for this component from
 // loggedInAs to loggedinUser
@@ -57,12 +60,14 @@ class Post extends React.Component {
       <div key={`post-${this.props.post._id}`}>
         { this.state.editMode ?
           <PostEditor
-            userDisplayName={this.state.userDisplayName}
-            userPic={this.state.userPic}
             editorContent={this.state.editorContent}
-            placeholder='Write something.'
             handleToggleEditMode={this.handleToggleEditMode.bind(this)}
             handlePost={editedContent => this.handleEditPost(editedContent, this.props.post._id) }
+            InlineToolbar ={<InlineToolbar/>}
+            placeholder='Write something.'
+            plugins={plugins}
+            userDisplayName={this.state.userDisplayName}
+            userPic={this.state.userPic}
           />
           :
           <PostDisplay

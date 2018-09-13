@@ -5,6 +5,9 @@ import Posts from './Posts';
 import PostEditor from './PostEditor';
 import { apiLink } from '../../data/apiLinks';
 import { getApiData } from '../../../lib/helpers';
+import { newPlugins } from './draftjsHelpers';
+const { plugins, inlineToolbarPlugin } = newPlugins();
+const { InlineToolbar } = inlineToolbarPlugin;
 
 export default class Discussion extends React.Component {
   constructor(props) {
@@ -60,6 +63,7 @@ export default class Discussion extends React.Component {
     });
     this.setState({ posts: newPosts });
   }
+
   render() {
     return (
       <div>
@@ -67,9 +71,11 @@ export default class Discussion extends React.Component {
           this.props.loggedinUser &&
             <PostEditor
               handlePost={d => this.handlePost(d)}
+              InlineToolbar ={<InlineToolbar/>}
+              placeholder={this.props.newPostPlaceholder}
+              plugins={plugins}
               userDisplayName={this.props.loggedinUser.displayName}
               userPic={this.props.loggedinUser.picture}
-              placeholder={this.props.newPostPlaceholder}
             />
         }
         <Posts
