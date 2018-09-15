@@ -1,7 +1,7 @@
 import React from 'react';
 import { getApiData } from '../../../lib/helpers';
 import { apiLink } from '../../data/apiLinks';
-import Projects from '../Collection/Projects';
+import Projects from '../Collection/Projects/Main';
 
 export default class One extends React.Component {
   constructor(props) {

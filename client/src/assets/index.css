@@ -709,6 +709,17 @@ footer.section-brown {
 .community-page {
   min-height: 300px;
 }
+
+.collection-project .meta-info-inline {
+  margin-top: 0px;
+}
+.meta-info-inline span {
+  margin-right: 15px;
+}
+.meta-info-inline i {
+  margin-right: 5px;
+}
+
 /* Override collection item avatar */
 #community-people {
   background-color: white;

@@ -3,7 +3,7 @@ import TopNav from '../TopNav';
 import { communityPage as page }  from '../../data/appPage';
 import { getApiData } from '../../../lib/helpers';
 import { apiLink } from '../../data/apiLinks';
-import Projects from '../../components/Collection/Projects';
+import Projects from '../../components/Collection/Projects/Main';
 
 export default class One extends React.Component {
   constructor(props) {
