@@ -3,14 +3,7 @@ import PropTypes from 'prop-types';
 import { CompositeDecorator, convertFromRaw, Editor, EditorState } from 'draft-js';
 import { dateFormatted } from '../../../lib/helpers';
 import PostEditMenu from './PostEditMenu';
-
-const Reactions = () => (
-  <div>
-    <a href="">Interesting</a>
-    <a href="">Clap</a>
-    <a href="">Response</a>
-  </div>
-);
+import Reactions from './Reactions';
 
 // Following code based on:
 // https://github.com/facebook/draft-js/blob/master/examples/draft-0-10-0/link/link.html
@@ -53,20 +46,18 @@ const PostDisplay = ({
   userDisplayName,
   userPic,
   username,
-  userId,
-  postId,
+  post,
   editedOn,
   loggedinUser,
   deletePost,
-  createdAt,
   editorContent }) => (
   editorContent &&
     <div className="card feed">
       <div className="card-content">
         {
-          loggedinUser && loggedinUser._id === userId ?
+          loggedinUser && loggedinUser._id === post.postedBy ?
             <PostEditMenu
-              postId={postId}
+              postId={post._id}
               deletePost={deletePost}
               handleToggleEditMode={handleToggleEditMode}
             />
@@ -82,13 +73,13 @@ const PostDisplay = ({
               <a href={`/@${username}`}>{userDisplayName}</a>
             </span>
             <p style={{paddingLeft: 15, fontSize: 14}}>
-              {dateFormatted(createdAt)}
+              {dateFormatted(post.createdAt)}
             </p>
           </div>
           {
             editedOn &&
             <div className="col">
-              <p style={{marginLeft: 12, paddingTop: 5}}>Edited</p>
+              <p className="post-edited-label">· Edited</p>
             </div>
           }
         </div>
@@ -101,7 +92,7 @@ const PostDisplay = ({
       </div>
       {
         <div className="card-action">
-          <Reactions />
+          <Reactions post={post} loggedinUser={loggedinUser} />
         </div>
       }
     </div>

@@ -38,6 +38,17 @@ api.delete('/post', (req, res) => {
   });
 });
 
+// create new post
+api.post('/post', (req, res) => {
+  const { content, userId, context } = req.body;
+  const newPost = new Post();
+  newPost.content = content;
+  newPost.postedBy = userId;
+  newPost.context = context;
+  newPost.save();
+  return res.send({ status: 'success', msg: 'post success!' });
+});
+
 // edit post as the person who contributes to the post
 api.post('/post/edit', (req, res) => {
   const { content } = req.body;
@@ -58,14 +69,20 @@ api.post('/post/edit', (req, res) => {
   });
 });
 
-api.post('/post', (req, res) => {
-  const { content, userId, context } = req.body;
-  const newPost = new Post();
-  newPost.content = content;
-  newPost.postedBy = userId;
-  newPost.context = context;
-  newPost.save();
-  return res.send({ status: 'success', msg: 'post success!' });
+// react to post
+api.post('/post/react', (req, res) => {
+  const { updatedReaction } = req.body;
+  Post.findById(req.query._id, (err, post) => {
+    if (err) return res.send('Error');
+    if (post) {
+      post.set(updatedReaction);
+      post.save();
+      return res.send({
+        status: 'success',
+        msg: { updatedReaction }
+      });
+    }
+  });
 });
 
 api.get('/post', (req, res) => {

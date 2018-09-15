@@ -66,6 +66,22 @@ export const capitalize = (word) => {
   return firstLtr.toUpperCase() + rest.toLowerCase();
 };
 
+export const copyToClipboard = str => {
+  const el = document.createElement('textarea');
+  el.value = str;
+  document.body.appendChild(el);
+  el.select();
+  document.execCommand('copy');
+  document.body.removeChild(el);
+};
+
+export const updateItems = (items, item) => {
+  if(items.includes(item)) {
+    return items.filter(i => i !== item);
+  }
+  return items.concat(item);
+}
+
 export const randomUser = (setState) => {
   const user = {
     firstname: 'hello',

@@ -111,7 +111,9 @@ export default class PostEditor extends React.Component {
               <img className="circle" src={this.props.userPic} alt=""/>
             </div>
             <div className="col">
-              <p>{this.props.userDisplayName}</p>
+              <span>
+                <p style={{fontSize: 16}}>{this.props.userDisplayName}</p>
+              </span>
             </div>
           </div>
           <div className="draft-js-editor">

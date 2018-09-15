@@ -59,6 +59,8 @@ export default class TopNav extends React.Component {
   renderCta(userId, userCommunities, communitySlug) {
     let updatedCommunities = userCommunities;
     // If user is a member of the community
+    //
+    // TODO: refactor below code to use updatedItems from helpers
     if (!userCommunities.includes(communitySlug)) {
       updatedCommunities = userCommunities.concat(communitySlug);
       return (

@@ -12,14 +12,14 @@ const projectSchema = mongoose.Schema({
     required: true
   },
   editedOn: { type: Date, default: null },
+  tags: Array,
+  hearts: [{ type: mongoose.Schema.ObjectId, ref: 'User' }],
+  thumbUps: [{ type: mongoose.Schema.ObjectId, ref: 'User' }],
   comments: [{
     text: String,
     created: { type: Date, default: Date.now },
     postedBy: { type: mongoose.Schema.ObjectId, ref: 'User' }
-  }],
-  tags: Array,
-  claps: [{ type: mongoose.Schema.ObjectId, ref: 'User' }],
-  stars: [{ type: mongoose.Schema.ObjectId, ref: 'User' }]
+  }]
 });
 
 // projectSchema.path('title').required(true, 'Project title cannot be blank');

@@ -15,6 +15,9 @@ export const staticApiLink = {
 // combine everything into apiLink and change the file name.
 // NOTE:
 // postsByContext: context can be 'project' or 'community'
+// NOTE:
+// postReaction: id is the postId, reaction is the name of the reaction, e.g., hearts
+// data that is to be posted is the updated array of userIds for that reaction.
 export const apiLink = {
   communities: `${root}/api/community`,
   userById: id =>  `${root}/api/user?_id=${id}`,
@@ -32,7 +35,11 @@ export const apiLink = {
   posts: `${root}/api/post`,
   postById: id => `${root}/api/post?_id=${id}`,
   postEdit: id => `${root}/api/post/edit?_id=${id}`,
+  postReaction: (id, reaction) => `${root}/api/post/react?_id=${id}&reaction=${reaction}`,
   postsByContext: (context, findBy) => `${root}/api/post/${context}/${findBy}`,
   postsByUserId: userId => `${root}/api/post?postedBy=${userId}`,
   authPath: `${root}/auth`
+}
+export const appLink = {
+  postById: id => `${root}/post/${id}`,
 }

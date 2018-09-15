@@ -74,9 +74,7 @@ class Post extends React.Component {
             userDisplayName={this.state.userDisplayName}
             userPic={this.state.userPic}
             username={this.state.username}
-            userId={this.props.post.postedBy}
-            postId={this.props.post._id}
-            createdAt={this.props.post.createdAt}
+            post={this.props.post}
             editedOn={this.state.editedOn}
             editorContent={this.state.editorContent}
             loggedinUser={this.props.loggedinAs}

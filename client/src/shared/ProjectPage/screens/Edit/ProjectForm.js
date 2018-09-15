@@ -47,8 +47,6 @@ export default class ProjectForm extends React.Component {
     postToApiData(postUrl, data, cbFailure, cbSucess);
   }
   render() {
-        console.log('foooo', this.props.creator.about)
-      console.log('foooo', this.props.creator.mission)
     return (
       <div className="col s12">
         <div className="card-panel white">
