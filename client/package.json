@@ -61,7 +61,7 @@
     "redux-logger": "^3.0.6",
     "redux-promise": "^0.5.3",
     "redux-thunk": "^2.2.0",
-    "request": "^2.85.0",
+    "request": "^2.88.0",
     "style-loader": "0.19.0",
     "sw-precache-webpack-plugin": "0.11.4",
     "union-class-names": "^1.0.0",
