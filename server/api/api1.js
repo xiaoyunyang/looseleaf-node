@@ -89,6 +89,7 @@ api.post('/post/react', (req, res) => {
 
 
 const getPosts = (findCriteria, reqLimit, reqPage, cbSuccess) => {
+  console.log('findCriteria......', findCriteria)
   const limit = reqLimit ? parseInt(reqLimit, 10) : 5;
   const page = reqPage ? parseInt(reqPage, 10) : 1;
   const options = {
@@ -115,7 +116,7 @@ api.get('/post/community/:slug', (req, res) => {
 api.get('/post/project/:id', (req, res) => {
   // Get posts associated with a project with the id
   const cbSuccess = result => res.send(result);
-  const findCriteria = { 'context.community': req.params.slug };
+  const findCriteria = { 'context.project': req.params.id };
   getPosts(findCriteria, req.query.limit, req.query.page, cbSuccess);
 });
 api.get('/post/user/:id', (req, res) => {
