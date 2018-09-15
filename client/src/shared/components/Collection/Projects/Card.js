@@ -2,19 +2,59 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import appRoute from '../../../data/appRoute';
 import { dateFormatted } from '../../../../lib/helpers';
+import { contributorIds } from '../../../../lib/helpers';
 
+class ContributorMeta extends React.Component {
+  renderSomething(contributors, slug) {
+    if(!contributors) return;
 
-const contributorInfo = (contributors, projSlug) => {
-  const num = Object.keys(contributors).length;
+    const numContributing = contributorIds(contributors, 'contribute').length;
+    const numWatching = contributorIds(contributors, 'watch').length;
+    return (
+      <div className="meta-info-inline">
+        <span className="grey-text text-darken-1">
+          <i className="fas fa-user-friends"/>
+          {
+            `${numContributing} contributing`
+          }
+        </span>
+        <span className="grey-text text-darken-1">
+            <i className="fas fa-eye"/>
+            {`${numWatching} watching`}
+        </span>
+      </div>
+    );
+  }
+  render() {
+    return this.renderSomething(this.props.contributors, this.props.slug)
+  }
+}
+class WatcherMeta extends React.Component {
+  renderSomething(contributors, slug) {
+    if(!contributors) return;
+
+    const num = contributorIds(contributors, 'watch').length;
+    const url = appRoute('projectPage')(slug);
+    return (
+      <span className="grey-text text-darken-1">
+          <i className="fas fa-eye"/>
+          {`${num} watching`}
+      </span>
+    );
+  }
+  render() {
+    return this.renderSomething(this.props.contributors, this.props.slug)
+  }
+}
+
+const watcherInfo = (contributors, projSlug) => {
+  const num = contributorIds(contributors, 'watch').length;
   const url = appRoute('projectPage')(projSlug);
   if (num === 0) {
-    return <a href={url}>Be the first contribute <i className="fas fa-rocket"/></a>;
-  } else if (num === 1) {
-    return `${num} contributor`;
-  } else if (num > 1) {
-    return `${num} contributors`;
+    return <div><i className="fas fa-eye"/> no one</div>;
+  } else {
+    return <i className="far fa-eye"/> `${num} watching`;
   }
-  return null;
 }
 
 export default class Card extends React.Component {
@@ -25,23 +65,18 @@ export default class Card extends React.Component {
         <div className="card-panel collection-project">
           <a href={appRoute('projectPage')(this.props.project.slug)}
           dangerouslySetInnerHTML={{ __html: this.props.project.title }} />
+          {
+            this.props.project.dueDate &&
+            <div className="grey-text text-darken-1" style={{fontSize: 14}}>
+              <i className="far fa-clock" />
+              {dateFormatted(this.props.project.dueDate)}
+            </div>
+          }
           <p>{this.props.project.desc}</p>
-          <div className="meta-info-inline">
-            {
-              this.props.project.dueDate &&
-              <span className="grey-text text-darken-1">
-                <i className="far fa-clock" />
-                {dateFormatted(this.props.project.dueDate)}
-              </span>
-            }
-            {
-              this.props.project.contributors &&
-              <span className="grey-text text-darken-1">
-                <i className="fas fa-user-friends"/>
-                {contributorInfo(this.props.project.contributors, this.props.project.slug)}
-              </span>
-            }
-          </div>
+          <ContributorMeta
+            contributors={this.props.project.contributors}
+            slug={this.props.project.slug}
+          />
         </div>
       </div>
     );
