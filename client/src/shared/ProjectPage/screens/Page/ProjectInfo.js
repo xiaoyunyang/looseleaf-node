@@ -132,7 +132,6 @@ export default class ProjectInfo extends React.Component {
         }
       </div>
     )
-
   }
   render() {
     const {
