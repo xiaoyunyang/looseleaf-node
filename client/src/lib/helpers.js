@@ -138,9 +138,9 @@ export const decodeHTMLEntities = (text) => {
   return text;
 }
 
-export const contributorIds = contributors => {
+export const contributorIds = (contributors, field) => {
   return  Object.keys(contributors).filter(key => {
-   return contributors[key] !== null
+   return contributors[key] && contributors[key][field];
  });
 };
 

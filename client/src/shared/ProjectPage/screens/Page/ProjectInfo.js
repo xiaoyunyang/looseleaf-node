@@ -46,20 +46,22 @@ export default class ProjectInfo extends React.Component {
   }
   handleCtaClick(userId, projectId, currContributors, action) {
     const updatedContributors = Object.assign({}, currContributors);
+    const entry = Object.assign({}, currContributors[userId]);
     if (action === 'contribute') {
       // Add userId to updatedContributorIds
-      updatedContributors[userId] = 'dc'; // dc stands for don't care.
-    } else if (action === 'uncontribute') {
-      // remove userId from updatedContributorIds
-      updatedContributors[userId] = null;
-    }
+      entry.contribute = 'dc'; // dc stands for don't care.
 
+    } else if (action === 'un-contribute') {
+      // remove userId from updatedContributorIds
+      entry.contribute = null;
+    }
+    updatedContributors[userId] = entry;
     const url = apiLink.userProjects(userId, projectId, action);
     const data = {formFields: null};
     const cbFailure = () => {};
     const cbSuccess = (status, msg) =>  {
       this.props.actions.getProjectPageData(msg.projectSlug, msg.userUsername);
-      const contributorIds = getIds(updatedContributors);
+      const contributorIds = getIds(updatedContributors, 'contribute');
       if (contributorIds.length > 0) {
         this.props.actions.getProjectContributors(contributorIds);
       } else {
@@ -73,13 +75,13 @@ export default class ProjectInfo extends React.Component {
     const projectId = projectInfo._id;
     const userId = loggedinUser._id.toString();
     // If this user is a contributor ...
-    if (contributors[userId]) {
+    if (contributors[userId] && contributors[userId].contribute) {
       return (
         <p>
-          {`You are a contributor of this project since ${dateFormatted(contributors[userId])}. `}
+          {`You are a contributor of this project since ${dateFormatted(contributors[userId].contribute)}. `}
           <span
             className="span-anchor"
-            onClick={this.handleCtaClick.bind(this, userId, projectId, projectInfo.contributors, 'uncontribute')}
+            onClick={this.handleCtaClick.bind(this, userId, projectId, projectInfo.contributors, 'un-contribute')}
           >
             Unjoin
           </span>

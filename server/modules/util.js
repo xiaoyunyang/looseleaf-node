@@ -1,16 +1,46 @@
-export const addToDict = (dict, newKey) => {
-  if (dict[newKey]) return dict;
-  const newDict = Object.assign({}, dict);
-  newDict[newKey] = new Date();
-  return newDict;
-};
-export const deleteFromDict = (dict, key) => {
-  if (!dict[key]) return dict;
-  const newDict = Object.assign({}, dict);
-  newDict[key] = null;
-  return newDict;
-};
+/*
+NOTE: newKey is the userId. field is 'contribute', 'watch' etc.
+The structure of the dict is as such:
 
+dict: {
+  <userId>: {
+    <field>: <Date or null>
+  }
+}
+*/
+export const addToDict = (dict, key, field) => {
+  let entry;
+
+  if (dict[key]) {
+    // If there's already a field called key in dict,
+    // create entry for that field based on the existing entry
+    // for that field by copying.
+    entry = Object.assign({}, dict[key]);
+  } else {
+    // If there's not already a field called key in dict,
+    // create a new entry for that field
+    entry = {};
+  }
+
+  entry[field] = new Date();
+  const newDict = Object.assign({}, dict);
+  newDict[key] = entry;
+
+  return newDict;
+};
+export const deleteFromDict = (dict, key, field) => {
+  // Edge case: you can't delete key and associated entry
+  // from dict if the key doesn't exist in dict
+  if (!dict[key]) return dict;
+
+  // Copy over the existing entry
+  const entry = Object.assign({}, dict[key]);
+  entry[field] = null;
+
+  const newDict = Object.assign({}, dict);
+  newDict[key] = entry;
+  return newDict;
+};
 export const urlSlug = (title, fingerprint) => {
   // This function creates a slugified version of the title
   const slugify = (string) => {

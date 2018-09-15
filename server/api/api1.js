@@ -94,7 +94,6 @@ const getPosts = (findCriteria, reqLimit, reqPage, cbSuccess) => {
   const options = {
     page, limit, sort: { createdAt: -1 }
   };
-  console.log(chalk.magenta(JSON.stringify(options)))
   return Post.paginate(findCriteria, options, (err, posts) => {
     cbSuccess(posts.docs);
   });
@@ -232,12 +231,15 @@ const updateProjectAndUser = ({
 }) => {
   let updatedContributors = project.contributors;
   let updatedProject = user.projects;
-  if (action === 'contribute') {
-    // Add user as a contributor of the project
-    updatedContributors = addToDict(project.contributors, userId);
+  if (action === 'contribute' || action === 'watch') {
+    // Add user as a contributor / watcher of the project
+    const field = action;
+    updatedContributors = addToDict(project.contributors, userId, field);
     updatedProject = addToDict(user.projects, projectId);
-  } else if (action === 'uncontribute') {
-    updatedContributors = deleteFromDict(project.contributors, userId);
+  } else if (action === 'un-contribute' || action === 'un-watch') {
+    // chop off the 'un' from 'uncontribute' and 'unwatch'
+    const field = action.split('-')[1];
+    updatedContributors = deleteFromDict(project.contributors, userId, field);
     updatedProject = deleteFromDict(user.projects, projectId);
   }
 
