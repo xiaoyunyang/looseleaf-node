@@ -1,19 +1,13 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import $ from 'jquery';
 
 export default class Reaction extends React.Component {
   componentDidMount() {
-    $(document).ready(function(){
-      $('.tooltipped').tooltip();
-    });
+    $('.tooltipped').tooltip();
   }
   handleClick() {
-    // if loggedin, handleClick per parent component.
-    // otherwise, get user to login / signup.
-    if(!this.props.readOnly) {
-      this.props.handleClick();
-    }
+    this.props.handleClick();
   }
   render() {
     return (
