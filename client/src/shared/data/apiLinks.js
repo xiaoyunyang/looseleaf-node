@@ -36,7 +36,7 @@ export const apiLink = {
   postById: id => `${root}/api/post?_id=${id}`,
   postEdit: id => `${root}/api/post/edit?_id=${id}`,
   postReaction: (id, reaction) => `${root}/api/post/react?_id=${id}&reaction=${reaction}`,
-  postsByContext: (context, findBy) => `${root}/api/post/${context}/${findBy}`,
+  postsByContext: (context, findBy, page) => `${root}/api/post/${context}/${findBy}?page=${page}`,
   postsByUserId: userId => `${root}/api/post?postedBy=${userId}`,
   authPath: `${root}/auth`
 }

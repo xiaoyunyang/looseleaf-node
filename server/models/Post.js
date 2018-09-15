@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
+import mongoosePaginate from 'mongoose-paginate';
 
-const projectSchema = mongoose.Schema({
+const schema = mongoose.Schema({
   createdAt: { type: Date, default: Date.now },
   postedBy: { type: mongoose.Schema.ObjectId, ref: 'User' },
   context: {
@@ -24,8 +25,9 @@ const projectSchema = mongoose.Schema({
 
 // projectSchema.path('title').required(true, 'Project title cannot be blank');
 
+schema.plugin(mongoosePaginate);
 
 // Creating and exporting the user model =======================================
-const Post = mongoose.model('Post', projectSchema);
+const Post = mongoose.model('Post', schema);
 
 module.exports = Post;

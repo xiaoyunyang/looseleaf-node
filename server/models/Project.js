@@ -1,13 +1,10 @@
 import mongoose from 'mongoose';
-
-const Schema = mongoose.Schema;
-const getTags = tags => tags.join(',');
-const setTags = tags => tags.split(',');
+import mongoosePaginate from 'mongoose-paginate';
 
 // TODO: contributors needs to be:
 // userId: { contribute: Date, watch: Date, submit: Date }
 
-const projectSchema = mongoose.Schema({
+const schema = mongoose.Schema({
   createdAt: { type: Date, default: Date.now },
   postedBy: { type: mongoose.Schema.ObjectId, ref: 'User' },
   creator: {
@@ -30,7 +27,7 @@ const projectSchema = mongoose.Schema({
 // projectSchema.path('title').required(true, 'Project title cannot be blank');
 
 // Model methods ===============================================================
-projectSchema.methods.list = function (options) {
+schema.methods.list = function (options) {
   const criteria = options.criteria || {};
   const page = options.page || 0;
   const limit = options.limit || 30;
@@ -42,7 +39,9 @@ projectSchema.methods.list = function (options) {
     .exec();
 };
 
+schema.plugin(mongoosePaginate);
+
 // Creating and exporting the user model =======================================
-const Project = mongoose.model('Project', projectSchema);
+const Project = mongoose.model('Project', schema);
 
 module.exports = Project;

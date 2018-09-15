@@ -40,6 +40,7 @@
     "gravatar-url": "^2.0.0",
     "helmet": "^3.11.0",
     "mongoose": "^5.0.4",
+    "mongoose-paginate": "^5.0.3",
     "morgan": "^1.9.0",
     "ms": "^2.1.1",
     "passport": "^0.4.0",

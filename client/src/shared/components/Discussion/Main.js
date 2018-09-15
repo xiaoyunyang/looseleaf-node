@@ -4,7 +4,7 @@ import axios from 'axios';
 import Posts from './Posts';
 import PostEditor from './PostEditor';
 import { apiLink } from '../../data/apiLinks';
-import { getApiData } from '../../../lib/helpers';
+import { getApiData, postToApiData } from '../../../lib/helpers';
 import { newPlugins } from './draftjsHelpers';
 const { plugins, inlineToolbarPlugin } = newPlugins();
 const { InlineToolbar } = inlineToolbarPlugin;
@@ -14,20 +14,49 @@ export default class Discussion extends React.Component {
     super(props);
     this.state = {
       editorContent: null,
-      posts: null
+      posts: [],
+      isLoading: true,
+      page: 1,
+      endOfPage: false
     };
+    this.loadMorePosts = this.loadMorePosts.bind(this);
   }
-  componentWillMount() {
-    this.fetchPosts();
+  componentDidMount() {
+    this.fetchPosts(this.state.page);
   }
-  fetchPosts() {
+  fetchPosts(page) {
     const context = this.props.context;
-    const findBy = context === 'project' ? this.props.projectId : this.props.communitySlug;
-    const link = apiLink.postsByContext(context, findBy);
-    const setApiData = data => this.setState({ posts: data });
+    const findBy = (context) => {
+      switch (context) {
+        case 'project': return this.props.projectId;
+        case 'community': return this.props.communitySlug;
+        case 'user': return this.props.userId;
+        default: return;
+      }
+    };
+    const link = apiLink.postsByContext(context, findBy(context), page);
+    const setApiData = data => {
+      const oldPosts = this.state.posts;
+      this.setState({
+        posts: oldPosts.concat(data),
+        isLoading: false
+      });
+
+      if (data.length < 5) {
+        this.setState({
+          endOfPage: true
+        });
+      }
+    }
     getApiData(link, setApiData);
   }
-
+  loadMorePosts() {
+    const nextPage = this.state.page + 1;
+    this.fetchPosts(nextPage);
+    this.setState({
+        page: nextPage
+      });
+  }
   // Returns True if successful post. False Otherwise.
   handlePost(d) {
     // The d received here are in the format that can be saved to the DB
@@ -40,21 +69,16 @@ export default class Discussion extends React.Component {
       project: this.props.projectId,
       community: this.props.communitySlug
     }
+    const postUrl = apiLink.posts;
+    const data = { content, userId, context };
 
-    // TODO: Move this to helper file
-    axios.post(apiLink.posts, { content, userId, context })
-      .then(res => {
-        if (res.statusText === 'error') {
-          // If there's error, do something
-        } else if (res.statusText === 'OK') {
-          this.fetchPosts();
-        }
-      // Perform action based on response, such as flashing error notif
-      })
-      .catch((error) => {
-        console.log(error);
-       //Perform action based on error
-      });
+    const cbFailure = (status, msg) => {};
+    const cbSucess = (status, msg) => {
+      const oldPosts = this.state.posts;
+      const updatedPosts = [msg].concat(oldPosts)
+      this.setState({ posts: updatedPosts})
+    }
+    postToApiData(postUrl, data, cbFailure, cbSucess);
   }
   // TODO: create addPost which gets passed down to PostEditor
   deletePost(postId) {
@@ -68,7 +92,7 @@ export default class Discussion extends React.Component {
     return (
       <div>
         {
-          this.props.loggedinUser &&
+          this.props.loggedinUser && !this.props.readOnly &&
             <PostEditor
               handlePost={d => this.handlePost(d)}
               InlineToolbar ={<InlineToolbar/>}
@@ -78,11 +102,29 @@ export default class Discussion extends React.Component {
               userPic={this.props.loggedinUser.picture}
             />
         }
-        <Posts
-          posts={this.state.posts}
-          loggedinAs={this.props.loggedinUser}
-          deletePost={this.deletePost.bind(this)}
-        />
+        {
+          this.state.isLoading ?
+          <p>Loading...</p>
+          :
+          <div>
+            <Posts
+              posts={this.state.posts}
+              loggedinAs={this.props.loggedinUser}
+              deletePost={this.deletePost.bind(this)}
+            />
+            {
+              this.state.posts.length > 0 && !this.state.endOfPage &&
+              <div className="row center">
+                <a
+                  className="btn col s8 m4 l4 offset-s2 offset-m4 offset-l4"
+                  onClick={this.loadMorePosts}
+                >
+                  Load More
+                </a>
+              </div>
+            }
+          </div>
+        }
       </div>
     );
   }
@@ -98,9 +140,12 @@ Discussion.propTypes = {
   newPostPlaceholder: PropTypes.string,
   communitySlug: PropTypes.string,
   projectId: PropTypes.string,
-  context: PropTypes.string.isRequired
+  context: PropTypes.string.isRequired,
+  readOnly: PropTypes.bool,
 };
 Discussion.defaultProps = {
   projectId: null,
   communitySlug: null,
+  readOnly: true,
+  userId: ''
 }

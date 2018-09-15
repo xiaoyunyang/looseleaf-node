@@ -4,9 +4,10 @@
 
 import mongoose from 'mongoose';
 import bcrypt from 'bcrypt-nodejs';
+import mongoosePaginate from 'mongoose-paginate';
 
 // TODO: change field "lastLoggedIn" to "lastLoggedin"
-const userSchema = mongoose.Schema({
+const schema = mongoose.Schema({
   createdAt: { type: Date, default: Date.now },
   lastLoggedIn: { type: Date },
   email: { type: String, unique: true },
@@ -46,7 +47,7 @@ const noop = () => {};
 // Defines a function that runs before model is saved
 // Gotchas:  don't use fat arrow functtion here
 // See: https://github.com/Automattic/mongoose/issues/3333
-userSchema.pre('save', function (done) {
+schema.pre('save', function (done) {
   const user = this; // Saves a reference to the user
   if (!user.isModified('local.password')) {
     return done();
@@ -65,18 +66,20 @@ userSchema.pre('save', function (done) {
 });
 
 // Model methods ===============================================================
-userSchema.methods.name = function () {
+schema.methods.name = function () {
   return this.displayName || this.username;
 };
 
 // Checking the user’s password against hashedPassword
-userSchema.methods.checkPassword = function (guess, done) {
+schema.methods.checkPassword = function (guess, done) {
   bcrypt.compare(guess, this.local.password, (err, isMatch) => {
     done(err, isMatch);
   });
 };
 
+schema.plugin(mongoosePaginate);
+
 // Creating and exporting the user model =======================================
-const User = mongoose.model('User', userSchema);
+const User = mongoose.model('User', schema);
 
 module.exports = User;

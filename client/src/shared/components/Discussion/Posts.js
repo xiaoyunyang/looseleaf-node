@@ -4,7 +4,8 @@ import Post from './Post';
 
 const Posts = ({ posts, deletePost, noPostDisp, loggedinAs }) => (
   <div>
-    { posts && posts.length>0 ?
+    {
+      posts && posts.length>0 ?
       posts.map(post => {
         return (
           <div key={`post-${post._id}`}>

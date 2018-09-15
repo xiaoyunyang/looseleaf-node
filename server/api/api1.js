@@ -19,13 +19,15 @@ const cuid = require('cuid');
 const api = express.Router();
 
 // Posts ======================================================================
-const getPosts = ({ findCriteria, limit, cbSuccess }) => {
-  return Post.find(findCriteria).sort({ createdAt: -1 }).limit(limit).exec(
-    (err, posts) => {
-      cbSuccess(posts);
-    }
-  );
-};
+// const getPosts = ({ findCriteria, limit, cbSuccess }) => {
+//   return Post.find(findCriteria).sort({ createdAt: -1 }).limit(limit).exec(
+//     (err, posts) => {
+//       cbSuccess(posts);
+//     }
+//   );
+// };
+
+
 api.delete('/post', (req, res) => {
   Post.findByIdAndRemove(req.query._id, (err, post) => {
     // As always, handle any potential errors:
@@ -46,7 +48,7 @@ api.post('/post', (req, res) => {
   newPost.postedBy = userId;
   newPost.context = context;
   newPost.save();
-  return res.send({ status: 'success', msg: 'post success!' });
+  return res.send({ status: 'success', msg: newPost });
 });
 
 // edit post as the person who contributes to the post
@@ -85,26 +87,43 @@ api.post('/post/react', (req, res) => {
   });
 });
 
+
+const getPosts = (findCriteria, reqLimit, reqPage, cbSuccess) => {
+  const limit = reqLimit ? parseInt(reqLimit, 10) : 5;
+  const page = reqPage ? parseInt(reqPage, 10) : 1;
+  const options = {
+    page, limit, sort: { createdAt: -1 }
+  };
+  console.log(chalk.magenta(JSON.stringify(options)))
+  return Post.paginate(findCriteria, options, (err, posts) => {
+    cbSuccess(posts.docs);
+  });
+};
+
 api.get('/post', (req, res) => {
-  // Queries
-  const limit = parseInt(req.query.limit, 10);
-  const cbSuccess = result => res.send(result);
+  // Queries - get all
   const findCriteria = req.query;
-  getPosts({ findCriteria, limit, cbSuccess });
+  const cbSuccess = result => res.send(result);
+  getPosts(findCriteria, req.query.limit, req.query.page, cbSuccess);
 });
+
 api.get('/post/community/:slug', (req, res) => {
-  // Queries
-  const limit = parseInt(req.query.limit, 10);
+  // Get posts from community with the slug, e.g., developers
   const cbSuccess = result => res.send(result);
   const findCriteria = { 'context.community': req.params.slug };
-  getPosts({ findCriteria, limit, cbSuccess });
+  getPosts(findCriteria, req.query.limit, req.query.page, cbSuccess);
 });
 api.get('/post/project/:id', (req, res) => {
-  // Queries
-  const limit = parseInt(req.query.limit, 10);
+  // Get posts associated with a project with the id
   const cbSuccess = result => res.send(result);
-  const findCriteria = { 'context.project': req.params.id };
-  getPosts({ findCriteria, limit, cbSuccess });
+  const findCriteria = { 'context.community': req.params.slug };
+  getPosts(findCriteria, req.query.limit, req.query.page, cbSuccess);
+});
+api.get('/post/user/:id', (req, res) => {
+  // Queries
+  const findCriteria = { postedBy: req.params.id };
+  const cbSuccess = result => res.send(result);
+  getPosts(findCriteria, req.query.limit, req.query.page, cbSuccess);
 });
 
 // Projects ======================================================================

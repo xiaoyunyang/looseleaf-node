@@ -23,6 +23,7 @@ export default class Two extends React.Component {
               communitySlug={communityInfo.slug}
               loggedinUser={this.props.state.user.loggedinUser}
               newPostPlaceholder='Post an announcement or question to this community.'
+              readOnly={!this.props.state.user.loggedinUser}
             />
           </div>
         </div>

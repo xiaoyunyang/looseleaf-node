@@ -8,6 +8,7 @@ export default class Reaction extends React.Component {
   }
   handleClick() {
     this.props.handleClick();
+    $('.tooltipped').tooltip('close');
   }
   render() {
     return (
