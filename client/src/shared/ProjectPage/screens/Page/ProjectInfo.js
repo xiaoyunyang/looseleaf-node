@@ -6,7 +6,7 @@ import { apiLink } from '../../../data/apiLinks';
 import appRoute from '../../../data/appRoute';
 import { postToApiData,  } from '../../../../lib/helpers';
 import Communities from '../../../components/Collection/Communities';
-import { contributorIds as getIds } from '../../../../lib/helpers';
+import { contributorIds } from '../../../../lib/helpers';
 
 export default class ProjectInfo extends React.Component {
   constructor(props) {
@@ -47,23 +47,29 @@ export default class ProjectInfo extends React.Component {
   handleCtaClick(userId, projectId, currContributors, action) {
     const updatedContributors = Object.assign({}, currContributors);
     const entry = Object.assign({}, currContributors[userId]);
+
     if (action === 'contribute') {
       // Add userId to updatedContributorIds
       entry.contribute = 'dc'; // dc stands for don't care.
-
     } else if (action === 'un-contribute') {
       // remove userId from updatedContributorIds
       entry.contribute = null;
+    } else if (action === 'watch') {
+      entry.watch = 'dc';
+    } else if (action === 'un-watch') {
+      entry.watch = null;
     }
+
     updatedContributors[userId] = entry;
+
     const url = apiLink.userProjects(userId, projectId, action);
     const data = {formFields: null};
     const cbFailure = () => {};
     const cbSuccess = (status, msg) =>  {
       this.props.actions.getProjectPageData(msg.projectSlug, msg.userUsername);
-      const contributorIds = getIds(updatedContributors, 'contribute');
-      if (contributorIds.length > 0) {
-        this.props.actions.getProjectContributors(contributorIds);
+      const ids = contributorIds(updatedContributors, 'contribute');
+      if (ids.length > 0) {
+        this.props.actions.getProjectContributors(ids);
       } else {
         this.props.actions.setProjectContributors([]);
       }
@@ -74,36 +80,50 @@ export default class ProjectInfo extends React.Component {
     const contributors = projectInfo.contributors;
     const projectId = projectInfo._id;
     const userId = loggedinUser._id.toString();
-    // If this user is a contributor ...
-    if (contributors[userId] && contributors[userId].contribute) {
-      return (
-        <p>
-          {`You are a contributor of this project since ${dateFormatted(contributors[userId].contribute)}. `}
-          <span
-            className="span-anchor"
-            onClick={this.handleCtaClick.bind(this, userId, projectId, projectInfo.contributors, 'un-contribute')}
-          >
-            Unjoin
-          </span>
-        </p>
-      );
-    }
-    // If this user is not a contributor ...
+
     return (
       <div className="row" style={{marginTop: 20}}>
-        <div className="col">
-          <button className="btn teal teal-text lighten-5">
-            Watch
-          </button>
-        </div>
-        <div className="col">
-          <button
-            className="btn teal lighten-1"
-            onClick={this.handleCtaClick.bind(this, userId, projectId, projectInfo.contributors, 'contribute')}
+        { contributors[userId] && contributors[userId].watch ?
+          <p className="col s12 m12 l12">
+            {`You are a watcher of this project. `}
+            <span
+              className="span-anchor"
+              onClick={this.handleCtaClick.bind(this, userId, projectId, projectInfo.contributors, 'un-watch')}
             >
-            Contribute
-          </button>
-        </div>
+              Unwatch
+            </span>
+          </p>
+          :
+          <div className="col">
+            <button
+              className="btn teal teal-text lighten-5"
+              onClick={this.handleCtaClick.bind(this, userId, projectId, projectInfo.contributors, 'watch')}
+            >
+              Watch
+            </button>
+          </div>
+        }
+        { contributors[userId] && contributors[userId].contribute ?
+          <p className="col s12 m12 l12">
+            {`You are a contributor of this project since ${dateFormatted(contributors[userId].contribute)}. `}
+            <span
+              className="span-anchor"
+              onClick={this.handleCtaClick.bind(this, userId, projectId, projectInfo.contributors, 'un-contribute')}
+            >
+              Unjoin
+            </span>
+          </p>
+          :
+          <div className="col">
+            <button
+              className="btn teal lighten-1"
+              onClick={this.handleCtaClick.bind(this, userId, projectId, projectInfo.contributors, 'contribute')}
+              >
+              Contribute
+            </button>
+          </div>
+        }
+
       </div>
     );
   }
@@ -173,6 +193,10 @@ export default class ProjectInfo extends React.Component {
             {
               dueDate &&  <p>{`Due Date: ${dateFormatted(dueDate)}`}</p>
             }
+            <span className="grey-text text-darken-2">
+              <i className="fas fa-eye" style={{marginRight: 5}}/>
+              <a href='#'>{`${contributorIds(this.props.projectInfo.contributors, 'watch').length} watching`}</a> this project
+            </span>
           </div>
           {
             this.props.loggedinUser &&

@@ -19,8 +19,8 @@ class ContributorMeta extends React.Component {
           }
         </span>
         <span className="grey-text text-darken-1">
-            <i className="fas fa-eye"/>
-            {`${numWatching} watching`}
+          <i className="fas fa-eye"/>
+          {`${numWatching} watching`}
         </span>
       </div>
     );
@@ -29,34 +29,6 @@ class ContributorMeta extends React.Component {
     return this.renderSomething(this.props.contributors, this.props.slug)
   }
 }
-class WatcherMeta extends React.Component {
-  renderSomething(contributors, slug) {
-    if(!contributors) return;
-
-    const num = contributorIds(contributors, 'watch').length;
-    const url = appRoute('projectPage')(slug);
-    return (
-      <span className="grey-text text-darken-1">
-          <i className="fas fa-eye"/>
-          {`${num} watching`}
-      </span>
-    );
-  }
-  render() {
-    return this.renderSomething(this.props.contributors, this.props.slug)
-  }
-}
-
-const watcherInfo = (contributors, projSlug) => {
-  const num = contributorIds(contributors, 'watch').length;
-  const url = appRoute('projectPage')(projSlug);
-  if (num === 0) {
-    return <div><i className="fas fa-eye"/> no one</div>;
-  } else {
-    return <i className="far fa-eye"/> `${num} watching`;
-  }
-}
-
 export default class Card extends React.Component {
 
   render() {
