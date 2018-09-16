@@ -87,7 +87,7 @@ if (process.env.NODE_ENV === 'production') {
  This is getting sent to localhost:3001/api/hello. In your terminal try:
  $ curl localhost:3001/api/hello
  */
-const apiVersion1 = require('./api/api1');
+const apiVersion1 = require('./api1/api');
 
 app.use('/api', apiVersion1);
 

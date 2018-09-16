@@ -132,7 +132,7 @@ export default class ProjectInfo extends React.Component {
     return (
       <div>
         <h6>Description:</h6>
-        <p style={{marginTop: -3}} dangerouslySetInnerHTML={{ __html: desc }} />
+        <p style={{marginTop: -3}}>{desc}</p>
       </div>
     )
   }
@@ -142,7 +142,7 @@ export default class ProjectInfo extends React.Component {
       <div>
         <h6>About the Project Creator:</h6>
         { about !== '' &&
-          <p style={{marginTop: -3}} dangerouslySetInnerHTML={{ __html: about }} />
+          <p style={{marginTop: -3}}>{about}</p>
         }
         {
           mission !== '' &&
@@ -171,7 +171,7 @@ export default class ProjectInfo extends React.Component {
               this.props.loggedinUser &&
               this.renderEditProjectLink(this.props.loggedinUser._id.toString(), postedBy)
             }
-            <h4 dangerouslySetInnerHTML={{ __html: title }} />
+            <h4>{title}</h4>
             {this.renderProjectCreator(this.state.user)}
             <p style={{marginTop: 0}}>
               {`Created On: ${dateFormatted(createdAt)}`}

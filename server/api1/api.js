@@ -11,23 +11,18 @@ import path from 'path';
 import User from '../models/User';
 import Project from '../models/Project';
 import Post from '../models/Post';
-import { urlSlug, addToDict, deleteFromDict, updateArr } from '../modules/util';
+import { urlSlug } from '../modules/util';
 import dataPreloading from '../../client/iso-middleware/dataPreloading';
-
-const cuid = require('cuid');
+import { getPosts } from './posts';
+import {
+  getProjects,
+  updateProject, updateProjectAndUser,
+  addNewProject } from './projects';
+import { getUsers } from './users';
 
 const api = express.Router();
 
 // Posts ======================================================================
-// const getPosts = ({ findCriteria, limit, cbSuccess }) => {
-//   return Post.find(findCriteria).sort({ createdAt: -1 }).limit(limit).exec(
-//     (err, posts) => {
-//       cbSuccess(posts);
-//     }
-//   );
-// };
-
-
 api.delete('/post', (req, res) => {
   Post.findByIdAndRemove(req.query._id, (err, post) => {
     // As always, handle any potential errors:
@@ -87,17 +82,6 @@ api.post('/post/react', (req, res) => {
   });
 });
 
-const getPosts = (findCriteria, reqLimit, reqPage, cbSuccess, cbFailure) => {
-  const limit = reqLimit ? parseInt(reqLimit, 10) : 5;
-  const page = reqPage ? parseInt(reqPage, 10) : 1;
-  const options = {
-    page, limit, sort: { createdAt: -1 }
-  };
-  return Post.paginate(findCriteria, options, (err, posts) => {
-    if (err) return cbFailure(err);
-    return cbSuccess(posts.docs);
-  });
-};
 
 api.get('/post', (req, res) => {
   // Queries - get all
@@ -120,6 +104,7 @@ api.get('/post/community/:slug', (req, res) => {
   const findCriteria = { 'context.community': req.params.slug };
   getPosts(findCriteria, req.query.limit, req.query.page, cbSuccess, cbFailure);
 });
+
 api.get('/post/project/:id', (req, res) => {
   // Get posts associated with a project with the id
   const cbSuccess = result => res.send(result);
@@ -130,6 +115,7 @@ api.get('/post/project/:id', (req, res) => {
   const findCriteria = { 'context.project': req.params.id };
   getPosts(findCriteria, req.query.limit, req.query.page, cbSuccess, cbFailure);
 });
+
 api.get('/post/user/:id', (req, res) => {
   // Queries
   const findCriteria = { postedBy: req.params.id };
@@ -142,66 +128,6 @@ api.get('/post/user/:id', (req, res) => {
 });
 
 // Projects ======================================================================
-const getProjects = (findCriteria, reqLimit, reqPage, cbSuccess, cbFailure) => {
-  const limit = reqLimit ? parseInt(reqLimit, 10) : 5;
-  const page = reqPage ? parseInt(reqPage, 10) : 1;
-  const options = {
-    page, limit, sort: { createdAt: -1 }
-  };
-  return Project.paginate(findCriteria, options, (err, projects) => {
-    if (err) return cbFailure(err);
-    return cbSuccess(projects.docs);
-  });
-};
-
-// TODO: Do not use validator.escape() on any field below...
-const updatedProjectProps = formFields => {
-  return {
-    creator: {
-      about: validator.escape(formFields.creatorAbout),
-      mission: validator.escape(formFields.creatorMission)
-    },
-    title: validator.escape(formFields.title),
-    desc: validator.escape(formFields.desc),
-    communities: formFields.communities,
-    interestAreas: formFields.interestAreas,
-    contributors: formFields.contributors.map(c => c.id),
-    submission: {
-      platform: formFields.selectedPlatform,
-      instruction: validator.escape(formFields.submissionInst)
-    },
-    dueDate: formFields.dueDate
-  };
-};
-const addNewProject = (formFields, postedBy) => {
-  const newProject = new Project();
-
-  // Fields you cannot update:
-  const slug = urlSlug(formFields.title, cuid.slug());
-  newProject.postedBy = postedBy;
-  newProject.slug = slug;
-
-  // Fields you can update:
-  // Below line of code combines properties from the updatedProject factory
-  // function into newProject
-  Object.assign(newProject, updatedProjectProps(formFields));
-
-  newProject.save();
-  return slug;
-};
-const updateProject = (formFields, slug, cbFailure) => {
-  Project.findOne({ slug }, (err, project) => {
-    if (err) {
-      return cbFailure();
-    }
-    if (project) {
-      project.set(updatedProjectProps(formFields));
-      project.save();
-      return slug;
-    }
-  });
-};
-
 api.post('/project', (req, res) => {
 
   const formFields = req.body.formFields;
@@ -284,40 +210,6 @@ api.get('/project/:slug', (req, res) => {
   });
 });
 
-const updateProjectAndUser = ({
-  project, user, userId, projectId, action
-}) => {
-  let updatedContributors = project.contributors;
-  let updatedProjects = user.projects; // array
-  if (action === 'contribute' || action === 'watch') {
-    // Add user as a contributor / watcher of the project
-    const field = action;
-    updatedContributors = addToDict(project.contributors, userId, field);
-    updatedProjects = updateArr(user.projects, projectId, 'add');
-  } else if (action === 'un-contribute' || action === 'un-watch') {
-    // chop off the 'un' from 'uncontribute' and 'unwatch'
-    const field = action.split('-')[1];
-    updatedContributors = deleteFromDict(project.contributors, userId, field);
-    const entry = updatedContributors[userId];
-    let arrUpdateCmd = 'standby';
-    if ((action === 'un-contribute' && !entry.watch) ||
-        (action === 'un-watch' && !entry.contribute)) {
-      arrUpdateCmd = 'remove';
-    }
-    updatedProjects = updateArr(user.projects, projectId, arrUpdateCmd);
-  }
-
-  project.set({
-    contributors: updatedContributors
-  });
-  project.save();
-  // Add project to user
-  user.set({
-    projects: updatedProjects
-  });
-  user.save();
-};
-
 api.post('/user/project', (req, res) => {
   Project.findById(req.query.projectId, (err, project) => {
     if (err) {
@@ -349,34 +241,6 @@ api.post('/user/project', (req, res) => {
 });
 
 // Users ======================================================================
-const getUsers = ({ findCriteria, cbSuccess }) => {
-  return User.find(findCriteria).sort({ lastLoggedIn: -1 }).exec(
-    (err, users) => {
-      const usersOut = [];
-
-      users.forEach((user) => {
-        const userInfo = {
-          _id: user._id,
-          createdAt: user.createdAt,
-          lastLoggedIn: user.lastLoggedIn,
-          username: user.username,
-          displayName: user.displayName,
-          email: user.email,
-          picture: user.picture,
-          bio: user.bio,
-          website: user.website,
-          interests: user.interests,
-          communities: user.communities,
-          projects: user.projects,
-          followers: user.followers,
-          following: user.following
-        };
-        usersOut.push(userInfo);
-      });
-      cbSuccess(usersOut);
-    }
-  );
-};
 // Get all users
 // TODO: List in descending order (most recently signed up user at the top).
 // Also, return the users JSON with date of creation.

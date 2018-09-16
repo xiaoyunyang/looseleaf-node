@@ -8,12 +8,12 @@ import configureStore from '../src/shared/redux/configureStore/projectPage';
 import HTML from '../src/shared/ProjectPage/HTML';
 import { getRoutes } from '../src/shared/ProjectPage/routes';
 import App from '../src/shared/ProjectPage/App';
-import { decodeHTMLEntities } from '../src/lib/helpers';
 
 export default function renderProjectApp(req, res, next, project) {
   // console.log(chalk.green('title', project['title']))
 
-  /* Expected redux state:
+  /* NOTE:
+    Expected redux state:
     {
       project: {info: {...}, contributors: {...}},
       user: {info: {...}}
@@ -29,7 +29,7 @@ export default function renderProjectApp(req, res, next, project) {
 
   const dataToSerialize = preloadedState;
   const meta = {
-    title: decodeHTMLEntities(project.title)
+    title: project.title
   };
   const branch = matchRoutes(getRoutes(project.slug), req.url);
   const promises = branch.map(({ route, match }) => {
