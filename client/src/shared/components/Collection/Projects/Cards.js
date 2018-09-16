@@ -10,7 +10,12 @@ class Cards extends React.Component {
           projects.map(project => {
             return (
               <div className="row" key={`projects-${project.slug}`}>
-                <Card project={project} />
+                <Card
+                  project={project}
+                  context={this.props.context}
+                  projectCreator={project.postedBy.toString()}
+                  userId={this.props.userId}
+                />
               </div>
             );
           })
@@ -52,9 +57,12 @@ Cards.propTypes = {
   noProjectDisp: PropTypes.string,
   loadMoreProjects: PropTypes.func,
   endOfPage: PropTypes.bool,
-  isLoading: PropTypes.bool
+  isLoading: PropTypes.bool,
+  context: PropTypes.string,
+  userId: PropTypes.string
 };
 Cards.defaultProps = {
-  noProjectDisp: 'No projects found.'
+  noProjectDisp: 'No projects found.',
+  context: 'project'
 }
 export default Cards;

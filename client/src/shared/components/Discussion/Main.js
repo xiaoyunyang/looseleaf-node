@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import axios from 'axios';
 import Posts from './Posts';
 import PostEditor from './PostEditor';
 import { apiLink } from '../../data/apiLinks';

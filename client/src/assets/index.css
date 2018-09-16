@@ -964,6 +964,20 @@ nav .categories-wrapper .categories {
 }
 /**** Project Page END ****/
 
+/**** Project Card badges BEGIN ***/
+.meta-badges-inline span {
+  padding-right: 10px;
+}
+.project-contributor-badge {
+  width: 32px;
+  height: 32px;
+}
+.project-contributor-badge i {
+  font-size: 22px;
+  margin-top: -7px;
+}
+/**** Project Card badges END ***/
+
 /**** Landing App Stuff Start ****/
 #team-pg {
   margin-top: 40px;

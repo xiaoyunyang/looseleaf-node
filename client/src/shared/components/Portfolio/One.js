@@ -18,7 +18,7 @@ export default class One extends React.Component {
     this.fetchProjects(this.state.page);
   }
   fetchProjects(page) {
-    const link = apiLink.projectsByUser(this.props.user._id, this.props.user.projects);
+    const link = apiLink.projectsByUser(this.props.user._id, this.props.user.projects, page);
 
     const setApiData = data => {
       const oldProjects = this.state.projects;
@@ -53,6 +53,8 @@ export default class One extends React.Component {
             endOfPage={this.state.endOfPage}
             loadMoreProjects={this.loadMoreProjects}
             noProjectDisp={this.props.noProjectDisp}
+            context='user'
+            userId={this.props.user._id.toString()}
           />
         </div>
       </div>

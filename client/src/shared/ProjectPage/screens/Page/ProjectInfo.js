@@ -1,12 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { dateFormatted, getApiData } from '../../../../lib/helpers';
+import { dateFormatted, getApiData, contributorIds, postToApiData } from '../../../../lib/helpers';
 import { apiLink } from '../../../data/apiLinks';
 import appRoute from '../../../data/appRoute';
-import { postToApiData,  } from '../../../../lib/helpers';
 import Communities from '../../../components/Collection/Communities';
-import { contributorIds } from '../../../../lib/helpers';
+import { badgeIcon } from '../../../components/Collection/Projects/Badge';
 
 export default class ProjectInfo extends React.Component {
   constructor(props) {
@@ -194,7 +193,7 @@ export default class ProjectInfo extends React.Component {
               dueDate &&  <p>{`Due Date: ${dateFormatted(dueDate)}`}</p>
             }
             <span className="grey-text text-darken-2">
-              <i className="fas fa-eye" style={{marginRight: 5}}/>
+              <i className={badgeIcon('watcher').className} style={{marginRight: 5}}/>
               <a href='#'>{`${contributorIds(this.props.projectInfo.contributors, 'watch').length} watching`}</a> this project
             </span>
           </div>

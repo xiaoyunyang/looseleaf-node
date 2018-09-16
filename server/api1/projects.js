@@ -44,7 +44,6 @@ const updatedProjectProps = formFields => {
     desc: formFields.desc,
     communities: formFields.communities,
     interestAreas: formFields.interestAreas,
-    contributors: formFields.contributors.map(c => c.id),
     submission: {
       platform: formFields.selectedPlatform,
       instruction: formFields.submissionInst

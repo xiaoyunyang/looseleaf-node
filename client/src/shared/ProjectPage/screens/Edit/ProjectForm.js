@@ -20,7 +20,7 @@ export default class ProjectForm extends React.Component {
       interestAreas: this.props.selectedInterestAreas,
       creatorAbout: this.props.creator.about,
       creatorMission: this.props.creator.mission,
-      contributors: [], // should be an array of ids
+      contributors: [], // should be an array of ids. TODO: this needs to be sent to /api/notif. It's not used for anything now
       selectedPlatform: this.props.platforms[0],
       submissionInst: '',
       dueDate: '',
