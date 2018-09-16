@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { CompositeDecorator, convertFromRaw, Editor, EditorState } from 'draft-js';
 import { dateFormatted } from '../../../lib/helpers';
+import appRoute from '../../data/appRoute';
 import PostEditMenu from './PostEditMenu';
 import Reactions from './Reactions';
 
@@ -48,7 +49,7 @@ const PostUserInfo = ({ userPic, username, userDisplayName, editedOn, post }) =>
     </div>
     <div className="col" style={{marginLeft: -18}}>
       <span>
-        <a href={`/@${username}`}>{userDisplayName}</a>
+        <a href={appRoute('userProfile', true)(username)}>{userDisplayName}</a>
       </span>
       <p style={{paddingLeft: 15, fontSize: 14}}>
         {dateFormatted(post.createdAt)}

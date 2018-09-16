@@ -2,11 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import FlashNotif from '../FlashNotif';
 import axios from 'axios';
-import { staticApiLink } from '../../data/apiLinks';
+import { apiLink } from '../../data/apiLinks';
 import appRoute from '../../data/appRoute';
 
-const loginPath = staticApiLink.login;
-const signupPath = staticApiLink.signup;
+const loginPath = apiLink.login;
+const signupPath = apiLink.signup;
 
 
 /* TODO: The propTypes checking is not the best. Check out this article for

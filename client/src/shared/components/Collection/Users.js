@@ -40,11 +40,11 @@ class Users extends React.Component {
         { this.props.users &&
           this.props.users.map(user => (
             <li key={`user-${user.username}`} className="collection-item avatar">
-              <a href={appRoute('userProfile')(user.username)}>
+              <a href={appRoute('userProfile', true)(user.username)}>
                 <img src={user.picture} alt={user.username} />
               </a>
               <div className="user-info">
-                <a href={appRoute('userProfile')(user.username)}>
+                <a href={appRoute('userProfile', true)(user.username)}>
                 {user.displayName}
                 </a>
                 <p style={{fontSize: 14, fontWeight: 300, paddingBottom: 10}}>

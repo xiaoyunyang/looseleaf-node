@@ -35,7 +35,7 @@ class Post extends React.Component {
 
     let link, name;
     if (communitySlug) {
-      link = appRoute('communityHome')(communitySlug);
+      link = appRoute('communityHome', true)(communitySlug);
       name = capitalize(communitySlug);
       this.setState({
         postContext: { link: link, name: name }
@@ -48,7 +48,7 @@ class Post extends React.Component {
     const url = apiLink.projectById(projectId);
     const setApiData = data => {
       const project = data[0];
-      const link = appRoute('projectPage')(project.slug);
+      const link = appRoute('projectPage', true)(project.slug);
       const name = project.title;
       this.setState({
         postContext: { link, name }

@@ -10,7 +10,7 @@ export default class Card extends React.Component {
     return (
       <div className="col s12 m12 l12">
         <div className="card-panel collection-project">
-          <a href={appRoute('projectPage')(this.props.project.slug)}>
+          <a href={appRoute('projectPage', true)(this.props.project.slug)}>
             {this.props.project.title}
           </a>
           {

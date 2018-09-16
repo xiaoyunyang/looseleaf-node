@@ -1,64 +1,63 @@
-// const root = 'http://localhost:3001';
+const root = 'http://localhost:3001';
 
 // To use this, example:
-// dynamicRoutes(userId).user
-// dynamicRoutes(slug).project
-const appRoute = (pageName) => {
+// appRoute('landingAbout', true) gives you `${root}+'/about'
+// appRoute('landingAbout') gives you '/about' for react router logic
+// appRoute('')
+// absRoute is a boolean and an optional argument.
+// NOTE: To create absolute version of the route, specify absRoute to be true.
+// Absolute routes are better for SEO
+const appRoute = (pageName, absRoute) => {
+  // if you want absolute route
+  const prepend = absRoute ? root : '';
+
   switch (pageName) {
     case 'landingHome':
-      return '/';
+      return prepend + '/';
     case 'landingHowItWorks':
-      return '/how-it-works';
+      return prepend + '/how-it-works';
     case 'landingAbout':
-      return '/about';
-    case 'login':
-      return '/auth/login';
-    case 'signup':
-      return '/auth/signup';
+      return prepend + '/about';
     case 'landingWildcard':
-      return '/*';
+      return '/*'; // NOTE: used for internal routing logic only
     case 'userHome':
-      return '/';
+      return prepend + '/';
     case 'userProfile':
-      return username => `/@${username}`;
+      return username => prepend + `/@${username}`;
     case 'userProfileTab':
-      return username => `/@${username}/:slug`;
+      return username => `/@${username}/:slug`; // NOTE: used for internal routing logic only
     case 'userSettings':
       return username => `/@${username}/settings`;
     case 'userWildcard':
-      return '/*';
+      return '/*'; // NOTE: used for internal routing logic only
     case 'userTabs':
-      return username => `/@${username}/:slug`;
+      return username => `/@${username}/:slug`; // NOTE: used for internal routing logic only
     case 'communityHome':
-      return name => `/community/${name}`;
+      return name => prepend + `/community/${name}`;
     case 'communityOne':
-      return name => `/community/${name}/projects`;
+      return name => prepend + `/community/${name}/projects`;
     case 'communityTwo':
-      return name => `/community/${name}/discussion`;
+      return name => prepend + `/community/${name}/discussion`;
     case 'communityThree':
-      return name => `/community/${name}/people`;
+      return name => prepend + `/community/${name}/people`;
     case 'communityWildcard':
-      return name => `/community/${name}/*`;
+      return name => `/community/${name}/*`; // NOTE: used for internal routing logic only
     case 'projectPage':
-      return slug => `/project/${slug}`;
+      return slug => prepend + `/project/${slug}`;
     case 'project':
-      return '/project';
+      return '/project'; // TODO: do we use this anywhere?
     case 'newProject':
-      return '/project/edit/new';
+      return '/project/edit/new'; // NOTE: used for internal routing logic only
     case 'editProject':
-      return slug => `/project/edit/${slug}`;
+      return slug => `/project/edit/${slug}`; // NOTE: used for internal routing logic only
     case 'projectWildcard':
-      return '/project/*';
+      return '/project/*'; // NOTE: used for internal routing logic only
     case 'exploreCommunities':
-      return '/explore/communities';
+      return prepend + '/explore/communities';
     default:
       return '';
   }
 };
 
-// TODO: create absolute version of the above routes. Basically the same
-// except prepended by 'root'. This is necessary for creating absolute links for pages
-// linked in other pages, which is desirable for SEO. After making this function,
-// update components/Discussion/Post
 
 export default appRoute;

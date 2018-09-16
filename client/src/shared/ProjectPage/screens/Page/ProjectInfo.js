@@ -26,7 +26,7 @@ export default class ProjectInfo extends React.Component {
     return user && (
       <p style={{marginBottom: 0, marginTop: -10}}>
         <span>Posted by </span>
-        <a href={`/@${user.username}`}>{user.displayName}</a>
+        <a href={appRoute('userProfile', true)(user.username)}>{user.displayName}</a>
       </p>
     );
   }

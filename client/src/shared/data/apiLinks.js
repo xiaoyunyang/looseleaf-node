@@ -1,16 +1,6 @@
 // const root = '';
 const root = 'http://localhost:3001';
 
-export const staticApiLink = {
-  posts: `${root}/api/post`,
-  projects: `${root}/api/project`,
-  users: `${root}/api/user`,
-  home: `${root}`,
-  login: `${root}/auth/login`,
-  signup: `${root}/auth/signup`,
-  logout: `${root}/auth/logout`
-};
-
 // TODO: apiLink is the only one that should exist in this file.
 // combine everything into apiLink and change the file name.
 // NOTE:
@@ -19,6 +9,9 @@ export const staticApiLink = {
 // postReaction: id is the postId, reaction is the name of the reaction, e.g., hearts
 // data that is to be posted is the updated array of userIds for that reaction.
 export const apiLink = {
+  signup: `${root}/auth/signup`,
+  login: `${root}/auth/login`,
+  logout: `${root}/auth/logout`,
   communities: `${root}/api/community`,
   userById: id =>  `${root}/api/user?_id=${id}`,
   usersByIds: ids =>  ids.reduce((acc, id) => `${acc}_id=${id}&`,`${root}/api/user?`).slice(0, -1),
@@ -35,7 +28,6 @@ export const apiLink = {
   projectsByContext: (context, findBy, page) => `${root}/api/project/${context}/${findBy}?page=${page}`,
   projectsByIds: ids =>  ids.reduce((acc, id) => `${acc}_id=${id}&`,`${root}/api/project?`).slice(0, -1),
   projectsByUser: (userId, projectIds, page) =>  projectIds.reduce((acc, id) => `${acc}_id=${id}&`,`${root}/api/project/user/${userId}?page=${page}?`).slice(0, -1),
-  logout: `${root}/auth/logout`,
   posts: `${root}/api/post`,
   postById: id => `${root}/api/post?_id=${id}`,
   postEdit: id => `${root}/api/post/edit?_id=${id}`,

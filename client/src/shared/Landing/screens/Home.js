@@ -146,6 +146,8 @@ export default class LandingHome extends React.Component {
     );
   }
   renderArea4(version) {
+    // TODO: put this into a component, which is also going to be rendered on the
+    // '/explore/community/all' page
     const communities = [
       {
         title: 'Developers',
