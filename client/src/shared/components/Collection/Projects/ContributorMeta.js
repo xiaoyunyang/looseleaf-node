@@ -39,13 +39,26 @@ export default class ContributorMeta extends React.Component {
       <div className="meta-badges-inline right-align">
         {
           this.props.projectCreator === userId &&
-          <Badge type='creator' customStyle={{marginTop: -2, paddingRight: 3}} />
+          <Badge
+            type='creator'
+            tooltipLabel={`${this.props.userFirstname} created this project`}
+            customStyle={{marginTop: -2, paddingRight: 3}}
+          />
         }
         {
-          watching && <Badge type='watcher' />
+          watching &&
+          <Badge
+            type='watcher'
+            tooltipLabel={`${this.props.userFirstname} is watching this project`}
+          />
         }
         {
-          contributing && <Badge type='contributor' customStyle={{marginLeft: 1}} />
+          contributing &&
+          <Badge
+            type='contributor'
+            tooltipLabel={`${this.props.userFirstname} is a contributor to this project`}
+            customStyle={{marginLeft: 1}}
+          />
         }
       </div>
     );
@@ -68,5 +81,12 @@ export default class ContributorMeta extends React.Component {
 }
 ContributorMeta.propTypes = {
   contributors: PropType.object.isRequired,
-  userId: PropType.string.isRequired
+  context: PropType.object.string,
+  slug: PropType.object.string,
+  userId: PropType.string.isRequired,
+  projectCreator: PropType.string.isRequired,
+  userFirstname: PropType.string
+}
+ContributorMeta.defaultProps = {
+  userFirstname: 'user'
 }

@@ -27,6 +27,7 @@ export default class Card extends React.Component {
             context={this.props.context}
             projectCreator={this.props.projectCreator}
             userId={this.props.userId}
+            userFirstname={this.props.userFirstname}
           />
         </div>
       </div>

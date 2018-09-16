@@ -968,6 +968,9 @@ nav .categories-wrapper .categories {
 .meta-badges-inline span {
   padding-right: 10px;
 }
+.meta-badges-inline a {
+  cursor: help;
+}
 .project-contributor-badge {
   width: 32px;
   height: 32px;

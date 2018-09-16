@@ -1,4 +1,5 @@
 import React from 'react';
+import $ from 'jquery';
 
 export const badgeIcon = type => {
   switch (type) {
@@ -10,12 +11,24 @@ export const badgeIcon = type => {
 }
 
 export class Badge extends React.Component {
+  componentDidMount() {
+    $('.tooltipped').tooltip();
+  }
+  handleClick() {
+    this.props.handleClick();
+    $('.tooltipped').tooltip('close');
+  }
   render() {
     const { className, backgroundColor } = badgeIcon(this.props.type)
     return (
       <span className="grey-text text-darken-1">
-        <a className="btn-floating project-contributor-badge"
-           style={{backgroundColor}}>
+        <a
+          className="tooltipped btn-floating project-contributor-badge"
+          data-position="top"
+          data-delay="50"
+          data-tooltip={this.props.tooltipLabel}
+          style={{backgroundColor}}
+        >
           <i style={this.props.customStyle} className={className}/>
         </a>
       </span>

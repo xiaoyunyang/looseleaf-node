@@ -43,6 +43,8 @@ export default class One extends React.Component {
     });
   }
   render() {
+    const userFirstname = this.props.user.displayName ?
+      this.props.user.displayName.split(' ')[0] : this.props.user.username;
     return (
       <div className="container">
         <div className="row">
@@ -55,6 +57,7 @@ export default class One extends React.Component {
             noProjectDisp={this.props.noProjectDisp}
             context='user'
             userId={this.props.user._id.toString()}
+            userFirstname={userFirstname}
           />
         </div>
       </div>

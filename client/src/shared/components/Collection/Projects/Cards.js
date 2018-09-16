@@ -15,6 +15,7 @@ class Cards extends React.Component {
                   context={this.props.context}
                   projectCreator={project.postedBy.toString()}
                   userId={this.props.userId}
+                  userFirstname={this.props.userFirstname}
                 />
               </div>
             );
@@ -59,7 +60,8 @@ Cards.propTypes = {
   endOfPage: PropTypes.bool,
   isLoading: PropTypes.bool,
   context: PropTypes.string,
-  userId: PropTypes.string
+  userId: PropTypes.string,
+  userFirstname: PropTypes.string
 };
 Cards.defaultProps = {
   noProjectDisp: 'No projects found.',

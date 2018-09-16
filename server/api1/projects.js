@@ -14,23 +14,6 @@ export const getProjects = (findCriteria, reqLimit, reqPage, cbSuccess, cbFailur
   });
 };
 
-export const addNewProject = (formFields, postedBy) => {
-  const newProject = new Project();
-
-  // Fields you cannot update:
-  const slug = urlSlug(formFields.title, cuid.slug());
-  newProject.postedBy = postedBy;
-  newProject.slug = slug;
-
-  // Fields you can update:
-  // Below line of code combines properties from the updatedProject factory
-  // function into newProject
-  Object.assign(newProject, updatedProjectProps(formFields));
-
-  newProject.save();
-  return slug;
-};
-
 // Update Project =============================================================
 // NOTE: updatedProjectProps is a helper function for updateProject and updateProjectAndUser
 // TODO: Do not use validator.escape() on any field below...
@@ -50,6 +33,23 @@ const updatedProjectProps = formFields => {
     },
     dueDate: formFields.dueDate
   };
+};
+
+export const addNewProject = (formFields, postedBy) => {
+  const newProject = new Project();
+
+  // Fields you cannot update:
+  const slug = urlSlug(formFields.title, cuid.slug());
+  newProject.postedBy = postedBy;
+  newProject.slug = slug;
+
+  // Fields you can update:
+  // Below line of code combines properties from the updatedProject factory
+  // function into newProject
+  Object.assign(newProject, updatedProjectProps(formFields));
+
+  newProject.save();
+  return slug;
 };
 
 export const updateProject = (formFields, slug, cbFailure) => {
