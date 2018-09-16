@@ -1,3 +1,16 @@
+export const updateArr = (items, item, action) => {
+  if (action === 'add') {
+    if (items.includes(item)) {
+      return items;
+    }
+    return [item].concat(items);
+  } else if (action === 'remove') {
+    return items.filter(i => i !== item);
+  }
+  // else if action === 'standby'
+  return items;
+};
+
 /*
 NOTE: newKey is the userId. field is 'contribute', 'watch' etc.
 The structure of the dict is as such:

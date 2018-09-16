@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { getApiData } from '../../../../lib/helpers';
 import { apiLink } from '../../../data/apiLinks';
-import Card from './Card';
+import Cards from './Cards';
 
 class Main extends React.Component {
   constructor(props) {
@@ -52,47 +52,15 @@ class Main extends React.Component {
       page: nextPage
     });
   }
-  renderProjects(projects) {
-    return (
-      <div>
-        { projects && projects.length>0 ?
-          projects.map(project => {
-            return (
-              <div className="row" key={`projects-${project.slug}`}>
-                <Card project={project} />
-              </div>
-            );
-          })
-          :
-          <p>{this.props.noProjectDisp}</p>
-        }
-      </div>
-    );
-  }
   render() {
     return (
-      <div>
-        {
-          this.state.isLoading ?
-          <p>Loading...</p>
-          :
-          <div>
-            { this.renderProjects(this.state.projects) }
-          </div>
-        }
-        {
-          this.state.projects.length > 0 && !this.state.endOfPage &&
-          <div className="row center">
-            <a
-              className="btn col s8 m4 l4 offset-s2 offset-m4 offset-l4"
-              onClick={this.loadMoreProjects}
-            >
-              Load More
-            </a>
-          </div>
-        }
-      </div>
-    );
+      <Cards
+        projects={this.state.projects}
+        isLoading={this.state.isLoading}
+        endOfPage={this.state.endOfPage}
+        loadMoreProjects={this.loadMoreProjects}
+        noProjectDisp={this.props.noProjectDisp}
+      />);
   }
 }
 

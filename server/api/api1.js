@@ -11,7 +11,7 @@ import path from 'path';
 import User from '../models/User';
 import Project from '../models/Project';
 import Post from '../models/Post';
-import { urlSlug, addToDict, deleteFromDict } from '../modules/util';
+import { urlSlug, addToDict, deleteFromDict, updateArr } from '../modules/util';
 import dataPreloading from '../../client/iso-middleware/dataPreloading';
 
 const cuid = require('cuid');
@@ -86,7 +86,6 @@ api.post('/post/react', (req, res) => {
     }
   });
 });
-
 
 const getPosts = (findCriteria, reqLimit, reqPage, cbSuccess) => {
   const limit = reqLimit ? parseInt(reqLimit, 10) : 5;
@@ -256,17 +255,24 @@ const updateProjectAndUser = ({
   project, user, userId, projectId, action
 }) => {
   let updatedContributors = project.contributors;
-  let updatedProject = user.projects;
+  let updatedProjects = user.projects; // array
   if (action === 'contribute' || action === 'watch') {
     // Add user as a contributor / watcher of the project
     const field = action;
     updatedContributors = addToDict(project.contributors, userId, field);
-    updatedProject = addToDict(user.projects, projectId);
+    updatedProjects = updateArr(user.projects, projectId, 'add');
+  
   } else if (action === 'un-contribute' || action === 'un-watch') {
     // chop off the 'un' from 'uncontribute' and 'unwatch'
     const field = action.split('-')[1];
     updatedContributors = deleteFromDict(project.contributors, userId, field);
-    updatedProject = deleteFromDict(user.projects, projectId);
+    const entry = updatedContributors[userId];
+    let arrUpdateCmd = 'standby';
+    if ((action === 'un-contribute' && !entry.watch) ||
+        (action === 'un-watch' && !entry.contribute)) {
+      arrUpdateCmd = 'remove';
+    }
+    updatedProjects = updateArr(user.projects, projectId, arrUpdateCmd);
   }
 
   project.set({
@@ -275,7 +281,7 @@ const updateProjectAndUser = ({
   project.save();
   // Add project to user
   user.set({
-    projects: updatedProject
+    projects: updatedProjects
   });
   user.save();
 };
