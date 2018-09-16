@@ -110,6 +110,7 @@ export default class Discussion extends React.Component {
               posts={this.state.posts}
               loggedinAs={this.props.loggedinUser}
               deletePost={this.deletePost.bind(this)}
+              showContext={this.props.showContext}
             />
             {
               this.state.posts.length > 0 && !this.state.endOfPage &&
@@ -135,6 +136,7 @@ export default class Discussion extends React.Component {
 // "Post an announcement, question, or insight to this community.
 // "Post an update, question, or clarification to this project."
 Discussion.propTypes = {
+  showContext: PropTypes.bool,
   loggedinUser: PropTypes.object,
   newPostPlaceholder: PropTypes.string,
   communitySlug: PropTypes.string,
@@ -143,6 +145,7 @@ Discussion.propTypes = {
   readOnly: PropTypes.bool,
 };
 Discussion.defaultProps = {
+  showContext: false,
   projectId: null,
   communitySlug: null,
   readOnly: true,

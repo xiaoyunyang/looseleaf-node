@@ -2,10 +2,10 @@ import React from 'react';
 // import PropTypes from 'prop-types';
 import PostDisplay from './PostDisplay';
 import PostEditor from './PostEditor';
-import { getApiData } from '../../../lib/helpers';
 import { image } from '../../data/assetLinks';
 import { apiLink } from '../../data/apiLinks';
-import { postToApiData } from '../../../lib/helpers';
+import appRoute from '../../data/appRoute'
+import { getApiData, postToApiData, capitalize } from '../../../lib/helpers';
 import { newPlugins } from './draftjsHelpers';
 const { plugins, inlineToolbarPlugin } = newPlugins();
 const { InlineToolbar } = inlineToolbarPlugin;
@@ -21,11 +21,40 @@ class Post extends React.Component {
       username: '',
       editMode: false,
       editedOn: this.props.post.editedOn,
-      editorContent: this.props.post.content
+      editorContent: this.props.post.content,
+      postContext: { link: '#', name: 'Project or community' }
     };
   }
   componentDidMount() {
     this.fetchUserInfo(this.props.post.postedBy);
+    this.updateContext(this.props.showContext);
+  }
+  updateContext(showContext) {
+    const projectId = this.props.post.context.project;
+    const communitySlug = this.props.post.context.community;
+
+    let link, name;
+    if (communitySlug) {
+      link = appRoute('communityHome')(communitySlug);
+      name = capitalize(communitySlug);
+      this.setState({
+        postContext: { link: link, name: name }
+      });
+    } else if (projectId) {
+      this.fetchProjectInfo(projectId);
+    }
+  }
+  fetchProjectInfo(projectId) {
+    const url = apiLink.projectById(projectId);
+    const setApiData = data => {
+      const project = data[0];
+      const link = appRoute('projectPage')(project.slug);
+      const name = project.title;
+      this.setState({
+        postContext: { link, name }
+      });
+    }
+    getApiData(url, setApiData)
   }
   fetchUserInfo(id) {
     const setApiData = data => this.setState({
@@ -53,7 +82,6 @@ class Post extends React.Component {
       });
     };
     postToApiData(url, data , cbFailure, cbSuccess);
-
   }
   render() {
     return (
@@ -71,15 +99,16 @@ class Post extends React.Component {
           />
           :
           <PostDisplay
+            context={this.props.showContext ? this.state.postContext : null}
+            deletePost={this.props.deletePost}
+            editedOn={this.state.editedOn}
+            editorContent={this.state.editorContent}
+            handleToggleEditMode={this.handleToggleEditMode.bind(this)}
+            loggedinUser={this.props.loggedinAs}
+            post={this.props.post}
             userDisplayName={this.state.userDisplayName}
             userPic={this.state.userPic}
             username={this.state.username}
-            post={this.props.post}
-            editedOn={this.state.editedOn}
-            editorContent={this.state.editorContent}
-            loggedinUser={this.props.loggedinAs}
-            deletePost={this.props.deletePost}
-            handleToggleEditMode={this.handleToggleEditMode.bind(this)}
           />
         }
       </div>

@@ -27,7 +27,7 @@ export default class ContributorMeta extends React.Component {
           }
         </span>
         <span className="grey-text text-darken-1">
-          <i className={badgeIcon('contributor').className} />
+          <i className={badgeIcon('watcher').className} />
           {`${numWatching} watching`}
         </span>
       </div>
@@ -81,8 +81,8 @@ export default class ContributorMeta extends React.Component {
 }
 ContributorMeta.propTypes = {
   contributors: PropType.object.isRequired,
-  context: PropType.object.string,
-  slug: PropType.object.string,
+  context: PropType.string,
+  slug: PropType.string,
   userId: PropType.string.isRequired,
   projectCreator: PropType.string.isRequired,
   userFirstname: PropType.string

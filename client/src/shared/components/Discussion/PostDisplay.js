@@ -41,16 +41,46 @@ const convertToEditorState = (editorContent) => {
   return editorState;
 };
 
+const PostUserInfo = ({ userPic, username, userDisplayName, editedOn, post }) => (
+  <div className="row feed-user">
+    <div className="col">
+      <img className="circle" src={userPic} alt="" />
+    </div>
+    <div className="col" style={{marginLeft: -18}}>
+      <span>
+        <a href={`/@${username}`}>{userDisplayName}</a>
+      </span>
+      <p style={{paddingLeft: 15, fontSize: 14}}>
+        {dateFormatted(post.createdAt)}
+      </p>
+    </div>
+    {
+      editedOn &&
+      <div className="col">
+        <p className="post-edited-label">· Edited</p>
+      </div>
+    }
+  </div>
+);
+const PostContext = ({ context }) => (
+  <div className="row post-context">
+    <span>Posted under </span>
+    <span><a href={context.link}>{context.name}</a></span>
+  </div>
+);
+
 const PostDisplay = ({
-  handleToggleEditMode,
-  userDisplayName,
-  userPic,
-  username,
-  post,
-  editedOn,
-  loggedinUser,
+  context,
   deletePost,
-  editorContent }) => (
+  editedOn,
+  editorContent,
+  handleToggleEditMode,
+  loggedinUser,
+  post,
+  userDisplayName,
+  username,
+  userPic
+}) => (
   editorContent &&
     <div className="card feed">
       <div className="card-content">
@@ -64,25 +94,17 @@ const PostDisplay = ({
             :
             null
         }
-        <div className="row feed-user">
-          <div className="col">
-            <img className="circle" src={userPic} alt="" />
-          </div>
-          <div className="col" style={{marginLeft: -18}}>
-            <span>
-              <a href={`/@${username}`}>{userDisplayName}</a>
-            </span>
-            <p style={{paddingLeft: 15, fontSize: 14}}>
-              {dateFormatted(post.createdAt)}
-            </p>
-          </div>
-          {
-            editedOn &&
-            <div className="col">
-              <p className="post-edited-label">· Edited</p>
-            </div>
-          }
-        </div>
+        {
+          context &&
+          <PostContext context={context}/>
+        }
+        <PostUserInfo
+          userPic={userPic}
+          username={username}
+          userDisplayName={userDisplayName}
+          editedOn={editedOn}
+          post={post}
+        />
         <div className="draft-js-editor">
           <Editor
             editorState={convertToEditorState(editorContent)}
@@ -90,21 +112,21 @@ const PostDisplay = ({
           />
         </div>
       </div>
-      {
-        <div className="card-action">
-          <Reactions post={post} loggedinUser={loggedinUser} />
-        </div>
-      }
+      <div className="card-action">
+        <Reactions post={post} loggedinUser={loggedinUser} />
+      </div>
     </div>
 );
 
 PostDisplay.propTypes = {
+  context: PropTypes.object,
   userDisplayName: PropTypes.string.isRequired,
   username: PropTypes.string.isRequired,
   userPic: PropTypes.string.isRequired,
   editorContent: PropTypes.string
 };
 PostDisplay.defaultProps = {
+  context: null,
   editorContent: null
 };
 

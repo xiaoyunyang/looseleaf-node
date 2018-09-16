@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Post from './Post';
 
-const Posts = ({ posts, deletePost, noPostDisp, loggedinAs }) => (
+const Posts = ({ posts, deletePost, noPostDisp, loggedinAs, showContext }) => (
   <div>
     {
       posts && posts.length>0 ?
@@ -10,6 +10,7 @@ const Posts = ({ posts, deletePost, noPostDisp, loggedinAs }) => (
         return (
           <div key={`post-${post._id}`}>
             <Post
+              showContext={showContext}
               post={post}
               loggedinAs={loggedinAs}
               deletePost={deletePost}
@@ -24,11 +25,13 @@ const Posts = ({ posts, deletePost, noPostDisp, loggedinAs }) => (
 );
 // TODO: change Posts's props from loggedInAs to 'loggedinAs'
 Posts.propTypes = {
+  showContext: PropTypes.bool,
   posts: PropTypes.array,
   noPostDisp: PropTypes.string,
   loggedInAs: PropTypes.object,
 };
 Posts.defaultProps = {
+  showContext: false,
   noPostDisp: 'No post found.',
   loggedInAs: {}
 };

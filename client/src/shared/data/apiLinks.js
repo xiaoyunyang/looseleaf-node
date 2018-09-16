@@ -29,7 +29,8 @@ export const apiLink = {
   users: `${root}/api/user`,
   usersByCommunity: (slug) => `${root}/api/user?communities=${slug}`,
   projects: `${root}/api/project`,
-  projectsByUserId: userId => `${root}/api/project?postedBy=${userId}`,
+  projectsByUserId: userId => `${root}/api/project?postedBy=${userId}`, // TODO: do we even use this? more appropriately should be called projectByCreator
+  projectById: id => `${root}/api/project?_id=${id}`,
   projectBySlug: slug => `${root}/api/project?slug=${slug}`,
   projectsByContext: (context, findBy, page) => `${root}/api/project/${context}/${findBy}?page=${page}`,
   projectsByIds: ids =>  ids.reduce((acc, id) => `${acc}_id=${id}&`,`${root}/api/project?`).slice(0, -1),

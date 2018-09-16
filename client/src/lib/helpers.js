@@ -5,6 +5,7 @@ export const getApiData = (url, setApiData) => {
   return axios.get(url)
     .then((response) => {
       // handle success
+      // NOTE: response.data comes back as an array.
       setApiData(response.data);
     })
     .catch((error) => {

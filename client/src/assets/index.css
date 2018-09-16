@@ -442,6 +442,11 @@ nav .dropdown-content li:hover {
 #user-card .or-divider {
   margin-top: 5px;
 }
+.feed .post-context {
+  padding-left: 10px;
+  padding-bottom: 10px;
+  font-weight: 300;
+}
 .feed .feed-user p {
   font-weight: 300;
   color: #555;

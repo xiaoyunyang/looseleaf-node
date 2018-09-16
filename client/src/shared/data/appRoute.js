@@ -57,6 +57,8 @@ const appRoute = (pageName) => {
 };
 
 // TODO: create absolute version of the above routes. Basically the same
-// except prepended by 'root'
+// except prepended by 'root'. This is necessary for creating absolute links for pages
+// linked in other pages, which is desirable for SEO. After making this function,
+// update components/Discussion/Post
 
 export default appRoute;

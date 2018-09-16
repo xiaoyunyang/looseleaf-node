@@ -18,6 +18,7 @@ export default class Two extends React.Component {
             userId={this.props.userId}
             loggedinUser={this.props.loggedinAs}
             readOnly
+            showContext={true}
           />
         </div>
       </div>
