@@ -87,14 +87,15 @@ api.post('/post/react', (req, res) => {
   });
 });
 
-const getPosts = (findCriteria, reqLimit, reqPage, cbSuccess) => {
+const getPosts = (findCriteria, reqLimit, reqPage, cbSuccess, cbFailure) => {
   const limit = reqLimit ? parseInt(reqLimit, 10) : 5;
   const page = reqPage ? parseInt(reqPage, 10) : 1;
   const options = {
     page, limit, sort: { createdAt: -1 }
   };
   return Post.paginate(findCriteria, options, (err, posts) => {
-    cbSuccess(posts.docs);
+    if (err) return cbFailure(err);
+    return cbSuccess(posts.docs);
   });
 };
 
@@ -102,40 +103,58 @@ api.get('/post', (req, res) => {
   // Queries - get all
   const findCriteria = req.query;
   const cbSuccess = result => res.send(result);
-  getPosts(findCriteria, req.query.limit, req.query.page, cbSuccess);
+  const cbFailure = err => {
+    res.status(500).end();
+    return console.error(err);
+  };
+  getPosts(findCriteria, req.query.limit, req.query.page, cbSuccess, cbFailure);
 });
 
 api.get('/post/community/:slug', (req, res) => {
   // Get posts from community with the slug, e.g., developers
   const cbSuccess = result => res.send(result);
+  const cbFailure = err => {
+    res.status(500).end();
+    return console.error(err);
+  };
   const findCriteria = { 'context.community': req.params.slug };
-  getPosts(findCriteria, req.query.limit, req.query.page, cbSuccess);
+  getPosts(findCriteria, req.query.limit, req.query.page, cbSuccess, cbFailure);
 });
 api.get('/post/project/:id', (req, res) => {
   // Get posts associated with a project with the id
   const cbSuccess = result => res.send(result);
+  const cbFailure = err => {
+    res.status(500).end();
+    return console.error(err);
+  };
   const findCriteria = { 'context.project': req.params.id };
-  getPosts(findCriteria, req.query.limit, req.query.page, cbSuccess);
+  getPosts(findCriteria, req.query.limit, req.query.page, cbSuccess, cbFailure);
 });
 api.get('/post/user/:id', (req, res) => {
   // Queries
   const findCriteria = { postedBy: req.params.id };
   const cbSuccess = result => res.send(result);
-  getPosts(findCriteria, req.query.limit, req.query.page, cbSuccess);
+  const cbFailure = err => {
+    res.status(500).end();
+    return console.error(err);
+  };
+  getPosts(findCriteria, req.query.limit, req.query.page, cbSuccess, cbFailure);
 });
 
 // Projects ======================================================================
-const getProjects = (findCriteria, reqLimit, reqPage, cbSuccess) => {
+const getProjects = (findCriteria, reqLimit, reqPage, cbSuccess, cbFailure) => {
   const limit = reqLimit ? parseInt(reqLimit, 10) : 5;
   const page = reqPage ? parseInt(reqPage, 10) : 1;
   const options = {
     page, limit, sort: { createdAt: -1 }
   };
   return Project.paginate(findCriteria, options, (err, projects) => {
-    cbSuccess(projects.docs);
+    if (err) return cbFailure(err);
+    return cbSuccess(projects.docs);
   });
 };
 
+// TODO: Do not use validator.escape() on any field below...
 const updatedProjectProps = formFields => {
   return {
     creator: {
@@ -212,13 +231,21 @@ api.get('/project', (req, res) => {
   // Queries - get all
   const findCriteria = req.query;
   const cbSuccess = result => res.send(result);
-  getProjects(findCriteria, req.query.limit, req.query.page, cbSuccess);
+  const cbFailure = err => {
+    res.status(500).end();
+    return console.error(err);
+  };
+  getProjects(findCriteria, req.query.limit, req.query.page, cbSuccess, cbFailure);
 });
 api.get('/project/community/:slug', (req, res) => {
   // Get posts from community with the slug, e.g., developers
   const cbSuccess = result => res.send(result);
+  const cbFailure = err => {
+    res.status(500).end();
+    return console.error(err);
+  };
   const findCriteria = { communities: req.params.slug };
-  getProjects(findCriteria, req.query.limit, req.query.page, cbSuccess);
+  getProjects(findCriteria, req.query.limit, req.query.page, cbSuccess, cbFailure);
 });
 
 // TODO:
@@ -228,11 +255,17 @@ api.get('/project/community/:slug', (req, res) => {
 api.get('/project/user/:id', (req, res) => {
   // Queries for followers of a community
   const findCriteria = {
-    postedBy: req.params.id,
-    // contributors: {req.params.id: null }
+    $or: [
+      { postedBy: req.params.id },
+      { _id: req.query._id }
+    ]
   };
   const cbSuccess = result => res.send(result);
-  getProjects(findCriteria, req.query.limit, req.query.page, cbSuccess);
+  const cbFailure = err => {
+    res.status(500).end();
+    return console.error(err);
+  };
+  getProjects(findCriteria, req.query.limit, req.query.page, cbSuccess, cbFailure);
 });
 
 // TODO: The following is probably not needed
@@ -261,7 +294,6 @@ const updateProjectAndUser = ({
     const field = action;
     updatedContributors = addToDict(project.contributors, userId, field);
     updatedProjects = updateArr(user.projects, projectId, 'add');
-  
   } else if (action === 'un-contribute' || action === 'un-watch') {
     // chop off the 'un' from 'uncontribute' and 'unwatch'
     const field = action.split('-')[1];

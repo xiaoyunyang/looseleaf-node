@@ -18,16 +18,7 @@ export default class One extends React.Component {
     this.fetchProjects(this.state.page);
   }
   fetchProjects(page) {
-    const context = this.props.context;
-    const findBy = context => {
-      switch (context) {
-        case 'project': return this.props.projectId;
-        case 'community': return this.props.communitySlug;
-        case 'user': return this.props.userId;
-        default: return;
-      }
-    };
-    const link = apiLink.projectsByIds(this.props.user.projects);
+    const link = apiLink.projectsByUser(this.props.user._id, this.props.user.projects);
 
     const setApiData = data => {
       const oldProjects = this.state.projects;
