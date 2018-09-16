@@ -89,7 +89,6 @@ api.post('/post/react', (req, res) => {
 
 
 const getPosts = (findCriteria, reqLimit, reqPage, cbSuccess) => {
-  console.log('findCriteria......', findCriteria)
   const limit = reqLimit ? parseInt(reqLimit, 10) : 5;
   const page = reqPage ? parseInt(reqPage, 10) : 1;
   const options = {
@@ -127,6 +126,17 @@ api.get('/post/user/:id', (req, res) => {
 });
 
 // Projects ======================================================================
+const getProjects = (findCriteria, reqLimit, reqPage, cbSuccess) => {
+  const limit = reqLimit ? parseInt(reqLimit, 10) : 5;
+  const page = reqPage ? parseInt(reqPage, 10) : 1;
+  const options = {
+    page, limit, sort: { createdAt: -1 }
+  };
+  return Project.paginate(findCriteria, options, (err, projects) => {
+    cbSuccess(projects.docs);
+  });
+};
+
 const updatedProjectProps = formFields => {
   return {
     creator: {
@@ -198,17 +208,32 @@ api.post('/project', (req, res) => {
   return res.send({ status: 'success', msg: slug });
 });
 
-// NOTE: No limit for how many can be displayed...but obviously we
-// want to put a limit if the number gets really big.
-// TODO: Get project based on descending order ("trendiest" project at the top)
+// TODO: Idea. Get project based on descending order ("trendiest" project at the top)
 api.get('/project', (req, res) => {
-  // Queries
-  const limit = parseInt(req.query.limit, 10);
-  Project.find(req.query).sort({ createdAt: -1 }).limit(limit).exec(
-    (err, projects) => {
-      res.send(projects);
-    }
-  );
+  // Queries - get all
+  const findCriteria = req.query;
+  const cbSuccess = result => res.send(result);
+  getProjects(findCriteria, req.query.limit, req.query.page, cbSuccess);
+});
+api.get('/project/community/:slug', (req, res) => {
+  // Get posts from community with the slug, e.g., developers
+  const cbSuccess = result => res.send(result);
+  const findCriteria = { communities: req.params.slug };
+  getProjects(findCriteria, req.query.limit, req.query.page, cbSuccess);
+});
+
+// TODO:
+// Want projects which is created by the user with this id AND
+// projects for which the user is a contributor AND
+// projects for which the user is a watcher
+api.get('/project/user/:id', (req, res) => {
+  // Queries for followers of a community
+  const findCriteria = {
+    postedBy: req.params.id,
+    // contributors: {req.params.id: null }
+  };
+  const cbSuccess = result => res.send(result);
+  getProjects(findCriteria, req.query.limit, req.query.page, cbSuccess);
 });
 
 // TODO: The following is probably not needed
@@ -341,6 +366,7 @@ api.post('/user/community', (req, res) => {
     return res.send({ status: 'success', msg: 'change success!' });
   });
 });
+
 // This is executed when loggedinUser "follow" or "unfollow" on userToFollow
 api.post('/user/following', (req, res) => {
   // req.query._id is the id of userA

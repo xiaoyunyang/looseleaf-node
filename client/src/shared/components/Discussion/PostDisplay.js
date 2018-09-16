@@ -92,10 +92,7 @@ const PostDisplay = ({
       </div>
       {
         <div className="card-action">
-          {
-          <Reactions post={post} loggedinUser={loggedinUser} />            
-          }
-
+          <Reactions post={post} loggedinUser={loggedinUser} />
         </div>
       }
     </div>

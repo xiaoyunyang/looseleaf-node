@@ -20,7 +20,7 @@ const schema = mongoose.Schema({
   location: String,
   gender: String,
   hireable: String,
-  projects: { type: Object, default: {} },
+  projects: { type: Array, default: [] },
   followers: { type: Array, default: [] },
   following: { type: Array, default: [] },
   interests: { type: Array, default: [] },

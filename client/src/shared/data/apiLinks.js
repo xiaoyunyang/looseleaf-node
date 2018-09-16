@@ -31,6 +31,7 @@ export const apiLink = {
   projects: `${root}/api/project`,
   projectsByUserId: userId => `${root}/api/project?postedBy=${userId}`,
   projectBySlug: slug => `${root}/api/project?slug=${slug}`,
+  projectsByContext: (context, findBy, page) => `${root}/api/project/${context}/${findBy}?page=${page}`,
   logout: `${root}/auth/logout`,
   posts: `${root}/api/post`,
   postById: id => `${root}/api/post?_id=${id}`,

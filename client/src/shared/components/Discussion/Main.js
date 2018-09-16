@@ -26,7 +26,7 @@ export default class Discussion extends React.Component {
   }
   fetchPosts(page) {
     const context = this.props.context;
-    const findBy = (context) => {
+    const findBy = context => {
       switch (context) {
         case 'project': return this.props.projectId;
         case 'community': return this.props.communitySlug;
@@ -42,7 +42,7 @@ export default class Discussion extends React.Component {
         isLoading: false
       });
 
-      if (data.length < 5) {
+      if (data.length < 5) { // TODO: 5 is a magic number
         this.setState({
           endOfPage: true
         });
@@ -54,8 +54,8 @@ export default class Discussion extends React.Component {
     const nextPage = this.state.page + 1;
     this.fetchPosts(nextPage);
     this.setState({
-        page: nextPage
-      });
+      page: nextPage
+    });
   }
   // Returns True if successful post. False Otherwise.
   handlePost(d) {

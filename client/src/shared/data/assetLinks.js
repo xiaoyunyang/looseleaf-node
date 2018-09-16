@@ -22,22 +22,22 @@ export const image = {
 export const team = [
   {
     fullName: 'Xiaoyun Yang',
-    role: 'Founder',
+    role: 'Co-founder',
     bio: "Xiaoyun's Bio",
     img: image.team.xiaoyunyang,
     linkedin: 'https://linkedin.com/in/xiaoyun-yang'
   },
   {
     fullName: 'Andrew Fenner',
-    role: 'Designer',
+    role: 'Co-founder',
     bio: "Andrew's Bio",
     img: image.team.andrewfenner,
     linkedin: 'https://linkedin.com/in/andrew-fenner'
   },
   {
     fullName: 'Ollie',
-    role: 'HR',
-    bio: "Ollie's Bio",
+    role: 'CHO',
+    bio: "Ollie is the Chief Happiness Officer of LooseLeaf. His primary role is to keep the team happy.",
     img: image.team.ollie,
     linkedin: 'https://linkedin.com/in/andrew-fenner'
   }
