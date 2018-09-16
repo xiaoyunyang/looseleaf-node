@@ -27,7 +27,7 @@ export default class TextInput extends React.Component {
       <div className="row">
         <div className={`input-field col s12 m12 l12`}>
           {iconName &&
-            <i className="material-icons prefix">{iconName}</i>
+            <i className="material-icons prefix grey-text text-darken-2">{iconName}</i>
           }
           <input
             id={this.props.id}

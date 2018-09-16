@@ -9,8 +9,8 @@ const Communities= ({ cs, altern, hasIcon, showAltern }) => (
       <div className="row portfolio-user-info">
         {
           hasIcon &&
-          <div className="col s1 m1 l1">
-            <i className="material-icons">group</i>
+          <div className="col s1 m1 l1" style={{marginTop: 4}}>
+            <i className="material-icons grey-text text-darken-2">group</i>
           </div>
         }
         <div className="col s11 m11 l11">
@@ -31,8 +31,8 @@ const Communities= ({ cs, altern, hasIcon, showAltern }) => (
       <div className="row portfolio-user-info">
         {
           hasIcon &&
-          <div className="col s1 m1 l1">
-            <i className="material-icons">group</i>
+          <div className="col s1 m1 l1" style={{marginTop: 4}}>
+            <i className="material-icons grey-text text-darken-2">group</i>
           </div>
         }
         <div className="col s11 m11 l11">

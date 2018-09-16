@@ -20,7 +20,7 @@ export default class TextAreaInput extends React.Component {
       <div className="row">
         <div className="input-field col s12 m12 l12">
           { iconName &&
-            <i className="material-icons prefix">{icon(this.props.id)}</i>
+            <i className="material-icons prefix grey-text text-darken-2">{icon(this.props.id)}</i>
           }
           <textarea
             id={this.props.id}

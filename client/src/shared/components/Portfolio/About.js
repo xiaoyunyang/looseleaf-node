@@ -57,7 +57,7 @@ const UserInfo = ({ icon, info, orElse, to, isLoggedinUser }) => (
     isLoggedinUser &&
     <div className="row portfolio-user-info">
       <div className="col s1 m1 l1">
-        <i className="material-icons">{icon}</i>
+        <i className="material-icons grey-text text-darken-2">{icon}</i>
       </div>
       <div className="col s11 m11 l11">
         { info ?
@@ -72,7 +72,7 @@ const UserInfo = ({ icon, info, orElse, to, isLoggedinUser }) => (
       !isLoggedinUser && info &&
       <div className="row portfolio-user-info">
         <div className="col s1 m1 l1">
-          <i className="material-icons">{icon}</i>
+          <i className="material-icons grey-text text-darken-2">{icon}</i>
         </div>
         <div className="col s11 m11 l11">
           <TextOrLink iconName={icon} content={info} />
