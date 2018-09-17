@@ -17,8 +17,8 @@ const schema = mongoose.Schema({
   communities: Array,
   interestAreas: Array,
   contributors: { type: Object, default: { } },
-  submission: {
-    platform: { type: String, required: true },
+  deliverable: {
+    formats: { type: Array, default: [] },
     instruction: { type: String, default: '' }
   },
   dueDate: Date

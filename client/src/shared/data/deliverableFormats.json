@@ -1,0 +1,80 @@
+{
+  "codesandbox": {
+    "slug": "codesandbox",
+    "communities": ["developers"],
+    "name": "CodeSandbox",
+    "desc": "Code editor for web apps."
+  },
+  "cloud9": {
+    "slug": "cloud9",
+    "communities": ["developers"],
+    "name": "Cloud9",
+    "desc": "Online IDE."
+  },
+  "codepen": {
+    "slug": "codepen",
+    "communities": ["developers"],
+    "name": "CodePen",
+    "desc": "Frontend developer's playground."
+  },
+  "dropbox": {
+    "slug": "dropbox",
+    "communities": ["developers"],
+    "name": "Dropbox",
+    "desc": "Share any files from your computer."
+  },
+  "invision": {
+    "slug": "invision",
+    "communities": ["developers"],
+    "name": "InVision",
+    "desc": "Build mockup of websites."
+  },
+  "glitch": {
+    "slug": "glitch",
+    "communities": ["developers"],
+    "name": "Glitch",
+    "desc": "Make games and apps."
+  },
+  "github": {
+    "slug": "github",
+    "communities": ["developers"],
+    "name": "Github",
+    "desc": "Code collaboration and free file sharing."
+  },
+  "ghost": {
+    "slug": "ghost",
+    "communities": ["writers"],
+    "name": "Ghost",
+    "desc": "Writing platform using Markdown."
+  },
+  "googledoc": {
+    "slug": "googledoc",
+    "communities": ["writers"],
+    "name": "Google Doc",
+    "desc": "Online collaborative writing tool."
+  },
+  "medium": {
+    "slug": "medium",
+    "communities": ["writers"],
+    "name": "Medium",
+    "desc": "Online publishing platform."
+  },
+  "repl": {
+    "slug": "repl",
+    "communities": ["developers"],
+    "name": "Repl.it",
+    "desc": "Sharing and trying out code snippets."
+  },
+  "youtube": {
+    "slug": "youtube",
+    "communities": ["video-producers"],
+    "name": "YouTube",
+    "desc": "Share videos."
+  },
+  "other": {
+    "slug": "other",
+    "communities": ["video-producers"],
+    "name": "Other",
+    "desc": "Emailing?"
+  }
+}

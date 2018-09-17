@@ -1,8 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import $ from 'jquery';
 
 export default class InputCheckboxes extends React.Component {
+  componentDidMount() {
+    $('.tooltipped').tooltip();
+  }
   handleClick(d, event) {
+    $('.tooltipped').tooltip('open');
+
     const clicked = d;
     const isChecked = event.target.checked;
 
@@ -32,7 +38,7 @@ export default class InputCheckboxes extends React.Component {
   // }
   render() {
     return (
-      <div>
+      <div className="input-checkboxes">
         <p>{this.props.title}</p>
         {
           this.props.choices.map(d => {
@@ -48,6 +54,14 @@ export default class InputCheckboxes extends React.Component {
                 <label htmlFor={`${this.props.id}-${dId}`}>
                   {`${d.name} ${this.renderUnits(d, this.props.units)}`}
                 </label>
+                <a
+                  className="tooltipped checkbox-help"
+                  data-position="right"
+                  data-delay="50"
+                  data-tooltip={d.desc}
+                >
+                  <i className="fas fa-question-circle" />
+                </a>
               </p>
             );
           })

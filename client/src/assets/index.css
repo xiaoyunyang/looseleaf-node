@@ -1215,3 +1215,12 @@ nav .categories-wrapper .categories {
 .draft-js-editor .draftJsMentionPlugin__inputInvalid__X9hHv {
   color: rgb(184, 115, 115) !important;
 }
+/* Input BEGIN */
+.checkbox-help {
+  color: #b0bec5;
+}
+.input-checkboxes i {
+  padding-left: 8px;
+  font-color: 'blue';
+}
+/* Input END */

@@ -9,6 +9,11 @@ import TextAreaInput from '../../../components/Form/TextAreaInput';
 import TextInput from '../../../components/Form/TextInput';
 import { postToApiData } from '../../../../lib/helpers';
 
+const communities = require('../../../data/community.json');
+const communitiesArr = Object.values(communities);
+const deliverableFormats = require('../../../data/deliverableFormats.json');
+const deliverableFormatsArr = Object.values(deliverableFormats);
+
 export default class ProjectForm extends React.Component {
   constructor(props) {
     super(props);
@@ -21,7 +26,7 @@ export default class ProjectForm extends React.Component {
       creatorAbout: this.props.creator.about,
       creatorMission: this.props.creator.mission,
       contributors: [], // should be an array of ids. TODO: this needs to be sent to /api/notif. It's not used for anything now
-      selectedPlatform: this.props.platforms[0],
+      deliverableFormats: this.props.selectedDeliverableFormats,
       submissionInst: '',
       dueDate: '',
       flash: {
@@ -66,13 +71,13 @@ export default class ProjectForm extends React.Component {
                 onChange={d => this.setState({ desc: d })}
               />
               <InputCheckboxes
-                id="select-coverage-types"
+                id="select-communities"
                 itemWidthStyle="col s12 m4 l6"
                 title={'What type of project?'}
-                choices={this.props.communities}
+                choices={communitiesArr}
                 selected={this.state.communities}
-                onChange={d => this.setState({
-                  communities: d
+                onChange={ds => this.setState({
+                  communities: ds
                 })}
               />
               <InputTags
@@ -106,28 +111,33 @@ export default class ProjectForm extends React.Component {
             </div>
           </div>
         </div>
+        {
+          // <div className="card-panel white">
+          //   <h5>Invite Project Contributors</h5>
+          //   <p style={{ opacity: '0.8' }}>Invite people you know or want to collaborate with to contribute to the project.</p>
+          //   <InputTags
+          //     id="select-people"
+          //     label="contributors"
+          //     hint="+contributor"
+          //     tags={this.props.people}
+          //     selectedTags={this.state.contributors}
+          //     onChange={ds => this.setState({ contributors: ds })}
+          //   />
+          // </div>
+        }
         <div className="card-panel white">
-          <h5>Invite Project Contributors</h5>
-          <p style={{ opacity: '0.8' }}>Invite people you know or want to collaborate with to contribute to the project.</p>
-          <InputTags
-            id="select-people"
-            label="contributors"
-            hint="+contributor"
-            tags={this.props.people}
-            selectedTags={this.state.contributors}
-            onChange={ds => this.setState({ contributors: ds })}
-          />
-        </div>
-        <div className="card-panel white">
-          <h5>Submission</h5>
-          <p>Submission Instruction</p>
+          <h5>Deliverable</h5>
           <div className="row">
             <div className="col s12">
-              <InputDropdown
-                id="select-platform"
-                label="Platform Type"
-                choices={this.props.platforms}
-                onChange={d => this.setState({ selectedPlatform: d })}
+              <InputCheckboxes
+                id="select-deliverable-formats"
+                itemWidthStyle="col s12 m4 l6"
+                title={'How to submit deliverable?'}
+                choices={deliverableFormatsArr}
+                selected={this.state.deliverableFormats}
+                onChange={ds => this.setState({
+                  deliverableFormats: ds
+                })}
               />
               <TextAreaInput
                 id="text-desc"

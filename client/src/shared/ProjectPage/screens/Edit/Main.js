@@ -55,15 +55,13 @@ export default class extends React.Component {
           <ProjectForm
             history={this.props.history}
             user={this.props.user.loggedinUser}
-            projectTypes={['Software Development', 'Design', 'Writng', 'Data Science', 'Illustration', 'Video Production']}
             tags={interests}
-            platforms={platforms}
             creator={this.props.projectInfo.creator}
             people={this.state.people}
             title={this.props.projectInfo.title}
             desc={this.props.projectInfo.desc}
-            communities={this.state.communities}
             selectedCommunities={this.props.projectInfo.communities}
+            selectedDeliverableFormats={this.props.projectInfo.deliverable.formats}
             selectedInterestAreas={this.props.projectInfo.interestAreas}
             actionBtn={{
               label: 'Update Project',

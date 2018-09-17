@@ -27,8 +27,8 @@ const updatedProjectProps = formFields => {
     desc: formFields.desc,
     communities: formFields.communities,
     interestAreas: formFields.interestAreas,
-    submission: {
-      platform: formFields.selectedPlatform,
+    deliverable: {
+      formats: formFields.deliverableFormats,
       instruction: formFields.submissionInst
     },
     dueDate: formFields.dueDate

@@ -3,19 +3,18 @@ import TopNav from '../../../components/TopNavUser/Main';
 import ProjectForm from '../Edit/ProjectForm';
 import { apiLink } from '../../../data/apiLinks';
 import { getApiData } from '../../../../lib/helpers';
-import { interests, platforms } from '../../../data/TempData';
+import { interests } from '../../../data/TempData';
 
 export default class extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      people: {},
-      communities: []
+      people: {}
     }
   }
   componentDidMount() {
-    this.loadPeople();
-    this.loadCommunities();
+    // this.loadPeople();
+    // this.loadCommunities();
   }
   loadPeople() {
     const url = apiLink.users;
@@ -56,11 +55,10 @@ export default class extends React.Component {
             user={this.props.user.loggedinUser}
             projectTypes={['Software Development', 'Design', 'Writng', 'Data Science', 'Illustration', 'Video Production']}
             tags={interests}
-            platforms={platforms}
             creator={{about: this.props.user.loggedinUser.bio, mission: ''}}
             people={this.state.people}
-            communities={this.state.communities}
             selectedCommunities={[]}
+            selectedDeliverableFormats={[]}
             selectedInterestAreas={[]}
             actionBtn={{
               label: 'Create Project',
