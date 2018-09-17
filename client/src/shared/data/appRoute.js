@@ -33,15 +33,15 @@ const appRoute = (pageName, absRoute) => {
     case 'userTabs':
       return username => `/@${username}/:slug`; // NOTE: used for internal routing logic only
     case 'communityHome':
-      return name => prepend + `/community/${name}`;
+      return slug => prepend + `/community/${slug}`;
     case 'communityOne':
-      return name => prepend + `/community/${name}/projects`;
+      return slug => prepend + `/community/${slug}/projects`;
     case 'communityTwo':
-      return name => prepend + `/community/${name}/discussion`;
+      return slug => prepend + `/community/${slug}/discussion`;
     case 'communityThree':
       return name => prepend + `/community/${name}/people`;
     case 'communityWildcard':
-      return name => `/community/${name}/*`; // NOTE: used for internal routing logic only
+      return slug => `/community/${slug}/*`; // NOTE: used for internal routing logic only
     case 'projectPage':
       return slug => prepend + `/project/${slug}`;
     case 'project':

@@ -83,7 +83,7 @@ ContributorMeta.propTypes = {
   contributors: PropType.object.isRequired,
   context: PropType.string,
   slug: PropType.string,
-  userId: PropType.string.isRequired,
+  userId: PropType.string,
   projectCreator: PropType.string.isRequired,
   userFirstname: PropType.string
 }

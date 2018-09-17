@@ -33,6 +33,7 @@ export default class extends React.Component {
     getApiData(url, setApiData);
   }
   loadCommunities() {
+    // TODO: do not loadCommunities. Just import from data/communities.json
     const url = apiLink.communities;
     const setApiData = communities => {
       const names = communities.map(community => {

@@ -1,6 +1,12 @@
 import React from 'react';
 import $ from 'jquery';
+import appRoute from '../data/appRoute';
 import { socialMedia, image } from '../data/assetLinks';
+
+// NOTE: for optimization and eliminating unnecessary queries, we've copied the file
+// from the server folder to the client folder. These files must be manually synchronized.
+const community = require('../data/community.json');
+const communityArr = Object.values(community);
 
 class Footer extends React.Component {
   componentDidMount() {
@@ -30,7 +36,6 @@ class Footer extends React.Component {
     );
   }
   render() {
-    // TODO: wrap social icons in circles
     return (
       <footer className="page-footer section-white">
         <div className="container">
@@ -42,9 +47,11 @@ class Footer extends React.Component {
               <div className="col s4 m2 l2">
                 <h6>Product
                   <ul style={{ marginTop: 5 }} className="light footer-text-links">
-                    <li><a href="#!">FAQs</a></li>
-                    <li><a href="#!">Support</a></li>
+                    <li><a href="#!">FAQ</a></li>
+                    <li><a href="#!">Pricing</a></li>
                     <li><a href="#!">Guides</a></li>
+                    <li><a href="#!">Privacy</a></li>
+                    <li><a href="#!">Terms</a></li>
                   </ul>
                 </h6>
               </div>
@@ -52,16 +59,26 @@ class Footer extends React.Component {
                 <h6>Company
                   <ul style={{ marginTop: 5 }} className="light footer-text-links">
                     <li><a href="#!">About</a></li>
+                    <li><a href="#!">Blog</a></li>
                     <li><a href="#!">Careers</a></li>
-                    <li><a href="#!">Partners</a></li>
+                    <li><a href="#!">AngelList</a></li>
+                    <li><a href="#!">Contact Us</a></li>
                   </ul>
                 </h6>
               </div>
-              <div className="col s4 m3 l3">
-                <h6>Legal
+              <div className="col s4 m3 l4">
+                <h6>Communities
                   <ul style={{ marginTop: 5 }} className="light footer-text-links">
-                    <li><a href="#!">Privacy Policy</a></li>
-                    <li><a href="#!">Terms of Use</a></li>
+                    {
+                      communityArr.map(c => {
+                        const link = appRoute('communityHome', true)(c.slug);
+                        return <li key={`footer-community=${c.slug}`}>
+                          <a href={link}>
+                            {c.name}
+                          </a>
+                        </li>
+                      })
+                    }
                   </ul>
                 </h6>
               </div>
@@ -74,7 +91,7 @@ class Footer extends React.Component {
         <div className="footer-copyright" style={{marginTop: 25}}>
           <div className="container">
             <p>
-              &copy; 2018 LooseLeaf, LLC.
+              &copy;{` ${(new Date()).getFullYear()} LooseLeaf, LLC.`}
             </p>
           </div>
         </div>
