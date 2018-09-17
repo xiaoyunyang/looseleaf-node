@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import appRoute from '../../data/appRoute';
-import Communities from '../Collection/Communities';
+import Communities from '../Collection/Communities/Chips';
 import { apiLink } from '../../data/apiLinks';
 import { postToApiData } from '../../../lib/helpers';
 import { image } from '../../data/assetLinks';

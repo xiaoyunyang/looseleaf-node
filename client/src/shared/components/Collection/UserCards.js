@@ -4,7 +4,7 @@ import InputAutocomplete from '../Form/InputAutocomplete';
 import { apiLink } from '../../data/apiLinks';
 import { image } from '../../data/assetLinks';
 import { getApiData, slug2Name } from '../../../lib/helpers';
-import Communities from './Communities';
+import Communities from './Communities/Chips';
 
 // This is a ES6 class - see https://toddmotto.com/react-create-class-versus-component/
 export default class UserCards extends React.Component {

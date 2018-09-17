@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import $ from 'jquery';
 import appRoute from '../../data/appRoute';
+import { slug2Name } from '../../../lib/helpers';
 
 class CommunityDropdown extends React.Component {
   componentDidMount() {
@@ -29,7 +30,7 @@ class CommunityDropdown extends React.Component {
             :
             this.props.communities.map(c => (
               <li key={`community-dropdown-${c}`}>
-                <a href={`/community/${c}`}>{c}</a>
+                <a href={`/community/${c}`}>{slug2Name(c)}</a>
               </li>
               ))
           }

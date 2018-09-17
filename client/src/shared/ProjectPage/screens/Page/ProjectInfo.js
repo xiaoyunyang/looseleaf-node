@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { dateFormatted, getApiData, contributorIds, postToApiData } from '../../../../lib/helpers';
 import { apiLink } from '../../../data/apiLinks';
 import appRoute from '../../../data/appRoute';
-import Communities from '../../../components/Collection/Communities';
+import Communities from '../../../components/Collection/Communities/Chips';
 import { badgeIcon } from '../../../components/Collection/Projects/Badge';
 
 export default class ProjectInfo extends React.Component {

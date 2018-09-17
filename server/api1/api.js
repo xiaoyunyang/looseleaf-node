@@ -360,7 +360,7 @@ api.post('/user', (req, res) => {
 });
 
 api.get('/community', (req, res) => {
-  const filePath = path.join(__dirname, '../data/community.json');
+  const filePath = path.join(__dirname, '../../client/src/shared/data/community.json');
   fs.readFile(filePath, 'utf8', (err, data) => {
     // Error handling - return an error
     if (err) {

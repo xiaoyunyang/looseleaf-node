@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { slug2Name } from '../../../lib/helpers';
+import { slug2Name } from '../../../../lib/helpers';
 
-const Communities= ({ cs, altern, hasIcon, showAltern }) => (
+const Chips = ({ cs, altern, hasIcon, showAltern }) => (
   <div>
     {
       showAltern &&
@@ -48,14 +48,14 @@ const Communities= ({ cs, altern, hasIcon, showAltern }) => (
     }
   </div>
 );
-Communities.propTypes = {
+Chips.propTypes = {
   cs: PropTypes.array,
   altern: PropTypes.object,
   hasIcon: PropTypes.bool
 };
-Communities.defaultProps = {
+Chips.defaultProps = {
   cs: null,
   altern: null,
   hasIcon: false
 }
-export default Communities;
+export default Chips;

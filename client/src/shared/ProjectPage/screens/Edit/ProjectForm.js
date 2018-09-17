@@ -8,9 +8,8 @@ import FlashNotif from '../../../components/FlashNotif';
 import TextAreaInput from '../../../components/Form/TextAreaInput';
 import TextInput from '../../../components/Form/TextInput';
 import { postToApiData } from '../../../../lib/helpers';
+import { communitiesArr } from '../../../components/Collection/Communities/lib';
 
-const communities = require('../../../data/community.json');
-const communitiesArr = Object.values(communities);
 const deliverableFormats = require('../../../data/deliverableFormats.json');
 const deliverableFormatsArr = Object.values(deliverableFormats);
 
@@ -138,6 +137,7 @@ export default class ProjectForm extends React.Component {
                 onChange={ds => this.setState({
                   deliverableFormats: ds
                 })}
+                showHelp
               />
               <TextAreaInput
                 id="text-desc"
@@ -154,7 +154,7 @@ export default class ProjectForm extends React.Component {
             </div>
           </div>
         </div>
-        <div className="row center">
+        <div className="row center" style={{paddingBottom: 60}}>
           <a className="btn" onClick={this.handleSubmit.bind(this, this.props.actionBtn.postUrl, this.state)}>
             {this.props.actionBtn.label}
           </a>

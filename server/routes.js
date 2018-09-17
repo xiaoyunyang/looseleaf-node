@@ -17,7 +17,7 @@ import renderCommunityUserAppMiddleware from '../client/iso-middleware/renderCom
 import renderCommunityGuestAppMiddleware from '../client/iso-middleware/renderCommunityGuestApp';
 import renderProjectPageMiddleware from '../client/iso-middleware/renderProjectPage';
 
-const community = require('./data/community.json');
+const community = require('../client/src/shared/data/community.json');
 
 const router = express.Router();
 

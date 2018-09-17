@@ -4,6 +4,7 @@ import TopNav from '../TopNav';
 import Footer from '../../components/Footer';
 import appRoute from '../../data/appRoute';
 import { image } from '../../data/assetLinks';
+import ExploreBlock from '../../components/Collection/Communities/ExploreBlock';
 
 const styles = {
   marginTop: '-4.5%',
@@ -146,100 +147,6 @@ export default class LandingHome extends React.Component {
     );
   }
   renderArea4(version) {
-    // TODO: put this into a component, which is also going to be rendered on the
-    // '/explore/community/all' page
-    const communities = [
-      {
-        title: 'Developers',
-        desc: 'Full stack developer, frontend developer, and apps for desktop, mobile, webapp, and embedded systems',
-        icon: 'code',
-        link: '/community/developers'
-      },
-      {
-        title: 'Designers',
-        desc: 'Landing Page, Logo design, web design, UX design.',
-        icon: 'format_shapes',
-        link: '/community/designers'
-      },
-      {
-        title: 'Illustrators',
-        desc: 'Contribute comics and illustrations of blog posts, books, and advertising campaigns',
-        icon: 'palette',
-        link: '/community/illustrators'
-      },
-      {
-        title: 'Writers',
-        desc: 'Copywriter, grant writing, press release, ghost writing',
-        icon: 'create',
-        link: '/community/writers'
-      },
-      {
-        title: 'Data Scientists',
-        desc: 'Organizing and making sense of information.',
-        icon: 'scatter_plot',
-        link: '/community/data-scientists'
-      },
-      {
-        title: 'Video Producers',
-        desc: 'Animations and Explainer videos.',
-        icon: 'theaters',
-        link: '/community/video-producers'
-      },
-      {
-        title: 'Everything Else',
-        desc: 'Organizing and making sense of information.',
-        icon: 'public',
-        link: '/community/misc'
-      }
-    ];
-    const short = (display) => {
-      return (
-        <div className={`row ${ display ? '' : 'hide'}`}>
-          <div className="col">
-            {
-            communities.map((d, i) => {
-              return (
-                <div key={i} className="col s10 m6 l4 offset-s1">
-                  <a href={d.link} className="">
-                    <div className="card-panel center hoverable" style={{ padding: 5 }}>
-                      <div className="row valign-wrapper" style={{ marginBottom: 0 }}>
-                        <div className="col s12 m4 l3">
-                          <i className="material-icons medium text-green">{d.icon}</i>
-                        </div>
-                        <div className="col s12 m8 l9">
-                          <h6 className="col s12 m12 l10 offset-l1  text-brown" style={{ fontWeight: 700, fontSize: 16, textTransform: 'uppercase' }}>
-                            {d.title}
-                          </h6>
-                        </div>
-                      </div>
-                    </div>
-                  </a>
-                </div>
-              );
-            })
-          }
-          </div>
-        </div>
-      );
-    };
-    const long = (display) => {
-      return (
-        <div className={`row ${display ? '' : 'hide'}`}>
-          {
-            communities.map((d, i) => {
-              return (
-                <div key={i} className="col s12 m12 l4">
-                  <img className="materialboxed" width="650" src="/assets/images/landing/mobile-laptop1.png" alt="" />
-                  <h4 className="light text-green">{d.title}</h4>
-                  <h6 className="light text-brown">{d.desc}</h6>
-                  <br />
-                </div>
-              );
-            })
-          }
-        </div>
-      );
-    };
     return (
       <div className="section white">
         <div className="row hero center" style={styles}>
@@ -249,8 +156,7 @@ export default class LandingHome extends React.Component {
               A community page is where you can post and browse projects, share advice, and make announcements.
             </h6>
           </div>
-          {short(version === 'short')}
-          {long(version === 'long')}
+          <ExploreBlock version='long' />
         </div>
       </div>
     );

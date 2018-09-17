@@ -54,14 +54,18 @@ export default class InputCheckboxes extends React.Component {
                 <label htmlFor={`${this.props.id}-${dId}`}>
                   {`${d.name} ${this.renderUnits(d, this.props.units)}`}
                 </label>
-                <a
-                  className="tooltipped checkbox-help"
-                  data-position="right"
-                  data-delay="50"
-                  data-tooltip={d.desc}
-                >
-                  <i className="fas fa-question-circle" />
-                </a>
+                {
+                  this.props.showHelp &&
+                  <a
+                    className="tooltipped checkbox-help"
+                    data-position="right"
+                    data-delay="50"
+                    data-tooltip={d.desc}
+                  >
+                    <i className="fas fa-question-circle" />
+                  </a>
+                }
+
               </p>
             );
           })
@@ -77,10 +81,12 @@ InputCheckboxes.propTypes = {
   onChange: PropTypes.func.isRequired,
   units: PropTypes.string,
   label: PropTypes.string,
-  title: PropTypes.string
+  title: PropTypes.string,
+  showHelp: PropTypes.bool
 };
 InputCheckboxes.defaultProps = {
   units: '',
   label: '',
-  title: ''
+  title: '',
+  showHelp: false
 }
