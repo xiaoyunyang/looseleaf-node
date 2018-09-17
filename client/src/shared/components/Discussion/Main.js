@@ -5,8 +5,11 @@ import PostEditor from './PostEditor';
 import { apiLink } from '../../data/apiLinks';
 import { getApiData, postToApiData } from '../../../lib/helpers';
 import { newPlugins } from './draftjsHelpers';
+import LoadMoreBtn from '../LoadMoreBtn';
+
 const { plugins, inlineToolbarPlugin } = newPlugins();
 const { InlineToolbar } = inlineToolbarPlugin;
+
 
 export default class Discussion extends React.Component {
   constructor(props) {
@@ -114,14 +117,10 @@ export default class Discussion extends React.Component {
             />
             {
               this.state.posts.length > 0 && !this.state.endOfPage &&
-              <div className="row center">
-                <a
-                  className="btn col s8 m4 l4 offset-s2 offset-m4 offset-l4"
-                  onClick={this.loadMorePosts}
-                >
-                  Load More
-                </a>
-              </div>
+              <LoadMoreBtn
+                handleClick={this.loadMorePosts}
+                itemName='Posts'
+              />
             }
           </div>
         }

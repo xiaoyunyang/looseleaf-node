@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Card from './Card';
+import LoadMoreBtn from '../../LoadMoreBtn';
 
 class Cards extends React.Component {
   renderProjects(projects) {
@@ -39,14 +40,10 @@ class Cards extends React.Component {
         }
         {
           this.props.projects.length > 0 && !this.props.endOfPage &&
-          <div className="row center">
-            <a
-              className="btn col s8 m4 l4 offset-s2 offset-m4 offset-l4"
-              onClick={this.props.loadMoreProjects.bind(this)}
-            >
-              Load More
-            </a>
-          </div>
+          <LoadMoreBtn
+            handleClick={this.props.loadMoreProjects.bind(this)}
+            itemName='Projects'
+          />
         }
       </div>
     );

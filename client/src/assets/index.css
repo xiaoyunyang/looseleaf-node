@@ -1221,6 +1221,8 @@ nav .categories-wrapper .categories {
 }
 .input-checkboxes i {
   padding-left: 8px;
-  font-color: 'blue';
+}
+.load-more-items {
+  padding-bottom: 50px;
 }
 /* Input END */

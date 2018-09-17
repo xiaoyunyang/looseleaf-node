@@ -6,7 +6,7 @@ import Projects from '../../components/Collection/Projects/Main';
 export default class One extends React.Component {
   render() {
     return (
-      <div className="section-white">
+      <div className="section-white" style={{minHeight: '100vh'}}>
         <TopNav route={this.props.route} user={this.props.user} community={this.props.community} />
         <div className="community-page container">
           <div className="row">

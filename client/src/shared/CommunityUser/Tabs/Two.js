@@ -8,7 +8,7 @@ export default class Two extends React.Component {
     const loggedinUser = this.props.state.user.loggedinUser;
     const communityInfo = this.props.state.community.info;
     return (
-      <div className="section-white">
+      <div className="section-white" style={{minHeight: '100vh'}}>
         <TopNav
           route={this.props.route}
           user={loggedinUser}

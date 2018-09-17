@@ -96,7 +96,7 @@ export default class Main extends Component {
     };
 
     return (
-      <div className="section-white">
+      <div className="section-white" style={{minHeight: '100vh'}}>
         {
           this.props.user.loggedinUser ?
             <TopNavUser
