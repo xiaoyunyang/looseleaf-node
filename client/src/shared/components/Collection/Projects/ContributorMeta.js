@@ -80,7 +80,7 @@ export default class ContributorMeta extends React.Component {
   }
 }
 ContributorMeta.propTypes = {
-  contributors: PropType.object.isRequired,
+  contributors: PropType.object,
   context: PropType.string,
   slug: PropType.string,
   userId: PropType.string,
@@ -88,5 +88,6 @@ ContributorMeta.propTypes = {
   userFirstname: PropType.string
 }
 ContributorMeta.defaultProps = {
-  userFirstname: 'user'
+  userFirstname: 'user',
+  contributors: {}
 }

@@ -42,6 +42,7 @@ export const addNewProject = (formFields, postedBy) => {
   const slug = urlSlug(formFields.title, cuid.slug());
   newProject.postedBy = postedBy;
   newProject.slug = slug;
+  newProject.contributors = { postedBy: { contribute: null, watch: null } };
 
   // Fields you can update:
   // Below line of code combines properties from the updatedProject factory
