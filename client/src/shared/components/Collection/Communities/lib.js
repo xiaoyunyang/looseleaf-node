@@ -4,21 +4,21 @@ export const communities = require('../../../data/community.json');
 
 export const communitiesArr = Object.values(communities);
 
-export const getIcon = slug => {
+export const getIconColor = slug => {
   switch (slug) {
-    case 'developers': return 'code';
-    case 'designers' : return 'create';
-    case 'illustrators': return 'palette';
-    case 'writers': return 'create';
-    case 'data-scientists': return 'scatter_plot';
-    case 'video-producers': return 'theaters';
-    case 'misc': return 'public';
+    case 'developers': return { icon: 'code', color: '#fff' } ;
+    case 'designers' : return { icon: 'create', color: '#fff'};
+    case 'illustrators': return { icon: 'palette', color: '#fff'};
+    case 'writers': return { icon: 'create', color: '#fff'};
+    case 'data-scientists': return { icon: 'scatter_plot', color: '#fff'};
+    case 'video-producers': return { icon: 'theaters', color: '#fff'};
+    case 'misc': return { icon: 'public', color: '#fff'};
     default: return;
   }
 };
 
-export const communityIconAndLink = slug => {
-  const icon = getIcon(slug);
+export const communityMeta = slug => {
+  const { icon, color } = getIconColor(slug);
   const link = appRoute('communityHome', true)(slug);
-  return { icon, link }
+  return { icon, color, link }
 }

@@ -25,7 +25,7 @@ class CommunityDropdown extends React.Component {
         <ul id="community-dropdown" className="dropdown-content topnav-dropdown">
           { this.props.communities.length === 0 ?
             <li>
-              <a href={appRoute('exploreCommunities')}>Join One</a>
+              <a href={appRoute('exploreCommunities', true)}>Join One</a>
             </li>
             :
             this.props.communities.map(c => (

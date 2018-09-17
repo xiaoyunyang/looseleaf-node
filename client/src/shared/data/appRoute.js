@@ -58,6 +58,8 @@ const appRoute = (pageName, absRoute) => {
       return '/project/*'; // NOTE: used for internal routing logic only
     case 'exploreCommunities':
       return prepend + '/explore/communities';
+    case 'exploreWildcard':
+      return '/explore/*';  
     default:
       return '';
   }

@@ -13,6 +13,7 @@ import AppProjectPage from './craApps/AppProjectPage';
 import AppCommunityUser from './craApps/AppCommunityUser';
 import AppCommunityGuest from './craApps/AppCommunityGuest';
 import AppLanding from './craApps/AppLanding';
+import AppExplore from './craApps/AppExplore';
 import AppRecipe from './craApps/AppRecipe';
 import './assets/index.css';
 import 'draft-js/dist/Draft.css';
@@ -28,10 +29,11 @@ const Apps = {
   communityUser: AppCommunityUser,
   communityGuest: AppCommunityGuest,
   landing: AppLanding,
+  explore: AppExplore,
   recipe: AppRecipe
 };
 
-const App = Apps.landing;
+const App = Apps.explore;
 
 const render = (Component) => {
   ReactDOM.render(

@@ -16,6 +16,7 @@ import renderUserPageMiddleware from '../client/iso-middleware/renderUserPage';
 import renderCommunityUserAppMiddleware from '../client/iso-middleware/renderCommunityUserApp';
 import renderCommunityGuestAppMiddleware from '../client/iso-middleware/renderCommunityGuestApp';
 import renderProjectPageMiddleware from '../client/iso-middleware/renderProjectPage';
+import renderExploreAppMiddleware from '../client/iso-middleware/renderExploreApp';
 
 const community = require('../client/src/shared/data/community.json');
 
@@ -84,6 +85,9 @@ router.get('/project/:slug*', (req, res, next) => {
     }
     return renderProjectPageMiddleware(req, res, next, project);
   });
+});
+router.get('/explore/:toExplore*', (req, res, next) => {
+  return renderExploreAppMiddleware(req, res, next);
 });
 router.get('/@:username*', (req, res, next) => {
   User.findOne({ username: req.params.username }, (err, user) => {
