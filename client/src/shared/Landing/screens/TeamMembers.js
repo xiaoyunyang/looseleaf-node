@@ -40,7 +40,7 @@ export default class TeamMembers extends React.Component {
   }
   renderPersonCard(user, i) {
     return (
-      <div key={i} className="center col s6 m2 l2">
+      <div key={i} className="center col s12 m4 l3">
         <a
           href="#person-card-modal"
           onClick={this.handlePersonCardClick.bind(this, user)}

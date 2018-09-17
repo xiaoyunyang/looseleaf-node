@@ -18,6 +18,10 @@ const appRoute = (pageName, absRoute) => {
       return prepend + '/how-it-works';
     case 'landingAbout':
       return prepend + '/about';
+    case 'login':
+      return '/auth/login';
+    case 'signup':
+      return '/auth/signup';
     case 'landingWildcard':
       return '/*'; // NOTE: used for internal routing logic only
     case 'userHome':
