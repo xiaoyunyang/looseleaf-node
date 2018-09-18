@@ -1,5 +1,5 @@
 import Root from './Root';
-import Home from './screens/Home';
+import Home from './screens/Home/Main';
 import Settings from './screens/Settings/Main';
 import Portfolio from '../components/Portfolio/Main';
 import NotFound from '../components/NotFound';

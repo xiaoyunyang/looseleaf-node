@@ -493,7 +493,7 @@ nav .dropdown-content li:hover {
 }
 #user-home .card-panel {
   position: fixed;
-  width: 250px;
+  width: 210px;
 }
 /* Big Screen */
 @media only screen and (min-width: 993px) {

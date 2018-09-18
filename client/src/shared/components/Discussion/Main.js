@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Posts from './Posts';
 import PostEditor from './PostEditor';
-import { apiLink } from '../../data/apiLinks';
+import { apiLink, userFeedFindBy } from '../../data/apiLinks';
 import { getApiData, postToApiData } from '../../../lib/helpers';
 import { newPlugins } from './draftjsHelpers';
 import LoadMoreBtn from '../LoadMoreBtn';
@@ -30,9 +30,10 @@ export default class Discussion extends React.Component {
     const context = this.props.context;
     const findBy = context => {
       switch (context) {
-        case 'project': return this.props.projectId;
-        case 'community': return this.props.communitySlug;
-        case 'user': return this.props.userId;
+        case 'project': return `?projectId=${this.props.projectId}`;
+        case 'community': return `?slug=${this.props.communitySlug}`;
+        case 'user': return `?userId=${this.props.userId}`;
+        case 'userFeed': return userFeedFindBy(this.props.postQueryBy);
         default: return;
       }
     };
@@ -50,6 +51,7 @@ export default class Discussion extends React.Component {
         });
       }
     }
+    console.log('link', link)
     getApiData(link, setApiData);
   }
   loadMorePosts() {

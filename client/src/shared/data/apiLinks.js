@@ -8,6 +8,20 @@ const root = 'http://localhost:3001';
 // NOTE:
 // postReaction: id is the postId, reaction is the name of the reaction, e.g., hearts
 // data that is to be posted is the updated array of userIds for that reaction.
+
+export const userFeedFindBy = ({ followers, following, projects, currUser }) =>  {
+  const userIds = followers.concat(following);
+  const queryUsers = userIds.reduce((acc, curr) => {
+    return `${acc}${curr}+`
+   }, '').slice(0,-1);
+
+   const queryProjects = projects.reduce((acc, curr) => {
+     return `${acc}${curr}+`
+   }, '').slice(0,-1)
+
+  return `?userIds=${queryUsers}&projectIds=${queryProjects}&currUser=${currUser}`;
+};
+
 export const apiLink = {
   signup: `${root}/auth/signup`,
   login: `${root}/auth/login`,
@@ -32,7 +46,7 @@ export const apiLink = {
   postById: id => `${root}/api/post?_id=${id}`,
   postEdit: id => `${root}/api/post/edit?_id=${id}`,
   postReaction: (id, reaction) => `${root}/api/post/react?_id=${id}&reaction=${reaction}`,
-  postsByContext: (context, findBy, page) => `${root}/api/post/${context}/${findBy}?page=${page}`,
+  postsByContext: (context, findBy, page) => `${root}/api/post/${context}${findBy}&page=${page}`,
   postsByUserId: userId => `${root}/api/post?postedBy=${userId}`,
   authPath: `${root}/auth`
 }

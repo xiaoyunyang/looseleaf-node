@@ -22,9 +22,10 @@ const initState = {
     interests: [],
     gender: "female",
     location: "Washington, District of Columbia",
+    projects: ['5b9db5777585c9479b29a98c'],
     communities: [],
-    followers: [],
-    following: [],
+    followers: ['5ac7f29dcc78928a6f24a100'],
+    following: ['5b95a4bca115cf2940592b9e'],
     picture: "https://graph.facebook.com/10213296357138004/picture?type=large","__v":0
   },
   loggedinUser: {

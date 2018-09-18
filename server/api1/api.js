@@ -94,31 +94,72 @@ api.get('/post', (req, res) => {
   getPosts(findCriteria, req.query.limit, req.query.page, cbSuccess, cbFailure);
 });
 
-api.get('/post/community/:slug', (req, res) => {
+api.get('/post/community', (req, res) => {
   // Get posts from community with the slug, e.g., developers
   const cbSuccess = result => res.send(result);
   const cbFailure = err => {
     res.status(500).end();
     return console.error(err);
   };
-  const findCriteria = { 'context.community': req.params.slug };
+  const findCriteria = { 'context.community': req.query.slug };
   getPosts(findCriteria, req.query.limit, req.query.page, cbSuccess, cbFailure);
 });
 
-api.get('/post/project/:id', (req, res) => {
+api.get('/post/project', (req, res) => {
   // Get posts associated with a project with the id
+  const findCriteria = { 'context.project': req.query.projectId };
   const cbSuccess = result => res.send(result);
   const cbFailure = err => {
     res.status(500).end();
     return console.error(err);
   };
-  const findCriteria = { 'context.project': req.params.id };
+
   getPosts(findCriteria, req.query.limit, req.query.page, cbSuccess, cbFailure);
 });
 
-api.get('/post/user/:id', (req, res) => {
+/* 
+http://localhost:3001/api/post/userFeed?userIds=1+3+5+6&projectIds=a+b&postedBy=12&page=1?page=1
+{"userIds":["1","3","5","6"],"projectIds":["a","b"],"postedBy":"12","page":"1?page=1"}
+*/
+api.get('/post/userFeed', (req, res) => {
+
+  const userIds = arrayWrap(req.query.userIds || '')[0].split(' ');
+  const projectIds = arrayWrap(req.query.projectIds || '')[0].split(' ');
+  
+  // TODO: We may need this for something later. Don't know what yet.
+  // const currUser = req.query.currUser;
+  
+  // We provide post for the user with userId from the following sources: 
+  // (1) people the user follows
+  // (2) followers of the user
+  // (3) posts associated with the project that the user contributes to.
+  const postsByUsers = userIds.filter(id => id !== '').map(ids => {
+    return { postedBy: ids };
+  });
+  const postsForProjects = projectIds.filter(id => id !== '').map(ids => {
+    return { 'context.project': ids };
+  });
+  const allPosts = [...postsByUsers, ...postsForProjects];
+
+  if (allPosts.length === 0) {
+    return res.send([]);
+  }
+  const findCriteria = {
+    $or: allPosts
+  };
+
+  const cbSuccess = result => res.send(result);
+  const cbFailure = err => {
+    res.status(500).end();
+    return console.error(err);
+  };
+
+  getPosts(findCriteria, req.query.limit, req.query.page, cbSuccess, cbFailure);
+});
+
+api.get('/post/user', (req, res) => {
   // Queries
-  const findCriteria = { postedBy: req.params.id };
+  const findCriteria = { postedBy: req.query.userId };
   const cbSuccess = result => res.send(result);
   const cbFailure = err => {
     res.status(500).end();
