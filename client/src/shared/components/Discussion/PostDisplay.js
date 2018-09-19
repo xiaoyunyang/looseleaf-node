@@ -71,60 +71,81 @@ const PostContext = ({ context, contextForUser }) => (
   </div>
 );
 
-const PostDisplay = ({
-  context,
-  contextForUser,
-  deletePost,
-  editedOn,
-  editorContent,
-  handleToggleEditMode,
-  handleToggleShowComment,
-  loggedinUser,
-  post,
-  userDisplayName,
-  username,
-  userPic
-}) => (
-  editorContent &&
-    <div className="card feed">
-      <div className="card-content">
-        {
-          loggedinUser && loggedinUser._id === post.postedBy ?
-            <PostEditMenu
-              postId={post._id}
-              deletePost={deletePost}
-              handleToggleEditMode={handleToggleEditMode}
+class PostDisplay extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      clientModeOn: false
+    }
+  }
+  componentDidMount() {
+    this.setState({
+      clientModeOn: true
+    });
+  }
+  render() {
+    const {
+      context,
+      contextForUser,
+      deletePost,
+      editedOn,
+      editorContent,
+      handleToggleEditMode,
+      handleToggleShowComment,
+      showComment,
+      loggedinUser,
+      post,
+      userDisplayName,
+      username,
+      userPic
+    } = this.props;
+    return (
+      editorContent &&
+        <div className="card feed">
+          <div className="card-content">
+            {
+              this.state.clientModeOn && loggedinUser && loggedinUser._id === post.postedBy?
+                <PostEditMenu
+                  postId={post._id}
+                  deletePost={deletePost}
+                  handleToggleEditMode={handleToggleEditMode}
+                />
+                :
+                null
+            }
+            {
+              context &&
+              <PostContext context={context} contextForUser={contextForUser}/>
+            }
+            {
+              this.state.clientModeOn &&
+              <PostUserInfo
+                userPic={userPic}
+                username={username}
+                userDisplayName={userDisplayName}
+                editedOn={editedOn}
+                post={post}
+              />
+            }
+            <div className="draft-js-editor">
+              <Editor
+                editorState={convertToEditorState(editorContent)}
+                readOnly
+              />
+            </div>
+          </div>
+          <div className="card-action">
+            <Reactions
+              post={post}
+              loggedinUser={loggedinUser}
+              handleToggleShowComment={handleToggleShowComment}
+              showComment={showComment}
             />
-            :
-            null
-        }
-        {
-          context &&
-          <PostContext context={context} contextForUser={contextForUser}/>
-        }
-        <PostUserInfo
-          userPic={userPic}
-          username={username}
-          userDisplayName={userDisplayName}
-          editedOn={editedOn}
-          post={post}
-        />
-        <div className="draft-js-editor">
-          <Editor
-            editorState={convertToEditorState(editorContent)}
-            readOnly
-          />
+          </div>
         </div>
-      </div>
-      <div className="card-action">
-        <Reactions
-          post={post}
-          loggedinUser={loggedinUser}
-          handleToggleShowComment={handleToggleShowComment}
-        />
-      </div>
-    </div>
-);
+    );
+  }
+}
 
 PostDisplay.propTypes = {
   context: PropTypes.object,
@@ -132,11 +153,13 @@ PostDisplay.propTypes = {
   userDisplayName: PropTypes.string.isRequired,
   username: PropTypes.string.isRequired,
   userPic: PropTypes.string.isRequired,
-  editorContent: PropTypes.string
+  editorContent: PropTypes.string,
+  showComment: PropTypes.bool
 };
 PostDisplay.defaultProps = {
   context: null,
-  editorContent: null
+  editorContent: null,
+  showComment: false
 };
 
 export default PostDisplay;

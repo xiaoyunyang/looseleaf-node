@@ -63,7 +63,7 @@ const appRoute = (pageName, absRoute) => {
     case 'postPage':
       return postId => prepend + `/post/${postId}`;
     case 'postWildcard':
-      return '/post/*';  
+      return '/post/*';
     default:
       return '';
   }

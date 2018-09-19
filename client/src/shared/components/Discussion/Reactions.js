@@ -22,7 +22,7 @@ export default class Reactions extends React.Component {
     this.state = {
       hearts: this.props.post.hearts,
       thumbUps: this.props.post.thumbUps,
-      commentsRevealed: this.props.post.commentsRevealed
+      showComment: this.props.showComment
     }
     this.handleReactionClick = this.handleReactionClick.bind(this);
     this.handleShareClick = this.handleShareClick.bind(this);
@@ -71,24 +71,12 @@ export default class Reactions extends React.Component {
   handleCommentsClick() {
     const revealed = this.props.handleToggleShowComment();
     this.setState({
-      commentsRevealed: revealed
+      showComment: revealed
     });
   }
   handleShareClick() {
     const postLink = appLink.postById(this.props.post._id);
-    copyToClipboard(postLink);
-
-    // const postLink = appLink.postById(this.props.post._id);
-    // window.location = postLink;
-    // TODO: later
-    // const toWait = 3000; // 3 seconds
-    // this.setState({
-    //   showCopied: true
-    // });
-    // setTimeout(() => this.setState({
-    //   showCopied: false
-    // }),
-    // toWait);
+    window.location = postLink;
   }
   render() {
     const location = (typeof document !== 'undefined') ? document.location.pathname : undefined;
@@ -116,18 +104,18 @@ export default class Reactions extends React.Component {
           />
           <Reaction
             faName='comments'
-            label={`${this.state.commentsRevealed ? 'Hide' : 'See'} Comments`}
-            userHasReacted={this.state.commentsRevealed}
+            label={`${this.state.showComment ? 'Hide' : 'See'} Comments`}
+            userHasReacted={this.state.showComment}
             readOnly={readOnly}
             showNumReacted={false}
             handleClick={this.handleCommentsClick}
           />
           <Reaction
             faName='share-square'
-            label={'Click to copy link to the post for sharing'}
+            label='Open post on own page'
             readOnly={readOnly}
             userHasReacted={true}
-            onClick={this.handleShareClick}
+            handleClick={this.handleShareClick}
           />
         </div>
       }

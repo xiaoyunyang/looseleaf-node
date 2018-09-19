@@ -14,6 +14,7 @@ import AppCommunityUser from './craApps/AppCommunityUser';
 import AppCommunityGuest from './craApps/AppCommunityGuest';
 import AppLanding from './craApps/AppLanding';
 import AppExplore from './craApps/AppExplore';
+import AppPost from './craApps/AppPost';
 import AppRecipe from './craApps/AppRecipe';
 import './assets/index.css';
 import 'draft-js/dist/Draft.css';
@@ -25,7 +26,8 @@ import 'draft-js-inline-toolbar-plugin/lib/plugin.css';
 const Apps = {
   user: AppUser,
   userPage: AppUserPage,
-  projectPage: AppProjectPage,
+  project: AppProjectPage,
+  post: AppPost,
   communityUser: AppCommunityUser,
   communityGuest: AppCommunityGuest,
   landing: AppLanding,
@@ -33,7 +35,7 @@ const Apps = {
   recipe: AppRecipe
 };
 
-const App = Apps.userPage;
+const App = Apps.post;
 
 const render = (Component) => {
   ReactDOM.render(

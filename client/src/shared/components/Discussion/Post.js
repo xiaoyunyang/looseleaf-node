@@ -1,5 +1,5 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import PostDisplay from './PostDisplay';
 import PostEditor from './PostEditor';
 import Comments from './Comments';
@@ -20,7 +20,7 @@ class Post extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      showComment: false,
+      showComment: this.props.showComment,
       userDisplayName: 'Firstname Lastname',
       userPic: image.defaultUser,
       username: '',
@@ -129,6 +129,7 @@ class Post extends React.Component {
             editorContent={this.state.editorContent}
             handleToggleEditMode={this.handleToggleEditMode.bind(this)}
             handleToggleShowComment={this.handleToggleShowComment.bind(this)}
+            showComment={this.state.showComment}
             loggedinUser={this.props.loggedinUser}
             post={this.props.post}
             userDisplayName={this.state.userDisplayName}
@@ -153,5 +154,11 @@ class Post extends React.Component {
 //   loggedinAs: PropTypes.string,
 //   deletePost: PropTypes.func
 // };
+Post.propTypes = {
+  showComment: PropTypes.bool
+}
+Post.defaultProps = {
+  showComment: false // important
+}
 
 export default Post;

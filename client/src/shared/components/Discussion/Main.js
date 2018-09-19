@@ -95,7 +95,6 @@ export default class Discussion extends React.Component {
     });
     this.setState({ posts: newPosts });
   }
-
   render() {
     return (
       <div>

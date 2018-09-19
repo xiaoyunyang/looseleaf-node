@@ -10,6 +10,19 @@ import {
   fetchLoggedinUser,
 } from './user';
 
+import {
+  fetchPostById
+} from './post';
+
+export function getPostPageData(postId, username) {
+  return (dispatch, getState) => {
+    return Promise.all([
+      dispatch(fetchPostById(postId)),
+      dispatch(fetchLoggedinUser(username))
+    ])
+  }
+}
+
 export function getProjectPageData(slug, username) {
   return (dispatch, getState) => {
     return Promise.all([

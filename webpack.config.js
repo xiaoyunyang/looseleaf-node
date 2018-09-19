@@ -11,6 +11,7 @@ module.exports = {
     userpage: path.resolve(__dirname, 'client/src/clientApps/userpage.js'),
     projectpage: path.resolve(__dirname, 'client/src/clientApps/projectpage.js'),
     explore: path.resolve(__dirname, 'client/src/clientApps/explore.js'),
+    post: path.resolve(__dirname, 'client/src/clientApps/post.js'),
     recipe: path.resolve(__dirname, 'client/src/clientApps/recipe.js')
   },
   output: {

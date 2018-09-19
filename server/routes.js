@@ -9,6 +9,7 @@ import csrf from 'csurf';
 import gravatarUrl from 'gravatar-url';
 import User from './models/User';
 import Project from './models/Project';
+import Post from './models/Post';
 import chalk from 'chalk';
 import renderLandingAppMiddleware from '../client/iso-middleware/renderLandingApp';
 import renderUserAppMiddleware from '../client/iso-middleware/renderUserApp';
@@ -17,6 +18,7 @@ import renderCommunityUserAppMiddleware from '../client/iso-middleware/renderCom
 import renderCommunityGuestAppMiddleware from '../client/iso-middleware/renderCommunityGuestApp';
 import renderProjectPageMiddleware from '../client/iso-middleware/renderProjectPage';
 import renderExploreAppMiddleware from '../client/iso-middleware/renderExploreApp';
+import renderPostAppMiddleware from '../client/iso-middleware/renderPostApp';
 
 const community = require('../client/src/shared/data/community.json');
 
@@ -88,6 +90,15 @@ router.get('/project/:slug*', (req, res, next) => {
 });
 router.get('/explore/:toExplore*', (req, res, next) => {
   return renderExploreAppMiddleware(req, res, next);
+});
+router.get('/post/:postId*', (req, res, next) => {
+  Post.findOne({ _id: req.params.postId }, (err, post) => {
+    if (err) { return next(err); }
+    if (!post) {
+      return renderLandingAppMiddleware(req, res, next); // This will display the NotFound page
+    }
+    return renderPostAppMiddleware(req, res, next, post);
+  });
 });
 router.get('/@:username*', (req, res, next) => {
   User.findOne({ username: req.params.username }, (err, user) => {
