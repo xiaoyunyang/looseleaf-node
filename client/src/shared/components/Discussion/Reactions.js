@@ -22,7 +22,7 @@ export default class Reactions extends React.Component {
     this.state = {
       hearts: this.props.post.hearts,
       thumbUps: this.props.post.thumbUps,
-      comments: this.props.post.comments
+      commentsRevealed: this.props.post.commentsRevealed
     }
     this.handleReactionClick = this.handleReactionClick.bind(this);
     this.handleShareClick = this.handleShareClick.bind(this);
@@ -69,12 +69,17 @@ export default class Reactions extends React.Component {
     postToApiData(postUrl, data, cbFailure, cbSucess);
   }
   handleCommentsClick() {
-    const postLink = appLink.postById(this.props.post._id);
-    window.location = postLink;
+    const revealed = this.props.handleToggleShowComment();
+    this.setState({
+      commentsRevealed: revealed
+    });
   }
   handleShareClick() {
     const postLink = appLink.postById(this.props.post._id);
     copyToClipboard(postLink);
+
+    // const postLink = appLink.postById(this.props.post._id);
+    // window.location = postLink;
     // TODO: later
     // const toWait = 3000; // 3 seconds
     // this.setState({
@@ -111,10 +116,10 @@ export default class Reactions extends React.Component {
           />
           <Reaction
             faName='comments'
-            label='Comments'
-            userHasReacted={false}
+            label={`${this.state.commentsRevealed ? 'Hide' : 'See'} Comments`}
+            userHasReacted={this.state.commentsRevealed}
             readOnly={readOnly}
-            numReacted={this.state.comments.length}
+            showNumReacted={false}
             handleClick={this.handleCommentsClick}
           />
           <Reaction

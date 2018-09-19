@@ -2,7 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Post from './Post';
 
-const Posts = ({ posts, deletePost, noPostDisp, loggedinAs, showContext, showContextForUser }) => (
+const Posts = ({
+  posts,
+  deletePost,
+  noPostDisp,
+  itemName,
+  loggedinUser,
+  showContext,
+  showContextForUser
+}) => (
   <div>
     {
       posts && posts.length>0 ?
@@ -13,14 +21,14 @@ const Posts = ({ posts, deletePost, noPostDisp, loggedinAs, showContext, showCon
               showContext={showContext}
               showContextForUser={showContextForUser}
               post={post}
-              loggedinAs={loggedinAs}
+              loggedinUser={loggedinUser}
               deletePost={deletePost}
             />
           </div>
         );
       })
       :
-      <p>{noPostDisp}</p>
+      <p>{`No ${itemName} found.`}</p>
     }
   </div>
 );
@@ -30,13 +38,15 @@ Posts.propTypes = {
   showMoreContext: PropTypes.bool,
   posts: PropTypes.array,
   noPostDisp: PropTypes.string,
-  loggedInAs: PropTypes.object,
+  itemName: PropTypes.string,
+  loggedInUser: PropTypes.object,
 };
 Posts.defaultProps = {
   showContext: false,
   showMoreContext: false,
+  itemName: 'posts',
   noPostDisp: 'No post found.',
-  loggedInAs: {}
+  loggedInUser: {}
 };
 
 export default Posts;

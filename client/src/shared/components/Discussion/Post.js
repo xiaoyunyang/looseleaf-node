@@ -2,10 +2,12 @@ import React from 'react';
 // import PropTypes from 'prop-types';
 import PostDisplay from './PostDisplay';
 import PostEditor from './PostEditor';
+import Comments from './Comments';
 import { image } from '../../data/assetLinks';
 import { apiLink } from '../../data/apiLinks';
 import appRoute from '../../data/appRoute'
 import { getApiData, postToApiData } from '../../../lib/helpers';
+
 import { communityName } from '../Collection/Communities/lib';
 import { newPlugins } from './draftjsHelpers';
 
@@ -18,6 +20,7 @@ class Post extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      showComment: false,
       userDisplayName: 'Firstname Lastname',
       userPic: image.defaultUser,
       username: '',
@@ -88,6 +91,13 @@ class Post extends React.Component {
     };
     postToApiData(url, data , cbFailure, cbSuccess);
   }
+  handleToggleShowComment() {
+    const toggledShowComment = !this.state.showComment;
+    this.setState({
+      showComment: toggledShowComment
+    });
+    return toggledShowComment;
+  }
   render() {
     return (
       <div key={`post-${this.props.post._id}`}>
@@ -110,11 +120,18 @@ class Post extends React.Component {
             editedOn={this.state.editedOn}
             editorContent={this.state.editorContent}
             handleToggleEditMode={this.handleToggleEditMode.bind(this)}
-            loggedinUser={this.props.loggedinAs}
+            handleToggleShowComment={this.handleToggleShowComment.bind(this)}
+            loggedinUser={this.props.loggedinUser}
             post={this.props.post}
             userDisplayName={this.state.userDisplayName}
             userPic={this.state.userPic}
             username={this.state.username}
+          />
+        }
+        { this.state.showComment &&
+          <Comments
+            postId={this.props.post._id}
+            loggedinUser={this.props.loggedinUser}
           />
         }
       </div>

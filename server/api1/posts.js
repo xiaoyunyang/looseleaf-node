@@ -12,9 +12,6 @@ export const getPosts = (findCriteria, reqLimit, reqPage, cbSuccess, cbFailure) 
   });
 };
 
-export const getFeed = (findCriteria, reqLimit, reqPage, cbSuccess, cbFailure) => {
-
-}
 
 // NOTE: Deprecated
 // const getPosts = ({ findCriteria, limit, cbSuccess }) => {

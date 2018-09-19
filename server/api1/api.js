@@ -38,6 +38,7 @@ api.delete('/post', (req, res) => {
 // create new post
 api.post('/post', (req, res) => {
   const { content, userId, context } = req.body;
+
   const newPost = new Post();
   newPost.content = content;
   newPost.postedBy = userId;
@@ -117,6 +118,18 @@ api.get('/post/project', (req, res) => {
   getPosts(findCriteria, req.query.limit, req.query.page, cbSuccess, cbFailure);
 });
 
+api.get('/post/post', (req, res) => {
+  // Queries
+  const findCriteria = { 'context.post': req.query.postId };
+  const cbSuccess = result => res.send(result);
+  const cbFailure = err => {
+    res.status(500).end();
+    return console.error(err);
+  };
+  getPosts(findCriteria, req.query.limit, req.query.page, cbSuccess, cbFailure);
+});
+
+
 /* 
 http://localhost:3001/api/post/userFeed?userIds=1+3+5+6&projectIds=a+b&postedBy=12&page=1?page=1
 {"userIds":["1","3","5","6"],"projectIds":["a","b"],"postedBy":"12","page":"1?page=1"}
@@ -128,7 +141,7 @@ api.get('/post/userFeed', (req, res) => {
   const communitySlugs = arrayWrap(req.query.communitySlugs || '')[0].split(' ');
 
   // TODO: We may need this for something later. Don't know what yet.
-  // const currUser = req.query.currUser;
+  const currUser = req.query.currUser;
   
   // We provide post for the user with userId from the following sources: 
   // (1) people the user follows
@@ -148,8 +161,12 @@ api.get('/post/userFeed', (req, res) => {
   if (allPosts.length === 0) {
     return res.send([]);
   }
+
   const findCriteria = {
-    $or: allPosts
+    $and: [
+      { $or: allPosts },
+      { postedBy: { $ne: currUser } }
+    ]
   };
 
   const cbSuccess = result => res.send(result);

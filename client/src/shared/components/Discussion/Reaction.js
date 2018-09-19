@@ -1,5 +1,5 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import $ from 'jquery';
 
 export default class Reaction extends React.Component {
@@ -26,10 +26,19 @@ export default class Reaction extends React.Component {
             <i className={`far fa-${this.props.faName}`}></i>
           }
         </a>
-        <a href='' style={{marginLeft: -20}}>
-          {this.props.numReacted}
-        </a>
+        {
+          this.props.showNumReacted &&
+          <a href='' style={{marginLeft: -20}}>
+            {this.props.numReacted}
+          </a>
+        }
       </span>
     );
   }
+}
+Reaction.propTypes = {
+  showNumReacted: PropTypes.bool
+}
+Reaction.defaultProps = {
+  showNumReacted: true
 }

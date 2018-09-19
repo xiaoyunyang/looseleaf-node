@@ -78,6 +78,7 @@ const PostDisplay = ({
   editedOn,
   editorContent,
   handleToggleEditMode,
+  handleToggleShowComment,
   loggedinUser,
   post,
   userDisplayName,
@@ -116,7 +117,11 @@ const PostDisplay = ({
         </div>
       </div>
       <div className="card-action">
-        <Reactions post={post} loggedinUser={loggedinUser} />
+        <Reactions
+          post={post}
+          loggedinUser={loggedinUser}
+          handleToggleShowComment={handleToggleShowComment}
+        />
       </div>
     </div>
 );

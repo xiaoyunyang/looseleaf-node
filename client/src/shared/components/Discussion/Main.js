@@ -4,8 +4,8 @@ import Posts from './Posts';
 import PostEditor from './PostEditor';
 import { apiLink, userFeedFindBy } from '../../data/apiLinks';
 import { getApiData, postToApiData } from '../../../lib/helpers';
-import { newPlugins } from './draftjsHelpers';
 import LoadMoreBtn from '../LoadMoreBtn';
+import { newPlugins } from './draftjsHelpers';
 
 const { plugins, inlineToolbarPlugin } = newPlugins();
 const { InlineToolbar } = inlineToolbarPlugin;
@@ -24,16 +24,20 @@ export default class Discussion extends React.Component {
     this.loadMorePosts = this.loadMorePosts.bind(this);
   }
   componentDidMount() {
-    this.fetchPosts(this.state.page);
+   this.fetchPosts(this.state.page);
   }
   fetchPosts(page) {
     const context = this.props.context;
+
+    // TODO: change postId, communitySlug, userId, postId to "contextIdentifier"
+
     const findBy = context => {
       switch (context) {
         case 'project': return `?projectId=${this.props.projectId}`;
         case 'community': return `?slug=${this.props.communitySlug}`;
         case 'user': return `?userId=${this.props.userId}`;
         case 'userFeed': return userFeedFindBy(this.props.postQueryBy);
+        case 'post': return `?postId=${this.props.postId}`;
         default: return;
       }
     };
@@ -51,7 +55,7 @@ export default class Discussion extends React.Component {
         });
       }
     }
-    getApiData(link, setApiData);
+   getApiData(link, setApiData);
   }
   loadMorePosts() {
     const nextPage = this.state.page + 1;
@@ -70,7 +74,8 @@ export default class Discussion extends React.Component {
     const content = d;
     const context = {
       project: this.props.projectId,
-      community: this.props.communitySlug
+      community: this.props.communitySlug,
+      post: this.props.postId
     }
     const postUrl = apiLink.posts;
     const data = { content, userId, context };
@@ -112,16 +117,17 @@ export default class Discussion extends React.Component {
           <div>
             <Posts
               posts={this.state.posts}
-              loggedinAs={this.props.loggedinUser}
+              loggedinUser={this.props.loggedinUser}
               deletePost={this.deletePost.bind(this)}
               showContext={this.props.showContext}
               showContextForUser={this.props.showContextForUser}
+              itemName={this.props.itemName}
             />
             {
               this.state.posts.length > 0 && !this.state.endOfPage &&
               <LoadMoreBtn
                 handleClick={this.loadMorePosts}
-                itemName='Posts'
+                itemName={this.props.itemName}
               />
             }
           </div>
@@ -143,14 +149,18 @@ Discussion.propTypes = {
   newPostPlaceholder: PropTypes.string,
   communitySlug: PropTypes.string,
   projectId: PropTypes.string,
+  postId: PropTypes.string,
   context: PropTypes.string.isRequired,
   readOnly: PropTypes.bool,
+  itemName: PropTypes.string
 };
 Discussion.defaultProps = {
   showContext: false,
   showMoreContext: false,
-  projectId: null,
   communitySlug: null,
+  projectId: null,
+  postId: null,
   readOnly: true,
-  userId: ''
+  userId: '',
+  itemName: 'posts'
 }

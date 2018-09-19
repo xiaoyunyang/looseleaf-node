@@ -6,6 +6,7 @@ const schema = mongoose.Schema({
   postedBy: { type: mongoose.Schema.ObjectId, ref: 'User' },
   context: {
     project: { type: mongoose.Schema.ObjectId, ref: 'Project' },
+    post: { type: mongoose.Schema.ObjectId, ref: 'Post' },
     community: { type: String }
   },
   content: {
@@ -16,11 +17,7 @@ const schema = mongoose.Schema({
   tags: Array,
   hearts: [{ type: mongoose.Schema.ObjectId, ref: 'User' }],
   thumbUps: [{ type: mongoose.Schema.ObjectId, ref: 'User' }],
-  comments: [{
-    text: String,
-    created: { type: Date, default: Date.now },
-    postedBy: { type: mongoose.Schema.ObjectId, ref: 'User' }
-  }]
+  comments: { type: Array, default: [] }
 });
 
 // projectSchema.path('title').required(true, 'Project title cannot be blank');
