@@ -59,7 +59,11 @@ const appRoute = (pageName, absRoute) => {
     case 'exploreCommunities':
       return prepend + '/explore/communities';
     case 'exploreWildcard':
-      return '/explore/*';  
+      return '/explore/*';
+    case 'postPage':
+      return postId => prepend + `/post/${postId}`;
+    case 'postWildcard':
+      return '/post/*';  
     default:
       return '';
   }

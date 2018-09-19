@@ -38,6 +38,7 @@ class Post extends React.Component {
   updateContext(showContext) {
     const projectId = this.props.post.context.project;
     const communitySlug = this.props.post.context.community;
+    const postId = this.props.post.context.post;
 
     let link, name;
     if (communitySlug) {
@@ -49,6 +50,13 @@ class Post extends React.Component {
       });
     } else if (projectId) {
       this.fetchProjectInfo(projectId);
+    } else if (postId) {
+      link = appRoute('postPage', true)(postId);
+      name = 'this post'
+      this.setState({
+        postContext: { link: link, name: name },
+        contextForUser: 'in which you replied'
+      });
     }
   }
   fetchProjectInfo(projectId) {
