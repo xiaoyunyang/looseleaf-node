@@ -63,15 +63,17 @@ const PostUserInfo = ({ userPic, username, userDisplayName, editedOn, post }) =>
     }
   </div>
 );
-const PostContext = ({ context }) => (
+const PostContext = ({ context, contextForUser }) => (
   <div className="row post-context">
     <span>Posted under </span>
     <span><a href={context.link}>{context.name}</a></span>
+    <div>{contextForUser}</div>
   </div>
 );
 
 const PostDisplay = ({
   context,
+  contextForUser,
   deletePost,
   editedOn,
   editorContent,
@@ -97,7 +99,7 @@ const PostDisplay = ({
         }
         {
           context &&
-          <PostContext context={context}/>
+          <PostContext context={context} contextForUser={contextForUser}/>
         }
         <PostUserInfo
           userPic={userPic}
@@ -121,6 +123,7 @@ const PostDisplay = ({
 
 PostDisplay.propTypes = {
   context: PropTypes.object,
+  contextForUser: PropTypes.string,
   userDisplayName: PropTypes.string.isRequired,
   username: PropTypes.string.isRequired,
   userPic: PropTypes.string.isRequired,

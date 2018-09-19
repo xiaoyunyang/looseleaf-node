@@ -24,7 +24,8 @@ class Post extends React.Component {
       editMode: false,
       editedOn: this.props.post.editedOn,
       editorContent: this.props.post.content,
-      postContext: { link: '#', name: 'Project or community' }
+      postContext: { link: '#', name: 'Project or community' },
+      contextForUser: 'because you are a contributor'
     };
   }
   componentDidMount() {
@@ -40,7 +41,8 @@ class Post extends React.Component {
       link = appRoute('communityHome', true)(communitySlug);
       name = communityName(communitySlug);
       this.setState({
-        postContext: { link: link, name: name }
+        postContext: { link: link, name: name },
+        contextForUser: 'in which you are a member'
       });
     } else if (projectId) {
       this.fetchProjectInfo(projectId);
@@ -53,7 +55,8 @@ class Post extends React.Component {
       const link = appRoute('projectPage', true)(project.slug);
       const name = project.title;
       this.setState({
-        postContext: { link, name }
+        postContext: { link, name },
+        contextForUser: 'for which you are a contributor' // TODO: not necessarily. I load posts from followers/following of the user also. Can't tell.
       });
     }
     getApiData(url, setApiData)
@@ -102,6 +105,7 @@ class Post extends React.Component {
           :
           <PostDisplay
             context={this.props.showContext ? this.state.postContext : null}
+            contextForUser={this.props.showContextForUser ? this.state.contextForUser : null}
             deletePost={this.props.deletePost}
             editedOn={this.state.editedOn}
             editorContent={this.state.editorContent}

@@ -25,7 +25,8 @@ class Home extends React.Component {
                 postQueryBy={{ following, followers, projects, communities, currUser }}
                 loggedinUser={this.props.user.info}
                 readOnly
-                showContext={true}
+                showContext
+                showContextForUser={false}
               />
             </div>
           </div>

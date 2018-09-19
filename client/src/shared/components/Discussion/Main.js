@@ -51,7 +51,6 @@ export default class Discussion extends React.Component {
         });
       }
     }
-    console.log('link', link)
     getApiData(link, setApiData);
   }
   loadMorePosts() {
@@ -116,6 +115,7 @@ export default class Discussion extends React.Component {
               loggedinAs={this.props.loggedinUser}
               deletePost={this.deletePost.bind(this)}
               showContext={this.props.showContext}
+              showContextForUser={this.props.showContextForUser}
             />
             {
               this.state.posts.length > 0 && !this.state.endOfPage &&
@@ -137,7 +137,8 @@ export default class Discussion extends React.Component {
 // "Post an announcement, question, or insight to this community.
 // "Post an update, question, or clarification to this project."
 Discussion.propTypes = {
-  showContext: PropTypes.bool,
+  showContext: PropTypes.bool, // shows the community or project the post is created under
+  showContextForUser: PropTypes.bool, // show how the user is related to the post
   loggedinUser: PropTypes.object,
   newPostPlaceholder: PropTypes.string,
   communitySlug: PropTypes.string,
@@ -147,6 +148,7 @@ Discussion.propTypes = {
 };
 Discussion.defaultProps = {
   showContext: false,
+  showMoreContext: false,
   projectId: null,
   communitySlug: null,
   readOnly: true,
