@@ -4,6 +4,7 @@ import $ from 'jquery';
 import NavLink from '../Nav/NavLink';
 import { UserAppNav } from '../Nav/AppNav';
 import { apiLink } from '../../data/apiLinks';
+import appRoute from '../../data/appRoute';
 
 class UserDropdown extends React.Component {
   constructor(props) {
@@ -37,10 +38,10 @@ class UserDropdown extends React.Component {
           }
         </a>
         <ul id="user-dropdown" className="dropdown-content topnav-dropdown">
-          <li><UserAppNav pageName='profile' username={username} external={useExternLinks}/></li>
           <li><UserAppNav pageName='newProject' username={username} external={true}/></li>
+          <li><a href={appRoute('exploreCommunities', true)}>Communities</a></li>
           <li className="divider" />
-          <li><a href="/community">Communities</a></li>
+          <li><UserAppNav pageName='profile' username={username} external={useExternLinks}/></li>
           <li><UserAppNav pageName='userSettings' username={username} external={useExternLinks}/></li>
           <li>
             {

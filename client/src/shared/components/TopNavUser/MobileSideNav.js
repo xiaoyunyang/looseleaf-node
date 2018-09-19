@@ -4,6 +4,7 @@ import $ from 'jquery';
 import NavLink from '../Nav/NavLink';
 import { UserAppNav } from '../Nav/AppNav';
 import { apiLink } from '../../data/apiLinks';
+import appRoute from '../../data/appRoute';
 
 class MobileSideNav extends React.Component {
   constructor(props) {
@@ -29,9 +30,12 @@ class MobileSideNav extends React.Component {
           <div className="user-view">
             <img alt={`looseleaf user ${username}`} className="circle" src={userPic} />
             <div className="row">
-              <div className="col l2 m2 s2">
-                <a href={`mailto:${userEmail}`}><i className="fa fa-envelope fa-lg" /></a>
-              </div>
+              {
+                false &&
+                <div className="col l2 m2 s2">
+                  <a href={`mailto:${userEmail}`}><i className="fa fa-envelope fa-lg" /></a>
+                </div>
+              }
               {
                 userWebsite &&
                 <div className="col l2 m2 s2">
@@ -44,9 +48,10 @@ class MobileSideNav extends React.Component {
           </div>
         </li>
         <li><UserAppNav pageName='home' username={username} external={useExternLinks}/></li>
-        <li><UserAppNav pageName = 'profile' username={username} external={useExternLinks}/></li>
         <li><UserAppNav pageName='newProject' username={username} external={useExternLinks}/></li>
+        <li><a href={appRoute('exploreCommunities', true)}>Communities</a></li>
         <li className="divider" />
+        <li><UserAppNav pageName = 'profile' username={username} external={useExternLinks}/></li>
         <li><UserAppNav pageName='userSettings' username={username} external={useExternLinks}/></li>
         <li>
           {

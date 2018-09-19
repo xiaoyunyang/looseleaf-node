@@ -49,7 +49,8 @@ export default class TopNavUser extends React.Component {
     const communities = this.props.user.communities;
     const useExternLinks = this.props.useExternLinks;
     const selected = this.props.route && (typeof this.props.route.path === 'string')
-      ? getPageName(this.props.route.path) : '';
+      ? getPageName(this.props.route.path) : 'foo'; // NOTE: The "foo" is so
+      // that it'll never match anything. Leaving it empty will cause match to "Home"
 
     // TODO: Still need the code below?
 /*
