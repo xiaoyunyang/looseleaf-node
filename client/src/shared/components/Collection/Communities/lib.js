@@ -2,6 +2,8 @@ import appRoute from '../../../data/appRoute';
 
 export const communities = require('../../../data/community.json');
 
+export const communityName = slug => communities[slug] ? communities[slug].name : '';
+
 export const communitiesArr = Object.values(communities);
 
 export const getIconColor = slug => {

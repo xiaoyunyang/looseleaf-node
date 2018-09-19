@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { slug2Name } from '../../../../lib/helpers';
+import { communityName } from './lib';
 
 const Chips = ({ cs, altern, hasIcon, showAltern }) => (
   <div>
@@ -17,7 +17,7 @@ const Chips = ({ cs, altern, hasIcon, showAltern }) => (
           {
             cs && cs.length>0 ? cs.map(c => {
             return <div key={`community-chip-${c}`} className="chip">
-              <a href={`/community/${c}`}>{slug2Name(c)}</a>
+              <a href={`/community/${c}`}>{communityName(c)}</a>
             </div>;
             })
             :
@@ -39,7 +39,7 @@ const Chips = ({ cs, altern, hasIcon, showAltern }) => (
           {
             cs.map(c => {
             return <div key={`community-chip-${c}`} className="chip">
-              <a href={`/community/${c}`}>{slug2Name(c)}</a>
+              <a href={`/community/${c}`}>{communityName(c)}</a>
             </div>;
             })
           }

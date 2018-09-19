@@ -27,7 +27,7 @@ const initState = {
     {
       displayName: "Andrew Fenner",
       username: "afenner",
-      communities: ["Developer"],
+      communities: [],
       bio: "hi I'm Andrew",
       email: "andrewfenner@numbershapes.com",
     },

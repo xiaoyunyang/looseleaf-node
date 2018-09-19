@@ -1,5 +1,4 @@
 import React from 'react';
-
 import { communityMeta, communitiesArr } from './lib';
 
 const ShortVersion = ({ collection }) => (

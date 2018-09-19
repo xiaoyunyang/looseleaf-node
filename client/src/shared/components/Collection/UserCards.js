@@ -3,8 +3,9 @@ import $ from 'jquery';
 import InputAutocomplete from '../Form/InputAutocomplete';
 import { apiLink } from '../../data/apiLinks';
 import { image } from '../../data/assetLinks';
-import { getApiData, slug2Name } from '../../../lib/helpers';
+import { getApiData } from '../../../lib/helpers';
 import Communities from './Communities/Chips';
+import { communityName } from './Communities/lib'
 
 // This is a ES6 class - see https://toddmotto.com/react-create-class-versus-component/
 export default class UserCards extends React.Component {
@@ -18,7 +19,7 @@ export default class UserCards extends React.Component {
       modalPerson: {
         displayName: 'Firstname Lastname',
         email: 'a@b.com',
-        communities: ['Developer'],
+        communities: ['developer'],
         bio: 'hello.',
         username: 'username',
         picture: image.defaultUser
@@ -62,6 +63,12 @@ export default class UserCards extends React.Component {
     $('select').material_select();
   }
   renderPersonCard(user, i) {
+    const userCommunitiesDisp = userCs => {
+      const [fst, ...rst] = userCs;
+      const fstName = communityName(fst).slice(0,-1); // the slice is so we have singular instead of plural version of the word
+      const rstNum = rst.length > 0 ? ` +${rst.length}` : '';
+      return `${fstName}${rstNum}`;
+    }
     return (
       <a
         href="#person-card-modal"
@@ -76,7 +83,7 @@ export default class UserCards extends React.Component {
           <div className="row">
             <span className="title">
               <h6 className="truncate">{user.displayName}</h6>
-              <p>{user.communities.length > 0 && slug2Name(user.communities[0], true)}</p>
+              <p>{user.communities.length > 0 && userCommunitiesDisp(user.communities)}</p>
             </span>
           </div>
         </div>

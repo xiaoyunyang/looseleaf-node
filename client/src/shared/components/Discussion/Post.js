@@ -5,8 +5,10 @@ import PostEditor from './PostEditor';
 import { image } from '../../data/assetLinks';
 import { apiLink } from '../../data/apiLinks';
 import appRoute from '../../data/appRoute'
-import { getApiData, postToApiData, capitalize } from '../../../lib/helpers';
+import { getApiData, postToApiData } from '../../../lib/helpers';
+import { communityName } from '../Collection/Communities/lib';
 import { newPlugins } from './draftjsHelpers';
+
 const { plugins, inlineToolbarPlugin } = newPlugins();
 const { InlineToolbar } = inlineToolbarPlugin;
 
@@ -36,7 +38,7 @@ class Post extends React.Component {
     let link, name;
     if (communitySlug) {
       link = appRoute('communityHome', true)(communitySlug);
-      name = capitalize(communitySlug);
+      name = communityName(communitySlug);
       this.setState({
         postContext: { link: link, name: name }
       });
