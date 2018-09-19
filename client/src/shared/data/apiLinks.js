@@ -9,17 +9,17 @@ const root = 'http://localhost:3001';
 // postReaction: id is the postId, reaction is the name of the reaction, e.g., hearts
 // data that is to be posted is the updated array of userIds for that reaction.
 
-export const userFeedFindBy = ({ followers, following, projects, currUser }) =>  {
+const query = arr => arr.reduce((acc, curr) => {
+  return `${acc}${curr}+`
+}, '').slice(0,-1);
+
+export const userFeedFindBy = ({ followers, following, projects, communities, currUser }) =>  {
   const userIds = followers.concat(following);
-  const queryUsers = userIds.reduce((acc, curr) => {
-    return `${acc}${curr}+`
-   }, '').slice(0,-1);
+  const queryUsers = `userIds=${query(userIds)}`;
+  const queryProjects = `projectIds=${query(projects)}`;
+  const queryCommunities = `communitySlugs=${query(communities)}`
 
-   const queryProjects = projects.reduce((acc, curr) => {
-     return `${acc}${curr}+`
-   }, '').slice(0,-1)
-
-  return `?userIds=${queryUsers}&projectIds=${queryProjects}&currUser=${currUser}`;
+  return `?${queryUsers}&${queryProjects}&${queryCommunities}&currUser=${currUser}`;
 };
 
 export const apiLink = {

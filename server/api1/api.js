@@ -125,7 +125,8 @@ api.get('/post/userFeed', (req, res) => {
 
   const userIds = arrayWrap(req.query.userIds || '')[0].split(' ');
   const projectIds = arrayWrap(req.query.projectIds || '')[0].split(' ');
-  
+  const communitySlugs = arrayWrap(req.query.communitySlugs || '')[0].split(' ');
+
   // TODO: We may need this for something later. Don't know what yet.
   // const currUser = req.query.currUser;
   
@@ -133,13 +134,16 @@ api.get('/post/userFeed', (req, res) => {
   // (1) people the user follows
   // (2) followers of the user
   // (3) posts associated with the project that the user contributes to.
-  const postsByUsers = userIds.filter(id => id !== '').map(ids => {
-    return { postedBy: ids };
+  const postsByUsers = userIds.filter(id => id !== '').map(id => {
+    return { postedBy: id };
   });
-  const postsForProjects = projectIds.filter(id => id !== '').map(ids => {
-    return { 'context.project': ids };
+  const postsForProjects = projectIds.filter(id => id !== '').map(id => {
+    return { 'context.project': id };
   });
-  const allPosts = [...postsByUsers, ...postsForProjects];
+  const postsForCommunities = communitySlugs.filter(slug => slug !== '').map(slug => {
+    return { 'context.community': slug };
+  });
+  const allPosts = [...postsByUsers, ...postsForProjects, ...postsForCommunities];
 
   if (allPosts.length === 0) {
     return res.send([]);

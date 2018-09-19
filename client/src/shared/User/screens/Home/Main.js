@@ -9,6 +9,7 @@ class Home extends React.Component {
     const following = this.props.user.info.following;
     const followers = this.props.user.info.followers;
     const projects = this.props.user.info.projects;
+    const communities = this.props.user.info.communities;
     const currUser = this.props.user.info._id;
     return (
       <div className="section-white" style={{minHeight: '100vh'}}>
@@ -21,7 +22,7 @@ class Home extends React.Component {
             <div className="col s12 m8 l9 user-feed">
               <Discussion
                 context='userFeed'
-                postQueryBy={{ following, followers, projects, currUser }}
+                postQueryBy={{ following, followers, projects, communities, currUser }}
                 loggedinUser={this.props.user.info}
                 readOnly
                 showContext={true}
