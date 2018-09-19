@@ -65,6 +65,8 @@ export default function renderProjectApp(req, res, next, project) {
       />
     );
     return res.send(`<!DOCTYPE html>${html}`);
+  }).catch(reason => {
+    console.log(reason)
   });
 
 }

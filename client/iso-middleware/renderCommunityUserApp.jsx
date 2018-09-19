@@ -48,5 +48,7 @@ export default function renderCommunityUserApp(req, res, next, community) {
       <HTML data={dataToSerialize} html={app}/>
     );
     return res.send(`<!DOCTYPE html>${html}`);
+  }).catch(reason => {
+    console.log(reason)
   });
 }

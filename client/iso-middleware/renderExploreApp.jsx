@@ -56,6 +56,8 @@ export default function renderExploreApp(req, res, next) {
       />
     );
     return res.send(`<!DOCTYPE html>${html}`);
+  }).catch(reason => {
+    console.log(reason)
   });
 
 }

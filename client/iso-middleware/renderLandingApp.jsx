@@ -32,5 +32,7 @@ export default function renderLandingApp(req, res, next) {
        <HTML html={app} />
      );
     return res.send(`<!DOCTYPE html>${html}`);
+  }).catch(reason => {
+    console.log(reason)
   });
 }

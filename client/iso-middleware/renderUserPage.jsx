@@ -52,5 +52,7 @@ export default function renderUserPage(req, res, next, user) {
       />
     );
     return res.send(`<!DOCTYPE html>${html}`);
+  }).catch(reason => {
+    console.log(reason)
   });
 }
