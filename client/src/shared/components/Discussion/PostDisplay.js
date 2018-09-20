@@ -93,6 +93,7 @@ class PostDisplay extends React.Component {
       handleToggleEditMode,
       handleToggleShowComment,
       showComment,
+      commentNum,
       loggedinUser,
       post,
       userDisplayName,
@@ -140,6 +141,7 @@ class PostDisplay extends React.Component {
               loggedinUser={loggedinUser}
               handleToggleShowComment={handleToggleShowComment}
               showComment={showComment}
+              commentNum={commentNum}
             />
           </div>
         </div>

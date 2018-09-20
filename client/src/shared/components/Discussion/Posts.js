@@ -6,7 +6,6 @@ const Posts = ({
   posts,
   deletePost,
   noPostDisp,
-  itemName,
   loggedinUser,
   showContext,
   showContextForUser
@@ -28,7 +27,7 @@ const Posts = ({
         );
       })
       :
-      <p>{`No ${itemName} found.`}</p>
+      <p>{noPostDisp}</p>
     }
   </div>
 );

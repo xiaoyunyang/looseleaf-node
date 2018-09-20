@@ -24,6 +24,7 @@ class Home extends React.Component {
                 context='userFeed'
                 postQueryBy={{ following, followers, projects, communities, currUser }}
                 loggedinUser={this.props.user.info}
+                noPostDisp='No posts found. To see posts added to your feed, join a community, contribute to a project, or follow other users.'
                 readOnly
                 showContext
                 showContextForUser={false}

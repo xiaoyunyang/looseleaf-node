@@ -107,7 +107,7 @@ export default class Reactions extends React.Component {
             label={`${this.state.showComment ? 'Hide' : 'See'} Comments`}
             userHasReacted={this.state.showComment}
             readOnly={readOnly}
-            showNumReacted={false}
+            numReacted={this.props.commentNum}
             handleClick={this.handleCommentsClick}
           />
           <Reaction

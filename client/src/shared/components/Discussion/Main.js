@@ -83,8 +83,12 @@ export default class Discussion extends React.Component {
     const cbFailure = (status, msg) => {};
     const cbSucess = (status, msg) => {
       const oldPosts = this.state.posts;
-      const updatedPosts = [msg].concat(oldPosts)
-      this.setState({ posts: updatedPosts})
+      const updatedPosts = [msg.newPost].concat(oldPosts);
+      this.setState({
+        posts: updatedPosts
+      });
+      console.log('handlePost.....', this.props)
+      this.props.updateParentPostCommentsNum(msg.parentPostCommentsNum);
     }
     postToApiData(postUrl, data, cbFailure, cbSucess);
   }
@@ -121,6 +125,7 @@ export default class Discussion extends React.Component {
               showContext={this.props.showContext}
               showContextForUser={this.props.showContextForUser}
               itemName={this.props.itemName}
+              noPostDisp={this.props.noPostDisp}
             />
             {
               this.state.posts.length > 0 && !this.state.endOfPage &&
@@ -151,7 +156,8 @@ Discussion.propTypes = {
   postId: PropTypes.string,
   context: PropTypes.string.isRequired,
   readOnly: PropTypes.bool,
-  itemName: PropTypes.string
+  itemName: PropTypes.string,
+  updateParentPostCommentsNum: PropTypes.func
 };
 Discussion.defaultProps = {
   showContext: false,
@@ -159,7 +165,9 @@ Discussion.defaultProps = {
   communitySlug: null,
   projectId: null,
   postId: null,
+  noPostDisp: 'no posts.',
   readOnly: true,
   userId: '',
-  itemName: 'posts'
+  itemName: 'posts',
+  updateParentPostCommentsNum: () => {console.log('foo')}
 }

@@ -24,6 +24,7 @@ class Post extends React.Component {
       userDisplayName: 'Firstname Lastname',
       userPic: image.defaultUser,
       username: '',
+      commentNum: this.props.post.comments.length,
       editMode: false,
       editedOn: this.props.post.editedOn,
       editorContent: this.props.post.content,
@@ -106,6 +107,12 @@ class Post extends React.Component {
     });
     return toggledShowComment;
   }
+  updateParentPostCommentsNum(commentNumUpdated) {
+    console.log('called.....')
+    this.setState({
+      commentNum: commentNumUpdated
+    });
+  }
   render() {
     return (
       <div key={`post-${this.props.post._id}`}>
@@ -130,6 +137,7 @@ class Post extends React.Component {
             handleToggleEditMode={this.handleToggleEditMode.bind(this)}
             handleToggleShowComment={this.handleToggleShowComment.bind(this)}
             showComment={this.state.showComment}
+            commentNum={this.state.commentNum}
             loggedinUser={this.props.loggedinUser}
             post={this.props.post}
             userDisplayName={this.state.userDisplayName}
@@ -141,6 +149,7 @@ class Post extends React.Component {
           <Comments
             postId={this.props.post._id}
             loggedinUser={this.props.loggedinUser}
+            updateParentPostCommentsNum={updatedNum => this.updateParentPostCommentsNum.bind(this, updatedNum)}
           />
         }
       </div>

@@ -27,11 +27,24 @@ api.delete('/post', (req, res) => {
   Post.findByIdAndRemove(req.query._id, (err, post) => {
     // As always, handle any potential errors:
     if (err) return res.status(500).send(err);
-    const response = {
-      message: 'Post successfully deleted',
-      id: post._id
-    };
-    return res.status(200).send(response);
+
+    // also delete postId from parent Post
+    if (post) {
+      if (post.context.post) {
+        Post.findById(post.context.post, (err, parentPost) => {
+          const updatedComments = parentPost.comments.filter(c => c.toString() !== req.query._id);
+          parentPost.set({
+            comments: updatedComments
+          });
+          parentPost.save();
+        });
+      }
+      const response = {
+        message: 'Post successfully deleted',
+        id: post._id
+      };
+      return res.status(200).send(response);
+    }
   });
 });
 
@@ -43,8 +56,24 @@ api.post('/post', (req, res) => {
   newPost.content = content;
   newPost.postedBy = userId;
   newPost.context = context;
-  newPost.save();
-  return res.send({ status: 'success', msg: newPost });
+
+  if (!context.post) {
+    newPost.save();
+    return res.send({ status: 'success', msg: { newPost, parentPostCommentsNum: -1 } });
+  }
+  // This means the new post is a comment to another post
+  Post.findById(context.post, (err, post) => {
+    if (err) return res.send('Error');
+    if (post) {
+      const updatedComments = [ newPost._id, ...post.comments ];
+      post.set({
+        comments: updatedComments
+      });
+      post.save();
+      newPost.save();
+      return res.send({ status: 'success', msg: { newPost, parentPostCommentsNum: updatedComments.length } });
+    }
+  });
 });
 
 // edit post as the person who contributes to the post
