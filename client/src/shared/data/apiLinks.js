@@ -41,7 +41,7 @@ export const apiLink = {
   projectBySlug: slug => `${root}/api/project?slug=${slug}`,
   projectsByContext: (context, findBy, page) => `${root}/api/project/${context}/${findBy}?page=${page}`,
   projectsByIds: ids =>  ids.reduce((acc, id) => `${acc}_id=${id}&`,`${root}/api/project?`).slice(0, -1),
-  projectsByUser: (userId, projectIds, page) =>  projectIds.reduce((acc, id) => `${acc}_id=${id}&`,`${root}/api/project/user/${userId}?page=${page}?`).slice(0, -1),
+  projectsByUser: (userId, projectIds, page) =>  projectIds.reduce((acc, id) => `${acc}_id=${id}&`,`${root}/api/project/user/${userId}?page=${page}&`).slice(0, -1),
   posts: `${root}/api/post`,
   postById: id => `${root}/api/post?_id=${id}`,
   postEdit: id => `${root}/api/post/edit?_id=${id}`,
