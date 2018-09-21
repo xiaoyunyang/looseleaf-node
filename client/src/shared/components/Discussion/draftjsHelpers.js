@@ -1,7 +1,9 @@
+import React from 'react';
 // import createMarkdownShortcutsPlugin from 'draft-js-markdown-shortcuts-plugin';
 import createInlineToolbarPlugin from 'draft-js-inline-toolbar-plugin';
 // import { Separator } from 'draft-js-inline-toolbar-plugin';
 import {
+  CompositeDecorator,
   // convertToRaw,
   convertFromRaw,
   EditorState,
@@ -36,7 +38,40 @@ export const convertToEditorState = (editorContent) => {
   return editorState;
 };
 
+export const convertToEditorStateWithDecorator = (editorContent) => {
+  const decorator = new CompositeDecorator([{
+    strategy: findLinkEntities,
+    component: Link
+  }]);
+  const content = convertFromRaw(JSON.parse(editorContent));
+  const editorState = EditorState.createWithContent(content, decorator);
+  return editorState;
+};
 
+
+// Following code based on:
+// https://github.com/facebook/draft-js/blob/master/examples/draft-0-10-0/link/link.html
+export const Link = (props) => {
+  const {url} = props.contentState.getEntity(props.entityKey).getData();
+  return (
+    <a rel="nofollow noreferrer" href={url} target="_blank">
+      {props.children}
+    </a>
+  );
+};
+
+export const findLinkEntities = (contentBlock, callback, contentState) => {
+  contentBlock.findEntityRanges(
+    (character) => {
+      const entityKey = character.getEntity();
+      return (
+        entityKey !== null &&
+        contentState.getEntity(entityKey).getType() === 'LINK'
+      );
+    },
+    callback
+  );
+}
 
 // TODO: Is there a way to recognize "cmd + k" or "ctrl + k" to open the url input?
 export const newPlugins = () => {

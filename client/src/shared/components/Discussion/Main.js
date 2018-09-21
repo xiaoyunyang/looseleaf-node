@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Posts from './Posts';
-import PostEditor from './PostEditor';
+import NewPost from './NewPost';
 import { apiLink, userFeedFindBy } from '../../data/apiLinks';
 import { getApiData, postToApiData } from '../../../lib/helpers';
 import LoadMoreBtn from '../LoadMoreBtn';
@@ -104,7 +104,7 @@ export default class Discussion extends React.Component {
       <div>
         {
           this.props.loggedinUser && !this.props.readOnly &&
-            <PostEditor
+            <NewPost
               handlePost={d => this.handlePost(d)}
               InlineToolbar ={<InlineToolbar/>}
               placeholder={this.props.newPostPlaceholder}

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import PostDisplay from './PostDisplay';
-import PostEditor from './PostEditor';
+import NewPost from './NewPost';
 import Comments from './Comments';
 import { image } from '../../data/assetLinks';
 import { apiLink } from '../../data/apiLinks';
@@ -117,7 +117,7 @@ class Post extends React.Component {
     return (
       <div key={`post-${this.props.post._id}`}>
         { this.state.editMode ?
-          <PostEditor
+          <NewPost
             editorContent={this.state.editorContent}
             handleToggleEditMode={this.handleToggleEditMode.bind(this)}
             handlePost={editedContent => this.handleEditPost(editedContent, this.props.post._id) }

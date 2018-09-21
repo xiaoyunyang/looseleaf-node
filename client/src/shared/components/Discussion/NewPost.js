@@ -8,7 +8,7 @@ import {
 import Editor from 'draft-js-plugins-editor';
 import { convertToEditorState } from './draftjsHelpers';
 
-export default class PostEditor extends React.Component {
+export default class NewPost extends React.Component {
   static defaultProps = {
     placeholder: 'Write something...'
   }
@@ -142,7 +142,7 @@ export default class PostEditor extends React.Component {
   }
 }
 
-PostEditor.propTypes = {
+NewPost.propTypes = {
   editorContent: PropTypes.string, // not null if edit post mode
   handleToggleEditMode: PropTypes.func, // not null if edit post mode
   handlePost: PropTypes.func.isRequired,
