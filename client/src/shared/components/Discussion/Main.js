@@ -21,6 +21,15 @@ const createQuery = context => {
     default: return;
   }
 }
+const createContextObj = context => {
+  const contextObj = {
+    project: null,
+    community: null,
+    post: null
+  };
+  contextObj[context.name] = context.queryBy;
+  return contextObj;
+}
 
 export default class Discussion extends React.Component {
   constructor(props) {
@@ -73,11 +82,7 @@ export default class Discussion extends React.Component {
     });
     const userId = this.props.loggedinUser._id;
     const content = d;
-    const context = {
-      project: this.props.projectId,
-      community: this.props.communitySlug,
-      post: this.props.postId
-    }
+    const context = createContextObj(this.props.context);
     const postUrl = apiLink.posts;
     const data = { content, userId, context };
 
