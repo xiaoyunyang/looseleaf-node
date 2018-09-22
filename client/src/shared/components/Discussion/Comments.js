@@ -4,10 +4,6 @@ import Discussion from './Main';
 
 // Comments is called by Post
 export default class Comments extends React.Component {
-  updateParent(updatedNum) {
-    console.log('Comments....', updatedNum)
-    this.props.updateParentPostCommentsNum(updatedNum);
-  }
   render() {
     const context = {name: 'post', queryBy: this.props.postId};
     return (
@@ -18,7 +14,7 @@ export default class Comments extends React.Component {
           newPostPlaceholder='Post a comment.'
           readOnly={!this.props.loggedinUser}
           noPostDisp='No comment found.'
-          updateParentPostCommentsNum={updatedNum => this.updateParent.bind(this, updatedNum)}
+          updateParentPostCommentsNum={this.props.updateParentPostCommentsNum.bind(this)}
         />
       </div>
     );

@@ -112,11 +112,6 @@ class Post extends React.Component {
     });
     return toggledShowComment;
   }
-  updateParentPostCommentsNum(commentNumUpdated) {
-    this.setState({
-      commentNum: commentNumUpdated
-    });
-  }
   createContext() {
     const contextForUser = this.props.showContextForUser ? this.state.contextForUser : null;
     const context = this.props.showContext ? this.state.postContext : null;
@@ -189,7 +184,7 @@ class Post extends React.Component {
           <Comments
             postId={this.props.post._id}
             loggedinUser={this.props.loggedinUser}
-            updateParentPostCommentsNum={updatedNum => this.updateParentPostCommentsNum.bind(this, updatedNum)}
+            updateParentPostCommentsNum={commentNum => this.setState({commentNum})}
           />
         }
       </div>
