@@ -1,15 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import PostDisplay from './PostDisplay';
 import NewPost from './NewPost';
 import Comments from './Comments';
+import Reactions from './Reactions';
+import PostEditMenu from './PostEditMenu';
 import { image } from '../../data/assetLinks';
 import { apiLink } from '../../data/apiLinks';
 import appRoute from '../../data/appRoute'
 import { getApiData, postToApiData } from '../../../lib/helpers';
-
+import { Context } from './PostParts';
 import { communityName } from '../Collection/Communities/lib';
 import { newPlugins } from './draftjsHelpers';
+import PostContent from './PostContent';
 
 const { plugins, inlineToolbarPlugin } = newPlugins();
 const { InlineToolbar } = inlineToolbarPlugin;
@@ -29,8 +31,11 @@ class Post extends React.Component {
       editedOn: this.props.post.editedOn,
       editorContent: this.props.post.content,
       postContext: { link: '#', name: 'Project or community' },
-      contextForUser: 'because you are a contributor'
+      contextForUser: 'because you are a contributor',
     };
+    this.handleToggleEditMode = this.handleToggleEditMode.bind(this);
+    this.handleToggleShowComment = this.handleToggleShowComment.bind(this);
+    this.handleEditPost = this.handleEditPost.bind(this);
   }
   componentDidMount() {
     this.fetchUserInfo(this.props.post.postedBy);
@@ -108,18 +113,69 @@ class Post extends React.Component {
     return toggledShowComment;
   }
   updateParentPostCommentsNum(commentNumUpdated) {
-    console.log('called.....')
     this.setState({
       commentNum: commentNumUpdated
     });
   }
+  createContext() {
+    const contextForUser = this.props.showContextForUser ? this.state.contextForUser : null;
+    const context = this.props.showContext ? this.state.postContext : null;
+    return context && <Context context={context} contextForUser={contextForUser}/>
+  }
+  renderCardAction() {
+    return (
+      <div className="card-action">
+        <Reactions
+          post={this.props.post}
+          loggedinUser={this.props.loggedinUser}
+          handleToggleShowComment={this.handleToggleShowComment}
+          showComment={this.state.showComment}
+          commentNum={this.state.commentNum}
+        />
+      </div>
+    )
+  }
+  createEditMenu(loggedinUser, post) {
+    if(!loggedinUser || loggedinUser._id !== post.postedBy) {
+      return null;
+    }
+    return (
+      <PostEditMenu
+        postId={post._id}
+        deletePost={this.props.deletePost}
+        handleToggleEditMode={this.handleToggleEditMode}
+      />
+    );
+  }
+  renderPost() {
+    const { userPic, username, userDisplayName} = this.state;
+    const userInfo={ userPic, username, userDisplayName };
+    const Context = this.createContext();
+    const EditMenu = this.createEditMenu(this.props.loggedinUser, this.props.post);
+    return (
+      <div className="card feed">
+        <PostContent
+          editorContent={this.state.editorContent}
+          editedOn={this.state.editedOn}
+          loggedinUser={this.props.loggedinUser}
+          post={this.props.post}
+          userInfo={userInfo}
+          deletePost={this.props.deletePost}
+          handleToggleEditMode={this.handleToggleShowComment}
+          Context={Context}
+          EditMenu={EditMenu}
+        />
+        {this.renderCardAction()}
+      </div>
+    );
+  }
   render() {
     return (
       <div key={`post-${this.props.post._id}`}>
-        { this.state.editMode ?
+        { this.state.editMode &&
           <NewPost
             editorContent={this.state.editorContent}
-            handleToggleEditMode={this.handleToggleEditMode.bind(this)}
+            handleToggleEditMode={this.handleToggleEditMode}
             handlePost={editedContent => this.handleEditPost(editedContent, this.props.post._id) }
             InlineToolbar ={<InlineToolbar/>}
             placeholder='Write something.'
@@ -127,24 +183,8 @@ class Post extends React.Component {
             userDisplayName={this.state.userDisplayName}
             userPic={this.state.userPic}
           />
-          :
-          <PostDisplay
-            context={this.props.showContext ? this.state.postContext : null}
-            contextForUser={this.props.showContextForUser ? this.state.contextForUser : null}
-            deletePost={this.props.deletePost}
-            editedOn={this.state.editedOn}
-            editorContent={this.state.editorContent}
-            handleToggleEditMode={this.handleToggleEditMode.bind(this)}
-            handleToggleShowComment={this.handleToggleShowComment.bind(this)}
-            showComment={this.state.showComment}
-            commentNum={this.state.commentNum}
-            loggedinUser={this.props.loggedinUser}
-            post={this.props.post}
-            userDisplayName={this.state.userDisplayName}
-            userPic={this.state.userPic}
-            username={this.state.username}
-          />
         }
+        { !this.state.editMode && this.renderPost() }
         { this.state.showComment &&
           <Comments
             postId={this.props.post._id}
@@ -164,7 +204,8 @@ class Post extends React.Component {
 //   deletePost: PropTypes.func
 // };
 Post.propTypes = {
-  showComment: PropTypes.bool
+  showComment: PropTypes.bool,
+  deletePost: PropTypes.func
 }
 Post.defaultProps = {
   showComment: false // important
