@@ -729,6 +729,9 @@ footer.section-brown {
 #community-people {
   background-color: white;
 }
+#community-people a {
+  margin-right: 0px;
+}
 #community-people img {
   position: absolute;
   width: 70px;
@@ -968,6 +971,14 @@ nav .categories-wrapper .categories {
   margin-right: 20px;
 }
 /**** Project Page END ****/
+
+/**** Post Helper BEGIN ***/
+.reaction-modal a {
+  text-transform: none !important;
+  font-size: 14px !important;
+}
+/**** Post Helper END ****/
+
 
 /**** Project Card badges BEGIN ***/
 .meta-badges-inline span {

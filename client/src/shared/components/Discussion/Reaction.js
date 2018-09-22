@@ -6,9 +6,8 @@ export default class Reaction extends React.Component {
   componentDidMount() {
     $('.tooltipped').tooltip();
   }
-  handleClick() {
-    this.props.handleClick();
-    $('.tooltipped').tooltip('close');
+  handleReactNumClick() {
+    this.props.handleReactNumClick(this.props.label);
   }
   render() {
     return (
@@ -18,7 +17,7 @@ export default class Reaction extends React.Component {
           data-position="top"
           data-delay="50"
           data-tooltip={this.props.label}
-          onClick={this.handleClick.bind(this)}>
+          onClick={this.props.handleReactClick}>
           {
             this.props.userHasReacted ?
             <i className={`fas fa-${this.props.faName}`}></i>
@@ -28,7 +27,10 @@ export default class Reaction extends React.Component {
         </a>
         {
           this.props.showNumReacted &&
-          <a href='' style={{marginLeft: -20}}>
+          <a
+            onClick={this.props.handleReactionNumClick}
+            style={{marginLeft: -20}}
+          >
             {this.props.numReacted}
           </a>
         }

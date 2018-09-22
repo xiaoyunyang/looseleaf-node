@@ -3,10 +3,9 @@ import PropTypes from 'prop-types';
 import $ from 'jquery';
 import Reaction from './Reaction';
 import { appLink, apiLink } from '../../data/apiLinks';
-import { postToApiData, copyToClipboard, updateItems } from '../../../lib/helpers';
-
+import { postToApiData, updateItems } from '../../../lib/helpers';
 import { LoginModal, SignupModal } from '../Login/Modal';
-
+import ReactionModal from './ReactionModal';
 
 const userHasReacted = (loggedinUser, reactedUsers) => {
   if(!loggedinUser) {
@@ -22,11 +21,16 @@ export default class Reactions extends React.Component {
     this.state = {
       hearts: this.props.post.hearts,
       thumbUps: this.props.post.thumbUps,
-      showComment: this.props.showComment
+      showComment: this.props.showComment,
+      modalReaction: {
+        reaction: 'hearts',
+        postId: this.props.post._id
+      },
     }
     this.handleReactionClick = this.handleReactionClick.bind(this);
     this.handleShareClick = this.handleShareClick.bind(this);
     this.handleCommentsClick = this.handleCommentsClick.bind(this);
+    this.handleReactionNumClick = this.handleReactionNumClick.bind(this);
   }
   componentDidMount() {
     $('.modal').modal({
@@ -47,6 +51,14 @@ export default class Reactions extends React.Component {
       // Open Modal
       $('#login-modal').modal('open');
     }
+  }
+  handleReactionNumClick(reaction) {
+    const modalReactionCpy = { ...this.state.modalReaction }
+    modalReactionCpy.reaction = reaction;
+    this.setState({
+      modalReaction: modalReactionCpy
+    });
+    $(`#reaction-modal-${modalReactionCpy.postId}`).modal('open');
   }
   handlePostReaction(reaction) {
     // reaction may be "hearts", thumbUps, "comments"
@@ -92,7 +104,8 @@ export default class Reactions extends React.Component {
             userHasReacted={userHasReacted(this.props.loggedinUser, this.state.hearts)}
             readOnly={readOnly}
             numReacted={this.state.hearts.length}
-            handleClick={action => this.handleReactionClick('hearts', action)}
+            handleReactClick={action => this.handleReactionClick('hearts', action)}
+            handleReactionNumClick={e => this.handleReactionNumClick('hearts')}
           />
           <Reaction
             faName='thumbs-up'
@@ -100,7 +113,8 @@ export default class Reactions extends React.Component {
             userHasReacted={userHasReacted(this.props.loggedinUser, this.state.thumbUps)}
             readOnly={readOnly}
             numReacted={this.state.thumbUps.length}
-            handleClick={action => this.handleReactionClick('thumbUps', action)}
+            handleReactClick={action => this.handleReactionClick('thumbUps', action)}
+            handleReactionNumClick={e => this.handleReactionNumClick('thumbUps')}
           />
           <Reaction
             faName='comments'
@@ -108,14 +122,15 @@ export default class Reactions extends React.Component {
             userHasReacted={this.state.showComment}
             readOnly={readOnly}
             numReacted={this.props.commentNum}
-            handleClick={this.handleCommentsClick}
+            handleReactClick={this.handleCommentsClick}
+            handleReactionNumClick={this.handleCommentsClick}
           />
           <Reaction
             faName='share-square'
             label='Open post on own page'
             readOnly={readOnly}
             userHasReacted={true}
-            handleClick={this.handleShareClick}
+            handleReactClick={this.handleShareClick}
           />
         </div>
       }
@@ -126,7 +141,10 @@ export default class Reactions extends React.Component {
           <SignupModal redirPath={location} />
         </div>
       }
-
+      <ReactionModal
+        modalReaction={this.state.modalReaction}
+        reacted={{ hearts: this.state.hearts, thumbUps: this.state.thumbUps }}
+      />
       </div>
     );
   }
