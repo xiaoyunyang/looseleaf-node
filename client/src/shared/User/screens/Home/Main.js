@@ -11,6 +11,7 @@ class Home extends React.Component {
     const projects = this.props.user.info.projects;
     const communities = this.props.user.info.communities;
     const currUser = this.props.user.info._id;
+    const context = {name: 'userFeed', queryBy: { following, followers, projects, communities, currUser }}
     return (
       <div className="section-white" style={{minHeight: '100vh'}}>
         <TopNav route={this.props.route} user={this.props.user.info}/>
@@ -21,8 +22,7 @@ class Home extends React.Component {
             </div>
             <div className="col s12 m8 l9 user-feed">
               <Discussion
-                context='userFeed'
-                postQueryBy={{ following, followers, projects, communities, currUser }}
+                context={context}
                 loggedinUser={this.props.user.info}
                 noPostDisp='No posts found. To see posts added to your feed, join a community, contribute to a project, or follow other users.'
                 readOnly

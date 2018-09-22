@@ -7,6 +7,7 @@ export default class Two extends React.Component {
   render() {
     const loggedinUser = this.props.state.user.loggedinUser;
     const communityInfo = this.props.state.community.info;
+    const context = { name: 'community', queryBy: communityInfo.slug }
     return (
       <div className="section-white" style={{minHeight: '100vh'}}>
         <TopNav
@@ -19,8 +20,7 @@ export default class Two extends React.Component {
           <div id={page(communityInfo.slug).two.slug}>
             <h3>{page(communityInfo.slug).two.name}</h3>
             <Discussion
-              context='community'
-              communitySlug={communityInfo.slug}
+              context={context}
               loggedinUser={this.props.state.user.loggedinUser}
               newPostPlaceholder='Post an announcement or question to this community.'
               readOnly={!this.props.state.user.loggedinUser}

@@ -9,11 +9,11 @@ export default class Comments extends React.Component {
     this.props.updateParentPostCommentsNum(updatedNum);
   }
   render() {
+    const context = {name: 'post', queryBy: this.props.postId};
     return (
       <div style={{ paddingLeft: '5%'}}>
         <Discussion
-          context='post'
-          postId={this.props.postId}
+          context={context}
           loggedinUser={this.props.loggedinUser}
           newPostPlaceholder='Post a comment.'
           readOnly={!this.props.loggedinUser}

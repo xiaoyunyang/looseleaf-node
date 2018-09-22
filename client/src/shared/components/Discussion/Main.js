@@ -10,6 +10,17 @@ import { newPlugins } from './draftjsHelpers';
 const { plugins, inlineToolbarPlugin } = newPlugins();
 const { InlineToolbar } = inlineToolbarPlugin;
 
+const createQuery = context => {
+  const queryBy = context.queryBy;
+  switch (context.name) {
+    case 'project': return `?projectId=${queryBy}`;
+    case 'community': return `?slug=${queryBy}`;
+    case 'user': return `?userId=${queryBy}`;
+    case 'userFeed': return userFeedFindBy(queryBy);
+    case 'post': return `?postId=${queryBy}`;
+    default: return;
+  }
+}
 
 export default class Discussion extends React.Component {
   constructor(props) {
@@ -31,17 +42,7 @@ export default class Discussion extends React.Component {
 
     // TODO: change postId, communitySlug, userId, postId to "contextIdentifier"
 
-    const findBy = context => {
-      switch (context) {
-        case 'project': return `?projectId=${this.props.projectId}`;
-        case 'community': return `?slug=${this.props.communitySlug}`;
-        case 'user': return `?userId=${this.props.userId}`;
-        case 'userFeed': return userFeedFindBy(this.props.postQueryBy);
-        case 'post': return `?postId=${this.props.postId}`;
-        default: return;
-      }
-    };
-    const link = apiLink.postsByContext(context, findBy(context), page);
+    const link = apiLink.postsByContext(context.name, createQuery(context), page);
     const setApiData = data => {
       const oldPosts = this.state.posts;
       this.setState({
@@ -87,7 +88,6 @@ export default class Discussion extends React.Component {
       this.setState({
         posts: updatedPosts
       });
-      console.log('handlePost.....', this.props)
       this.props.updateParentPostCommentsNum(msg.parentPostCommentsNum);
     }
     postToApiData(postUrl, data, cbFailure, cbSucess);
@@ -151,10 +151,7 @@ Discussion.propTypes = {
   showContextForUser: PropTypes.bool, // show how the user is related to the post
   loggedinUser: PropTypes.object,
   newPostPlaceholder: PropTypes.string,
-  communitySlug: PropTypes.string,
-  projectId: PropTypes.string,
-  postId: PropTypes.string,
-  context: PropTypes.string.isRequired,
+  context: PropTypes.object.isRequired,
   readOnly: PropTypes.bool,
   itemName: PropTypes.string,
   updateParentPostCommentsNum: PropTypes.func
@@ -162,12 +159,8 @@ Discussion.propTypes = {
 Discussion.defaultProps = {
   showContext: false,
   showMoreContext: false,
-  communitySlug: null,
-  projectId: null,
-  postId: null,
   noPostDisp: 'no posts.',
   readOnly: true,
-  userId: '',
   itemName: 'posts',
   updateParentPostCommentsNum: () => {console.log('foo')}
 }
