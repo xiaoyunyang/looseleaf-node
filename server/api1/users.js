@@ -30,15 +30,41 @@ export const getUsers = ({ findCriteria, cbSuccess }) => {
 };
 
 // Determine if username exists
-export const usernameExists = ({ username, cbSuccess, cbErr }) => {
-  return User.findOne({ username }, (err, user) => {
+export const uniqueFieldsExists = ({
+  usernameNew, emailNew, usernameOld, emailOld, cbSuccess, cbErr
+}) => {
+  if (usernameNew !== usernameOld && emailNew === emailOld) {
+    // If changing username only...
+    return User.findOne({ username: usernameNew }, (err, user) => {
+      if (err) {
+        return cbErr(err);
+      }
+      if (user) {
+        return cbSuccess({ usernameExists: true, emailExists: false });
+      }
+      return cbSuccess({ usernameExists: false, emailExists: false });
+    });
+  } else if (usernameNew === usernameOld && emailNew !== emailOld) {
+    // If changing email only...
+    return User.findOne({ email: emailNew }, (err, user) => {
+      if (err) {
+        return cbErr(err);
+      }
+      if (user) {
+        return cbSuccess({ usernameExists: false, emailExists: true });
+      }
+      return cbSuccess({ usernameExists: false, emailExists: false });
+    });
+  }
+
+  // If changing both username and email...
+  return User.findOne({ username: usernameNew, email: emailNew }, (err, user) => {
     if (err) {
       return cbErr(err);
     }
     if (user) {
-      console.log('user already exists....');
-      return cbSuccess(true);
+      return cbSuccess({ usernameExists: true, emailExists: true });
     }
-    return cbSuccess(false);
+    return cbSuccess({ usernameExists: false, emailExists: false });
   });
 };
