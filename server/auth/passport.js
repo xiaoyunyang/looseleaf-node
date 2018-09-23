@@ -165,12 +165,12 @@ module.exports = () => {
         newUser.displayName = (`${profile.name.givenName} ${profile.name.familyName}`);
 
         const baseUsername = (`${profile.name.givenName}${profile.name.familyName}`).toLowerCase();
-        const errCb = err => done(err);
-        const successCb = username => {
+        const cbErr = err => done(err);
+        const cbSuccess = username => {
           newUser.username = username;
           newUser.save(done);
         };
-        createUsername({ baseUsername, errCb, successCb });
+        createUsername({ baseUsername, cbErr, cbSuccess });
       });
     });
   }));
@@ -213,12 +213,12 @@ module.exports = () => {
         newUser.lastLoggedIn = new Date();
 
         const baseUsername = profile._json.login;
-        const errCb = err => done(err);
-        const successCb = username => {
+        const cbErr = err => done(err);
+        const cbSuccess = username => {
           newUser.username = username;
           newUser.save(done);
         };
-        createUsername({ baseUsername, errCb, successCb });
+        createUsername({ baseUsername, cbErr, cbSuccess });
       });
     });
   }));

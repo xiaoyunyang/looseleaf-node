@@ -102,14 +102,14 @@ router.post('/signup', (req, res, next) => {
     newUser.local.password = password;
     newUser.picture = gravatarUrl(email, { size: 120, default: 'mm' });
 
-    const errCb = err => next(err);
-    const successCb = username => {
+    const cbErr = err => next(err);
+    const cbSuccess = username => {
       newUser.username = username;
       newUser.displayName = username;
       newUser.save(next);
     };
     const baseUsername = email.split('@')[0];
-    createUsername({ baseUsername, errCb, successCb });
+    createUsername({ baseUsername, cbErr, cbSuccess });
   });
 }, passport.authenticate('login-local', {
   successRedirect: '/',

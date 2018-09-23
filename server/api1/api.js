@@ -18,7 +18,7 @@ import {
   getProjects,
   updateProject, updateProjectAndUser,
   addNewProject } from './projects';
-import { getUsers } from './users';
+import { getUsers, usernameExists } from './users';
 
 const api = express.Router();
 
@@ -414,39 +414,51 @@ api.post('/user', (req, res) => {
       return res.send({ status: 'error', msg: 'username cannot be empty!' });
     }
 
-
-    if (formFields.email === '') {
-      res.statusText = 'error';
-      // TODO: Below is the way we should be sending error messages. Make the same change
-      // to POST /project and POST /auth/login
-      return res.send({ status: 'error', msg: 'email cannot be empty!' });
-    }
-    const username = formFields.username || user.username;
-    const displayName = formFields.displayName || user.displayName;
-    const email = formFields.email || user.email;
-    const location = formFields.location || user.location;
-    const interests = formFields.interests || user.interests;
-    const bio = formFields.bio || user.bio;
-    const website = formFields.website || user.website;
-
-    // TODO: If user is making a request to change the username,
+    // NOTE: If user is making a request to change the username,
     // (1) Make sure username cannot contain any spaces or special characters.
     // (2) Make sure the desired username is not already taken
-    // (3) If username change is successful, make sure to have the server
-    // redirect to the settings page with username changed?
+    if (formFields.username !== user.username) {
+      const username = formFields.username;
+      const cbErr = err => {
+        return res.send({ status: 'error', msg: 'Cannot update user info right now' });
+      }
+      const cbSuccess = usernameExists => {
+        if (usernameExists) {
+          console.log('username already exists.....')
+          res.statusText = 'error';
+          return res.send({ status: 'error', msg: 'username already taken.' });
+        }
 
-    user.set({
-      username,
-      displayName,
-      email,
-      location,
-      interests,
-      bio,
-      website
-    });
-    user.save();
+        if (formFields.email === '') {
+          res.statusText = 'error';
+          // TODO: Below is the way we should be sending error messages. Make the same change
+          // to POST /project and POST /auth/login
+          return res.send({ status: 'error', msg: 'email cannot be empty!' });
+        }
+        const username = formFields.username || user.username;
+        const displayName = formFields.displayName || user.displayName;
+        const email = formFields.email || user.email;
+        const location = formFields.location || user.location;
+        const interests = formFields.interests || user.interests;
+        const bio = formFields.bio || user.bio;
+        const website = formFields.website || user.website;
 
-    return res.send({ status: 'success', msg: 'change success!' });
+        user.set({
+          username,
+          displayName,
+          email,
+          location,
+          interests,
+          bio,
+          website
+        });
+        user.save();
+
+        return res.send({ status: 'success', msg: 'change success!' });
+      };
+      
+      return usernameExists({ username, cbSuccess, cbErr });
+    }
   });
 });
 

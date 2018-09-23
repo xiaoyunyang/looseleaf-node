@@ -28,3 +28,17 @@ export const getUsers = ({ findCriteria, cbSuccess }) => {
     }
   );
 };
+
+// Determine if username exists
+export const usernameExists = ({ username, cbSuccess, cbErr }) => {
+  return User.findOne({ username }, (err, user) => {
+    if (err) {
+      return cbErr(err);
+    }
+    if (user) {
+      console.log('user already exists....');
+      return cbSuccess(true);
+    }
+    return cbSuccess(false);
+  });
+};

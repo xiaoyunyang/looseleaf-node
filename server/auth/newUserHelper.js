@@ -16,14 +16,14 @@ const updateLargest = (largest, append) => {
   return candidateLargest > largest ? candidateLargest : largest;
 };
 
-export const createUsername = ({ baseUsername, successCb, errCb }) => {
+export const createUsername = ({ baseUsername, cbSuccess, cbErr }) => {
   const regex = new RegExp(`^${baseUsername}.*$`, 'i');
   return User.find({ username: regex }, (err, users) => {
     if (err) {
-      return errCb(err);
+      return cbErr(err);
     }
     if (users.length === 0) {
-      return successCb(baseUsername);
+      return cbSuccess(baseUsername);
     }
 
     let largest = 0;
@@ -33,7 +33,7 @@ export const createUsername = ({ baseUsername, successCb, errCb }) => {
       largest = updateLargest(largest, append);
     }
 
-    successCb(`${baseUsername}-${largest + 1}`);
+    cbSuccess(`${baseUsername}-${largest + 1}`);
   });
 };
 
