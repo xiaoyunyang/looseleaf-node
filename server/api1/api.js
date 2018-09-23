@@ -65,7 +65,7 @@ api.post('/post', (req, res) => {
   Post.findById(context.post, (err, post) => {
     if (err) return res.send('Error');
     if (post) {
-      const updatedComments = [ newPost._id, ...post.comments ];
+      const updatedComments = [newPost._id, ...post.comments];
       post.set({
         comments: updatedComments
       });
@@ -159,7 +159,7 @@ api.get('/post/post', (req, res) => {
 });
 
 
-/* 
+/*
 http://localhost:3001/api/post/userFeed?userIds=1+3+5+6&projectIds=a+b&postedBy=12&page=1?page=1
 {"userIds":["1","3","5","6"],"projectIds":["a","b"],"postedBy":"12","page":"1?page=1"}
 */
@@ -171,8 +171,8 @@ api.get('/post/userFeed', (req, res) => {
 
   // TODO: We may need this for something later. Don't know what yet.
   const currUser = req.query.currUser;
-  
-  // We provide post for the user with userId from the following sources: 
+
+  // We provide post for the user with userId from the following sources:
   // (1) people the user follows
   // (2) followers of the user
   // (3) posts associated with the project that the user contributes to.

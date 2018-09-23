@@ -10,7 +10,9 @@ import { Strategy as LocalStrategy } from 'passport-local';
 import { Strategy as FacebookStrategy } from 'passport-facebook';
 import { Strategy as GithubStrategy } from 'passport-github';
 import User from '../models/User';
+import { createUsername } from './newUserHelper';
 import chalk from 'chalk';
+
 
 const configAuth = require('./secrets');
 
@@ -162,6 +164,7 @@ console.log('login-local req.body', req.body);
         const username = (`${profile.name.givenName}${profile.name.familyName}`).toLowerCase();
         const regex = new RegExp(`^${username}.*$`, 'i');
 
+        // TODO: refactor this
         User.count({ username: regex }, (err2, c) => {
           if (err2) {
             return done(err2);

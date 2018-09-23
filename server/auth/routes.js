@@ -9,6 +9,7 @@ import csrf from 'csurf';
 import gravatarUrl from 'gravatar-url';
 import User from '../models/User';
 import chalk from 'chalk';
+import { createUsername } from './newUserHelper';
 
 const router = express.Router();
 // TODO: csrf commented out so client app can post. Need to figure out use
@@ -63,13 +64,6 @@ router.get('/users/:username', (req, res, next) => {
 
 // Local Signup ================================================================
 // Saves user to the database
-// TODO: Do I really need to code below?
-// router.get('/signup', (req, res) => {
-//   res.render('signup', {
-//     // csrfToken: req.csrfToken()
-//   });
-// });
-
 // NOTE POST '/auth/signup' and POST '/auth/login' are handled by LandingAppMiddleware
 router.post('/signup', (req, res, next) => {
   // body-parser adds the username and password to req.body
@@ -83,7 +77,7 @@ router.post('/signup', (req, res, next) => {
     }
     // If user already exists ...
     if (user) {
-      console.log(chalk.red('error: user already exists'));
+      // console.log(chalk.red('error: user already exists'));
       req.flash('error', 'User already exists');
       res.statusMessage = 'error';
       return res.send('User already exists');
@@ -106,28 +100,15 @@ router.post('/signup', (req, res, next) => {
     // Error checking for email to make sure it is an email...
     newUser.lastLoggedIn = new Date();
     newUser.local.password = password;
-    // TODO: newUser.picture = Gravatar
     newUser.picture = gravatarUrl(email, { size: 120, default: 'mm' });
-    const username = email.split('@')[0];
-    newUser.displayName = username;
-    const regex = new RegExp(`^${username}.*$`, 'i');
 
-    // TODO: don't user User.count. If you logged in with facebook, with username
-    // xiaoyunyang, then logged in with github, which created another user with
-    // same username, but called xiaoyunyang-1, then deleted the facebook account,
-    // then created the facebook account again, you won't be able to create an
-    // account due to duplicate key (xiaoyunyang-1).
-    // What we want to do is to find the largest number following the username
-    // and append that to the end of the new username (xiaoyunyang-2)
-
-    User.count({ username: regex }, (err2, c) => {
-      if (err2) {
-        return next(err2);
-      }
-      const append = (c === 0) ? '' : `-${c}`;
-      newUser.username = username + append;
+    const errCb = err => next(err);
+    const successCb = username => {
+      newUser.username = username;
+      newUser.displayName = username;
       newUser.save(next);
-    });
+    };
+    createUsername({ email, errCb, successCb });
   });
 }, passport.authenticate('login-local', {
   successRedirect: '/',
@@ -167,7 +148,7 @@ router.post('/login', (req, res, next) => {
 router.get('/facebook', (req, res, next) => {
   req.session.redirect = req.query.redirPath;
   console.log(chalk.green('redirPath', req.query.redirPath))
-  passport.authenticate('facebook')(req, res, next)
+  passport.authenticate('facebook')(req, res, next);
 });
 
 // handle the callback after facebook has authenticated the user
@@ -175,7 +156,7 @@ router.get('/facebook/callback',
   passport.authenticate('facebook', { failureRedirect: '/login' }),
   (req, res) => {
     // Successful authentication, redirect
-    const redirPath = req.session.redirect
+    const redirPath = req.session.redirect;
     delete req.session.redirect;
     res.redirect(redirPath);
   });
@@ -183,7 +164,7 @@ router.get('/facebook/callback',
 // Github =====================================================================
 router.get('/github', (req, res, next) => {
   req.session.redirect = req.query.redirPath;
-  passport.authenticate('github')(req, res, next)
+  passport.authenticate('github')(req, res, next);
 });
 
 // handle the callback after github has authenticated the user
@@ -191,7 +172,7 @@ router.get('/github/callback',
   passport.authenticate('github', { failureRedirect: '/login' }),
   (req, res) => {
     // Successful authentication, redirect
-    const redirPath = req.session.redirect
+    const redirPath = req.session.redirect;
     delete req.session.redirect;
     res.redirect(redirPath);
   });
