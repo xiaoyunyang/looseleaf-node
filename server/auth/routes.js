@@ -178,6 +178,22 @@ router.get('/github/callback',
     res.redirect(redirPath);
   });
 
+// Google =====================================================================
+router.get('/google', (req, res, next) => {
+  req.session.redirect = req.query.redirPath;
+  passport.authenticate('google')(req, res, next);
+});
+
+// handle the callback after github has authenticated the user
+router.get('/google/callback',
+  passport.authenticate('google', { failureRedirect: '/login' }),
+  (req, res) => {
+    // Successful authentication, redirect
+    const redirPath = req.session.redirect;
+    delete req.session.redirect;
+    res.redirect(redirPath);
+  });
+
 // Delete ======================================================================
 // Delete user from the database
 router.post(

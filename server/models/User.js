@@ -24,6 +24,7 @@ const schema = mongoose.Schema({
   followers: { type: Array, default: [] },
   following: { type: Array, default: [] },
   interests: { type: Array, default: [] },
+  communities: Array,
   local: {
     password: { type: String, required: true },
     passwordResetToken: String
@@ -36,7 +37,10 @@ const schema = mongoose.Schema({
     id: String,
     token: String
   },
-  communities: Array
+  google: {
+    id: String,
+    token: String
+  }
 });
 
 const SALT_FACTOR = 10;

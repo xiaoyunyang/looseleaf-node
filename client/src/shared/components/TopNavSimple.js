@@ -15,8 +15,8 @@ export default class TopNavSimple extends React.Component {
       opacity: 0.5, // Opacity of modal background
       inDuration: 300, // Transition in duration
       outDuration: 200, // Transition out duration
-      startingTop: '4%', // Starting top style attribute
-      endingTop: '80px' // Ending top style attribute
+      startingTop: '10px', // Starting top style attribute
+      endingTop: '50px' // Ending top style attribute
     });
 
     $('ul.tabs').tabs();

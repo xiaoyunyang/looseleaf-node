@@ -9,10 +9,10 @@ import validator from 'validator';
 import { Strategy as LocalStrategy } from 'passport-local';
 import { Strategy as FacebookStrategy } from 'passport-facebook';
 import { Strategy as GithubStrategy } from 'passport-github';
+import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
 import User from '../models/User';
 import { createUsername } from './newUserHelper';
 import chalk from 'chalk';
-
 
 const configAuth = require('./secrets');
 
@@ -162,7 +162,7 @@ module.exports = () => {
         newUser.location = profile._json.location.name;
         newUser.picture = `https://graph.facebook.com/${profile.id}/picture?type=large`;
         newUser.lastLoggedIn = new Date();
-        newUser.displayName = (`${profile.name.givenName} ${profile.name.familyName}`);
+        newUser.displayName = `${profile.name.givenName} ${profile.name.familyName}`;
 
         const baseUsername = (`${profile.name.givenName}${profile.name.familyName}`).toLowerCase();
         const cbErr = err => done(err);
@@ -213,6 +213,49 @@ module.exports = () => {
         newUser.lastLoggedIn = new Date();
 
         const baseUsername = profile._json.login;
+        const cbErr = err => done(err);
+        const cbSuccess = username => {
+          newUser.username = username;
+          newUser.save(done);
+        };
+        createUsername({ baseUsername, cbErr, cbSuccess });
+      });
+    });
+  }));
+  passport.use(new GoogleStrategy({
+    clientID: configAuth.googleAuth.clientID,
+    clientSecret: configAuth.googleAuth.clientSecret,
+    callbackURL: configAuth.googleAuth.callbackURL,
+    scope: configAuth.googleAuth.scope
+  }, (token, refreshToken, profile, done) => {
+    process.nextTick(() => {
+      User.findOne({ 'google.id': profile.id }, (err, user) => {
+        // if there is an error, stop everything and return that
+        // ie an error connecting to the database
+        if (err) return done(err);
+
+        // if the user is found, then log them in
+        if (user) {
+          user.set({
+            lastLoggedIn: new Date()
+          });
+          user.save();
+          return done(null, user); // user found, return that user
+        }
+        // if there is no user found with that facebook id, create them
+        const newUser = new User();
+        // set all of the facebook information in our user model
+        newUser.google.id = profile._json.id; // set the users facebook id
+        newUser.google.token = token;
+
+        newUser.email = profile._json.emails[0].value;
+        newUser.displayName = profile._json.displayName;
+        
+        newUser.local.password = crypto.randomBytes(20).toString('hex');
+        newUser.picture = profile._json.image.url.split('?')[0];
+        newUser.lastLoggedIn = new Date();
+
+        const baseUsername = profile._json.displayName.split(' ')[0].toLowerCase();
         const cbErr = err => done(err);
         const cbSuccess = username => {
           newUser.username = username;
