@@ -16,11 +16,9 @@ const updateLargest = (largest, append) => {
   return candidateLargest > largest ? candidateLargest : largest;
 };
 
-export const createUsername = ({ email, successCb, errCb }) => {
-  const baseUsername = email.split('@')[0];
-
+export const createUsername = ({ baseUsername, successCb, errCb }) => {
   const regex = new RegExp(`^${baseUsername}.*$`, 'i');
-  User.find({ username: regex }, (err, users) => {
+  return User.find({ username: regex }, (err, users) => {
     if (err) {
       return errCb(err);
     }

@@ -46,10 +46,6 @@ module.exports = () => {
     passwordField: 'password',
     passReqToCallback: true // allows us to pass back the entire request to the callback
   }, (req, email, password, done) => {
-console.log(chalk.red('post request for login'));
-console.log('login-local req.headers', req.headers);
-console.log('login-local req.body', req.body);
-
     // First, perform some validation of the inputs
     if (!validator.isEmail(email)) {
       return done(null, false, { message: 'Please provide a valid email' });
@@ -160,28 +156,21 @@ console.log('login-local req.body', req.body);
         // set all of the facebook information in our user model
         newUser.facebook.id = profile.id; // set the users facebook id
         newUser.facebook.token = token; // we will save the token that facebook provides to the user
+        newUser.email = profile.emails[0].value;
+        newUser.local.password = crypto.randomBytes(20).toString('hex');
+        newUser.gender = profile.gender;
+        newUser.location = profile._json.location.name;
+        newUser.picture = `https://graph.facebook.com/${profile.id}/picture?type=large`;
+        newUser.lastLoggedIn = new Date();
+        newUser.displayName = (`${profile.name.givenName} ${profile.name.familyName}`);
 
-        const username = (`${profile.name.givenName}${profile.name.familyName}`).toLowerCase();
-        const regex = new RegExp(`^${username}.*$`, 'i');
-
-        // TODO: refactor this
-        User.count({ username: regex }, (err2, c) => {
-          if (err2) {
-            return done(err2);
-          }
-          const append = (c === 0) ? '' : `-${c}`;
-          newUser.username = username + append;
-          newUser.displayName = (`${profile.name.givenName} ${profile.name.familyName}`);
-          // facebook can return multiple emails so we'll take the first
-          newUser.email = profile.emails[0].value;
-          newUser.local.password = crypto.randomBytes(20).toString('hex');
-          newUser.gender = profile.gender;
-          newUser.location = profile._json.location.name;
-          newUser.picture = `https://graph.facebook.com/${profile.id}/picture?type=large`;
-          newUser.lastLoggedIn = new Date();
-          // save our user to the database
+        const baseUsername = (`${profile.name.givenName}${profile.name.familyName}`).toLowerCase();
+        const errCb = err => done(err);
+        const successCb = username => {
+          newUser.username = username;
           newUser.save(done);
-        });
+        };
+        createUsername({ baseUsername, errCb, successCb });
       });
     });
   }));
@@ -213,28 +202,23 @@ console.log('login-local req.body', req.body);
         newUser.github.id = profile._json.id; // set the users facebook id
         newUser.github.token = token;
 
-        const username = profile._json.login;
-        const regex = new RegExp(`^${username}.*$`, 'i');
+        newUser.email = profile.emails[0].value;
+        newUser.location = profile._json.Location;
+        newUser.hireable = profile._json.hireable;
+        newUser.displayName = profile._json.name;
+        newUser.website = profile._json.blog;
+        newUser.bio = profile._json.bio;
+        newUser.local.password = crypto.randomBytes(20).toString('hex');
+        newUser.picture = profile._json.avatar_url;
+        newUser.lastLoggedIn = new Date();
 
-        User.count({ username: regex }, (err2, c) => {
-          if (err2) {
-            return done(err2);
-          }
-
-          const append = (c === 0) ? '' : `-${c}`;
-          newUser.username = username + append;
-          newUser.email = profile.emails[0].value;
-          newUser.location = profile._json.Location;
-          newUser.hireable = profile._json.hireable;
-          newUser.displayName = profile._json.name;
-          newUser.website = profile._json.blog;
-          newUser.bio = profile._json.bio;
-          newUser.local.password = crypto.randomBytes(20).toString('hex');
-          newUser.picture = profile._json.avatar_url;
-          newUser.lastLoggedIn = new Date();
-          // save our user to the database
+        const baseUsername = profile._json.login;
+        const errCb = err => done(err);
+        const successCb = username => {
+          newUser.username = username;
           newUser.save(done);
-        });
+        };
+        createUsername({ baseUsername, errCb, successCb });
       });
     });
   }));

@@ -108,7 +108,8 @@ router.post('/signup', (req, res, next) => {
       newUser.displayName = username;
       newUser.save(next);
     };
-    createUsername({ email, errCb, successCb });
+    const baseUsername = email.split('@')[0];
+    createUsername({ baseUsername, errCb, successCb });
   });
 }, passport.authenticate('login-local', {
   successRedirect: '/',
