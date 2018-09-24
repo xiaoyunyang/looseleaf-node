@@ -85,7 +85,9 @@ export default class TopNavUser extends React.Component {
                 <li className={selected === username ? 'active' : ''}>
                   <UserAppNav pageName="profile" id={`nav-${username}`} username={username} external={useExternLinks}/>
                 </li>
-                <NotifDropdown notifs="stuff" />
+                {
+                // <NotifDropdown notifs="stuff" />
+                }
                 <UserDropdown
                   username={username}
                   userPic={userPic}

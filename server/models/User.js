@@ -10,7 +10,7 @@ import mongoosePaginate from 'mongoose-paginate';
 const schema = mongoose.Schema({
   createdAt: { type: Date, default: Date.now },
   lastLoggedIn: { type: Date },
-  email: { type: String, unique: true },
+  email: { type: String, required: true },
   username: { type: String, required: true, unique: true },
   displayName: String,
   picture: String,

@@ -115,23 +115,26 @@ export default class Settings extends React.Component {
             interests={this.props.user.info.interests}
             handleSubmit={formFields => this.handleSubmit(formFields)}
           />
-          <div className="card-panel white">
-            <h5>Deactivate account</h5>
-            <p>
-              {
-                'Deactivating your account will remove it from LooseLeaf. You can sign back in anytime to reactivate your account and restore its content.'
-              }
-            </p>
-            <a href="">Deactivate account</a>
-            <div className="or-divider" />
-            <h5>Delete account</h5>
-            <p>
-              {
-                'Permanently delete your account and all of your content.'
-              }
-            </p>
-            <a href="">Delete account</a>
-          </div>
+        {
+          // <div className="card-panel white">
+          //   <h5>Deactivate account</h5>
+          //   <p>
+          //     {
+          //       'Deactivating your account will remove it from LooseLeaf. You can sign back in anytime to reactivate your account and restore its content.'
+          //     }
+          //   </p>
+          //   <a href="">Deactivate account</a>
+          //   <div className="or-divider" />
+          //   <h5>Delete account</h5>
+          //   <p>
+          //     {
+          //       'Permanently delete your account and all of your content.'
+          //     }
+          //   </p>
+          //   <a href="">Delete account</a>
+          // </div>
+        }
+
         </div>
       </div>
     );
