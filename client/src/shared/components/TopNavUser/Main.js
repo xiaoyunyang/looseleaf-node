@@ -87,7 +87,7 @@ export default class TopNavUser extends React.Component {
                 </li>
                 {
                 // <NotifDropdown notifs="stuff" />
-                }
+                } 
                 <UserDropdown
                   username={username}
                   userPic={userPic}
