@@ -184,7 +184,7 @@ export default class ProjectInfo extends React.Component {
             <div style={{maxWidth: 500}}>
               <Communities
                 cs={communities}
-                altern={<div style={{fontWeight: 350}}>{'This project is not associated with a community.'}</div>}
+                altern={<div style={{fontWeight: 350, paddingTop: 5}}>{'This project is not associated with a community.'}</div>}
                 showAltern
                 hasIcon
               />

@@ -321,6 +321,7 @@ api.get('/project/:slug', (req, res) => {
   });
 });
 
+// When user contributes to a project
 api.post('/user/project', (req, res) => {
   Project.findById(req.query.projectId, (err, project) => {
     if (err) {
@@ -337,6 +338,15 @@ api.post('/user/project', (req, res) => {
 
         if (user) {
           const { userId, projectId, action } = req.query;
+
+          // Send notification to project creator
+          if (action === 'contribute' && userId.toString() !== project.postedBy.toString()) {
+            const fromUser = userId;
+            const toUser = project.postedBy;
+            const action = 'STARTED_CONTRIBUTE_TO_PROJECT';
+            const ref = project.slug;
+            createNotif({ fromUser, toUser, action, ref });
+          }
 
           updateProjectAndUser({
             project, user, userId, projectId, action

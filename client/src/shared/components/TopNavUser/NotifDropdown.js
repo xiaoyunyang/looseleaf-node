@@ -21,6 +21,11 @@ const notifObject = {
     name: 'STARTED_CONTRIBUTE_TO_PROJECT',
     getMsg: (fromUserDisplayName, projectName) => `${fromUserDisplayName} started contributing to ${projectName}`,
     getLink: projectSlug => appRoute('projectPage', true)(projectSlug)
+  },
+  RESPONDED_TO_POST: {
+    name: 'RESPONDED_TO_POST',
+    getMsg: fromUserDisplayName => `${fromUserDisplayName} responded to your post`,
+    getLink: postId => appRoute('postPage', true)(postId)
   }
 }
 
@@ -51,13 +56,14 @@ class Notif extends React.Component {
     if(name === 'STARTED_FOLLOWING') {
       msg = getMsg(this.state.user.displayName);
       link= getLink(this.state.user.username);
-    }
-    if(name === 'INVITED_TO_PROJECT') {
+    } else if (name === 'INVITED_TO_PROJECT') {
       msg = getMsg(this.state.user.displayName, 'a project');
       link = getLink(notif.ref);
-    }
-    if(name === 'STARTED_CONTRIBUTE_TO_PROJECT') {
+    } else if (name === 'STARTED_CONTRIBUTE_TO_PROJECT') {
       msg = getMsg(this.state.user.displayName, 'a project you own');
+      link = getLink(notif.ref);
+    } else if (name === 'RESPONDED_TO_POST') {
+      msg = getMsg(this.state.user.displayName);
       link = getLink(notif.ref);
     }
 
