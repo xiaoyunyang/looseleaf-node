@@ -1,7 +1,7 @@
 import React from 'react';
 // import PropTypes from 'prop-types';
 import $ from 'jquery';
-import { dateFormatted, getApiData } from '../../../lib/helpers';
+import { dateFormatted, getApiData, postToApiData } from '../../../lib/helpers';
 import appRoute from '../../data/appRoute';
 import { apiLink } from '../../data/apiLinks';
 import { image } from '../../data/assetLinks';
@@ -89,6 +89,12 @@ class Notif extends React.Component {
 }
 
 class NotifDropdown extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      notifs: this.props.notifs
+    }
+  }
   componentDidMount() {
     $('.dropdown-button').dropdown({
       inDuration: 300,
@@ -101,7 +107,7 @@ class NotifDropdown extends React.Component {
     });
   }
   renderNotifs(notifs) {
-    if (this.props.notifs.length === 0) {
+    if (notifs.length === 0) {
       return <li><p className="center-align">No Notification</p></li>
     }
     return notifs.map(notif =>
@@ -110,11 +116,36 @@ class NotifDropdown extends React.Component {
       </div>
     );
   }
+  handleNotifIconClick(notifs) {
+    if(notifs.length === 0) return;
+    const link = apiLink.userReadAlNotifs(notifs[0].toUser);
+    const data = ''; // data does not matter
+    const cbFailure = () => {};
+    const cbSuccess = () => {
+      this.props.markAllNotifsAsRead();
+    }
+    postToApiData(link, data, cbFailure, cbSuccess);
+  }
+  renderNotifIcon(notifs) {
+    if(notifs.length === 0 || notifs[0].read === true) {
+      return <i className="material-icons">notifications_none</i>;
+    }
+    const numUnread = notifs.filter(notif => notif.read === false).length;
+    return (
+      <div className="circle-with-text" style={{marginTop: 10, marginRight: -6}}>
+        {numUnread}
+      </div>
+    );
+  }
   render() {
     return (
       <li className="dropdown-block">
-        <a className="dropdown-button" data-activates="notif-dropdown">
-          <i className="material-icons">notifications_none</i>
+        <a
+          className="dropdown-button"
+          data-activates="notif-dropdown"
+          onClick={this.handleNotifIconClick.bind(this, this.props.notifs)}
+        >
+          {this.renderNotifIcon(this.props.notifs)}
         </a>
         <ul id="notif-dropdown" className="dropdown-content topnav-dropdown">
           {

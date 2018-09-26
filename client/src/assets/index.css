@@ -372,7 +372,6 @@ img.mod-round, picture.mod-round {
 #notif-dropdown .notif-msg {
   font-size: 15px;
   margin-left: -6px;
-
 }
 #notif-dropdown .notif-text {
   /* overflow: hidden;
@@ -392,6 +391,20 @@ img.mod-round, picture.mod-round {
 #notif-dropdown .popover-arrow {
   left: 280px;
 }
+
+.circle-with-text {
+  display: block;
+  height: 40px;
+  width: 40px;
+  line-height: 42px;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+  background-color: #26a69a;
+  color: white;
+  text-align: center;
+  font-size: 1em;
+}
+
 .dropdown-content {
   z-index: 998;
   overflow-y: visible;

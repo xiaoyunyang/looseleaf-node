@@ -59,6 +59,16 @@ export default class TopNavUser extends React.Component {
       navbarLogo.css('visibility', 'visible');
     }
   }
+  markAllNotifsAsRead() {
+    const notifsRead = this.state.notifs.map(notif => {
+      const newNotif = {...notif};
+      newNotif.read = true;
+      return newNotif
+    });
+    this.setState({
+      notifs: notifsRead
+    });
+  }
   render() {
     const username = this.props.user.username;
     const userPic = this.props.user.picture;
@@ -103,7 +113,10 @@ export default class TopNavUser extends React.Component {
                 <li className={selected === username ? 'active' : ''}>
                   <UserAppNav pageName="profile" id={`nav-${username}`} username={username} external={useExternLinks}/>
                 </li>
-                <NotifDropdown notifs={this.state.notifs} />
+                <NotifDropdown
+                  notifs={this.state.notifs}
+                  markAllNotifsAsRead={this.markAllNotifsAsRead.bind(this)}
+                />
                 <UserDropdown
                   username={username}
                   userPic={userPic}

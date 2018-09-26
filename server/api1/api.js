@@ -19,7 +19,7 @@ import {
   getProjects,
   updateProject, updateProjectAndUser,
   addNewProject } from './projects';
-import { getNotifs, createNotif } from './notifs';
+import { getNotifs, createNotif, postNotif } from './notifs';
 import { getUsers, uniqueFieldsExists } from './users';
 
 const api = express.Router();
@@ -36,11 +36,19 @@ api.get('/notif', (req, res) => {
   getNotifs(findCriteria, req.query.limit, req.query.page, cbSuccess, cbFailure);
 });
 
+api.post('/notif/readAll', (req, res) => {
+  Notif.updateMany(req.query, { read: true }, (err, resInner) => {
+    if (err) {
+      return res.send('Error');
+    }
+    return res.send({ status: 'success', msg: 'all notifs read!' });
+  })
+});
+
 api.post('/notif', (req, res) => {
   postNotif(req.body.formFields);
   return res.send({ status: 'success', msg: 'notification sent!' });
 });
-
 
 // Posts ======================================================================
 api.delete('/post', (req, res) => {
