@@ -12,12 +12,6 @@ import UserDropdown from './UserDropdown';
 import CommunityDropdown from './CommunityDropdown';
 import NotifDropdown from './NotifDropdown';
 
-const date = new Date();
-const notifs = [
-  { fromImg: image.defaultUser, msg: 'someone started following you', link: '/', timeStamp: date},
-  { fromImg: image.defaultUser, msg: 'someone invited you to collaborate on the project', link: '/', timeStamp: date},
-];
-
 // Callers:  User/Home.js and User/Porfolio/Main.js and User/Settings/Main.js
 export default class TopNavUser extends React.Component {
   constructor(props) {
@@ -32,6 +26,7 @@ export default class TopNavUser extends React.Component {
         this.toggleNavbarBoxShadow();
       });
     }
+    this.getNotifs(this.props.user._id);
   }
   componentWillReceiveProps(nextProps) {
     if(nextProps.user._id !== this.props.user._id) {

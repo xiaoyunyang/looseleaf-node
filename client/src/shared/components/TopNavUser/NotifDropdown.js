@@ -74,11 +74,9 @@ class Notif extends React.Component {
     );
   }
   render() {
-    const { notif, key } = this.props;
-
     return (
-      <li key={key}>
-        {this.renderNotifBlock(notif)}
+      <li>
+        {this.renderNotifBlock(this.props.notif)}
       </li>
     );
   }
@@ -100,9 +98,10 @@ class NotifDropdown extends React.Component {
     if (this.props.notifs.length === 0) {
       return <li><p className="center-align">No Notification</p></li>
     }
-    console.log('notifs', notifs)
-    return notifs.map((notif, i) =>
-      <Notif notif={notif} key={`notif-${i}`} />
+    return notifs.map(notif =>
+      <div key={`notif-${notif._id}`}>
+        <Notif notif={notif} />
+      </div>
     );
   }
   render() {
