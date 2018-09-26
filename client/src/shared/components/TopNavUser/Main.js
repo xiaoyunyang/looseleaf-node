@@ -2,23 +2,46 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import $ from 'jquery';
-import { getPageName } from '../../../lib/helpers';
+import { getPageName, getApiData } from '../../../lib/helpers';
 import { image } from '../../data/assetLinks';
 import appRoute from '../../data/appRoute';
+import { apiLink } from '../../data/apiLinks';
 import { UserAppNav } from '../Nav/AppNav';
 import MobileSideNav from './MobileSideNav';
 import UserDropdown from './UserDropdown';
 import CommunityDropdown from './CommunityDropdown';
 import NotifDropdown from './NotifDropdown';
 
+const date = new Date();
+const notifs = [
+  { fromImg: image.defaultUser, msg: 'someone started following you', link: '/', timeStamp: date},
+  { fromImg: image.defaultUser, msg: 'someone invited you to collaborate on the project', link: '/', timeStamp: date},
+];
+
 // Callers:  User/Home.js and User/Porfolio/Main.js and User/Settings/Main.js
 export default class TopNavUser extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      notifs: []
+    }
+  }
   componentDidMount() {
     if (typeof window !== 'undefined') {
       $(window).scroll(() => {
         this.toggleNavbarBoxShadow();
       });
     }
+  }
+  componentWillReceiveProps(nextProps) {
+    if(nextProps.user._id !== this.props.user._id) {
+      this.getNotifs(nextProps.user._id);
+    }
+  }
+  getNotifs(userId) {
+    const link = apiLink.userNotifs(userId);
+    const setApiData = data => this.setState({notifs: data});
+    getApiData(link, setApiData);
   }
   // TODO: I don't know if there's a more elegant way to do this in css
   // This function is essentially doing the same thing as the one in the topNav
@@ -85,9 +108,7 @@ export default class TopNavUser extends React.Component {
                 <li className={selected === username ? 'active' : ''}>
                   <UserAppNav pageName="profile" id={`nav-${username}`} username={username} external={useExternLinks}/>
                 </li>
-                {
-                // <NotifDropdown notifs="stuff" />
-                } 
+                <NotifDropdown notifs={this.state.notifs} />
                 <UserDropdown
                   username={username}
                   userPic={userPic}

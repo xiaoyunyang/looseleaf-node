@@ -1,6 +1,88 @@
 import React from 'react';
 // import PropTypes from 'prop-types';
 import $ from 'jquery';
+import { dateFormatted, getApiData } from '../../../lib/helpers';
+import appRoute from '../../data/appRoute';
+import { apiLink } from '../../data/apiLinks';
+import { image } from '../../data/assetLinks';
+
+const notifObject = {
+  STARTED_FOLLOWING: {
+    name: 'STARTED_FOLLOWING',
+    getMsg: fromUserDisplayName => `${fromUserDisplayName} started following you`,
+    getLink: username => appRoute('userProfile', true)(username)
+  },
+  INVITED_TO_PROJECT: {
+    name: 'INVITED_TO_PROJECT',
+    getMsg: (fromUserDisplayName, projectName) => `${fromUserDisplayName} invited you to contribute to ${projectName}`,
+    getLink: projectSlug => appRoute('projectPage', true)(projectSlug)
+  },
+  STARTED_CONTRIBUTE_TO_PROJECT: {
+    name: 'STARTED_CONTRIBUTE_TO_PROJECT',
+    getMsg: (fromUserDisplayName, projectName) => `${fromUserDisplayName} started contributing to ${projectName}`,
+    getLink: projectSlug => appRoute('projectPage', true)(projectSlug)
+  }
+}
+
+class Notif extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      user: {
+        username: '',
+        picture: image.defaultUser,
+        displayName: 'firstname lastname'
+      }
+    }
+  }
+  componentDidMount() {
+    this.fetchUser(this.props.notif.fromUser);
+  }
+  fetchUser(userId) {
+    const link = apiLink.userById(userId);
+    const setApiData = data => {
+      this.setState({ user: data[0]});
+    }
+    getApiData(link, setApiData);
+  }
+  renderNotifBlock(notif) {
+    const { name, getMsg, getLink } = notifObject[notif.action];
+    let msg, link;
+    if(name === 'STARTED_FOLLOWING') {
+      msg = getMsg(this.state.user.displayName);
+      link= getLink(this.state.user.username);
+    }
+    if(name === 'INVITED_TO_PROJECT') {
+      msg = getMsg(this.state.user.displayName, 'a project');
+      link = getLink(notif.ref);
+    }
+    if(name === 'STARTED_CONTRIBUTE_TO_PROJECT') {
+      msg = getMsg(this.state.user.displayName, 'a project you own');
+      link = getLink(notif.ref);
+    }
+
+    return (
+      <a href={link}>
+        <div className="row">
+          <img alt="" className="col s3 m2 l2 circle" src={this.state.user.picture} />
+          <div className="col s9 m10 l10 notif-msg">
+            <div className="notif-text">{msg}</div>
+            <div className="time-stamp">{`${dateFormatted(notif.createdAt)}`}</div>
+          </div>
+        </div>
+      </a>
+    );
+  }
+  render() {
+    const { notif, key } = this.props;
+
+    return (
+      <li key={key}>
+        {this.renderNotifBlock(notif)}
+      </li>
+    );
+  }
+}
 
 class NotifDropdown extends React.Component {
   componentDidMount() {
@@ -14,6 +96,15 @@ class NotifDropdown extends React.Component {
       stopPropagation: false // Stops event propagation
     });
   }
+  renderNotifs(notifs) {
+    if (this.props.notifs.length === 0) {
+      return <li><p className="center-align">No Notification</p></li>
+    }
+    console.log('notifs', notifs)
+    return notifs.map((notif, i) =>
+      <Notif notif={notif} key={`notif-${i}`} />
+    );
+  }
   render() {
     return (
       <li className="dropdown-block">
@@ -22,9 +113,7 @@ class NotifDropdown extends React.Component {
         </a>
         <ul id="notif-dropdown" className="dropdown-content topnav-dropdown">
           {
-            <li>
-              <p>Stuff</p>
-            </li>
+            this.renderNotifs(this.props.notifs)
           }
           <div className="popover-arrow"></div>
         </ul>

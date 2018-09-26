@@ -8,6 +8,7 @@ import {
   fetchUser,
   fetchUserFollowers,
   fetchLoggedinUser,
+  fetchUserNotifs,
 } from './user';
 
 import {
@@ -61,6 +62,13 @@ export function getUserProfileData(username, loggedinUsername) {
     return Promise.all([
       dispatch(fetchUser(username)),
       dispatch(fetchLoggedinUser(loggedinUsername))
+    ])
+  }
+}
+export function getUserNotifs(userId) {
+  return (dispatch, getState) => {
+    return Promise.all([
+      dispatch(fetchUserNotifs(userId))
     ])
   }
 }

@@ -3,7 +3,8 @@ import {
   GET_USER,
   SET_USER,
   GET_LOGGED_IN_USER,
-  SET_LOGGED_IN_USER
+  SET_LOGGED_IN_USER,
+  GET_USER_NOTIFS
  } from '../actions/user';
 
 // NOTE:
@@ -44,7 +45,8 @@ const initState = {
     followers: [],
     following: [],
     picture: "https://graph.facebook.com/10213296357138004/picture?type=large","__v":0
-  }
+  },
+  notifs: []
 };
 
 export default function user(state = initState, action) {
@@ -58,6 +60,11 @@ export default function user(state = initState, action) {
       return {
         ...state,
         info: {...state.info, followers: action.data}
+      }
+    case GET_USER_NOTIFS:
+      return {
+        ...state,
+        notifs: action.data
       }
     case SET_USER:
       return {

@@ -6,6 +6,7 @@ import { apiLink } from '../../data/apiLinks';
 //  use them. This way you won’t have discrepancies between the strings.
 export const GET_USER = 'GET_USER';
 export const SET_USER = 'SET_USER';
+export const GET_USER_NOTIFS = 'GET_USER_NOTIFS';
 export const GET_USER_FOLLOWERS = 'GET_USER_FOLLOWERS';
 export const GET_USER_BY_USERNAME = 'GET_USER_BY_USERNAME';
 export const GET_USER_BY_ID = 'GET_USER_BY_ID';
@@ -39,6 +40,22 @@ export function fetchUserFollowers(username) {
         return dispatch({  // Dispatch the action.
           type: GET_USER_FOLLOWERS,  // Type is the only required property of every action.
           data: data.pop().followers  // Attach the JSON data to the action payload on a property called data.
+        });
+      });
+    }).catch((e) => {
+      console.log("error", e)
+    });
+  }
+}
+export function fetchUserNotifs(userId) {
+  return dispatch => {
+    return fetch(apiLink.userNotifs(userId), {
+      method: 'GET'
+    }).then((response) => {
+      return response.json().then((data) => { // On a successful response, get the JSON from the response.
+        return dispatch({  // Dispatch the action.
+          type: GET_USER_NOTIFS,  // Type is the only required property of every action.
+          data: data  // Attach the JSON data to the action payload on a property called data.
         });
       });
     }).catch((e) => {

@@ -11,6 +11,7 @@ import path from 'path';
 import User from '../models/User';
 import Project from '../models/Project';
 import Post from '../models/Post';
+import Notif from '../models/Notif';
 import { urlSlug } from '../modules/util';
 import dataPreloading from '../../client/iso-middleware/dataPreloading';
 import { getPosts } from './posts';
@@ -18,9 +19,28 @@ import {
   getProjects,
   updateProject, updateProjectAndUser,
   addNewProject } from './projects';
+import { getNotifs, createNotif } from './notifs';
 import { getUsers, uniqueFieldsExists } from './users';
 
 const api = express.Router();
+
+// Notifs ======================================================================
+api.get('/notif', (req, res) => {
+  // Queries - get all
+  const findCriteria = req.query;
+  const cbSuccess = result => res.send(result);
+  const cbFailure = err => {
+    res.status(500).end();
+    return console.error(err);
+  };
+  getNotifs(findCriteria, req.query.limit, req.query.page, cbSuccess, cbFailure);
+});
+
+api.post('/notif', (req, res) => {
+  postNotif(req.body.formFields);
+  return res.send({ status: 'success', msg: 'notification sent!' });
+});
+
 
 // Posts ======================================================================
 api.delete('/post', (req, res) => {
@@ -379,6 +399,11 @@ api.post('/user/following', (req, res) => {
             // add loggedinUser's id to userToFollow's followers field
             following = loggedinUser.following.concat(userToFollow._id);
             followers = userToFollow.followers.concat(loggedinUser._id);
+            const fromUser = loggedinUser._id;
+            const toUser = userToFollow._id;
+            const action = 'STARTED_FOLLOWING';
+            const ref = loggedinUser.username;
+            createNotif({ fromUser, toUser, action, ref });
           } else if (action === 'unfollow') {
             // remove userToFollow's id to loggedinUser's following field
             // remove loggedinUser's id to userToFollow's followers field

@@ -33,6 +33,7 @@ export const apiLink = {
   userCommunities: userId => `${root}/api/user/community?_id=${userId}`, // NOTE: this is used when user clicks to join/unjoin a community
   userFollowing: userId => `${root}/api/user/following?_id=${userId}`, // NOTE: this is used when user with userId clicks to follow/unfollow another user
   userProjects: (userId, projectId, action) => `${root}/api/user/project?projectId=${projectId}&userId=${userId}&action=${action}`,
+  userNotifs: userId => `${root}/api/notif?toUser=${userId}`,
   users: `${root}/api/user`,
   usersByCommunity: (slug) => `${root}/api/user?communities=${slug}`,
   projects: `${root}/api/project`,
