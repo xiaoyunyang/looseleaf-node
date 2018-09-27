@@ -27,7 +27,7 @@ const api = express.Router();
 // Notifs ======================================================================
 api.get('/notif', (req, res) => {
   // Queries - get all
-  const findCriteria = req.query;
+  const findCriteria = { toUser: req.query.toUser };
   const cbSuccess = result => res.send(result);
   const cbFailure = err => {
     res.status(500).end();

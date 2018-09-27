@@ -34,7 +34,7 @@ export const apiLink = {
   userFollowing: userId => `${root}/api/user/following?_id=${userId}`, // NOTE: this is used when user with userId clicks to follow/unfollow another user
   userProjects: (userId, projectId, action) => `${root}/api/user/project?projectId=${projectId}&userId=${userId}&action=${action}`,
   notifs: `${root}/api/notif/`,
-  userNotifs: userId => `${root}/api/notif?toUser=${userId}`,
+  userNotifs: (userId, page) => `${root}/api/notif?toUser=${userId}&page=${page}`,
   userReadAlNotifs: userId => `${root}/api/notif/readAll?toUser=${userId}`,
   users: `${root}/api/user`,
   usersByCommunity: (slug) => `${root}/api/user?communities=${slug}`,
