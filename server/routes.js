@@ -112,6 +112,12 @@ router.get('/@:username*', (req, res, next) => {
     return renderUserPageMiddleware(req, res, next, user);
   });
 });
+router.get('/notifications', (req, res, next) => {
+  if (req.isAuthenticated()) {
+    renderUserAppMiddleware(req, res, next);
+  }
+  renderLandingAppMiddleware(req, res, next);
+});
 
 router.get('/*', (req, res, next) => {
   if (req.isAuthenticated()) {

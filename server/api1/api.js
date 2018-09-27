@@ -33,7 +33,7 @@ api.get('/notif', (req, res) => {
     res.status(500).end();
     return console.error(err);
   };
-  getNotifs(findCriteria, req.query.limit, req.query.page, cbSuccess, cbFailure);
+  return getNotifs(findCriteria, req.query.limit, req.query.page, cbSuccess, cbFailure);
 });
 
 api.post('/notif/readAll', (req, res) => {
@@ -149,7 +149,7 @@ api.get('/post', (req, res) => {
     res.status(500).end();
     return console.error(err);
   };
-  getPosts(findCriteria, req.query.limit, req.query.page, cbSuccess, cbFailure);
+  return getPosts(findCriteria, req.query.limit, req.query.page, cbSuccess, cbFailure);
 });
 
 api.get('/post/community', (req, res) => {
@@ -160,7 +160,7 @@ api.get('/post/community', (req, res) => {
     return console.error(err);
   };
   const findCriteria = { 'context.community': req.query.slug };
-  getPosts(findCriteria, req.query.limit, req.query.page, cbSuccess, cbFailure);
+  return getPosts(findCriteria, req.query.limit, req.query.page, cbSuccess, cbFailure);
 });
 
 api.get('/post/project', (req, res) => {
@@ -172,7 +172,7 @@ api.get('/post/project', (req, res) => {
     return console.error(err);
   };
 
-  getPosts(findCriteria, req.query.limit, req.query.page, cbSuccess, cbFailure);
+  return getPosts(findCriteria, req.query.limit, req.query.page, cbSuccess, cbFailure);
 });
 
 api.get('/post/post', (req, res) => {
@@ -183,7 +183,7 @@ api.get('/post/post', (req, res) => {
     res.status(500).end();
     return console.error(err);
   };
-  getPosts(findCriteria, req.query.limit, req.query.page, cbSuccess, cbFailure);
+  return getPosts(findCriteria, req.query.limit, req.query.page, cbSuccess, cbFailure);
 });
 
 
@@ -236,7 +236,7 @@ api.get('/post/userFeed', (req, res) => {
     return console.error(err);
   };
 
-  getPosts(findCriteria, req.query.limit, req.query.page, cbSuccess, cbFailure);
+  return getPosts(findCriteria, req.query.limit, req.query.page, cbSuccess, cbFailure);
 });
 
 api.get('/post/user', (req, res) => {
@@ -247,7 +247,7 @@ api.get('/post/user', (req, res) => {
     res.status(500).end();
     return console.error(err);
   };
-  getPosts(findCriteria, req.query.limit, req.query.page, cbSuccess, cbFailure);
+  return getPosts(findCriteria, req.query.limit, req.query.page, cbSuccess, cbFailure);
 });
 
 // Projects ======================================================================
@@ -284,8 +284,9 @@ api.get('/project', (req, res) => {
     res.status(500).end();
     return console.error(err);
   };
-  getProjects(findCriteria, req.query.limit, req.query.page, cbSuccess, cbFailure);
+  return getProjects(findCriteria, req.query.limit, req.query.page, cbSuccess, cbFailure);
 });
+
 api.get('/project/community/:slug', (req, res) => {
   // Get posts from community with the slug, e.g., developers
   const cbSuccess = result => res.send(result);
@@ -294,7 +295,7 @@ api.get('/project/community/:slug', (req, res) => {
     return console.error(err);
   };
   const findCriteria = { communities: req.params.slug };
-  getProjects(findCriteria, req.query.limit, req.query.page, cbSuccess, cbFailure);
+  return getProjects(findCriteria, req.query.limit, req.query.page, cbSuccess, cbFailure);
 });
 
 // TODO:
@@ -314,7 +315,7 @@ api.get('/project/user/:id', (req, res) => {
     res.status(500).end();
     return console.error(err);
   };
-  getProjects(findCriteria, req.query.limit, req.query.page, cbSuccess, cbFailure);
+  return getProjects(findCriteria, req.query.limit, req.query.page, cbSuccess, cbFailure);
 });
 
 // TODO: The following is probably not needed
@@ -385,7 +386,7 @@ api.post('/user/project', (req, res) => {
 api.get('/user', (req, res) => {
   const cbSuccess = result => res.send(result);
   const findCriteria = req.query;
-  getUsers({ findCriteria, cbSuccess });
+  return getUsers({ findCriteria, cbSuccess });
 });
 
 api.post('/user/community', (req, res) => {
@@ -459,7 +460,7 @@ const updatedUserProps = (formFields, user) => {
     bio: formFields.bio || user.bio,
     website: formFields.website || user.website
   };
-}
+};
 
 api.post('/user', (req, res) => {
   User.findById(req.query._id, (err, user) => {
@@ -489,7 +490,7 @@ api.post('/user', (req, res) => {
 
       const cbErr = err => {
         return res.send({ status: 'error', msg: 'Cannot update user info right now' });
-      }
+      };
 
       const cbSuccess = ({ usernameExists, emailExists }) => {
         // If you are
@@ -526,7 +527,7 @@ api.get('/community', (req, res) => {
       return console.error(err);
     }
     const community = JSON.parse(data); // object
-    res.status(200).send(Object.values(community)); // send array version
+    return res.status(200).send(Object.values(community)); // send array version
   });
 });
 

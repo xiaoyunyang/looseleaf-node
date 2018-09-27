@@ -24,7 +24,7 @@ export const getUsers = ({ findCriteria, cbSuccess }) => {
         };
         usersOut.push(userInfo);
       });
-      cbSuccess(usersOut);
+      return cbSuccess(usersOut);
     }
   );
 };

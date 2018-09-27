@@ -1,5 +1,6 @@
 import Root from './Root';
 import Home from './screens/Home/Main';
+import Notif from './screens/Notif/Main';
 import Settings from './screens/Settings/Main';
 import Portfolio from '../components/Portfolio/Main';
 import NotFound from '../components/NotFound';
@@ -37,6 +38,11 @@ const getRoutes = (user) => {
           path: appRoute('userSettings')(username),
           exact: true,
           component: Settings
+        },
+        {
+          path: appRoute('userNotif'),
+          exact: true,
+          component: Notif
         },
         {
           path: appRoute('userProfile')(username),

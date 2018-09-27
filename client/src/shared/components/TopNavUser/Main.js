@@ -26,7 +26,12 @@ export default class TopNavUser extends React.Component {
         this.toggleNavbarBoxShadow();
       });
     }
-    this.getNotifs(this.props.user._id);
+    if (this.props.notifs) {
+      this.setState({notifs: this.props.notifs})
+    } else {
+      this.getNotifs(this.props.user._id);
+    }
+
   }
   componentWillReceiveProps(nextProps) {
     if(nextProps.user._id !== this.props.user._id) {

@@ -32,6 +32,8 @@ const appRoute = (pageName, absRoute) => {
       return username => `/@${username}/:slug`; // NOTE: used for internal routing logic only
     case 'userSettings':
       return username => `/@${username}/settings`;
+    case 'userNotif':
+      return `/notifications`;
     case 'userWildcard':
       return '/*'; // NOTE: used for internal routing logic only
     case 'userTabs':
