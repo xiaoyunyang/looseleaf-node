@@ -1,23 +1,30 @@
 import React from 'react';
 import $ from 'jquery';
 
+const autoCompleteData = choices => {
+  const options = {};
+  for (const key in choices) {
+    options[choices[key].displayName] = choices[key].picture;
+  }
+  return options;
+}
+
 export default class InputAutocomplete extends React.Component {
+
   initializeAutoComplete() {
+    // const data = autoCompleteData(this.props.choices);
     const data = this.props.choices;
+
     $(document).ready(() => {
       $(`#${this.props.id}`).autocomplete({
         data: data,
         limit: 20, // The max amount of results that can be shown at once. Default: Infinity.
-        onAutocomplete: function(val) {
-          this.props.onChange(val);
-        }.bind(this),
+        onAutocomplete: key => {
+          this.props.onChange(key);
+        },
         minLength: 1, // The minimum length of the input for the autocomplete to start. Default: 1.
       });
     });
-  }
-  handleClick() {
-    const newData = $(`#${this.props.id}`).val();
-    this.props.onChange(newData);
   }
   render() {
     if (typeof document !== 'undefined') {

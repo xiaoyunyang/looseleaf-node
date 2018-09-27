@@ -6,6 +6,7 @@ import 'materialize-css/dist/css/materialize.min.css';
 import 'materialize-css/dist/js/materialize.min';
 import './lib/tabs'; // <- overriding the materialize tabs js
 import './lib/chips'; // <- overriding the materialize chips js
+import './lib/forms'; // <- overriding the materialize forms js
 // import AppOld from './craApps/App';
 import AppUser from './craApps/AppUser';
 import AppUserPage from './craApps/AppUserPage';
@@ -35,7 +36,7 @@ const Apps = {
   recipe: AppRecipe
 };
 
-const App = Apps.user;
+const App = Apps.project;
 
 const render = (Component) => {
   ReactDOM.render(

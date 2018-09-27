@@ -20,5 +20,3 @@ export const getNotifs = (findCriteria, reqLimit, reqPage, cbSuccess, cbFailure)
     return cbSuccess(notifs.docs);
   });
 };
-
-export const postNotif = () => {};

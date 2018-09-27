@@ -6,6 +6,7 @@ import { image } from '../../data/assetLinks';
 import { getApiData } from '../../../lib/helpers';
 import Communities from './Communities/Chips';
 import { communityName } from './Communities/lib'
+import FlashNotif from '../FlashNotif';
 
 // This is a ES6 class - see https://toddmotto.com/react-create-class-versus-component/
 export default class UserCards extends React.Component {
@@ -25,8 +26,12 @@ export default class UserCards extends React.Component {
         picture: image.defaultUser
       },
       inviteChoices: {},
-      invited: ''
+      invited: '',
+      flash: { status: 'none', msg: 'succes' }
     };
+    this.inviteNewContributor = this.inviteNewContributor.bind(this);
+    this.handleSetInvited = this.handleSetInvited.bind(this);
+    this.displayFlash = this.displayFlash.bind(this);
   }
   componentDidMount() {
     this.loadPeople();
@@ -37,7 +42,8 @@ export default class UserCards extends React.Component {
     const setApiData = users => {
       const people = {};
       users.forEach(user => {
-        people[user.displayName] = user.picture;
+        // people[user.displayName] = user.picture;
+        people[user._id] = {displayName: user.displayName, picture: user.picture };
       });
       this.setState({inviteChoices: people})
     }
@@ -138,23 +144,48 @@ export default class UserCards extends React.Component {
       </a>
     );
   }
+  inviteNewContributor() {
+    this.props.inviteNewContributor(this.state.invited, this.displayFlash);
+  }
+  handleSetInvited(userId) {
+    this.setState({ invited: userId })
+  }
+  displayFlash(status, msg) {
+    const flashUpdated = { status, msg };
+    const flashNone = {status: 'none', msg: ''}
+
+    const toWait = 3000; // 3 seconds
+    // NOTE: what's happening below is we want to show alert box for three seconds with
+    // the right color and alert message. After three seconds, the alert box disappears
+    this.setState({
+      flash: flashUpdated
+    });
+    setTimeout(() => this.setState({
+      flash: flashNone
+    }),
+    toWait);
+  }
   renderInvitePersonCardModal() {
     return (
       <div id="invite-person-card-modal" style={{ paddingBottom: 20 }} className="modal">
         <div className="modal-content">
           <h4>Invite A New Contributor</h4>
+          <div className="row">
+            <FlashNotif state={this.state.flash.status} msg={this.state.flash.msg} />
+          </div>
           <InputAutocomplete
             id="select-invites"
             choices={this.state.inviteChoices}
             label="Full Name"
-            onChange={d => this.setState({ invited: d })}
+            onChange={this.handleSetInvited}
           />
         </div>
         <div className="modal-footer" style={{ paddingBottom: 20 }}>
-          <a href={`/@${this.state.modalPerson.username}`} className="modal-action modal-close teal btn-flat">
+          <button onClick={this.inviteNewContributor}
+            className="modal-action teal btn-flat">
             Invite
             <i className="fa fa-paper-plane" />
-          </a>
+          </button>
         </div>
       </div>
     );

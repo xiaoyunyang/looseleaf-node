@@ -6,7 +6,8 @@ import ProjectInfo from './ProjectInfo';
 import Contributors from './Contributors';
 import Feed from './Feed';
 import Footer from '../../../components/Footer';
-import { contributorIds } from '../../../../lib/helpers';
+import { contributorIds, postToApiData } from '../../../../lib/helpers';
+import { apiLink } from '../../../data/apiLinks';
 
 class Main extends React.Component {
   componentDidMount() {
@@ -34,6 +35,24 @@ class Main extends React.Component {
       this.props.actions.setProjectContributors([]);
     }
   }
+  inviteNewContributor(userId, displayFlash) {
+    const loggedinUser = this.props.user.loggedinUser;
+    if (!loggedinUser) return;
+    const link = apiLink.notifs;
+    const data = { formFields: {
+      fromUser: loggedinUser._id,
+      toUser: userId,
+      action: 'INVITED_TO_PROJECT', // TODO: Really need to get this from somewhere else (Sigle Source of Truth). OK to hard code for now.
+      ref: this.props.projectInfo.slug
+    }};
+    const cbFailure = (status, msg) => {
+      displayFlash('failure', 'Something went wrong. Try again later.');
+    }
+    const cbSucess = (status, msg) => {
+      displayFlash('success', 'Invitation to contribute is sent.');
+    }
+    postToApiData(link, data, cbFailure, cbSucess);
+  }
   render() {
     const location = (typeof document !== 'undefined') ? document.location.pathname : undefined;
     return (
@@ -51,7 +70,10 @@ class Main extends React.Component {
               loggedinUser={this.props.user.loggedinUser}
               actions={this.props.actions}
             />
-            <Contributors contributors={this.props.contributors} />
+            <Contributors
+              contributors={this.props.contributors}
+              inviteNewContributor={this.inviteNewContributor.bind(this)}
+            />
             <Feed user={this.props.user.loggedinUser} projectId={this.props.projectInfo._id} />
           </div>
         </div>

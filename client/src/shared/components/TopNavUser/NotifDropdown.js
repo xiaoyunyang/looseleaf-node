@@ -6,6 +6,8 @@ import appRoute from '../../data/appRoute';
 import { apiLink } from '../../data/apiLinks';
 import { image } from '../../data/assetLinks';
 
+
+// The keys of the notifObject is action 
 const notifObject = {
   STARTED_FOLLOWING: {
     name: 'STARTED_FOLLOWING',
@@ -128,9 +130,10 @@ class NotifDropdown extends React.Component {
   }
   renderNotifIcon(notifs) {
     if(notifs.length === 0 || notifs[0].read === true) {
-      return <i className="material-icons">notifications_none</i>;
+      return <i style={{paddingLeft: 10}} className="material-icons">notifications_none</i>;
     }
     const numUnread = notifs.filter(notif => notif.read === false).length;
+
     return (
       <div className="circle-with-text" style={{marginTop: 10, marginRight: -6}}>
         {numUnread}

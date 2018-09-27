@@ -9,6 +9,7 @@ import configureStore from '../shared/redux/configureStore/projectPage';
 import App from '../shared/ProjectPage/App';
 import '../lib/tabs';
 import '../lib/chips';
+import '../lib/forms'; // <- overriding the materialize forms js
 import '../assets/index.css';
 import 'draft-js/dist/Draft.css';
 import 'draft-js-inline-toolbar-plugin/lib/plugin.css';

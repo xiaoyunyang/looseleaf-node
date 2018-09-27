@@ -9,6 +9,8 @@ class FlashNotif extends React.Component {
     switch (state) {
       case 'error':
         return this.renderError(text);
+      case 'success':
+        return this.renderSuccess(text)
       default:
         return null;
     }
@@ -16,6 +18,11 @@ class FlashNotif extends React.Component {
   renderError(msg) {
     return (
       <p style={{ color: '#e57373' }}>{msg}</p>
+    );
+  }
+  renderSuccess(msg) {
+    return (
+      <p style={{ color: '#26a69a' }}>{msg}</p>
     );
   }
   render() {

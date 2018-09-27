@@ -19,7 +19,7 @@ import {
   getProjects,
   updateProject, updateProjectAndUser,
   addNewProject } from './projects';
-import { getNotifs, createNotif, postNotif } from './notifs';
+import { getNotifs, createNotif } from './notifs';
 import { getUsers, uniqueFieldsExists } from './users';
 
 const api = express.Router();
@@ -42,12 +42,12 @@ api.post('/notif/readAll', (req, res) => {
       return res.send('Error');
     }
     return res.send({ status: 'success', msg: 'all notifs read!' });
-  })
+  });
 });
 
 api.post('/notif', (req, res) => {
-  postNotif(req.body.formFields);
-  return res.send({ status: 'success', msg: 'notification sent!' });
+  createNotif(req.body.formFields);
+  return res.send({ status: 'success', msg: 'Success! Notification sent!' });
 });
 
 // Posts ======================================================================
@@ -197,13 +197,17 @@ api.get('/post/userFeed', (req, res) => {
   const projectIds = arrayWrap(req.query.projectIds || '')[0].split(' ');
   const communitySlugs = arrayWrap(req.query.communitySlugs || '')[0].split(' ');
 
-  // TODO: We may need this for something later. Don't know what yet.
+
   const currUser = req.query.currUser;
 
   // We provide post for the user with userId from the following sources:
   // (1) people the user follows
   // (2) followers of the user
   // (3) posts associated with the project that the user contributes to.
+  // (4) posts associated with communities in which the user is a member
+  
+  // TODO: We need to be able to distinguish between posts for currUser's followers and those whom 
+  // currUser is following
   const postsByUsers = userIds.filter(id => id !== '').map(id => {
     return { postedBy: id };
   });
