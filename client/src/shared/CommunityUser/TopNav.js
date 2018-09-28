@@ -8,6 +8,7 @@ import { image } from '../data/assetLinks';
 import { apiLink } from '../data/apiLinks';
 import appRoute from '../data/appRoute';
 import UserDropdown from '../components/TopNavUser/UserDropdown';
+import NotifWrapper from '../components/Collection/Notifs/Wrapper';
 
 export default class TopNav extends React.Component {
   // constructor(props) {
@@ -109,6 +110,7 @@ export default class TopNav extends React.Component {
         { user &&
           <div>
             <ul className="right">
+              <NotifWrapper userId={user._id} />
               <UserDropdown
                 username={user.username}
                 userPic={user.picture}

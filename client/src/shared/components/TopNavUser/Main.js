@@ -2,48 +2,23 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import $ from 'jquery';
-import { getPageName, getApiData } from '../../../lib/helpers';
+import { getPageName} from '../../../lib/helpers';
 import { image } from '../../data/assetLinks';
 import appRoute from '../../data/appRoute';
-import { apiLink } from '../../data/apiLinks';
 import { UserAppNav } from '../Nav/AppNav';
 import MobileSideNav from './MobileSideNav';
 import UserDropdown from './UserDropdown';
 import CommunityDropdown from './CommunityDropdown';
-import NotifDropdown from './NotifDropdown';
+import NotifWrapper from '../Collection/Notifs/Wrapper';
 
 // Callers:  User/Home.js and User/Porfolio/Main.js and User/Settings/Main.js
 export default class TopNavUser extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      notifs: []
-    }
-  }
   componentDidMount() {
     if (typeof window !== 'undefined') {
       $(window).scroll(() => {
         this.toggleNavbarBoxShadow();
       });
     }
-    if (this.props.notifs) {
-      this.setState({notifs: this.props.notifs})
-    } else {
-      this.getNotifs(this.props.user._id);
-    }
-  }
-  componentWillReceiveProps(nextProps) {
-    if(nextProps.user._id !== this.props.user._id) {
-      this.getNotifs(nextProps.user._id);
-    }
-    if(nextProps.notifs !== this.props.notifs) {
-      this.setState({notifs: nextProps.notifs });
-    }
-  }
-  getNotifs(userId) {
-    const link = apiLink.userNotifs(userId);
-    const setApiData = data => this.setState({notifs: data});
-    getApiData(link, setApiData);
   }
   // TODO: I don't know if there's a more elegant way to do this in css
   // This function is essentially doing the same thing as the one in the topNav
@@ -65,16 +40,6 @@ export default class TopNavUser extends React.Component {
       profileUserpic.css('visibility', 'hidden');
       navbarLogo.css('visibility', 'visible');
     }
-  }
-  markAllNotifsAsRead() {
-    const notifsRead = this.state.notifs.map(notif => {
-      const newNotif = {...notif};
-      newNotif.read = true;
-      return newNotif
-    });
-    this.setState({
-      notifs: notifsRead
-    });
   }
   render() {
     const username = this.props.user.username;
@@ -120,10 +85,7 @@ export default class TopNavUser extends React.Component {
                 <li className={selected === username ? 'active' : ''}>
                   <UserAppNav pageName="profile" id={`nav-${username}`} username={username} external={useExternLinks}/>
                 </li>
-                <NotifDropdown
-                  notifs={this.state.notifs}
-                  markAllNotifsAsRead={this.markAllNotifsAsRead.bind(this)}
-                />
+                <NotifWrapper userId={this.props.user._id} notifs={this.props.notifs}/>
                 <UserDropdown
                   username={username}
                   userPic={userPic}
@@ -153,9 +115,11 @@ export default class TopNavUser extends React.Component {
 TopNavUser.propTypes = {
   redirPath: PropTypes.string,
   useExternLinks: PropTypes.bool,
-  user: PropTypes.object.isRequired
+  user: PropTypes.object.isRequired,
+  notifs: PropTypes.array
 };
 TopNavUser.defaultProps = {
   redirPath: '/',
-  useExternLinks: true
+  useExternLinks: true,
+  notifs: null
 };

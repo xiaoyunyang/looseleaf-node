@@ -7,12 +7,6 @@ import { apiLink } from '../../data/apiLinks';
 import Notif from '../Collection/Notifs/Notif';
 
 class NotifDropdown extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      notifs: this.props.notifs
-    }
-  }
   componentDidMount() {
     $('.dropdown-button').dropdown({
       inDuration: 300,

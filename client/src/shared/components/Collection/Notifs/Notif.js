@@ -5,6 +5,7 @@ import { apiLink } from '../../../data/apiLinks';
 import { dateFormatted, getApiData } from '../../../../lib/helpers';
 import { image } from '../../../data/assetLinks';
 
+// TODO: Move this dictionary somewhere else more accessible for both client and server
 // The keys of the notifObject is action
 const notifObject = {
   STARTED_FOLLOWING: {
