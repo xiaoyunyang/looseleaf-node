@@ -90,15 +90,23 @@ api.post('/post', (req, res) => {
     return res.send({ status: 'success', msg: { newPost, parentPostCommentsNum: -1 } });
   }
   // This means the new post is a comment to another post
-  Post.findById(context.post, (err, post) => {
+  Post.findById(context.post, (err, parentPost) => {
     if (err) return res.send('Error');
-    if (post) {
-      const updatedComments = [newPost._id, ...post.comments];
-      post.set({
+    if (parentPost) {
+      const updatedComments = [newPost._id, ...parentPost.comments];
+      parentPost.set({
         comments: updatedComments
       });
-      post.save();
+      parentPost.save();
       newPost.save();
+
+      // Also create a Notif to the original post creator
+      const toUser = parentPost.postedBy;
+      const fromUser = newPost.postedBy;
+      const action = 'RESPONDED_TO_POST';
+      const ref = parentPost._id;
+      createNotif({ fromUser, toUser, action, ref });
+
       return res.send({ status: 'success', msg: { newPost, parentPostCommentsNum: updatedComments.length } });
     }
   });
