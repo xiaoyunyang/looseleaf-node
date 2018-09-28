@@ -31,11 +31,13 @@ export default class TopNavUser extends React.Component {
     } else {
       this.getNotifs(this.props.user._id);
     }
-
   }
   componentWillReceiveProps(nextProps) {
     if(nextProps.user._id !== this.props.user._id) {
       this.getNotifs(nextProps.user._id);
+    }
+    if(nextProps.notifs !== this.props.notifs) {
+      this.setState({notifs: nextProps.notifs });
     }
   }
   getNotifs(userId) {
