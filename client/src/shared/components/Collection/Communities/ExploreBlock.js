@@ -6,7 +6,7 @@ const ShortVersion = ({ collection }) => (
     <div className="col">
       {
       collection.map(c => {
-        const { icon, color, link } = communityMeta(c.slug);
+        const { icon, link } = communityMeta(c.slug);
         return (
           <div key={`explore-community-${c.slug}`} className="col s10 m6 l4 offset-s1">
             <a href={link} className="">
@@ -66,7 +66,7 @@ const LongVersion = ({ collection }) => (
   <div className="row" style={{paddingTop: 30}}>
     {
       collection.map((c, i) => {
-        const { icon, color, link } = communityMeta(c.slug);
+        const { icon, link } = communityMeta(c.slug);
         return (
           <div
             key={`explore-community-${c.slug}`}

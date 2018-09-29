@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import InputTags from '../../../components/Form/InputTags';
-import InputDropdown from '../../../components/Form/InputDropdown';
 import InputCheckboxes from '../../../components/Form/InputCheckboxes';
 import DatePicker from '../../../components/Form/DatePicker';
 import FlashNotif from '../../../components/FlashNotif';
@@ -9,6 +8,7 @@ import TextAreaInput from '../../../components/Form/TextAreaInput';
 import TextInput from '../../../components/Form/TextInput';
 import { postToApiData } from '../../../../lib/helpers';
 import { communitiesArr } from '../../../components/Collection/Communities/lib';
+import { interests as availableInterests } from '../../../components/Collection/Interests/lib';
 
 const deliverableFormats = require('../../../data/deliverableFormats.json');
 const deliverableFormatsArr = Object.values(deliverableFormats);
@@ -83,7 +83,7 @@ export default class ProjectForm extends React.Component {
                 id="select-areas"
                 label="Interest Areas"
                 hint="+Interest"
-                tags={this.props.tags}
+                tags={availableInterests}
                 selectedTags={this.state.interestAreas}
                 onChange={ds => this.setState({ interestAreas: ds })}
               />

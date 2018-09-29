@@ -3,7 +3,6 @@ import TopNav from '../../../components/TopNavUser/Main';
 import ProjectForm from './ProjectForm';
 import { apiLink } from '../../../data/apiLinks';
 import { getApiData } from '../../../../lib/helpers';
-import { interests, platforms } from '../../../data/TempData';
 
 export default class extends React.Component {
   constructor(props) {
@@ -55,7 +54,6 @@ export default class extends React.Component {
           <ProjectForm
             history={this.props.history}
             user={this.props.user.loggedinUser}
-            tags={interests}
             creator={this.props.projectInfo.creator}
             people={this.state.people}
             title={this.props.projectInfo.title}
