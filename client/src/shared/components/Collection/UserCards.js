@@ -27,6 +27,7 @@ export default class UserCards extends React.Component {
       },
       inviteChoices: {},
       invited: '',
+      inviteSuccess: false,
       flash: { status: 'none', msg: 'succes' }
     };
     this.inviteNewContributor = this.inviteNewContributor.bind(this);
@@ -145,7 +146,11 @@ export default class UserCards extends React.Component {
     );
   }
   inviteNewContributor() {
-    this.props.inviteNewContributor(this.state.invited, this.displayFlash);
+    if (this.state.invited === '' || !this.state.inviteChoices[this.state.invited]) {
+      this.displayFlash('error', 'Please enter valid user name to invite as a contributor.');
+    } else {
+      this.props.inviteNewContributor(this.state.invited, this.displayFlash);
+    }
   }
   handleSetInvited(userId) {
     this.setState({ invited: userId })
@@ -153,6 +158,13 @@ export default class UserCards extends React.Component {
   displayFlash(status, msg) {
     const flashUpdated = { status, msg };
     const flashNone = {status: 'none', msg: ''}
+
+    if (status==='success') {
+      this.setState({
+        inviteSuccess: true
+      });
+      return;
+    }
 
     const toWait = 3000; // 3 seconds
     // NOTE: what's happening below is we want to show alert box for three seconds with
@@ -165,27 +177,53 @@ export default class UserCards extends React.Component {
     }),
     toWait);
   }
-  renderInvitePersonCardModal() {
+  renderInvitePersonCardModal(inviteSuccess) {
+    const invitedName = inviteSuccess ? this.state.inviteChoices[this.state.invited].displayName : '';
     return (
       <div id="invite-person-card-modal" style={{ paddingBottom: 20 }} className="modal">
         <div className="modal-content">
           <h4>Invite A New Contributor</h4>
-          <div className="row">
-            <FlashNotif state={this.state.flash.status} msg={this.state.flash.msg} />
-          </div>
-          <InputAutocomplete
-            id="select-invites"
-            choices={this.state.inviteChoices}
-            label="Full Name"
-            onChange={this.handleSetInvited}
-          />
+          {
+            !inviteSuccess &&
+            <div>
+              <div className="row">
+                <FlashNotif state={this.state.flash.status} msg={this.state.flash.msg} />
+              </div>
+              <InputAutocomplete
+                id="select-invites"
+                choices={this.state.inviteChoices}
+                label="Full Name"
+                selected={this.state.invited}
+                onChange={this.handleSetInvited}
+              />
+            </div>
+          }
+          {
+            inviteSuccess &&
+            <div className="">
+              <h6>
+                {`Invitation to ${invitedName} was sent successfully`}
+              </h6>
+              <h6>
+                {`${invitedName} will become a contributor once he clicks "Contribute" on this project page`}
+              </h6>
+              <div style={{paddingTop: 20}}>
+                <a className="btn" onClick={() => this.setState({inviteSuccess: false, invited: ''})}>
+                  Invite Another Contributor
+                </a>
+              </div>
+            </div>
+          }
         </div>
         <div className="modal-footer" style={{ paddingBottom: 20 }}>
-          <button onClick={this.inviteNewContributor}
-            className="modal-action teal btn-flat">
-            Invite
-            <i className="fa fa-paper-plane" />
-          </button>
+          {
+            !inviteSuccess &&
+            <button onClick={this.inviteNewContributor}
+              className="modal-action teal btn-flat">
+              Invite
+              <i className="fa fa-paper-plane" />
+            </button>
+          }
         </div>
       </div>
     );
@@ -204,7 +242,7 @@ export default class UserCards extends React.Component {
           this.renderInvitePersonCard()
         }
         {
-          this.renderInvitePersonCardModal()
+          this.renderInvitePersonCardModal(this.state.inviteSuccess)
         }
       </div>
     );

@@ -10,6 +10,11 @@ import appRoute from '../data/appRoute';
 import UserDropdown from '../components/TopNavUser/UserDropdown';
 import NotifWrapper from '../components/Collection/Notifs/Wrapper';
 
+// TODO: With respect to the use of NotifWrapper here, if you click around the tab on the
+// communityUser page, then click the Notif icon in the TopNav again,
+// the text will overflow out of NotifDropdown. The first render of the NotifDropdown is alright.
+
+
 export default class TopNav extends React.Component {
   // constructor(props) {
   //   super(props);
