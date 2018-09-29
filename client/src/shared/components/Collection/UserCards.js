@@ -44,7 +44,7 @@ export default class UserCards extends React.Component {
       const people = {};
       users.forEach(user => {
         // people[user.displayName] = user.picture;
-        people[user._id] = {displayName: user.displayName, picture: user.picture };
+        people[user._id] = { name: user.displayName, picture: user.picture };
       });
       this.setState({inviteChoices: people})
     }

@@ -403,17 +403,17 @@ import Materialize from 'materialize-css/dist/js/materialize';
               if (val.length >= options.minLength) {
                 for(var key in data) {
                   if (data.hasOwnProperty(key) &&
-                      data[key].displayName.toLowerCase().indexOf(val) !== -1) { // NEW
+                      data[key].name.toLowerCase().indexOf(val) !== -1) { // NEW
                     // Break if past limit
                     if (count >= options.limit) {
                       break;
                     }
 
                     var autocompleteOption = $('<li id="' + key +'"></li>'); // NEW
-                    if (!!data[key]) {
-                      autocompleteOption.append('<img src="'+ data[key].picture +'" class="right circle"><span>'+ data[key].displayName +'</span>');
+                    if (!!data[key].picture) {
+                      autocompleteOption.append('<img src="'+ data[key].picture +'" class="right circle"><span>'+ data[key].name +'</span>');
                     } else {
-                      autocompleteOption.append('<span>'+ data[key].displayName +'</span>');
+                      autocompleteOption.append('<span>'+ data[key].name +'</span>'); // NEW
                     }
 
                     $autocomplete.append(autocompleteOption);

@@ -13,7 +13,7 @@ export default function renderProjectApp(req, res, next, project) {
     title: `${project.title} - LooseLeaf`,
     desc: project.desc,
     url: req.url,
-    keywords: project.interestAreas.toString()
+    keywords: project.interestAreas.map(i => i.name).toString()
   };
 
   const clientAppPath = '/projectpage.bundle.js';

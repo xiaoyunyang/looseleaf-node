@@ -1,6 +1,6 @@
 import React from 'react';
 import InputTags from './../../../components/Form/InputTags';
-import { interests as availableInterests } from './../../../data/TempData';
+import { interests as availableInterests } from '../../../components/Collection/Interests/lib';
 import TextInput from '../../../components/Form/TextInput';
 import TextAreaInput from '../../../components/Form/TextAreaInput';
 

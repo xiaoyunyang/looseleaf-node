@@ -18,25 +18,21 @@ export default class InputTags extends React.Component {
     const tags = this.props.selectedTags.map(tag => {
       return { tag: tag.name };
     });
-    const options = {};
-    for(const key in this.props.tags) {
-      options[key] = this.props.tags[key].picture
-    }
     $(document).ready(() => {
       $(`#${this.props.id}`).material_chip({
         data: tags,
         placeholder: this.props.label,
         secondaryPlaceholder: this.props.hint,
         autocompleteOptions: {
-          data: options,
+          data: this.props.tags,
           limit: Infinity,
           minLength: 1
         }
       });
     });
   }
-  handleAddTag(tagName) {
-    const newField = { name: tagName, id: this.props.tags[tagName].id };
+  handleAddTag(tagSlug) {
+    const newField = { name: this.props.tags[tagSlug].name, slug: tagSlug };
     const selectedNew = this.props.selectedTags.concat(newField);
     this.props.onChange(selectedNew);
   }

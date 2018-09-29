@@ -9,11 +9,13 @@ import HTML from '../src/shared/components/HTML';
 import App from '../src/shared/UserPage/App';
 
 export default function renderUserPage(req, res, next, user) {
+  const userInterests = user.interests.map(i => i.name).toString();
+  const userCommunities = user.communities.toString();
   const meta = {
     title: `${user.displayName} - LooseLeaf`,
-    desc: `${user.followers.length} followers - ${user.bio ? user.bio : ''}`,
+    desc: `followers: ${user.followers.length} | bio: ${user.bio ? user.bio : ''}`,
     url: req.url,
-    keywords: `${user.interests.toString()}, ${user.communities.toString()}`
+    keywords: `${userInterests} ${userCommunities.length>0 ? ',' : ''} ${userCommunities}`
   };
 
   const clientAppPath = '/userpage.bundle.js';

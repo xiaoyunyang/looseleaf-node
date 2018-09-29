@@ -9,6 +9,11 @@
     "name": "AI",
     "picture": ""
   },
+  "algorithms": {
+    "slug": "algorithms",
+    "name": "Algorithms",
+    "picture": ""
+  },
   "agile": {
     "slug": "agile",
     "name": "Agile",
@@ -47,6 +52,11 @@
   "audio-production": {
     "slug": "audio-production",
     "name": "Audio Production",
+    "picture": ""
+  },
+  "back-end-development": {
+    "slug": "back-end-development",
+    "name": "Back-end Development",
     "picture": ""
   },
   "blockchain": {
@@ -119,6 +129,11 @@
     "name": "Digital Marketing",
     "picture": ""
   },
+  "docker": {
+    "slug": "docker",
+    "name": "Docker",
+    "picture": ""
+  },
   "django": {
     "slug": "django",
     "name": "Django",
@@ -171,7 +186,7 @@
   },
   "front-end-development": {
     "slug": "front-end-development",
-    "name": "Front End Development",
+    "name": "Front-end Development",
     "picture": ""
   },
   "full-stack-development": {
@@ -237,6 +252,11 @@
   "kotlin": {
     "slug": "kotlin",
     "name": "Kotlin",
+    "picture": ""
+  },
+  "kubernetes": {
+    "slug": "kubernetes",
+    "name": "Kubernetes",
     "picture": ""
   },
   "logo-design": {
@@ -347,6 +367,11 @@
   "swift": {
     "slug": "swift",
     "name": "Swift",
+    "picture": ""
+  },
+  "technical-writing": {
+    "slug": "technical-writing",
+    "name": "Technical Writing",
     "picture": ""
   },
   "translation": {

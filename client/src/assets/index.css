@@ -1290,4 +1290,8 @@ nav .categories-wrapper .categories {
 .load-more-items {
   padding-bottom: 50px;
 }
+.autocomplete-content {
+  max-height: 80vh;
+  overflow-y: scroll;
+}
 /* Input END */

@@ -22,7 +22,7 @@ class AppProjectPage extends React.Component {
         invalid: 'foop'
       }
       if (slug !== 'default') {
-        store.dispatch(actions.getProjectPageData(slug, username.kyle));
+        store.dispatch(actions.getProjectPageData(slug, username.github));
       }
     }
   }
