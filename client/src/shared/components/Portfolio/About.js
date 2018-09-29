@@ -83,6 +83,17 @@ const UserInfo = ({ icon, info, orElse, to, isLoggedinUser }) => (
 
 );
 class About extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      clientModeOn: false
+    }
+  }
+  componentDidMount() {
+    this.setState({
+      clientModeOn: true
+    })
+  }
   handleFollowBtnClick(loggedinUserId, userToFollowId, action) {
 
     // NOTE: the user who is doing the following isthe loggedinUser
@@ -145,7 +156,7 @@ class About extends React.Component {
               </div>
             }
             {
-              this.props.loggedinUser && !isLoggedinUser &&
+              this.props.loggedinUser && !isLoggedinUser && this.state.clientModeOn &&
               this.renderFollowBtn(this.props.loggedinUser._id, this.props.user.followers)
             }
           </div>

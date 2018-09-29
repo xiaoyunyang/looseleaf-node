@@ -7,7 +7,6 @@ import 'materialize-css/dist/css/materialize.min.css';
 import 'materialize-css/dist/js/materialize.min';
 import configureStore from '../shared/redux/configureStore/projectPage';
 import App from '../shared/ProjectPage/App';
-import '../lib/tabs';
 import '../lib/chips';
 import '../lib/forms'; // <- overriding the materialize forms js
 import '../assets/index.css';

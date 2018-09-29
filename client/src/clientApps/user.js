@@ -9,6 +9,7 @@ import configureStore from '../shared/redux/configureStore/userPage';
 import App from '../shared/User/App';
 import '../lib/tabs';
 import '../lib/chips';
+import '../lib/forms'; // <- overriding the materialize forms js
 import '../assets/index.css';
 import 'draft-js/dist/Draft.css';
 import 'draft-js-inline-toolbar-plugin/lib/plugin.css';
@@ -24,7 +25,6 @@ delete window.__PRELOADED_STATE__;
 const store = configureStore(initialState);
 // const storeRoute = initRedux(initialStateRoute);
 
-console.log('Data to hydrate with', initialState);
 /*
  * Main entry point for the client side isomorphic app
  */

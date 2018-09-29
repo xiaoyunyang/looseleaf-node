@@ -9,11 +9,13 @@ import HTML from '../src/shared/components/HTML';
 import App from '../src/shared/User/App';
 
 export default function renderUserApp(req, res, next) {
+  const userInterests = req.user.interests.map(i => i.name).toString();
+  const userCommunities = req.user.communities.toString();
   const meta = {
     title: `${req.user.displayName} - LooseLeaf`,
     desc: `${req.user.followers.length} followers - ${req.user.bio ? req.user.bio : ''}`,
     url: req.url,
-    keywords: `${JSON.stringify(req.user.interests)}, ${req.user.communities.toString()}`
+    keywords: `${userInterests} ${userCommunities.length>0 ? ',' : ''} ${userCommunities}`
   };
 
   const clientAppPath = '/user.bundle.js';

@@ -1,13 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import 'materialize-css';
 import 'materialize-css/dist/css/materialize.min.css';
 import 'materialize-css/dist/js/materialize.min';
 import App from '../shared/Landing/App';
 import '../lib/tabs';
-import '../lib/chips';
 import '../assets/index.css';
 
 // Grab the server serialized state off of the window object.

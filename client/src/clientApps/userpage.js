@@ -24,7 +24,6 @@ delete window.__PRELOADED_STATE__;
 const store = configureStore(initialState);
 // const storeRoute = initRedux(initialStateRoute);
 
-console.log('Data to hydrate with', initialState);
 /*
  * Main entry point for the client side isomorphic app
  */

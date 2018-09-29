@@ -8,7 +8,6 @@ import 'materialize-css/dist/js/materialize.min';
 import configureStore from '../shared/redux/configureStore/communityUserPage';
 import App from '../shared/CommunityUser/App';
 import '../lib/tabs';
-import '../lib/chips';
 import '../assets/index.css';
 import 'draft-js/dist/Draft.css';
 import 'draft-js-inline-toolbar-plugin/lib/plugin.css';
@@ -25,10 +24,6 @@ delete window.__PRELOADED_STATE__;
 // you pass the server data into the Redux setup.
 // const storeRoute = initRedux(initialStateRoute);
 const store = configureStore(initialState);
-
-console.log('store...', store)
-
-console.log('Data to hydrate with', initialState);
 
 /*
  * Main entry point for the client side isomorphic app

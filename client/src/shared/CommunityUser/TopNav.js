@@ -57,7 +57,6 @@ export default class TopNav extends React.Component {
 
     const cbSuccess = () =>  {
       this.props.actions.getLoggedinUserData(this.props.user.username);
-      this.props.updateState();
     }
 
     postToApiData(url, data, cbFailure, cbSuccess);
@@ -207,8 +206,7 @@ export default class TopNav extends React.Component {
 }
 
 TopNav.propTypes = {
-  extended: PropTypes.bool,
-  updateState: PropTypes.func,
+  extended: PropTypes.bool
 }
 TopNav.defaultProps = {
   extended: false

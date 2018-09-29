@@ -54,7 +54,9 @@ router.get('/community/:name*', (req, res, next) => {
 });
 router.get('/project/edit/new', (req, res, next) => {
   if (req.isAuthenticated()) {
-    return renderProjectPageMiddleware(req, res, next, { title: 'new project', slug: 'new' });
+    return renderProjectPageMiddleware(req, res, next, {
+      title: 'New Project', desc: 'New Project', slug: 'new', interestAreas: []
+    });
   }
   renderLandingAppMiddleware(req, res, next);
 });
