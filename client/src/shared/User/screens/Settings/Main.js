@@ -20,7 +20,7 @@ export default class Settings extends React.Component {
       alertMsg: 'Alert Message'
     };
   }
-  handleSubmit(formFields) {
+  handleGeneralSubmit(formFields) {
     const userId = this.props.user.info._id;
     const url = apiLink.userById(userId);
     const data = { formFields, userId };
@@ -42,7 +42,23 @@ export default class Settings extends React.Component {
         (oldUsername === newUsername) ? flashStatusMsg(status, msg) : redirect(newUsername);
       }
     }
-
+    postToApiData(url, data, cbFailure, cbSuccess);
+  }
+  handleAboutSubmit(formFields) {
+    const userId = this.props.user.info._id;
+    const url = apiLink.userAboutById(userId);
+    const data = { formFields, userId };
+    const flashStatusMsg = (status, msg) => this.showAlert(status, msg);
+    const cbFailure = flashStatusMsg;
+    const cbSuccess = (status, msg) => {
+      if (status === 'error') {
+        flashStatusMsg(status, msg);
+      } else {
+        const username = this.props.user.info.username;
+        this.props.actions.getUserProfileData(username, username);
+        flashStatusMsg(status, msg);
+      }
+    }
     postToApiData(url, data, cbFailure, cbSuccess);
   }
   showAlert(status, msg) {
@@ -105,7 +121,7 @@ export default class Settings extends React.Component {
             displayName={this.props.user.info.displayName}
             username={this.props.user.info.username}
             picture={this.props.user.info.picture}
-            handleSubmit={formFields => this.handleSubmit(formFields)}
+            handleSubmit={formFields => this.handleGeneralSubmit(formFields)}
           />
           <AboutForm
             userId={this.props.user.info._id}
@@ -113,7 +129,7 @@ export default class Settings extends React.Component {
             location={this.props.user.info.location}
             website={this.props.user.info.website}
             interests={this.props.user.info.interests}
-            handleSubmit={formFields => this.handleSubmit(formFields)}
+            handleSubmit={formFields => this.handleAboutSubmit(formFields)}
           />
         {
           // <div className="card-panel white">

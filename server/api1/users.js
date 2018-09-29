@@ -15,6 +15,7 @@ export const getUsers = ({ findCriteria, cbSuccess }) => {
           email: user.email,
           picture: user.picture,
           bio: user.bio,
+          hireable: user.hireable,
           website: user.website,
           interests: user.interests,
           communities: user.communities,

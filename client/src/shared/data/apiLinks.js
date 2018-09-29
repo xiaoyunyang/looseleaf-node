@@ -28,6 +28,7 @@ export const apiLink = {
   logout: `${root}/auth/logout`,
   communities: `${root}/api/community`,
   userById: id =>  `${root}/api/user?_id=${id}`,
+  userAboutById: id => `${root}/api/user/about?_id=${id}`,
   usersByIds: ids =>  ids.reduce((acc, id) => `${acc}_id=${id}&`,`${root}/api/user?`).slice(0, -1),
   userByUsername: username => `${root}/api/user?username=${username}`,
   userCommunities: userId => `${root}/api/user/community?_id=${userId}`, // NOTE: this is used when user clicks to join/unjoin a community

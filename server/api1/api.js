@@ -458,17 +458,21 @@ api.post('/user/following', (req, res) => {
 // actual user?
 // TODO: Make the id come from req.query._id, as consistent from the previous api.post request handler
 // for user community
-const updatedUserProps = (formFields, user) => {
-  return {
-    username: formFields.username || user.username,
-    displayName: formFields.displayName || user.displayName,
-    email: formFields.email || user.email,
-    location: formFields.location || user.location,
-    interests: formFields.interests || user.interests,
-    bio: formFields.bio || user.bio,
-    website: formFields.website || user.website
-  };
-};
+api.post('/user/about', (req, res) => {
+  User.findById(req.query._id, (err, user) => {
+    if (err) return res.send('Error');
+
+    const formFields = req.body.formFields;
+    user.set({
+      bio: formFields.bio,
+      location: formFields.location,
+      interests: formFields.interests,
+      website: formFields.website
+    });
+    user.save();
+    return res.send({ status: 'success', msg: 'change success!' });
+  });
+});
 
 api.post('/user', (req, res) => {
   User.findById(req.query._id, (err, user) => {
@@ -510,7 +514,7 @@ api.post('/user', (req, res) => {
           res.statusText = 'error';
           return res.send({ status: 'error', msg: 'email already taken.' });
         }
-        user.set(updatedUserProps(formFields, user));
+        user.set(updatedUserProps(formFields));
         user.save();
         return res.send({ status: 'success', msg: 'change success!' });
       };
@@ -520,7 +524,11 @@ api.post('/user', (req, res) => {
       });
     }
 
-    user.set(updatedUserProps(formFields, user));
+    user.set({
+      username: formFields.username,
+      displayName: formFields.displayName || formFields.username,
+      email: formFields.email
+    });
     user.save();
     return res.send({ status: 'success', msg: 'change success!' });
   });

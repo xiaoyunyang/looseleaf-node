@@ -44,7 +44,8 @@ export default class UserCards extends React.Component {
       const people = {};
       users.forEach(user => {
         // people[user.displayName] = user.picture;
-        people[user._id] = { name: user.displayName, picture: user.picture };
+        const name = user.displayName ? user.displayName : user.username;
+        people[user._id] = { name, picture: user.picture };
       });
       this.setState({inviteChoices: people})
     }
@@ -178,7 +179,7 @@ export default class UserCards extends React.Component {
     toWait);
   }
   renderInvitePersonCardModal(inviteSuccess) {
-    const invitedName = inviteSuccess ? this.state.inviteChoices[this.state.invited].displayName : '';
+    const invitedName = inviteSuccess ? this.state.inviteChoices[this.state.invited].name : '';
     return (
       <div id="invite-person-card-modal" style={{ paddingBottom: 20 }} className="modal">
         <div className="modal-content">
