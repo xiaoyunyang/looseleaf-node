@@ -5,13 +5,21 @@ import { matchRoutes } from 'react-router-config';
 import { Provider } from 'react-redux';
 import configureStore from '../src/shared/redux/configureStore/communityGuestPage';
 import { getRoutes } from '../src/shared/CommunityGuest/routes';
-import HTML from '../src/shared/CommunityGuest/HTML';
+import HTML from '../src/shared/components/HTML';
 import App from '../src/shared/CommunityGuest/App';
 
 export default function renderCommunityGuestApp(req, res, next, community) {
+  const meta = {
+    title: `${community.name} - LooseLeaf`,
+    desc: `${community.desc}`,
+    url: req.url
+  };
+  const clientAppPath = '/communityguest.bundle.js';
+
   const preloadedState = {
     community: {info: community},
   }
+
   const store = configureStore(preloadedState);
   const dataToSerialize = preloadedState;
 
@@ -43,7 +51,12 @@ export default function renderCommunityGuestApp(req, res, next, community) {
 			res.end()
 		}
     const html = renderToString(
-      <HTML data={dataToSerialize} html={app}/>
+      <HTML
+        meta={meta}
+        html={app}
+        dataToSerialize={dataToSerialize}
+        clientAppPath={clientAppPath}
+      />
     );
     return res.send(`<!DOCTYPE html>${html}`);
   }).catch(reason => {

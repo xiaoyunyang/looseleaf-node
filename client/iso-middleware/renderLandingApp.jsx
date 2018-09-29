@@ -3,10 +3,18 @@ import { renderToString } from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom';
 import { matchRoutes } from 'react-router-config';
 import { routes } from '../src/shared/Landing/routes';
-import HTML from '../src/shared/Landing/HTML';
+import HTML from '../src/shared/components/HTML';
 import App from '../src/shared/Landing/App';
 
 export default function renderLandingApp(req, res, next) {
+  const meta = {
+    title: 'LooseLeaf',
+    desc: 'Get your projects done for free',
+    url: req.url,
+    keywords: 'LooseLeaf, CRM, ATS, applicant tracking, collaboration, project management, developers, talent sourcing, open source'
+  };
+  const clientAppPath='/landing.bundle.js';
+
   const branch = matchRoutes(routes, req.url);
 
   const promises = branch.map(({ route, match }) => {
@@ -29,7 +37,11 @@ export default function renderLandingApp(req, res, next) {
        </StaticRouter>
      );
      const html = renderToString(
-       <HTML html={app} />
+       <HTML
+         meta={meta}
+         html={app}
+         clientAppPath={clientAppPath}
+       />
      );
     return res.send(`<!DOCTYPE html>${html}`);
   }).catch(reason => {

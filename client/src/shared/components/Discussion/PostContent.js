@@ -41,7 +41,7 @@ class PostContent extends React.Component {
             postCreatedAt={this.props.post.createdAt}
           />
         }
-        { this.props.editorContent &&
+        { this.props.editorContent && this.state.clientModeOn &&
           <div className="draft-js-editor">
             <Editor
               editorState={convertToEditorState(this.props.editorContent)}

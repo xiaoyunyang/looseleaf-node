@@ -1,0 +1,392 @@
+{
+  "advertising": {
+    "slug": "advertising",
+    "name": "Advertising",
+    "picture": ""
+  },
+  "ai": {
+    "slug": "ai",
+    "name": "AI",
+    "picture": ""
+  },
+  "agile": {
+    "slug": "agile",
+    "name": "Agile",
+    "picture": ""
+  },
+  "android": {
+    "slug": "android",
+    "name": "Android",
+    "picture": ""
+  },
+  "animation": {
+    "slug": "animation",
+    "name": "Animation",
+    "picture": ""
+  },
+  "angular": {
+    "slug": "angular",
+    "name": "Angular",
+    "picture": ""
+  },
+  "art": {
+    "slug": "art",
+    "name": "Art",
+    "picture": ""
+  },
+  "asp": {
+    "slug": "asp",
+    "name": "ASP.NET",
+    "picture": ""
+  },
+  "aws": {
+    "slug": "aws",
+    "name": "AWS",
+    "picture": ""
+  },
+  "audio-production": {
+    "slug": "audio-production",
+    "name": "Audio Production",
+    "picture": ""
+  },
+  "blockchain": {
+    "slug": "blockchain",
+    "name": "Blockchain",
+    "picture": ""
+  },
+  "blogging": {
+    "slug": "blogging",
+    "name": "Blogging",
+    "picture": ""
+  },
+  "branding": {
+    "slug": "branding",
+    "name": "Branding",
+    "picture": ""
+  },
+  "c": {
+    "slug": "c",
+    "name": "C",
+    "picture": ""
+  },
+  "comics": {
+    "slug": "comics",
+    "name": "Comics",
+    "picture": ""
+  },
+  "crypto": {
+    "slug": "crypto",
+    "name": "Crypto",
+    "picture": ""
+  },
+  "css": {
+    "slug": "css",
+    "name": "CSS",
+    "picture": ""
+  },
+  "d3js": {
+    "slug": "d3js",
+    "name": "D3.js",
+    "picture": ""
+  },
+  "data-vis": {
+    "slug": "data-vis",
+    "name": "Data Visualization",
+    "picture": ""
+  },
+  "data-entry": {
+    "slug": "data-entry",
+    "name": "Data Entry",
+    "picture": ""
+  },
+  "design": {
+    "slug": "design",
+    "name": "Design",
+    "picture": ""
+  },
+  "desktop-application": {
+    "slug": "desktop-application",
+    "name": "Desktop Application",
+    "picture": ""
+  },
+  "devops": {
+    "slug": "devops",
+    "name": "DevOps",
+    "picture": ""
+  },
+  "digital-marketing": {
+    "slug": "digital-marketing",
+    "name": "Digital Marketing",
+    "picture": ""
+  },
+  "django": {
+    "slug": "django",
+    "name": "Django",
+    "picture": ""
+  },
+  "education": {
+    "slug": "education",
+    "name": "Education",
+    "picture": ""
+  },
+  "editing": {
+    "slug": "editing",
+    "name": "Editing",
+    "picture": ""
+  },
+  "electronjs": {
+    "slug": "electronjs",
+    "name": "Electron.js",
+    "picture": ""
+  },
+  "elixir": {
+    "slug": "elixir",
+    "name": "Elixir",
+    "picture": ""
+  },
+  "email-marketing": {
+    "slug": "email-marketing",
+    "name": "Email Marketing",
+    "picture": ""
+  },
+  "ember": {
+    "slug": "ember",
+    "name": "Ember",
+    "picture": ""
+  },
+  "entrepreneurship": {
+    "slug": "entrepreneurship",
+    "name": "Entrepreneurship",
+    "picture": ""
+  },
+  "erlang": {
+    "slug": "erlang",
+    "name": "Erlang",
+    "picture": ""
+  },
+  "express": {
+    "slug": "express",
+    "name": "Express",
+    "picture": ""
+  },
+  "front-end-development": {
+    "slug": "front-end-development",
+    "name": "Front End Development",
+    "picture": ""
+  },
+  "full-stack-development": {
+    "slug": "full-stack-development",
+    "name": "Full-Stack Development",
+    "picture": ""
+  },
+  "html": {
+    "slug": "html",
+    "name": "HTML",
+    "picture": ""
+  },
+  "game-development": {
+    "slug": "game-development",
+    "name": "Game Development",
+    "picture": ""
+  },
+  "go": {
+    "slug": "go",
+    "name": "Go",
+    "picture": ""
+  },
+  "graphic-design": {
+    "slug": "graphic-design",
+    "name": "Graphic Design",
+    "picture": ""
+  },
+  "graphql": {
+    "slug": "graphql",
+    "name": "GraphQL",
+    "picture": ""
+  },
+  "hibernate": {
+    "slug": "hibernate",
+    "name": "Hibernate",
+    "picture": ""
+  },
+  "illustration": {
+    "slug": "illustration",
+    "name": "Illustration",
+    "picture": ""
+  },
+  "info-graphics": {
+    "slug": "Info-graphics",
+    "name": "Info-graphics",
+    "picture": ""
+  },
+  "ios": {
+    "slug": "ios",
+    "name": "iOS",
+    "picture": ""
+  },
+  "java": {
+    "slug": "java",
+    "name": "Java",
+    "picture": ""
+  },
+  "javascript": {
+    "slug": "javascript",
+    "name": "JavaScript",
+    "picture": ""
+  },
+  "kotlin": {
+    "slug": "kotlin",
+    "name": "Kotlin",
+    "picture": ""
+  },
+  "logo-design": {
+    "slug": "logo-design",
+    "name": "Logo Design",
+    "picture": ""
+  },
+  "machine-learning": {
+    "slug": "machine-learning",
+    "name": "Machine Learning",
+    "picture": ""
+  },
+  "meteor": {
+    "slug": "meteor",
+    "name": "Meteor",
+    "picture": ""
+  },
+  "mobile-development": {
+    "slug": "mobile-development",
+    "name": "Mobile Development",
+    "picture": ""
+  },
+  "nodejs": {
+    "slug": "nodejs",
+    "name": "Node.js",
+    "picture": ""
+  },
+  "opengl": {
+    "slug": "opengl",
+    "name": "OpenGL",
+    "picture": ""
+  },
+  "photography": {
+    "slug": "photography",
+    "name": "Photography",
+    "picture": ""
+  },
+  "php": {
+    "slug": "php",
+    "name": "PHP",
+    "picture": ""
+  },
+  "print-design": {
+    "slug": "print-design",
+    "name": "Print Design",
+    "picture": ""
+  },
+  "product-management": {
+    "slug": "product-management",
+    "name": "Product Management",
+    "picture": ""
+  },
+  "python": {
+    "slug": "python",
+    "name": "Python",
+    "picture": ""
+  },
+  "react-native": {
+    "slug": "react-native",
+    "name": "React Native",
+    "picture": ""
+  },
+  "redux": {
+    "slug": "redux",
+    "name": "Redux",
+    "picture": ""
+  },
+  "reactjs": {
+    "slug": "reactjs",
+    "name": "React.js",
+    "picture": ""
+  },
+  "ruby": {
+    "slug": "ruby",
+    "name": "Ruby",
+    "picture": ""
+  },
+  "ruby-on-rails": {
+    "slug": "ruby-on-rails",
+    "name": "Ruby on Rails",
+    "picture": ""
+  },
+  "scripting": {
+    "slug": "scripting",
+    "name": "Scripting",
+    "picture": ""
+  },
+  "shopify": {
+    "slug": "shopify",
+    "name": "Shopify",
+    "picture": ""
+  },
+  "sinatra": {
+    "slug": "sinatra",
+    "name": "Sinatra",
+    "picture": ""
+  },
+  "spa": {
+    "slug": "spa",
+    "name": "SPA",
+    "picture": ""
+  },
+  "spring": {
+    "slug": "spring",
+    "name": "Spring",
+    "picture": ""
+  },
+  "swift": {
+    "slug": "swift",
+    "name": "Swift",
+    "picture": ""
+  },
+  "translation": {
+    "slug": "translation",
+    "name": "Translation",
+    "picture": ""
+  },
+  "ui-ux-design": {
+    "slug": "ui-ux-design",
+    "name": "UI/UX design",
+    "picture": ""
+  },
+  "visual-design": {
+    "slug": "visual-design",
+    "name": "Visual Design",
+    "picture": ""
+  },
+  "vuejs": {
+    "slug": "vuejs",
+    "name": "Vue.js",
+    "picture": ""
+  },
+  "web-design": {
+    "slug": "web-design",
+    "name": "Web Design",
+    "picture": ""
+  },
+  "web-development": {
+    "slug": "web-development",
+    "name": "Web Development",
+    "picture": ""
+  },
+  "wordpress": {
+    "slug": "wordpress",
+    "name": "Wordpress",
+    "picture": ""
+  },
+  "writing": {
+    "slug": "writing",
+    "name": "Writing",
+    "picture": ""
+  }
+}

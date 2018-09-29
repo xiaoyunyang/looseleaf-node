@@ -2,15 +2,21 @@ import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom';
 import { matchRoutes } from 'react-router-config';
-import chalk from 'chalk';
 import { Provider } from 'react-redux';
 import configureStore from '../src/shared/redux/configureStore/projectPage';
-import HTML from '../src/shared/ProjectPage/HTML';
+import HTML from '../src/shared/components/HTML';
 import { getRoutes } from '../src/shared/ProjectPage/routes';
 import App from '../src/shared/ProjectPage/App';
 
 export default function renderProjectApp(req, res, next, project) {
-  // console.log(chalk.green('title', project['title']))
+  const meta = {
+    title: `${project.title} - LooseLeaf`,
+    desc: project.desc,
+    url: req.url,
+    keywords: project.interestAreas.toString()
+  };
+
+  const clientAppPath = '/projectpage.bundle.js';
 
   /* NOTE:
     Expected redux state:
@@ -28,9 +34,7 @@ export default function renderProjectApp(req, res, next, project) {
   const store = configureStore(preloadedState);
 
   const dataToSerialize = preloadedState;
-  const meta = {
-    title: project.title
-  };
+
   const branch = matchRoutes(getRoutes(project.slug), req.url);
   const promises = branch.map(({ route, match }) => {
     return route.loadData
@@ -60,8 +64,9 @@ export default function renderProjectApp(req, res, next, project) {
     const html = renderToString(
       <HTML
         meta={meta}
-        dataToSerialize={dataToSerialize}
         html={app}
+        dataToSerialize={dataToSerialize}
+        clientAppPath={clientAppPath}
       />
     );
     return res.send(`<!DOCTYPE html>${html}`);

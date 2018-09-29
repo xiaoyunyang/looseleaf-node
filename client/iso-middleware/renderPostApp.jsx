@@ -4,12 +4,18 @@ import { StaticRouter } from 'react-router-dom';
 import { matchRoutes } from 'react-router-config';
 import { Provider } from 'react-redux';
 import configureStore from '../src/shared/redux/configureStore/postPage';
-import HTML from '../src/shared/Post/HTML';
+import HTML from '../src/shared/components/HTML';
 import { getRoutes } from '../src/shared/Post/routes';
 import App from '../src/shared/Post/App';
 
 export default function renderExploreApp(req, res, next, post) {
-  // console.log(chalk.green('title', project['title']))
+  const meta = {
+    title: `Post - LooseLeaf`,
+    desc: `Post ${post.comments.length} comments, ${post.hearts.length} hearts, ${post.thumbUps.length} thumbUps`,
+    url: req.url
+  };
+
+  const clientAppPath = '/post.bundle.js';
 
   const preloadedState = {
     post: { main: post },
@@ -20,9 +26,6 @@ export default function renderExploreApp(req, res, next, post) {
 
   const dataToSerialize = preloadedState;
 
-  const meta = {
-    title: 'Post'
-  };
   const branch = matchRoutes(getRoutes(post._id), req.url);
   const promises = branch.map(({ route, match }) => {
     return route.loadData
@@ -52,8 +55,9 @@ export default function renderExploreApp(req, res, next, post) {
     const html = renderToString(
       <HTML
         meta={meta}
-        dataToSerialize={dataToSerialize}
         html={app}
+        dataToSerialize={dataToSerialize}
+        clientAppPath={clientAppPath}
       />
     );
     return res.send(`<!DOCTYPE html>${html}`);

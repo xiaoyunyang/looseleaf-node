@@ -5,10 +5,18 @@ import { matchRoutes } from 'react-router-config';
 import { Provider } from 'react-redux';
 import configureStore from '../src/shared/redux/configureStore/userPage';
 import { getRoutes } from '../src/shared/User/routes';
-import HTML from '../src/shared/User/HTML';
+import HTML from '../src/shared/components/HTML';
 import App from '../src/shared/User/App';
 
 export default function renderUserApp(req, res, next) {
+  const meta = {
+    title: `${req.user.displayName} - LooseLeaf`,
+    desc: `${req.user.followers.length} followers - ${req.user.bio ? req.user.bio : ''}`,
+    url: req.url,
+    keywords: `${JSON.stringify(req.user.interests)}, ${req.user.communities.toString()}`
+  };
+
+  const clientAppPath = '/user.bundle.js';
 
   const preloadedState = {
     user: { info: req.user, loggedinUser: req.user },
@@ -16,9 +24,7 @@ export default function renderUserApp(req, res, next) {
 
   const store = configureStore(preloadedState);
   const dataToSerialize = preloadedState;
-  const meta = {
-    title: `${req.user.displayName} - LooseLeaf`
-  };
+
 
   const branch = matchRoutes(getRoutes(req.user.username), req.url)
   const promises = branch.map(({ route, match }) => {
@@ -48,8 +54,9 @@ export default function renderUserApp(req, res, next) {
     const html = renderToString(
       <HTML
         meta={meta}
-        dataToSerialize={dataToSerialize}
         html={app}
+        dataToSerialize={dataToSerialize}
+        clientAppPath={clientAppPath}
       />
     );
     return res.send(`<!DOCTYPE html>${html}`);

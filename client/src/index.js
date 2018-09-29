@@ -36,7 +36,7 @@ const Apps = {
   recipe: AppRecipe
 };
 
-const App = Apps.project;
+const App = Apps.post;
 
 const render = (Component) => {
   ReactDOM.render(

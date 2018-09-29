@@ -5,19 +5,25 @@ import { matchRoutes } from 'react-router-config';
 import { Provider } from 'react-redux';
 import configureStore from '../src/shared/redux/configureStore/userPage';
 import { getRoutes } from '../src/shared/UserPage/routes';
-import HTML from '../src/shared/UserPage/HTML';
+import HTML from '../src/shared/components/HTML';
 import App from '../src/shared/UserPage/App';
 
 export default function renderUserPage(req, res, next, user) {
+  const meta = {
+    title: `${user.displayName} - LooseLeaf`,
+    desc: `${user.followers.length} followers - ${user.bio ? user.bio : ''}`,
+    url: req.url,
+    keywords: `${user.interests.toString()}, ${user.communities.toString()}`
+  };
+
+  const clientAppPath = '/userpage.bundle.js';
+
   const preloadedState = {
     user: { info: user, loggedinUser: req.user },
   }
 
   const store = configureStore(preloadedState);
   const dataToSerialize = preloadedState;
-  const meta = {
-    title: `${user.displayName} - LooseLeaf`
-  };
 
   const branch = matchRoutes(getRoutes(user.username), req.url);
   const promises = branch.map(({ route, match }) => {
@@ -47,8 +53,9 @@ export default function renderUserPage(req, res, next, user) {
     const html = renderToString(
       <HTML
         meta={meta}
-        dataToSerialize={dataToSerialize}
         html={app}
+        dataToSerialize={dataToSerialize}
+        clientAppPath={clientAppPath}
       />
     );
     return res.send(`<!DOCTYPE html>${html}`);

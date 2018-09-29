@@ -5,10 +5,17 @@ import { matchRoutes } from 'react-router-config';
 import { Provider } from 'react-redux';
 import configureStore from '../src/shared/redux/configureStore/communityUserPage';
 import { getRoutes } from '../src/shared/CommunityUser/routes';
-import HTML from '../src/shared/CommunityUser/HTML';
+import HTML from '../src/shared/components/HTML';
 import App from '../src/shared/CommunityUser/App';
 
 export default function renderCommunityUserApp(req, res, next, community) {
+  const meta = {
+    title: `${community.name} - LooseLeaf`,
+    desc: `${community.desc}`,
+    url: req.url
+  };
+  const clientAppPath = '/communityuser.bundle.js';
+
   const preloadedState = {
     community: {info: community},
     user: {loggedinUser: req.user }
@@ -45,7 +52,12 @@ export default function renderCommunityUserApp(req, res, next, community) {
     }
     // TODO: pass meta into <HTML />
     const html = renderToString(
-      <HTML data={dataToSerialize} html={app}/>
+      <HTML
+        meta={meta}
+        html={app}
+        dataToSerialize={dataToSerialize}
+        clientAppPath={clientAppPath}
+      />
     );
     return res.send(`<!DOCTYPE html>${html}`);
   }).catch(reason => {

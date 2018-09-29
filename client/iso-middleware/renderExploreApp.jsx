@@ -2,26 +2,27 @@ import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom';
 import { matchRoutes } from 'react-router-config';
-import chalk from 'chalk';
 import { Provider } from 'react-redux';
 import configureStore from '../src/shared/redux/configureStore/explorePage';
-import HTML from '../src/shared/Explore/HTML';
+import HTML from '../src/shared/components/HTML';
 import { routes } from '../src/shared/Explore/routes';
 import App from '../src/shared/Explore/App';
 
 export default function renderExploreApp(req, res, next) {
-  // console.log(chalk.green('title', project['title']))
+  const meta = {
+    title: `Explore ${req.params.toExplore} - LooseLeaf`,
+    desc: 'Get your projects done for free',
+    url: req.url
+  };
+  const clientAppPath = '/explore.bundle.js';
 
   const preloadedState = {
     user: { loggedinUser: req.user }
   };
 
   const store = configureStore(preloadedState);
-  const dataToSerialize = preloadedState;
 
-  const meta = {
-    title: `Explore ${req.params.toExplore}`
-  };
+  const dataToSerialize = preloadedState;
 
   const branch = matchRoutes(routes, req.url);
 
@@ -51,8 +52,9 @@ export default function renderExploreApp(req, res, next) {
     const html = renderToString(
       <HTML
         meta={meta}
-        dataToSerialize={dataToSerialize}
         html={app}
+        dataToSerialize={dataToSerialize}
+        clientAppPath={clientAppPath}
       />
     );
     return res.send(`<!DOCTYPE html>${html}`);
