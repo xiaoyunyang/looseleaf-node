@@ -1,21 +1,54 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import $ from 'jquery';
 import { Link } from 'react-router-dom';
 import { dateFormatted, getApiData, contributorIds, postToApiData } from '../../../../lib/helpers';
 import { apiLink } from '../../../data/apiLinks';
 import appRoute from '../../../data/appRoute';
 import Communities from '../../../components/Collection/Communities/Chips';
 import { badgeIcon } from '../../../components/Collection/Projects/Badge';
+import Users from '../../../components/Collection/Users';
 
 export default class ProjectInfo extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: null
+      user: null,
+      projectWatchers: []
     }
   }
   componentDidMount() {
+    $('.modal').modal({
+      dismissible: true, // Modal can be dismissed by clicking outside of the modal
+      opacity: 0.5, // Opacity of modal background
+      inDuration: 300, // Transition in duration
+      outDuration: 200, // Transition out duration
+      startingTop: '4%', // Starting top style attribute
+      endingTop: '80px' // Ending top style attribute
+    });
     this.fetchProjectCreator();
+    const projectWatchersIds = contributorIds(this.props.projectInfo.contributors, 'watch');
+    this.fetchProjectWatchers(projectWatchersIds);
+  }
+  componentWillReceiveProps(nextProps) {
+    if(JSON.stringify(nextProps.projectInfo.contributors) !== JSON.stringify(this.props.projectInfo.contributors)) {
+      const nextProjectWatcherIds = contributorIds(nextProps.projectInfo.contributors, 'watch');
+      this.fetchProjectWatchers(nextProjectWatcherIds);
+    }
+  }
+  fetchProjectWatchers(projectWatchersIds) {
+    if(projectWatchersIds.length === 0) {
+      this.setState({
+        projectWatchers: []
+      });
+      return;
+    }
+    const setApiData = data => {
+      this.setState({
+        projectWatchers: data
+      })
+    }
+    getApiData(apiLink.usersByIds(projectWatchersIds), setApiData);
   }
   fetchProjectCreator() {
     const url = apiLink.userById(this.props.projectInfo.postedBy);
@@ -152,6 +185,20 @@ export default class ProjectInfo extends React.Component {
       </div>
     )
   }
+  renderModalWatching(projectWatchers) {
+    return (
+      <div id="modal-watching" className="modal" style={{maxHeight: '90vh', top: '5vh'}}>
+        <div className="modal-content reaction-modal">
+          <h5>Project Watchers</h5>
+          {
+            projectWatchers.length === 0 ? <p>{`No one is watching this project`}</p>
+            :
+            <Users users={projectWatchers} showBio={false} />
+          }
+        </div>
+      </div>
+    )
+  }
   render() {
     const {
       title,
@@ -162,6 +209,8 @@ export default class ProjectInfo extends React.Component {
       creator,
       communities,
     } = this.props.projectInfo;
+    const projectWatchers = contributorIds(this.props.projectInfo.contributors, 'watch');
+
     return (
       <div id="project-info" className="col s12 m12 l12">
         <div className="card-panel white">
@@ -194,7 +243,9 @@ export default class ProjectInfo extends React.Component {
             }
             <span className="grey-text text-darken-2">
               <i className={badgeIcon('watcher').className} style={{marginRight: 5}}/>
-              <a href='#'>{`${contributorIds(this.props.projectInfo.contributors, 'watch').length} watching`}</a> this project
+              <a className="modal-trigger" href="#modal-watching">
+                {`${projectWatchers.length} watching`}
+              </a> this project
             </span>
           </div>
           {
@@ -205,6 +256,7 @@ export default class ProjectInfo extends React.Component {
             )
           }
         </div>
+        {this.renderModalWatching(this.state.projectWatchers)}
       </div>
     );
   }
