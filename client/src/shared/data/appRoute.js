@@ -1,4 +1,4 @@
-const root = 'http://localhost:3001';
+import { root } from './apiLinks';
 
 // To use this, example:
 // appRoute('landingAbout', true) gives you `${root}+'/about'

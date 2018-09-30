@@ -1136,6 +1136,26 @@ nav .categories-wrapper .categories {
   font-weight: 200;
   color: white;
 }
+#person-card-modal a {
+  font-size: 22px;
+  margin-left: -3px;
+}
+#person-card-modal h5 {
+  font-size: 1.64rem;
+  font-weight: 450;
+}
+
+#person-card-modal .modal-content {
+  max-height: 80vh;
+  overflow-y: scroll;
+}
+#person-card-modal img {
+  max-width: 250px;
+}
+#person-card-modal .team-socials {
+  display: block;
+  margin: auto;
+}
 #landing-top {
   position: relative;
   text-align: center;
