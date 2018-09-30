@@ -2,12 +2,13 @@ import React from 'react';
 import TopNav from '../TopNav';
 import TeamMembers from './TeamMembers';
 import MdText from '../../components/MdText';
+import Footer from '../../components/Footer';
 import { image } from '../../data/assetLinks';
 import {  markdown } from '../../data/assetLinks';
 import team from '../../data/team';
 
 export default ({ route }) => (
-  <div className="section-white">
+  <div className="section-white" style={{paddingBottom: 0}}>
     <TopNav route={route} extended={false} />
     <div id="team-pg" className="container">
       <div className="card row s12 m12 l12">
@@ -46,5 +47,6 @@ export default ({ route }) => (
         </div>
       </div>
     </div>
+    <Footer />
   </div>
 );

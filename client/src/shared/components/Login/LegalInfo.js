@@ -6,6 +6,7 @@ const LegalInfo = () => (
     <span>
       <a
         href={appRoute('landingTerms', true)}
+        target="_blank"
         className="center-align"
         style={{color: '#555', textDecoration: 'underline'}}
       >
@@ -13,6 +14,7 @@ const LegalInfo = () => (
       </a>{`  |  `}
       <a
         href={appRoute('landingPrivacy', true)}
+        target="_blank"
         className="center-align"
         style={{color: '#555', textDecoration: 'underline'}}
       >

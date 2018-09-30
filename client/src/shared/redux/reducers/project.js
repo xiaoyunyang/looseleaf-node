@@ -16,56 +16,56 @@ const initState = {
     contributors: {},
     tags:["Logo Design"],
     submission: {"instruction":"Submission Instruction","platform":"Dropbox"},
-    title: "Dummy project",
+    title: "project title",
     slug: "default",
     desc: "This project is a placeholder to support rapid app prototyping with CRA.",
     dueDate: "2018-08-31T04:00:00.000Z", // or null if not specified
     type: "Web Development",
-    interests: ['JavaScript', 'React'],
+    interests: [],
   },
   contributors: [
-    {
-      displayName: "Andrew Fenner",
-      username: "afenner",
-      communities: [],
-      bio: "hi I'm Andrew",
-      email: "andrewfenner@numbershapes.com",
-    },
-    {
-      displayName: "Xiaoyun Yang",
-      username: "xiaoyunyang",
-      communities: ["Developer"],
-      bio: "hi I'm Xiaoyun",
-      email: "yangx232@gmail.com",
-    },
-    {
-      displayName: "Desi Graphica",
-      username: "afenner",
-      communities: ["Designer"],
-      bio: "hi I'm Desi",
-      email: "graphica@email.com",
-    },
-    {
-      displayName: "Reallyreally Longname",
-      username: "xiaoyunyang",
-      communities: [],
-      bio: "hi I'm Longname. Realy really really really really really really really really really really really really really really really really long bio",
-      email: "longname@email.com"
-    },
-    {
-      displayName: "Another Person",
-      username: "afenner",
-      communities: ["Marketer"],
-      bio: "hi I'm Another Person",
-      email: "randomPerson@email.com",
-    },
-    {
-      displayName: "Oscar Wilde",
-      username: "xiaoyunyang",
-      communities: ["Writer"],
-      bio: "I'm Oscar. I'm a writer.",
-      email: "illustrator@email.com",
-    }
+    // {
+    //   displayName: "Andrew Fenner",
+    //   username: "afenner",
+    //   communities: [],
+    //   bio: "hi I'm Andrew",
+    //   email: "andrewfenner@numbershapes.com",
+    // },
+    // {
+    //   displayName: "Xiaoyun Yang",
+    //   username: "xiaoyunyang",
+    //   communities: ["Developer"],
+    //   bio: "hi I'm Xiaoyun",
+    //   email: "yangx232@gmail.com",
+    // },
+    // {
+    //   displayName: "Desi Graphica",
+    //   username: "afenner",
+    //   communities: ["Designer"],
+    //   bio: "hi I'm Desi",
+    //   email: "graphica@email.com",
+    // },
+    // {
+    //   displayName: "Reallyreally Longname",
+    //   username: "xiaoyunyang",
+    //   communities: [],
+    //   bio: "hi I'm Longname. Realy really really really really really really really really really really really really really really really really long bio",
+    //   email: "longname@email.com"
+    // },
+    // {
+    //   displayName: "Another Person",
+    //   username: "afenner",
+    //   communities: ["Marketer"],
+    //   bio: "hi I'm Another Person",
+    //   email: "randomPerson@email.com",
+    // },
+    // {
+    //   displayName: "Oscar Wilde",
+    //   username: "xiaoyunyang",
+    //   communities: ["Writer"],
+    //   bio: "I'm Oscar. I'm a writer.",
+    //   email: "illustrator@email.com",
+    // }
   ]
 };
 

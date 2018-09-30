@@ -120,7 +120,10 @@ export default class UserCards extends React.Component {
           </div>
         </div>
         <div className="modal-footer">
-          <a href={`/@${this.state.modalPerson.username}`} className="modal-action modal-close waves-effect waves-green btn-flat">
+          <a
+            className="modal-action modal-close btn-flat"
+            href={`/@${this.state.modalPerson.username}`}
+          >
             Visit Profile
             <i className="fa fa-angle-right" />
           </a>
@@ -209,9 +212,9 @@ export default class UserCards extends React.Component {
                 {`${invitedName} will become a contributor once he clicks "Contribute" on this project page`}
               </h6>
               <div style={{paddingTop: 20}}>
-                <a className="btn" onClick={() => this.setState({inviteSuccess: false, invited: ''})}>
+                <button className="btn" onClick={() => this.setState({inviteSuccess: false, invited: ''})}>
                   Invite Another Contributor
-                </a>
+                </button>
               </div>
             </div>
           }

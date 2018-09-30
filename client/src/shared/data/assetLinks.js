@@ -1,5 +1,4 @@
-//const root = '';
-const root = 'http://localhost:3001';
+import { root } from './apiLinks';
 
 export const markdown = {
   ourStory: `${root}/markdown/our-story.md`,
