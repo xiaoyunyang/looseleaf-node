@@ -3,19 +3,17 @@
 
 LooseLeaf is a crowdsourcing platform for getting your projects done by others for little to no cost.
 
-The major challenges of self-study for a career change include the lack of insight on what skills to build, what to work on to build these skills, and how the skill building activity will improve chance of employment in a chosen career track. LooseLeaf's mission is to help career changers build a portfolio with real projects from non-profits.
+We believe learning should be a by-product of the need to solve real world problems. These real world problems are in forms of projects on LooseLeaf.
 
-
-We are not an ed-tech company. We are a get-shit-done company. We believe learning should be a by-product of the need to solve real world problems. These real world problems are in forms of projects on LooseLeaf.
-
-
-# Explore Career Paths
+## Explore Career Paths
 
 Collaborate on projects with others to explore interests, grow your skills, and develop a passion. In a not so stressful way.
 
 Work on projects for other people. You may get paid.
 
-# Projects
+The major challenges of self-study for a career change include the lack of insight on what skills to build, what to work on to build these skills, and how the skill building activity will improve chance of employment in a chosen career track. LooseLeaf's mission is to help career changers build a portfolio with real projects from non-profits.
+
+## Projects
 
 Examples
 
@@ -38,10 +36,12 @@ Because every effort they put into accomplishing tasks for your project are visi
 
 In a future feature update, LooseLeaf will let you pay them on the platform. Right now, you may use things like [Patreon](https://www.patreon.com/) or [beerpay](https://beerpay.io/).  
 
-# Talent Search
-
-# Invest In LooseLeaf
+## Invest In LooseLeaf
 
 ## What categories does LooseLeaf fall under?
 
 Marketplace, Crowdsourcing, Freelance, Communities, Social
+
+# Guides
+
+# Pricing

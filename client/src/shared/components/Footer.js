@@ -27,7 +27,7 @@ class Footer extends React.Component {
             <a target="_blank" rel="noopener noreferrer" href={socialMedia.angellist}>
               <i className="fab fa-angellist fa-lg" />
             </a>
-            <a className="tooltipped" data-position="top" data-delay="50" data-tooltip="Email us" href="mailto:info@looseleaf.us">
+            <a className="tooltipped" data-position="top" data-delay="50" data-tooltip="Email us" href="mailto:hello@looseleafapp.com">
               <i className="fa fa-envelope fa-lg" />
             </a>
           </div>
@@ -47,9 +47,9 @@ class Footer extends React.Component {
               <div className="col s4 m2 l2">
                 <h6>Product
                   <ul style={{ marginTop: 5 }} className="light footer-text-links">
-                    <li><a href={appRoute('landingHowItWorks', true)}>FAQ</a></li>
-                    <li><a href={appRoute('landingHowItWorks', true)}>Pricing</a></li>
+                    <li><a href={`${appRoute('landingHowItWorks', true)}`}>FAQ</a></li>
                     <li><a href={appRoute('landingHowItWorks', true)}>Guides</a></li>
+                    <li><a href={appRoute('landingHowItWorks', true)}>Pricing</a></li>
                     <li><a href={appRoute('landingPrivacy', true)}>Privacy</a></li>
                     <li><a href={appRoute('landingTerms', true)}>Terms</a></li>
                   </ul>
@@ -61,7 +61,7 @@ class Footer extends React.Component {
                     <li><a href={appRoute('landingAbout', true)}>About</a></li>
                     <li><a href="http://xiaoyunyang.github.io/">Blog</a></li>
                     <li><a href={appRoute('landingCareers', true)}>Careers</a></li>
-                    <li><a href="#!">AngelList</a></li>
+                    <li><a href={socialMedia.angellist}>AngelList</a></li>
                   </ul>
                 </h6>
               </div>
