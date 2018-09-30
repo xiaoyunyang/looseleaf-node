@@ -170,7 +170,7 @@ export default class LandingHome extends React.Component {
             <p className="light text-brown">
               {aboutPortfolio[0]}
             </p>
-            <a href="">Learn more <i className="fa fa-arrow-circle-right" aria-hidden="true" /></a>
+            <a href={appRoute('landingHowItWorks', true)}>Learn more <i className="fa fa-arrow-circle-right" aria-hidden="true" /></a>
           </div>
         </div>
       </div>
@@ -185,7 +185,7 @@ export default class LandingHome extends React.Component {
             <p className="light text-brown">
               {aboutValidation[0]}
             </p>
-            <a href="">Learn more <i className="fa fa-arrow-circle-right" aria-hidden="true" /></a>
+            <a href={appRoute('landingHowItWorks', true)}>Learn more <i className="fa fa-arrow-circle-right" aria-hidden="true" /></a>
           </div>
         </div>
       </div>
@@ -200,7 +200,7 @@ export default class LandingHome extends React.Component {
             <p className="light text-brown">
               {aboutMentorship[0]}
             </p>
-            <a href="">Learn more <i className="fa fa-arrow-circle-right" aria-hidden="true" /></a>
+            <a href={appRoute('landingHowItWorks', true)}>Learn more <i className="fa fa-arrow-circle-right" aria-hidden="true" /></a>
           </div>
         </div>
       </div>

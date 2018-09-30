@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import LoginForm from './LoginForm';
 import appRoute from '../../data/appRoute';
+import LegalInfo from './LegalInfo';
 
 const LoginPage = ({ route }) => (
   <div className="section-white row" style={{ minHeight: '45em' }}>
@@ -17,6 +18,7 @@ const LoginPage = ({ route }) => (
             New to LooseLeaf? <Link to={appRoute('signup')}>Sign up</Link>
           </h6>
         </div>
+        <LegalInfo />
       </div>
     </div>
   </div>

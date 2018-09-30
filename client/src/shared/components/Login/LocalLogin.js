@@ -68,8 +68,8 @@ class LocalLogin extends React.Component {
     if (this.props.action === 'Continue') {
       return (
         <div style={style} className="col l8 offset-l5 m10 offset-m4 s12">
-            <a className="" href="/forgot">Forgot password</a>
-          </div>
+          <a className="" href="/auth/forgot">Forgot password</a>
+        </div>
       );
     }
     return null;
@@ -99,7 +99,9 @@ class LocalLogin extends React.Component {
                 onKeyPress={this.handleKeyPress.bind(this)}
               />
               <label htmlFor="password"><i className="fa fa-lock" /> Password</label>
-              { this.renderForgotPass() }
+              {
+                // this.renderForgotPass() 
+              }
             </div>
           </form>
         </div>

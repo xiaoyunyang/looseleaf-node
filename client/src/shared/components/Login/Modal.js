@@ -1,14 +1,7 @@
 import React from 'react';
 import LoginForm from './LoginForm';
+import LegalInfo from './LegalInfo';
 
-const ModalInfo = () => (
-  <div className="col l12 m12 s12">
-    <a className="center-align" style={{color: '#555', textDecoration: 'underline'}}>
-      Terms
-    </a>
-  </div>
-
-)
 const SignupModal = ({redirPath}) => (
   <div id="signup-modal" className="modal">
     <LoginForm
@@ -20,7 +13,7 @@ const SignupModal = ({redirPath}) => (
       <div className="col l12 m12 s12">
         Already a member? <a className="modal-trigger modal-action modal-close" href="#login-modal">Log in</a>
       </div>
-      <ModalInfo />
+      <LegalInfo />
     </div>
   </div>
 );
@@ -36,7 +29,7 @@ const LoginModal = ({redirPath}) => (
       <div className="col l12 m12 s12">
         New to LooseLeaf? <a className="modal-trigger modal-action modal-close" href="#signup-modal">Sign up</a>
       </div>
-      <ModalInfo />
+      <LegalInfo />
     </div>
   </div>
 );

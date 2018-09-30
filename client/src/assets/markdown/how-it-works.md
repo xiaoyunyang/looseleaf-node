@@ -131,7 +131,7 @@ Interaction with other people in your network via these posts provide the basis 
 - *Contribute to a project.* The primary way LooseLeaf helps you explore a career track like web development or graphic design is through collaborating with others on projects. These are low-stakes projects that provide a low-risk and low-cost way for you to explore your interests, grow your skills, and develop a passion.
 - *Watch a project.* If you don't want to sign up to contribute to a project, you can choose to watch a project. All projects you watch appear under your profile and your feed also include projects which you watch. You always have the option to both contribute and watch a project.
 
-## Pricing -
+# Pricing -
 
 ### How much does it cost to use LooseLeaf?
 
@@ -153,7 +153,7 @@ LooseLeaf does not currently make any money We have a few ideas for how to monet
 - Allow third parties to sell ads for tools or resources which are useful for career changers and online learners.
 - Sell LooseLeaf as SaaS to companies as an internal project management platform.
 
-## Misc
+# Misc
 
 ### What categories describe LooseLeaf?
 
