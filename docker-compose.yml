@@ -1,0 +1,18 @@
+version: "2"
+services:
+  web:
+    container_name: looseleaf-node-app
+    build: .
+    ports:
+      - "3001:3001"
+    depends_on:
+      - mongo
+  mongo:
+    container_name: mongo
+    image: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - data-volume:/data/db
+volumes:
+  data-volume:

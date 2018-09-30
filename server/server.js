@@ -9,7 +9,8 @@ import bodyParser from 'body-parser';
 import fs from 'fs';
 import cookieParser from 'cookie-parser';
 import mongoose from 'mongoose';
-import session from 'express-session';
+import session from 'cookie-session';
+//import session from 'express-session';
 import flash from 'connect-flash';
 import passport from 'passport';
 import cors from 'cors';
@@ -19,9 +20,6 @@ import chalk from 'chalk';
 import helmet from 'helmet';
 import ms from 'ms';
 import validator from 'validator';
-import renderViewMiddleware from '../client/iso-middleware/renderView';
-//import renderGuestAppMiddleware from '../client/iso-middleware/renderGuestApp';
-//import renderUserAppMiddleware from '../client/iso-middleware/renderUserApp';
 
 require('dotenv').config();
 
@@ -52,8 +50,6 @@ app.use(helmet.noSniff()); // Don’t let browsers infer the file type
 // mitigate cross site request forgery
 
 // connect to our database
-mongoose.connect(process.env.MONGODB);
-
 // set up ejs for templating - for prototyping server only
 app.set('view engine', 'ejs');
 app.set('views', path.resolve(__dirname, 'views'));
@@ -66,6 +62,9 @@ const clientAppPathDev = path.join(__dirname, '../', 'client/src/assets');
 
 if (process.env.NODE_ENV === 'production') {
   console.log(chalk.blue('Running in production mode'));
+  mongoose.connect('mongodb://mongo:27017');
+
+  app.use(cors());
   // The below code allows client app to run from the the server (localhost:3001)
   app.use('/', express.static(clientAppPathProd));
 } else if (process.env.NODE_ENV === 'development') {
@@ -75,6 +74,7 @@ if (process.env.NODE_ENV === 'production') {
   // to the client, this is only helpful when UI and Backend development
   // are on different servers and in production they are actually on same
   // server.
+  mongoose.connect(process.env.MONGODB);
   app.use(cors());
 
   // Note: make sure to enable cors, then serve static. In node,
@@ -94,12 +94,6 @@ app.use('/api', apiVersion1);
 // Isomorphic Webapp ===========================================================
 
 // handle the isomorphic page render
-app.get('/recipe', renderViewMiddleware);
-
-// app.use(express.static(__dirname));
-// app.get('/user*', renderUserAppMiddleware);
-// app.get('/public*', renderGuestAppMiddleware);
-
 // Auth ========================================================================
 // required for passport
 // TODO: "secret" needs to be secret and a bunch of random characters
@@ -123,66 +117,6 @@ app.use('/auth', authRoutes);
 app.use('/', appRoutes);
 configPassport();
 
-// Guestbook ===================================================================
-// TODO: TEST CODE BELOW. Remote for production
-// console.log(getInfoFromURL("https://medium.com/@xiaoyunyang")("username"))
-// console.log(getInfoFromURL(path)("pathname"))
-
-const entries = [];
-let ctr = 0;
-app.locals.entries = entries;
-
-app.get('/guestbook', (req, res) => {
-  res.render('index');
-});
-app.get('/guestbook/new-entry', (req, res) => {
-  res.render('new-entry');
-});
-
-// regex for catching numbers only
-app.get(/^\/guestbook\/(\d+)$/, (req, res) => {
-  const id = parseInt(req.params[0], 10);
-  const entry = entries[id];
-  app.locals.entry = entry;
-  res.render('entry');
-});
-
-app.post('/guestbook/new-entry', (req, res) => {
-  if (!req.body.title || !req.body.body) {
-    res.status(400).send('Entries must have a title and a body.');
-    return;
-  }
-  entries.push({
-    id: ctr,
-    title: req.body.title,
-    content: req.body.body,
-    published: new Date()
-  });
-  ctr += 1;
-
-  res.redirect('/guestbook');
-});
-
-
-// Serve Static ================================================================
-// Serve static file
-// Try: http://localhost:3001/static/cat.png
-// Try:  http://localhost:3001/static/resume.png
-
-/* If we don't comment this out, integration with frontend won't work...Not sure why.
-app.use('/static', (req, res, next) => {
-  const filePath = path.join(__dirname, 'static', req.url);
-  if (req.url === '/resume.pdf') {
-    res.status(403).send(`${req.url}  is Forbidden resource`);
-  }
-  res.sendFile(filePath, (err) => {
-    if (err) {
-      next(new Error('Error sending file!'));
-    }
-  });
-});
-
-*/
 
 // Send to SuperTest for test ==================================================
 app.get('/test/', (req, res) => {

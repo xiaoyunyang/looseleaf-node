@@ -14,6 +14,9 @@ results
 tmp
 coverage
 
+# Git
+.git
+
 # API keys
 .env
 secrets.js
@@ -24,6 +27,9 @@ node_modules
 bower_components
 package-lock.json
 .map
+
+# Data Persistence
+data
 
 # Builds
 build

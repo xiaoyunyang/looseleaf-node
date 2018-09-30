@@ -3,7 +3,6 @@
 // All the routes for authentication
 
 import express from 'express';
-import passport from 'passport';
 import validator from 'validator';
 import csrf from 'csurf';
 import gravatarUrl from 'gravatar-url';

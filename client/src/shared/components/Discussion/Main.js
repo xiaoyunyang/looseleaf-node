@@ -167,5 +167,5 @@ Discussion.defaultProps = {
   noPostDisp: 'no posts.',
   readOnly: true,
   itemName: 'posts',
-  updateParentPostCommentsNum: () => {console.log('foo')}
+  updateParentPostCommentsNum: () => {}
 }
