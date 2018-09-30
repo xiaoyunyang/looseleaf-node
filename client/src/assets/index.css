@@ -1051,6 +1051,27 @@ nav .categories-wrapper .categories {
 /**** Project Card badges END ***/
 
 /**** Landing App Stuff Start ****/
+#markdown-pg {
+  min-height: 100vh;
+}
+#markdown-pg p {
+  color: #616161;
+  max-width: 95%;
+  padding-left: 2%;
+}
+#markdown-pg h1 {
+  font-size: 2rem;
+  font-weight: 500;
+}
+#markdown-pg h2 {
+  font-size: 1.3rem;
+  padding-left: 2%;
+  font-weight: 500;
+}
+#markdown-pg h3 {
+  font-size: 1rem;
+  font-weight: 500;
+}
 #team-pg {
   margin-top: 40px;
   margin-bottom: 40px;

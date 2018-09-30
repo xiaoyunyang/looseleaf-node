@@ -18,6 +18,12 @@ const appRoute = (pageName, absRoute) => {
       return prepend + '/how-it-works';
     case 'landingAbout':
       return prepend + '/about';
+    case 'landingPrivacy':
+      return prepend + '/privacy';
+    case 'landingTerms':
+      return prepend + '/terms';
+    case 'landingCareers':
+      return prepend + '/careers';
     case 'login':
       return '/auth/login';
     case 'signup':

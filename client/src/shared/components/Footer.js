@@ -47,20 +47,20 @@ class Footer extends React.Component {
               <div className="col s4 m2 l2">
                 <h6>Product
                   <ul style={{ marginTop: 5 }} className="light footer-text-links">
-                    <li><a href="#!">FAQ</a></li>
-                    <li><a href="#!">Pricing</a></li>
-                    <li><a href="#!">Guides</a></li>
-                    <li><a href="#!">Privacy</a></li>
-                    <li><a href="#!">Terms</a></li>
+                    <li><a href={appRoute('landingHowItWorks', true)}>FAQ</a></li>
+                    <li><a href={appRoute('landingHowItWorks', true)}>Pricing</a></li>
+                    <li><a href={appRoute('landingHowItWorks', true)}>Guides</a></li>
+                    <li><a href={appRoute('landingPrivacy', true)}>Privacy</a></li>
+                    <li><a href={appRoute('landingTerms', true)}>Terms</a></li>
                   </ul>
                 </h6>
               </div>
               <div className="col s4 m2 l2">
                 <h6>Company
                   <ul style={{ marginTop: 5 }} className="light footer-text-links">
-                    <li><a href="#!">About</a></li>
-                    <li><a href="#!">Blog</a></li>
-                    <li><a href="#!">Careers</a></li>
+                    <li><a href={appRoute('landingAbout', true)}>About</a></li>
+                    <li><a href="http://xiaoyunyang.github.io/">Blog</a></li>
+                    <li><a href={appRoute('landingCareers', true)}>Careers</a></li>
                     <li><a href="#!">AngelList</a></li>
                   </ul>
                 </h6>

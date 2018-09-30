@@ -8,7 +8,7 @@ export default ({ route }) => (
   <div className="section-white" style={{paddingBottom: 0}}>
     <TopNav route={route} extended={false} />
     <div id="markdown-pg" className="container">
-      <MdText filepath={markdown.howItWorks} mdId="how-it-works" />
+      <MdText filepath={markdown.terms} mdId="terms" />
     </div>
     <Footer />
   </div>

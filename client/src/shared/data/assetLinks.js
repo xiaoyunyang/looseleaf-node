@@ -6,6 +6,9 @@ export const markdown = {
   ourValues: `${root}/markdown/our-values.md`,
   ourMission: `${root}/markdown/our-mission.md`,
   howItWorks: `${root}/markdown/how-it-works.md`,
+  terms: `${root}/markdown/terms.md`,
+  privacy: `${root}/markdown/privacy.md`,
+  careers: `${root}/markdown/careers.md`
 };
 
 export const image = {
