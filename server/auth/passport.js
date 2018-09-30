@@ -86,44 +86,6 @@ module.exports = () => {
   /* TODO: If same user has same email from facebook and github, should that person
      be able to create two separate accounts?
   */
-
-  // ===========================================================================
-  // Helpers needed for open auth
-  // ===========================================================================
-  /*
-  const createUserName = (username) => {
-    const regex = new RegExp(`^${username}.*$`, 'i');
-    return User.count({ 'username': regex}, (err, c) => {
-      if (err) {
-        return '';
-      }
-      const append = (c === 0) ? '' : `-${c}`;
-      return username + append;
-    });
-  }
-
-  const newSocialUser =(
-    count,
-    email,
-    username,
-    displayName,
-    picture,
-    bio,
-    website,
-    location,
-    gender, hireable) => {
-      const newUser = new User();
-      newUser.email = email;
-      newUser.username = username;
-      newUser.displayName = displayName;
-      newUser.local.password = crypto.randomBytes(20).toString('hex');
-      newUser.gender = gender;
-      newUser.location = location;
-      newUser.picture = picture;
-
-      return newUser;
-    };
-*/
   // ===========================================================================
   // Facebook Signup  ==========================================================
   // ===========================================================================
@@ -158,7 +120,6 @@ module.exports = () => {
         newUser.facebook.token = token; // we will save the token that facebook provides to the user
         newUser.email = profile.emails[0].value;
         newUser.local.password = crypto.randomBytes(20).toString('hex');
-        newUser.gender = profile.gender;
         newUser.location = profile._json.location.name;
         newUser.picture = `https://graph.facebook.com/${profile.id}/picture?type=large`;
         newUser.lastLoggedIn = new Date();

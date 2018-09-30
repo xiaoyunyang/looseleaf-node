@@ -17,7 +17,6 @@ const schema = mongoose.Schema({
   bio: { type: String, default: '' },
   website: { type: String, default: '' },
   location: { type: String, default: '' },
-  gender: String,
   hireable: { type: Boolean, default: true },
   projects: { type: Array, default: [] },
   followers: { type: Array, default: [] },

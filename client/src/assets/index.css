@@ -1057,7 +1057,13 @@ nav .categories-wrapper .categories {
 #markdown-pg p {
   color: #616161;
   max-width: 95%;
-  padding-left: 2%;
+  margin-left: 2%;
+}
+#markdown-pg ul li {
+  color: #616161;
+  max-width: 95%;
+  margin-left: 5%;
+  list-style-type: disc;
 }
 #markdown-pg h1 {
   font-size: 2rem;
