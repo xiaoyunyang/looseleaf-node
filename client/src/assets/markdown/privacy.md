@@ -41,7 +41,7 @@ Some third-party services that we use to provide the LooseLeaf Service, such as 
 
 If you have a LooseLeaf account, you can access, modify or export your personal information,
 
-You cannot delete your account yet but we are working on it.
+Currently, LooseLeaf does not provide the capability for you to delete your accounts on your own, but we are working on implementing this feature so you may in the future. In the interim, if you wish to delete your account, please send us an account deletion request at <a href="mailto: hello@looseleafapp.com">hello@looseleafapp.com</a>.
 
 We use encryption (HTTPS/TLS) to protect data transmitted to and from our site. However, no data transmission over the Internet is 100% secure, so we can’t guarantee security. You use the Service at your own risk, and you’re responsible for taking reasonable measures to secure your account.
 Business Transfers
@@ -139,7 +139,8 @@ LooseLeaf is hosted in the United States. By using LooseLeaf Services, you autho
 
 ### Retention
 
-LooseLeaf retains personal data associated with your account for the lifetime of your account. If you would like to delete your personal information, you cannot delete your account at this time but we are working on this feature.
+LooseLeaf retains personal data associated with your account for the lifetime of your account. If you would like to delete your personal information, please send us an account deletion request at <a href="mailto: hello@looseleafapp.com">hello@looseleafapp.com</a>. Currently, LooseLeaf does not provide the capability for you to delete your accounts on your own, but we are working on implementing this features so you may in the future.
+
 
 Deleted account profile pages will yield an error 404 “file not found” page, immediately upon initiating deletion, and will become unrecoverable in our system after a period of fourteen days. It may take several additional days for your personal data to be de-indexed from search engines, depending on those search engines’ practices, over which LooseLeaf may have limited or no control.
 
