@@ -1054,6 +1054,12 @@ nav .categories-wrapper .categories {
 #markdown-pg {
   min-height: 100vh;
 }
+#markdown-pg img {
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
 #markdown-pg p {
   color: #616161;
   max-width: 95%;
@@ -1065,17 +1071,22 @@ nav .categories-wrapper .categories {
   margin-left: 5%;
   list-style-type: disc;
 }
+#markdown-pg ol li {
+  color: #616161;
+}
 #markdown-pg h1 {
-  font-size: 2rem;
+  font-size: 2.2rem;
   font-weight: 500;
 }
 #markdown-pg h2 {
-  font-size: 1.3rem;
+  font-size: 1.5rem;
   padding-left: 2%;
   font-weight: 500;
 }
 #markdown-pg h3 {
-  font-size: 1rem;
+  font-size: 1.1rem;
+  padding-left: 2%;
+  margin-bottom: -10px;
   font-weight: 500;
 }
 #team-pg {
