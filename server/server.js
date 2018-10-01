@@ -63,8 +63,6 @@ const clientAppPathDev = path.join(__dirname, '../', 'client/src/assets');
 if (process.env.NODE_ENV === 'production') {
   console.log(chalk.blue('Running in production mode'));
   mongoose.connect('mongodb://mongo:27017');
-
-  app.use(cors());
   // The below code allows client app to run from the the server (localhost:3001)
   app.use('/', express.static(clientAppPathProd));
 } else if (process.env.NODE_ENV === 'development') {
