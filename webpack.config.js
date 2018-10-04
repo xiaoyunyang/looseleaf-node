@@ -59,6 +59,17 @@ module.exports = {
   optimization: {
     nodeEnv: 'production',
     minimize: true,
-    minimizer: [new UglifyJsPlugin()]
+    minimizer: [new UglifyJsPlugin()],
+    splitChunks: {
+      cacheGroups: {
+        default: false,
+        vendors: false,
+        vendor: { // vendor chunk
+          name: 'vendor',
+          chunks: 'all', // async + async chunks
+          test: /node_modules/ // import file path containing node_modules
+        }
+      }
+    }
   }
 };

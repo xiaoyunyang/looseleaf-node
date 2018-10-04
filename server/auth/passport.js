@@ -14,7 +14,7 @@ import User from '../models/User';
 import { createUsername } from './newUserHelper';
 import chalk from 'chalk';
 
-const configAuth = require('./secrets');
+const configAuth = (process.env.NODE_ENV === 'production') ? require('./secrets/prod') : require('./secrets/prod');
 
 module.exports = () => {
   // =========================================================================
@@ -211,7 +211,7 @@ module.exports = () => {
 
         newUser.email = profile._json.emails[0].value;
         newUser.displayName = profile._json.displayName;
-        
+
         newUser.local.password = crypto.randomBytes(20).toString('hex');
         newUser.picture = profile._json.image.url.split('?')[0];
         newUser.lastLoggedIn = new Date();

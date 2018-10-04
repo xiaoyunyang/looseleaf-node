@@ -1,5 +1,6 @@
-// const root = '';
-export const root = 'http://localhost:3001';
+// export const root = 'http://localhost:3001';
+
+export const root = '';
 
 // TODO: apiLink is the only one that should exist in this file.
 // combine everything into apiLink and change the file name.

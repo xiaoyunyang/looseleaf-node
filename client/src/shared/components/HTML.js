@@ -44,7 +44,8 @@ const HTML = ({meta, html, dataToSerialize, clientAppPath})  => {
               ${JSON.stringify(dataToSerialize)}`
           }}
         />
-      <script type="application/javascript" src={clientAppPath} />
+        <script type="application/javascript" src='/vendor.bundle.js' />
+        <script type="application/javascript" src={clientAppPath} />
       </body>
     </html>
   );

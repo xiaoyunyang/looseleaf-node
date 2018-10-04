@@ -17,19 +17,18 @@ coverage
 # Git
 .git
 
-# API keys
+# API keys and private stuff
 .env
-secrets.js
+secrets
 localhost-ssl
+config
+data
 
 # Dependency directory
 node_modules
 bower_components
 package-lock.json
 .map
-
-# Data Persistence
-data
 
 # Builds
 build
@@ -44,10 +43,5 @@ browser.js
 # OS metadata
 .DS_Store
 Thumbs.db
-
-# Elastic Beanstalk Files
-.elasticbeanstalk/*
-!.elasticbeanstalk/*.cfg.yml
-!.elasticbeanstalk/*.global.yml
 
 .dockerignore

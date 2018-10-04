@@ -1,7 +1,6 @@
 import React from 'react';
 import $ from 'jquery';
-
-const defaultUserPic = 'http://localhost:3001/user.png';
+import { image } from '../../data/assetLinks';
 
 export default class TeamMembers extends React.Component {
   constructor(props) {
@@ -13,7 +12,7 @@ export default class TeamMembers extends React.Component {
         fullName: 'Firstname Lastname',
         role: 'CEO',
         bio: 'stuff',
-        img: defaultUserPic,
+        img: image.defaultUserPic,
         social: {
           linkedin: 'https://linkedin.com',
         }
