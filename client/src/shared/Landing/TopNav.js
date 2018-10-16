@@ -23,8 +23,8 @@ export default class TopNavGuest extends React.Component {
       opacity: 0.5, // Opacity of modal background
       inDuration: 300, // Transition in duration
       outDuration: 200, // Transition out duration
-      startingTop: '10px', // Starting top style attribute
-      endingTop: '50px' // Ending top style attribute
+      startingTop: '2px', // Starting top style attribute
+      endingTop: '10px' // Ending top style attribute
     });
 
     $('ul.tabs').tabs();

@@ -1,12 +1,12 @@
 // Set up ======================================================================
 // get all the tools we need
 import express from 'express';
-import https from 'https';
+// import https from 'https';
 import http from 'http';
 import logger from 'morgan';
 import path from 'path';
 import bodyParser from 'body-parser';
-import fs from 'fs';
+// import fs from 'fs';
 import cookieParser from 'cookie-parser';
 import mongoose from 'mongoose';
 import session from 'cookie-session';
@@ -178,18 +178,18 @@ app.use((err, req, res, next) => {
 
 // launch ======================================================================
 // Starts the Express server on port 3001 and logs that it has started
-const httpsOptions = {
-  key: fs.readFileSync('localhost-ssl/key.pem'),
-  cert: fs.readFileSync('localhost-ssl/cert.pem')
-};
+// const httpsOptions = {
+//   key: fs.readFileSync('localhost-ssl/key.pem'),
+//   cert: fs.readFileSync('localhost-ssl/cert.pem')
+// };
 
 http.createServer(app).listen(app.get('port'), () => {
   console.info(`Express server started at: http://localhost:${app.get('port')}/`); // eslint-disable-line no-console
 });
 
-https.createServer(httpsOptions, app).listen(8080, () => {
-  console.info('Express server started at: https://localhost:8080/'); // eslint-disable-line no-console
-});
+// https.createServer(httpsOptions, app).listen(8080, () => {
+//   console.info('Express server started at: https://localhost:8080/'); // eslint-disable-line no-console
+// });
 
 /*
 https.createServer(httpsOptions, app).listen(app.get('port'), () => {

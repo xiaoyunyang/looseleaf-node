@@ -7,7 +7,7 @@
     "build:dev": "./node_modules/.bin/webpack --mode development",
     "prestart": "npm run build:prod",
     "start": "node server/run-prod.js",
-    "start-server-dev": "nodemon server/run-dev.js --watch server --watch client/iso-middleware --watch client/src",
+    "start-server-dev": "nodemon server/run-dev.js --watch server --watch client/iso-middleware",
     "start-dev": "concurrently \"npm run start-server-dev\" \"npm run start-client\"",
     "build": "npm run build-client && npm run build-server",
     "build-server": "./node_modules/.bin/babel server/server.js -o server/build/main.bundle.js",

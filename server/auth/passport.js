@@ -14,7 +14,9 @@ import User from '../models/User';
 import { createUsername } from './newUserHelper';
 import chalk from 'chalk';
 
-const configAuth = (process.env.NODE_ENV === 'production') ? require('./secrets/prod') : require('./secrets/prod');
+const configAuth = (process.env.NODE_ENV === 'production') ? require('./secrets/prod') : require('./secrets/dev');
+
+// const configAuth = require('./secrets/prod');
 
 module.exports = () => {
   // =========================================================================

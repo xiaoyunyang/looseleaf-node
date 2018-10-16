@@ -34,7 +34,7 @@ const Apps = {
   explore: AppExplore
 };
 
-const App = Apps.communityUser;
+const App = Apps.landing;
 
 const render = (Component) => {
   ReactDOM.render(

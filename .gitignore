@@ -23,6 +23,7 @@ secrets
 localhost-ssl
 config
 data
+.ssh
 
 # Dependency directory
 node_modules
