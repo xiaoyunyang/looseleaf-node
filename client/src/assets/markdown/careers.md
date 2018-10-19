@@ -7,13 +7,16 @@ We do not have any full-time positions available now but we are looking for free
 - React and Redux
 - Vanilla CSS and CSS framework / preprocessor like SASS or LESS
 - UX/UI Design
+- [our stack](https://stackshare.io/looseleaf/looseleaf)
 
-## Full-stack Developer
+## Full-stack Developer and DevOps
 
 - Node, Express, Mongo, Mongoose
 - Isomorphic application
 - REST API
-- AWS, Docker, and Kubernetes
+- AWS ECS, AWS EFS, Docker
+- [our stack](https://stackshare.io/looseleaf/looseleaf)
+
 
 ## Sales and Marketing
 
