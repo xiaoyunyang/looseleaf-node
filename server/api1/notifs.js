@@ -1,6 +1,12 @@
 import Notif from '../models/Notif';
 
-export const createNotif = ({ fromUser, toUser, action, ref }) => {
+export const createNotif = ({
+  fromUser,
+  toUser,
+  action,
+  ref
+}) => {
+  if (fromUser.equals(toUser)) return;
   const newNotif = new Notif();
   newNotif.fromUser = fromUser;
   newNotif.toUser = toUser;
