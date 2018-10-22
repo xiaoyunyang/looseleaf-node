@@ -22,7 +22,7 @@ coverage
 secrets
 localhost-ssl
 config
-data
+dbdata
 .ssh
 
 # Dependency directory

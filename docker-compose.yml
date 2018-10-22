@@ -13,6 +13,6 @@ services:
     ports:
       - "27017:27017"
     volumes:
-      - data-volume:/data/db
+      - data-volume:/dbdata/db
 volumes:
   data-volume:
