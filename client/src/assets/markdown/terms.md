@@ -37,6 +37,10 @@ Crawling the Services is allowed if done in accordance with the provisions of ou
 
 We may change, terminate, or restrict access to any aspect of the service, at any time, without notice.
 
+## No Children
+
+LooseLeaf is only for people 13 years old and over. By using LooseLeaf, you affirm that you are over 13. If we learn someone under 13 is using LooseLeaf, we’ll terminate their account.
+
 ## Security
 
 If you find a security vulnerability on LooseLeaf, please let us know.

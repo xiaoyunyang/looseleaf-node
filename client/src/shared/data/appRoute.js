@@ -18,11 +18,11 @@ const appRoute = (pageName, absRoute) => {
       return prepend + '/how-it-works';
     case 'landingAbout':
       return prepend + '/about';
-    case 'landingPrivacy':
+    case 'privacy':  // privacy page can be accessed by either landing or user app
       return prepend + '/privacy';
-    case 'landingTerms':
+    case 'terms': // terms page can be accessed by either landing or user app
       return prepend + '/terms';
-    case 'landingCareers':
+    case 'careers':  // careers page can be accessed by either landing or user app
       return prepend + '/careers';
     case 'login':
       return '/auth/login';

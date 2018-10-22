@@ -3,6 +3,8 @@ import Home from './screens/Home/Main';
 import Notif from './screens/Notif/Main';
 import Settings from './screens/Settings/Main';
 import Portfolio from '../components/Portfolio/Main';
+import Terms from './screens/Terms';
+import Privacy from './screens/Privacy'
 import NotFound from '../components/NotFound';
 import appRoute from '../data/appRoute';
 
@@ -43,6 +45,14 @@ const getRoutes = (user) => {
           path: appRoute('userNotif'),
           exact: true,
           component: Notif
+        },
+        {
+          path: appRoute('terms'),
+          component: Terms
+        },
+        {
+          path: appRoute('privacy'),
+          component: Privacy
         },
         {
           path: appRoute('userProfile')(username),

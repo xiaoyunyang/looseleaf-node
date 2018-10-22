@@ -50,8 +50,8 @@ class Footer extends React.Component {
                     <li><a href={`${appRoute('landingHowItWorks', true)}`}>FAQ</a></li>
                     <li><a href={appRoute('landingHowItWorks', true)}>Guides</a></li>
                     <li><a href={appRoute('landingHowItWorks', true)}>Pricing</a></li>
-                    <li><a href={appRoute('landingPrivacy', true)}>Privacy</a></li>
-                    <li><a href={appRoute('landingTerms', true)}>Terms</a></li>
+                    <li><a href={appRoute('privacy', true)}>Privacy</a></li>
+                    <li><a href={appRoute('terms', true)}>Terms</a></li>
                   </ul>
                 </h6>
               </div>

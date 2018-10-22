@@ -31,17 +31,17 @@ const routes = [
         component: About
       },
       {
-        path: appRoute('landingCareers'),
+        path: appRoute('careers'),
         exact: true,
         component: Careers
       },
       {
-        path: appRoute('landingPrivacy'),
+        path: appRoute('privacy'),
         exact: true,
         component: Privacy
       },
       {
-        path: appRoute('landingTerms'),
+        path: appRoute('terms'),
         exact: true,
         component: Terms
       },
