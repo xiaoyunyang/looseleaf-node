@@ -17,7 +17,7 @@ export default class Card extends React.Component {
             this.props.project.dueDate &&
             <div className="grey-text text-darken-1" style={{fontSize: 14}}>
               <i className="far fa-clock" />
-              {dateFormatted(this.props.project.dueDate)}
+              {` Need Date - ${dateFormatted(this.props.project.dueDate)}`}
             </div>
           }
           <p>{this.props.project.desc}</p>

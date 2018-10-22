@@ -79,14 +79,16 @@ export default class TopNavUser extends React.Component {
                 }
               </div>
               <ul className="right hide-on-small-only">
-                <li className={selected === '' ? 'active' : ''}>
-                  <UserAppNav pageName="home" id="nav-" username={username} external={useExternLinks}/>
-                </li>
-                <CommunityDropdown communities={communities} />
-                <NewDropdown />
                 <li className={selected === username ? 'active' : ''}>
                   <UserAppNav pageName="profile" id={`nav-${username}`} username={username} external={useExternLinks}/>
                 </li>
+                {
+                  // <li className={selected === '' ? 'active' : ''}>
+                  //   <UserAppNav pageName="home" id="nav-" username={username} external={useExternLinks}/>
+                  // </li>
+                }
+                <CommunityDropdown communities={communities} />
+                <NewDropdown />
                 <NotifWrapper
                   userId={this.props.user._id.toString()}
                   notifs={this.props.notifs}

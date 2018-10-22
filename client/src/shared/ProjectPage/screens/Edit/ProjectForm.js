@@ -147,7 +147,7 @@ export default class ProjectForm extends React.Component {
               />
             </div>
           </div>
-          <p>Set a due date. You can change the due date anytime.</p>
+          <p>Set a need date. You can change the need date anytime.</p>
           <div className="row">
             <div className="col s12 m10 l8">
               <DatePicker onChange={d => this.setState({ dueDate: d })} />
