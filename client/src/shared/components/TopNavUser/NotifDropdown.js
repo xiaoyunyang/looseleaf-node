@@ -5,6 +5,7 @@ import { postToApiData } from '../../../lib/helpers';
 import appRoute from '../../data/appRoute';
 import { apiLink } from '../../data/apiLinks';
 import Notif from '../Collection/Notifs/Notif';
+import NotifIcon from '../Collection/Notifs/NotifIcon';
 
 class NotifDropdown extends React.Component {
   componentDidMount() {
@@ -40,18 +41,6 @@ class NotifDropdown extends React.Component {
     }
     postToApiData(link, data, cbFailure, cbSuccess);
   }
-  renderNotifIcon(notifs) {
-    if(notifs.length === 0 || notifs[0].read === true) {
-      return <i style={{paddingLeft: 10}} className="material-icons">notifications_none</i>;
-    }
-    const numUnread = notifs.filter(notif => notif.read === false).length;
-
-    return (
-      <div className="circle-with-text" style={{marginTop: 10, marginRight: -6}}>
-        {numUnread}
-      </div>
-    );
-  }
   render() {
     return (
       <li className="dropdown-block">
@@ -60,7 +49,7 @@ class NotifDropdown extends React.Component {
           data-activates="notif-dropdown"
           onClick={this.handleNotifIconClick.bind(this, this.props.notifs)}
         >
-          {this.renderNotifIcon(this.props.notifs)}
+          <NotifIcon notifs={this.props.notifs} />
         </a>
         <ul id="notif-dropdown" className="notif-collection dropdown-content topnav-dropdown">
           {

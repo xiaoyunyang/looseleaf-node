@@ -354,6 +354,12 @@ img.mod-round, picture.mod-round {
   font-weight: 200;
   width: 150px !important;
 }
+#new-dropdown {
+  margin-left: -25px;
+}
+#new-dropdown .popover-arrow {
+  left: 50px;
+}
 #user-dropdown .popover-arrow {
   left: 102px;
 }

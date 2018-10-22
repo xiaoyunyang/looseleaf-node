@@ -8,6 +8,7 @@ import appRoute from '../../data/appRoute';
 import { UserAppNav } from '../Nav/AppNav';
 import MobileSideNav from './MobileSideNav';
 import UserDropdown from './UserDropdown';
+import NewDropdown from './NewDropdown';
 import CommunityDropdown from './CommunityDropdown';
 import NotifWrapper from '../Collection/Notifs/Wrapper';
 
@@ -82,10 +83,15 @@ export default class TopNavUser extends React.Component {
                   <UserAppNav pageName="home" id="nav-" username={username} external={useExternLinks}/>
                 </li>
                 <CommunityDropdown communities={communities} />
+                <NewDropdown />
                 <li className={selected === username ? 'active' : ''}>
                   <UserAppNav pageName="profile" id={`nav-${username}`} username={username} external={useExternLinks}/>
                 </li>
-                <NotifWrapper userId={this.props.user._id.toString()} notifs={this.props.notifs}/>
+                <NotifWrapper
+                  userId={this.props.user._id.toString()}
+                  notifs={this.props.notifs}
+                  openDropdown={true}
+                />
                 <UserDropdown
                   username={username}
                   userPic={userPic}
@@ -95,10 +101,16 @@ export default class TopNavUser extends React.Component {
               </ul>
               <ul className="right hide-on-med-and-up">
                 <li>
+                  <NotifWrapper
+                    userId={this.props.user._id.toString()}
+                    notifs={this.props.notifs}
+                    openDropdown={false}
+                  />
+                </li>
+                <li>
                   <a data-activates="mobile-menu" className="button-collapse"><i id="top-nav-hamburger" className="material-icons large">menu</i></a>
                 </li>
               </ul>
-
             </div>
           </nav>
         </div>
