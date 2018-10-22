@@ -34,7 +34,7 @@ const Apps = {
   explore: AppExplore
 };
 
-const App = Apps.user;
+const App = Apps.communityUser;
 
 const render = (Component) => {
   ReactDOM.render(

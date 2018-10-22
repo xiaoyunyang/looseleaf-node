@@ -114,7 +114,11 @@ export default class TopNav extends React.Component {
         { user &&
           <div>
             <ul className="right">
-              <NotifWrapper userId={user._id} />
+              <NotifWrapper
+                className="hide-on-small-only"
+                userId={user._id}
+                openDropdown={true}
+              />
               <UserDropdown
                 username={user.username}
                 userPic={user.picture}
