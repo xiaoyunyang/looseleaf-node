@@ -69,3 +69,21 @@ export const uniqueFieldsExists = ({
     return cbSuccess({ usernameExists: false, emailExists: false });
   });
 };
+
+// Update user based on id
+// TODO: This is dangerous. This API lets anyone update user information
+// based on user id. How do we make sure the request is coming from the
+// actual user?
+// TODO: Make the id come from req.query._id, as consistent from the previous api.post request handler
+// for user community
+export const updatedUserProps = (formFields, user) => {
+  return {
+    username: formFields.username || user.username,
+    displayName: formFields.displayName || user.displayName,
+    email: formFields.email || user.email,
+    location: formFields.location || user.location,
+    interests: formFields.interests || user.interests,
+    bio: formFields.bio || user.bio,
+    website: formFields.website || user.website
+  };
+}

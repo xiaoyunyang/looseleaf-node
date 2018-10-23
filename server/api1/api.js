@@ -18,7 +18,7 @@ import {
   updateProject, updateProjectAndUser,
   addNewProject } from './projects';
 import { getNotifs, createNotif } from './notifs';
-import { getUsers, uniqueFieldsExists } from './users';
+import { getUsers, uniqueFieldsExists, updatedUserProps } from './users';
 
 const api = express.Router();
 
@@ -512,7 +512,7 @@ api.post('/user', (req, res) => {
           res.statusText = 'error';
           return res.send({ status: 'error', msg: 'email already taken.' });
         }
-        user.set(updatedUserProps(formFields));
+        user.set(updatedUserProps(formFields, user));
         user.save();
         return res.send({ status: 'success', msg: 'change success!' });
       };
