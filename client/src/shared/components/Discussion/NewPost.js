@@ -111,15 +111,18 @@ export default class NewPost extends React.Component {
   renderEditorHelpModal() {
     return (
       <div id="editor-help-modal" className="modal">
-          <div className="row center hero">
-            <div className="col l12 m12 s12">
-              <h6>Rich Text Editor Shortcuts</h6>
-
-            </div>
-
+        <div className="row center hero">
+          <div className="col l12 m12 s12">
+            <h5>Rich Text Editor Shortcuts</h5>
+            {
+              'The New Post creator recognizes markdown shortcuts. Markdown provides a simple way to style your text to make it bold, change the size of text, add link, quote, or codeblock. For a quick tutorial on Markdown, check out '
+            }
+            <a target="_blank" rel="noopener noreferrer" href="https://guides.github.com/features/mastering-markdown/">{'this guide from GitHub'}</a>
           </div>
+          <button style={{marginTop: 40}} className="btn teal teal-text lighten-5 modal-close">Got it!</button>
+        </div>
       </div>
-    )
+    );
   }
   renderHelpBtn() {
     // This should open up a modal

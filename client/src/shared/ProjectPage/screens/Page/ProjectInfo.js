@@ -155,7 +155,6 @@ export default class ProjectInfo extends React.Component {
             </button>
           </div>
         }
-
       </div>
     );
   }
