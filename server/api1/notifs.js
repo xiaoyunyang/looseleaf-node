@@ -6,7 +6,7 @@ export const createNotif = ({
   action,
   ref
 }) => {
-  if (fromUser.equals(toUser)) return;
+  if (fromUser.toString === toUser.toString) return;
   const newNotif = new Notif();
   newNotif.fromUser = fromUser;
   newNotif.toUser = toUser;
