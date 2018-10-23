@@ -4,7 +4,6 @@ import {
   applyMiddleware,
   compose } from 'redux';
 import thunkMiddleware from 'redux-thunk';
-import loggerMiddleware from 'redux-logger';
 import community from '../reducers/community';
 
 //TODO: remove logger for only production mode
@@ -14,7 +13,7 @@ const reducers = combineReducers({
 });
 
 const configureStore = ({community}, init) => {
-  const middleware = [thunkMiddleware, loggerMiddleware];
+  const middleware = [thunkMiddleware];
   const enhancer = compose(
     applyMiddleware(...middleware)
   );
