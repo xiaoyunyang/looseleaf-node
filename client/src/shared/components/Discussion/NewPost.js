@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import $ from 'jquery';
 import {
   convertToRaw,
   EditorState,
@@ -37,6 +38,14 @@ export default class NewPost extends React.Component {
         editorState: newEditorState
       });
     }
+    $('.modal').modal({
+      dismissible: true, // Modal can be dismissed by clicking outside of the modal
+      opacity: 0.5, // Opacity of modal background
+      inDuration: 300, // Transition in duration
+      outDuration: 200, // Transition out duration
+      startingTop: '2px', // Starting top style attribute
+      endingTop: '10px' // Ending top style attribute
+    });
   }
   clearEditor() {
     this.setState({
@@ -99,6 +108,31 @@ export default class NewPost extends React.Component {
       </button>
     );
   }
+  renderEditorHelpModal() {
+    return (
+      <div id="editor-help-modal" className="modal">
+          <div className="row center hero">
+            <div className="col l12 m12 s12">
+              <h6>Rich Text Editor Shortcuts</h6>
+
+            </div>
+
+          </div>
+      </div>
+    )
+  }
+  renderHelpBtn() {
+    // This should open up a modal
+    return (
+      <div className="right" style={{maxWidth: 30}}>
+        <a
+          className="checkbox-help modal-trigger"
+          href="#editor-help-modal"
+        >
+          <i className="fas fa-question-circle" />
+        </a>
+      </div>)
+  }
   renderEditor() {
     if (!this.state.clientModeOn) {
       return null;
@@ -106,6 +140,7 @@ export default class NewPost extends React.Component {
     return (
       <div className="card feed">
         <div className="card-content">
+          { this.renderHelpBtn() }
           <div className="row feed-user">
             <div className="col">
               <img className="circle" src={this.props.userPic} alt=""/>
@@ -137,7 +172,10 @@ export default class NewPost extends React.Component {
   }
   render() {
     return (
-      <div>{ this.renderEditor() }</div>
+      <div>
+        { this.renderEditor() }
+        { this.renderEditorHelpModal() }
+      </div>
     );
   }
 }
