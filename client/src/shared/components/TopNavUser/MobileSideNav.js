@@ -5,6 +5,7 @@ import NavLink from '../Nav/NavLink';
 import { UserAppNav } from '../Nav/AppNav';
 import { apiLink } from '../../data/apiLinks';
 import appRoute from '../../data/appRoute';
+import { amendHref } from '../../../lib/helpers';
 
 class MobileSideNav extends React.Component {
   constructor(props) {
@@ -39,7 +40,7 @@ class MobileSideNav extends React.Component {
               {
                 userWebsite &&
                 <div className="col l2 m2 s2">
-                  <a target="_blank" href={userWebsite} rel="noopener noreferrer">
+                  <a target="_blank" href={amendHref(userWebsite)} rel="noopener noreferrer">
                     <i className="fa fa-globe-americas fa-lg" />
                   </a>
                 </div>

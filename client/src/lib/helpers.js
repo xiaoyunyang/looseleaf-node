@@ -160,3 +160,46 @@ export const slug2Name = (slug, singularize) => {
 
   return final;
 }
+
+// The function matches the most common cases
+export const isStrUrl = str => {
+  const matchTld = /(\.com|\.org|\.net|\.edu|\.gov|\.mil|\.io|\.ly|\.ai|\.my|\.co|\.exchange|\.me|\.app|\.gl|\.us|\.de|\.fr|\.is|\.co.uk)/i
+  const matchWWW = /(\www.)/i;
+  const matchHTTP = /(http:|https:)/i;
+  return matchTld.test(str) || matchWWW.test(str) || matchHTTP.test(str);
+};
+// Given string, return an array of objects in the following form:
+// { value: 'hello world', strType: 'text' }
+// { value: 'https://google.com', strType: 'url' }
+// Strategy: use string pattern matching
+export const parseUrl = longStr => {
+  const strs = longStr.split(' ').map(str => {
+    return isStrUrl(str) ? { value: str, strType: 'url'} :
+      { value: str, strType: 'text'}
+  });
+  let res = [];
+  let curr = null;
+  let last = null;
+  for(let i=0; i < strs.length; i+=1) {
+    curr = strs[i];
+    [last] = res.slice(-1);
+    if (res.length === 0) {
+      // the res array is empty, just push the text obj
+      res = res.concat(curr);
+    } else if (curr.strType === 'url' || last.strType === 'url') {
+      res = res.concat(curr);
+    } else if (curr.strType === 'text' && last && last.strType === 'text') {
+      // replace last in the res
+      const newLast = { value: `${last.value} ${curr.value}`, strType: 'text' };
+      // replace last thing in the array
+      res.splice(-1);
+      res.push(newLast);
+    }
+  }
+  return res;
+}
+// For links without www or http prepended, the link does not open properly
+export const amendHref = href => {
+  const match = /^(www\.|http:|https:)/;
+  return match.test(href) ? href : `http://${href}`
+}

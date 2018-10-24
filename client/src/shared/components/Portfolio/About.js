@@ -2,8 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import appRoute from '../../data/appRoute';
 import Communities from '../Collection/Communities/Chips';
+import TextWithLinks from '../TextWithLinks';
 import { apiLink } from '../../data/apiLinks';
-import { postToApiData } from '../../../lib/helpers';
+import { postToApiData, amendHref } from '../../../lib/helpers';
 import { image } from '../../data/assetLinks';
 
 const getMonthYear = (dateString) => {
@@ -36,7 +37,7 @@ const TextOrLink = ({ iconName, content }) => (
     }
     {
       iconEnums[iconName] === 'website' ?
-        <a href={`${content}`} target="_blank">
+        <a href={`${amendHref(content)}`} target="_blank">
           {content} <i className="fa fa-external-link"></i>
         </a>
         :
@@ -44,7 +45,7 @@ const TextOrLink = ({ iconName, content }) => (
     }
     {
       (iconEnums[iconName] === 'bio' || iconEnums[iconName] === 'location') ?
-        <p>{content}</p>
+        <TextWithLinks content={content} />
         :
         null
     }

@@ -6,6 +6,7 @@ import { dateFormatted, getApiData, contributorIds, postToApiData } from '../../
 import { apiLink } from '../../../data/apiLinks';
 import appRoute from '../../../data/appRoute';
 import Communities from '../../../components/Collection/Communities/Chips';
+import TextWithLinks from '../../../components/TextWithLinks';
 import { badgeIcon } from '../../../components/Collection/Projects/Badge';
 import Users from '../../../components/Collection/Users';
 
@@ -163,7 +164,9 @@ export default class ProjectInfo extends React.Component {
     return (
       <div>
         <h6>Description:</h6>
-        <p style={{marginTop: -3}}>{desc}</p>
+        <div style={{marginTop: -3}}>
+          <TextWithLinks content={desc} />
+        </div>
       </div>
     )
   }
@@ -173,12 +176,12 @@ export default class ProjectInfo extends React.Component {
       <div>
         <h6>About the Project Creator:</h6>
         { about !== '' &&
-          <p style={{marginTop: -3}}>{about}</p>
+          <div style={{marginTop: -3}}><TextWithLinks content={about} /></div>
         }
         {
           mission !== '' &&
           <p>
-            <span style={{marginRight: 4}}>Mission:</span>{mission}
+            <span style={{marginRight: 4}}>Mission:</span><TextWithLinks content={mission} />
           </p>
         }
       </div>
