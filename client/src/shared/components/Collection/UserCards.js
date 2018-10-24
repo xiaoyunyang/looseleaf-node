@@ -7,6 +7,7 @@ import { getApiData } from '../../../lib/helpers';
 import Communities from './Communities/Chips';
 import { communityName } from './Communities/lib'
 import FlashNotif from '../FlashNotif';
+import TextWithLinks from '../TextWithLinks';
 
 // This is a ES6 class - see https://toddmotto.com/react-create-class-versus-component/
 export default class UserCards extends React.Component {
@@ -106,9 +107,9 @@ export default class UserCards extends React.Component {
             <div className="col s8 m10 l8">
               <h4>{this.state.modalPerson.fullName}</h4>
               <p>{`@${this.state.modalPerson.username}`} </p>
-              <h6 style={{marginBottom: 20}}>
-                {this.state.modalPerson.bio}
-              </h6>
+              <div style={{marginBottom: 20}}>
+                <TextWithLinks content={this.state.modalPerson.bio} />
+              </div>
               <Communities
                 cs={this.state.modalPerson.communities}
                 altern={<div style={{fontWeight: 350}}>This user is not part of a community</div>}

@@ -180,9 +180,9 @@ export default class ProjectInfo extends React.Component {
         }
         {
           mission !== '' &&
-          <p>
+          <div>
             <span style={{marginRight: 4}}>Mission:</span><TextWithLinks content={mission} />
-          </p>
+          </div>
         }
       </div>
     )
