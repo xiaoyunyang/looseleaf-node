@@ -103,7 +103,12 @@ api.post('/post', (req, res) => {
       const fromUser = newPost.postedBy;
       const action = 'RESPONDED_TO_POST';
       const ref = parentPost._id;
-      createNotif({ fromUser, toUser, action, ref });
+      createNotif({
+        fromUser,
+        toUser,
+        action,
+        ref
+      });
 
       return res.send({ status: 'success', msg: { newPost, parentPostCommentsNum: updatedComments.length } });
     }

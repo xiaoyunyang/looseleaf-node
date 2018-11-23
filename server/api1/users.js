@@ -74,7 +74,8 @@ export const uniqueFieldsExists = ({
 // TODO: This is dangerous. This API lets anyone update user information
 // based on user id. How do we make sure the request is coming from the
 // actual user?
-// TODO: Make the id come from req.query._id, as consistent from the previous api.post request handler
+// TODO: Make the id come from req.query._id, as consistent from the previous
+// api.post request handler
 // for user community
 export const updatedUserProps = (formFields, user) => {
   return {
@@ -86,4 +87,4 @@ export const updatedUserProps = (formFields, user) => {
     bio: formFields.bio || user.bio,
     website: formFields.website || user.website
   };
-}
+};
