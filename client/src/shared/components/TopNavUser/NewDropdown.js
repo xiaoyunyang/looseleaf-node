@@ -4,12 +4,6 @@ import $ from 'jquery';
 import { UserAppNav } from '../Nav/AppNav';
 
 class UserDropdown extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      clientModeOn: false
-    }
-  }
   componentDidMount() {
     $('.dropdown-button').dropdown({
       inDuration: 300,
@@ -19,9 +13,6 @@ class UserDropdown extends React.Component {
       alignment: 'left', // Displays dropdown with edge aligned to the left of button
       constrainWidth: false, // Does not change width of dropdown to that of the activator
       stopPropagation: false // Stops event propagation
-    });
-    this.setState({
-      clientModeOn: true
     });
   }
   render() {

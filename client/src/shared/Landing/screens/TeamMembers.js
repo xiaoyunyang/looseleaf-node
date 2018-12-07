@@ -71,51 +71,65 @@ export default class TeamMembers extends React.Component {
         <div className="modal-content">
           <div className="row">
             <div className="col s10 m6 l4 offset-s1 offset-m3">
-              <img className="circle" alt="" src={this.state.modalPerson.img}/>
+              <img className="circle" alt="" src={this.state.modalPerson.img} />
               <div className="row team-socials">
                 {
                   socialLinks.linkedin &&
                   <div className="col">
-                    <a style={{color: '#0077b5'}}
+                    <a
+                      style={{ color: '#0077b5' }}
                       href={socialLinks.linkedin}
                       target="_blank"
-                    ><i className="fab fa-linkedin" /></a>
+                    >
+                      <i className="fab fa-linkedin" />
+                    </a>
                   </div>
                 }
                 {
                   socialLinks.github &&
                   <div className="col">
-                    <a style={{color: '#333'}}
+                    <a
+                      style={{ color: '#333' }}
                       href={socialLinks.github}
                       target="_blank"
-                    ><i className="fab fa-github" /></a>
+                    >
+                      <i className="fab fa-github" />
+                    </a>
                   </div>
                 }
                 {
                   socialLinks.medium &&
                   <div className="col">
-                    <a style={{color: '#000'}}
+                    <a
+                      style={{ color: '#000' }}
                       href={socialLinks.medium}
                       target="_blank"
-                    ><i className="fab fa-medium-m" /></a>
+                    ><i className="fab fa-medium-m" />
+                    </a>
                   </div>
                 }
                 {
                   socialLinks.angellist &&
                   <div className="col">
-                    <a style={{color: '#000'}}
+                    <a
+                      style={{ color: '#000' }}
                       href={socialLinks.angellist}
                       target="_blank"
-                    ><i className="fab fa-angellist" /></a>
+                    >
+                      <i className="fab fa-angellist" />
+                    </a>
                   </div>
                 }
                 {
                   socialLinks.website &&
                   <div className="col">
-                    <a style={{color: '#555'}}
+                    <a
+                      style={{ color: '#555' }}
                       href={socialLinks.website}
                       target="_blank"
-                    ><i className="fas fa-globe-americas" /></a>
+                    >
+                      <i className="fas fa-globe-americas" />
+                    </a>
                   </div>
                 }
 

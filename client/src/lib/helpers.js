@@ -77,11 +77,11 @@ export const copyToClipboard = str => {
 };
 
 export const updateItems = (items, item) => {
-  if(items.includes(item)) {
+  if (items.includes(item)) {
     return items.filter(i => i !== item);
   }
   return items.concat(item);
-}
+};
 
 export const randomUser = (setState) => {
   const user = {
@@ -111,7 +111,12 @@ export const getPageName = (url) => {
 export const dateFormatted = dateStr => {
   if (!dateStr) return '';
 
-  const options = { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' };
+  const options = {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric'
+  };
   // The split is to chop off the day of the week
   const formatted = new Date(dateStr).toLocaleDateString('en-US', options).split(/,(.+)/)[1];
   return formatted;
@@ -119,47 +124,50 @@ export const dateFormatted = dateStr => {
 
 export const decodeHTMLEntities = (text) => {
   const entities = [
-      ['amp', '&'],
-      ['apos', '\''],
-      ['#x27', '\''],
-      ['#x2F', '/'],
-      ['#39', '\''],
-      ['#47', '/'],
-      ['lt', '<'],
-      ['gt', '>'],
-      ['nbsp', ' '],
-      ['quot', '"']
+    ['amp', '&'],
+    ['apos', '\''],
+    ['#x27', '\''],
+    ['#x2F', '/'],
+    ['#39', '\''],
+    ['#47', '/'],
+    ['lt', '<'],
+    ['gt', '>'],
+    ['nbsp', ' '],
+    ['quot', '"']
   ];
 
-  for (let i = 0; i < entities.length; i++)  {
+  for (let i = 0; i < entities.length; i += 1)  {
     text = text.replace(
-      new RegExp('&'+entities[i][0]+';', 'g'),
-      entities[i][1]);
+      new RegExp(`&${entities[i][0]};`, 'g'),
+      entities[i][1]
+    );
   }
   return text;
-}
+};
 
 export const contributorIds = (contributors, field) => {
   return  Object.keys(contributors).filter(key => {
-   return contributors[key] && contributors[key][field];
- });
+    return contributors[key] && contributors[key][field];
+  });
 };
 
 // This function is used for displaying community tags properties
 export const slug2Name = (slug, singularize) => {
 
   const capitalized = slug.split('-')
-    .reduce((acc, curr) =>
-    {
+    .reduce((acc, curr) => {
       const currCapitalized = curr.charAt(0).toUpperCase() + curr.slice(1);
-      return `${acc}${currCapitalized} `
+      return `${acc}${currCapitalized} `;
     },
     '');
 
-  const final = singularize ? capitalized.slice(0,-2) : capitalized.slice(0,-1); // because there's an extra space at the end of capitalized
+  const final = singularize ?
+    capitalized.slice(0, -2) 
+    :
+    capitalized.slice(0, -1); // because there's an extra space at the end of capitalized
 
   return final;
-}
+};
 
 // The function matches the most common cases
 export const isStrUrl = str => {
@@ -180,7 +188,7 @@ export const parseUrl = longStr => {
   let res = [];
   let curr = null;
   let last = null;
-  for(let i=0; i < strs.length; i+=1) {
+  for (let i = 0; i < strs.length; i += 1) {
     curr = strs[i];
     [last] = res.slice(-1);
     if (res.length === 0) {
@@ -197,9 +205,9 @@ export const parseUrl = longStr => {
     }
   }
   return res;
-}
+};
 // For links without www or http prepended, the link does not open properly
 export const amendHref = href => {
   const match = /^(www\.|http:|https:)/;
   return match.test(href) ? href : `http://${href}`
-}
+};

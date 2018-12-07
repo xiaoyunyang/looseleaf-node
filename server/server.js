@@ -18,6 +18,7 @@ import chalk from 'chalk';
 
 // import enforceSSL from 'express-enforces-ssl';
 import helmet from 'helmet';
+import csp from 'helmet-csp';
 import ms from 'ms';
 import validator from 'validator';
 
@@ -28,7 +29,11 @@ const app = express();
 app.set('port', process.env.PORT || 8080);
 app.use(logger('short'));
 app.use(cookieParser());
-app.use(bodyParser.json());
+
+app.use(bodyParser.json({
+  type: ['json', 'application/csp-report']
+}));
+
 app.use(bodyParser.urlencoded({ extended: false }));
 // app.enable('trust proxy');
 // app.use(enforceSSL());
@@ -48,6 +53,39 @@ app.use(helmet.xssFilter());
 app.use(helmet.frameguard('sameorigin'));
 app.use(helmet.noSniff()); // Don’t let browsers infer the file type
 // mitigate cross site request forgery
+
+app.use(csp({
+  // Specify directives as normal.
+  directives: {
+    scriptSrc: ["'self'", "'unsafe-inline'"],
+    reportUri: '/report-violation',
+    objectSrc: ["'none'"],
+    upgradeInsecureRequests: false, // change to true? this affects request of images
+    workerSrc: false  // This is not set.
+  },
+
+  // This module will detect common mistakes in your directives and throw errors
+  // if it finds any. To disable this, enable "loose mode".
+  loose: false,
+
+  // Set to true if you only want browsers to report errors, not block them.
+  // You may also set this to a function(req, res) in order to decide dynamically
+  // whether to use reportOnly mode, e.g., to allow for a dynamic kill switch.
+  reportOnly: false,
+
+  // Set to true if you want to blindly set all headers: Content-Security-Policy,
+  // X-WebKit-CSP, and X-Content-Security-Policy.
+  setAllHeaders: false,
+
+  // Set to true if you want to disable CSP on Android where it can be buggy.
+  disableAndroid: false,
+
+  // Set to false if you want to completely disable any user-agent sniffing.
+  // This may make the headers less compatible but it will be much faster.
+  // This defaults to `true`.
+  browserSniff: true
+}));
+
 
 // connect to our database
 // set up ejs for templating - for prototyping server only
@@ -81,6 +119,15 @@ if (process.env.NODE_ENV === 'production') {
   // order matters.
   app.use('/', express.static(clientAppPathDev));
 }
+
+app.post('/report-violation', (req, res) => {
+  if (req.body) {
+    console.log('CSP Violation: ', req.body)
+  } else {
+    console.log('CSP Violation: No data received!')
+  }
+  res.status(204).end();
+});
 
 // API =========================================================================
 /*
