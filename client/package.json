@@ -26,6 +26,7 @@
     "draft-js-plugins-editor": "^2.1.1",
     "es6-promise": "^4.2.4",
     "eslint": "^4.19.1",
+    "eslint-config-airbnb": "^16.1.0",
     "eslint-config-react-app": "^2.1.0",
     "eslint-loader": "1.9.0",
     "eslint-plugin-flowtype": "2.39.1",

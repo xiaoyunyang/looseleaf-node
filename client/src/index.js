@@ -34,7 +34,7 @@ const Apps = {
   explore: AppExplore
 };
 
-const App = Apps.explore;
+const App = Apps.communityGuest;
 
 const render = (Component) => {
   ReactDOM.render(
