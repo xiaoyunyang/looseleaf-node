@@ -176,15 +176,42 @@ export const isStrUrl = str => {
   const matchHTTP = /(http:|https:)/i;
   return matchTld.test(str) || matchWWW.test(str) || matchHTTP.test(str);
 };
+
+const collapseConsec = arr => {
+  let buffer = "";
+  let newArr = [];
+  arr.forEach(elem => {
+      if(elem.strType === "text") {
+          buffer += elem.value;
+      } else {
+        newArr.push({value: buffer, strType: "text"});
+        newArr.push(elem);
+        buffer = "";
+      }
+  });
+  if(buffer.length > 0) {
+      newArr.push({value: buffer, strType: "text"});
+  }
+  return newArr;
+}
+
+
 // Given string, return an array of objects in the following form:
 // { value: 'hello world', strType: 'text' }
 // { value: 'https://google.com', strType: 'url' }
 // Strategy: use string pattern matching
 export const parseUrl = longStr => {
-  const strs = longStr.split(' ').map(str => {
+  const splitOn = /([() \r\n])/;
+  const splitStrs = longStr.split(splitOn).map(str => {
     return isStrUrl(str) ? { value: str, strType: 'url'} :
       { value: str, strType: 'text'}
   });
+
+
+  // collapse consecutive text types in strs
+
+  const strs = collapseConsec(splitStrs)
+
   let res = [];
   let curr = null;
   let last = null;
@@ -204,6 +231,7 @@ export const parseUrl = longStr => {
       res.push(newLast);
     }
   }
+
   return res;
 };
 // For links without www or http prepended, the link does not open properly

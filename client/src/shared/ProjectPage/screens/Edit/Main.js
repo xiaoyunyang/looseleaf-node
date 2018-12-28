@@ -45,6 +45,8 @@ export default class extends React.Component {
     }
     getApiData(url, setApiData);
   }
+  // TODO: If there's a lot of text for desc, need to trigger expansion of
+  // input field
   render() {
     return (
       <div className="section-white" id="project-form">

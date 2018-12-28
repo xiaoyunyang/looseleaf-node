@@ -9,9 +9,9 @@ const TextWithLinks = ({ content }) => (
       return <span key={i}>
         {
           d.strType === 'url' ?
-            <a style={{paddingRight: 5}} href={amendHref(d.value)} target="_blank" rel="noopener noreferrer">{d.value}</a>
+            <a href={amendHref(d.value)} target="_blank" rel="noopener noreferrer">{d.value}</a>
             :
-            <span>{`${d.value} `}</span>
+            <span>{`${d.value}`}</span>
         }
       </span>
     })
