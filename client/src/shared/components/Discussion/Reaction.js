@@ -7,14 +7,12 @@ export default class Reaction extends React.Component {
     $('.tooltipped').tooltip();
   }
   handleReactNumClick() {
-    // TODO: What's the difference between handleReactNumClick and handleReactionNumClick?
-    // Both are from props.
     this.props.handleReactNumClick(this.props.label);
   }
   render() {
     return (
       <span>
-        <button
+        <a
           className="tooltipped"
           data-position="top"
           data-delay="50"
@@ -27,29 +25,29 @@ export default class Reaction extends React.Component {
               :
               <i className={`far fa-${this.props.faName}`} />
           }
-        </button>
+        </a>
         {
           this.props.showNumReacted &&
-          <button
+          <a
             onClick={this.props.handleReactionNumClick}
             style={{ marginLeft: -20 }}
           >
             {this.props.numReacted}
-          </button>
+          </a>
         }
       </span>
     );
   }
 }
 Reaction.propTypes = {
-  showNumReacted: PropTypes.bool,
-  numReacted: PropTypes.number.isRequired,
-  handleReactionNumClick: PropTypes.func.isRequired,
-  handleReactClick: PropTypes.func.isRequired,
-  handleReactNumClick: PropTypes.func.isRequired,
-  userHasReacted: PropTypes.bool.isRequired,
   faName: PropTypes.string.isRequired,
-  label: PropTypes.string.isRequired
+  label: PropTypes.string.isRequired,
+  userHasReacted: PropTypes.bool.isRequired,
+  readOnly: PropTypes.bool,
+  numReacted: PropTypes.number,
+  showNumReacted: PropTypes.bool,
+  handleReactClick: PropTypes.func.isRequired,
+  handleReactionNumClick: PropTypes.func, 
 };
 Reaction.defaultProps = {
   showNumReacted: true
